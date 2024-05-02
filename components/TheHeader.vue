@@ -11,8 +11,12 @@ import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
 import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
+import { useI18n } from "#imports";
 
 console.info("Version: ", packageJson.version);
+
+// @ts-expect-error - You see the error here, but it's not a problem
+const { setLocale } = useI18n();
 
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
 
@@ -159,9 +163,9 @@ function openModal() {
         class="bgGradient textGradient text-center text-4xl"
         :data-version="packageJson.version"
       >
-        Nice
+        {{ $t("nice") }}
         <br />
-        Resume
+        {{ $t("resume") }}
       </h1>
     </NuxtLink>
     <div class="flex items-end gap-8 h-[60%]">
@@ -213,6 +217,13 @@ function openModal() {
         <DocumentArrowDownIcon class="h-6" />
         Download
       </button>
+    </div>
+    <div>
+      <div>
+        <button @click="setLocale('en')">en</button>
+        <br />
+        <button @click="setLocale('fr')">fr</button>
+      </div>
     </div>
   </header>
 </template>
