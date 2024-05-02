@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxtjs/tailwindcss",
     "nuxt-svgo",
-    "nuxt-build-cache",
     "@nuxt/test-utils/module",
     "@pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/seo",
