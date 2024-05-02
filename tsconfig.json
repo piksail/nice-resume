@@ -9,8 +9,7 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["vitest/globals"],
-
+    "types": ["vitest/globals", "@types/node"],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -25,8 +24,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "extends": "./.nuxt/tsconfig.json",
   "exclude": ["node_modules"],
+  "extends": ["./.nuxt/tsconfig.json"],
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
