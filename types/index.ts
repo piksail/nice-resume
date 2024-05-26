@@ -39,6 +39,7 @@ export type TextSettings = {
   font?: string;
   fontSize: number;
   lineHeight: number;
+  letterSpacing: number;
   fontWeight: number; // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
   isItalic: boolean;
   isUppercase?: boolean;

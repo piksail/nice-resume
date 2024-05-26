@@ -27,6 +27,7 @@ const settings = computed(() => {
       fontFamily: settings.categoryName.font,
       fontSize: `${settings.categoryName.fontSize}px`,
       lineHeight: settings.categoryName.lineHeight,
+      letterSpacing: `${settings.categoryName.letterSpacing}px`,
       fontWeight: settings.categoryName.fontWeight,
       fontStyle: settings.categoryName.isItalic ? 'italic' : 'initial',
       textTransform: settings.categoryName.isUppercase
@@ -47,7 +48,10 @@ const settings = computed(() => {
       paddingRight: `${settings.categoryName.padding[1]}px`,
       paddingBottom: `${settings.categoryName.padding[2]}px`,
       paddingLeft: `${settings.categoryName.padding[3]}px`,
-      width: `${settings.categoryName.width}%`,
+      width:
+        settings.categoryName.width === 'fit'
+          ? 'fit-content'
+          : `${settings.categoryName.width}%`,
     }"
   >
     {{ categoryName }}

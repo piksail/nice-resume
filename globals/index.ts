@@ -99,6 +99,7 @@ export const resumeSettings: ResumeSettings = {
   name: {
     font: "inherit",
     fontSize: 22,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -114,6 +115,7 @@ export const resumeSettings: ResumeSettings = {
   title: {
     font: "inherit",
     fontSize: 18,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -129,6 +131,7 @@ export const resumeSettings: ResumeSettings = {
   contactDetails: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -165,6 +168,7 @@ export const resumeSettings: ResumeSettings = {
   categoryName: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -191,6 +195,7 @@ export const resumeSettings: ResumeSettings = {
   entryTitle: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -201,6 +206,7 @@ export const resumeSettings: ResumeSettings = {
   entryPeriod: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -211,6 +217,7 @@ export const resumeSettings: ResumeSettings = {
   entryOrganization: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -221,6 +228,7 @@ export const resumeSettings: ResumeSettings = {
   entryLocation: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -231,6 +239,7 @@ export const resumeSettings: ResumeSettings = {
   entrySummary: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -246,6 +255,7 @@ export const resumeSettings: ResumeSettings = {
   entryHighlight: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -652,25 +662,42 @@ if (
 }
 
 if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
-  templateSettings.Cupcake.resume.document.margin = [0, 0, 0, 0];
-  templateSettings.Cupcake.letter.document.margin = [0, 0, 0, 0];
-  templateSettings.Cupcake.letter.senderDetails.margin[0] = 24;
-  templateSettings.Cupcake.letter.senderDetails.margin[1] = 32;
-  templateSettings.Cupcake.letter.senderDetails.margin[3] = 32;
+  templateSettings.Cupcake.resume.contactDetails.alignment = "end";
+  templateSettings.Cupcake.resume.contactDetails.color =
+    templateBaseSettings.Cupcake.colors[1];
+  templateSettings.Cupcake.resume.contactDetails.iconColor =
+    templateBaseSettings.Cupcake.colors[1];
+  templateSettings.Cupcake.resume.category.gap = 32;
+  templateSettings.Cupcake.resume.categoryName.font =
+    templateBaseSettings.Cupcake.displayFont;
+  templateSettings.Cupcake.resume.categoryName.fontSize = 30;
+  templateSettings.Cupcake.resume.categoryName.fontWeight = 700;
+  templateSettings.Cupcake.resume.categoryName.lineHeight = 1.2;
+  templateSettings.Cupcake.resume.categoryName.letterSpacing = 3;
+  templateSettings.Cupcake.resume.categoryName.width = "fit";
+  templateSettings.Cupcake.resume.categoryName.isUppercase = true;
+  templateSettings.Cupcake.resume.categoryName.margin[2] = 16;
+  templateSettings.Cupcake.resume.categoryName.margin[3] = 80;
+  templateSettings.Cupcake.resume.categoryName.border[2] = 2;
+  templateSettings.Cupcake.resume.categoryName.borderColor =
+    templateBaseSettings.Cupcake.colors[1];
+  templateSettings.Cupcake.resume.entry.layout = 3;
+  templateSettings.Cupcake.resume.entryPeriod.color =
+    templateBaseSettings.Cupcake.colors[1];
+  templateSettings.Cupcake.resume.entryTitle.isItalic = true;
+  templateSettings.Cupcake.resume.entryHighlight.listMarker = "disc";
+  templateSettings.Cupcake.resume.entryHighlight.listMarkerColor =
+    templateBaseSettings.Cupcake.colors[0];
+  templateSettings.Cupcake.resume.entryHighlight.color =
+    templateBaseSettings.Cupcake.colors[3];
+  templateSettings.Cupcake.letter.document.margin = [32, 32, 32, 32];
   templateSettings.Cupcake.letter.senderDetails.fontSize = 16;
   templateSettings.Cupcake.letter.senderDetails.lineHeight = 1;
-  templateSettings.Cupcake.letter.recipientDetails.margin[0] = 24;
-  templateSettings.Cupcake.letter.recipientDetails.margin[1] = 32;
-  templateSettings.Cupcake.letter.recipientDetails.margin[3] = 32;
   templateSettings.Cupcake.letter.recipientDetails.fontSize = 16;
   templateSettings.Cupcake.letter.recipientDetails.lineHeight = 1;
-  templateSettings.Cupcake.letter.header.margin[1] = 32;
-  templateSettings.Cupcake.letter.header.margin[3] = 32;
   templateSettings.Cupcake.letter.subject.fontWeight = 600;
   templateSettings.Cupcake.letter.subject.fontSize = 20;
   templateSettings.Cupcake.letter.reference.fontSize = 15;
-  templateSettings.Cupcake.letter.body.margin[1] = 32;
-  templateSettings.Cupcake.letter.body.margin[3] = 32;
   templateSettings.Cupcake.letter.body.fontSize = 16;
 }
 
