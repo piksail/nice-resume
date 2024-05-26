@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import type { ListMarker } from "@/types";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import { getListMarker } from "@/utils/editor";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
@@ -19,17 +19,6 @@ const settings = computed(() => {
     ? storeSettings.value
     : templateSettings[template.value].resume;
 });
-
-function getListMarker(value: ListMarker) {
-  switch (value) {
-    case "hyphen":
-      return "'- '";
-    case null:
-      return "none";
-    default:
-      return value;
-  }
-}
 </script>
 
 <template>

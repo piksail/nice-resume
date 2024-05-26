@@ -29,8 +29,8 @@ const settings = computed(() => {
       v-if="categories.some((category) => category.layout === 'aside')"
       class="flex flex-col"
       :style="{
-        width: `${settings.aside.width}%`,
         gap: `${settings.category.gap}px`,
+        width: `${settings.aside.width}%`,
       }"
     >
       <div
@@ -38,6 +38,22 @@ const settings = computed(() => {
           (category) => category.layout === 'aside',
         )"
         :key="categoryIndex"
+        :style="{
+          backgroundColor: settings.category.backgroundColor,
+          marginTop: `${settings.category.margin[0]}px`,
+          marginRight: `${settings.category.margin[1]}px`,
+          marginBottom: `${settings.category.margin[2]}px`,
+          marginLeft: `${settings.category.margin[3]}px`,
+          borderTop: `solid ${settings.category.borderColor} ${settings.category.border[0]}px`,
+          borderRight: `solid ${settings.category.borderColor} ${settings.category.border[1]}px`,
+          borderBottom: `solid ${settings.category.borderColor} ${settings.category.border[2]}px`,
+          borderLeft: `solid ${settings.category.borderColor} ${settings.category.border[3]}px`,
+          borderRadius: `${settings.category.borderRadius}px`,
+          paddingTop: `${settings.category.padding[0]}px`,
+          paddingRight: `${settings.category.padding[1]}px`,
+          paddingBottom: `${settings.category.padding[2]}px`,
+          paddingLeft: `${settings.category.padding[3]}px`,
+        }"
       >
         <ResumeCategoryName :category-name="category.name" />
         <ul
@@ -99,6 +115,22 @@ const settings = computed(() => {
         )"
         :key="categoryIndex"
         :class="category.layout === 'half' ? 'col-span-1' : 'col-span-2'"
+        :style="{
+          backgroundColor: settings.category.backgroundColor,
+          marginTop: `${settings.category.margin[0]}px`,
+          marginRight: `${settings.category.margin[1]}px`,
+          marginBottom: `${settings.category.margin[2]}px`,
+          marginLeft: `${settings.category.margin[3]}px`,
+          borderTop: `solid ${settings.category.borderColor} ${settings.category.border[0]}px`,
+          borderRight: `solid ${settings.category.borderColor} ${settings.category.border[1]}px`,
+          borderBottom: `solid ${settings.category.borderColor} ${settings.category.border[2]}px`,
+          borderLeft: `solid ${settings.category.borderColor} ${settings.category.border[3]}px`,
+          borderRadius: `${settings.category.borderRadius}px`,
+          paddingTop: `${settings.category.padding[0]}px`,
+          paddingRight: `${settings.category.padding[1]}px`,
+          paddingBottom: `${settings.category.padding[2]}px`,
+          paddingLeft: `${settings.category.padding[3]}px`,
+        }"
       >
         <ResumeCategoryName :category-name="category.name" />
         <ul
@@ -126,27 +158,7 @@ const settings = computed(() => {
             :key="entryIndex"
             class="flex flex-col"
           >
-            <!-- TODO customize gap-4 here -->
-            <div class="flex gap-4 items-center">
-              <ResumeEntryPeriod
-                v-if="entry.nature === 'experience'"
-                :entry-period="entry.period"
-              />
-              <ResumeEntryTitle :entry-title="entry.title" />
-              <ResumeEntryOrganization
-                v-if="entry.nature === 'experience'"
-                :entry-organization="entry.organization"
-              />
-              <ResumeEntryLocation
-                v-if="entry.nature === 'experience'"
-                :entry-location="entry.location"
-              />
-            </div>
-            <ResumeEntrySummary
-              v-if="entry.nature === 'experience'"
-              :entry-summary="entry.summary"
-            />
-            <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+            <ResumeEntry :entry="entry" />
           </li>
         </ul>
       </section>

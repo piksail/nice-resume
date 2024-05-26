@@ -5,6 +5,7 @@ import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import { getListMarker } from "@/utils/editor";
 import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
@@ -21,9 +22,27 @@ const settings = ref(templateSettings[template.value].resume);
 
 <template>
   <ul
-    class="flex items-end"
+    class="flex"
     :style="{
       flexDirection: settings.contactDetails.listOrientation,
+      alignItems: settings.contactDetails.alignment,
+      gap: `${settings.contactDetails.gap}px`,
+      listStyleType: getListMarker(settings.contactDetails.listMarker),
+      color: settings.contactDetails.listMarkerColor,
+      backgroundColor: settings.contactDetails.backgroundColor,
+      marginTop: `${settings.contactDetails.margin[0]}px`,
+      marginRight: `${settings.contactDetails.margin[1]}px`,
+      marginBottom: `${settings.contactDetails.margin[2]}px`,
+      marginLeft: `${settings.contactDetails.margin[3]}px`,
+      borderTop: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[0]}px`,
+      borderRight: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[1]}px`,
+      borderBottom: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[2]}px`,
+      borderLeft: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[3]}px`,
+      borderRadius: `${settings.contactDetails.borderRadius}px`,
+      paddingTop: `${settings.contactDetails.padding[0]}px`,
+      paddingRight: `${settings.contactDetails.padding[1]}px`,
+      paddingBottom: `${settings.contactDetails.padding[2]}px`,
+      paddingLeft: `${settings.contactDetails.padding[3]}px`,
     }"
   >
     <li
@@ -31,6 +50,20 @@ const settings = ref(templateSettings[template.value].resume);
       :key="`${detail.value}${detail.icon}`"
       class="flex items-center"
       :style="{
+        backgroundColor: settings.contactDetails.backgroundColor,
+        marginTop: `${settings.contactDetails.margin[0]}px`,
+        marginRight: `${settings.contactDetails.margin[1]}px`,
+        marginBottom: `${settings.contactDetails.margin[2]}px`,
+        marginLeft: `${settings.contactDetails.margin[3]}px`,
+        borderTop: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[0]}px`,
+        borderRight: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[1]}px`,
+        borderBottom: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[2]}px`,
+        borderLeft: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[3]}px`,
+        borderRadius: `${settings.contactDetails.borderRadius}px`,
+        paddingTop: `${settings.contactDetails.padding[0]}px`,
+        paddingRight: `${settings.contactDetails.padding[1]}px`,
+        paddingBottom: `${settings.contactDetails.padding[2]}px`,
+        paddingLeft: `${settings.contactDetails.padding[3]}px`,
         gap: `${settings.contactDetails.iconGap}px`,
       }"
     >
@@ -41,7 +74,21 @@ const settings = ref(templateSettings[template.value].resume);
         class="w-4"
         :style="{ color: settings.contactDetails.iconColor }"
       />
-      <span>{{ detail.value }}</span>
+      <span
+        :style="{
+          fontFamily: settings.contactDetails.font,
+          fontSize: `${settings.contactDetails.fontSize}px`,
+          lineHeight: settings.contactDetails.lineHeight,
+          fontWeight: settings.contactDetails.fontWeight,
+          fontStyle: settings.contactDetails.isItalic ? 'italic' : 'initial',
+          textTransform: settings.contactDetails.isUppercase
+            ? 'uppercase'
+            : 'initial',
+          color: settings.contactDetails.color,
+        }"
+      >
+        {{ detail.value }}
+      </span>
     </li>
   </ul>
 </template>

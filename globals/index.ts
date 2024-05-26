@@ -88,6 +88,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
   },
   header: {
+    layout: 0,
     backgroundColor: "#ffffff",
     borderColor: "#000000",
     borderRadius: 0,
@@ -95,18 +96,65 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
   },
+  name: {
+    font: "inherit",
+    fontSize: 22,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    backgroundColor: "transparent",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+  },
+  title: {
+    font: "inherit",
+    fontSize: 18,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    backgroundColor: "transparent",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+  },
   contactDetails: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    alignment: "start",
     listOrientation: "column",
+    listMarker: null,
+    listMarkerColor: "currentColor",
     iconColor: "currentColor",
     iconGap: 4,
     isIconFirst: true,
+    backgroundColor: "transparent",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+    gap: 0,
   },
   aside: {
     width: 20, // Percentage
     gap: 16,
   },
   category: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderColor: "#000000",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -122,7 +170,7 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -131,7 +179,8 @@ export const resumeSettings: ResumeSettings = {
     width: 100, // Percentage
   },
   entry: {
-    backgroundColor: "#ffffff",
+    layout: 0,
+    backgroundColor: "transparent",
     borderColor: "#000000",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -187,7 +236,7 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -205,7 +254,7 @@ export const resumeSettings: ResumeSettings = {
     listOrientation: "column",
     listMarker: "hyphen",
     listMarkerColor: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -496,6 +545,7 @@ Object.entries(templateBaseSettings).forEach(([key, value]) => {
 if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
   templateSettings.Aster.resume.document.margin = [0, 0, 0, 0];
   templateSettings.Aster.resume.header.margin = [32, 32, 32, 32];
+  templateSettings.Aster.resume.contactDetails.alignment = "end";
   templateSettings.Aster.resume.contactDetails.iconColor =
     templateBaseSettings.Aster.colors[0];
   templateSettings.Aster.resume.categoryName.width = 64;
@@ -530,6 +580,56 @@ if (
   templateSettings.CottonCandy.letter
 ) {
   templateSettings.CottonCandy.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.CottonCandy.resume.header.layout = 1;
+  templateSettings.CottonCandy.resume.name.font =
+    templateBaseSettings.CottonCandy.displayFont;
+  templateSettings.CottonCandy.resume.name.fontSize = 36;
+  templateSettings.CottonCandy.resume.name.isUppercase = true;
+  templateSettings.CottonCandy.resume.name.padding = [0, 16, 0, 16];
+  templateSettings.CottonCandy.resume.name.border[0] = 4;
+  templateSettings.CottonCandy.resume.name.borderColor =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.title.font =
+    templateBaseSettings.CottonCandy.displayFont;
+  templateSettings.CottonCandy.resume.title.fontSize = 24;
+  templateSettings.CottonCandy.resume.title.isUppercase = true;
+  templateSettings.CottonCandy.resume.title.padding = [0, 16, 0, 16];
+  templateSettings.CottonCandy.resume.title.border[2] = 4;
+  templateSettings.CottonCandy.resume.title.borderColor =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.contactDetails.margin[3] = 22;
+  templateSettings.CottonCandy.resume.contactDetails.color =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.contactDetails.iconColor =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.category.padding = [24, 40, 24, 40];
+  templateSettings.CottonCandy.resume.category.backgroundColor =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.categoryName.font =
+    templateBaseSettings.CottonCandy.displayFont;
+  templateSettings.CottonCandy.resume.categoryName.fontSize = 24;
+  templateSettings.CottonCandy.resume.categoryName.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.categoryName.isUppercase = true;
+  templateSettings.CottonCandy.resume.entry.layout = 1;
+  templateSettings.CottonCandy.resume.entryTitle.font =
+    templateBaseSettings.CottonCandy.displayFont;
+  templateSettings.CottonCandy.resume.entryTitle.fontSize = 20;
+  templateSettings.CottonCandy.resume.entryTitle.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryPeriod.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryOrganization.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryLocation.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entrySummary.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryHighlight.color =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryHighlight.listMarkerColor =
+    templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryHighlight.isItalic = true;
   templateSettings.CottonCandy.letter.document.margin = [0, 0, 0, 0];
   templateSettings.CottonCandy.letter.senderDetails.color =
     templateBaseSettings.CottonCandy.colors[0];
@@ -725,6 +825,32 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
 
 if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
   templateSettings.Toothpaste.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Toothpaste.resume.header.layout = 1;
+  templateSettings.Toothpaste.resume.name.font =
+    templateBaseSettings.Toothpaste.displayFont;
+  templateSettings.Toothpaste.resume.name.fontSize = 36;
+  templateSettings.Toothpaste.resume.name.isUppercase = true;
+  templateSettings.Toothpaste.resume.title.font =
+    templateBaseSettings.Toothpaste.displayFont;
+  templateSettings.Toothpaste.resume.title.fontSize = 24;
+  templateSettings.Toothpaste.resume.title.isUppercase = true;
+  templateSettings.Toothpaste.resume.category.padding = [24, 40, 24, 40];
+  templateSettings.Toothpaste.resume.category.border[0] = 4;
+  templateSettings.Toothpaste.resume.category.borderColor =
+    templateBaseSettings.Toothpaste.colors[0];
+  templateSettings.Toothpaste.resume.categoryName.font =
+    templateBaseSettings.Toothpaste.displayFont;
+  templateSettings.Toothpaste.resume.categoryName.fontSize = 24;
+  templateSettings.Toothpaste.resume.categoryName.color =
+    templateBaseSettings.Toothpaste.colors[0];
+  templateSettings.Toothpaste.resume.categoryName.isUppercase = true;
+  templateSettings.Toothpaste.resume.entry.layout = 1;
+  templateSettings.Toothpaste.resume.entryTitle.font =
+    templateBaseSettings.Toothpaste.displayFont;
+  templateSettings.Toothpaste.resume.entryTitle.fontSize = 20;
+  templateSettings.Toothpaste.resume.entryTitle.color =
+    templateBaseSettings.Toothpaste.colors[0];
+  templateSettings.Toothpaste.resume.entryHighlight.isItalic = true;
   templateSettings.Toothpaste.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Toothpaste.letter.senderDetails.fontSize = 12;
   templateSettings.Toothpaste.letter.senderDetails.isItalic = true;

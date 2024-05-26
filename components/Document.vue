@@ -10,7 +10,8 @@ import { templateSettings } from "@/globals";
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 const { settings: resumeStoreSettings } = storeToRefs(useResumeStore());
-const { settings: letterStoreSettings } = storeToRefs(useLetterStore());
+const { isHeaderSimple, settings: letterStoreSettings } =
+  storeToRefs(useLetterStore());
 
 const settings = computed(() => {
   if (isThemeCustomized.value) {
@@ -40,6 +41,8 @@ const settings = computed(() => {
       borderLeft: `solid ${settings.document.borderColor} ${settings.document.border[3]}px`,
     }"
   >
-    <slot />
+    <DocumentHeader v-if="documentType === 'resume' || !isHeaderSimple" />
+    <LetterBody v-if="documentType === 'letter'" />
+    <ResumeBody v-else />
   </div>
 </template>

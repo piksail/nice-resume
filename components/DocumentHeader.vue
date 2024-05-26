@@ -4,6 +4,8 @@ import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import DocumentHeaderName from "@/components/DocumentHeaderName.vue";
+import DocumentHeaderTitle from "@/components/DocumentHeaderTitle.vue";
 import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDetails.vue";
 
 const { name, template, title } = storeToRefs(useProfileStore());
@@ -36,13 +38,27 @@ console.log(settings);
       paddingLeft: `${settings.header.padding[3]}px`,
     }"
   >
-    <div class="flex-1">
-      <h1 v-if="name">{{ name }}</h1>
-      <h2>
-        {{ title }}
-      </h2>
-      <p v-if="about">{{ about }}</p>
-    </div>
-    <DocumentHeaderContactDetails />
+    <template v-if="settings.header.layout === 1">
+      <div class="flex flex-col">
+        <DocumentHeaderName :name="name" />
+        <DocumentHeaderTitle :title="title" />
+      </div>
+      <DocumentHeaderContactDetails />
+      <p v-if="about" class="flex-1">
+        <!-- TODO this is from Tootpaste (blue quote) -->
+        <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
+          “
+        </span>
+        {{ about }}
+      </p>
+    </template>
+    <template v-else>
+      <div class="flex-1">
+        <DocumentHeaderName :name="name" />
+        <DocumentHeaderTitle :title="title" />
+        <p v-if="about">{{ about }}</p>
+      </div>
+      <DocumentHeaderContactDetails />
+    </template>
   </header>
 </template>

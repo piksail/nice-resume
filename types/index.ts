@@ -15,9 +15,15 @@ export type Template =
 
 export type DocumentType = "letter" | "resume";
 
+export type SideSetting = number[];
+
 export type ListMarker = null | "circle" | "disc" | "hyphen" | "square";
 
-export type SideSetting = number[];
+export type ListSettings = {
+  listOrientation: "row" | "column";
+  listMarker: ListMarker;
+  listMarkerColor: string;
+};
 
 export type BlockSettings = {
   backgroundColor: string;
@@ -77,9 +83,6 @@ export type DocumentSettings = {
   border: SideSetting;
 };
 
-// export type HeaderSettings = {
-//   layout: string; // TODO union type
-// };
 // export type HeaderSettings = BlockSettings & {
 //   justification:
 //     | "left"
@@ -93,14 +96,20 @@ export type DocumentSettings = {
 
 export type ResumeSettings = {
   document: DocumentSettings;
-  header: BlockSettings; // TODO other properties
-  contactDetails: {
-    listOrientation: "row" | "column";
-    iconColor: string;
-    iconGap: number;
-    isIconFirst: boolean;
-    // TODO all font properties
+  header: BlockSettings & {
+    layout: number; // TODO other properties
   };
+  name: BlockSettings & TextSettings;
+  title: BlockSettings & TextSettings;
+  contactDetails: BlockSettings &
+    TextSettings &
+    ListSettings & {
+      alignment: "start" | "center" | "end";
+      iconColor: string;
+      iconGap: number;
+      isIconFirst: boolean;
+      gap: number; // Flex gap between details
+    };
   aside: {
     width: number;
     gap: number; // Flex gap between aside and main columns
@@ -113,6 +122,7 @@ export type ResumeSettings = {
       width?: number | "fit";
     };
   entry: BlockSettings & {
+    layout: number;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;
@@ -121,11 +131,8 @@ export type ResumeSettings = {
   entryLocation: TextSettings;
   entrySummary: BlockSettings & TextSettings;
   entryHighlight: BlockSettings &
-    TextSettings & {
-      // TODO merge ListSettings types (contactDetails, entryHighlights)
-      listOrientation: "row" | "column";
-      listMarker: ListMarker;
-      listMarkerColor: string;
+    TextSettings &
+    ListSettings & {
       gap: number; // Flex gap between highlights
     };
 };
