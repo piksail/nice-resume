@@ -725,7 +725,7 @@ export const categoryTypes: Array<Category["type"]> = [
   "project",
   "voluntary",
   "work",
-  "hobby",
+  "interest",
   "language",
   "skill",
 ];
@@ -736,7 +736,11 @@ export const categoryLayouts: Array<Category["layout"]> = [
   "half",
 ];
 
-export const assetTypes: Array<Asset["type"]> = ["hobby", "language", "skill"];
+export const assetTypes: Array<Asset["type"]> = [
+  "interest",
+  "language",
+  "skill",
+];
 
 export const experienceTypes: Array<Experience["type"]> = [
   "certificate",

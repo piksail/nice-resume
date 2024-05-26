@@ -175,7 +175,7 @@ export interface Experience extends Entry {
 
 export interface Asset extends Entry {
   nature: "asset";
-  type: "hobby" | "language" | "skill";
+  type: "interest" | "language" | "skill";
 }
 export interface Category {
   nature: Entry["nature"];
