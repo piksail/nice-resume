@@ -175,6 +175,24 @@ function generateStores() {
       layout: "full",
     },
     {
+      nature: "experience",
+      type: "certificate",
+      name: "Certificates",
+      entries: [
+        {
+          nature: "experience",
+          type: "certificate",
+          title: "Title",
+          organization: "Issuer",
+          location: "Location",
+          period: "Delivered (valid 2 years)",
+          summary: "",
+          highlights: [],
+        },
+      ],
+      layout: "half",
+    },
+    {
       nature: "asset",
       type: "skill",
       name: "Skills",

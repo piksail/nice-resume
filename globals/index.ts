@@ -739,6 +739,7 @@ export const categoryLayouts: Array<Category["layout"]> = [
 export const assetTypes: Array<Asset["type"]> = ["hobby", "language", "skill"];
 
 export const experienceTypes: Array<Experience["type"]> = [
+  "certificate",
   "education",
   "project",
   "voluntary",

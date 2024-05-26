@@ -166,7 +166,7 @@ export interface Entry {
 
 export interface Experience extends Entry {
   nature: "experience";
-  type: "education" | "project" | "voluntary" | "work";
+  type: "certificate" | "education" | "project" | "voluntary" | "work";
   organization: string; // Institution, Company, ...
   location: string;
   period: string; // No strict format to allow custom values
