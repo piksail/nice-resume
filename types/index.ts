@@ -77,22 +77,57 @@ export type DocumentSettings = {
   border: SideSetting;
 };
 
+// export type HeaderSettings = {
+//   layout: string; // TODO union type
+// };
+// export type HeaderSettings = BlockSettings & {
+//   justification:
+//     | "left"
+//     | "center"
+//     | "space-around"
+//     | "space-between"
+//     | "space-between"
+//     | "right";
+//   alignment: "start" | "center" | "baseline" | "end";
+// };
+
 export type ResumeSettings = {
   document: DocumentSettings;
-  asideWidth: number; // TODO convert to object
+  header: BlockSettings; // TODO other properties
+  contactDetails: {
+    listOrientation: "row" | "column";
+    iconColor: string;
+    iconGap: number;
+    isIconFirst: boolean;
+    // TODO all font properties
+  };
+  aside: {
+    width: number;
+    gap: number; // Flex gap between aside and main columns
+  };
+  category: BlockSettings & {
+    gap: number; // Flex gap between categories
+  };
   categoryName: BlockSettings &
     TextSettings & {
       width?: number | "fit";
     };
+  entry: BlockSettings & {
+    gap: number; // Flex gap between entries
+  };
   entryTitle: TextSettings;
   entryPeriod: TextSettings;
   entryOrganization: TextSettings;
   entryLocation: TextSettings;
-  entrySummary: TextSettings;
-  entryHighlight: TextSettings & {
-    listMarker: ListMarker;
-    listMarkerColor: string;
-  };
+  entrySummary: BlockSettings & TextSettings;
+  entryHighlight: BlockSettings &
+    TextSettings & {
+      // TODO merge ListSettings types (contactDetails, entryHighlights)
+      listOrientation: "row" | "column";
+      listMarker: ListMarker;
+      listMarkerColor: string;
+      gap: number; // Flex gap between highlights
+    };
 };
 
 export type LetterSettings = {

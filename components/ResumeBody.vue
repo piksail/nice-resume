@@ -24,12 +24,13 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <div class="flex gap-4">
+  <div class="flex" :style="{ gap: `${settings.aside.gap}px` }">
     <aside
       v-if="categories.some((category) => category.layout === 'aside')"
-      class="flex flex-col gap-6"
+      class="flex flex-col"
       :style="{
-        width: `${settings.asideWidth}%`,
+        width: `${settings.aside.width}%`,
+        gap: `${settings.category.gap}px`,
       }"
     >
       <div
@@ -39,7 +40,26 @@ const settings = computed(() => {
         :key="categoryIndex"
       >
         <ResumeCategoryName :category-name="category.name" />
-        <ul class="flex flex-col gap-4 p-2 pl-8">
+        <ul
+          class="flex flex-col"
+          :style="{
+            backgroundColor: settings.entry.backgroundColor,
+            marginTop: `${settings.entry.margin[0]}px`,
+            marginRight: `${settings.entry.margin[1]}px`,
+            marginBottom: `${settings.entry.margin[2]}px`,
+            marginLeft: `${settings.entry.margin[3]}px`,
+            borderTop: `solid ${settings.entry.borderColor} ${settings.entry.border[0]}px`,
+            borderRight: `solid ${settings.entry.borderColor} ${settings.entry.border[1]}px`,
+            borderBottom: `solid ${settings.entry.borderColor} ${settings.entry.border[2]}px`,
+            borderLeft: `solid ${settings.entry.borderColor} ${settings.entry.border[3]}px`,
+            borderRadius: `${settings.entry.borderRadius}px`,
+            paddingTop: `${settings.entry.padding[0]}px`,
+            paddingRight: `${settings.entry.padding[1]}px`,
+            paddingBottom: `${settings.entry.padding[2]}px`,
+            paddingLeft: `${settings.entry.padding[3]}px`,
+            gap: `${settings.entry.gap}px`,
+          }"
+        >
           <li
             v-for="(entry, entryIndex) in category.entries"
             :key="entryIndex"
@@ -67,7 +87,12 @@ const settings = computed(() => {
         </ul>
       </div>
     </aside>
-    <div class="grid grid-cols-2 gap-6 flex-1">
+    <div
+      class="grid grid-cols-2 flex-1"
+      :style="{
+        gap: `${settings.category.gap}px`,
+      }"
+    >
       <section
         v-for="(category, categoryIndex) in categories.filter(
           (category) => category.layout !== 'aside',
@@ -76,12 +101,32 @@ const settings = computed(() => {
         :class="category.layout === 'half' ? 'col-span-1' : 'col-span-2'"
       >
         <ResumeCategoryName :category-name="category.name" />
-        <ul class="flex flex-col gap-4 p-2 px-8">
+        <ul
+          class="flex flex-col"
+          :style="{
+            backgroundColor: settings.entry.backgroundColor,
+            marginTop: `${settings.entry.margin[0]}px`,
+            marginRight: `${settings.entry.margin[1]}px`,
+            marginBottom: `${settings.entry.margin[2]}px`,
+            marginLeft: `${settings.entry.margin[3]}px`,
+            borderTop: `solid ${settings.entry.borderColor} ${settings.entry.border[0]}px`,
+            borderRight: `solid ${settings.entry.borderColor} ${settings.entry.border[1]}px`,
+            borderBottom: `solid ${settings.entry.borderColor} ${settings.entry.border[2]}px`,
+            borderLeft: `solid ${settings.entry.borderColor} ${settings.entry.border[3]}px`,
+            borderRadius: `${settings.entry.borderRadius}px`,
+            paddingTop: `${settings.entry.padding[0]}px`,
+            paddingRight: `${settings.entry.padding[1]}px`,
+            paddingBottom: `${settings.entry.padding[2]}px`,
+            paddingLeft: `${settings.entry.padding[3]}px`,
+            gap: `${settings.entry.gap}px`,
+          }"
+        >
           <li
             v-for="(entry, entryIndex) in category.entries"
             :key="entryIndex"
             class="flex flex-col"
           >
+            <!-- TODO customize gap-4 here -->
             <div class="flex gap-4 items-center">
               <ResumeEntryPeriod
                 v-if="entry.nature === 'experience'"
@@ -97,13 +142,11 @@ const settings = computed(() => {
                 :entry-location="entry.location"
               />
             </div>
-            <div class="pl-4">
-              <ResumeEntrySummary
-                v-if="entry.nature === 'experience'"
-                :entry-summary="entry.summary"
-              />
-              <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-            </div>
+            <ResumeEntrySummary
+              v-if="entry.nature === 'experience'"
+              :entry-summary="entry.summary"
+            />
+            <ResumeEntryHighlights :entry-highlights="entry.highlights" />
           </li>
         </ul>
       </section>

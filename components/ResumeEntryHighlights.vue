@@ -35,9 +35,26 @@ function getListMarker(value: ListMarker) {
 <template>
   <ul
     v-if="entryHighlights.length"
+    class="flex"
     :style="{
+      flexDirection: settings.entryHighlight.listOrientation,
+      gap: `${settings.entryHighlight.gap}px`,
       listStyleType: getListMarker(settings.entryHighlight.listMarker),
       color: settings.entryHighlight.listMarkerColor,
+      backgroundColor: settings.entryHighlight.backgroundColor,
+      marginTop: `${settings.entryHighlight.margin[0]}px`,
+      marginRight: `${settings.entryHighlight.margin[1]}px`,
+      marginBottom: `${settings.entryHighlight.margin[2]}px`,
+      marginLeft: `${settings.entryHighlight.margin[3]}px`,
+      borderTop: `solid ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[0]}px`,
+      borderRight: `solid ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[1]}px`,
+      borderBottom: `solid ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[2]}px`,
+      borderLeft: `solid ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[3]}px`,
+      borderRadius: `${settings.entryHighlight.borderRadius}px`,
+      paddingTop: `${settings.entryHighlight.padding[0]}px`,
+      paddingRight: `${settings.entryHighlight.padding[1]}px`,
+      paddingBottom: `${settings.entryHighlight.padding[2]}px`,
+      paddingLeft: `${settings.entryHighlight.padding[3]}px`,
     }"
   >
     <li

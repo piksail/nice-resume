@@ -33,6 +33,20 @@ const settings = computed(() => {
         ? 'uppercase'
         : 'initial',
       color: settings.entrySummary.color,
+      backgroundColor: settings.entrySummary.backgroundColor,
+      marginTop: `${settings.entrySummary.margin[0]}px`,
+      marginRight: `${settings.entrySummary.margin[1]}px`,
+      marginBottom: `${settings.entrySummary.margin[2]}px`,
+      marginLeft: `${settings.entrySummary.margin[3]}px`,
+      borderTop: `solid ${settings.entrySummary.borderColor} ${settings.entrySummary.border[0]}px`,
+      borderRight: `solid ${settings.entrySummary.borderColor} ${settings.entrySummary.border[1]}px`,
+      borderBottom: `solid ${settings.entrySummary.borderColor} ${settings.entrySummary.border[2]}px`,
+      borderLeft: `solid ${settings.entrySummary.borderColor} ${settings.entrySummary.border[3]}px`,
+      borderRadius: `${settings.entrySummary.borderRadius}px`,
+      paddingTop: `${settings.entrySummary.padding[0]}px`,
+      paddingRight: `${settings.entrySummary.padding[1]}px`,
+      paddingBottom: `${settings.entrySummary.padding[2]}px`,
+      paddingLeft: `${settings.entrySummary.padding[3]}px`,
     }"
   >
     {{ entrySummary }}

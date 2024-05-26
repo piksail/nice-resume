@@ -414,12 +414,3 @@ function getSectionCategory(indexToGetFrom: number) {
     </template>
   </Document>
 </template>
-
-<style scoped>
-.font-body {
-  font-family: "Mulish";
-}
-.font-display {
-  font-family: "League Gothic";
-}
-</style>

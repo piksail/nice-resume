@@ -87,7 +87,33 @@ export const resumeSettings: ResumeSettings = {
     margin: [40, 40, 40, 40], // TODO [80, 80, 80, 80]; feel VERY nice
     border: [0, 0, 0, 0],
   },
-  asideWidth: 20, // Percentage
+  header: {
+    backgroundColor: "#ffffff",
+    borderColor: "#000000",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+  },
+  contactDetails: {
+    listOrientation: "column",
+    iconColor: "currentColor",
+    iconGap: 4,
+    isIconFirst: true,
+  },
+  aside: {
+    width: 20, // Percentage
+    gap: 16,
+  },
+  category: {
+    backgroundColor: "#ffffff",
+    borderColor: "#000000",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+    gap: 12,
+  },
   categoryName: {
     font: "inherit",
     fontSize: 14,
@@ -102,7 +128,16 @@ export const resumeSettings: ResumeSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
-    width: 64, // Percentage
+    width: 100, // Percentage
+  },
+  entry: {
+    backgroundColor: "#ffffff",
+    borderColor: "#000000",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+    gap: 16,
   },
   entryTitle: {
     font: "inherit",
@@ -152,7 +187,12 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+    backgroundColor: "#ffffff",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
   },
   entryHighlight: {
     font: "inherit",
@@ -162,8 +202,16 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    listOrientation: "column",
     listMarker: "hyphen",
     listMarkerColor: "currentColor",
+    backgroundColor: "#ffffff",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+    gap: 0,
   },
 };
 
@@ -207,6 +255,7 @@ export const letterSettings: LetterSettings = {
     padding: [0, 0, 0, 0],
     gap: 12,
   },
+  // TODO rename below property as subjectWrapper ? Or "chapeau"?
   header: {
     isCentered: true,
     backgroundColor: "#ffffff",
@@ -436,7 +485,7 @@ function scaffoldTemplateSettings(
   templateSettings[template] = settings;
 }
 
-// TODO reprendre ici : vérifier que le assign marche bien, full custommiser la vue letter, et une fois que c'est fait, full customiser la vue CV
+// TODO reprendre ici :
 // Remplacer chaque --var ou classe tailwind par son style défini below
 // pour rappel, les templatezs sont en fait dsormais à la fois des presets (colors = blabla)
 // réfléchir au concept de layout de section, où on peut dire par ex que les company et title sont sur la même ligne ou pas
@@ -446,7 +495,10 @@ Object.entries(templateBaseSettings).forEach(([key, value]) => {
 
 if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
   templateSettings.Aster.resume.document.margin = [0, 0, 0, 0];
-  // text-sm w-64%
+  templateSettings.Aster.resume.header.margin = [32, 32, 32, 32];
+  templateSettings.Aster.resume.contactDetails.iconColor =
+    templateBaseSettings.Aster.colors[0];
+  templateSettings.Aster.resume.categoryName.width = 64;
   templateSettings.Aster.resume.categoryName.padding = [4, 4, 4, 32];
   templateSettings.Aster.resume.categoryName.backgroundColor =
     templateBaseSettings.Aster.colors[0];
@@ -454,8 +506,11 @@ if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
     templateBaseSettings.Aster.colors[2];
   templateSettings.Aster.resume.categoryName.isUppercase = true;
   templateSettings.Aster.resume.categoryName.fontWeight = 600;
+  templateSettings.Aster.resume.entry.padding = [8, 8, 8, 32];
   templateSettings.Aster.resume.entryTitle.fontWeight = 500;
   templateSettings.Aster.resume.entryOrganization.isItalic = true;
+  templateSettings.Aster.resume.entrySummary.padding[3] = 16;
+  templateSettings.Aster.resume.entryHighlight.padding[3] = 16;
   templateSettings.Aster.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Aster.letter.senderDetails.fontWeight = 300;
   templateSettings.Aster.letter.recipientDetails.fontWeight = 300;
@@ -521,7 +576,7 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
 
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
-  templateSettings.Macaron.resume.asideWidth = 25;
+  templateSettings.Macaron.resume.aside.width = 25;
   templateSettings.Macaron.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.letter.senderDetails.margin[1] = 40;
   templateSettings.Macaron.letter.recipientDetails.margin[1] = 40;
@@ -643,7 +698,7 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
 }
 
 if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
-  templateSettings.Stone.resume.asideWidth = 25;
+  templateSettings.Stone.resume.aside.width = 25;
   templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Stone.letter.senderDetails.color =
     templateBaseSettings.Stone.colors[1];
@@ -722,6 +777,7 @@ export const socialIcons: Array<ContactDetail["icon"]> = [
 ];
 
 export const categoryTypes: Array<Category["type"]> = [
+  "certificate",
   "education",
   "project",
   "voluntary",

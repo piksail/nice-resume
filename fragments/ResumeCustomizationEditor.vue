@@ -121,9 +121,9 @@ watch(
                 type="range"
                 min="0"
                 max="100"
-                v-model="settings.asideWidth"
+                v-model="settings.aside.width"
               />
-              <output class="w-[3rem]">{{ settings.asideWidth }}%</output>
+              <output class="w-[3rem]">{{ settings.aside.width }}%</output>
             </div>
           </label>
         </div>
