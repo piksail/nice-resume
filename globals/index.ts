@@ -102,6 +102,7 @@ export const resumeSettings: ResumeSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 64, // Percentage
   },
   entryTitle: {
     font: "inherit",

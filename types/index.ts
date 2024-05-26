@@ -79,8 +79,11 @@ export type DocumentSettings = {
 
 export type ResumeSettings = {
   document: DocumentSettings;
-  asideWidth: number;
-  categoryName: BlockSettings & TextSettings;
+  asideWidth: number; // TODO convert to object
+  categoryName: BlockSettings &
+    TextSettings & {
+      width?: number | "fit";
+    };
   entryTitle: TextSettings;
   entryPeriod: TextSettings;
   entryOrganization: TextSettings;

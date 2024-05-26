@@ -47,6 +47,7 @@ const settings = computed(() => {
       paddingRight: `${settings.categoryName.padding[1]}px`,
       paddingBottom: `${settings.categoryName.padding[2]}px`,
       paddingLeft: `${settings.categoryName.padding[3]}px`,
+      width: `${settings.categoryName.width}%`,
     }"
   >
     {{ categoryName }}
