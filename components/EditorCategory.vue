@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/vue/24/outline";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  IdentificationIcon,
+  PaintBrushIcon,
+} from "@heroicons/vue/24/outline";
 
+const isCustomizing = ref(false);
 const isOpen = ref(true);
 
 function toggleDisplay() {
@@ -25,7 +31,27 @@ function toggleDisplay() {
       </button>
     </header>
     <div class="p-10 pt-6" v-if="isOpen">
-      <slot />
+      <!-- TODO tab component -->
+      <div class="flex justify-around">
+        <button
+          class="flex items-center gap-2 border-b-2 border-transparent pb-2"
+          :class="!isCustomizing && 'border-white'"
+          @click="isCustomizing = false"
+        >
+          <IdentificationIcon class="h-6" />
+          Texts
+        </button>
+        <button
+          class="flex items-center gap-2 border-b-2 border-transparent pb-2"
+          :class="isCustomizing && 'border-white'"
+          @click="isCustomizing = true"
+        >
+          <PaintBrushIcon class="h-6" />
+          Styles
+        </button>
+      </div>
+      <slot v-if="isCustomizing" name="style" />
+      <slot v-else />
     </div>
   </div>
 </template>

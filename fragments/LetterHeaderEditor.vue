@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import {
-  IdentificationIcon,
-  PaintBrushIcon,
-  PlusCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -25,8 +20,6 @@ const {
   subject,
 } = storeToRefs(useLetterStore());
 
-const isCustomizing = ref(false);
-
 function addRecipientDetail() {
   recipientDetails.value.push("");
 
@@ -43,26 +36,7 @@ function addSenderDetail() {
 <template>
   <EditorCategory id="Header" class="w-full">
     <template v-slot:header>Header</template>
-    <!-- TODO tab component -->
-    <div class="flex justify-around">
-      <button
-        class="flex items-center gap-2 border-b-2 border-transparent pb-2"
-        :class="!isCustomizing && 'border-white'"
-        @click="isCustomizing = false"
-      >
-        <IdentificationIcon class="h-6" />
-        Texts
-      </button>
-      <button
-        class="flex items-center gap-2 border-b-2 border-transparent pb-2"
-        :class="isCustomizing && 'border-white'"
-        @click="isCustomizing = true"
-      >
-        <PaintBrushIcon class="h-6" />
-        Styles
-      </button>
-    </div>
-    <div v-if="isCustomizing" class="flex flex-col gap-5">
+    <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">
         <li class="border-b-2 border-white border-opacity-5 pb-12">
           <header>
@@ -693,8 +667,8 @@ function addSenderDetail() {
           </div>
         </li>
       </ul>
-    </div>
-    <div v-else class="flex flex-col gap-5">
+    </template>
+    <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="senderDetails">
         <!-- TODO use nice toggle component -->
         <label class="cursor-pointer" for="isHeaderSimple">

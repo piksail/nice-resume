@@ -130,7 +130,7 @@ function generateStores() {
           period: "Since",
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: ["- A", "- B", "- C"],
+          highlights: ["A", "B", "C"],
         },
         {
           nature: "experience",
@@ -138,10 +138,10 @@ function generateStores() {
           title: "Title",
           organization: "Company",
           location: "Location",
-          period: "From - To",
+          period: "From To",
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: ["- A", "- B"],
+          highlights: ["A", "B"],
         },
       ],
       layout: "full",
@@ -157,10 +157,10 @@ function generateStores() {
           title: "Title",
           organization: "Institution",
           location: "Location",
-          period: "From - To",
+          period: "From To",
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: ["- A", "- B", "- C"],
+          highlights: ["A", "B", "C"],
         },
         {
           nature: "experience",
@@ -168,7 +168,7 @@ function generateStores() {
           title: "Title",
           organization: "Institution",
           location: "Location",
-          period: "From - To",
+          period: "From To",
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           highlights: [],
@@ -185,19 +185,19 @@ function generateStores() {
           nature: "asset",
           type: "skill",
           title: "Title",
-          highlights: ["- A", "- B", "- C"],
+          highlights: ["A", "B", "C"],
         },
         {
           nature: "asset",
           type: "skill",
           title: "Title",
-          highlights: ["- A", "- B", "- C"],
+          highlights: ["A", "B", "C"],
         },
         {
           nature: "asset",
           type: "skill",
           title: "Title",
-          highlights: ["- A", "- B"],
+          highlights: ["A", "B"],
         },
       ],
       layout: "half",
@@ -211,19 +211,19 @@ function generateStores() {
           nature: "asset",
           type: "language",
           title: "Title",
-          highlights: ["- A", "- B", "- C"],
+          highlights: ["A", "B", "C"],
         },
         {
           nature: "asset",
           type: "language",
           title: "Title",
-          highlights: ["- A", "- B", "- C"],
+          highlights: ["A", "B", "C"],
         },
         {
           nature: "asset",
           type: "language",
           title: "Title",
-          highlights: ["- A", "- B"],
+          highlights: ["A", "B"],
         },
       ],
       layout: "half",
@@ -232,12 +232,12 @@ function generateStores() {
   letter.senderDetails.value = [
     "Firstname Lastname",
     "Streetnumber Streetname Street",
-    "Zip code City - Country",
+    "Zip code City Country",
   ];
   letter.recipientDetails.value = [
     "Firstname Lastname",
     "Streetnumber Streetname Street",
-    "Zip code City - Country",
+    "Zip code City Country",
   ];
   letter.subject.value = "Cover letter subject";
   letter.reference.value = "Ref.: Application reference";

@@ -13,14 +13,16 @@ import {
   categoryLayouts,
   experienceTypes,
   fixedLayoutTemplates,
+  fonts,
+  listMarkers,
 } from "@/globals";
 import Button from "@/components/Button.vue";
 import EditorCategory from "@/components/EditorCategory.vue";
 import ListActions from "@/components/ListActions.vue";
 
-const { template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
-const { categories } = storeToRefs(useResumeStore());
+const { categories, settings } = storeToRefs(useResumeStore());
 
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
@@ -115,6 +117,7 @@ function getExperienceOrganizationLabel(experience: Experience) {
     v-for="(category, categoryIndex) in categories"
     :key="categoryIndex"
     :id="category.name"
+    :is-customizing="isThemeCustomized"
   >
     <template v-slot:header>
       <div class="flex items-baseline gap-8">
@@ -171,6 +174,594 @@ function getExperienceOrganizationLabel(experience: Experience) {
         @moveDown="moveDown(categories, categoryIndex)"
         @remove="remove(categories, categoryIndex)"
       />
+    </template>
+    <template v-slot:style>
+      <ul class="flex flex-col gap-10 mb-4">
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Category name</div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="categoryNameColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.categoryName.color"
+            />
+            <label class="flex flex-col" for="categoryNameFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="categoryNameFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.categoryName.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="categoryNameFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.categoryName.fontSize"
+            />
+            <Field
+              id="categoryNameLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.categoryName.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="categoryNameFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="categoryNameFontWeight"
+                v-model="settings.categoryName.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="categoryNameIsItalic">
+              <input
+                id="categoryNameIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.categoryName.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="categoryNameIsUppercase">
+              <input
+                id="categoryNameIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.categoryName.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Entry title</div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="entryTitleColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryTitle.color"
+            />
+            <label class="flex flex-col" for="entryTitleFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="entryTitleFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryTitle.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="entryTitleFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryTitle.fontSize"
+            />
+            <Field
+              id="entryTitleLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryTitle.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="entryTitleFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="entryTitleFontWeight"
+                v-model="settings.entryTitle.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="entryTitleIsItalic">
+              <input
+                id="entryTitleIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryTitle.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="entryTitleIsUppercase">
+              <input
+                id="entryTitleIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryTitle.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Entry period</div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="entryPeriodColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryPeriod.color"
+            />
+            <label class="flex flex-col" for="entryPeriodFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="entryPeriodFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryPeriod.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="entryPeriodFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryPeriod.fontSize"
+            />
+            <Field
+              id="entryPeriodLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryPeriod.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="entryPeriodFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="entryPeriodFontWeight"
+                v-model="settings.entryPeriod.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="entryPeriodIsItalic">
+              <input
+                id="entryPeriodIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryPeriod.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="entryPeriodIsUppercase">
+              <input
+                id="entryPeriodIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryPeriod.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">
+              Entry organization
+            </div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="entryOrganizationColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryOrganization.color"
+            />
+            <label class="flex flex-col" for="entryOrganizationFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="entryOrganizationFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryOrganization.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="entryOrganizationFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryOrganization.fontSize"
+            />
+            <Field
+              id="entryOrganizationLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryOrganization.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="entryOrganizationFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="entryOrganizationFontWeight"
+                v-model="settings.entryOrganization.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="entryOrganizationIsItalic">
+              <input
+                id="entryOrganizationIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryOrganization.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="entryOrganizationIsUppercase">
+              <input
+                id="entryOrganizationIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryOrganization.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Entry location</div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="entryLocationColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryLocation.color"
+            />
+            <label class="flex flex-col" for="entryLocationFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="entryLocationFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryLocation.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="entryLocationFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryLocation.fontSize"
+            />
+            <Field
+              id="entryLocationLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryLocation.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="entryLocationFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="entryLocationFontWeight"
+                v-model="settings.entryLocation.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="entryLocationIsItalic">
+              <input
+                id="entryLocationIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryLocation.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="entryLocationIsUppercase">
+              <input
+                id="entryLocationIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryLocation.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Entry summary</div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="entrySummaryColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entrySummary.color"
+            />
+            <label class="flex flex-col" for="entrySummaryFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="entrySummaryFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entrySummary.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="entrySummaryFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entrySummary.fontSize"
+            />
+            <Field
+              id="entrySummaryLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entrySummary.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="entrySummaryFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="entrySummaryFontWeight"
+                v-model="settings.entrySummary.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="entrySummaryIsItalic">
+              <input
+                id="entrySummaryIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entrySummary.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="entrySummaryIsUppercase">
+              <input
+                id="entrySummaryIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entrySummary.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+        <li>
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Highlight</div>
+          </header>
+          <div class="flex gap-5 flex-wrap">
+            <label for="entryHighlightListMarker">
+              <span class="opacity-60">List marker</span>
+              <select
+                id="entryHighlightListMarker"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryHighlight.listMarker"
+              >
+                <option class="option" value="">none</option>
+                <option
+                  class="option"
+                  v-for="(item, index) in listMarkers"
+                  :key="index"
+                  :value="item"
+                >
+                  {{ item }}
+                </option>
+              </select>
+            </label>
+            <!-- TODO toggle button -->
+            <Field
+              id="entryHighlightListMarkerColor"
+              type="color"
+              label="List marker color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryHighlight.listMarkerColor"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              id="entryHighlightColor"
+              type="color"
+              label="Color"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryHighlight.color"
+            />
+            <label class="flex flex-col" for="entryHighlightFont">
+              <span class="opacity-60">Font</span>
+              <select
+                id="entryHighlightFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryHighlight.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="entryHighlightFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryHighlight.fontSize"
+            />
+            <Field
+              id="entryHighlightLineHeight"
+              label="Line height"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.entryHighlight.lineHeight"
+              step="0.1"
+            />
+          </div>
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="entryHighlightFontWeight">
+              <span class="opacity-60">Font weight</span>
+              <select
+                id="entryHighlightFontWeight"
+                v-model="settings.entryHighlight.fontWeight"
+                class="select block"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <label for="entryHighlightIsItalic">
+              <input
+                id="entryHighlightIsItalic"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryHighlight.isItalic"
+              />
+              <span class="opacity-60">Italic</span>
+            </label>
+            <label for="entryHighlightIsUppercase">
+              <input
+                id="entryHighlightIsUppercase"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.entryHighlight.isUppercase"
+              />
+              <span class="opacity-60">Uppercase</span>
+            </label>
+          </div>
+        </li>
+      </ul>
     </template>
     <ul v-if="category.entries.length" class="flex flex-col gap-10 mb-4">
       <li

@@ -7,6 +7,7 @@ import type {
   Experience,
   LetterSettings,
   Link,
+  ListMarker,
   ResumeSettings,
   Template,
   TemplateBaseSettings,
@@ -73,6 +74,10 @@ export const discouragedLayoutTemplates: {
 //   "Open Sans": [200, 300, 500, 600, 900];
 // }; // TODO one entry per font-family
 
+// TODO settings réduire espace entrelistmarker et text
+// TODO fournir le uppercase pour ceux qui n'en ont pas (recherche globale sur isItalic pour trouver)
+export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
+
 export const resumeSettings: ResumeSettings = {
   document: {
     bodyFont: "serif",
@@ -82,9 +87,79 @@ export const resumeSettings: ResumeSettings = {
     margin: [40, 40, 40, 40], // TODO [80, 80, 80, 80]; feel VERY nice
     border: [0, 0, 0, 0],
   },
+  categoryName: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+  },
+  entryTitle: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+  },
+  entryPeriod: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+  },
+  entryOrganization: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+  },
+  entryLocation: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+  },
+  entrySummary: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+  },
+  entryHighlight: {
+    font: "inherit",
+    fontSize: 14,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    listMarker: "hyphen",
+    listMarkerColor: "currentColor",
+  },
 };
 
-// TODO allow bullet point edition (circle, hyphen, square, none, ...)
 // TODO for ANY element that is text, have below properties+letterSPacing
 export const letterSettings: LetterSettings = {
   document: {

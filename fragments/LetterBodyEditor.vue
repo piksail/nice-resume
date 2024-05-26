@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import {
-  IdentificationIcon,
-  PaintBrushIcon,
-  PlusCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -17,8 +12,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 const { paragraphs, settings } = storeToRefs(useLetterStore());
 
-const isCustomizing = ref(false);
-
 function addParagraph() {
   paragraphs.value.push("");
 
@@ -29,30 +22,11 @@ function addParagraph() {
 <template>
   <EditorCategory id="Body" class="w-full">
     <template v-slot:header>Body</template>
-    <!-- TODO tab component -->
-    <div class="flex justify-around">
-      <button
-        class="flex items-center gap-2 border-b-2 border-transparent pb-2"
-        :class="!isCustomizing && 'border-white'"
-        @click="isCustomizing = false"
-      >
-        <IdentificationIcon class="h-6" />
-        Texts
-      </button>
-      <button
-        class="flex items-center gap-2 border-b-2 border-transparent pb-2"
-        :class="isCustomizing && 'border-white'"
-        @click="isCustomizing = true"
-      >
-        <PaintBrushIcon class="h-6" />
-        Styles
-      </button>
-    </div>
-    <div v-if="isCustomizing" class="flex flex-col gap-5">
+    <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">
         <li>
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Body</div>
+            <div class="uppercase font-bold text-lg mb-5">Paragraphs</div>
           </header>
           <div class="flex flex-col gap-5">
             <div class="flex gap-5 flex-wrap">
@@ -128,8 +102,8 @@ function addParagraph() {
           />
         </li>
       </ul>
-    </div>
-    <div v-else class="flex flex-col gap-5">
+    </template>
+    <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="paragraphList">
         <div class="flex gap-2">
           <span class="opacity-60">Paragraphs</span>

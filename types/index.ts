@@ -15,7 +15,19 @@ export type Template =
 
 export type DocumentType = "letter" | "resume";
 
+export type ListMarker = null | "circle" | "disc" | "hyphen" | "square";
+
 export type SideSetting = number[];
+
+export type TextSettings = {
+  font?: string;
+  fontSize: number;
+  lineHeight: number;
+  fontWeight: number; // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+  isItalic: boolean;
+  isUppercase?: boolean;
+  color: string;
+};
 
 export type Settings = {
   font?: string;
@@ -57,6 +69,16 @@ export type DocumentSettings = {
 
 export type ResumeSettings = {
   document: DocumentSettings;
+  categoryName: TextSettings;
+  entryTitle: TextSettings;
+  entryPeriod: TextSettings;
+  entryOrganization: TextSettings;
+  entryLocation: TextSettings;
+  entrySummary: TextSettings;
+  entryHighlight: TextSettings & {
+    listMarker: ListMarker;
+    listMarkerColor: string;
+  };
 };
 
 export type LetterSettings = {
