@@ -103,6 +103,7 @@ function getExperienceOrganizationLabel(experience: Experience) {
     case "work":
       return "Company";
     case "education":
+    case "certificate":
       return "Institution";
     case "project":
     case "voluntary":
