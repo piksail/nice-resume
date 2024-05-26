@@ -117,27 +117,33 @@ export type TemplateSettings = {
   };
 };
 
-export interface Detail {
-  icon: null | "default" | "address" | "drivingLicense" | "email" | "phone";
-  value: string;
-}
+export type DetailIcon =
+  | null
+  | "default"
+  | "address"
+  | "drivingLicense"
+  | "email"
+  | "phone";
 
-export interface Link {
-  icon:
-    | null
-    | "default"
-    | "bandcamp"
-    | "behance"
-    | "facebook"
-    | "gitHub"
-    | "instagram"
-    | "linkedIn"
-    | "mastodon"
-    | "soundCloud"
-    | "stackOverflow"
-    | "viadeo"
-    | "x";
-  url: string;
+export type SocialIcon =
+  | null
+  | "default"
+  | "bandcamp"
+  | "behance"
+  | "facebook"
+  | "gitHub"
+  | "instagram"
+  | "linkedIn"
+  | "mastodon"
+  | "soundCloud"
+  | "stackOverflow"
+  | "viadeo"
+  | "x";
+
+export interface ContactDetail {
+  type: "personal" | "social";
+  icon: DetailIcon | SocialIcon;
+  value: string;
 }
 
 export interface Entry {
@@ -173,8 +179,7 @@ export interface Profile {
   template: Template;
   name: string;
   title: string;
-  contactDetails: Array<Detail>;
-  socialLinks: Array<Link>;
+  contactDetails: Array<ContactDetail>;
 }
 
 export interface Resume extends Profile {

@@ -2,11 +2,10 @@ import type {
   Asset,
   BaseSettings,
   Category,
-  Detail,
+  ContactDetail,
   DocumentType,
   Experience,
   LetterSettings,
-  Link,
   ListMarker,
   ResumeSettings,
   Template,
@@ -681,14 +680,14 @@ if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
   templateSettings.Wiki.letter.body.fontSize = 12;
 }
 
-export const contactIcons: Array<Detail["icon"]> = [
+export const contactIcons: Array<ContactDetail["icon"]> = [
   "address",
   "drivingLicense",
   "email",
   "phone",
 ];
 
-export const socialIcons: Array<Link["icon"]> = [
+export const socialIcons: Array<ContactDetail["icon"]> = [
   "bandcamp",
   "behance",
   "mastodon",

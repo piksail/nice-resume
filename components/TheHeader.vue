@@ -105,15 +105,13 @@ function generateStores() {
   profile.title.value = "Title";
   resume.about.value = "About";
   resume.contactDetails.value = [
-    { icon: "drivingLicense", value: "Driving license" },
-    { icon: "address", value: "Address" },
-    { icon: "email", value: "email@email.com" },
-    { icon: "phone", value: "061122334455" },
-  ];
-  resume.socialLinks.value = [
-    { icon: "gitHub", url: "github.com" },
-    { icon: "linkedIn", url: "linkedin.com" },
-    { icon: "viadeo", url: "viadeo.com" },
+    { type: "personal", icon: "drivingLicense", value: "Driving license" },
+    { type: "personal", icon: "address", value: "Address" },
+    { type: "personal", icon: "email", value: "email@email.com" },
+    { type: "personal", icon: "phone", value: "061122334455" },
+    { type: "social", icon: "gitHub", value: "github.com" },
+    { type: "social", icon: "linkedIn", value: "linkedin.com" },
+    { type: "social", icon: "viadeo", value: "viadeo.com" },
   ];
   resume.categories.value = [
     {

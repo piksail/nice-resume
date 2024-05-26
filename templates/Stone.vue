@@ -4,17 +4,15 @@ import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import ContactIcon from "@/components/ContactIcon.vue";
+import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
 import Document from "@/components/Document.vue";
 import LetterBody from "@/components/LetterBody.vue";
-import LinkIcon from "@/components/LinkIcon.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 
 const { name, title } = storeToRefs(useProfileStore());
 
-const { about, categories, contactDetails, socialLinks } =
-  storeToRefs(useResumeStore());
+const { about, categories, contactDetails } = storeToRefs(useResumeStore());
 
 const { isHeaderSimple } = storeToRefs(useLetterStore());
 </script>
@@ -38,21 +36,13 @@ const { isHeaderSimple } = storeToRefs(useLetterStore());
             :key="`${detail.value}${detail.icon}`"
             class="flex gap-1 items-center"
           >
-            <ContactIcon v-if="detail.icon" :icon="detail.icon" class="w-4" />
+            <ContactDetailIcon
+              v-if="detail.icon"
+              :icon="detail.icon"
+              :type="detail.type"
+              class="w-4"
+            />
             {{ detail.value }}
-          </li>
-        </ul>
-        <ul
-          v-if="socialLinks.length"
-          class="leading-tight text-xs flex gap-x-6 flex-wrap mb-6"
-        >
-          <li
-            v-for="link in socialLinks"
-            :key="`${link.url}${link.icon}`"
-            class="flex gap-1 items-center"
-          >
-            <LinkIcon v-if="link.icon" :icon="link.icon" class="w-4" />
-            {{ link.url }}
           </li>
         </ul>
       </header>
@@ -68,7 +58,7 @@ const { isHeaderSimple } = storeToRefs(useLetterStore());
         </h2>
         <ul
           v-if="contactDetails.length"
-          class="text-center leading-tight flex justify-center gap-x-6 flex-wrap mb-2"
+          class="text-center leading-tight flex justify-center gap-x-6 flex-wrap"
         >
           <li
             v-for="detail in contactDetails"
@@ -77,19 +67,6 @@ const { isHeaderSimple } = storeToRefs(useLetterStore());
           >
             <ContactIcon v-if="detail.icon" :icon="detail.icon" class="w-4" />
             {{ detail.value }}
-          </li>
-        </ul>
-        <ul
-          v-if="socialLinks.length"
-          class="text-center leading-tight flex justify-center gap-x-6 flex-wrap"
-        >
-          <li
-            v-for="link in socialLinks"
-            :key="`${link.url}${link.icon}`"
-            class="flex gap-1 items-center"
-          >
-            <LinkIcon v-if="link.icon" :icon="link.icon" class="w-4" />
-            {{ link.url }}
           </li>
         </ul>
       </header>

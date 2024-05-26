@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { type Component, computed } from "vue";
-import { LinkIcon } from "@heroicons/vue/16/solid";
+import {
+  EnvelopeIcon,
+  IdentificationIcon,
+  LinkIcon,
+  MapPinIcon,
+  PhoneIcon,
+  UserCircleIcon,
+} from "@heroicons/vue/16/solid";
 import {
   BandcampIcon,
   BehanceIcon,
@@ -14,18 +21,25 @@ import {
   ViadeoIcon,
   XIcon,
 } from "vue3-simple-icons";
-import type { Link } from "@/types";
+import type { ContactDetail } from "@/types";
 
-const { icon } = defineProps<{
-  icon: Link["icon"];
+const { icon, type } = defineProps<{
+  icon: ContactDetail["icon"];
+  type: ContactDetail["type"];
 }>();
 
 type IconMapper = {
-  [K in Link["icon"] as string]: Component;
+  [K in ContactDetail["icon"] as string]: Component;
 };
 
 const iconMapper: IconMapper = {
-  default: LinkIcon,
+  default: type === "social" ? LinkIcon : UserCircleIcon,
+  // Personal
+  address: MapPinIcon,
+  drivingLicense: IdentificationIcon,
+  email: EnvelopeIcon,
+  phone: PhoneIcon,
+  // Social
   bandcamp: BandcampIcon,
   behance: BehanceIcon,
   facebook: FacebookIcon,

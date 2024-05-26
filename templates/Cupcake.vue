@@ -4,17 +4,15 @@ import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import ContactIcon from "@/components/ContactIcon.vue";
+import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
 import Document from "@/components/Document.vue";
 import LetterBody from "@/components/LetterBody.vue";
-import LinkIcon from "@/components/LinkIcon.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 
 const { name, title } = storeToRefs(useProfileStore());
 
-const { about, categories, contactDetails, socialLinks } =
-  storeToRefs(useResumeStore());
+const { about, categories, contactDetails } = storeToRefs(useResumeStore());
 
 const { isHeaderSimple } = storeToRefs(useLetterStore());
 </script>
@@ -38,23 +36,20 @@ const { isHeaderSimple } = storeToRefs(useLetterStore());
       </div>
       <ul
         class="flex flex-col self-center text-[color:var(--resume-color1)] font-display font-bold text-sm tracking-wider"
-        v-if="contactDetails.length || socialLinks.length"
+        v-if="contactDetails.length"
       >
         <li
           v-for="detail in contactDetails"
           :key="`${detail.value}${detail.icon}`"
           class="flex gap-1 items-center justify-end"
         >
-          <ContactIcon v-if="detail.icon" :icon="detail.icon" class="w-4" />
+          <ContactDetailIcon
+            v-if="detail.icon"
+            :icon="detail.icon"
+            :type="detail.type"
+            class="w-4"
+          />
           {{ detail.value }}
-        </li>
-        <li
-          v-for="link in socialLinks"
-          :key="`${link.url}${link.icon}`"
-          class="flex gap-1 items-center justify-end"
-        >
-          <LinkIcon v-if="link.icon" :icon="link.icon" class="w-4" />
-          {{ link.url }}
         </li>
       </ul>
     </header>
