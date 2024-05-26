@@ -19,6 +19,16 @@ export type ListMarker = null | "circle" | "disc" | "hyphen" | "square";
 
 export type SideSetting = number[];
 
+export type BlockSettings = {
+  backgroundColor: string;
+  padding: SideSetting;
+  border: SideSetting;
+  borderColor: string;
+  borderRadius: number;
+  margin: SideSetting;
+  // TODO allow width -> This allow some templates to have the same width even though their text is different
+};
+
 export type TextSettings = {
   font?: string;
   fontSize: number;
@@ -69,7 +79,8 @@ export type DocumentSettings = {
 
 export type ResumeSettings = {
   document: DocumentSettings;
-  categoryName: TextSettings;
+  asideWidth: number;
+  categoryName: BlockSettings & TextSettings;
   entryTitle: TextSettings;
   entryPeriod: TextSettings;
   entryOrganization: TextSettings;

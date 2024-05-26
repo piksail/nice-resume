@@ -74,6 +74,7 @@ export const discouragedLayoutTemplates: {
 // }; // TODO one entry per font-family
 
 // TODO settings réduire espace entrelistmarker et text
+// TODO autoriser le Block settings pour le entry carrément (iso letter header)
 // TODO fournir le uppercase pour ceux qui n'en ont pas (recherche globale sur isItalic pour trouver)
 export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
 
@@ -86,6 +87,7 @@ export const resumeSettings: ResumeSettings = {
     margin: [40, 40, 40, 40], // TODO [80, 80, 80, 80]; feel VERY nice
     border: [0, 0, 0, 0],
   },
+  asideWidth: 20, // Percentage
   categoryName: {
     font: "inherit",
     fontSize: 14,
@@ -94,7 +96,12 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+    backgroundColor: "#ffffff",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
   },
   entryTitle: {
     font: "inherit",
@@ -438,6 +445,16 @@ Object.entries(templateBaseSettings).forEach(([key, value]) => {
 
 if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
   templateSettings.Aster.resume.document.margin = [0, 0, 0, 0];
+  // text-sm w-64%
+  templateSettings.Aster.resume.categoryName.padding = [4, 4, 4, 32];
+  templateSettings.Aster.resume.categoryName.backgroundColor =
+    templateBaseSettings.Aster.colors[0];
+  templateSettings.Aster.resume.categoryName.color =
+    templateBaseSettings.Aster.colors[2];
+  templateSettings.Aster.resume.categoryName.isUppercase = true;
+  templateSettings.Aster.resume.categoryName.fontWeight = 600;
+  templateSettings.Aster.resume.entryTitle.fontWeight = 500;
+  templateSettings.Aster.resume.entryOrganization.isItalic = true;
   templateSettings.Aster.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Aster.letter.senderDetails.fontWeight = 300;
   templateSettings.Aster.letter.recipientDetails.fontWeight = 300;
@@ -503,6 +520,7 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
 
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Macaron.resume.asideWidth = 25;
   templateSettings.Macaron.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.letter.senderDetails.margin[1] = 40;
   templateSettings.Macaron.letter.recipientDetails.margin[1] = 40;
@@ -624,6 +642,7 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
 }
 
 if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
+  templateSettings.Stone.resume.asideWidth = 25;
   templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Stone.letter.senderDetails.color =
     templateBaseSettings.Stone.colors[1];
