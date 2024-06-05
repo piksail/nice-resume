@@ -591,6 +591,7 @@ if (
 ) {
   templateSettings.CottonCandy.resume.document.margin = [0, 0, 0, 0];
   templateSettings.CottonCandy.resume.header.layout = 1;
+  templateSettings.CottonCandy.resume.header.padding = [24, 40, 24, 40];
   templateSettings.CottonCandy.resume.name.font =
     templateBaseSettings.CottonCandy.displayFont;
   templateSettings.CottonCandy.resume.name.fontSize = 36;
@@ -704,6 +705,38 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.resume.aside.width = 25;
+  templateSettings.Macaron.resume.header.padding = [32, 40, 32, 40];
+  templateSettings.Macaron.resume.header.backgroundColor =
+    templateBaseSettings.Macaron.colors[0];
+  templateSettings.Macaron.resume.name.color =
+    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.name.fontSize = 36;
+  templateSettings.Macaron.resume.name.fontWeight = 600;
+  templateSettings.Macaron.resume.title.color =
+    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.title.fontSize = 24;
+  templateSettings.Macaron.resume.title.fontWeight = 600;
+  templateSettings.Macaron.resume.contactDetails.color =
+    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.contactDetails.iconColor =
+    templateBaseSettings.Macaron.colors[1];
+  // templateSettings.Macaron.resume.about.font =
+  //   templateBaseSettings.Macaron.displayFont; TODO make it customizable
+  templateSettings.Macaron.resume.category.padding = [40, 40, 0, 40];
+  templateSettings.Macaron.resume.categoryName.color =
+    templateBaseSettings.Macaron.colors[0];
+  templateSettings.Macaron.resume.categoryName.fontSize = 24;
+  templateSettings.Macaron.resume.categoryName.fontWeight = 600;
+  templateSettings.Macaron.resume.entry.layout = 4;
+  templateSettings.Macaron.resume.entryTitle.fontWeight = 700;
+  templateSettings.Macaron.resume.entryPeriod.color =
+    templateBaseSettings.Macaron.colors[0];
+  templateSettings.Macaron.resume.entryPeriod.fontWeight = 700;
+  templateSettings.Macaron.resume.entryOrganization.fontWeight = 300;
+  templateSettings.Macaron.resume.entryLocation.fontWeight = 300;
+  templateSettings.Macaron.resume.entrySummary.fontWeight = 300;
+  templateSettings.Macaron.resume.entryHighlight.isItalic = true;
+  templateSettings.Macaron.resume.entryHighlight.listMarker = "disc";
   templateSettings.Macaron.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.letter.senderDetails.margin[1] = 40;
   templateSettings.Macaron.letter.recipientDetails.margin[1] = 40;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
@@ -12,10 +12,10 @@ const { name, template, title } = storeToRefs(useProfileStore());
 
 const { about } = storeToRefs(useResumeStore());
 
-// TODO fix below
-// const settings = ref(templateSettings[template.value][documentType.value]);
-const settings = ref(templateSettings[template.value].resume);
-console.log(settings);
+const settings = computed(() => {
+  // TODO fix templateSettings[template.value][documentType.value]
+  return templateSettings[template.value].resume;
+});
 </script>
 
 <template>

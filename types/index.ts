@@ -123,7 +123,7 @@ export type ResumeSettings = {
       width?: number | "fit";
     };
   entry: BlockSettings & {
-    layout: number;
+    layout: 0 | 1 | 2 | 3 | 4;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;
