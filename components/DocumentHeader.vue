@@ -52,6 +52,20 @@ const settings = computed(() => {
         {{ about }}
       </p>
     </template>
+    <template v-else-if="settings.header.layout === 2">
+      <div class="flex flex-col">
+        <DocumentHeaderName :name="name" />
+        <DocumentHeaderTitle :title="title" />
+        <DocumentHeaderContactDetails />
+        <p v-if="about" class="flex-1">
+          <!-- TODO this is from Tootpaste (blue quote) -->
+          <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
+            “
+          </span>
+          {{ about }}
+        </p>
+      </div>
+    </template>
     <template v-else>
       <div class="flex-1">
         <DocumentHeaderName :name="name" />

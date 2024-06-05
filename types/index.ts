@@ -98,7 +98,7 @@ export type DocumentSettings = {
 export type ResumeSettings = {
   document: DocumentSettings;
   header: BlockSettings & {
-    layout: number; // TODO other properties
+    layout: 0 | 1 | 2; // TODO other properties
   };
   name: BlockSettings & TextSettings;
   title: BlockSettings & TextSettings;

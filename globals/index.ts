@@ -388,7 +388,7 @@ export const templateBaseSettings: TemplateBaseSettings = {
   },
   Macaron: {
     isLetterMarginless: true,
-    colors: ["#d88277", "#f8aaa6", "#ffffff", "#414e66"],
+    colors: ["#d88277", "#f8aaa6", "#f8d5cd", "#f8f4f2", "#ffffff", "#414e66"],
     bodyFont: "Karla",
     displayFont: "Caveat",
   },
@@ -705,24 +705,29 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.resume.aside.width = 25;
-  templateSettings.Macaron.resume.header.padding = [32, 40, 32, 40];
-  templateSettings.Macaron.resume.header.backgroundColor =
-    templateBaseSettings.Macaron.colors[0];
-  templateSettings.Macaron.resume.name.color =
+  templateSettings.Macaron.resume.header.layout = 2;
+  templateSettings.Macaron.resume.header.margin = [68, 0, 40, 0];
+  templateSettings.Macaron.resume.header.border = [1, 0, 1, 0];
+  templateSettings.Macaron.resume.header.borderColor =
     templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.header.padding = [12, 40, 12, 40];
+  templateSettings.Macaron.resume.header.backgroundColor =
+    templateBaseSettings.Macaron.colors[3];
   templateSettings.Macaron.resume.name.fontSize = 36;
   templateSettings.Macaron.resume.name.fontWeight = 600;
-  templateSettings.Macaron.resume.title.color =
-    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.name.isUppercase = true;
+  templateSettings.Macaron.resume.name.letterSpacing = 10;
   templateSettings.Macaron.resume.title.fontSize = 24;
   templateSettings.Macaron.resume.title.fontWeight = 600;
-  templateSettings.Macaron.resume.contactDetails.color =
-    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.title.isUppercase = true;
+  templateSettings.Macaron.resume.title.letterSpacing = 5;
+  templateSettings.Macaron.resume.contactDetails.listOrientation = "row";
   templateSettings.Macaron.resume.contactDetails.iconColor =
     templateBaseSettings.Macaron.colors[1];
   // templateSettings.Macaron.resume.about.font =
   //   templateBaseSettings.Macaron.displayFont; TODO make it customizable
-  templateSettings.Macaron.resume.category.padding = [40, 40, 0, 40];
+  templateSettings.Macaron.resume.category.padding = [0, 40, 0, 40];
+  templateSettings.Macaron.resume.category.gap = 30;
   templateSettings.Macaron.resume.categoryName.color =
     templateBaseSettings.Macaron.colors[0];
   templateSettings.Macaron.resume.categoryName.fontSize = 24;

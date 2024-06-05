@@ -26,6 +26,7 @@ const settings = ref(templateSettings[template.value].resume);
       fontFamily: settings.name.font,
       fontSize: `${settings.name.fontSize}px`,
       lineHeight: settings.name.lineHeight,
+      letterSpacing: `${settings.name.letterSpacing}px`,
       fontWeight: settings.name.fontWeight,
       fontStyle: settings.name.isItalic ? 'italic' : 'initial',
       textTransform: settings.name.isUppercase ? 'uppercase' : 'initial',
