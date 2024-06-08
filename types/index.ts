@@ -99,10 +99,12 @@ export type ResumeSettings = {
       isIconFirst: boolean;
       gap: number; // Flex gap between details
     };
+  // TODO provide Pick<BlockSettings, "margin">; to aside as well
   aside: {
     width: number;
     gap: number; // Flex gap between aside and main columns
   };
+  body: Pick<BlockSettings, "margin">;
   category: BlockSettings & {
     gap: number; // Flex gap between categories
   };
@@ -115,7 +117,7 @@ export type ResumeSettings = {
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5;
+    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;

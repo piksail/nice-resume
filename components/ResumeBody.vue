@@ -106,6 +106,10 @@ const settings = computed(() => {
     <div
       class="grid grid-cols-2 flex-1"
       :style="{
+        marginTop: `${settings.body.margin[0]}px`,
+        marginRight: `${settings.body.margin[1]}px`,
+        marginBottom: `${settings.body.margin[2]}px`,
+        marginLeft: `${settings.body.margin[3]}px`,
         gap: `${settings.category.gap}px`,
       }"
     >

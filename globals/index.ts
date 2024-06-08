@@ -156,6 +156,9 @@ export const resumeSettings: ResumeSettings = {
     width: 20, // Percentage
     gap: 16,
   },
+  body: {
+    margin: [0, 0, 0, 0],
+  },
   category: {
     backgroundColor: "transparent",
     borderColor: "#000000",
@@ -412,7 +415,7 @@ export const templateBaseSettings: TemplateBaseSettings = {
   },
   Oilcloth: {
     isLetterMarginless: true,
-    colors: ["#0076c0", "#f6ba62", "#43a385", "#ffffff", "#231f20"],
+    colors: ["#0f9ef8", "#ff9b08", "#43a385", "#ffffff", "#231f20"],
     bodyFont: "Open Sans",
     displayFont: "Yanone Kaffeesatz",
   },
@@ -722,7 +725,7 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.resume.aside.width = 25;
   templateSettings.Macaron.resume.header.layout = 2;
-  templateSettings.Macaron.resume.header.margin = [68, 0, 40, 0];
+  templateSettings.Macaron.resume.header.margin = [68, 0, 20, 0];
   templateSettings.Macaron.resume.header.border = [1, 0, 1, 0];
   templateSettings.Macaron.resume.header.borderColor =
     templateBaseSettings.Macaron.colors[2];
@@ -742,7 +745,8 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
     templateBaseSettings.Macaron.colors[1];
   // templateSettings.Macaron.resume.about.font =
   //   templateBaseSettings.Macaron.displayFont; TODO make it customizable
-  templateSettings.Macaron.resume.category.padding = [0, 40, 0, 40];
+  templateSettings.Macaron.resume.body.margin = [40, 40, 40, 40];
+  // templateSettings.Macaron.resume.category.padding = [0, 40, 0, 40];
   templateSettings.Macaron.resume.category.gap = 30;
   templateSettings.Macaron.resume.categoryName.color =
     templateBaseSettings.Macaron.colors[0];
@@ -818,6 +822,53 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
 
 if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Oilcloth.resume.document.border = [15, 0, 20, 0];
+  templateSettings.Oilcloth.resume.document.borderColor =
+    templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.resume.header.backgroundColor =
+    templateBaseSettings.Oilcloth.colors[0];
+  templateSettings.Oilcloth.resume.header.padding = [30, 40, 30, 40];
+  templateSettings.Oilcloth.resume.name.color =
+    templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.resume.name.fontSize = 40;
+  templateSettings.Oilcloth.resume.name.fontWeight = 900;
+  templateSettings.Oilcloth.resume.name.letterSpacing = 2;
+  templateSettings.Oilcloth.resume.title.color =
+    templateBaseSettings.Oilcloth.colors[3];
+  templateSettings.Oilcloth.resume.title.fontWeight = 600;
+  templateSettings.Oilcloth.resume.title.isUppercase = true;
+  templateSettings.Oilcloth.resume.title.letterSpacing = 4;
+  // templateSettings.Oilcloth.resume.about.color = TODO
+  //   templateBaseSettings.Oilcloth.colors[3];
+  templateSettings.Oilcloth.resume.contactDetails.fontWeight = 600;
+  templateSettings.Oilcloth.resume.contactDetails.color =
+    templateBaseSettings.Oilcloth.colors[3];
+  templateSettings.Oilcloth.resume.contactDetails.iconColor =
+    templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.resume.body.margin = [40, 40, 40, 40];
+  templateSettings.Oilcloth.resume.category.gap = 40;
+  templateSettings.Oilcloth.resume.categoryName.isUppercase = true;
+  templateSettings.Oilcloth.resume.categoryName.fontSize = 25;
+  templateSettings.Oilcloth.resume.categoryName.letterSpacing = 2;
+  templateSettings.Oilcloth.resume.categoryName.fontWeight = 300;
+  templateSettings.Oilcloth.resume.categoryName.margin[2] = 5;
+  templateSettings.Oilcloth.resume.entry.layout = 6;
+  templateSettings.Oilcloth.resume.entryPeriod.color =
+    templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.resume.entryPeriod.fontSize = 16;
+  templateSettings.Oilcloth.resume.entryPeriod.fontWeight = 700;
+  templateSettings.Oilcloth.resume.entryTitle.fontSize = 16;
+  templateSettings.Oilcloth.resume.entryTitle.fontWeight = 900;
+  templateSettings.Oilcloth.resume.entryOrganization.fontWeight = 300;
+  templateSettings.Oilcloth.resume.entryOrganization.lineHeight = 1;
+  templateSettings.Oilcloth.resume.entryLocation.fontWeight = 300;
+  templateSettings.Oilcloth.resume.entryLocation.lineHeight = 1;
+  templateSettings.Oilcloth.resume.entrySummary.color =
+    templateBaseSettings.Oilcloth.colors[0];
+  templateSettings.Oilcloth.resume.entrySummary.margin = [10, 0, 10, 0];
+  templateSettings.Oilcloth.resume.entrySummary.lineHeight = 1;
+  templateSettings.Oilcloth.resume.entryHighlight.fontWeight = 300;
+  templateSettings.Oilcloth.resume.entryHighlight.lineHeight = 1;
   templateSettings.Oilcloth.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Oilcloth.letter.senderDetails.color =
     templateBaseSettings.Oilcloth.colors[0];
