@@ -48,11 +48,11 @@ const settings = computed(() => {
       <DocumentHeaderAbout :about="about" />
     </template>
     <template v-else-if="settings.header.layout === 2">
-      <div class="flex flex-col">
+      <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderAbout :about="about" />
         <DocumentHeaderContactDetails />
+        <DocumentHeaderAbout :about="about" />
       </div>
     </template>
     <template v-else-if="settings.header.layout === 3">

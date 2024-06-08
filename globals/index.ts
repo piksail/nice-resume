@@ -1106,6 +1106,53 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
 
 if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.aside.width = 25;
+  templateSettings.Stone.resume.header.layout = 2;
+  templateSettings.Stone.resume.name.font =
+    templateBaseSettings.Stone.displayFont;
+  templateSettings.Stone.resume.name.textAlign = "center";
+  templateSettings.Stone.resume.name.fontSize = 36;
+  templateSettings.Stone.resume.name.margin[2] = 2;
+  templateSettings.Stone.resume.title.textAlign = "center";
+  templateSettings.Stone.resume.title.fontSize = 20;
+  templateSettings.Stone.resume.title.margin[2] = 2;
+  templateSettings.Stone.resume.contactDetails.fontSize = 12;
+  templateSettings.Stone.resume.contactDetails.listOrientation = "row";
+  templateSettings.Stone.resume.contactDetails.gap = 30;
+  // TODO handle justify-center of details
+  templateSettings.Stone.resume.contactDetails.padding = [2, 20, 20, 20];
+  templateSettings.Stone.resume.about.font =
+    templateBaseSettings.Stone.displayFont;
+  templateSettings.Stone.resume.about.textAlign = "center";
+  templateSettings.Stone.resume.about.fontSize = 12;
+  templateSettings.Stone.resume.about.padding = [25, 0, 25, 0];
+  templateSettings.Stone.resume.about.border[0] = 1;
+  templateSettings.Stone.resume.about.borderColor =
+    templateBaseSettings.Stone.colors[2];
+  templateSettings.Stone.resume.category.padding = [25, 0, 25, 0];
+  templateSettings.Stone.resume.category.border[0] = 1;
+  templateSettings.Stone.resume.category.borderColor =
+    templateBaseSettings.Stone.colors[2];
+  templateSettings.Stone.resume.categoryName.isUppercase = true;
+  templateSettings.Stone.resume.categoryName.color =
+    templateBaseSettings.Stone.colors[0];
+  templateSettings.Stone.resume.categoryName.font =
+    templateBaseSettings.Stone.displayFont;
+  templateSettings.Stone.resume.categoryName.fontSize = 20;
+  templateSettings.Stone.resume.categoryName.fontWeight = 700;
+  templateSettings.Stone.resume.categoryName.margin[2] = 20;
+  templateSettings.Stone.resume.entry.layout = 10;
+  templateSettings.Stone.resume.entryTitle.isUppercase = true;
+  templateSettings.Stone.resume.entryTitle.lineHeight = 1;
+  templateSettings.Stone.resume.entryTitle.fontSize = 13;
+  templateSettings.Stone.resume.entryOrganization.fontSize = 12;
+  templateSettings.Stone.resume.entryOrganization.color =
+    templateBaseSettings.Stone.colors[1];
+  templateSettings.Stone.resume.entryLocation.fontSize = 12;
+  templateSettings.Stone.resume.entryLocation.color =
+    templateBaseSettings.Stone.colors[1];
+  templateSettings.Stone.resume.entryPeriod.fontSize = 12;
+  templateSettings.Stone.resume.entryPeriod.color =
+    templateBaseSettings.Stone.colors[1];
   templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Stone.letter.senderDetails.color =
     templateBaseSettings.Stone.colors[1];
