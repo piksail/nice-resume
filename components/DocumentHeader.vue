@@ -11,7 +11,7 @@ import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDeta
 
 const { name, template, title } = storeToRefs(useProfileStore());
 
-const { about } = storeToRefs(useResumeStore());
+const { about, contactDetails } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
   // TODO fix templateSettings[template.value][documentType.value]
@@ -44,14 +44,14 @@ const settings = computed(() => {
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
       </div>
-      <DocumentHeaderContactDetails />
+      <DocumentHeaderContactDetails :contact-details="contactDetails" />
       <DocumentHeaderAbout :about="about" />
     </template>
     <template v-else-if="settings.header.layout === 2">
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderContactDetails />
+        <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderAbout :about="about" />
       </div>
     </template>
@@ -63,7 +63,7 @@ const settings = computed(() => {
           <span v-if="name && title" :style="{fontSize: `${settings.name.fontSize}px`}">,&nbsp;</span>
           <DocumentHeaderTitle :title="title" />
         </div>
-        <DocumentHeaderContactDetails />
+        <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderAbout :about="about" />
       </div>
     </template>
@@ -73,7 +73,7 @@ const settings = computed(() => {
         <DocumentHeaderTitle :title="title" />
         <DocumentHeaderAbout :about="about" />
       </div>
-      <DocumentHeaderContactDetails />
+      <DocumentHeaderContactDetails :contact-details="contactDetails" />
     </template>
   </header>
 </template>

@@ -352,6 +352,30 @@ const settings = computed(() => {
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
   </template>
+  <template v-else-if="settings.entry.layout === 11">
+    <div class="flex justify-between">
+      <ResumeEntryTitle :entry-title="entry.title" />
+      <ResumeEntryPeriod
+        v-if="entry.nature === 'experience'"
+        :entry-period="entry.period"
+      />
+    </div>
+    <div class="flex justify-between">
+      <ResumeEntryOrganization
+        v-if="entry.nature === 'experience'"
+        :entry-organization="entry.organization"
+      />
+      <ResumeEntryLocation
+        v-if="entry.nature === 'experience'"
+        :entry-location="entry.location"
+      />
+    </div>
+    <ResumeEntrySummary
+      v-if="entry.nature === 'experience'"
+      :entry-summary="entry.summary"
+    />
+    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+  </template>
   <template v-else>
     <!-- TODO customize gap-4 here -->
     <div class="flex gap-4 items-center">

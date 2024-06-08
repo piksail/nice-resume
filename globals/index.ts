@@ -1220,8 +1220,40 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
 }
 
 if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
-  templateSettings.Wiki.resume.document.margin = [24, 20, 24, 20];
-  templateSettings.Wiki.letter.document.margin = [24, 20, 24, 20];
+  templateSettings.Wiki.resume.document.margin = [24, 30, 24, 30];
+  templateSettings.Wiki.resume.name.textAlign = "center";
+  templateSettings.Wiki.resume.name.fontSize = 30;
+  templateSettings.Wiki.resume.name.fontWeight = 700;
+  templateSettings.Wiki.resume.title.textAlign = "center";
+  templateSettings.Wiki.resume.title.fontSize = 20;
+  templateSettings.Wiki.resume.about.textAlign = "center";
+  templateSettings.Wiki.resume.about.fontSize = 12;
+  templateSettings.Wiki.resume.contactDetails.alignment = "end";
+  templateSettings.Wiki.resume.contactDetails.fontSize = 12;
+  templateSettings.Wiki.resume.category.gap = 20;
+  templateSettings.Wiki.resume.categoryName.isUppercase = true;
+  templateSettings.Wiki.resume.categoryName.color =
+    templateBaseSettings.Wiki.colors[0];
+  templateSettings.Wiki.resume.categoryName.margin[2] = 10;
+  templateSettings.Wiki.resume.categoryName.border[2] = 1;
+  templateSettings.Wiki.resume.categoryName.borderColor =
+    templateBaseSettings.Wiki.colors[1];
+  templateSettings.Wiki.resume.entry.layout = 11;
+  templateSettings.Wiki.resume.entryTitle.fontWeight = 700;
+  templateSettings.Wiki.resume.entryTitle.fontSize = 11;
+  templateSettings.Wiki.resume.entryTitle.lineHeight = 1.5;
+  templateSettings.Wiki.resume.entryPeriod.fontSize = 11;
+  templateSettings.Wiki.resume.entryPeriod.lineHeight = 1.5;
+  templateSettings.Wiki.resume.entryOrganization.isItalic = true;
+  templateSettings.Wiki.resume.entryOrganization.fontSize = 11;
+  templateSettings.Wiki.resume.entryOrganization.lineHeight = 1.5;
+  templateSettings.Wiki.resume.entryLocation.isItalic = true;
+  templateSettings.Wiki.resume.entryLocation.fontSize = 11;
+  templateSettings.Wiki.resume.entryLocation.lineHeight = 1.5;
+  templateSettings.Wiki.resume.entrySummary.margin[0] = 4;
+  templateSettings.Wiki.resume.entrySummary.fontSize = 11;
+  templateSettings.Wiki.resume.entryHighlight.fontSize = 11;
+  templateSettings.Wiki.letter.document.margin = [24, 30, 24, 30];
   templateSettings.Wiki.letter.senderDetails.fontSize = 12;
   templateSettings.Wiki.letter.senderDetails.lineHeight = 1.2;
   templateSettings.Wiki.letter.recipientDetails.fontSize = 12;

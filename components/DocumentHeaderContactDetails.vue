@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import type { Profile } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
-import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
 import { getListMarker } from "@/utils/editor";
 import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
@@ -12,7 +12,9 @@ const { documentType } = storeToRefs(useEditorStore());
 
 const { template } = storeToRefs(useProfileStore());
 
-const { contactDetails } = storeToRefs(useResumeStore());
+const { contactDetails } = defineProps<{
+  contactDetails: Profile["contactDetails"];
+}>();
 
 // TODO fix below
 // const settings = ref(templateSettings[template.value][documentType.value]);
