@@ -827,6 +827,10 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.resume.entryPeriod.fontWeight = 300;
   templateSettings.Macchiato.resume.entryPeriod.isItalic = true;
   templateSettings.Macchiato.resume.entryTitle.fontWeight = 300;
+  templateSettings.Macchiato.resume.entryOrganization.fontSize = 12;
+  templateSettings.Macchiato.resume.entryLocation.fontSize = 12;
+  templateSettings.Macchiato.resume.entrySummary.fontSize = 12;
+  templateSettings.Macchiato.resume.entryHighlight.fontSize = 12;
   templateSettings.Macchiato.resume.entryHighlight.listMarker = "disc";
   templateSettings.Macchiato.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
