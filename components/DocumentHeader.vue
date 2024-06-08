@@ -60,10 +60,18 @@ const settings = computed(() => {
         <div class="flex items-baseline">
           <DocumentHeaderName :name="name" />
           <!-- prettier-ignore -->
-          <span v-if="name && title" :style="{fontSize: `${settings.name.fontSize}px`}">,&nbsp;</span>
+          <span v-if="name && title" :style="{ fontSize: `${settings.name.fontSize}px`, color: settings.name.color }">,&nbsp;</span>
           <DocumentHeaderTitle :title="title" />
         </div>
         <DocumentHeaderContactDetails :contact-details="contactDetails" />
+        <DocumentHeaderAbout :about="about" />
+      </div>
+    </template>
+    <template v-else-if="settings.header.layout === 4">
+      <div class="flex-1">
+        <DocumentHeaderName :name="name" />
+        <DocumentHeaderContactDetails :contact-details="contactDetails" />
+        <DocumentHeaderTitle :title="title" />
         <DocumentHeaderAbout :about="about" />
       </div>
     </template>

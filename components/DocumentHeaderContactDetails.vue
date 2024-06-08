@@ -57,6 +57,9 @@ const settings = computed(() => {
       :key="`${detail.value}${detail.icon}`"
       class="flex items-center"
       :style="{
+        flexDirection: settings.contactDetails.isIconFirst
+          ? 'row'
+          : 'row-reverse',
         gap: `${settings.contactDetails.iconGap}px`,
       }"
     >

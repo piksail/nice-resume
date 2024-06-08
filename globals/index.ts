@@ -1024,6 +1024,52 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
 
 if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
   templateSettings.Pharmacy.resume.document.margin = [48, 48, 48, 48];
+  templateSettings.Pharmacy.resume.header.layout = 4;
+  templateSettings.Pharmacy.resume.name.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.name.isUppercase = true;
+  templateSettings.Pharmacy.resume.name.fontSize = 30;
+  templateSettings.Pharmacy.resume.name.letterSpacing = 2;
+  templateSettings.Pharmacy.resume.contactDetails.margin = [10, 0, 30, 0];
+  templateSettings.Pharmacy.resume.contactDetails.alignment = "end";
+  templateSettings.Pharmacy.resume.contactDetails.border[1] = 2;
+  templateSettings.Pharmacy.resume.contactDetails.borderColor =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.contactDetails.padding[1] = 20;
+  templateSettings.Pharmacy.resume.contactDetails.fontSize = 12;
+  templateSettings.Pharmacy.resume.contactDetails.isIconFirst = false;
+  templateSettings.Pharmacy.resume.title.textAlign = "center";
+  templateSettings.Pharmacy.resume.title.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.title.fontSize = 36;
+  templateSettings.Pharmacy.resume.title.letterSpacing = 3;
+  templateSettings.Pharmacy.resume.title.textAlign = "center";
+  templateSettings.Pharmacy.resume.about.fontSize = 16;
+  templateSettings.Pharmacy.resume.about.color =
+    templateBaseSettings.Pharmacy.colors[2];
+  templateSettings.Pharmacy.resume.about.textAlign = "center";
+  templateSettings.Pharmacy.resume.category.gap = 34;
+  templateSettings.Pharmacy.resume.categoryName.margin[2] = 6;
+  templateSettings.Pharmacy.resume.categoryName.isUppercase = true;
+  templateSettings.Pharmacy.resume.categoryName.fontSize = 16;
+  templateSettings.Pharmacy.resume.categoryName.fontWeight = 700;
+  templateSettings.Pharmacy.resume.categoryName.letterSpacing = 1;
+  templateSettings.Pharmacy.resume.entry.layout = 4;
+  templateSettings.Pharmacy.resume.entry.border[3] = 2;
+  templateSettings.Pharmacy.resume.entry.borderColor =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.entry.padding[3] = 20;
+  templateSettings.Pharmacy.resume.entryPeriod.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.entryOrganization.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.entryLocation.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.resume.entrySummary.color =
+    templateBaseSettings.Pharmacy.colors[2];
+  templateSettings.Pharmacy.resume.entryHighlight.listMarker = "disc";
+  templateSettings.Pharmacy.resume.entryHighlight.color =
+    templateBaseSettings.Pharmacy.colors[1];
   templateSettings.Pharmacy.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Pharmacy.letter.senderDetails.borderColor =
     templateBaseSettings.Pharmacy.colors[0];
