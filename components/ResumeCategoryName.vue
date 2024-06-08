@@ -56,4 +56,27 @@ const settings = computed(() => {
   >
     {{ categoryName }}
   </h3>
+  <div
+    :style="{
+      backgroundColor: settings.categoryNameSeparator.backgroundColor,
+      marginTop: `${settings.categoryNameSeparator.margin[0]}px`,
+      marginRight: `${settings.categoryNameSeparator.margin[1]}px`,
+      marginBottom: `${settings.categoryNameSeparator.margin[2]}px`,
+      marginLeft: `${settings.categoryNameSeparator.margin[3]}px`,
+      borderTop: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[0]}px`,
+      borderRight: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[1]}px`,
+      borderBottom: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[2]}px`,
+      borderLeft: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[3]}px`,
+      borderRadius: `${settings.categoryNameSeparator.borderRadius}px`,
+      paddingTop: `${settings.categoryNameSeparator.padding[0]}px`,
+      paddingRight: `${settings.categoryNameSeparator.padding[1]}px`,
+      paddingBottom: `${settings.categoryNameSeparator.padding[2]}px`,
+      paddingLeft: `${settings.categoryNameSeparator.padding[3]}px`,
+      height: `${settings.categoryNameSeparator.height}px`,
+      width:
+        settings.categoryNameSeparator.width === 'fit'
+          ? 'fit-content'
+          : `${settings.categoryNameSeparator.width}%`,
+    }"
+  />
 </template>

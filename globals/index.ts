@@ -182,6 +182,14 @@ export const resumeSettings: ResumeSettings = {
     padding: [0, 0, 0, 0],
     width: 100, // Percentage
   },
+  categoryNameSeparator: {
+    backgroundColor: "transparent",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+  },
   entry: {
     layout: 0,
     backgroundColor: "transparent",
@@ -287,6 +295,7 @@ export const letterSettings: LetterSettings = {
   senderDetails: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -302,6 +311,7 @@ export const letterSettings: LetterSettings = {
   recipientDetails: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -327,6 +337,7 @@ export const letterSettings: LetterSettings = {
   subject: {
     font: "inherit",
     fontSize: 14,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -343,6 +354,7 @@ export const letterSettings: LetterSettings = {
   reference: {
     font: "inherit",
     fontSize: 12,
+    letterSpacing: 0,
     lineHeight: 1.5,
     fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
     isItalic: false,
@@ -566,6 +578,10 @@ if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
     templateBaseSettings.Aster.colors[2];
   templateSettings.Aster.resume.categoryName.isUppercase = true;
   templateSettings.Aster.resume.categoryName.fontWeight = 600;
+  templateSettings.Aster.resume.categoryNameSeparator.height = 6;
+  templateSettings.Aster.resume.categoryNameSeparator.width = 65;
+  templateSettings.Aster.resume.categoryNameSeparator.backgroundColor =
+    templateBaseSettings.Aster.colors[1];
   templateSettings.Aster.resume.entry.padding = [8, 8, 8, 32];
   templateSettings.Aster.resume.entryTitle.fontWeight = 500;
   templateSettings.Aster.resume.entryOrganization.isItalic = true;
@@ -754,12 +770,36 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
 
 if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.resume.document.margin = [0, 0, 0, 0];
-  templateSettings.Macchiato.letter.document.margin = [0, 0, 0, 0];
-  // templateSettings.Macchiato.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Macchiato.resume.document.border = [10, 0, 0, 0];
-  templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
   templateSettings.Macchiato.resume.document.borderColor =
     templateBaseSettings.Macchiato.colors[0];
+  templateSettings.Macchiato.resume.header.layout = 2;
+  templateSettings.Macchiato.resume.header.margin = [48, 48, 20, 48];
+  templateSettings.Macchiato.resume.name.font =
+    templateBaseSettings.Macchiato.displayFont;
+  templateSettings.Macchiato.resume.name.fontSize = 36;
+  templateSettings.Macchiato.resume.name.fontWeight = 700;
+  templateSettings.Macchiato.resume.name.letterSpacing = 1;
+  templateSettings.Macchiato.resume.title.font =
+    templateBaseSettings.Macchiato.displayFont;
+  templateSettings.Macchiato.resume.title.fontSize = 20;
+  templateSettings.Macchiato.resume.title.fontWeight = 300;
+  templateSettings.Macchiato.resume.title.letterSpacing = 1;
+  templateSettings.Macchiato.resume.contactDetails.fontSize = 11;
+  templateSettings.Macchiato.resume.categoryName.font =
+    templateBaseSettings.Macchiato.displayFont;
+  templateSettings.Macchiato.resume.categoryName.fontWeight = 300;
+  templateSettings.Macchiato.resume.categoryNameSeparator.margin[0] = 4;
+  templateSettings.Macchiato.resume.categoryNameSeparator.border[0] = 1;
+  templateSettings.Macchiato.resume.categoryNameSeparator.width = 7;
+  templateSettings.Macchiato.resume.category.margin = [0, 48, 20, 48];
+  templateSettings.Macchiato.resume.entry.layout = 5;
+  templateSettings.Macchiato.resume.entryPeriod.fontWeight = 300;
+  templateSettings.Macchiato.resume.entryPeriod.isItalic = true;
+  templateSettings.Macchiato.resume.entryTitle.fontWeight = 300;
+  templateSettings.Macchiato.resume.entryHighlight.listMarker = "disc";
+  templateSettings.Macchiato.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
   templateSettings.Macchiato.letter.document.borderColor =
     templateBaseSettings.Macchiato.colors[0];
   templateSettings.Macchiato.letter.senderDetails.margin = [0, 48, 48, 48];

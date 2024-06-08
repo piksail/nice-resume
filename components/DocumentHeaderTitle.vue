@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
@@ -16,7 +16,9 @@ const { title } = defineProps<{
 // TODO fix below
 // const settings = ref(templateSettings[template.value][documentType.value]);
 console.log(documentType);
-const settings = ref(templateSettings[template.value].resume);
+const settings = computed(() => {
+  return templateSettings[template.value].resume;
+});
 </script>
 
 <template>

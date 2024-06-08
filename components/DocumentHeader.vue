@@ -56,7 +56,6 @@ const settings = computed(() => {
       <div class="flex flex-col">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderContactDetails />
         <p v-if="about" class="flex-1">
           <!-- TODO this is from Tootpaste (blue quote) -->
           <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
@@ -64,6 +63,7 @@ const settings = computed(() => {
           </span>
           {{ about }}
         </p>
+        <DocumentHeaderContactDetails />
       </div>
     </template>
     <template v-else>

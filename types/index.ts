@@ -41,26 +41,14 @@ export type TextSettings = {
   lineHeight: number;
   letterSpacing: number;
   fontWeight: number; // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
-  isItalic: boolean;
+  isItalic?: boolean;
   isUppercase?: boolean;
   color: string;
 };
 
+// TODO get rid of below type which is too fourre-tout
 export type Settings = {
-  font?: string;
-  fontSize: number;
-  lineHeight: number;
-  fontWeight: number; // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
-  isItalic: boolean;
-  isUppercase?: boolean;
   isCentered?: boolean;
-  color: string;
-  backgroundColor: string;
-  borderColor: string;
-  borderRadius: number;
-  margin: SideSetting;
-  border: SideSetting;
-  padding: SideSetting;
   gap?: number;
 };
 
@@ -122,8 +110,12 @@ export type ResumeSettings = {
     TextSettings & {
       width?: number | "fit";
     };
+  categoryNameSeparator: BlockSettings & {
+    height?: number;
+    width?: number | "fit";
+  };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4;
+    layout: 0 | 1 | 2 | 3 | 4 | 5;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;
@@ -140,8 +132,8 @@ export type ResumeSettings = {
 
 export type LetterSettings = {
   document: DocumentSettings;
-  senderDetails: Settings;
-  recipientDetails: Settings;
+  senderDetails: Settings & BlockSettings & TextSettings;
+  recipientDetails: Settings & BlockSettings & TextSettings;
   header: {
     isCentered: boolean;
     backgroundColor: string;
@@ -151,8 +143,8 @@ export type LetterSettings = {
     border: SideSetting;
     padding: SideSetting;
   };
-  subject: Settings;
-  reference: Settings;
+  subject: Settings & BlockSettings & TextSettings;
+  reference: Settings & BlockSettings & TextSettings;
   body: {
     fontSize: number;
     lineHeight: number;
