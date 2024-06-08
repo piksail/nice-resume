@@ -41,7 +41,7 @@ export type TextSettings = {
   fontSize: number;
   lineHeight: number;
   letterSpacing: number;
-  fontWeight: number; // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+  fontWeight: number;
   isItalic?: boolean;
   isUppercase?: boolean;
   color: string;
@@ -93,7 +93,7 @@ export type DocumentSettings = {
 export type ResumeSettings = {
   document: DocumentSettings;
   header: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4; // TODO other properties
+    layout: 0 | 1 | 2 | 3 | 4;
   };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
@@ -161,7 +161,7 @@ export type LetterSettings = {
   body: {
     fontSize: number;
     lineHeight: number;
-    fontWeight: number; // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: number;
     color: string;
     indentation: number;
     isJustified: boolean;

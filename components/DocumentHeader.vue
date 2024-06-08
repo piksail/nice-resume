@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import { getNodeStyle } from "@/utils/style";
 import DocumentHeaderAbout from "@/components/DocumentHeaderAbout.vue";
 import DocumentHeaderName from "@/components/DocumentHeaderName.vue";
 import DocumentHeaderTitle from "@/components/DocumentHeaderTitle.vue";
@@ -20,25 +21,7 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <header
-    class="flex"
-    :style="{
-      backgroundColor: settings.header.backgroundColor,
-      marginTop: `${settings.header.margin[0]}px`,
-      marginRight: `${settings.header.margin[1]}px`,
-      marginBottom: `${settings.header.margin[2]}px`,
-      marginLeft: `${settings.header.margin[3]}px`,
-      borderTop: `${settings.header.borderStyle} ${settings.header.borderColor} ${settings.header.border[0]}px`,
-      borderRight: `${settings.header.borderStyle} ${settings.header.borderColor} ${settings.header.border[1]}px`,
-      borderBottom: `${settings.header.borderStyle} ${settings.header.borderColor} ${settings.header.border[2]}px`,
-      borderLeft: `${settings.header.borderStyle} ${settings.header.borderColor} ${settings.header.border[3]}px`,
-      borderRadius: `${settings.header.borderRadius}px`,
-      paddingTop: `${settings.header.padding[0]}px`,
-      paddingRight: `${settings.header.padding[1]}px`,
-      paddingBottom: `${settings.header.padding[2]}px`,
-      paddingLeft: `${settings.header.padding[3]}px`,
-    }"
-  >
+  <header class="flex" :style="getNodeStyle(settings.header, 'block')">
     <template v-if="settings.header.layout === 1">
       <div class="flex flex-col">
         <DocumentHeaderName :name="name" />

@@ -6,6 +6,7 @@ import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { templateSettings } from "@/globals";
 import { getListMarker } from "@/utils/editor";
+import { getNodeStyle } from "@/utils/style";
 import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
@@ -36,20 +37,7 @@ const settings = computed(() => {
       rowGap: settings.contactDetails.listOrientation === 'row' ? 0 : 'initial',
       listStyleType: getListMarker(settings.contactDetails.listMarker),
       color: settings.contactDetails.listMarkerColor,
-      backgroundColor: settings.contactDetails.backgroundColor,
-      marginTop: `${settings.contactDetails.margin[0]}px`,
-      marginRight: `${settings.contactDetails.margin[1]}px`,
-      marginBottom: `${settings.contactDetails.margin[2]}px`,
-      marginLeft: `${settings.contactDetails.margin[3]}px`,
-      borderTop: `${settings.contactDetails.borderStyle} ${settings.contactDetails.borderColor} ${settings.contactDetails.border[0]}px`,
-      borderRight: `${settings.contactDetails.borderStyle} ${settings.contactDetails.borderColor} ${settings.contactDetails.border[1]}px`,
-      borderBottom: `${settings.contactDetails.borderStyle} ${settings.contactDetails.borderColor} ${settings.contactDetails.border[2]}px`,
-      borderLeft: `${settings.contactDetails.borderStyle} ${settings.contactDetails.borderColor} ${settings.contactDetails.border[3]}px`,
-      borderRadius: `${settings.contactDetails.borderRadius}px`,
-      paddingTop: `${settings.contactDetails.padding[0]}px`,
-      paddingRight: `${settings.contactDetails.padding[1]}px`,
-      paddingBottom: `${settings.contactDetails.padding[2]}px`,
-      paddingLeft: `${settings.contactDetails.padding[3]}px`,
+      ...getNodeStyle(settings.contactDetails, 'block'),
     }"
   >
     <li
@@ -70,19 +58,7 @@ const settings = computed(() => {
         class="w-4"
         :style="{ color: settings.contactDetails.iconColor }"
       />
-      <span
-        :style="{
-          fontFamily: settings.contactDetails.font,
-          fontSize: `${settings.contactDetails.fontSize}px`,
-          lineHeight: settings.contactDetails.lineHeight,
-          fontWeight: settings.contactDetails.fontWeight,
-          fontStyle: settings.contactDetails.isItalic ? 'italic' : 'initial',
-          textTransform: settings.contactDetails.isUppercase
-            ? 'uppercase'
-            : 'initial',
-          color: settings.contactDetails.color,
-        }"
-      >
+      <span :style="getNodeStyle(settings.contactDetails, 'text')">
         {{ detail.value }}
       </span>
     </li>

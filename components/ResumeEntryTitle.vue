@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import { getNodeStyle } from "@/utils/style";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
@@ -21,18 +22,7 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <span
-    v-if="entryTitle"
-    :style="{
-      fontFamily: settings.entryTitle.font,
-      fontSize: `${settings.entryTitle.fontSize}px`,
-      lineHeight: settings.entryTitle.lineHeight,
-      fontWeight: settings.entryTitle.fontWeight,
-      fontStyle: settings.entryTitle.isItalic ? 'italic' : 'initial',
-      textTransform: settings.entryTitle.isUppercase ? 'uppercase' : 'initial',
-      color: settings.entryTitle.color,
-    }"
-  >
+  <span v-if="entryTitle" :style="getNodeStyle(settings.entryTitle, 'text')">
     {{ entryTitle }}
   </span>
 </template>

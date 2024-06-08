@@ -69,14 +69,9 @@ export const discouragedLayoutTemplates: {
   Wiki: [],
 };
 
-// export const fontWeights: {
-//   "Open Sans": [200, 300, 500, 600, 900];
-// }; // TODO one entry per font-family
-
-// TODO tous les :style={} pourraient être le résultat d'un getter qui renvoie u objet en fonction d'un type genre "getBlockStyle, getTextStyle, getTitleStyle" pour éviter de tout c/c
 // TODO settings réduire espace entrelistmarker et text
-// TODO autoriser le Block settings pour le entry carrément (iso letter header)
-// TODO fournir le uppercase pour ceux qui n'en ont pas (recherche globale sur isItalic pour trouver)
+// TODO bind les valeurs numériques avec du extralight, semibold dans le <select> https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+
 export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
 
 export const resumeSettings: ResumeSettings = {
@@ -104,7 +99,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 22,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -122,7 +117,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 18,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -140,7 +135,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -158,7 +153,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -200,7 +195,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -241,7 +236,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -252,7 +247,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -263,7 +258,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -274,7 +269,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -285,7 +280,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -302,7 +297,7 @@ export const resumeSettings: ResumeSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
@@ -336,7 +331,7 @@ export const letterSettings: LetterSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     color: "currentColor",
     backgroundColor: "#ffffff",
@@ -353,7 +348,7 @@ export const letterSettings: LetterSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     color: "currentColor",
     backgroundColor: "#ffffff",
@@ -381,7 +376,7 @@ export const letterSettings: LetterSettings = {
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isUppercase: false,
     isCentered: true,
@@ -399,7 +394,7 @@ export const letterSettings: LetterSettings = {
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     isItalic: false,
     isCentered: true,
     color: "currentColor",
@@ -414,7 +409,7 @@ export const letterSettings: LetterSettings = {
   body: {
     fontSize: 14,
     lineHeight: 1.5,
-    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    fontWeight: 400,
     color: "currentColor",
     indentation: 48,
     isJustified: true,
@@ -598,10 +593,6 @@ function scaffoldTemplateSettings(
   templateSettings[template] = settings;
 }
 
-// TODO reprendre ici :
-// Remplacer chaque --var ou classe tailwind par son style défini below
-// pour rappel, les templatezs sont en fait dsormais à la fois des presets (colors = blabla)
-// réfléchir au concept de layout de section, où on peut dire par ex que les company et title sont sur la même ligne ou pas
 Object.entries(templateBaseSettings).forEach(([key, value]) => {
   scaffoldTemplateSettings(key as Template, value, value.isLetterMarginless);
 });

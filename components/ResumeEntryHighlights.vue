@@ -5,6 +5,7 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
 import { getListMarker } from "@/utils/editor";
+import { getNodeStyle } from "@/utils/style";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
@@ -30,20 +31,7 @@ const settings = computed(() => {
       gap: `${settings.entryHighlight.gap}px`,
       listStyleType: getListMarker(settings.entryHighlight.listMarker),
       color: settings.entryHighlight.listMarkerColor,
-      backgroundColor: settings.entryHighlight.backgroundColor,
-      marginTop: `${settings.entryHighlight.margin[0]}px`,
-      marginRight: `${settings.entryHighlight.margin[1]}px`,
-      marginBottom: `${settings.entryHighlight.margin[2]}px`,
-      marginLeft: `${settings.entryHighlight.margin[3]}px`,
-      borderTop: `${settings.entryHighlight.borderStyle} ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[0]}px`,
-      borderRight: `${settings.entryHighlight.borderStyle} ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[1]}px`,
-      borderBottom: `${settings.entryHighlight.borderStyle} ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[2]}px`,
-      borderLeft: `${settings.entryHighlight.borderStyle} ${settings.entryHighlight.borderColor} ${settings.entryHighlight.border[3]}px`,
-      borderRadius: `${settings.entryHighlight.borderRadius}px`,
-      paddingTop: `${settings.entryHighlight.padding[0]}px`,
-      paddingRight: `${settings.entryHighlight.padding[1]}px`,
-      paddingBottom: `${settings.entryHighlight.padding[2]}px`,
-      paddingLeft: `${settings.entryHighlight.padding[3]}px`,
+      ...getNodeStyle(settings.entryHighlight, 'block'),
     }"
   >
     <li
