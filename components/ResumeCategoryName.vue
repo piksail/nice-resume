@@ -24,7 +24,7 @@ const getSeparatorFlexDirection = () => {
     case "bottom":
       return "flex-col";
     case "left":
-      return "flex-row-reverse";
+      return "flex-row-reverse justify-end";
     case "right":
       return "flex-row";
     case "top":
