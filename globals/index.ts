@@ -673,6 +673,7 @@ if (
     templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.resume.contactDetails.iconColor =
     templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.category.gap = 0;
   templateSettings.CottonCandy.resume.category.padding = [24, 40, 24, 40];
   templateSettings.CottonCandy.resume.category.backgroundColor =
     templateBaseSettings.CottonCandy.colors[0];
