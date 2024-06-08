@@ -105,6 +105,7 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    textAlign: "left",
     backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -121,6 +122,7 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    textAlign: "left",
     backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -177,6 +179,7 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    textAlign: "left",
     backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -616,6 +619,7 @@ if (
     templateBaseSettings.CottonCandy.displayFont;
   templateSettings.CottonCandy.resume.name.fontSize = 36;
   templateSettings.CottonCandy.resume.name.isUppercase = true;
+  templateSettings.CottonCandy.resume.name.textAlign = "center";
   templateSettings.CottonCandy.resume.name.padding = [0, 16, 0, 16];
   templateSettings.CottonCandy.resume.name.border[0] = 4;
   templateSettings.CottonCandy.resume.name.borderColor =
@@ -624,6 +628,7 @@ if (
     templateBaseSettings.CottonCandy.displayFont;
   templateSettings.CottonCandy.resume.title.fontSize = 24;
   templateSettings.CottonCandy.resume.title.isUppercase = true;
+  templateSettings.CottonCandy.resume.title.textAlign = "center";
   templateSettings.CottonCandy.resume.title.padding = [0, 16, 0, 16];
   templateSettings.CottonCandy.resume.title.border[2] = 4;
   templateSettings.CottonCandy.resume.title.borderColor =
@@ -850,6 +855,7 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.body.margin = [40, 40, 40, 40];
   templateSettings.Oilcloth.resume.category.gap = 40;
   templateSettings.Oilcloth.resume.categoryName.isUppercase = true;
+  templateSettings.Oilcloth.resume.categoryName.textAlign = "center";
   templateSettings.Oilcloth.resume.categoryName.fontSize = 25;
   templateSettings.Oilcloth.resume.categoryName.letterSpacing = 2;
   templateSettings.Oilcloth.resume.categoryName.fontWeight = 300;
@@ -965,10 +971,54 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
 }
 
 if (templateSettings.Red.resume && templateSettings.Red.letter) {
-  // templateSettings.Red.resume.document.margin = [48, 26, 48, 26];
-  // templateSettings.Red.letter.document.margin = [48, 26, 48, 26];
-  templateSettings.Red.resume.document.margin = [0, 0, 0, 0];
-  templateSettings.Red.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.Red.resume.document.margin = [48, 56, 48, 56];
+  templateSettings.Red.resume.header.layout = 1;
+  templateSettings.Red.resume.header.padding = [24, 40, 24, 40];
+  templateSettings.Red.resume.name.font = templateBaseSettings.Red.displayFont;
+  templateSettings.Red.resume.name.fontSize = 36;
+  templateSettings.Red.resume.name.isUppercase = true;
+  templateSettings.Red.resume.name.textAlign = "center";
+  templateSettings.Red.resume.name.lineHeight = 1;
+  templateSettings.Red.resume.name.padding = [10, 16, 0, 16];
+  templateSettings.Red.resume.name.border[0] = 4;
+  templateSettings.Red.resume.name.borderColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.title.font = templateBaseSettings.Red.displayFont;
+  templateSettings.Red.resume.title.fontSize = 24;
+  templateSettings.Red.resume.title.textAlign = "center";
+  templateSettings.Red.resume.title.padding = [0, 16, 10, 16];
+  templateSettings.Red.resume.title.border[2] = 4;
+  templateSettings.Red.resume.title.borderColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.contactDetails.margin[3] = 30;
+  templateSettings.Red.resume.contactDetails.border[3] = 1;
+  templateSettings.Red.resume.contactDetails.borderColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.contactDetails.padding[3] = 10;
+  templateSettings.Red.resume.contactDetails.fontSize = 11;
+  templateSettings.Red.resume.contactDetails.isItalic = true;
+  templateSettings.Red.resume.contactDetails.color =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.contactDetails.iconColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.body.margin[0] = 22;
+  templateSettings.Red.resume.categoryName.isUppercase = true;
+  templateSettings.Red.resume.categoryName.font =
+    templateBaseSettings.Red.displayFont;
+  templateSettings.Red.resume.categoryName.fontSize = 28;
+  templateSettings.Red.resume.categoryName.textAlign = "center";
+  templateSettings.Red.resume.entry.layout = 8;
+  templateSettings.Red.resume.entryOrganization.color =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.entrySummary.fontSize = 12;
+  templateSettings.Red.resume.entryHighlight.fontSize = 12;
+  templateSettings.Red.resume.entryHighlight.isItalic = true;
+  templateSettings.Red.resume.entryHighlight.margin[3] = 20;
+  templateSettings.Red.resume.entryHighlight.listMarker = "square";
+  templateSettings.Red.resume.entryHighlight.listMarkerColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.entryHighlight.color =
+    templateBaseSettings.Red.colors[1];
   templateSettings.Red.letter.senderDetails.margin[0] = 0;
   templateSettings.Red.letter.senderDetails.isItalic = true;
   templateSettings.Red.letter.senderDetails.fontSize = 12;

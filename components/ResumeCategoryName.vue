@@ -48,6 +48,7 @@ const getSeparatorFlexDirection = () => {
           ? 'uppercase'
           : 'initial',
         color: settings.categoryName.color,
+        textAlign: settings.categoryName.textAlign,
         backgroundColor: settings.categoryName.backgroundColor,
         marginTop: `${settings.categoryName.margin[0]}px`,
         marginRight: `${settings.categoryName.margin[1]}px`,

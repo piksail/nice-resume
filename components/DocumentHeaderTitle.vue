@@ -33,6 +33,7 @@ const settings = computed(() => {
       fontStyle: settings.title.isItalic ? 'italic' : 'initial',
       textTransform: settings.title.isUppercase ? 'uppercase' : 'initial',
       color: settings.title.color,
+      textAlign: settings.title.textAlign,
       backgroundColor: settings.title.backgroundColor,
       marginTop: `${settings.title.margin[0]}px`,
       marginRight: `${settings.title.margin[1]}px`,

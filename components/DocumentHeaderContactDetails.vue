@@ -55,20 +55,6 @@ const settings = computed(() => {
       :key="`${detail.value}${detail.icon}`"
       class="flex items-center"
       :style="{
-        backgroundColor: settings.contactDetails.backgroundColor,
-        marginTop: `${settings.contactDetails.margin[0]}px`,
-        marginRight: `${settings.contactDetails.margin[1]}px`,
-        marginBottom: `${settings.contactDetails.margin[2]}px`,
-        marginLeft: `${settings.contactDetails.margin[3]}px`,
-        borderTop: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[0]}px`,
-        borderRight: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[1]}px`,
-        borderBottom: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[2]}px`,
-        borderLeft: `solid ${settings.contactDetails.borderColor} ${settings.contactDetails.border[3]}px`,
-        borderRadius: `${settings.contactDetails.borderRadius}px`,
-        paddingTop: `${settings.contactDetails.padding[0]}px`,
-        paddingRight: `${settings.contactDetails.padding[1]}px`,
-        paddingBottom: `${settings.contactDetails.padding[2]}px`,
-        paddingLeft: `${settings.contactDetails.padding[3]}px`,
         gap: `${settings.contactDetails.iconGap}px`,
       }"
     >

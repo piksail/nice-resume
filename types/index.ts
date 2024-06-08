@@ -46,6 +46,11 @@ export type TextSettings = {
   color: string;
 };
 
+export type TitleSettings = TextSettings & {
+  textAlign: "left" | "center" | "right";
+  // TODO move the width? property here? rework letter header (subject+ref)
+};
+
 // TODO get rid of below type which is too fourre-tout
 export type Settings = {
   isCentered?: boolean;
@@ -88,8 +93,8 @@ export type ResumeSettings = {
   header: BlockSettings & {
     layout: 0 | 1 | 2; // TODO other properties
   };
-  name: BlockSettings & TextSettings;
-  title: BlockSettings & TextSettings;
+  name: BlockSettings & TitleSettings;
+  title: BlockSettings & TitleSettings;
   contactDetails: BlockSettings &
     TextSettings &
     ListSettings & {
@@ -109,7 +114,7 @@ export type ResumeSettings = {
     gap: number; // Flex gap between categories
   };
   categoryName: BlockSettings &
-    TextSettings & {
+    TitleSettings & {
       width?: number | "fit";
     };
   categoryNameSeparator: BlockSettings & {
@@ -118,7 +123,7 @@ export type ResumeSettings = {
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;
