@@ -186,6 +186,7 @@ export const resumeSettings: ResumeSettings = {
     width: 100, // Percentage
   },
   categoryNameSeparator: {
+    position: "bottom",
     backgroundColor: "transparent",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -741,6 +742,7 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.title.isUppercase = true;
   templateSettings.Macaron.resume.title.letterSpacing = 5;
   templateSettings.Macaron.resume.contactDetails.listOrientation = "row";
+  templateSettings.Macaron.resume.contactDetails.gap = 20;
   templateSettings.Macaron.resume.contactDetails.iconColor =
     templateBaseSettings.Macaron.colors[1];
   // templateSettings.Macaron.resume.about.font =
@@ -878,11 +880,40 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
 
 if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.document.margin = [0, 0, 0, 0];
-  templateSettings.OpenResume.letter.document.margin = [0, 0, 0, 0];
-  // templateSettings.OpenResume.letter.document.margin = [48, 26, 48, 26];
   templateSettings.OpenResume.resume.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.resume.document.borderColor =
     templateBaseSettings.OpenResume.colors[0];
+  templateSettings.OpenResume.resume.header.layout = 2;
+  templateSettings.OpenResume.resume.header.margin = [24, 48, 24, 48];
+  templateSettings.OpenResume.resume.name.color =
+    templateBaseSettings.OpenResume.colors[0];
+  templateSettings.OpenResume.resume.name.fontSize = 30;
+  templateSettings.OpenResume.resume.name.fontWeight = 700;
+  templateSettings.OpenResume.resume.name.lineHeight = 1.2;
+  templateSettings.OpenResume.resume.name.margin[2] = 10;
+  templateSettings.OpenResume.resume.title.fontSize = 20;
+  templateSettings.OpenResume.resume.title.fontWeight = 700;
+  templateSettings.OpenResume.resume.title.lineHeight = 1.2;
+  templateSettings.OpenResume.resume.title.margin[2] = 10;
+  templateSettings.OpenResume.resume.contactDetails.listOrientation = "row";
+  templateSettings.OpenResume.resume.contactDetails.gap = 40;
+  // templateSettings.OpenResume.resume.about.isItalic = true; TODO
+  templateSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
+  templateSettings.OpenResume.resume.categoryName.fontWeight = 700;
+  templateSettings.OpenResume.resume.categoryName.fontSize = 12;
+  templateSettings.OpenResume.resume.categoryNameSeparator.position = "left";
+  templateSettings.OpenResume.resume.categoryNameSeparator.height = 4;
+  templateSettings.OpenResume.resume.categoryNameSeparator.width = 8;
+  templateSettings.OpenResume.resume.categoryNameSeparator.margin[1] = 10;
+  templateSettings.OpenResume.resume.categoryNameSeparator.backgroundColor =
+    templateBaseSettings.OpenResume.colors[0];
+  templateSettings.OpenResume.resume.entry.layout = 7;
+  templateSettings.OpenResume.resume.entryTitle.fontWeight = 600;
+  templateSettings.OpenResume.resume.entrySummary.isItalic = true;
+  templateSettings.OpenResume.resume.entryHighlight.listMarker = "disc";
+  templateSettings.OpenResume.resume.entryHighlight.fontSize = 12;
+  templateSettings.OpenResume.letter.document.margin = [0, 0, 0, 0];
+  // templateSettings.OpenResume.letter.document.margin = [48, 26, 48, 26];
   templateSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.letter.document.borderColor =
     templateBaseSettings.OpenResume.colors[0];

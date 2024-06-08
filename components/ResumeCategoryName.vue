@@ -18,65 +18,84 @@ const settings = computed(() => {
     ? storeSettings.value
     : templateSettings[template.value].resume;
 });
+
+const getSeparatorFlexDirection = () => {
+  switch (settings.value.categoryNameSeparator.position) {
+    case "bottom":
+      return "flex-col";
+    case "left":
+      return "flex-row-reverse";
+    case "right":
+      return "flex-row";
+    case "top":
+      return "flex-col-reverse";
+  }
+};
 </script>
 
 <template>
-  <h3
-    v-if="categoryName"
-    :style="{
-      fontFamily: settings.categoryName.font,
-      fontSize: `${settings.categoryName.fontSize}px`,
-      lineHeight: settings.categoryName.lineHeight,
-      letterSpacing: `${settings.categoryName.letterSpacing}px`,
-      fontWeight: settings.categoryName.fontWeight,
-      fontStyle: settings.categoryName.isItalic ? 'italic' : 'initial',
-      textTransform: settings.categoryName.isUppercase
-        ? 'uppercase'
-        : 'initial',
-      color: settings.categoryName.color,
-      backgroundColor: settings.categoryName.backgroundColor,
-      marginTop: `${settings.categoryName.margin[0]}px`,
-      marginRight: `${settings.categoryName.margin[1]}px`,
-      marginBottom: `${settings.categoryName.margin[2]}px`,
-      marginLeft: `${settings.categoryName.margin[3]}px`,
-      borderTop: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[0]}px`,
-      borderRight: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[1]}px`,
-      borderBottom: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[2]}px`,
-      borderLeft: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[3]}px`,
-      borderRadius: `${settings.categoryName.borderRadius}px`,
-      paddingTop: `${settings.categoryName.padding[0]}px`,
-      paddingRight: `${settings.categoryName.padding[1]}px`,
-      paddingBottom: `${settings.categoryName.padding[2]}px`,
-      paddingLeft: `${settings.categoryName.padding[3]}px`,
-      width:
-        settings.categoryName.width === 'fit'
-          ? 'fit-content'
-          : `${settings.categoryName.width}%`,
-    }"
-  >
-    {{ categoryName }}
-  </h3>
-  <div
-    :style="{
-      backgroundColor: settings.categoryNameSeparator.backgroundColor,
-      marginTop: `${settings.categoryNameSeparator.margin[0]}px`,
-      marginRight: `${settings.categoryNameSeparator.margin[1]}px`,
-      marginBottom: `${settings.categoryNameSeparator.margin[2]}px`,
-      marginLeft: `${settings.categoryNameSeparator.margin[3]}px`,
-      borderTop: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[0]}px`,
-      borderRight: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[1]}px`,
-      borderBottom: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[2]}px`,
-      borderLeft: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[3]}px`,
-      borderRadius: `${settings.categoryNameSeparator.borderRadius}px`,
-      paddingTop: `${settings.categoryNameSeparator.padding[0]}px`,
-      paddingRight: `${settings.categoryNameSeparator.padding[1]}px`,
-      paddingBottom: `${settings.categoryNameSeparator.padding[2]}px`,
-      paddingLeft: `${settings.categoryNameSeparator.padding[3]}px`,
-      height: `${settings.categoryNameSeparator.height}px`,
-      width:
-        settings.categoryNameSeparator.width === 'fit'
-          ? 'fit-content'
-          : `${settings.categoryNameSeparator.width}%`,
-    }"
-  />
+  <div class="flex" :class="getSeparatorFlexDirection()">
+    <h3
+      v-if="categoryName"
+      :style="{
+        fontFamily: settings.categoryName.font,
+        fontSize: `${settings.categoryName.fontSize}px`,
+        lineHeight: settings.categoryName.lineHeight,
+        letterSpacing: `${settings.categoryName.letterSpacing}px`,
+        fontWeight: settings.categoryName.fontWeight,
+        fontStyle: settings.categoryName.isItalic ? 'italic' : 'initial',
+        textTransform: settings.categoryName.isUppercase
+          ? 'uppercase'
+          : 'initial',
+        color: settings.categoryName.color,
+        backgroundColor: settings.categoryName.backgroundColor,
+        marginTop: `${settings.categoryName.margin[0]}px`,
+        marginRight: `${settings.categoryName.margin[1]}px`,
+        marginBottom: `${settings.categoryName.margin[2]}px`,
+        marginLeft: `${settings.categoryName.margin[3]}px`,
+        borderTop: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[0]}px`,
+        borderRight: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[1]}px`,
+        borderBottom: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[2]}px`,
+        borderLeft: `solid ${settings.categoryName.borderColor} ${settings.categoryName.border[3]}px`,
+        borderRadius: `${settings.categoryName.borderRadius}px`,
+        paddingTop: `${settings.categoryName.padding[0]}px`,
+        paddingRight: `${settings.categoryName.padding[1]}px`,
+        paddingBottom: `${settings.categoryName.padding[2]}px`,
+        paddingLeft: `${settings.categoryName.padding[3]}px`,
+        width:
+          settings.categoryName.width === 'fit'
+            ? 'fit-content'
+            : `${settings.categoryName.width}%`,
+      }"
+    >
+      {{ categoryName }}
+    </h3>
+    <div
+      :class="
+        ['left', 'right'].includes(settings.categoryNameSeparator.position) &&
+        'self-center'
+      "
+      :style="{
+        backgroundColor: settings.categoryNameSeparator.backgroundColor,
+        marginTop: `${settings.categoryNameSeparator.margin[0]}px`,
+        marginRight: `${settings.categoryNameSeparator.margin[1]}px`,
+        marginBottom: `${settings.categoryNameSeparator.margin[2]}px`,
+        marginLeft: `${settings.categoryNameSeparator.margin[3]}px`,
+        borderTop: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[0]}px`,
+        borderRight: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[1]}px`,
+        borderBottom: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[2]}px`,
+        borderLeft: `solid ${settings.categoryNameSeparator.borderColor} ${settings.categoryNameSeparator.border[3]}px`,
+        borderRadius: `${settings.categoryNameSeparator.borderRadius}px`,
+        paddingTop: `${settings.categoryNameSeparator.padding[0]}px`,
+        paddingRight: `${settings.categoryNameSeparator.padding[1]}px`,
+        paddingBottom: `${settings.categoryNameSeparator.padding[2]}px`,
+        paddingLeft: `${settings.categoryNameSeparator.padding[3]}px`,
+        height: `${settings.categoryNameSeparator.height}px`,
+        width:
+          settings.categoryNameSeparator.width === 'fit'
+            ? 'fit-content'
+            : `${settings.categoryNameSeparator.width}%`,
+      }"
+    />
+  </div>
 </template>

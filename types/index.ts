@@ -113,11 +113,12 @@ export type ResumeSettings = {
       width?: number | "fit";
     };
   categoryNameSeparator: BlockSettings & {
+    position: "bottom" | "left" | "right" | "top";
     height?: number;
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;
