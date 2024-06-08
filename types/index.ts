@@ -93,7 +93,7 @@ export type DocumentSettings = {
 export type ResumeSettings = {
   document: DocumentSettings;
   header: BlockSettings & {
-    layout: 0 | 1 | 2; // TODO other properties
+    layout: 0 | 1 | 2 | 3; // TODO other properties
   };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
@@ -118,6 +118,7 @@ export type ResumeSettings = {
   categoryName: BlockSettings &
     TitleSettings & {
       width?: number | "fit";
+      isAside: boolean;
     };
   categoryNameSeparator: BlockSettings & {
     position: "bottom" | "left" | "right" | "top";
@@ -125,7 +126,7 @@ export type ResumeSettings = {
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;

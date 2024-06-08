@@ -66,6 +66,24 @@ const settings = computed(() => {
         <DocumentHeaderContactDetails />
       </div>
     </template>
+    <template v-else-if="settings.header.layout === 3">
+      <div class="flex-col">
+        <div class="flex items-baseline">
+          <DocumentHeaderName :name="name" />
+          <!-- prettier-ignore -->
+          <span v-if="name && title" :style="{fontSize: `${settings.name.fontSize}px`}">,&nbsp;</span>
+          <DocumentHeaderTitle :title="title" />
+        </div>
+        <DocumentHeaderContactDetails />
+        <p v-if="about" class="flex-1">
+          <!-- TODO this is from Tootpaste (blue quote) -->
+          <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
+            “
+          </span>
+          {{ about }}
+        </p>
+      </div>
+    </template>
     <template v-else>
       <div class="flex-1">
         <DocumentHeaderName :name="name" />

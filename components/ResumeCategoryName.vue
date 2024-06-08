@@ -34,7 +34,16 @@ const getSeparatorFlexDirection = () => {
 </script>
 
 <template>
-  <div class="flex" :class="getSeparatorFlexDirection()">
+  <div
+    class="flex"
+    :class="getSeparatorFlexDirection()"
+    :style="{
+      width:
+        settings.categoryName.width === 'fit' && settings.categoryName.isAside
+          ? 'fit-content'
+          : `${settings.categoryName.width}%`,
+    }"
+  >
     <h3
       v-if="categoryName"
       :style="{
@@ -64,7 +73,8 @@ const getSeparatorFlexDirection = () => {
         paddingBottom: `${settings.categoryName.padding[2]}px`,
         paddingLeft: `${settings.categoryName.padding[3]}px`,
         width:
-          settings.categoryName.width === 'fit'
+          settings.categoryName.width === 'fit' &&
+          !settings.categoryName.isAside
             ? 'fit-content'
             : `${settings.categoryName.width}%`,
       }"

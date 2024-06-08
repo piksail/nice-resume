@@ -120,6 +120,7 @@ const settings = computed(() => {
         :key="categoryIndex"
         :class="category.layout === 'half' ? 'col-span-1' : 'col-span-2'"
         :style="{
+          display: settings.categoryName.isAside ? 'flex' : 'initial',
           backgroundColor: settings.category.backgroundColor,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
@@ -138,7 +139,7 @@ const settings = computed(() => {
       >
         <ResumeCategoryName :category-name="category.name" />
         <ul
-          class="flex flex-col"
+          class="flex flex-col flex-1"
           :style="{
             backgroundColor: settings.entry.backgroundColor,
             marginTop: `${settings.entry.margin[0]}px`,

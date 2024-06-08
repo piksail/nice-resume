@@ -965,6 +965,31 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
 
 if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
   templateSettings.Paper.resume.document.margin = [80, 80, 80, 80];
+  templateSettings.Paper.resume.header.layout = 3;
+  templateSettings.Paper.resume.name.fontSize = 20;
+  templateSettings.Paper.resume.title.fontSize = 20;
+  templateSettings.Paper.resume.contactDetails.listOrientation = "row";
+  templateSettings.Paper.resume.contactDetails.gap = 12;
+  templateSettings.Paper.resume.contactDetails.fontSize = 12;
+  // TODO about;
+  templateSettings.Paper.resume.category.padding = [16, 16, 16, 0];
+  templateSettings.Paper.resume.category.border[0] = 2;
+  templateSettings.Paper.resume.category.borderStyle = "dotted";
+  templateSettings.Paper.resume.category.borderColor =
+    templateBaseSettings.Paper.colors[0];
+  templateSettings.Paper.resume.categoryName.isAside = true;
+  templateSettings.Paper.resume.categoryName.width = 20;
+  templateSettings.Paper.resume.categoryName.isUppercase = true;
+  templateSettings.Paper.resume.categoryName.fontSize = 12;
+  templateSettings.Paper.resume.entry.layout = 9;
+  templateSettings.Paper.resume.entryTitle.fontWeight = 700;
+  templateSettings.Paper.resume.entryTitle.fontSize = 13;
+  templateSettings.Paper.resume.entryOrganization.fontSize = 13;
+  templateSettings.Paper.resume.entryLocation.fontSize = 13;
+  templateSettings.Paper.resume.entryPeriod.fontSize = 13;
+  templateSettings.Paper.resume.entrySummary.fontSize = 13;
+  templateSettings.Paper.resume.entryHighlight.fontSize = 13;
+  templateSettings.Paper.resume.entryHighlight.listMarker = "circle";
   templateSettings.Paper.letter.document.margin = [80, 80, 80, 80];
   templateSettings.Paper.letter.header.isCentered = false;
   templateSettings.Paper.letter.subject.isCentered = false;

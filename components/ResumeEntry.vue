@@ -234,6 +234,7 @@ const settings = computed(() => {
           v-if="
             entry.nature === 'experience' && entry.title && entry.organization
           "
+          :style="{ fontSize: `${settings.entryOrganization.fontSize}px` }"
         >
           -
         </span>
@@ -249,13 +250,13 @@ const settings = computed(() => {
         />
         <!-- prettier-ignore -->
         <span
-            v-if="
-              entry.nature === 'experience' &&
-              entry.period &&
-              entry.location
-            "
-            :style="{ fontSize: `${settings.entryPeriod.fontSize}px` }"
-          >,&nbsp;</span>
+          v-if="
+            entry.nature === 'experience' &&
+            entry.period &&
+            entry.location
+          "
+          :style="{ fontSize: `${settings.entryPeriod.fontSize}px` }"
+        >,&nbsp;</span>
         <ResumeEntryLocation
           v-if="entry.nature === 'experience'"
           :entry-location="entry.location"
@@ -267,6 +268,47 @@ const settings = computed(() => {
       />
       <ResumeEntryHighlights :entry-highlights="entry.highlights" />
     </div>
+  </template>
+  <template v-else-if="settings.entry.layout === 9">
+    <div class="flex justify-between">
+      <div>
+        <ResumeEntryTitle :entry-title="entry.title" />
+        <span
+          v-if="
+            entry.nature === 'experience' && entry.title && entry.organization
+          "
+          :style="{ fontSize: `${settings.entryOrganization.fontSize}px` }"
+        >
+          &nbsp;|&nbsp;
+        </span>
+        <ResumeEntryOrganization
+          v-if="entry.nature === 'experience'"
+          :entry-organization="entry.organization"
+        />
+        <!-- prettier-ignore -->
+        <span
+          v-if="
+            entry.nature === 'experience' &&
+            entry.organization &&
+            entry.location
+          "
+          :style="{ fontSize: `${settings.entryOrganization.fontSize}px` }"
+        >,&nbsp;</span>
+        <ResumeEntryLocation
+          v-if="entry.nature === 'experience'"
+          :entry-location="entry.location"
+        />
+      </div>
+      <ResumeEntryPeriod
+        v-if="entry.nature === 'experience'"
+        :entry-period="entry.period"
+      />
+    </div>
+    <ResumeEntrySummary
+      v-if="entry.nature === 'experience'"
+      :entry-summary="entry.summary"
+    />
+    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
   </template>
   <template v-else>
     <!-- TODO customize gap-4 here -->
