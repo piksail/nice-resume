@@ -1196,7 +1196,9 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
     templateBaseSettings.Toothpaste.colors[1];
   templateSettings.Toothpaste.resume.contactDetails.margin[1] = 80;
   templateSettings.Toothpaste.resume.contactDetails.margin[3] = 60;
+  templateSettings.Toothpaste.resume.contactDetails.fontSize = 12;
   templateSettings.Toothpaste.resume.about.textAlign = "center";
+  templateSettings.Toothpaste.resume.about.fontSize = 12;
   templateSettings.Toothpaste.resume.category.gap = 0;
   templateSettings.Toothpaste.resume.category.padding = [24, 40, 24, 40];
   templateSettings.Toothpaste.resume.category.border[0] = 2;
