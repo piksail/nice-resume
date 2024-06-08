@@ -173,8 +173,9 @@ const settings = computed(() => {
                 entry.organization &&
                 entry.location
               "
+              :style="{ fontSize: `${settings.entryLocation.fontSize}px` }"
             >
-              -
+              &nbsp;-&nbsp;
             </span>
             <ResumeEntryLocation
               v-if="entry.nature === 'experience'"
@@ -206,7 +207,8 @@ const settings = computed(() => {
               entry.organization &&
               entry.location
             "
-          >, </span>
+            :style="{ fontSize: `${settings.entryOrganization.fontSize}px` }"
+          >,&nbsp;</span>
           <ResumeEntryLocation
             v-if="entry.nature === 'experience'"
             :entry-location="entry.location"
@@ -252,7 +254,8 @@ const settings = computed(() => {
               entry.period &&
               entry.location
             "
-          >, </span>
+            :style="{ fontSize: `${settings.entryPeriod.fontSize}px` }"
+          >,&nbsp;</span>
         <ResumeEntryLocation
           v-if="entry.nature === 'experience'"
           :entry-location="entry.location"
