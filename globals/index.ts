@@ -135,6 +135,24 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
   },
+  about: {
+    font: "inherit",
+    fontSize: 14,
+    letterSpacing: 0,
+    lineHeight: 1.5,
+    fontWeight: 400, // TODO https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    textAlign: "left",
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+  },
   contactDetails: {
     font: "inherit",
     fontSize: 14,
@@ -482,8 +500,6 @@ export const templateBaseSettings: TemplateBaseSettings = {
   },
 };
 
-// TODO allow letter spacing
-
 export const templateSettings: TemplateSettings = {
   Aster: {
     base: templateBaseSettings.Aster,
@@ -769,10 +785,11 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.contactDetails.gap = 20;
   templateSettings.Macaron.resume.contactDetails.iconColor =
     templateBaseSettings.Macaron.colors[1];
-  // templateSettings.Macaron.resume.about.font =
-  //   templateBaseSettings.Macaron.displayFont; TODO make it customizable
+  templateSettings.Macaron.resume.about.font =
+    templateBaseSettings.Macaron.displayFont;
+  templateSettings.Macaron.resume.about.fontSize = 16;
+  templateSettings.Macaron.resume.about.fontWeight = 500;
   templateSettings.Macaron.resume.body.margin = [40, 40, 40, 40];
-  // templateSettings.Macaron.resume.category.padding = [0, 40, 0, 40];
   templateSettings.Macaron.resume.category.gap = 30;
   templateSettings.Macaron.resume.categoryName.color =
     templateBaseSettings.Macaron.colors[0];
@@ -868,8 +885,9 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.title.fontWeight = 600;
   templateSettings.Oilcloth.resume.title.isUppercase = true;
   templateSettings.Oilcloth.resume.title.letterSpacing = 4;
-  // templateSettings.Oilcloth.resume.about.color = TODO
-  //   templateBaseSettings.Oilcloth.colors[3];
+  templateSettings.Oilcloth.resume.about.color =
+    templateBaseSettings.Oilcloth.colors[3];
+  templateBaseSettings.Oilcloth.colors[3];
   templateSettings.Oilcloth.resume.contactDetails.fontWeight = 600;
   templateSettings.Oilcloth.resume.contactDetails.color =
     templateBaseSettings.Oilcloth.colors[3];
@@ -926,7 +944,7 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.title.margin[2] = 10;
   templateSettings.OpenResume.resume.contactDetails.listOrientation = "row";
   templateSettings.OpenResume.resume.contactDetails.gap = 40;
-  // templateSettings.OpenResume.resume.about.isItalic = true; TODO
+  templateSettings.OpenResume.resume.about.isItalic = true;
   templateSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
   templateSettings.OpenResume.resume.categoryName.fontWeight = 700;
   templateSettings.OpenResume.resume.categoryName.fontSize = 12;
@@ -942,7 +960,6 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.entryHighlight.listMarker = "disc";
   templateSettings.OpenResume.resume.entryHighlight.fontSize = 12;
   templateSettings.OpenResume.letter.document.margin = [0, 0, 0, 0];
-  // templateSettings.OpenResume.letter.document.margin = [48, 26, 48, 26];
   templateSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.letter.document.borderColor =
     templateBaseSettings.OpenResume.colors[0];
@@ -971,7 +988,12 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
   templateSettings.Paper.resume.contactDetails.listOrientation = "row";
   templateSettings.Paper.resume.contactDetails.gap = 12;
   templateSettings.Paper.resume.contactDetails.fontSize = 12;
-  // TODO about;
+  templateSettings.Paper.resume.about.fontSize = 12;
+  templateSettings.Paper.resume.about.padding = [16, 16, 16, 0];
+  templateSettings.Paper.resume.about.border[0] = 2;
+  templateSettings.Paper.resume.about.borderStyle = "dotted";
+  templateSettings.Paper.resume.about.borderColor =
+    templateBaseSettings.Paper.colors[0];
   templateSettings.Paper.resume.category.padding = [16, 16, 16, 0];
   templateSettings.Paper.resume.category.border[0] = 2;
   templateSettings.Paper.resume.category.borderStyle = "dotted";

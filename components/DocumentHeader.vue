@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import DocumentHeaderAbout from "@/components/DocumentHeaderAbout.vue";
 import DocumentHeaderName from "@/components/DocumentHeaderName.vue";
 import DocumentHeaderTitle from "@/components/DocumentHeaderTitle.vue";
 import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDetails.vue";
@@ -44,25 +45,13 @@ const settings = computed(() => {
         <DocumentHeaderTitle :title="title" />
       </div>
       <DocumentHeaderContactDetails />
-      <p v-if="about" class="flex-1">
-        <!-- TODO this is from Tootpaste (blue quote) -->
-        <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
-          “
-        </span>
-        {{ about }}
-      </p>
+      <DocumentHeaderAbout :about="about" />
     </template>
     <template v-else-if="settings.header.layout === 2">
       <div class="flex flex-col">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <p v-if="about" class="flex-1">
-          <!-- TODO this is from Tootpaste (blue quote) -->
-          <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
-            “
-          </span>
-          {{ about }}
-        </p>
+        <DocumentHeaderAbout :about="about" />
         <DocumentHeaderContactDetails />
       </div>
     </template>
@@ -75,20 +64,14 @@ const settings = computed(() => {
           <DocumentHeaderTitle :title="title" />
         </div>
         <DocumentHeaderContactDetails />
-        <p v-if="about" class="flex-1">
-          <!-- TODO this is from Tootpaste (blue quote) -->
-          <span class="text-3xl text-[color:var(--resume-color1)] leading-4">
-            “
-          </span>
-          {{ about }}
-        </p>
+        <DocumentHeaderAbout :about="about" />
       </div>
     </template>
     <template v-else>
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <p v-if="about">{{ about }}</p>
+        <DocumentHeaderAbout :about="about" />
       </div>
       <DocumentHeaderContactDetails />
     </template>

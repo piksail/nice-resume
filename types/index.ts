@@ -97,6 +97,7 @@ export type ResumeSettings = {
   };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
+  about: BlockSettings & TitleSettings;
   contactDetails: BlockSettings &
     TextSettings &
     ListSettings & {
