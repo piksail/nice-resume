@@ -106,14 +106,14 @@ const settings = computed(() => {
   </template>
   <template v-else-if="settings.entry.layout === 4">
     <div class="flex flex-col">
-      <div class="flex">
+      <div class="flex gap-2">
         <ResumeEntryPeriod
           v-if="entry.nature === 'experience'"
           :entry-period="entry.period"
         />
         <ResumeEntryTitle :entry-title="entry.title" class="flex-1" />
       </div>
-      <div class="flex">
+      <div class="flex gap-2">
         <ResumeEntryOrganization
           v-if="entry.nature === 'experience'"
           :entry-organization="entry.organization"
