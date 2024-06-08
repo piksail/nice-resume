@@ -1181,16 +1181,25 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
 if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
   templateSettings.Toothpaste.resume.document.margin = [0, 0, 0, 0];
   templateSettings.Toothpaste.resume.header.layout = 1;
+  templateSettings.Toothpaste.resume.header.padding = [24, 40, 24, 40];
   templateSettings.Toothpaste.resume.name.font =
     templateBaseSettings.Toothpaste.displayFont;
   templateSettings.Toothpaste.resume.name.fontSize = 36;
   templateSettings.Toothpaste.resume.name.isUppercase = true;
+  templateSettings.Toothpaste.resume.name.color =
+    templateBaseSettings.Toothpaste.colors[0];
   templateSettings.Toothpaste.resume.title.font =
     templateBaseSettings.Toothpaste.displayFont;
   templateSettings.Toothpaste.resume.title.fontSize = 24;
   templateSettings.Toothpaste.resume.title.isUppercase = true;
+  templateSettings.Toothpaste.resume.title.color =
+    templateBaseSettings.Toothpaste.colors[1];
+  templateSettings.Toothpaste.resume.contactDetails.margin[1] = 80;
+  templateSettings.Toothpaste.resume.contactDetails.margin[3] = 60;
+  templateSettings.Toothpaste.resume.about.textAlign = "center";
+  templateSettings.Toothpaste.resume.category.gap = 0;
   templateSettings.Toothpaste.resume.category.padding = [24, 40, 24, 40];
-  templateSettings.Toothpaste.resume.category.border[0] = 4;
+  templateSettings.Toothpaste.resume.category.border[0] = 2;
   templateSettings.Toothpaste.resume.category.borderColor =
     templateBaseSettings.Toothpaste.colors[0];
   templateSettings.Toothpaste.resume.categoryName.font =
@@ -1204,7 +1213,7 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
     templateBaseSettings.Toothpaste.displayFont;
   templateSettings.Toothpaste.resume.entryTitle.fontSize = 20;
   templateSettings.Toothpaste.resume.entryTitle.color =
-    templateBaseSettings.Toothpaste.colors[0];
+    templateBaseSettings.Toothpaste.colors[1];
   templateSettings.Toothpaste.resume.entryHighlight.isItalic = true;
   templateSettings.Toothpaste.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Toothpaste.letter.senderDetails.fontSize = 12;
