@@ -35,10 +35,10 @@ const settings = computed(() => {
       marginRight: `${settings.document.margin[1]}px`,
       marginBottom: `${settings.document.margin[2]}px`,
       marginLeft: `${settings.document.margin[3]}px`,
-      borderTop: `solid ${settings.document.borderColor} ${settings.document.border[0]}px`,
-      borderRight: `solid ${settings.document.borderColor} ${settings.document.border[1]}px`,
-      borderBottom: `solid ${settings.document.borderColor} ${settings.document.border[2]}px`,
-      borderLeft: `solid ${settings.document.borderColor} ${settings.document.border[3]}px`,
+      borderTop: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[0]}px`,
+      borderRight: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[1]}px`,
+      borderBottom: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[2]}px`,
+      borderLeft: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[3]}px`,
     }"
   >
     <DocumentHeader v-if="documentType === 'resume' || !isHeaderSimple" />

@@ -73,6 +73,7 @@ export const discouragedLayoutTemplates: {
 //   "Open Sans": [200, 300, 500, 600, 900];
 // }; // TODO one entry per font-family
 
+// TODO tous les :style={} pourraient être le résultat d'un getter qui renvoie u objet en fonction d'un type genre "getBlockStyle, getTextStyle, getTitleStyle" pour éviter de tout c/c
 // TODO settings réduire espace entrelistmarker et text
 // TODO autoriser le Block settings pour le entry carrément (iso letter header)
 // TODO fournir le uppercase pour ceux qui n'en ont pas (recherche globale sur isItalic pour trouver)
@@ -83,6 +84,7 @@ export const resumeSettings: ResumeSettings = {
     bodyFont: "serif",
     color: "#000000",
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "#000000",
     margin: [40, 40, 40, 40], // TODO [80, 80, 80, 80]; feel VERY nice
     border: [0, 0, 0, 0],
@@ -90,6 +92,7 @@ export const resumeSettings: ResumeSettings = {
   header: {
     layout: 0,
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "#000000",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -107,6 +110,7 @@ export const resumeSettings: ResumeSettings = {
     color: "currentColor",
     textAlign: "left",
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -124,6 +128,7 @@ export const resumeSettings: ResumeSettings = {
     color: "currentColor",
     textAlign: "left",
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -147,6 +152,7 @@ export const resumeSettings: ResumeSettings = {
     iconGap: 4,
     isIconFirst: true,
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -163,6 +169,7 @@ export const resumeSettings: ResumeSettings = {
   },
   category: {
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "#000000",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -181,16 +188,19 @@ export const resumeSettings: ResumeSettings = {
     color: "currentColor",
     textAlign: "left",
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     width: 100, // Percentage
+    isAside: false,
   },
   categoryNameSeparator: {
     position: "bottom",
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -200,6 +210,7 @@ export const resumeSettings: ResumeSettings = {
   entry: {
     layout: 0,
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "#000000",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -261,6 +272,7 @@ export const resumeSettings: ResumeSettings = {
     isUppercase: false,
     color: "currentColor",
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -280,6 +292,7 @@ export const resumeSettings: ResumeSettings = {
     listMarker: "hyphen",
     listMarkerColor: "currentColor",
     backgroundColor: "transparent",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -295,6 +308,7 @@ export const letterSettings: LetterSettings = {
     bodyFont: "serif",
     color: "#000000",
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "#000000",
     margin: [40, 40, 40, 40],
     border: [0, 0, 0, 0],
@@ -308,6 +322,7 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     color: "currentColor",
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0], // If sender details is used, it is the first element on the document (no need for margins)
@@ -324,6 +339,7 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     color: "currentColor",
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [40, 0, 40, 0],
@@ -335,6 +351,7 @@ export const letterSettings: LetterSettings = {
   header: {
     isCentered: true,
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 40, 0],
@@ -352,6 +369,7 @@ export const letterSettings: LetterSettings = {
     isCentered: true,
     color: "currentColor",
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],
@@ -368,6 +386,7 @@ export const letterSettings: LetterSettings = {
     isCentered: true,
     color: "currentColor",
     backgroundColor: "#ffffff",
+    borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
     margin: [0, 0, 0, 0],

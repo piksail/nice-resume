@@ -29,6 +29,7 @@ export type BlockSettings = {
   backgroundColor: string;
   padding: SideSetting;
   border: SideSetting;
+  borderStyle: "dashed" | "dotted" | "solid";
   borderColor: string;
   borderRadius: number;
   margin: SideSetting;
@@ -72,9 +73,10 @@ export type DocumentSettings = {
   bodyFont: string;
   color: string;
   backgroundColor: string;
-  borderColor: string;
   margin: SideSetting;
   border: SideSetting;
+  borderStyle: "dashed" | "dotted" | "solid";
+  borderColor: string;
 };
 
 // export type HeaderSettings = BlockSettings & {
@@ -145,6 +147,7 @@ export type LetterSettings = {
   header: {
     isCentered: boolean;
     backgroundColor: string;
+    borderStyle: "dashed" | "dotted" | "solid";
     borderColor: string;
     borderRadius: number;
     margin: SideSetting;
