@@ -40,6 +40,7 @@ export const templates: Array<Template> = [
   "Cupcake",
   "Macaron",
   "Macchiato",
+  "NeoBrutalism",
   "Oilcloth",
   "OpenResume",
   "Paper",
@@ -60,6 +61,7 @@ export const discouragedLayoutTemplates: {
   Cupcake: [],
   Macaron: [],
   Macchiato: [],
+  NeoBrutalism: [],
   Oilcloth: [],
   OpenResume: [],
   Paper: [],
@@ -425,6 +427,23 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Open Sans Condensed",
     displayFont: "Yanone Kaffeesatz",
   },
+  NeoBrutalism: {
+    isLetterMarginless: true,
+    colors: [
+      "#000000",
+      "#ffffff",
+      // TODO reorder colors
+      "#fdba74",
+      "#fef08a",
+      "#86efac",
+      "#22d3ee",
+      "#f472b6",
+      "#f87171",
+      "#818cf8",
+    ],
+    bodyFont: "Roboto",
+    displayFont: "Archivo",
+  },
   Macaron: {
     isLetterMarginless: true,
     colors: ["#d88277", "#f8aaa6", "#f8d5cd", "#f8f4f2", "#ffffff", "#414e66"],
@@ -506,6 +525,11 @@ export const templateSettings: TemplateSettings = {
   },
   Macchiato: {
     base: templateBaseSettings.Macchiato,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
+  NeoBrutalism: {
+    base: templateBaseSettings.NeoBrutalism,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
@@ -918,6 +942,175 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.letter.reference.color =
     templateBaseSettings.Macchiato.colors[0];
   templateSettings.Macchiato.letter.body.margin = [24, 48, 48, 48];
+}
+
+if (
+  templateSettings.NeoBrutalism.resume &&
+  templateSettings.NeoBrutalism.letter
+) {
+  templateSettings.NeoBrutalism.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.NeoBrutalism.resume.document.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.document.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[2];
+  templateSettings.NeoBrutalism.resume.header.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[3];
+  templateSettings.NeoBrutalism.resume.header.border[2] = 4;
+  templateSettings.NeoBrutalism.resume.header.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.name.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.name.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[5];
+  templateSettings.NeoBrutalism.resume.name.isUppercase = true;
+  templateSettings.NeoBrutalism.resume.name.font =
+    templateSettings.NeoBrutalism.base.displayFont;
+  templateSettings.NeoBrutalism.resume.name.fontSize = 36;
+  templateSettings.NeoBrutalism.resume.name.fontWeight = 900;
+  templateSettings.NeoBrutalism.resume.name.letterSpacing = 1;
+  templateSettings.NeoBrutalism.resume.name.padding = [8, 8, 8, 8];
+  templateSettings.NeoBrutalism.resume.name.border = [4, 8, 8, 4];
+  templateSettings.NeoBrutalism.resume.name.borderRadius = 8;
+  templateSettings.NeoBrutalism.resume.name.margin = [22, 22, 22, 22];
+  templateSettings.NeoBrutalism.resume.title.color =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.resume.title.isItalic = true;
+  templateSettings.NeoBrutalism.resume.title.fontWeight = 700;
+  templateSettings.NeoBrutalism.resume.title.borderColor =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.resume.title.border[2] = 2;
+  templateSettings.NeoBrutalism.resume.title.borderStyle = "dashed";
+  templateSettings.NeoBrutalism.resume.title.padding = [0, 22, 0, 22];
+  templateSettings.NeoBrutalism.resume.about.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.about.margin = [0, 22, 0, 22];
+  templateSettings.NeoBrutalism.resume.about.textAlign = "right";
+  templateSettings.NeoBrutalism.resume.contactDetails.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[4];
+  templateSettings.NeoBrutalism.resume.contactDetails.color =
+    templateSettings.NeoBrutalism.base.colors[1];
+  templateSettings.NeoBrutalism.resume.contactDetails.iconColor =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.resume.contactDetails.border[3] = 4;
+  templateSettings.NeoBrutalism.resume.contactDetails.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.contactDetails.padding = [
+    22, 22, 22, 22,
+  ];
+  templateSettings.NeoBrutalism.resume.body.margin = [22, 22, 22, 22];
+  templateSettings.NeoBrutalism.resume.categoryName.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[7];
+  templateSettings.NeoBrutalism.resume.categoryName.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.categoryName.border = [4, 8, 8, 4];
+  templateSettings.NeoBrutalism.resume.categoryName.borderRadius = 8;
+  templateSettings.NeoBrutalism.resume.categoryName.padding = [4, 4, 4, 4];
+  templateSettings.NeoBrutalism.resume.categoryName.isUppercase = true;
+  templateSettings.NeoBrutalism.resume.categoryName.fontWeight = 900;
+  templateSettings.NeoBrutalism.resume.categoryName.fontSize = 22;
+  templateSettings.NeoBrutalism.resume.categoryName.letterSpacing = 8;
+  templateSettings.NeoBrutalism.resume.categoryName.margin[2] = 8;
+  templateSettings.NeoBrutalism.resume.entry.layout = 1;
+  templateSettings.NeoBrutalism.resume.entryTitle.color =
+    templateSettings.NeoBrutalism.base.colors[1];
+  templateSettings.NeoBrutalism.resume.entryTitle.isUppercase = true;
+  templateSettings.NeoBrutalism.resume.entryTitle.letterSpacing = 2;
+  templateSettings.NeoBrutalism.resume.entryTitle.fontWeight = 700;
+  templateSettings.NeoBrutalism.resume.entryOrganization.fontWeight = 700;
+  templateSettings.NeoBrutalism.resume.entryOrganization.color =
+    templateSettings.NeoBrutalism.base.colors[8];
+  templateSettings.NeoBrutalism.resume.entryPeriod.fontWeight = 700;
+  templateSettings.NeoBrutalism.resume.entryPeriod.color =
+    templateSettings.NeoBrutalism.base.colors[8];
+  templateSettings.NeoBrutalism.resume.entryLocation.fontWeight = 700;
+  templateSettings.NeoBrutalism.resume.entryLocation.color =
+    templateSettings.NeoBrutalism.base.colors[8];
+  templateSettings.NeoBrutalism.resume.entryHighlight.listMarker = "disc";
+  templateSettings.NeoBrutalism.resume.entryHighlight.listMarkerColor =
+    templateSettings.NeoBrutalism.base.colors[7];
+  templateSettings.NeoBrutalism.resume.entryHighlight.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.NeoBrutalism.letter.document.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.document.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[2];
+  templateSettings.NeoBrutalism.letter.header.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[3];
+  templateSettings.NeoBrutalism.letter.header.border[2] = 4;
+  templateSettings.NeoBrutalism.letter.header.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.name.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.name.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[5];
+  templateSettings.NeoBrutalism.letter.name.isUppercase = true;
+  templateSettings.NeoBrutalism.letter.name.font =
+    templateSettings.NeoBrutalism.base.displayFont;
+  templateSettings.NeoBrutalism.letter.name.fontSize = 36;
+  templateSettings.NeoBrutalism.letter.name.fontWeight = 900;
+  templateSettings.NeoBrutalism.letter.name.letterSpacing = 1;
+  templateSettings.NeoBrutalism.letter.name.padding = [8, 8, 8, 8];
+  templateSettings.NeoBrutalism.letter.name.border = [4, 8, 8, 4];
+  templateSettings.NeoBrutalism.letter.name.borderRadius = 8;
+  templateSettings.NeoBrutalism.letter.name.margin = [22, 22, 22, 22];
+  templateSettings.NeoBrutalism.letter.title.color =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.letter.title.isItalic = true;
+  templateSettings.NeoBrutalism.letter.title.fontWeight = 700;
+  templateSettings.NeoBrutalism.letter.title.borderColor =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.letter.title.border[2] = 2;
+  templateSettings.NeoBrutalism.letter.title.borderStyle = "dashed";
+  templateSettings.NeoBrutalism.letter.title.padding = [0, 22, 0, 22];
+  templateSettings.NeoBrutalism.letter.about.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.about.margin = [0, 22, 0, 22];
+  templateSettings.NeoBrutalism.letter.about.textAlign = "right";
+  templateSettings.NeoBrutalism.letter.contactDetails.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[4];
+  templateSettings.NeoBrutalism.letter.contactDetails.color =
+    templateSettings.NeoBrutalism.base.colors[1];
+  templateSettings.NeoBrutalism.letter.contactDetails.iconColor =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.letter.contactDetails.border[3] = 4;
+  templateSettings.NeoBrutalism.letter.contactDetails.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.contactDetails.padding = [
+    22, 22, 22, 22,
+  ];
+  templateSettings.NeoBrutalism.letter.senderDetails.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[4];
+  templateSettings.NeoBrutalism.letter.senderDetails.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.senderDetails.padding = [8, 8, 8, 8];
+  templateSettings.NeoBrutalism.letter.senderDetails.border = [4, 8, 8, 4];
+  templateSettings.NeoBrutalism.letter.senderDetails.borderRadius = 8;
+  templateSettings.NeoBrutalism.letter.senderDetails.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.recipientDetails.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[5];
+  templateSettings.NeoBrutalism.letter.recipientDetails.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.recipientDetails.padding = [8, 8, 8, 8];
+  templateSettings.NeoBrutalism.letter.recipientDetails.border = [4, 8, 8, 4];
+  templateSettings.NeoBrutalism.letter.recipientDetails.borderRadius = 8;
+  templateSettings.NeoBrutalism.letter.recipientDetails.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.subject.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.letter.subject.color =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.subject.padding = [8, 8, 8, 8];
+  templateSettings.NeoBrutalism.letter.subject.border = [4, 8, 8, 4];
+  templateSettings.NeoBrutalism.letter.subject.borderRadius = 8;
+  templateSettings.NeoBrutalism.letter.subject.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.letter.reference.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[2];
+  templateSettings.NeoBrutalism.letter.reference.color =
+    templateSettings.NeoBrutalism.base.colors[8];
+  templateSettings.NeoBrutalism.letter.reference.fontWeight = 700;
 }
 
 if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
