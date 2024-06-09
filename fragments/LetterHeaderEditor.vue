@@ -313,83 +313,6 @@ function addSenderDetail() {
         </li>
         <li class="border-b-2 border-white border-opacity-5 pb-12">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Header</div>
-          </header>
-          <div class="flex flex-col gap-5">
-            <div class="flex gap-5 flex-wrap">
-              <label for="headerIsCentered">
-                <input
-                  id="headerIsCentered"
-                  class="input"
-                  type="checkbox"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.header.isCentered"
-                />
-                <span class="opacity-60">Centered</span>
-              </label>
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`headerMargin${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Margin ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.header.margin[i - 1]"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`headerBorder${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Border ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.header.border[i - 1]"
-              />
-              <Field
-                id="headerBorderColor"
-                type="color"
-                label="Border color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.header.borderColor"
-              />
-              <Field
-                id="headerBorderRadius"
-                class="w-[20%]"
-                type="number"
-                label="Border radius"
-                :disabled="!isThemeCustomized"
-                v-model="settings.header.borderRadius"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`headerPadding${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Padding ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.header.padding[i - 1]"
-              />
-              <Field
-                id="headerBackgroundColor"
-                type="color"
-                label="Background color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.header.backgroundColor"
-              />
-            </div>
-          </div>
-        </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
-          <header>
             <div class="uppercase font-bold text-lg mb-5">Subject</div>
           </header>
           <div class="flex flex-col gap-5">
@@ -456,7 +379,7 @@ function addSenderDetail() {
                 />
                 <span class="opacity-60">Italic</span>
               </label>
-              <label for="subjectIsCentered">
+              <!-- <label for="subjectIsCentered">
                 <input
                   id="subjectIsCentered"
                   class="input"
@@ -465,7 +388,7 @@ function addSenderDetail() {
                   v-model="settings.subject.isCentered"
                 />
                 <span class="opacity-60">Centered</span>
-              </label>
+              </label> -->
             </div>
             <div class="flex gap-5 flex-wrap">
               <Field
@@ -595,7 +518,7 @@ function addSenderDetail() {
                 />
                 <span class="opacity-60">Italic</span>
               </label>
-              <label for="referenceIsCentered">
+              <!-- <label for="referenceIsCentered">
                 <input
                   id="referenceIsCentered"
                   class="input"
@@ -604,7 +527,7 @@ function addSenderDetail() {
                   v-model="settings.reference.isCentered"
                 />
                 <span class="opacity-60">Centered</span>
-              </label>
+              </label> -->
             </div>
             <div class="flex gap-5 flex-wrap">
               <Field

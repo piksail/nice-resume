@@ -79,21 +79,10 @@ export type DocumentSettings = {
   borderColor: string;
 };
 
-// export type HeaderSettings = BlockSettings & {
-//   justification:
-//     | "left"
-//     | "center"
-//     | "space-around"
-//     | "space-between"
-//     | "space-between"
-//     | "right";
-//   alignment: "start" | "center" | "baseline" | "end";
-// };
-
-export type ResumeSettings = {
+export type CommonDocumentSettings = {
   document: DocumentSettings;
   header: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4;
+    layout: 0 | 1 | 2 | 3 | 4 | 5;
   };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
@@ -107,6 +96,9 @@ export type ResumeSettings = {
       isIconFirst: boolean;
       gap: number; // Flex gap between details
     };
+};
+
+export type ResumeSettings = CommonDocumentSettings & {
   // TODO provide Pick<BlockSettings, "margin">; to aside as well
   aside: {
     width: number;
@@ -142,22 +134,11 @@ export type ResumeSettings = {
     };
 };
 
-export type LetterSettings = {
-  document: DocumentSettings;
+export type LetterSettings = CommonDocumentSettings & {
   senderDetails: Settings & BlockSettings & TextSettings;
   recipientDetails: Settings & BlockSettings & TextSettings;
-  header: {
-    isCentered: boolean;
-    backgroundColor: string;
-    borderStyle: "dashed" | "dotted" | "solid";
-    borderColor: string;
-    borderRadius: number;
-    margin: SideSetting;
-    border: SideSetting;
-    padding: SideSetting;
-  };
-  subject: Settings & BlockSettings & TextSettings;
-  reference: Settings & BlockSettings & TextSettings;
+  subject: BlockSettings & TitleSettings;
+  reference: BlockSettings & TitleSettings & { isBeforeSubject: boolean };
   body: {
     fontSize: number;
     lineHeight: number;

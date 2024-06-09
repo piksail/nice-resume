@@ -17,11 +17,8 @@ const { contactDetails } = defineProps<{
   contactDetails: Profile["contactDetails"];
 }>();
 
-// TODO fix below
-// const settings = ref(templateSettings[template.value][documentType.value]);
-console.log(documentType);
 const settings = computed(() => {
-  return templateSettings[template.value].resume;
+  return templateSettings[template.value][documentType.value];
 });
 </script>
 

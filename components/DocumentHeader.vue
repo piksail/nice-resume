@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
@@ -10,13 +11,13 @@ import DocumentHeaderName from "@/components/DocumentHeaderName.vue";
 import DocumentHeaderTitle from "@/components/DocumentHeaderTitle.vue";
 import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDetails.vue";
 
+const { documentType } = storeToRefs(useEditorStore());
 const { name, template, title } = storeToRefs(useProfileStore());
 
 const { about, contactDetails } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
-  // TODO fix templateSettings[template.value][documentType.value]
-  return templateSettings[template.value].resume;
+  return templateSettings[template.value][documentType.value];
 });
 </script>
 
@@ -55,6 +56,14 @@ const settings = computed(() => {
         <DocumentHeaderName :name="name" />
         <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderTitle :title="title" />
+        <DocumentHeaderAbout :about="about" />
+      </div>
+    </template>
+    <template v-else-if="settings.header.layout === 5">
+      <div class="flex-1">
+        <DocumentHeaderName :name="name" />
+        <DocumentHeaderTitle :title="title" />
+        <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderAbout :about="about" />
       </div>
     </template>

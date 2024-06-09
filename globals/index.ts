@@ -2,6 +2,7 @@ import type {
   Asset,
   BaseSettings,
   Category,
+  CommonDocumentSettings,
   ContactDetail,
   DocumentType,
   Experience,
@@ -71,10 +72,13 @@ export const discouragedLayoutTemplates: {
 
 // TODO settings réduire espace entrelistmarker et text
 // TODO bind les valeurs numériques avec du extralight, semibold dans le <select> https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
+// TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
+// TODO gérer le aside
+// TODO faire une passe sur l'editor pour customizer tout ce qui est customizable
 
 export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
 
-export const resumeSettings: ResumeSettings = {
+export const commonDocumentSettings: CommonDocumentSettings = {
   document: {
     bodyFont: "serif",
     color: "#000000",
@@ -173,6 +177,9 @@ export const resumeSettings: ResumeSettings = {
     padding: [0, 0, 0, 0],
     gap: 0,
   },
+};
+export const resumeSettings: ResumeSettings = {
+  ...commonDocumentSettings,
   aside: {
     width: 20, // Percentage
     gap: 16,
@@ -315,17 +322,8 @@ export const resumeSettings: ResumeSettings = {
   },
 };
 
-// TODO for ANY element that is text, have below properties+letterSPacing
 export const letterSettings: LetterSettings = {
-  document: {
-    bodyFont: "serif",
-    color: "#000000",
-    backgroundColor: "#ffffff",
-    borderStyle: "solid",
-    borderColor: "#000000",
-    margin: [40, 40, 40, 40],
-    border: [0, 0, 0, 0],
-  },
+  ...commonDocumentSettings,
   senderDetails: {
     font: "inherit",
     fontSize: 14,
@@ -360,17 +358,6 @@ export const letterSettings: LetterSettings = {
     padding: [0, 0, 0, 0],
     gap: 12,
   },
-  // TODO rename below property as subjectWrapper ? Or "chapeau"?
-  header: {
-    isCentered: true,
-    backgroundColor: "#ffffff",
-    borderStyle: "solid",
-    borderColor: "currentColor",
-    borderRadius: 0,
-    margin: [0, 0, 40, 0],
-    border: [0, 0, 0, 0],
-    padding: [0, 0, 0, 0],
-  },
   subject: {
     font: "inherit",
     fontSize: 14,
@@ -379,7 +366,7 @@ export const letterSettings: LetterSettings = {
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
-    isCentered: true,
+    textAlign: "center",
     color: "currentColor",
     backgroundColor: "#ffffff",
     borderStyle: "solid",
@@ -396,7 +383,7 @@ export const letterSettings: LetterSettings = {
     lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
-    isCentered: true,
+    textAlign: "center",
     color: "currentColor",
     backgroundColor: "#ffffff",
     borderStyle: "solid",
@@ -405,6 +392,7 @@ export const letterSettings: LetterSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    isBeforeSubject: false,
   },
   body: {
     fontSize: 14,
@@ -413,7 +401,7 @@ export const letterSettings: LetterSettings = {
     color: "currentColor",
     indentation: 48,
     isJustified: true,
-    margin: [0, 0, 0, 0],
+    margin: [20, 0, 0, 0],
     gap: 12,
     isSignatureRightAligned: true,
   },
@@ -421,18 +409,18 @@ export const letterSettings: LetterSettings = {
 
 export const templateBaseSettings: TemplateBaseSettings = {
   Aster: {
-    isLetterMarginless: true,
+    isLetterMarginless: false,
     colors: ["#713c97", "#f6881f", "#ffffff", "#000000"],
     bodyFont: "Fira Sans",
   },
   CottonCandy: {
-    isLetterMarginless: true,
+    isLetterMarginless: false,
     colors: ["#ed3660", "#5662e8", "#e8afcf", "#ffffff", "#1e1e1e"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
   },
   Cupcake: {
-    isLetterMarginless: true,
+    isLetterMarginless: false,
     colors: ["#f2b150", "#e593aa", "#a9d7e2", "#231f20"],
     bodyFont: "Open Sans Condensed",
     displayFont: "Yanone Kaffeesatz",
@@ -471,7 +459,7 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Libre Franklin",
   },
   Red: {
-    isLetterMarginless: true,
+    isLetterMarginless: false,
     colors: ["#ab3134", "#231f20"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
@@ -483,7 +471,7 @@ export const templateBaseSettings: TemplateBaseSettings = {
     displayFont: "Kaisei Tokumin",
   },
   Toothpaste: {
-    isLetterMarginless: true,
+    isLetterMarginless: false,
     colors: ["#ed3660", "#5662e8", "#e8afcf", "#1e1e1e"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
@@ -585,10 +573,14 @@ function scaffoldTemplateSettings(
     settings.letter.senderDetails.margin[3] = 64;
     settings.letter.recipientDetails.margin[1] = 64;
     settings.letter.recipientDetails.margin[3] = 64;
-    settings.letter.header.margin[1] = 64;
-    settings.letter.header.margin[3] = 64;
+    settings.letter.subject.margin[1] = 64;
+    settings.letter.subject.margin[3] = 64;
+    settings.letter.reference.margin[1] = 64;
+    settings.letter.reference.margin[3] = 64;
     settings.letter.body.margin[1] = 64;
     settings.letter.body.margin[3] = 64;
+  } else {
+    settings.letter.header.margin = [0, 0, 0, 0];
   }
   templateSettings[template] = settings;
 }
@@ -620,10 +612,11 @@ if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
   templateSettings.Aster.resume.entryOrganization.isItalic = true;
   templateSettings.Aster.resume.entrySummary.padding[3] = 16;
   templateSettings.Aster.resume.entryHighlight.padding[3] = 16;
-  templateSettings.Aster.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.Aster.letter.contactDetails.alignment = "end";
+  templateSettings.Aster.letter.contactDetails.iconColor =
+    templateBaseSettings.Aster.colors[0];
   templateSettings.Aster.letter.senderDetails.fontWeight = 300;
   templateSettings.Aster.letter.recipientDetails.fontWeight = 300;
-  templateSettings.Aster.letter.header.isCentered;
   templateSettings.Aster.letter.subject.fontSize = 18;
   templateSettings.Aster.letter.subject.fontWeight = 300;
   templateSettings.Aster.letter.reference.fontSize = 15;
@@ -693,7 +686,31 @@ if (
   templateSettings.CottonCandy.resume.entryHighlight.listMarkerColor =
     templateBaseSettings.CottonCandy.colors[3];
   templateSettings.CottonCandy.resume.entryHighlight.isItalic = true;
-  templateSettings.CottonCandy.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.CottonCandy.letter.header.layout = 1;
+  templateSettings.CottonCandy.letter.header.padding = [24, 40, 24, 40];
+  templateSettings.CottonCandy.letter.name.font =
+    templateBaseSettings.CottonCandy.displayFont;
+  templateSettings.CottonCandy.letter.name.fontSize = 36;
+  templateSettings.CottonCandy.letter.name.isUppercase = true;
+  templateSettings.CottonCandy.letter.name.textAlign = "center";
+  templateSettings.CottonCandy.letter.name.padding = [0, 16, 0, 16];
+  templateSettings.CottonCandy.letter.name.border[0] = 4;
+  templateSettings.CottonCandy.letter.name.borderColor =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.letter.title.font =
+    templateBaseSettings.CottonCandy.displayFont;
+  templateSettings.CottonCandy.letter.title.fontSize = 24;
+  templateSettings.CottonCandy.letter.title.isUppercase = true;
+  templateSettings.CottonCandy.letter.title.textAlign = "center";
+  templateSettings.CottonCandy.letter.title.padding = [0, 16, 0, 16];
+  templateSettings.CottonCandy.letter.title.border[2] = 4;
+  templateSettings.CottonCandy.letter.title.borderColor =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.letter.contactDetails.margin[3] = 22;
+  templateSettings.CottonCandy.letter.contactDetails.color =
+    templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.letter.contactDetails.iconColor =
+    templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.letter.senderDetails.color =
     templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.letter.senderDetails.margin[0] = 0;
@@ -706,10 +723,12 @@ if (
   templateSettings.CottonCandy.letter.recipientDetails.margin[1] = 40;
   templateSettings.CottonCandy.letter.recipientDetails.margin[3] = 40;
   templateSettings.CottonCandy.letter.recipientDetails.isItalic = true;
-  templateSettings.CottonCandy.letter.header.margin[1] = 40;
-  templateSettings.CottonCandy.letter.header.margin[3] = 40;
   templateSettings.CottonCandy.letter.subject.fontWeight = 700;
+  templateSettings.CottonCandy.letter.subject.margin[1] = 40;
+  templateSettings.CottonCandy.letter.subject.margin[3] = 40;
   templateSettings.CottonCandy.letter.reference.fontSize = 11;
+  templateSettings.CottonCandy.letter.reference.margin[1] = 40;
+  templateSettings.CottonCandy.letter.reference.margin[3] = 40;
   templateSettings.CottonCandy.letter.body.margin[1] = 40;
   templateSettings.CottonCandy.letter.body.margin[3] = 40;
 }
@@ -743,7 +762,11 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
     templateBaseSettings.Cupcake.colors[0];
   templateSettings.Cupcake.resume.entryHighlight.color =
     templateBaseSettings.Cupcake.colors[3];
-  templateSettings.Cupcake.letter.document.margin = [32, 32, 32, 32];
+  templateSettings.Cupcake.letter.contactDetails.alignment = "end";
+  templateSettings.Cupcake.letter.contactDetails.color =
+    templateBaseSettings.Cupcake.colors[1];
+  templateSettings.Cupcake.letter.contactDetails.iconColor =
+    templateBaseSettings.Cupcake.colors[1];
   templateSettings.Cupcake.letter.senderDetails.fontSize = 16;
   templateSettings.Cupcake.letter.senderDetails.lineHeight = 1;
   templateSettings.Cupcake.letter.recipientDetails.fontSize = 16;
@@ -756,7 +779,6 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
 
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
-  templateSettings.Macaron.resume.aside.width = 25;
   templateSettings.Macaron.resume.header.layout = 2;
   templateSettings.Macaron.resume.header.margin = [68, 0, 20, 0];
   templateSettings.Macaron.resume.header.border = [1, 0, 1, 0];
@@ -781,6 +803,7 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
     templateBaseSettings.Macaron.displayFont;
   templateSettings.Macaron.resume.about.fontSize = 16;
   templateSettings.Macaron.resume.about.fontWeight = 500;
+  templateSettings.Macaron.resume.aside.width = 25;
   templateSettings.Macaron.resume.body.margin = [40, 40, 40, 40];
   templateSettings.Macaron.resume.category.gap = 30;
   templateSettings.Macaron.resume.categoryName.color =
@@ -798,8 +821,30 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.entryHighlight.isItalic = true;
   templateSettings.Macaron.resume.entryHighlight.listMarker = "disc";
   templateSettings.Macaron.letter.document.margin = [0, 0, 0, 0];
-  templateSettings.Macaron.letter.senderDetails.margin[1] = 40;
-  templateSettings.Macaron.letter.recipientDetails.margin[1] = 40;
+  templateSettings.Macaron.letter.header.layout = 2;
+  templateSettings.Macaron.letter.header.margin = [68, 0, 20, 0];
+  templateSettings.Macaron.letter.header.border = [1, 0, 1, 0];
+  templateSettings.Macaron.letter.header.borderColor =
+    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.letter.header.padding = [12, 40, 12, 40];
+  templateSettings.Macaron.letter.header.backgroundColor =
+    templateBaseSettings.Macaron.colors[3];
+  templateSettings.Macaron.letter.name.fontSize = 36;
+  templateSettings.Macaron.letter.name.fontWeight = 600;
+  templateSettings.Macaron.letter.name.isUppercase = true;
+  templateSettings.Macaron.letter.name.letterSpacing = 10;
+  templateSettings.Macaron.letter.title.fontSize = 24;
+  templateSettings.Macaron.letter.title.fontWeight = 600;
+  templateSettings.Macaron.letter.title.isUppercase = true;
+  templateSettings.Macaron.letter.title.letterSpacing = 5;
+  templateSettings.Macaron.letter.contactDetails.listOrientation = "row";
+  templateSettings.Macaron.letter.contactDetails.gap = 20;
+  templateSettings.Macaron.letter.contactDetails.iconColor =
+    templateBaseSettings.Macaron.colors[1];
+  templateSettings.Macaron.letter.about.font =
+    templateBaseSettings.Macaron.displayFont;
+  templateSettings.Macaron.letter.about.fontSize = 16;
+  templateSettings.Macaron.letter.about.fontWeight = 500;
   templateSettings.Macaron.letter.subject.fontWeight = 600;
   templateSettings.Macaron.letter.subject.fontSize = 19;
   templateSettings.Macaron.letter.reference.color =
@@ -845,18 +890,33 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
   templateSettings.Macchiato.letter.document.borderColor =
     templateBaseSettings.Macchiato.colors[0];
+  templateSettings.Macchiato.letter.header.layout = 2;
+  templateSettings.Macchiato.letter.header.margin = [48, 48, 20, 48];
+  templateSettings.Macchiato.letter.name.font =
+    templateBaseSettings.Macchiato.displayFont;
+  templateSettings.Macchiato.letter.name.fontSize = 36;
+  templateSettings.Macchiato.letter.name.fontWeight = 700;
+  templateSettings.Macchiato.letter.name.letterSpacing = 1;
+  templateSettings.Macchiato.letter.title.font =
+    templateBaseSettings.Macchiato.displayFont;
+  templateSettings.Macchiato.letter.title.fontSize = 20;
+  templateSettings.Macchiato.letter.title.fontWeight = 300;
+  templateSettings.Macchiato.letter.title.letterSpacing = 1;
+  templateSettings.Macchiato.letter.contactDetails.fontSize = 11;
   templateSettings.Macchiato.letter.senderDetails.margin = [0, 48, 48, 48];
   templateSettings.Macchiato.letter.senderDetails.fontSize = 12;
   templateSettings.Macchiato.letter.recipientDetails.margin = [0, 48, 48, 48];
   templateSettings.Macchiato.letter.recipientDetails.fontSize = 12;
-  templateSettings.Macchiato.letter.header.margin[1] = 48;
-  templateSettings.Macchiato.letter.header.margin[3] = 48;
+  templateSettings.Macchiato.letter.subject.margin[1] = 48;
+  templateSettings.Macchiato.letter.subject.margin[3] = 48;
   templateSettings.Macchiato.letter.subject.font =
     templateBaseSettings.Macchiato.displayFont;
   templateSettings.Macchiato.letter.subject.fontSize = 17;
+  templateSettings.Macchiato.letter.reference.margin[1] = 48;
+  templateSettings.Macchiato.letter.reference.margin[3] = 48;
   templateSettings.Macchiato.letter.reference.color =
     templateBaseSettings.Macchiato.colors[0];
-  templateSettings.Macchiato.letter.body.margin = [0, 48, 48, 48];
+  templateSettings.Macchiato.letter.body.margin = [24, 48, 48, 48];
 }
 
 if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
@@ -911,6 +971,28 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.entryHighlight.fontWeight = 300;
   templateSettings.Oilcloth.resume.entryHighlight.lineHeight = 1;
   templateSettings.Oilcloth.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.Oilcloth.letter.document.border = [15, 0, 20, 0];
+  templateSettings.Oilcloth.letter.document.borderColor =
+    templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.letter.header.padding = [30, 40, 30, 40];
+  templateSettings.Oilcloth.letter.name.color =
+    templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.letter.name.fontSize = 40;
+  templateSettings.Oilcloth.letter.name.fontWeight = 900;
+  templateSettings.Oilcloth.letter.name.letterSpacing = 2;
+  templateSettings.Oilcloth.letter.title.color =
+    templateBaseSettings.Oilcloth.colors[0];
+  templateSettings.Oilcloth.letter.title.fontWeight = 600;
+  templateSettings.Oilcloth.letter.title.isUppercase = true;
+  templateSettings.Oilcloth.letter.title.letterSpacing = 4;
+  templateSettings.Oilcloth.letter.about.color =
+    templateBaseSettings.Oilcloth.colors[0];
+  templateBaseSettings.Oilcloth.colors[0];
+  templateSettings.Oilcloth.letter.contactDetails.fontWeight = 600;
+  templateSettings.Oilcloth.letter.contactDetails.color =
+    templateBaseSettings.Oilcloth.colors[0];
+  templateSettings.Oilcloth.letter.contactDetails.iconColor =
+    templateBaseSettings.Oilcloth.colors[1];
   templateSettings.Oilcloth.letter.senderDetails.color =
     templateBaseSettings.Oilcloth.colors[0];
   templateSettings.Oilcloth.letter.recipientDetails.color =
@@ -937,6 +1019,7 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.contactDetails.listOrientation = "row";
   templateSettings.OpenResume.resume.contactDetails.gap = 40;
   templateSettings.OpenResume.resume.about.isItalic = true;
+  templateSettings.OpenResume.resume.about.textAlign = "center";
   templateSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
   templateSettings.OpenResume.resume.categoryName.fontWeight = 700;
   templateSettings.OpenResume.resume.categoryName.fontSize = 12;
@@ -955,21 +1038,41 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.letter.document.borderColor =
     templateBaseSettings.OpenResume.colors[0];
+  templateSettings.OpenResume.letter.header.layout = 2;
+  templateSettings.OpenResume.letter.header.margin = [24, 48, 24, 48];
+  templateSettings.OpenResume.letter.name.color =
+    templateBaseSettings.OpenResume.colors[0];
+  templateSettings.OpenResume.letter.name.fontSize = 30;
+  templateSettings.OpenResume.letter.name.fontWeight = 700;
+  templateSettings.OpenResume.letter.name.lineHeight = 1.2;
+  templateSettings.OpenResume.letter.name.margin[2] = 10;
+  templateSettings.OpenResume.letter.title.fontSize = 20;
+  templateSettings.OpenResume.letter.title.fontWeight = 700;
+  templateSettings.OpenResume.letter.title.lineHeight = 1.2;
+  templateSettings.OpenResume.letter.title.margin[2] = 10;
+  templateSettings.OpenResume.letter.contactDetails.listOrientation = "row";
+  templateSettings.OpenResume.letter.contactDetails.gap = 40;
+  templateSettings.OpenResume.letter.about.isItalic = true;
+  templateSettings.OpenResume.letter.about.textAlign = "center";
   templateSettings.OpenResume.letter.senderDetails.isItalic = true;
   templateSettings.OpenResume.letter.senderDetails.margin[0] = 24;
   templateSettings.OpenResume.letter.senderDetails.margin[1] = 48;
   templateSettings.OpenResume.letter.recipientDetails.isItalic = true;
   templateSettings.OpenResume.letter.recipientDetails.margin[0] = 24;
   templateSettings.OpenResume.letter.recipientDetails.margin[1] = 48;
-  templateSettings.OpenResume.letter.header.isCentered = false;
-  templateSettings.OpenResume.letter.header.margin[3] = 48 * 2;
-  templateSettings.OpenResume.letter.subject.fontWeight = 800;
-  templateSettings.OpenResume.letter.subject.isCentered = false;
-  templateSettings.OpenResume.letter.reference.fontWeight = 800;
-  templateSettings.OpenResume.letter.reference.isCentered = false;
+  templateSettings.OpenResume.letter.reference.isBeforeSubject = true;
+  templateSettings.OpenResume.letter.reference.margin[1] = 48;
+  templateSettings.OpenResume.letter.reference.margin[3] = 48 * 2 + 4;
+  templateSettings.OpenResume.letter.reference.fontWeight = 700;
+  templateSettings.OpenResume.letter.reference.textAlign = "left";
   templateSettings.OpenResume.letter.reference.color =
     templateBaseSettings.OpenResume.colors[0];
-  templateSettings.OpenResume.letter.body.margin = [0, 48, 0, 48];
+  templateSettings.OpenResume.letter.subject.margin[1] = 48;
+  templateSettings.OpenResume.letter.subject.margin[3] = 48 * 2 + 4;
+  templateSettings.OpenResume.letter.subject.fontWeight = 700;
+  templateSettings.OpenResume.letter.subject.textAlign = "left";
+  templateSettings.OpenResume.letter.body.margin = [24, 48, 0, 48];
+  templateSettings.OpenResume.letter.body.indentation = 48;
 }
 
 if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
@@ -1005,10 +1108,21 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
   templateSettings.Paper.resume.entryHighlight.fontSize = 13;
   templateSettings.Paper.resume.entryHighlight.listMarker = "circle";
   templateSettings.Paper.letter.document.margin = [80, 80, 80, 80];
-  templateSettings.Paper.letter.header.isCentered = false;
-  templateSettings.Paper.letter.subject.isCentered = false;
+  templateSettings.Paper.letter.header.layout = 3;
+  templateSettings.Paper.letter.name.fontSize = 20;
+  templateSettings.Paper.letter.title.fontSize = 20;
+  templateSettings.Paper.letter.contactDetails.listOrientation = "row";
+  templateSettings.Paper.letter.contactDetails.gap = 12;
+  templateSettings.Paper.letter.contactDetails.fontSize = 12;
+  templateSettings.Paper.letter.about.fontSize = 12;
+  templateSettings.Paper.letter.about.padding = [16, 16, 16, 0];
+  templateSettings.Paper.letter.about.border[0] = 2;
+  templateSettings.Paper.letter.about.borderStyle = "dotted";
+  templateSettings.Paper.letter.about.borderColor =
+    templateBaseSettings.Paper.colors[0];
+  templateSettings.Paper.letter.subject.textAlign = "left";
   templateSettings.Paper.letter.reference.isItalic = true;
-  templateSettings.Paper.letter.reference.isCentered = false;
+  templateSettings.Paper.letter.reference.textAlign = "left";
   templateSettings.Paper.letter.body.indentation = 0;
   templateSettings.Paper.letter.body.isSignatureRightAligned = false;
 }
@@ -1029,7 +1143,6 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
   templateSettings.Pharmacy.resume.contactDetails.padding[1] = 20;
   templateSettings.Pharmacy.resume.contactDetails.fontSize = 12;
   templateSettings.Pharmacy.resume.contactDetails.isIconFirst = false;
-  templateSettings.Pharmacy.resume.title.textAlign = "center";
   templateSettings.Pharmacy.resume.title.color =
     templateBaseSettings.Pharmacy.colors[0];
   templateSettings.Pharmacy.resume.title.fontSize = 36;
@@ -1062,6 +1175,26 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
   templateSettings.Pharmacy.resume.entryHighlight.color =
     templateBaseSettings.Pharmacy.colors[1];
   templateSettings.Pharmacy.letter.document.margin = [48, 48, 48, 48];
+  templateSettings.Pharmacy.letter.header.layout = 2;
+  templateSettings.Pharmacy.letter.name.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.letter.name.isUppercase = true;
+  templateSettings.Pharmacy.letter.name.fontSize = 30;
+  templateSettings.Pharmacy.letter.name.letterSpacing = 2;
+  templateSettings.Pharmacy.letter.contactDetails.margin = [10, 0, 30, 0];
+  templateSettings.Pharmacy.letter.contactDetails.alignment = "start";
+  templateSettings.Pharmacy.letter.contactDetails.border[3] = 2;
+  templateSettings.Pharmacy.letter.contactDetails.borderColor =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.letter.contactDetails.padding[3] = 20;
+  templateSettings.Pharmacy.letter.contactDetails.fontSize = 12;
+  templateSettings.Pharmacy.letter.title.color =
+    templateBaseSettings.Pharmacy.colors[0];
+  templateSettings.Pharmacy.letter.title.fontSize = 36;
+  templateSettings.Pharmacy.letter.title.letterSpacing = 3;
+  templateSettings.Pharmacy.letter.about.fontSize = 16;
+  templateSettings.Pharmacy.letter.about.color =
+    templateBaseSettings.Pharmacy.colors[2];
   templateSettings.Pharmacy.letter.senderDetails.borderColor =
     templateBaseSettings.Pharmacy.colors[0];
   templateSettings.Pharmacy.letter.senderDetails.border[3] = 2;
@@ -1127,6 +1260,36 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
     templateBaseSettings.Red.colors[0];
   templateSettings.Red.resume.entryHighlight.color =
     templateBaseSettings.Red.colors[1];
+  templateSettings.Red.letter.document.margin = [48, 56, 48, 56];
+  templateSettings.Red.letter.header.layout = 1;
+  templateSettings.Red.letter.header.padding = [24, 40, 24, 40];
+  templateSettings.Red.letter.name.font = templateBaseSettings.Red.displayFont;
+  templateSettings.Red.letter.name.fontSize = 36;
+  templateSettings.Red.letter.name.isUppercase = true;
+  templateSettings.Red.letter.name.textAlign = "center";
+  templateSettings.Red.letter.name.lineHeight = 1;
+  templateSettings.Red.letter.name.padding = [10, 16, 0, 16];
+  templateSettings.Red.letter.name.border[0] = 4;
+  templateSettings.Red.letter.name.borderColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.letter.title.font = templateBaseSettings.Red.displayFont;
+  templateSettings.Red.letter.title.fontSize = 24;
+  templateSettings.Red.letter.title.textAlign = "center";
+  templateSettings.Red.letter.title.padding = [0, 16, 10, 16];
+  templateSettings.Red.letter.title.border[2] = 4;
+  templateSettings.Red.letter.title.borderColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.letter.contactDetails.margin[3] = 30;
+  templateSettings.Red.letter.contactDetails.border[3] = 1;
+  templateSettings.Red.letter.contactDetails.borderColor =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.letter.contactDetails.padding[3] = 10;
+  templateSettings.Red.letter.contactDetails.fontSize = 11;
+  templateSettings.Red.letter.contactDetails.isItalic = true;
+  templateSettings.Red.letter.contactDetails.color =
+    templateBaseSettings.Red.colors[0];
+  templateSettings.Red.letter.contactDetails.iconColor =
+    templateBaseSettings.Red.colors[0];
   templateSettings.Red.letter.senderDetails.margin[0] = 0;
   templateSettings.Red.letter.senderDetails.isItalic = true;
   templateSettings.Red.letter.senderDetails.fontSize = 12;
@@ -1143,7 +1306,6 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
 }
 
 if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
-  templateSettings.Stone.resume.aside.width = 25;
   templateSettings.Stone.resume.header.layout = 2;
   templateSettings.Stone.resume.name.font =
     templateBaseSettings.Stone.displayFont;
@@ -1166,6 +1328,7 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.about.border[0] = 1;
   templateSettings.Stone.resume.about.borderColor =
     templateBaseSettings.Stone.colors[2];
+  templateSettings.Stone.resume.aside.width = 25;
   templateSettings.Stone.resume.category.padding = [25, 0, 25, 0];
   templateSettings.Stone.resume.category.border[0] = 1;
   templateSettings.Stone.resume.category.borderColor =
@@ -1192,6 +1355,18 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.entryPeriod.color =
     templateBaseSettings.Stone.colors[1];
   templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
+  templateSettings.Stone.letter.header.layout = 5;
+  templateSettings.Stone.letter.name.font =
+    templateBaseSettings.Stone.displayFont;
+  templateSettings.Stone.letter.name.fontSize = 24;
+  templateSettings.Stone.letter.title.fontSize = 16;
+  templateSettings.Stone.letter.contactDetails.fontSize = 12;
+  templateSettings.Stone.letter.contactDetails.listOrientation = "row";
+  templateSettings.Stone.letter.contactDetails.gap = 24;
+  templateSettings.Stone.letter.contactDetails.padding = [10, 0, 10, 0];
+  templateSettings.Stone.letter.about.font =
+    templateBaseSettings.Stone.displayFont;
+  templateSettings.Stone.letter.about.fontSize = 12;
   templateSettings.Stone.letter.senderDetails.color =
     templateBaseSettings.Stone.colors[1];
   templateSettings.Stone.letter.recipientDetails.color =
@@ -1200,17 +1375,17 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
     templateBaseSettings.Stone.colors[2];
   templateSettings.Stone.letter.recipientDetails.border = [1, 1, 1, 1];
   templateSettings.Stone.letter.recipientDetails.padding = [6, 10, 6, 10];
-  templateSettings.Stone.letter.header.isCentered = false;
-  templateSettings.Stone.letter.subject.isCentered = false;
+  templateSettings.Stone.letter.subject.textAlign = "left";
   templateSettings.Stone.letter.subject.isUppercase = true;
   templateSettings.Stone.letter.subject.fontSize = 20;
   templateSettings.Stone.letter.subject.fontWeight = 600;
   templateSettings.Stone.letter.subject.font =
     templateBaseSettings.Stone.displayFont;
   templateSettings.Stone.letter.reference.margin[0] = 10;
-  templateSettings.Stone.letter.reference.isCentered = false;
+  templateSettings.Stone.letter.reference.textAlign = "left";
   templateSettings.Stone.letter.reference.color =
     templateBaseSettings.Stone.colors[1];
+  templateSettings.Stone.letter.body.margin[0] = 40;
   templateSettings.Stone.letter.body.indentation = 0;
   templateSettings.Stone.letter.body.isSignatureRightAligned = false;
 }
@@ -1254,7 +1429,24 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
   templateSettings.Toothpaste.resume.entryTitle.color =
     templateBaseSettings.Toothpaste.colors[1];
   templateSettings.Toothpaste.resume.entryHighlight.isItalic = true;
-  templateSettings.Toothpaste.letter.document.margin = [0, 0, 0, 0];
+  templateSettings.Toothpaste.letter.header.layout = 1;
+  templateSettings.Toothpaste.letter.name.font =
+    templateBaseSettings.Toothpaste.displayFont;
+  templateSettings.Toothpaste.letter.name.fontSize = 36;
+  templateSettings.Toothpaste.letter.name.isUppercase = true;
+  templateSettings.Toothpaste.letter.name.color =
+    templateBaseSettings.Toothpaste.colors[0];
+  templateSettings.Toothpaste.letter.title.font =
+    templateBaseSettings.Toothpaste.displayFont;
+  templateSettings.Toothpaste.letter.title.fontSize = 24;
+  templateSettings.Toothpaste.letter.title.isUppercase = true;
+  templateSettings.Toothpaste.letter.title.color =
+    templateBaseSettings.Toothpaste.colors[1];
+  templateSettings.Toothpaste.letter.contactDetails.margin[1] = 80;
+  templateSettings.Toothpaste.letter.contactDetails.margin[3] = 60;
+  templateSettings.Toothpaste.letter.contactDetails.fontSize = 12;
+  templateSettings.Toothpaste.letter.about.textAlign = "center";
+  templateSettings.Toothpaste.letter.about.fontSize = 12;
   templateSettings.Toothpaste.letter.senderDetails.fontSize = 12;
   templateSettings.Toothpaste.letter.senderDetails.isItalic = true;
   templateSettings.Toothpaste.letter.senderDetails.color =
@@ -1303,14 +1495,31 @@ if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
   templateSettings.Wiki.resume.entrySummary.fontSize = 11;
   templateSettings.Wiki.resume.entryHighlight.fontSize = 11;
   templateSettings.Wiki.letter.document.margin = [24, 30, 24, 30];
+  templateSettings.Wiki.letter.name.textAlign = "center";
+  templateSettings.Wiki.letter.name.fontSize = 30;
+  templateSettings.Wiki.letter.name.fontWeight = 700;
+  templateSettings.Wiki.letter.title.textAlign = "center";
+  templateSettings.Wiki.letter.title.fontSize = 20;
+  templateSettings.Wiki.letter.about.textAlign = "center";
+  templateSettings.Wiki.letter.about.fontSize = 12;
+  templateSettings.Wiki.letter.contactDetails.alignment = "end";
+  templateSettings.Wiki.letter.contactDetails.fontSize = 12;
   templateSettings.Wiki.letter.senderDetails.fontSize = 12;
   templateSettings.Wiki.letter.senderDetails.lineHeight = 1.2;
   templateSettings.Wiki.letter.recipientDetails.fontSize = 12;
   templateSettings.Wiki.letter.recipientDetails.lineHeight = 1.2;
-  templateSettings.Wiki.letter.header.margin[1] = 20;
-  templateSettings.Wiki.letter.header.margin[3] = 20;
-  templateSettings.Wiki.letter.subject.isItalic = true;
+  templateSettings.Wiki.letter.subject.textAlign = "left";
+  templateSettings.Wiki.letter.subject.fontWeight = 700;
   templateSettings.Wiki.letter.subject.fontSize = 16;
+  templateSettings.Wiki.letter.subject.lineHeight = 1.5;
+  templateSettings.Wiki.letter.reference.textAlign = "left";
+  templateSettings.Wiki.letter.reference.isUppercase = true;
+  templateSettings.Wiki.letter.reference.color =
+    templateBaseSettings.Wiki.colors[0];
+  templateSettings.Wiki.letter.reference.margin[2] = 10;
+  templateSettings.Wiki.letter.reference.border[2] = 1;
+  templateSettings.Wiki.letter.reference.borderColor =
+    templateBaseSettings.Wiki.colors[1];
   templateSettings.Wiki.letter.body.margin[1] = 20;
   templateSettings.Wiki.letter.body.margin[3] = 20;
   templateSettings.Wiki.letter.body.fontSize = 12;
