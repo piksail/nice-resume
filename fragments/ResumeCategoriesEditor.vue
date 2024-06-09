@@ -791,22 +791,20 @@ function getExperienceOrganizationLabel(experience: Experience) {
             <input id="title" class="input" v-model="entry.title" />
           </label>
           <template v-if="entry.nature === 'experience'">
-            <div class="flex justify-center gap-5 flex-wrap">
-              <label class="flex flex-col flex-1" for="organization">
-                <span class="opacity-60">
-                  {{ getExperienceOrganizationLabel(entry) }}
-                </span>
-                <input
-                  id="organization"
-                  class="input"
-                  v-model="entry.organization"
-                />
-              </label>
-              <label class="flex flex-col flex-1" for="location">
-                <span class="opacity-60">Location</span>
-                <input id="location" class="input" v-model="entry.location" />
-              </label>
-            </div>
+            <label class="flex flex-col" for="organization">
+              <span class="opacity-60">
+                {{ getExperienceOrganizationLabel(entry) }}
+              </span>
+              <input
+                id="organization"
+                class="input"
+                v-model="entry.organization"
+              />
+            </label>
+            <label class="flex flex-col" for="location">
+              <span class="opacity-60">Location</span>
+              <input id="location" class="input" v-model="entry.location" />
+            </label>
             <label class="flex flex-col" for="period">
               <span class="opacity-60">Period</span>
               <input id="period" class="input" v-model="entry.period" />

@@ -46,16 +46,14 @@ function changeContactDetaiType(
   <EditorCategory id="Details" class="w-full">
     <template v-slot:header>Details</template>
     <div class="flex flex-col gap-5">
-      <div class="flex justify-center gap-5 flex-wrap">
-        <label class="flex flex-col flex-1" for="detailsName">
-          <span class="opacity-60">Name</span>
-          <input id="detailsName" class="input" v-model="name" />
-        </label>
-        <label class="flex flex-col flex-1" for="detailsTitle">
-          <span class="opacity-60">Title</span>
-          <input id="detailsTitle" class="input" v-model="title" />
-        </label>
-      </div>
+      <label class="flex flex-col" for="detailsName">
+        <span class="opacity-60">Name</span>
+        <input id="detailsName" class="input" v-model="name" />
+      </label>
+      <label class="flex flex-col" for="detailsTitle">
+        <span class="opacity-60">Title</span>
+        <input id="detailsTitle" class="input" v-model="title" />
+      </label>
       <label class="flex flex-col" for="detailsAbout">
         <span class="opacity-60">About</span>
         <textarea id="detailsAbout" class="input" v-model="about" />
