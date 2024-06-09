@@ -65,10 +65,10 @@ function addEntry(category: Category) {
   }
 }
 
-function addHighlight(entry: Entry) {
+function addHighlight(entry: Entry, entryIndex: number) {
   entry.highlights.push("");
 
-  focusNextInput("#highlightList input");
+  focusNextInput(`#highlightList${entryIndex} input`);
 }
 
 function changeCategoryType(category: Category, value: Category["type"]) {
@@ -823,14 +823,14 @@ function getExperienceOrganizationLabel(experience: Experience) {
                 id="highlights"
                 title="Add highlight"
                 class="text-white bg-blue-500 rounded-full size-7"
-                @click="addHighlight(entry)"
+                @click="addHighlight(entry, entryIndex)"
               >
                 <PlusCircleIcon class="size-full" />
               </button>
             </div>
             <ul
               v-if="entry.highlights.length"
-              id="highlightList"
+              :id="`highlightList${entryIndex}`"
               class="inputList"
             >
               <li
@@ -841,7 +841,7 @@ function getExperienceOrganizationLabel(experience: Experience) {
                 <input
                   class="input w-[70%]"
                   v-model="entry.highlights[highlightIndex]"
-                  @keydown.enter.prevent="addHighlight(entry)"
+                  @keydown.enter.prevent="addHighlight(entry, entryIndex)"
                 />
                 <ListActions
                   class="mb-2"
