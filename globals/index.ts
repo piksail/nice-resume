@@ -569,6 +569,7 @@ function scaffoldTemplateSettings(
     baseSettings.colors[baseSettings.colors.length - 1];
 
   if (isLetterMarginless) {
+    settings.letter.senderDetails.margin[0] = 64;
     settings.letter.senderDetails.margin[1] = 64;
     settings.letter.senderDetails.margin[3] = 64;
     settings.letter.recipientDetails.margin[1] = 64;
@@ -713,7 +714,7 @@ if (
     templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.letter.senderDetails.color =
     templateBaseSettings.CottonCandy.colors[0];
-  templateSettings.CottonCandy.letter.senderDetails.margin[0] = 0;
+  templateSettings.CottonCandy.letter.senderDetails.margin[0] = 40;
   templateSettings.CottonCandy.letter.senderDetails.margin[1] = 40;
   templateSettings.CottonCandy.letter.senderDetails.margin[3] = 40;
   templateSettings.CottonCandy.letter.senderDetails.isItalic = true;
@@ -903,7 +904,7 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.letter.title.fontWeight = 300;
   templateSettings.Macchiato.letter.title.letterSpacing = 1;
   templateSettings.Macchiato.letter.contactDetails.fontSize = 11;
-  templateSettings.Macchiato.letter.senderDetails.margin = [0, 48, 48, 48];
+  templateSettings.Macchiato.letter.senderDetails.margin = [48, 48, 48, 48];
   templateSettings.Macchiato.letter.senderDetails.fontSize = 12;
   templateSettings.Macchiato.letter.recipientDetails.margin = [0, 48, 48, 48];
   templateSettings.Macchiato.letter.recipientDetails.fontSize = 12;
@@ -1055,8 +1056,9 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.letter.about.isItalic = true;
   templateSettings.OpenResume.letter.about.textAlign = "center";
   templateSettings.OpenResume.letter.senderDetails.isItalic = true;
-  templateSettings.OpenResume.letter.senderDetails.margin[0] = 24;
+  templateSettings.OpenResume.letter.senderDetails.margin[0] = 48;
   templateSettings.OpenResume.letter.senderDetails.margin[1] = 48;
+  templateSettings.OpenResume.letter.senderDetails.margin[3] = 48 * 2 + 4;
   templateSettings.OpenResume.letter.recipientDetails.isItalic = true;
   templateSettings.OpenResume.letter.recipientDetails.margin[0] = 24;
   templateSettings.OpenResume.letter.recipientDetails.margin[1] = 48;
