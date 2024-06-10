@@ -39,6 +39,11 @@ const description = ref(
           <Button class="block mx-auto mt-8">Get started</Button>
         </NuxtLink>
       </Card>
+      <div class="max-w-[800px] mx-auto">
+        <p class="text-lg font-thin text-right">
+          No cookies. No signup. No payment.
+        </p>
+      </div>
     </section>
     <NuxtPage />
   </NuxtLayout>
