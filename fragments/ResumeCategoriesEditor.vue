@@ -37,6 +37,9 @@ function addCategory() {
   };
 
   categories.value.push(category);
+
+  // Add an entry to anticipate user need
+  addEntry(category);
 }
 
 function addEntry(category: Category) {
