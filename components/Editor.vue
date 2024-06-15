@@ -352,10 +352,8 @@ onMounted(() => {
       </p>
     </div>
   </dialog>
-  <main
-    class="flex flex-col xl:flex-row overflow-y-auto text-white flex-1 scroll-smooth"
-  >
-    <header class="sticky z-10 top-[100px] md:top-0">
+  <main class="flex flex-col xl:flex-row text-white flex-1">
+    <header class="sticky z-10 top-[100px] lg:top-0">
       <nav
         class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"
       >
@@ -388,7 +386,9 @@ onMounted(() => {
         </p>
       </template>
     </header>
-    <div class="flex flex-col gap-8 p-4 md:p-8 w-full max-w-[860px] mx-auto">
+    <div
+      class="flex flex-col gap-8 p-4 lg:p-8 w-full max-w-[860px] mx-auto overflow-y-auto scroll-smooth"
+    >
       <PersonalDetailsEditor />
       <template v-if="documentType === 'letter'">
         <LetterHeaderEditor />
