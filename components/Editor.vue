@@ -336,7 +336,9 @@ onMounted(() => {
       </p>
     </div>
   </dialog>
-  <main class="flex flex-col xl:flex-row overflow-y-auto text-white flex-1">
+  <main
+    class="flex flex-col xl:flex-row overflow-y-auto text-white flex-1 scroll-smooth"
+  >
     <header class="sticky z-10 top-[100px] md:top-0">
       <nav
         class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"
