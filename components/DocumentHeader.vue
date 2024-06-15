@@ -35,9 +35,9 @@ const settings = computed(() => {
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderAbout :about="about" />
       </div>
+      <DocumentHeaderContactDetails :contact-details="contactDetails" />
     </template>
     <template v-else-if="settings.header.layout === 3">
       <div class="flex-col">
@@ -71,9 +71,9 @@ const settings = computed(() => {
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
+        <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderAbout :about="about" />
       </div>
-      <DocumentHeaderContactDetails :contact-details="contactDetails" />
     </template>
   </header>
 </template>

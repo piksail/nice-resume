@@ -1,4 +1,5 @@
 export type Template =
+  | "default"
   | "Aster"
   | "CottonCandy"
   | "Cupcake"
