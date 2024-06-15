@@ -63,8 +63,8 @@ const settings = computed(() => {
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderContactDetails :contact-details="contactDetails" />
         <DocumentHeaderAbout :about="about" />
+        <DocumentHeaderContactDetails :contact-details="contactDetails" />
       </div>
     </template>
     <template v-else>

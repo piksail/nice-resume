@@ -1,6 +1,7 @@
 export type Template =
   | "default"
   | "Aster"
+  | "Care"
   | "CottonCandy"
   | "Cupcake"
   | "Macaron"
@@ -16,6 +17,31 @@ export type Template =
   | "Wiki";
 
 export type DocumentType = "letter" | "resume";
+
+export type Font =
+  | "inherit"
+  | "sans-serif"
+  | "serif"
+  | "Archivo"
+  | "Caveat"
+  | "Fira Sans"
+  | "Fira Sans Condensed"
+  | "Josefin Sans"
+  | "Kaisei Tokumin"
+  | "Karla"
+  | "Lato"
+  | "League Gothic"
+  | "Libre Franklin"
+  | "Mulish"
+  | "Open Sans"
+  | "Open Sans Condensed"
+  | "Playwrite AU NSW"
+  | "Poppins"
+  | "PT Serif"
+  | "Roboto"
+  | "Roboto Condensed"
+  | "Times New Roman"
+  | "Yanone Kaffeesatz";
 
 export type SideSetting = number[];
 
@@ -39,7 +65,7 @@ export type BlockSettings = {
 };
 
 export type TextSettings = {
-  font?: string;
+  font?: Font;
   fontSize: number;
   lineHeight: number;
   letterSpacing: number;
@@ -63,8 +89,8 @@ export type Settings = {
 export type BaseSettings = {
   isLetterMarginless: boolean;
   colors: string[];
-  bodyFont: string;
-  displayFont?: string;
+  bodyFont: Font;
+  displayFont?: Font;
 };
 
 export type TemplateBaseSettings = {
@@ -72,7 +98,7 @@ export type TemplateBaseSettings = {
 };
 
 export type DocumentSettings = {
-  bodyFont: string;
+  bodyFont: Font;
   color: string;
   backgroundColor: string;
   margin: SideSetting;

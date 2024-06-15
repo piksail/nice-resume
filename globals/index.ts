@@ -6,6 +6,7 @@ import type {
   ContactDetail,
   DocumentType,
   Experience,
+  Font,
   LetterSettings,
   ListMarker,
   ResumeSettings,
@@ -16,7 +17,10 @@ import type {
 
 export const documentTypes: Array<DocumentType> = ["resume", "letter"];
 
-export const fonts: string[] = [
+export const fonts: Font[] = [
+  "serif",
+  "sans-serif",
+  "Archivo",
   "Caveat",
   "Fira Sans",
   "Fira Sans Condensed",
@@ -29,14 +33,19 @@ export const fonts: string[] = [
   "Mulish",
   "Open Sans",
   "Open Sans Condensed",
+  "Playwrite AU NSW",
+  "Poppins",
+  "PT Serif",
   "Roboto",
   "Roboto Condensed",
+  "Times New Roman",
   "Yanone Kaffeesatz",
 ];
 
 export const templates: Array<Template> = [
   "default",
   "Aster",
+  "Care",
   "CottonCandy",
   "Cupcake",
   "Macaron",
@@ -52,13 +61,18 @@ export const templates: Array<Template> = [
   "Wiki",
 ];
 
-export const fixedLayoutTemplates: Array<Template> = ["Cupcake", "Paper"];
+export const fixedLayoutTemplates: Array<Template> = [
+  "Care",
+  "Cupcake",
+  "Paper",
+];
 
 export const discouragedLayoutTemplates: {
   [T in Template]: Array<Category["layout"]>;
 } = {
   default: [],
   Aster: ["aside", "half"],
+  Care: [],
   CottonCandy: ["aside"],
   Cupcake: [],
   Macaron: [],
@@ -83,7 +97,7 @@ export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
 
 export const commonDocumentSettings: CommonDocumentSettings = {
   document: {
-    bodyFont: "serif",
+    bodyFont: "sans-serif",
     color: "#000000",
     backgroundColor: "#ffffff",
     borderStyle: "solid",
@@ -93,7 +107,7 @@ export const commonDocumentSettings: CommonDocumentSettings = {
   },
   header: {
     layout: 0,
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderStyle: "solid",
     borderColor: "#000000",
     borderRadius: 0,
@@ -353,7 +367,7 @@ export const letterSettings: LetterSettings = {
     fontWeight: 400,
     isItalic: false,
     color: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -370,7 +384,7 @@ export const letterSettings: LetterSettings = {
     fontWeight: 400,
     isItalic: false,
     color: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -389,7 +403,7 @@ export const letterSettings: LetterSettings = {
     isUppercase: false,
     textAlign: "center",
     color: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -406,7 +420,7 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     textAlign: "center",
     color: "currentColor",
-    backgroundColor: "#ffffff",
+    backgroundColor: "transparent",
     borderStyle: "solid",
     borderColor: "currentColor",
     borderRadius: 0,
@@ -439,6 +453,12 @@ export const templateBaseSettings: TemplateBaseSettings = {
     colors: ["#713c97", "#f6881f", "#ffffff", "#000000"],
     bodyFont: "Fira Sans",
   },
+  Care: {
+    isLetterMarginless: true,
+    colors: ["#7cbaa4", "#ffe7c9", "#ffe6e9", "#ffbec9", "#ffeca6", "#ffffff"],
+    bodyFont: "Poppins",
+    displayFont: "Playwrite AU NSW",
+  },
   CottonCandy: {
     isLetterMarginless: false,
     colors: ["#ed3660", "#5662e8", "#e8afcf", "#ffffff", "#1e1e1e"],
@@ -450,6 +470,18 @@ export const templateBaseSettings: TemplateBaseSettings = {
     colors: ["#f2b150", "#e593aa", "#a9d7e2", "#231f20"],
     bodyFont: "Open Sans Condensed",
     displayFont: "Yanone Kaffeesatz",
+  },
+  Macaron: {
+    isLetterMarginless: true,
+    colors: ["#d88277", "#f8aaa6", "#f8d5cd", "#f8f4f2", "#ffffff", "#414e66"],
+    bodyFont: "Karla",
+    displayFont: "Caveat",
+  },
+  Macchiato: {
+    isLetterMarginless: true,
+    colors: ["#56817a", "#f8f8ff", "#39424b"],
+    bodyFont: "Lato",
+    displayFont: "Josefin Sans",
   },
   NeoBrutalism: {
     isLetterMarginless: true,
@@ -467,18 +499,6 @@ export const templateBaseSettings: TemplateBaseSettings = {
     ],
     bodyFont: "Roboto",
     displayFont: "Archivo",
-  },
-  Macaron: {
-    isLetterMarginless: true,
-    colors: ["#d88277", "#f8aaa6", "#f8d5cd", "#f8f4f2", "#ffffff", "#414e66"],
-    bodyFont: "Karla",
-    displayFont: "Caveat",
-  },
-  Macchiato: {
-    isLetterMarginless: true,
-    colors: ["#56817a", "#f8f8ff", "#39424b"],
-    bodyFont: "Lato",
-    displayFont: "Josefin Sans",
   },
   Oilcloth: {
     isLetterMarginless: true,
@@ -534,6 +554,11 @@ export const templateSettings: TemplateSettings = {
   },
   Aster: {
     base: templateBaseSettings.Aster,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
+  Care: {
+    base: templateBaseSettings.Care,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
@@ -622,6 +647,7 @@ function scaffoldTemplateSettings(
     baseSettings.colors[baseSettings.colors.length - 1];
 
   if (isLetterMarginless) {
+    settings.letter.document.margin = [0, 0, 0, 0];
     settings.letter.senderDetails.margin[0] = 64;
     settings.letter.senderDetails.margin[1] = 64;
     settings.letter.senderDetails.margin[3] = 64;
@@ -682,6 +708,105 @@ if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
     templateBaseSettings.Aster.colors[0];
   templateSettings.Aster.letter.body.fontWeight = 300;
   templateSettings.Aster.letter.body.lineHeight = 1.6;
+}
+
+if (templateSettings.Care.resume && templateSettings.Care.letter) {
+  templateSettings.Care.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Care.resume.document.backgroundColor =
+    templateSettings.Care.base.colors[0];
+  templateSettings.Care.resume.document.color =
+    templateSettings.Care.base.colors[5];
+  templateSettings.Care.resume.header.margin = [60, 60, 0, 60];
+  templateSettings.Care.resume.header.layout = 5;
+  templateSettings.Care.resume.name.font =
+    templateSettings.Care.base.displayFont;
+  templateSettings.Care.resume.name.isUppercase = true;
+  templateSettings.Care.resume.name.letterSpacing = 4;
+  templateSettings.Care.resume.name.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.resume.title.font =
+    templateSettings.Care.base.displayFont;
+  templateSettings.Care.resume.title.color =
+    templateSettings.Care.base.colors[3];
+  templateSettings.Care.resume.title.margin = [12, 0, 0, 114];
+  templateSettings.Care.resume.about.margin[3] = 218;
+  templateSettings.Care.resume.contactDetails.margin = [44, 0, 0, 20];
+  templateSettings.Care.resume.contactDetails.iconColor =
+    templateSettings.Care.base.colors[3];
+  templateSettings.Care.resume.contactDetails.color =
+    templateSettings.Care.base.colors[5];
+  templateSettings.Care.resume.body.margin = [60, 60, 60, 60];
+  templateSettings.Care.resume.category.gap = 40;
+  templateSettings.Care.resume.categoryName.isAside = true;
+  templateSettings.Care.resume.categoryName.width = "fit";
+  templateSettings.Care.resume.categoryName.font =
+    templateSettings.Care.base.displayFont;
+  templateSettings.Care.resume.categoryName.isUppercase = true;
+  templateSettings.Care.resume.categoryName.letterSpacing = 2;
+  templateSettings.Care.resume.categoryName.fontWeight = 500;
+  templateSettings.Care.resume.categoryName.padding[2] = 12;
+  templateSettings.Care.resume.categoryName.border[2] = 1;
+  templateSettings.Care.resume.categoryName.margin[1] = 30;
+  templateSettings.Care.resume.categoryName.margin[2] = 15;
+  templateSettings.Care.resume.categoryName.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.resume.entry.layout = 9;
+  templateSettings.Care.resume.entryTitle.color =
+    templateSettings.Care.base.colors[2];
+  templateSettings.Care.resume.entryOrganization.color =
+    templateSettings.Care.base.colors[4];
+  templateSettings.Care.resume.entryLocation.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.resume.entryPeriod.color =
+    templateSettings.Care.base.colors[2];
+  templateSettings.Care.resume.entryHighlight.listMarker = "disc";
+  templateSettings.Care.resume.entryHighlight.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.resume.entryTag.gap = 20;
+  templateSettings.Care.resume.entryTag.backgroundColor = "transparent";
+  templateSettings.Care.resume.entryTag.borderColor =
+    templateSettings.Care.base.colors[3];
+  templateSettings.Care.resume.entryTag.border = [2, 2, 2, 2];
+  templateSettings.Care.resume.entryTag.borderRadius = 50;
+  templateSettings.Care.letter.header.margin = [60, 60, 0, 60];
+  templateSettings.Care.letter.document.backgroundColor =
+    templateSettings.Care.base.colors[0];
+  templateSettings.Care.letter.document.color =
+    templateSettings.Care.base.colors[5];
+  templateSettings.Care.letter.header.layout = 5;
+  templateSettings.Care.letter.name.font =
+    templateSettings.Care.base.displayFont;
+  templateSettings.Care.letter.name.isUppercase = true;
+  templateSettings.Care.letter.name.letterSpacing = 4;
+  templateSettings.Care.letter.name.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.letter.title.font =
+    templateSettings.Care.base.displayFont;
+  templateSettings.Care.letter.title.color =
+    templateSettings.Care.base.colors[3];
+  templateSettings.Care.letter.title.margin = [12, 0, 0, 114];
+  templateSettings.Care.letter.about.margin[3] = 218;
+  templateSettings.Care.letter.contactDetails.margin = [44, 0, 0, 20];
+  templateSettings.Care.letter.contactDetails.iconColor =
+    templateSettings.Care.base.colors[3];
+  templateSettings.Care.letter.contactDetails.color =
+    templateSettings.Care.base.colors[5];
+  templateSettings.Care.letter.senderDetails.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.letter.recipientDetails.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.letter.subject.fontSize = 20;
+  templateSettings.Care.letter.subject.font =
+    templateSettings.Care.base.displayFont;
+  templateSettings.Care.letter.subject.color =
+    templateSettings.Care.base.colors[3];
+  templateSettings.Care.letter.reference.color =
+    templateSettings.Care.base.colors[1];
+  templateSettings.Care.letter.reference.isItalic = true;
+  templateSettings.Care.letter.reference.fontSize = 14;
+  templateSettings.Care.letter.body.margin[0] = 10;
+  templateSettings.Care.letter.body.isJustified = false;
+  templateSettings.Care.letter.body.fontSize = 15;
 }
 
 if (
@@ -892,7 +1017,6 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
     templateBaseSettings.Macaron.colors[2];
   templateSettings.Macaron.resume.entryTag.border[2] = 1;
   templateSettings.Macaron.resume.entryTag.gap = 20;
-  templateSettings.Macaron.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.letter.header.layout = 0;
   templateSettings.Macaron.letter.header.margin = [68, 0, 20, 0];
   templateSettings.Macaron.letter.header.border = [1, 0, 1, 0];
@@ -962,7 +1086,6 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.resume.entryTag.backgroundColor =
     templateBaseSettings.Macchiato.colors[1];
   templateSettings.Macchiato.resume.entryTag.gap = 4;
-  templateSettings.Macchiato.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
   templateSettings.Macchiato.letter.document.borderColor =
     templateBaseSettings.Macchiato.colors[0];
@@ -1089,7 +1212,6 @@ if (
   templateSettings.NeoBrutalism.resume.entryTag.fontWeight = 900;
   templateSettings.NeoBrutalism.resume.entryTag.isUppercase = true;
   templateSettings.NeoBrutalism.resume.entryTag.gap = 20;
-  templateSettings.NeoBrutalism.letter.document.margin = [0, 0, 0, 0];
   templateSettings.NeoBrutalism.letter.header.layout = 2;
   templateSettings.NeoBrutalism.letter.document.color =
     templateSettings.NeoBrutalism.base.colors[0];
@@ -1235,7 +1357,6 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.entryTag.fontSize = 11;
   templateSettings.Oilcloth.resume.entryTag.lineHeight = 1;
   templateSettings.Oilcloth.resume.entryTag.gap = 10;
-  templateSettings.Oilcloth.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Oilcloth.letter.document.border = [15, 0, 20, 0];
   templateSettings.Oilcloth.letter.document.borderColor =
     templateBaseSettings.Oilcloth.colors[1];
@@ -1302,7 +1423,6 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.entryHighlight.fontSize = 12;
   templateSettings.OpenResume.resume.entryTag.margin[0] = 10;
   templateSettings.OpenResume.resume.entryTag.gap = 10;
-  templateSettings.OpenResume.letter.document.margin = [0, 0, 0, 0];
   templateSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.letter.document.borderColor =
     templateBaseSettings.OpenResume.colors[0];
@@ -1591,8 +1711,6 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
     templateBaseSettings.Red.colors[0];
 }
 
-// TODO layout 2 devient zéro, layout 0 doit devenir deux
-
 if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.header.layout = 0;
   templateSettings.Stone.resume.name.font =
@@ -1648,7 +1766,7 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.entryTag.borderRadius = 0;
   templateSettings.Stone.resume.entryTag.fontSize = 12;
   templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
-  templateSettings.Stone.letter.header.layout = 5;
+  templateSettings.Stone.letter.header.layout = 0;
   templateSettings.Stone.letter.name.font =
     templateBaseSettings.Stone.displayFont;
   templateSettings.Stone.letter.name.fontSize = 24;
