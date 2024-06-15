@@ -221,6 +221,7 @@ export interface Category {
   name: string;
   entries: Array<Experience | Asset>;
   layout: "aside" | "full" | "half";
+  isVisible: boolean; // Preserve data but exclude it from the resume
 }
 
 export interface Profile {

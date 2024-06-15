@@ -7,6 +7,16 @@ import {
   PaintBrushIcon,
 } from "@heroicons/vue/24/outline";
 
+const {
+  class: classList,
+  id,
+  isHidden,
+} = defineProps<{
+  class: string;
+  id: string;
+  isHidden?: boolean;
+}>();
+
 const isCustomizing = ref(false);
 const isOpen = ref(true);
 
@@ -16,12 +26,16 @@ function toggleDisplay() {
 </script>
 
 <template>
-  <div class="flex flex-col bg-white bg-opacity-10 rounded">
+  <div
+    :id="id"
+    :class="`flex flex-col bg-white bg-opacity-10 rounded ${classList ?? ''}`"
+  >
     <header
-      class="p-6 flex justify-between items-center rounded bg-white text-pink-500 shadow-lg"
+      :class="`p-6 flex justify-between items-center rounded bg-white ${isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'} text-pink-500 shadow-lg`"
     >
       <slot name="header" />
       <button
+        v-if="!isHidden"
         title="Toggle display"
         class="text-pink-500 size-7 rounded-full p-1 hover:bg-blue-700 hover:bg-opacity-5"
         @click="toggleDisplay"
@@ -30,7 +44,7 @@ function toggleDisplay() {
         <ChevronDownIcon v-else class="size-full" />
       </button>
     </header>
-    <div class="p-10 pt-6" v-if="isOpen">
+    <div class="p-10 pt-6" v-if="isOpen && !isHidden">
       <!-- TODO tab component -->
       <div class="flex justify-around">
         <button

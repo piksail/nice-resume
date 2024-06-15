@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { PlusCircleIcon } from "@heroicons/vue/24/outline";
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  PlusCircleIcon,
+} from "@heroicons/vue/24/outline";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -34,6 +38,7 @@ function addCategory() {
     name: "Name",
     entries: [],
     layout: "full",
+    isVisible: true,
   };
 
   categories.value.push(category);
@@ -121,6 +126,10 @@ function getExperienceOrganizationLabel(experience: Experience) {
       return "Organization";
   }
 }
+
+function toggleCategoryVisibility(category: Category) {
+  category.isVisible = !category.isVisible;
+}
 </script>
 
 <template>
@@ -130,62 +139,78 @@ function getExperienceOrganizationLabel(experience: Experience) {
     :key="categoryIndex"
     :id="category.name"
     :is-customizing="isThemeCustomized"
+    :is-hidden="!category.isVisible"
   >
     <template v-slot:header>
-      <div class="flex items-baseline gap-8">
-        <label for="name">
-          Category name
-          <input
-            id="name"
-            class="input text-blue-500 block bg-blue-700 bg-opacity-5"
-            v-model="category.name"
-          />
-        </label>
-        <label for="type">
-          Type
-          <select
-            id="type"
-            :value="category.type"
-            @change="
-              changeCategoryType(
-                category,
-                ($event.target as HTMLInputElement).value as Category['type'],
-              )
-            "
-            class="select block capitalize px-2 py-1 pl-0"
-          >
-            <option v-for="item in types" :key="item" class="option">
-              {{ item }}
-            </option>
-          </select>
-        </label>
-        <label for="layout">
-          Layout
-          <select
-            id="layout"
-            :disabled="fixedLayoutTemplates.includes(template)"
-            :value="category.layout"
-            @change="
-              changeCategoryLayout(
-                category,
-                ($event.target as HTMLInputElement).value as Category['layout'],
-              )
-            "
-            class="select block capitalize px-2 py-1 pl-0 disabled:cursor-not-allowed"
-          >
-            <option v-for="item in layouts" :key="item" class="option">
-              {{ item }}
-            </option>
-          </select>
-        </label>
-      </div>
-      <ListActions
-        :index="categoryIndex"
-        :list-length="categories.length"
-        @moveUp="moveUp(categories, categoryIndex)"
-        @moveDown="moveDown(categories, categoryIndex)"
-        @remove="remove(categories, categoryIndex)"
-      />
+      <template v-if="category.isVisible">
+        <div class="flex items-baseline gap-8">
+          <label for="name">
+            Category name
+            <input
+              id="name"
+              class="input text-blue-500 block bg-blue-700 bg-opacity-5"
+              v-model="category.name"
+            />
+          </label>
+          <label for="type">
+            Type
+            <select
+              id="type"
+              :value="category.type"
+              @change="
+                changeCategoryType(
+                  category,
+                  ($event.target as HTMLInputElement).value as Category['type'],
+                )
+              "
+              class="select block capitalize px-2 py-1 pl-0"
+            >
+              <option v-for="item in types" :key="item" class="option">
+                {{ item }}
+              </option>
+            </select>
+          </label>
+          <label for="layout">
+            Layout
+            <select
+              id="layout"
+              :disabled="fixedLayoutTemplates.includes(template)"
+              :value="category.layout"
+              @change="
+                changeCategoryLayout(
+                  category,
+                  ($event.target as HTMLInputElement)
+                    .value as Category['layout'],
+                )
+              "
+              class="select block capitalize px-2 py-1 pl-0 disabled:cursor-not-allowed"
+            >
+              <option v-for="item in layouts" :key="item" class="option">
+                {{ item }}
+              </option>
+            </select>
+          </label>
+        </div>
+        <ListActions
+          :index="categoryIndex"
+          :list-length="categories.length"
+          @moveUp="moveUp(categories, categoryIndex)"
+          @moveDown="moveDown(categories, categoryIndex)"
+          @remove="remove(categories, categoryIndex)"
+        />
+      </template>
+      <template v-else>
+        <span class="text-white">{{ category.name }}</span>
+      </template>
+      <button
+        id="toggleVisibility"
+        title="Toggle category visibility"
+        :class="`${category.isVisible ? 'text-pink-500' : 'text-white'} size-7 rounded-full p-1 hover:bg-blue-700 hover:bg-opacity-5`"
+        @click="toggleCategoryVisibility(category)"
+      >
+        <EyeSlashIcon v-if="category.isVisible" class="size-full" />
+        <EyeIcon v-else class="size-full" />
+      </button>
     </template>
     <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">

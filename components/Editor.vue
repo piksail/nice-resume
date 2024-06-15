@@ -104,6 +104,7 @@ function generateStores() {
         },
       ],
       layout: "full",
+      isVisible: true,
     },
     {
       nature: "experience",
@@ -136,6 +137,7 @@ function generateStores() {
         },
       ],
       layout: "full",
+      isVisible: true,
     },
     {
       nature: "experience",
@@ -155,6 +157,7 @@ function generateStores() {
         },
       ],
       layout: "half",
+      isVisible: true,
     },
     {
       nature: "asset",
@@ -184,6 +187,7 @@ function generateStores() {
         },
       ],
       layout: "half",
+      isVisible: true,
     },
     {
       nature: "asset",
@@ -213,6 +217,7 @@ function generateStores() {
         },
       ],
       layout: "half",
+      isVisible: true,
     },
   ];
   letter.senderDetails.value = [

@@ -38,7 +38,7 @@ const settings = computed(() => {
     >
       <div
         v-for="(category, categoryIndex) in categories.filter(
-          (category) => category.layout === 'aside',
+          (category) => category.isVisible && category.layout === 'aside',
         )"
         :key="categoryIndex"
         :style="{
@@ -119,7 +119,7 @@ const settings = computed(() => {
     >
       <section
         v-for="(category, categoryIndex) in categories.filter(
-          (category) => category.layout !== 'aside',
+          (category) => category.isVisible && category.layout !== 'aside',
         )"
         :key="categoryIndex"
         :class="category.layout === 'half' ? 'col-span-1' : 'col-span-2'"
