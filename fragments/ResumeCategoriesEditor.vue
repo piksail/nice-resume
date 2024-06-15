@@ -46,6 +46,7 @@ function addEntry(category: Category) {
       type: assetTypes.find((type) => category.type === type) || "skill",
       title: "",
       highlights: [],
+      tags: [],
     };
 
     category.entries.push(asset);
@@ -59,6 +60,7 @@ function addEntry(category: Category) {
       location: "",
       summary: "",
       highlights: [],
+      tags: [],
     };
 
     category.entries.push(experience);
@@ -69,6 +71,12 @@ function addHighlight(entry: Entry, entryIndex: number) {
   entry.highlights.push("");
 
   focusNextInput(`#highlightList${entryIndex} input`);
+}
+
+function addTag(entry: Entry, entryIndex: number) {
+  entry.tags.push("");
+
+  focusNextInput(`#tagList${entryIndex} input`);
 }
 
 function changeCategoryType(category: Category, value: Category["type"]) {
@@ -848,6 +856,44 @@ function getExperienceOrganizationLabel(experience: Experience) {
                   @moveUp="moveUp(entry.highlights, highlightIndex)"
                   @moveDown="moveDown(entry.highlights, highlightIndex)"
                   @remove="remove(entry.highlights, highlightIndex)"
+                />
+              </li>
+            </ul>
+          </label>
+          <label class="flex flex-col" for="tags">
+            <div class="flex gap-2">
+              <span class="opacity-60">Tags</span>
+              <button
+                id="tags"
+                title="Add tag"
+                class="text-white bg-blue-500 rounded-full size-7"
+                @click="addTag(entry, entryIndex)"
+              >
+                <PlusCircleIcon class="size-full" />
+              </button>
+            </div>
+            <ul
+              v-if="entry.tags.length"
+              :id="`tagList${entryIndex}`"
+              class="inputList"
+            >
+              <li
+                v-for="(_tag, tagIndex) in entry.tags"
+                :key="tagIndex"
+                class="inputListItem"
+              >
+                <input
+                  class="input w-[70%]"
+                  v-model="entry.tags[tagIndex]"
+                  @keydown.enter.prevent="addTag(entry, entryIndex)"
+                />
+                <ListActions
+                  class="mb-2"
+                  :index="tagIndex"
+                  :list-length="entry.tags.length"
+                  @moveUp="moveUp(entry.tags, tagIndex)"
+                  @moveDown="moveDown(entry.tags, tagIndex)"
+                  @remove="remove(entry.tags, tagIndex)"
                 />
               </li>
             </ul>

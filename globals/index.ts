@@ -322,6 +322,24 @@ export const resumeSettings: ResumeSettings = {
     padding: [0, 0, 0, 0],
     gap: 0,
   },
+  entryTag: {
+    font: "inherit",
+    fontSize: 12,
+    letterSpacing: 0,
+    lineHeight: 1.2,
+    fontWeight: 400,
+    isItalic: false,
+    isUppercase: false,
+    color: "currentColor",
+    backgroundColor: "#f1f1f1",
+    borderStyle: "solid",
+    borderColor: "currentColor",
+    borderRadius: 4,
+    margin: [4, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [2, 6, 2, 6],
+    gap: 4,
+  },
 };
 
 export const letterSettings: LetterSettings = {
@@ -637,6 +655,7 @@ if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
   templateSettings.Aster.resume.entryOrganization.isItalic = true;
   templateSettings.Aster.resume.entrySummary.padding[3] = 16;
   templateSettings.Aster.resume.entryHighlight.padding[3] = 16;
+  templateSettings.Aster.resume.entryTag.margin[3] = 16;
   templateSettings.Aster.letter.contactDetails.alignment = "end";
   templateSettings.Aster.letter.contactDetails.iconColor =
     templateBaseSettings.Aster.colors[0];
@@ -711,6 +730,8 @@ if (
   templateSettings.CottonCandy.resume.entryHighlight.listMarkerColor =
     templateBaseSettings.CottonCandy.colors[3];
   templateSettings.CottonCandy.resume.entryHighlight.isItalic = true;
+  templateSettings.CottonCandy.resume.entryTag.backgroundColor =
+    templateBaseSettings.CottonCandy.colors[3];
   templateSettings.CottonCandy.letter.header.layout = 1;
   templateSettings.CottonCandy.letter.header.padding = [24, 40, 24, 40];
   templateSettings.CottonCandy.letter.name.font =
@@ -787,6 +808,9 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
     templateBaseSettings.Cupcake.colors[0];
   templateSettings.Cupcake.resume.entryHighlight.color =
     templateBaseSettings.Cupcake.colors[3];
+  templateSettings.Cupcake.resume.entryTag.backgroundColor =
+    templateBaseSettings.Cupcake.colors[2];
+  templateSettings.Cupcake.resume.entryTag.gap = 8;
   templateSettings.Cupcake.letter.contactDetails.alignment = "end";
   templateSettings.Cupcake.letter.contactDetails.color =
     templateBaseSettings.Cupcake.colors[1];
@@ -845,6 +869,14 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.entrySummary.fontWeight = 300;
   templateSettings.Macaron.resume.entryHighlight.isItalic = true;
   templateSettings.Macaron.resume.entryHighlight.listMarker = "disc";
+  templateSettings.Macaron.resume.entryTag.padding[1] = 8;
+  templateSettings.Macaron.resume.entryTag.padding[3] = 8;
+  templateSettings.Macaron.resume.entryTag.backgroundColor =
+    templateBaseSettings.Macaron.colors[3];
+  templateSettings.Macaron.resume.entryTag.borderColor =
+    templateBaseSettings.Macaron.colors[2];
+  templateSettings.Macaron.resume.entryTag.border[2] = 1;
+  templateSettings.Macaron.resume.entryTag.gap = 20;
   templateSettings.Macaron.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macaron.letter.header.layout = 2;
   templateSettings.Macaron.letter.header.margin = [68, 0, 20, 0];
@@ -911,6 +943,10 @@ if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
   templateSettings.Macchiato.resume.entrySummary.fontSize = 12;
   templateSettings.Macchiato.resume.entryHighlight.fontSize = 12;
   templateSettings.Macchiato.resume.entryHighlight.listMarker = "disc";
+  templateSettings.Macchiato.resume.entryTag.padding = [2, 2, 2, 2];
+  templateSettings.Macchiato.resume.entryTag.backgroundColor =
+    templateBaseSettings.Macchiato.colors[1];
+  templateSettings.Macchiato.resume.entryTag.gap = 4;
   templateSettings.Macchiato.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
   templateSettings.Macchiato.letter.document.borderColor =
@@ -1030,6 +1066,13 @@ if (
     templateSettings.NeoBrutalism.base.colors[7];
   templateSettings.NeoBrutalism.resume.entryHighlight.color =
     templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.entryTag.border = [2, 4, 4, 2];
+  templateSettings.NeoBrutalism.resume.entryTag.padding = [8, 8, 8, 8];
+  templateSettings.NeoBrutalism.resume.entryTag.backgroundColor =
+    templateBaseSettings.NeoBrutalism.colors[6];
+  templateSettings.NeoBrutalism.resume.entryTag.fontWeight = 900;
+  templateSettings.NeoBrutalism.resume.entryTag.isUppercase = true;
+  templateSettings.NeoBrutalism.resume.entryTag.gap = 20;
   templateSettings.NeoBrutalism.letter.document.margin = [0, 0, 0, 0];
   templateSettings.NeoBrutalism.letter.document.color =
     templateSettings.NeoBrutalism.base.colors[0];
@@ -1164,6 +1207,16 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.entrySummary.lineHeight = 1;
   templateSettings.Oilcloth.resume.entryHighlight.fontWeight = 300;
   templateSettings.Oilcloth.resume.entryHighlight.lineHeight = 1;
+  templateSettings.Oilcloth.resume.entryTag.margin[0] = 10;
+  templateSettings.Oilcloth.resume.entryTag.padding = [4, 12, 4, 12];
+  templateSettings.Oilcloth.resume.entryTag.backgroundColor =
+    templateBaseSettings.Oilcloth.colors[0];
+  templateSettings.Oilcloth.resume.entryTag.color =
+    templateBaseSettings.Oilcloth.colors[3];
+  templateSettings.Oilcloth.resume.entryTag.isUppercase = true;
+  templateSettings.Oilcloth.resume.entryTag.fontSize = 11;
+  templateSettings.Oilcloth.resume.entryTag.lineHeight = 1;
+  templateSettings.Oilcloth.resume.entryTag.gap = 10;
   templateSettings.Oilcloth.letter.document.margin = [0, 0, 0, 0];
   templateSettings.Oilcloth.letter.document.border = [15, 0, 20, 0];
   templateSettings.Oilcloth.letter.document.borderColor =
@@ -1228,6 +1281,8 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.entrySummary.isItalic = true;
   templateSettings.OpenResume.resume.entryHighlight.listMarker = "disc";
   templateSettings.OpenResume.resume.entryHighlight.fontSize = 12;
+  templateSettings.OpenResume.resume.entryTag.margin[0] = 10;
+  templateSettings.OpenResume.resume.entryTag.gap = 10;
   templateSettings.OpenResume.letter.document.margin = [0, 0, 0, 0];
   templateSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.letter.document.borderColor =
@@ -1302,6 +1357,12 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
   templateSettings.Paper.resume.entrySummary.fontSize = 13;
   templateSettings.Paper.resume.entryHighlight.fontSize = 13;
   templateSettings.Paper.resume.entryHighlight.listMarker = "circle";
+  templateSettings.Paper.resume.entryTag.border = [1, 1, 1, 1];
+  templateSettings.Paper.resume.entryTag.borderColor =
+    templateBaseSettings.Paper.colors[0];
+  templateSettings.Paper.resume.entryTag.color =
+    templateBaseSettings.Paper.colors[0];
+  templateSettings.Paper.resume.entryTag.backgroundColor = "transparent";
   templateSettings.Paper.letter.document.margin = [80, 80, 80, 80];
   templateSettings.Paper.letter.header.layout = 3;
   templateSettings.Paper.letter.name.fontSize = 20;
@@ -1369,6 +1430,16 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
   templateSettings.Pharmacy.resume.entryHighlight.listMarker = "disc";
   templateSettings.Pharmacy.resume.entryHighlight.color =
     templateBaseSettings.Pharmacy.colors[1];
+  templateSettings.Pharmacy.resume.entryTag.color =
+    templateBaseSettings.Pharmacy.colors[2];
+  templateSettings.Pharmacy.resume.entryTag.backgroundColor = "transparent";
+  templateSettings.Pharmacy.resume.entryTag.borderRadius = 0;
+  templateSettings.Pharmacy.resume.entryTag.border[3] = 1;
+  templateSettings.Pharmacy.resume.entryTag.padding[0] = 0;
+  templateSettings.Pharmacy.resume.entryTag.padding[2] = 0;
+  templateSettings.Pharmacy.resume.entryTag.borderColor =
+    templateBaseSettings.Pharmacy.colors[2];
+  templateSettings.Pharmacy.resume.entryTag.gap = 20;
   templateSettings.Pharmacy.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Pharmacy.letter.header.layout = 2;
   templateSettings.Pharmacy.letter.name.color =
@@ -1455,6 +1526,7 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
     templateBaseSettings.Red.colors[0];
   templateSettings.Red.resume.entryHighlight.color =
     templateBaseSettings.Red.colors[1];
+  templateSettings.Red.resume.entryTag.isUppercase = true;
   templateSettings.Red.letter.document.margin = [48, 56, 48, 56];
   templateSettings.Red.letter.header.layout = 1;
   templateSettings.Red.letter.header.padding = [24, 40, 24, 40];
@@ -1549,6 +1621,11 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.entryPeriod.fontSize = 12;
   templateSettings.Stone.resume.entryPeriod.color =
     templateBaseSettings.Stone.colors[1];
+  templateSettings.Stone.resume.entryTag.backgroundColor =
+    templateBaseSettings.Stone.colors[2];
+  templateSettings.Stone.resume.entryTag.padding = [2, 10, 2, 10];
+  templateSettings.Stone.resume.entryTag.borderRadius = 0;
+  templateSettings.Stone.resume.entryTag.fontSize = 12;
   templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
   templateSettings.Stone.letter.header.layout = 5;
   templateSettings.Stone.letter.name.font =
@@ -1624,6 +1701,11 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
   templateSettings.Toothpaste.resume.entryTitle.color =
     templateBaseSettings.Toothpaste.colors[1];
   templateSettings.Toothpaste.resume.entryHighlight.isItalic = true;
+  templateSettings.Toothpaste.resume.entryTag.backgroundColor = "transparent";
+  templateSettings.Toothpaste.resume.entryTag.border = [1, 1, 1, 1];
+  templateSettings.Toothpaste.resume.entryTag.borderColor =
+    templateBaseSettings.Toothpaste.colors[1];
+  templateSettings.Toothpaste.resume.entryTag.gap = 8;
   templateSettings.Toothpaste.letter.header.layout = 1;
   templateSettings.Toothpaste.letter.name.font =
     templateBaseSettings.Toothpaste.displayFont;
@@ -1689,6 +1771,9 @@ if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
   templateSettings.Wiki.resume.entrySummary.margin[0] = 4;
   templateSettings.Wiki.resume.entrySummary.fontSize = 11;
   templateSettings.Wiki.resume.entryHighlight.fontSize = 11;
+  templateSettings.Wiki.resume.entryTag.color =
+    templateBaseSettings.Wiki.colors[0];
+  templateSettings.Wiki.resume.entryTag.borderRadius = 0;
   templateSettings.Wiki.letter.document.margin = [24, 30, 24, 30];
   templateSettings.Wiki.letter.name.textAlign = "center";
   templateSettings.Wiki.letter.name.fontSize = 30;

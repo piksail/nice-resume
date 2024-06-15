@@ -88,6 +88,7 @@ function generateStores() {
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           highlights: ["A", "B", "C"],
+          tags: ["1", "2", "3"],
         },
         {
           nature: "experience",
@@ -99,6 +100,7 @@ function generateStores() {
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           highlights: ["A", "B"],
+          tags: ["1", "2"],
         },
       ],
       layout: "full",
@@ -118,6 +120,7 @@ function generateStores() {
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           highlights: ["A", "B", "C"],
+          tags: ["1", "2", "3"],
         },
         {
           nature: "experience",
@@ -129,6 +132,7 @@ function generateStores() {
           summary:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           highlights: [],
+          tags: [],
         },
       ],
       layout: "full",
@@ -147,6 +151,7 @@ function generateStores() {
           period: "Delivered (valid 2 years)",
           summary: "",
           highlights: [],
+          tags: [],
         },
       ],
       layout: "half",
@@ -161,18 +166,21 @@ function generateStores() {
           type: "skill",
           title: "Title",
           highlights: ["A", "B", "C"],
+          tags: ["1", "2", "3"],
         },
         {
           nature: "asset",
           type: "skill",
           title: "Title",
           highlights: ["A", "B", "C"],
+          tags: ["1", "2", "3"],
         },
         {
           nature: "asset",
           type: "skill",
           title: "Title",
           highlights: ["A", "B"],
+          tags: ["1", "2"],
         },
       ],
       layout: "half",
@@ -187,18 +195,21 @@ function generateStores() {
           type: "language",
           title: "Title",
           highlights: ["A", "B", "C"],
+          tags: ["1", "2", "3"],
         },
         {
           nature: "asset",
           type: "language",
           title: "Title",
           highlights: ["A", "B", "C"],
+          tags: ["1", "2", "3"],
         },
         {
           nature: "asset",
           type: "language",
           title: "Title",
           highlights: ["A", "B"],
+          tags: ["1", "2"],
         },
       ],
       layout: "half",

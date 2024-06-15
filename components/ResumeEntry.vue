@@ -5,6 +5,13 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
 import type { Category } from "@/types";
+import ResumeEntryLocation from "./ResumeEntryLocation.vue";
+import ResumeEntryOrganization from "./ResumeEntryOrganization.vue";
+import ResumeEntryPeriod from "./ResumeEntryPeriod.vue";
+import ResumeEntrySummary from "./ResumeEntrySummary.vue";
+import ResumeEntryTitle from "./ResumeEntryTitle.vue";
+import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
+import ResumeEntryTags from "./ResumeEntryTags.vue";
 
 const { entry } = defineProps<{
   entry: Category["entries"][0];
@@ -47,6 +54,7 @@ const settings = computed(() => {
       :entry-summary="entry.summary"
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+    <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
   <template v-else-if="settings.entry.layout === 2">
     <div class="flex justify-between gap-4 items-center">
@@ -73,6 +81,7 @@ const settings = computed(() => {
       :entry-summary="entry.summary"
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+    <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
   <template v-else-if="settings.entry.layout === 3">
     <div class="flex">
@@ -101,6 +110,7 @@ const settings = computed(() => {
           :entry-summary="entry.summary"
         />
         <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+        <ResumeEntryTags :entry-tags="entry.tags" />
       </div>
     </div>
   </template>
@@ -128,6 +138,7 @@ const settings = computed(() => {
         :entry-summary="entry.summary"
       />
       <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+      <ResumeEntryTags :entry-tags="entry.tags" />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 5">
@@ -151,6 +162,7 @@ const settings = computed(() => {
         :entry-summary="entry.summary"
       />
       <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+      <ResumeEntryTags :entry-tags="entry.tags" />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 6">
@@ -189,6 +201,7 @@ const settings = computed(() => {
         :entry-summary="entry.summary"
       />
       <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+      <ResumeEntryTags :entry-tags="entry.tags" />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 7">
@@ -224,6 +237,7 @@ const settings = computed(() => {
         :entry-summary="entry.summary"
       />
       <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+      <ResumeEntryTags :entry-tags="entry.tags" />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 8">
@@ -267,6 +281,7 @@ const settings = computed(() => {
         :entry-summary="entry.summary"
       />
       <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+      <ResumeEntryTags :entry-tags="entry.tags" />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 9">
@@ -309,6 +324,7 @@ const settings = computed(() => {
       :entry-summary="entry.summary"
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+    <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
   <template v-else-if="settings.entry.layout === 10">
     <ResumeEntryTitle :entry-title="entry.title" />
@@ -351,6 +367,7 @@ const settings = computed(() => {
       :entry-summary="entry.summary"
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+    <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
   <template v-else-if="settings.entry.layout === 11">
     <div class="flex justify-between">
@@ -375,6 +392,7 @@ const settings = computed(() => {
       :entry-summary="entry.summary"
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+    <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
   <template v-else>
     <!-- TODO customize gap-4 here -->
@@ -398,5 +416,6 @@ const settings = computed(() => {
       :entry-summary="entry.summary"
     />
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+    <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
 </template>

@@ -133,6 +133,10 @@ export type ResumeSettings = CommonDocumentSettings & {
     ListSettings & {
       gap: number; // Flex gap between highlights
     };
+  entryTag: BlockSettings &
+    TextSettings & {
+      gap: number; // Flex gap between tags
+    };
 };
 
 export type LetterSettings = CommonDocumentSettings & {
@@ -195,6 +199,7 @@ export interface Entry {
   type: string;
   title: string; // Position, Diploma, ...
   highlights: Array<string>;
+  tags: Array<string>;
 }
 
 export interface Experience extends Entry {

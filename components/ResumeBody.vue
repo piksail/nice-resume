@@ -6,12 +6,14 @@ import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import ResumeCategoryName from "./ResumeCategoryName.vue";
+import ResumeEntry from "./ResumeEntry.vue";
 import ResumeEntryLocation from "./ResumeEntryLocation.vue";
 import ResumeEntryOrganization from "./ResumeEntryOrganization.vue";
 import ResumeEntryPeriod from "./ResumeEntryPeriod.vue";
 import ResumeEntrySummary from "./ResumeEntrySummary.vue";
 import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
+import ResumeEntryTags from "./ResumeEntryTags.vue";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
@@ -100,6 +102,7 @@ const settings = computed(() => {
               :entry-summary="entry.summary"
             />
             <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+            <ResumeEntryTags :entry-tags="entry.tags" />
           </li>
         </ul>
       </div>
