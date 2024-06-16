@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
-import type { Export } from "@/types";
+import type { Asset, Experience, Export } from "@/types";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import { getRandomAsset, getRandomExperience } from "@/utils/random";
 import { capitalize } from "@/utils/string";
 import LetterBodyEditor from "@/fragments/LetterBodyEditor.vue";
 import LetterCustomizationEditor from "@/fragments/LetterCustomizationEditor.vue";
@@ -79,30 +80,9 @@ function generateStores() {
       type: "work",
       name: "Work experience",
       entries: [
-        {
-          nature: "experience",
-          type: "work",
-          title: "Title",
-          organization: "Company",
-          location: "Location",
-          period: "Since",
-          summary:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: ["A", "B", "C"],
-          tags: ["1", "2", "3"],
-        },
-        {
-          nature: "experience",
-          type: "work",
-          title: "Title",
-          organization: "Company",
-          location: "Location",
-          period: "From To",
-          summary:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: ["A", "B"],
-          tags: ["1", "2"],
-        },
+        getRandomExperience("work" as Experience["type"]),
+        getRandomExperience("work" as Experience["type"]),
+        getRandomExperience("work" as Experience["type"]),
       ],
       layout: "full",
       isVisible: true,
@@ -112,30 +92,8 @@ function generateStores() {
       type: "education",
       name: "Education",
       entries: [
-        {
-          nature: "experience",
-          type: "education",
-          title: "Title",
-          organization: "Institution",
-          location: "Location",
-          period: "From To",
-          summary:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: ["A", "B", "C"],
-          tags: ["1", "2", "3"],
-        },
-        {
-          nature: "experience",
-          type: "education",
-          title: "Title",
-          organization: "Institution",
-          location: "Location",
-          period: "From To",
-          summary:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          highlights: [],
-          tags: [],
-        },
+        getRandomExperience("education" as Experience["type"]),
+        getRandomExperience("education" as Experience["type"]),
       ],
       layout: "full",
       isVisible: true,
@@ -144,19 +102,7 @@ function generateStores() {
       nature: "experience",
       type: "certificate",
       name: "Certificates",
-      entries: [
-        {
-          nature: "experience",
-          type: "certificate",
-          title: "Title",
-          organization: "Issuer",
-          location: "Location",
-          period: "Delivered (valid 2 years)",
-          summary: "",
-          highlights: [],
-          tags: [],
-        },
-      ],
+      entries: [getRandomExperience("certificate" as Experience["type"])],
       layout: "half",
       isVisible: true,
     },
@@ -165,27 +111,9 @@ function generateStores() {
       type: "skill",
       name: "Skills",
       entries: [
-        {
-          nature: "asset",
-          type: "skill",
-          title: "Title",
-          highlights: ["A", "B", "C"],
-          tags: ["1", "2", "3"],
-        },
-        {
-          nature: "asset",
-          type: "skill",
-          title: "Title",
-          highlights: ["A", "B", "C"],
-          tags: ["1", "2", "3"],
-        },
-        {
-          nature: "asset",
-          type: "skill",
-          title: "Title",
-          highlights: ["A", "B"],
-          tags: ["1", "2"],
-        },
+        getRandomAsset("skill" as Asset["type"]),
+        getRandomAsset("skill" as Asset["type"]),
+        getRandomAsset("skill" as Asset["type"]),
       ],
       layout: "half",
       isVisible: true,
@@ -195,27 +123,9 @@ function generateStores() {
       type: "language",
       name: "Languages",
       entries: [
-        {
-          nature: "asset",
-          type: "language",
-          title: "Title",
-          highlights: ["A", "B", "C"],
-          tags: ["1", "2", "3"],
-        },
-        {
-          nature: "asset",
-          type: "language",
-          title: "Title",
-          highlights: ["A", "B", "C"],
-          tags: ["1", "2", "3"],
-        },
-        {
-          nature: "asset",
-          type: "language",
-          title: "Title",
-          highlights: ["A", "B"],
-          tags: ["1", "2"],
-        },
+        getRandomAsset("language" as Asset["type"]),
+        getRandomAsset("language" as Asset["type"]),
+        getRandomAsset("language" as Asset["type"]),
       ],
       layout: "half",
       isVisible: true,

@@ -9,7 +9,11 @@ import {
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
-import { focusNextInput } from "@/utils/editor";
+import {
+  focusNextInput,
+  getEntryTitleLabel,
+  getExperienceOrganizationLabel,
+} from "@/utils/editor";
 import type { Asset, Category, Entry, Experience } from "@/types";
 import {
   assetTypes,
@@ -97,34 +101,6 @@ function changeCategoryType(category: Category, value: Category["type"]) {
 
 function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
-}
-
-function getEntryTitleLabel(entry: Entry) {
-  switch (entry.type) {
-    case "education":
-      return "Diploma";
-    case "project":
-    case "voluntary":
-    case "work":
-      return "Position";
-    case "language":
-      return "Language";
-    default:
-      return "Title";
-  }
-}
-
-function getExperienceOrganizationLabel(experience: Experience) {
-  switch (experience.type) {
-    case "work":
-      return "Company";
-    case "education":
-    case "certificate":
-      return "Institution";
-    case "project":
-    case "voluntary":
-      return "Organization";
-  }
 }
 
 function toggleCategoryVisibility(category: Category) {
@@ -822,14 +798,14 @@ function toggleCategoryVisibility(category: Category) {
         <div class="flex flex-col gap-5">
           <label class="flex flex-col flex-1" for="title">
             <span class="opacity-60">
-              {{ getEntryTitleLabel(entry) }}
+              {{ getEntryTitleLabel(entry.type) }}
             </span>
             <input id="title" class="input" v-model="entry.title" />
           </label>
           <template v-if="entry.nature === 'experience'">
             <label class="flex flex-col" for="organization">
               <span class="opacity-60">
-                {{ getExperienceOrganizationLabel(entry) }}
+                {{ getExperienceOrganizationLabel(entry.type) }}
               </span>
               <input
                 id="organization"

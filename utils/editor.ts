@@ -1,5 +1,5 @@
 import { nextTick } from "vue";
-import type { ListMarker } from "@/types";
+import type { Asset, Experience, ListMarker } from "@/types";
 
 /**
  * Focus the last input of a given selector.
@@ -8,6 +8,37 @@ export async function focusNextInput(selector: string) {
   await nextTick(); // Wait for the new input to be rendered before querying it
   const inputs = [...document.querySelectorAll(selector)];
   (inputs[inputs.length - 1] as HTMLInputElement).focus();
+}
+
+export function getEntryTitleLabel(type: Asset["type"] | Experience["type"]) {
+  switch (type) {
+    case "education":
+      return "Diploma";
+    case "project":
+    case "voluntary":
+    case "work":
+      return "Position";
+    case "language":
+      return "Language";
+    default:
+      return "Title";
+  }
+}
+
+/**
+ * Adapt experience oragnization label given the type.
+ */
+export function getExperienceOrganizationLabel(type: Experience["type"]) {
+  switch (type) {
+    case "work":
+      return "Company";
+    case "education":
+    case "certificate":
+      return "Institution";
+    case "project":
+    case "voluntary":
+      return "Organization";
+  }
 }
 
 /**
