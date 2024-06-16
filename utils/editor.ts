@@ -32,9 +32,12 @@ export function getExperienceOrganizationLabel(type: Experience["type"]) {
   switch (type) {
     case "work":
       return "Company";
+    case "award":
     case "education":
     case "certificate":
       return "Institution";
+    case "publication":
+      return "Publisher";
     case "project":
     case "voluntary":
       return "Organization";

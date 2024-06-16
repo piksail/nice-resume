@@ -1968,9 +1968,11 @@ export const socialIcons: Array<ContactDetail["icon"]> = [
 ];
 
 export const categoryTypes: Array<Category["type"]> = [
+  "award",
   "certificate",
   "education",
   "project",
+  "publication",
   "voluntary",
   "work",
   "interest",
@@ -1991,9 +1993,11 @@ export const assetTypes: Array<Asset["type"]> = [
 ];
 
 export const experienceTypes: Array<Experience["type"]> = [
+  "award",
   "certificate",
   "education",
   "project",
+  "publication",
   "voluntary",
   "work",
 ];

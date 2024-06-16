@@ -94,8 +94,7 @@ watch(documentType, (newValue) => {
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
         double-check dates, highlights and tags, and add missing elements such
-        as profile image, awards, publications and references directly in JSON
-        Resume.
+        as profile image and references directly in JSON Resume.
       </p>
       <!-- <p v-if="isImportError" class="text-red-500 text-center">
         Error exporting data. TODO handle errors

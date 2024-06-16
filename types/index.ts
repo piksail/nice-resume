@@ -231,7 +231,14 @@ export interface Entry {
 
 export interface Experience extends Entry {
   nature: "experience";
-  type: "certificate" | "education" | "project" | "voluntary" | "work";
+  type:
+    | "award"
+    | "certificate"
+    | "education"
+    | "project"
+    | "publication"
+    | "voluntary"
+    | "work";
   organization: string; // Institution, Company, ...
   location: string;
   period: string; // No strict format to allow custom values
@@ -242,6 +249,7 @@ export interface Asset extends Entry {
   nature: "asset";
   type: "interest" | "language" | "skill";
 }
+
 export interface Category {
   nature: Entry["nature"];
   type: Asset["type"] | Experience["type"];
@@ -325,8 +333,7 @@ export interface JsonResume {
     score: string | number;
     courses: string[];
   }[];
-  awards: // Not supported
-  {
+  awards: {
     title: string;
     date: string;
     awarder: string;
@@ -338,8 +345,7 @@ export interface JsonResume {
     issuer: string;
     url: string;
   }[];
-  publications: // Not supported
-  {
+  publications: {
     name: string;
     publisher: string;
     releaseDate: string;

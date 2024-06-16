@@ -101,7 +101,19 @@ export function formatResumeAsJsonResume(
         courses: entry.highlights.concat(entry.tags),
       };
     }),
-    awards: [], // TODO prompt definition
+    awards: (
+      resume.categories
+        .filter((category) => category.type === "award")
+        .flatMap((category) => category.entries) as Experience[]
+    ).map((entry) => {
+      const { startDate } = getPeriodBounds(entry.period);
+      return {
+        title: entry.title,
+        date: startDate,
+        awarder: entry.organization,
+        summary: entry.summary,
+      };
+    }),
     certificates: (
       resume.categories
         .filter((category) => category.type === "certificate")
@@ -115,7 +127,20 @@ export function formatResumeAsJsonResume(
         url: "string", // TODO
       };
     }),
-    publications: [], // TODO prompt definition
+    publications: (
+      resume.categories
+        .filter((category) => category.type === "publication")
+        .flatMap((category) => category.entries) as Experience[]
+    ).map((entry) => {
+      const { startDate } = getPeriodBounds(entry.period);
+      return {
+        name: entry.title,
+        publisher: entry.organization,
+        releaseDate: startDate,
+        summary: entry.summary,
+        url: "string", // TODO
+      };
+    }),
     skills: (
       resume.categories
         .filter((category) => category.type === "skill")

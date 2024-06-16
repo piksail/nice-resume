@@ -107,6 +107,25 @@ function generateStores() {
       isVisible: true,
     },
     {
+      nature: "experience",
+      type: "publication",
+      name: "Publications",
+      entries: [
+        getRandomExperience("publication" as Experience["type"]),
+        getRandomExperience("publication" as Experience["type"]),
+      ],
+      layout: "half",
+      isVisible: true,
+    },
+    {
+      nature: "experience",
+      type: "award",
+      name: "Awards",
+      entries: [getRandomExperience("award" as Experience["type"])],
+      layout: "half",
+      isVisible: true,
+    },
+    {
       nature: "asset",
       type: "skill",
       name: "Skills",
@@ -311,7 +330,7 @@ onMounted(() => {
         <span
           class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
         >
-          Import a JSON Resume file
+          Import a JSON Resume file*
         </span>
         <input
           id="editorJsonResumeFileReader"
@@ -323,6 +342,11 @@ onMounted(() => {
       </label>
       <!-- <Button>Import LinkedIn profile</Button> -->
       <!-- <Button>Import Viadeo profile</Button> -->
+      <p class="text-blue-500 text-center">
+        *Full compatibility will be soon available. In The meantime,
+        double-check dates, highlights and tags after import, and be informed
+        that profile image and references are not supported yet.
+      </p>
       <p v-if="isImportError" class="text-red-500 text-center">
         Error while importing data from local file.
       </p>
