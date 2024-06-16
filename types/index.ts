@@ -274,3 +274,102 @@ export interface Letter extends Profile {
 export interface Export extends Resume, Letter {
   isNiceResumeExport: boolean;
 }
+
+export interface JsonResume {
+  basics: {
+    name: string;
+    label: string; // = title
+    image?: string; // Not supported
+    email?: string; // = contact detail
+    phone?: string; // = contact detail
+    url?: string; // = contact detail
+    summary?: string; // = about
+    location: {
+      address: string;
+      postalCode: string;
+      city: string;
+      countryCode: string;
+      region: string;
+    };
+    profiles: {
+      network: string;
+      username: string;
+      url: string;
+    }[];
+  };
+  work: {
+    name: string;
+    position: string;
+    url: string;
+    startDate: string;
+    endDate: string;
+    summary: string;
+    highlights: string[];
+  }[];
+  volunteer: {
+    organization: string;
+    position: string;
+    url: string;
+    startDate: string;
+    endDate: string;
+    summary: string;
+    highlights: string[];
+  }[];
+  education: {
+    institution: string;
+    url: string;
+    area: string;
+    studyType: string;
+    startDate: string;
+    endDate: string;
+    score: string | number;
+    courses: string[];
+  }[];
+  awards: // Not supported
+  {
+    title: string;
+    date: string;
+    awarder: string;
+    summary: string;
+  }[];
+  certificates: {
+    name: string;
+    date: string;
+    issuer: string;
+    url: string;
+  }[];
+  publications: // Not supported
+  {
+    name: string;
+    publisher: string;
+    releaseDate: string;
+    url: string;
+    summary: string;
+  }[];
+  skills: {
+    name: string;
+    level: string;
+    keywords: string[];
+  }[];
+  languages: {
+    language: string;
+    fluency: string; // = highlight
+  }[];
+  interests: {
+    name: string;
+    keywords: string[]; // = tag
+  }[];
+  references: // Not supported
+  {
+    name: string;
+    reference: string;
+  }[];
+  projects: {
+    name: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    highlights: string[];
+    url: string;
+  }[];
+}

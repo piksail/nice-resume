@@ -17,7 +17,7 @@ const title = ref("Nice resume");
     <Meta name="description" :content="title" />
   </Head>
   <NuxtLayout name="editor">
-    <Editor class="print:hidden flex-1" document-type="letter" />
+    <Editor document-type="letter" />
     <template v-slot:preview>
       <Preview />
     </template>

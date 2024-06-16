@@ -2,7 +2,6 @@
 import { computed, onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import type { Export } from "@/types";
-import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
@@ -16,7 +15,9 @@ import PersonalDetailsEditor from "@/fragments/PersonalDetailsEditor.vue";
 import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
 import Button from "./Button.vue";
 
-const { documentType } = storeToRefs(useEditorStore());
+const { documentType } = defineProps<{
+  documentType: "letter" | "resume";
+}>();
 
 const { template } = storeToRefs(useProfileStore());
 
@@ -309,7 +310,7 @@ onMounted(() => {
 <template>
   <dialog
     ref="dialog"
-    class="m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    class="print:hidden m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
   >
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       How do you want to start editing?
@@ -340,9 +341,6 @@ onMounted(() => {
             @change="importFromJson"
           />
         </label>
-        <p v-if="isImportError" class="text-red-500">
-          Error while importing data from local file.
-        </p>
       </div>
       <!-- <Button>Import JSONResume.org</Button> -->
       <!-- <Button>Import LinkedIn profile</Button> -->
@@ -352,7 +350,7 @@ onMounted(() => {
       </p>
     </div>
   </dialog>
-  <main class="flex flex-col xl:flex-row text-white flex-1">
+  <main class="print:hidden flex flex-col xl:flex-row text-white flex-1">
     <header class="sticky z-10 top-[100px] lg:top-0">
       <nav
         class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"

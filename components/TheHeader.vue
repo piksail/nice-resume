@@ -1,50 +1,70 @@
 <script setup lang="ts">
-import { watch } from "vue";
+import { ref, watch } from "vue";
 import { navigateTo } from "nuxt/app";
 import { storeToRefs } from "pinia";
-import {
-  ArrowDownOnSquareIcon,
-  DocumentArrowDownIcon,
-} from "@heroicons/vue/24/outline";
+import { DocumentArrowDownIcon } from "@heroicons/vue/24/outline";
 import { useEditorStore } from "@/stores/editor";
-import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { documentTypes, templates } from "@/globals";
 import { download } from "@/utils/file";
+import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import packageJson from "../package.json";
 
-console.log("Version: ", packageJson.version);
+console.info("Version: ", packageJson.version);
 
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
+const { name, template, title } = storeToRefs(useProfileStore());
+const { about, categories, contactDetails } = storeToRefs(useResumeStore());
 
-const { template } = storeToRefs(useProfileStore());
-
-const profileStore = useProfileStore();
-const profile = storeToRefs(profileStore);
-const letterStore = useLetterStore();
-const letter = storeToRefs(letterStore);
-const resumeStore = useResumeStore();
-const resume = storeToRefs(resumeStore);
+const dialog = ref(null);
 
 function downloadPdf() {
   window.print();
+  closeModal();
 }
 
+/**
+ * Retrieve and export state from localStorage as a JSON file.
+ */
 function exportToJson() {
+  const rawProfile = localStorage.getItem("profile");
+  const rawResume = localStorage.getItem("resume");
+  const rawLetter = localStorage.getItem("letter");
   const toExport = {
-    ...letter,
-    ...profile,
-    ...resume,
+    isNiceResumeExport: true,
+    profile: JSON.parse(rawProfile ?? ""),
+    resume: JSON.parse(rawResume ?? ""),
+    letter: JSON.parse(rawLetter ?? ""),
   };
-  Object.entries(toExport).forEach(([key, value]) => {
-    // @ts-expect-error Build object on the fly
-    toExport[key] = value.value;
-  });
-
-  // @ts-expect-error Build object on the fly
-  toExport.isNiceResumeExport = true;
   download(toExport, "nice-resume");
+  closeModal();
+}
+
+/**
+ * Create and export a JSON-Resume-compliant resume as a JSON.
+ */
+function exportResumeToJsonResume() {
+  const resume = {
+    name: name.value,
+    title: title.value,
+    about: about.value,
+    contactDetails: contactDetails.value,
+    categories: categories.value,
+  };
+  const toExport = formatResumeAsJsonResume(resume);
+  download(toExport, "nice-resume-to-json-resume");
+  closeModal();
+}
+
+function closeModal() {
+  // @ts-expect-error TODO type
+  dialog.value.close();
+}
+
+function openModal() {
+  // @ts-expect-error TODO type
+  dialog.value.showModal();
 }
 
 watch(documentType, (newValue) => {
@@ -53,6 +73,29 @@ watch(documentType, (newValue) => {
 </script>
 
 <template>
+  <dialog
+    ref="dialog"
+    class="print:hidden m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+  >
+    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
+      What do you want to download?
+    </p>
+    <!-- TODO use checkbox instead -->
+    <div class="flex flex-col gap-4">
+      <Button class="shadow" @click="downloadPdf">
+        {{ documentType }} as PDF
+      </Button>
+      <Button class="shadow" @click="exportToJson">
+        Nice Resume data (save it for later)
+      </Button>
+      <Button class="shadow" @click="exportResumeToJsonResume">
+        JSON Resume compatible data
+      </Button>
+      <!-- <p v-if="isImportError" class="text-red-500 text-center">
+        Error exporting data. TODO handle errors
+      </p> -->
+    </div>
+  </dialog>
   <header
     class="print:hidden sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 bg-white text-pink-500 shadow-lg"
   >
@@ -108,20 +151,9 @@ watch(documentType, (newValue) => {
         </div>
       </label>
 
-      <button
-        class="text-blue-500 flex items-center gap-1"
-        @click="exportToJson"
-      >
-        <ArrowDownOnSquareIcon class="h-6" />
-        Export data
-      </button>
-
-      <button
-        class="text-blue-500 flex items-center gap-1"
-        @click="downloadPdf"
-      >
+      <button class="text-blue-500 flex items-center gap-1" @click="openModal">
         <DocumentArrowDownIcon class="h-6" />
-        Download PDF
+        Download
       </button>
     </div>
   </header>
