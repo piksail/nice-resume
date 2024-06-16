@@ -4,6 +4,7 @@ export type Template =
   | "Care"
   | "CottonCandy"
   | "Cupcake"
+  | "Elegant"
   | "Macaron"
   | "Macchiato"
   | "NeoBrutalism"

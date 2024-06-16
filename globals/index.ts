@@ -48,6 +48,7 @@ export const templates: Array<Template> = [
   "Care",
   "CottonCandy",
   "Cupcake",
+  "Elegant",
   "Macaron",
   "Macchiato",
   "NeoBrutalism",
@@ -75,6 +76,7 @@ export const discouragedLayoutTemplates: {
   Care: [],
   CottonCandy: ["aside"],
   Cupcake: [],
+  Elegant: [],
   Macaron: [],
   Macchiato: [],
   NeoBrutalism: [],
@@ -88,6 +90,9 @@ export const discouragedLayoutTemplates: {
   Wiki: [],
 };
 
+// TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Kendall by Adam Kendall
+// TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : StackOverflow (uncredited)
+// TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Paper ++ (uncredited)
 // TODO settings réduire espace entrelistmarker et text
 // TODO bind les valeurs numériques avec du extralight, semibold dans le <select> https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
 // TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
@@ -471,6 +476,19 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Open Sans Condensed",
     displayFont: "Yanone Kaffeesatz",
   },
+  Elegant: {
+    isLetterMarginless: false,
+    colors: [
+      "#707070",
+      "#777777",
+      "#e6e6e6",
+      "#357ebd",
+      "#7eb0db",
+      "#ffffff",
+      "#333333",
+    ],
+    bodyFont: "Lato",
+  },
   Macaron: {
     isLetterMarginless: true,
     colors: ["#d88277", "#f8aaa6", "#f8d5cd", "#f8f4f2", "#ffffff", "#414e66"],
@@ -569,6 +587,11 @@ export const templateSettings: TemplateSettings = {
   },
   Cupcake: {
     base: templateBaseSettings.Cupcake,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
+  Elegant: {
+    base: templateBaseSettings.Elegant,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
@@ -964,6 +987,89 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
   templateSettings.Cupcake.letter.subject.fontSize = 20;
   templateSettings.Cupcake.letter.reference.fontSize = 15;
   templateSettings.Cupcake.letter.body.fontSize = 16;
+}
+
+if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
+  templateSettings.Elegant.resume.document.margin = [50, 50, 50, 50];
+  templateSettings.Elegant.resume.header.layout = 0;
+  templateSettings.Elegant.resume.name.textAlign = "center";
+  templateSettings.Elegant.resume.name.fontSize = 24;
+  templateSettings.Elegant.resume.name.fontWeight = 700;
+  templateSettings.Elegant.resume.title.margin[0] = 10;
+  templateSettings.Elegant.resume.title.textAlign = "center";
+  templateSettings.Elegant.resume.title.color =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.resume.contactDetails.margin[0] = 10;
+  templateSettings.Elegant.resume.contactDetails.gap = 20;
+  templateSettings.Elegant.resume.contactDetails.fontSize = 12;
+  templateSettings.Elegant.resume.contactDetails.iconGap = 25;
+  templateSettings.Elegant.resume.contactDetails.iconColor =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.resume.contactDetails.color =
+    templateSettings.Elegant.base.colors[6];
+  templateSettings.Elegant.resume.body.margin[0] = 20;
+  templateSettings.Elegant.resume.category.gap = 20;
+  templateSettings.Elegant.resume.categoryName.color =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.resume.categoryName.isUppercase = true;
+  templateSettings.Elegant.resume.categoryName.fontSize = 18;
+  templateSettings.Elegant.resume.categoryName.padding[2] = 10;
+  templateSettings.Elegant.resume.categoryName.border[2] = 1;
+  templateSettings.Elegant.resume.categoryName.borderColor =
+    templateSettings.Elegant.base.colors[2];
+  templateSettings.Elegant.resume.categoryName.margin[2] = 10;
+  templateSettings.Elegant.resume.entry.layout = 8;
+  templateSettings.Elegant.resume.entryTitle.fontWeight = 700;
+  templateSettings.Elegant.resume.entryPeriod.color =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.resume.entryPeriod.fontSize = 11;
+  templateSettings.Elegant.resume.entryPeriod.fontWeight = 500;
+  templateSettings.Elegant.resume.entryLocation.color =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.resume.entryLocation.fontSize = 11;
+  templateSettings.Elegant.resume.entryLocation.fontWeight = 500;
+  templateSettings.Elegant.resume.entrySummary.margin[0] = 10;
+  templateSettings.Elegant.resume.entryHighlight.margin[0] = 10;
+  templateSettings.Elegant.resume.entryHighlight.margin[3] = 40;
+  templateSettings.Elegant.resume.entryHighlight.listMarker = "circle";
+  templateSettings.Elegant.resume.entryTag.margin[0] = 10;
+  templateSettings.Elegant.resume.entryTag.gap = 5;
+  templateSettings.Elegant.resume.entryTag.padding = [5, 5, 5, 5];
+  templateSettings.Elegant.resume.entryTag.border = [1, 1, 1, 1];
+  templateSettings.Elegant.resume.entryTag.borderColor =
+    templateSettings.Elegant.base.colors[3];
+  templateSettings.Elegant.resume.entryTag.backgroundColor =
+    templateSettings.Elegant.base.colors[4];
+  templateSettings.Elegant.resume.entryTag.color =
+    templateSettings.Elegant.base.colors[5];
+  templateSettings.Elegant.resume.entryTag.fontWeight = 700;
+  templateSettings.Elegant.resume.entryTag.fontSize = 14;
+  templateSettings.Elegant.resume.entryTag.lineHeight = 1;
+  templateSettings.Elegant.letter.document.margin = [50, 50, 50, 50];
+  templateSettings.Elegant.letter.header.layout = 0;
+  templateSettings.Elegant.letter.name.textAlign = "center";
+  templateSettings.Elegant.letter.name.fontSize = 24;
+  templateSettings.Elegant.letter.name.fontWeight = 700;
+  templateSettings.Elegant.letter.title.margin[0] = 10;
+  templateSettings.Elegant.letter.title.textAlign = "center";
+  templateSettings.Elegant.letter.title.color =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.letter.contactDetails.margin[0] = 10;
+  templateSettings.Elegant.letter.contactDetails.gap = 20;
+  templateSettings.Elegant.letter.contactDetails.fontSize = 12;
+  templateSettings.Elegant.letter.contactDetails.iconGap = 25;
+  templateSettings.Elegant.letter.contactDetails.iconColor =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.letter.contactDetails.color =
+    templateSettings.Elegant.base.colors[6];
+  templateSettings.Elegant.letter.subject.fontSize = 18;
+  templateSettings.Elegant.letter.subject.fontWeight = 700;
+  templateSettings.Elegant.letter.reference.margin[0] = 10;
+  templateSettings.Elegant.letter.reference.color =
+    templateSettings.Elegant.base.colors[1];
+  templateSettings.Elegant.letter.reference.fontSize = 11;
+  templateSettings.Elegant.letter.reference.fontWeight = 500;
+  templateSettings.Elegant.letter.body.margin[0] = 20;
 }
 
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {

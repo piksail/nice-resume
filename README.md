@@ -62,10 +62,9 @@ pnpm run test:playwright
 
 ## Add a template
 
-1. Create the Vue component in `/templates`
-2. Add the name in the template union type in `/types`
-3. Add the name in the templates array in `/globals`
-4. Add the name in the templateMapper in `/components/Preview.vue`
+1. Add the name in the template union type in `/types`
+2. Add the name in the templates array in `/globals`
+3. Add the base settings in the templateBaseSettings object in `/globals` and override them in the templateSettings object
 
 Make sure the above steps rely on the same template name.
 
@@ -73,8 +72,9 @@ Make sure the above steps rely on the same template name.
 
 Templates offer an aside section on the left and a main section on the right that can be split into two columns. Select _Aside_, _Full_ or _Half_ to place content accordingly.
 
-Some themes come other tools:
+Some themes come from other tools:
 
+- _Elegant_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=elegant) by Mudassir Ali
 - _Macchiato_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=macchiato) by Alessandro Biondi
 - _OpenResume_ is the theme from [OpenResume](https://www.open-resume.com/)
 - _Paper_ is adapted from the _One Page Plus_ theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=onepage-plus)

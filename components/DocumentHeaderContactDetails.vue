@@ -30,8 +30,14 @@ const settings = computed(() => {
       flexWrap:
         settings.contactDetails.listOrientation === 'row' ? 'wrap' : 'initial',
       alignItems: settings.contactDetails.alignment,
-      gap: `${settings.contactDetails.gap}px`,
-      rowGap: settings.contactDetails.listOrientation === 'row' ? 0 : 'initial',
+      columnGap:
+        settings.contactDetails.listOrientation === 'column'
+          ? 0
+          : `${settings.contactDetails.gap}px`,
+      rowGap:
+        settings.contactDetails.listOrientation === 'row'
+          ? 0
+          : `${settings.contactDetails.gap}px`,
       listStyleType: getListMarker(settings.contactDetails.listMarker),
       color: settings.contactDetails.listMarkerColor,
       ...getNodeStyle(settings.contactDetails, 'block'),
