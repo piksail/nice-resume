@@ -1,43 +1,5 @@
-import { moveUp, moveDown, remove } from "./array";
-import { test, expect, describe } from "vitest";
-
-describe("moveUp", () => {
-  test("should move the element at the given index up by one position", () => {
-    const array = [1, 2, 3, 4, 5];
-    const index = 2;
-
-    moveUp(array, index);
-
-    expect(array).toEqual([1, 3, 2, 4, 5]);
-  });
-
-  test("should not modify the array if the element is already in the first position", () => {
-    const array = [1, 2, 3, 4, 5];
-    const index = 0;
-
-    moveUp(array, index);
-
-    expect(array).toEqual([1, 2, 3, 4, 5]);
-  });
-
-  test("should handle empty arrays", () => {
-    const array: unknown[] = [];
-    const index = 0;
-
-    moveUp(array, index);
-
-    expect(array).toEqual([]);
-  });
-
-  test("should handle arrays with a single element", () => {
-    const array = [1];
-    const index = 0;
-
-    moveUp(array, index);
-
-    expect(array).toEqual([1]);
-  });
-});
+import { describe, expect, test } from "vitest";
+import { moveDown, moveUp, remove } from "./array";
 
 describe("moveDown", () => {
   test("should move the element at the given index down by one position", () => {
@@ -72,6 +34,44 @@ describe("moveDown", () => {
     const index = 0;
 
     moveDown(array, index);
+
+    expect(array).toEqual([1]);
+  });
+});
+
+describe("moveUp", () => {
+  test("should move the element at the given index up by one position", () => {
+    const array = [1, 2, 3, 4, 5];
+    const index = 2;
+
+    moveUp(array, index);
+
+    expect(array).toEqual([1, 3, 2, 4, 5]);
+  });
+
+  test("should not modify the array if the element is already in the first position", () => {
+    const array = [1, 2, 3, 4, 5];
+    const index = 0;
+
+    moveUp(array, index);
+
+    expect(array).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  test("should handle empty arrays", () => {
+    const array: unknown[] = [];
+    const index = 0;
+
+    moveUp(array, index);
+
+    expect(array).toEqual([]);
+  });
+
+  test("should handle arrays with a single element", () => {
+    const array = [1];
+    const index = 0;
+
+    moveUp(array, index);
 
     expect(array).toEqual([1]);
   });

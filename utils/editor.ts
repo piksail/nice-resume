@@ -1,12 +1,18 @@
 import { nextTick } from "vue";
 import type { ListMarker } from "@/types";
 
+/**
+ * Focus the last input of a given selector.
+ */
 export async function focusNextInput(selector: string) {
   await nextTick(); // Wait for the new input to be rendered before querying it
   const inputs = [...document.querySelectorAll(selector)];
   (inputs[inputs.length - 1] as HTMLInputElement).focus();
 }
 
+/**
+ * Get actual marker symbol given list marker.
+ */
 export function getListMarker(value: ListMarker) {
   switch (value) {
     case "hyphen":
@@ -18,7 +24,11 @@ export function getListMarker(value: ListMarker) {
   }
 }
 
+/**
+ * Convert 1/2/3/4 to top/right/bottom/left.
+ */
 export function getSideIndexLabel(index: number) {
+  // Vue.js for loop is one-indexed
   if (index < 1 || index > 4) return "";
   return ["top", "right", "bottom", "left"][index - 1];
 }
