@@ -6,6 +6,9 @@ import type { StyleValue } from "vue";
 // type Keys = keyof ResumeSettings;
 // type Values = ResumeSettings[Keys];
 
+/**
+ * Generate the customizable style properties of an HTML node given its purpose.
+ */
 export function getNodeStyle(
   // settingsItem: Values,
   settingsItem: object, // TODO make it type-compliant
