@@ -220,7 +220,7 @@ onMounted(() => {
 <template>
   <dialog
     ref="dialog"
-    class="print:hidden m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    class="print:hidden max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
   >
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       How do you want to start editing?
