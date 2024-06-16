@@ -205,6 +205,60 @@ function importFromJson(event: Event) {
   }
 }
 
+function importFromJsonResume(event: Event) {
+  isImportError.value = false;
+  try {
+    // @ts-expect-error It seems there is no default <input type=file /> native TS type...
+    const file = event.currentTarget?.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.readAsText(file, "UTF-8");
+    fileReader.onload = function (fileReaderEvent) {
+      if (!fileReaderEvent.target?.result) {
+        isImportError.value = true;
+        return;
+      }
+
+      const toImport: Export = JSON.parse(
+        fileReaderEvent.target.result.toString(),
+      );
+
+      console.log(toImport);
+      // TODO start user-journey to apply mapping
+      // TODO imrpove mapping (startDate/endDate->period)
+      // TODO imrpove mapping (highlights/tags->handle)
+      // TODO imrpove mapping (references->lost)
+      // TODO imrpove mapping (awards->lost)
+      // TODO imrpove mapping (publications->lost)
+
+      Object.entries(toImport).forEach(([key, value]) => {
+        // @ts-expect-error Build object on the fly
+        if (letter[key]) {
+          // @ts-expect-error Build object on the fly
+          letter[key].value = value;
+        }
+        // @ts-expect-error Build object on the fly
+        if (profile[key]) {
+          // @ts-expect-error Build object on the fly
+          profile[key].value = value;
+        }
+        // @ts-expect-error Build object on the fly
+        if (resume[key]) {
+          // @ts-expect-error Build object on the fly
+          resume[key].value = value;
+        }
+      });
+
+      closeModal();
+    };
+    fileReader.onerror = function () {
+      isImportError.value = true;
+    };
+  } catch {
+    isImportError.value = true;
+  }
+}
+
 function resetStores() {
   profileStore.$reset();
   resumeStore.$reset();
@@ -233,26 +287,40 @@ onMounted(() => {
       <Button class="shadow" @click="generateStores">
         Edit pre-filled data
       </Button>
-      <div>
-        <label
-          for="editorFileReader"
-          class="shadow bg-white px-3 py-2 rounded cursor-pointer"
+      <label
+        for="editorSaveFileReader"
+        class="shadow bg-white px-3 py-2 rounded cursor-pointer text-center"
+      >
+        <span
+          class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
         >
-          <span
-            class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
-          >
-            Import a save file from a previous session
-          </span>
-          <input
-            id="editorFileReader"
-            class="hidden"
-            type="file"
-            accept=".json"
-            @change="importFromJson"
-          />
-        </label>
-      </div>
-      <!-- <Button>Import JSONResume.org</Button> -->
+          Import a save file from a previous session
+        </span>
+        <input
+          id="editorSaveFileReader"
+          class="hidden"
+          type="file"
+          accept=".json"
+          @change="importFromJson"
+        />
+      </label>
+      <label
+        for="editorJsonResumeFileReader"
+        class="shadow bg-white px-3 py-2 rounded cursor-pointer text-center"
+      >
+        <span
+          class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
+        >
+          Import a JSON Resume file
+        </span>
+        <input
+          id="editorJsonResumeFileReader"
+          class="hidden"
+          type="file"
+          accept=".json"
+          @change="importFromJsonResume"
+        />
+      </label>
       <!-- <Button>Import LinkedIn profile</Button> -->
       <!-- <Button>Import Viadeo profile</Button> -->
       <p v-if="isImportError" class="text-red-500 text-center">
