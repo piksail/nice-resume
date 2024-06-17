@@ -78,13 +78,7 @@ export type TextSettings = {
 
 export type TitleSettings = TextSettings & {
   textAlign: "left" | "center" | "right";
-  // TODO move the width? property here? rework letter header (subject+ref)
-};
-
-// TODO get rid of below type which is too fourre-tout
-export type Settings = {
-  isCentered?: boolean;
-  gap?: number;
+  // TODO move the width? property here?
 };
 
 export type BaseSettings = {
@@ -168,8 +162,8 @@ export type ResumeSettings = CommonDocumentSettings & {
 };
 
 export type LetterSettings = CommonDocumentSettings & {
-  senderDetails: Settings & BlockSettings & TextSettings;
-  recipientDetails: Settings & BlockSettings & TextSettings;
+  senderDetails: BlockSettings & TitleSettings & { gap: number };
+  recipientDetails: BlockSettings & TitleSettings & { gap: number };
   subject: BlockSettings & TitleSettings;
   reference: BlockSettings & TitleSettings & { isBeforeSubject: boolean };
   body: {

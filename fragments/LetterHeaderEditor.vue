@@ -4,10 +4,12 @@ import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { moveDown, moveUp, remove } from "@/utils/array";
-import { focusNextInput, getSideIndexLabel } from "@/utils/editor";
-import { fonts } from "@/globals";
+import { focusNextInput } from "@/utils/editor";
 import EditorCategory from "@/components/EditorCategory.vue";
+import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import ListActions from "@/components/ListActions.vue";
+import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
+import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 
 const { isThemeCustomized } = storeToRefs(useProfileStore());
 
@@ -43,69 +45,15 @@ function addSenderDetail() {
             <!-- TODO sender is not always set (condition with "use simple layout") -->
             <div class="uppercase font-bold text-lg mb-5">Sender</div>
           </header>
-          <div class="flex gap-5 flex-wrap">
-            <Field
-              id="senderDetailsColor"
-              type="color"
-              label="Color"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.color"
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="senderDetails"
+              :settings="settings.senderDetails"
             />
-            <label class="flex flex-col" for="senderDetailsFont">
-              <span class="opacity-60">Font</span>
-              <select
-                id="senderDetailsFont"
-                class="select block"
-                :disabled="!isThemeCustomized"
-                v-model="settings.senderDetails.font"
-              >
-                <option class="option" value="inherit">
-                  default (inherit from document font)
-                </option>
-                <option v-for="font in fonts" :key="font" class="option">
-                  {{ font }}
-                </option>
-              </select>
-            </label>
-            <Field
-              id="senderDetailsFontSize"
-              label="Font size"
-              type="number"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.fontSize"
+            <TextSettingsEditor
+              property-name="senderDetails"
+              :settings="settings.senderDetails"
             />
-            <Field
-              id="senderDetailsLineHeight"
-              label="Line height"
-              type="number"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.lineHeight"
-              step="0.1"
-            />
-          </div>
-          <div class="flex gap-5 flex-wrap">
-            <label class="flex flex-col" for="senderDetailsFontWeight">
-              <span class="opacity-60">Font weight</span>
-              <select
-                id="senderDetailsFontWeight"
-                v-model="settings.senderDetails.fontWeight"
-                class="select block"
-              >
-                <option v-for="i in 9" :key="i" class="option">
-                  {{ `${i}00` }}
-                </option>
-              </select>
-            </label>
-            <label for="senderDetailsIsItalic">
-              <input
-                id="senderDetailsIsItalic"
-                class="input"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="settings.senderDetails.isItalic"
-              />
-              <span class="opacity-60">Italic</span>
-            </label>
             <Field
               id="senderDetailsGap"
               label="Gap"
@@ -114,201 +62,27 @@ function addSenderDetail() {
               v-model="settings.senderDetails.gap"
             />
           </div>
-          <div class="flex gap-5">
-            <Field
-              v-for="i in 4"
-              :key="i"
-              :id="`senderDetailsMargin${i}`"
-              class="w-[20%]"
-              type="number"
-              :label="`Margin ${getSideIndexLabel(i)}`"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.margin[i - 1]"
-            />
-          </div>
-          <div class="flex gap-5 flex-wrap">
-            <Field
-              v-for="i in 4"
-              :key="i"
-              :id="`senderDetailsBorder${i}`"
-              class="w-[20%]"
-              type="number"
-              :label="`Border ${getSideIndexLabel(i)}`"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.border[i - 1]"
-            />
-            <Field
-              id="senderDetailsBorderColor"
-              class="w-[20%]"
-              type="color"
-              label="Border color"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.borderColor"
-            />
-            <Field
-              id="senderDetailsBorderRadius"
-              class="w-[20%]"
-              type="number"
-              label="Border radius"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.borderRadius"
-            />
-          </div>
-          <div class="flex gap-5 flex-wrap">
-            <Field
-              v-for="i in 4"
-              :key="i"
-              :id="`senderDetailsPadding${i}`"
-              class="w-[20%]"
-              type="number"
-              :label="`Padding ${getSideIndexLabel(i)}`"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.padding[i - 1]"
-            />
-            <Field
-              id="senderDetailsBackgroundColor"
-              type="color"
-              label="Background color"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.backgroundColor"
-            />
-          </div>
         </li>
         <li class="border-b-2 border-white border-opacity-5 pb-12">
           <header>
             <div class="uppercase font-bold text-lg mb-5">Recipient</div>
           </header>
           <div class="flex flex-col gap-5">
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                id="recipientDetailsColor"
-                type="color"
-                label="Color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.color"
-              />
-              <label class="flex flex-col" for="recipientDetailsFont">
-                <span class="opacity-60">Font</span>
-                <select
-                  id="recipientDetailsFont"
-                  class="select block"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.recipientDetails.font"
-                >
-                  <option class="option" value="inherit">
-                    default (inherit from document font)
-                  </option>
-                  <option v-for="font in fonts" :key="font" class="option">
-                    {{ font }}
-                  </option>
-                </select>
-              </label>
-              <Field
-                id="recipientDetailsFontSize"
-                label="Font size"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.fontSize"
-              />
-              <Field
-                id="recipientDetailsLineHeight"
-                label="Line height"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.lineHeight"
-                step="0.1"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <label class="flex flex-col" for="recipientDetailsFontWeight">
-                <span class="opacity-60">Font weight</span>
-                <select
-                  id="recipientDetailsFontWeight"
-                  v-model="settings.recipientDetails.fontWeight"
-                  class="select block"
-                >
-                  <option v-for="i in 9" :key="i" class="option">
-                    {{ `${i}00` }}
-                  </option>
-                </select>
-              </label>
-              <label for="recipientDetailsIsItalic">
-                <input
-                  id="recipientDetailsIsItalic"
-                  class="input"
-                  type="checkbox"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.recipientDetails.isItalic"
-                />
-                <span class="opacity-60">Italic</span>
-              </label>
-              <Field
-                id="recipientDetailsGap"
-                label="Gap"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.gap"
-              />
-            </div>
-            <div class="flex gap-5">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`recipientDetailsMargin${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Margin ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.margin[i - 1]"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`recipientDetailsBorder${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Border ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.border[i - 1]"
-              />
-              <Field
-                id="recipientDetailsBorderColor"
-                class="w-[20%]"
-                type="color"
-                label="Border color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.borderColor"
-              />
-              <Field
-                id="recipientDetailsBorderRadius"
-                class="w-[20%]"
-                type="number"
-                label="Border radius"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.borderRadius"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`recipientDetailsPadding${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Padding ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.padding[i - 1]"
-              />
-              <Field
-                id="recipientDetailsBackgroundColor"
-                type="color"
-                label="Background color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.recipientDetails.backgroundColor"
-              />
-            </div>
+            <BlockSettingsEditor
+              property-name="recipientDetails"
+              :settings="settings.recipientDetails"
+            />
+            <TextSettingsEditor
+              property-name="recipientDetails"
+              :settings="settings.recipientDetails"
+            />
+            <Field
+              id="recipientDetailsGap"
+              label="Gap"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="settings.recipientDetails.gap"
+            />
           </div>
         </li>
         <li class="border-b-2 border-white border-opacity-5 pb-12">
@@ -316,138 +90,18 @@ function addSenderDetail() {
             <div class="uppercase font-bold text-lg mb-5">Subject</div>
           </header>
           <div class="flex flex-col gap-5">
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                id="subjectColor"
-                type="color"
-                label="Color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.color"
-              />
-              <label class="flex flex-col" for="subjectFont">
-                <span class="opacity-60">Font</span>
-                <select
-                  id="subjectFont"
-                  class="select block"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.subject.font"
-                >
-                  <option class="option" value="inherit">
-                    default (inherit from document font)
-                  </option>
-                  <option v-for="font in fonts" :key="font" class="option">
-                    {{ font }}
-                  </option>
-                </select>
-              </label>
-              <Field
-                id="subjectFontSize"
-                label="Font size"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.fontSize"
-              />
-              <Field
-                id="subjectLineHeight"
-                label="Line height"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.lineHeight"
-                step="0.1"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <label class="flex flex-col" for="subjectFontWeight">
-                <span class="opacity-60">Font weight</span>
-                <select
-                  id="subjectFontWeight"
-                  v-model="settings.subject.fontWeight"
-                  class="select block"
-                >
-                  <option v-for="i in 9" :key="i" class="option">
-                    {{ `${i}00` }}
-                  </option>
-                </select>
-              </label>
-              <label for="subjectIsItalic">
-                <input
-                  id="subjectIsItalic"
-                  class="input"
-                  type="checkbox"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.subject.isItalic"
-                />
-                <span class="opacity-60">Italic</span>
-              </label>
-              <!-- <label for="subjectIsCentered">
-                <input
-                  id="subjectIsCentered"
-                  class="input"
-                  type="checkbox"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.subject.isCentered"
-                />
-                <span class="opacity-60">Centered</span>
-              </label> -->
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`subjectMargin${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Margin ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.margin[i - 1]"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`subjectBorder${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Border ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.border[i - 1]"
-              />
-              <Field
-                id="subjectBorderColor"
-                type="color"
-                label="Border color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.borderColor"
-              />
-              <Field
-                id="subjectBorderRadius"
-                class="w-[20%]"
-                type="number"
-                label="Border radius"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.borderRadius"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`subjectPadding${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Padding ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.padding[i - 1]"
-              />
-              <Field
-                id="subjectBackgroundColor"
-                type="color"
-                label="Background color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.subject.backgroundColor"
-              />
-            </div>
+            <BlockSettingsEditor
+              property-name="subject"
+              :settings="settings.subject"
+            />
+            <TextSettingsEditor
+              property-name="subject"
+              :settings="settings.subject"
+            />
+            <TitleSettingsEditor
+              property-name="subject"
+              :settings="settings.subject"
+            />
           </div>
         </li>
         <li>
@@ -455,138 +109,18 @@ function addSenderDetail() {
             <div class="uppercase font-bold text-lg mb-5">Reference</div>
           </header>
           <div class="flex flex-col gap-5">
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                id="referenceColor"
-                type="color"
-                label="Color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.color"
-              />
-              <label class="flex flex-col" for="referenceFont">
-                <span class="opacity-60">Font</span>
-                <select
-                  id="referenceFont"
-                  class="select block"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.reference.font"
-                >
-                  <option class="option" value="inherit">
-                    default (inherit from document font)
-                  </option>
-                  <option v-for="font in fonts" :key="font" class="option">
-                    {{ font }}
-                  </option>
-                </select>
-              </label>
-              <Field
-                id="referenceFontSize"
-                label="Font size"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.fontSize"
-              />
-              <Field
-                id="referenceLineHeight"
-                label="Line height"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.lineHeight"
-                step="0.1"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <label class="flex flex-col" for="referenceFontWeight">
-                <span class="opacity-60">Font weight</span>
-                <select
-                  id="referenceFontWeight"
-                  v-model="settings.reference.fontWeight"
-                  class="select block"
-                >
-                  <option v-for="i in 9" :key="i" class="option">
-                    {{ `${i}00` }}
-                  </option>
-                </select>
-              </label>
-              <label for="referenceIsItalic">
-                <input
-                  id="referenceIsItalic"
-                  class="input"
-                  type="checkbox"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.reference.isItalic"
-                />
-                <span class="opacity-60">Italic</span>
-              </label>
-              <!-- <label for="referenceIsCentered">
-                <input
-                  id="referenceIsCentered"
-                  class="input"
-                  type="checkbox"
-                  :disabled="!isThemeCustomized"
-                  v-model="settings.reference.isCentered"
-                />
-                <span class="opacity-60">Centered</span>
-              </label> -->
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`referenceMargin${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Margin ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.margin[i - 1]"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`referenceBorder${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Border ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.border[i - 1]"
-              />
-              <Field
-                id="referenceBorderColor"
-                type="color"
-                label="Border color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.borderColor"
-              />
-              <Field
-                id="referenceBorderRadius"
-                class="w-[20%]"
-                type="number"
-                label="Border radius"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.borderRadius"
-              />
-            </div>
-            <div class="flex gap-5 flex-wrap">
-              <Field
-                v-for="i in 4"
-                :key="i"
-                :id="`referencePadding${i}`"
-                class="w-[20%]"
-                type="number"
-                :label="`Padding ${getSideIndexLabel(i)}`"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.padding[i - 1]"
-              />
-              <Field
-                id="referenceBackgroundColor"
-                type="color"
-                label="Background color"
-                :disabled="!isThemeCustomized"
-                v-model="settings.reference.backgroundColor"
-              />
-            </div>
+            <BlockSettingsEditor
+              property-name="reference"
+              :settings="settings.reference"
+            />
+            <TextSettingsEditor
+              property-name="reference"
+              :settings="settings.reference"
+            />
+            <TitleSettingsEditor
+              property-name="reference"
+              :settings="settings.reference"
+            />
           </div>
         </li>
       </ul>

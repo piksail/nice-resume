@@ -85,9 +85,8 @@ function addParagraph() {
                 v-for="i in 4"
                 :key="i"
                 :id="`bodyMargin${i}`"
-                class="w-[20%]"
-                type="number"
                 :label="`Margin ${getSideIndexLabel(i)}`"
+                type="number"
                 :disabled="!isThemeCustomized"
                 v-model="settings.body.margin[i - 1]"
               />

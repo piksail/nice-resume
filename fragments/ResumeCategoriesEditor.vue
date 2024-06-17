@@ -28,6 +28,7 @@ import EditorCategory from "@/components/EditorCategory.vue";
 import ListActions from "@/components/ListActions.vue";
 import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
+import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
@@ -207,7 +208,15 @@ function toggleCategoryVisibility(category: Category) {
             <div class="uppercase font-bold text-lg mb-5">Category name</div>
           </header>
           <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="categoryName"
+              :settings="settings.categoryName"
+            />
             <TextSettingsEditor
+              property-name="categoryName"
+              :settings="settings.categoryName"
+            />
+            <TitleSettingsEditor
               property-name="categoryName"
               :settings="settings.categoryName"
             />
@@ -275,7 +284,7 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
           <header>
             <div class="uppercase font-bold text-lg mb-5">Highlight</div>
           </header>

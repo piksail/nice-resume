@@ -30,10 +30,11 @@ const settings = computed(() => {
 <template>
   <ul
     v-if="isHeaderSimple"
-    class="self-start"
+    class="flex flex-col self-start"
     :style="{
       ...getNodeStyle(settings.senderDetails, 'text'),
       ...getNodeStyle(settings.senderDetails, 'block'),
+      gap: `${settings.senderDetails.gap}px`,
     }"
   >
     <li v-for="detail in senderDetails" :key="detail">
@@ -42,10 +43,11 @@ const settings = computed(() => {
   </ul>
   <ul
     v-if="recipientDetails.length"
-    class="text-right self-end"
+    class="flex flex-col text-right self-end"
     :style="{
       ...getNodeStyle(settings.recipientDetails, 'text'),
       ...getNodeStyle(settings.recipientDetails, 'block'),
+      gap: `${settings.recipientDetails.gap}px`,
     }"
   >
     <li v-for="detail in recipientDetails" :key="detail">
