@@ -20,5 +20,6 @@ module.exports = {
   plugins: ["vue", "@typescript-eslint", "vuejs-accessibility", "vitest"],
   rules: {
     "vue/multi-word-component-names": "off",
+    "vue/no-mutating-props": ["error", { shallowOnly: true }],
   },
 };
