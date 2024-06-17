@@ -242,13 +242,10 @@ function importFromJsonResume(event: Event) {
         fileReaderEvent.target.result.toString(),
       );
 
-      console.log(toImport);
       // TODO start user-journey to apply mapping
-      // TODO imrpove mapping (startDate/endDate->period)
-      // TODO imrpove mapping (highlights/tags->handle)
-      // TODO imrpove mapping (references->lost)
-      // TODO imrpove mapping (awards->lost)
-      // TODO imrpove mapping (publications->lost)
+      // TODO improve mapping (startDate/endDate->period)
+      // TODO improve mapping (highlights/tags->handle)
+      // TODO improve mapping (references->lost)
 
       Object.entries(toImport).forEach(([key, value]) => {
         // @ts-expect-error Build object on the fly
