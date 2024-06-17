@@ -39,11 +39,50 @@ const description = ref(
           <Button class="block mx-auto mt-8">Get started</Button>
         </NuxtLink>
       </Card>
-      <div class="max-w-[800px] mx-auto">
+      <div class="max-w-screen-md mx-auto">
         <p class="text-lg font-thin text-right">
           No cookies. No signup. No payment.
         </p>
       </div>
+    </section>
+    <section class="p-20 max-w-screen-xl mx-auto">
+      <h2 class="text-4xl font-bold mb-32">Pick a design</h2>
+      <div class="relative h-[calc((400px*1.414)+50px)] mx-auto group">
+        <img
+          src="/paper-example.png"
+          alt="First example of a resume built with Nice Resume"
+          class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] -rotate-6 -translate-x-32 bg-white shadow group-hover:-translate-x-60 group-hover:-rotate-12 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/macchiato-example.png"
+          alt="Second example of a resume built with Nice Resume"
+          class="absolute z-[1] mx-auto left-0 right-0 -translate-y-6 w-[400px] h-[calc(400px*1.414)] bg-white shadow group-hover:-translate-y-10 group-hover:-rotate-1 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/stone-example.png"
+          alt="Third example of a resume built with Nice Resume"
+          class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] rotate-3 translate-x-32 bg-white shadow group-hover:translate-x-60 group-hover:rotate-6 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+      </div>
+    </section>
+    <section class="p-20 max-w-screen-xl mx-auto">
+      <h2 class="text-4xl font-bold mb-32">Build your resume</h2>
+      <p>TODO screenshot editor</p>
+    </section>
+    <section class="p-20 max-w-screen-xl mx-auto">
+      <h2 class="text-4xl font-bold mb-32">Write your cover letter</h2>
+      <div class="flex gap-10">
+        <p class="flex-1">TODO screenshot editor</p>
+        <img
+          src="/macchiato-cover-letter-example.png"
+          alt="Example of a cover letter written and styled with Nice Resume"
+          class="w-[400px] h-[calc(400px*1.414)] bg-white shadow hover:scale-105 transition-all"
+        />
+      </div>
+    </section>
+    <section class="p-20 max-w-screen-xl mx-auto">
+      <h2 class="text-4xl font-bold mb-32">Adapt the design to your need</h2>
+      <p class="flex-1">TODO screenshot style editor</p>
     </section>
     <NuxtPage />
   </NuxtLayout>
