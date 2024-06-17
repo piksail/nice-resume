@@ -22,7 +22,7 @@ const settings = computed(() => {
 <template>
   <p v-if="about" class="flex-1" :style="getNodeStyle(settings.about, 'title')">
     <!-- TODO this is from Tootpaste (blue quote) -->
-    <span class="text-3xl text-[color:var(--resume-color1)] leading-4">“</span>
+    <!-- <span class="text-3xl text-[color:var(--resume-color1)] leading-4">“</span> -->
     {{ about }}
   </p>
 </template>

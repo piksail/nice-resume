@@ -24,9 +24,8 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <!-- TODO remove that text-xs -->
   <div
-    class="relative h-full w-full flex flex-col text-xs"
+    class="relative h-full w-full flex flex-col"
     :style="{
       color: settings.document.color,
       fontFamily: settings.document.bodyFont,
