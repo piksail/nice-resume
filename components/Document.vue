@@ -10,7 +10,8 @@ import { templateSettings } from "@/globals";
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 const { settings: resumeStoreSettings } = storeToRefs(useResumeStore());
-const { settings: letterStoreSettings } = storeToRefs(useLetterStore());
+const { isHeaderSimple, settings: letterStoreSettings } =
+  storeToRefs(useLetterStore());
 
 const settings = computed(() => {
   if (isThemeCustomized.value) {
@@ -23,9 +24,8 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <!-- TODO remove that text-xs -->
   <div
-    class="relative h-full w-full flex flex-col text-xs"
+    class="relative h-full w-full flex flex-col"
     :style="{
       color: settings.document.color,
       fontFamily: settings.document.bodyFont,
@@ -34,12 +34,14 @@ const settings = computed(() => {
       marginRight: `${settings.document.margin[1]}px`,
       marginBottom: `${settings.document.margin[2]}px`,
       marginLeft: `${settings.document.margin[3]}px`,
-      borderTop: `solid ${settings.document.borderColor} ${settings.document.border[0]}px`,
-      borderRight: `solid ${settings.document.borderColor} ${settings.document.border[1]}px`,
-      borderBottom: `solid ${settings.document.borderColor} ${settings.document.border[2]}px`,
-      borderLeft: `solid ${settings.document.borderColor} ${settings.document.border[3]}px`,
+      borderTop: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[0]}px`,
+      borderRight: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[1]}px`,
+      borderBottom: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[2]}px`,
+      borderLeft: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[3]}px`,
     }"
   >
-    <slot />
+    <DocumentHeader v-if="documentType === 'resume' || !isHeaderSimple" />
+    <LetterBody v-if="documentType === 'letter'" />
+    <ResumeBody v-else />
   </div>
 </template>

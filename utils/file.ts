@@ -1,3 +1,6 @@
+/**
+ * Download a file without opening a tab.
+ */
 export function download(object: object, fileName: string) {
   const dataString =
     "data:text/json;charset=utf-8," +
