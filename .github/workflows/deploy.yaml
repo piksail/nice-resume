@@ -9,7 +9,7 @@ on:
 
 env:
   NODE_VERSION: 20.11
-  PNPM_VERSION: 8
+  PNPM_VERSION: 9
   IMAGE_NAME: nice-resume
 
 jobs:

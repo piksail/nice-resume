@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "nuxt-build-cache",
     "@nuxt/test-utils/module",
     "@pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/seo",
   ],
   ssr: false,
   app: {
@@ -27,5 +28,15 @@ export default defineNuxtConfig({
   // @ts-expect-error - TS cannot find schema for Nuxt modules
   piniaPersistedstate: {
     storage: "localStorage",
+  },
+  site: {
+    url: "https://piksail.github.io/nice-resume/",
+    name: "Nice Resume",
+    description: "CV/Resume template for developers",
+    defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
+    indexable: false,
+  },
+  seo: {
+    redirectToCanonicalSiteUrl: true,
   },
 });
