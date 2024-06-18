@@ -49,6 +49,7 @@ export const templates: Array<Template> = [
   "CottonCandy",
   "Cupcake",
   "Elegant",
+  "Kendall",
   "Macaron",
   "Macchiato",
   "NeoBrutalism",
@@ -77,6 +78,7 @@ export const discouragedLayoutTemplates: {
   CottonCandy: ["aside"],
   Cupcake: [],
   Elegant: [],
+  Kendall: [],
   Macaron: [],
   Macchiato: [],
   NeoBrutalism: [],
@@ -90,7 +92,6 @@ export const discouragedLayoutTemplates: {
   Wiki: [],
 };
 
-// TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Kendall by Adam Kendall
 // TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : StackOverflow (uncredited)
 // TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Paper ++ (uncredited)
 // TODO settings réduire espace entrelistmarker et text
@@ -207,7 +208,13 @@ export const resumeSettings: ResumeSettings = {
     gap: 16,
   },
   body: {
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "#000000",
+    borderRadius: 0,
     margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
   },
   category: {
     backgroundColor: "transparent",
@@ -381,7 +388,7 @@ export const letterSettings: LetterSettings = {
     margin: [0, 0, 0, 0], // If sender details is used, it is the first element on the document (no need for margins)
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
-    gap: 12,
+    gap: 0,
   },
   recipientDetails: {
     font: "inherit",
@@ -400,7 +407,7 @@ export const letterSettings: LetterSettings = {
     margin: [40, 0, 40, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
-    gap: 12,
+    gap: 0,
   },
   subject: {
     font: "inherit",
@@ -493,6 +500,21 @@ export const templateBaseSettings: TemplateBaseSettings = {
       "#333333",
     ],
     bodyFont: "Lato",
+  },
+  Kendall: {
+    isLetterMarginless: true,
+    colors: [
+      "#334960",
+      "#32475c",
+      "#227c74",
+      "#6f7f8f",
+      "#cccccc",
+      "#dddddd",
+      "#eeeeee",
+      "#ffffff",
+      "#363636",
+    ],
+    bodyFont: "Open Sans",
   },
   Macaron: {
     isLetterMarginless: true,
@@ -597,6 +619,11 @@ export const templateSettings: TemplateSettings = {
   },
   Elegant: {
     base: templateBaseSettings.Elegant,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
+  Kendall: {
+    base: templateBaseSettings.Kendall,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
@@ -1075,6 +1102,100 @@ if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
   templateSettings.Elegant.letter.reference.fontSize = 11;
   templateSettings.Elegant.letter.reference.fontWeight = 500;
   templateSettings.Elegant.letter.body.margin[0] = 20;
+}
+
+if (templateSettings.Kendall.resume && templateSettings.Kendall.letter) {
+  templateSettings.Kendall.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Kendall.resume.document.border = [10, 10, 10, 10];
+  templateSettings.Kendall.resume.document.borderColor =
+    templateSettings.Kendall.base.colors[0];
+  templateSettings.Kendall.resume.header.padding = [15, 15, 15, 15];
+  templateSettings.Kendall.resume.name.textAlign = "center";
+  templateSettings.Kendall.resume.name.isUppercase = true;
+  templateSettings.Kendall.resume.name.fontWeight = 800;
+  templateSettings.Kendall.resume.name.letterSpacing = -1;
+  templateSettings.Kendall.resume.name.fontSize = 26;
+  templateSettings.Kendall.resume.title.textAlign = "center";
+  templateSettings.Kendall.resume.title.isUppercase = true;
+  templateSettings.Kendall.resume.title.fontWeight = 700;
+  templateSettings.Kendall.resume.title.letterSpacing = -1;
+  templateSettings.Kendall.resume.title.fontSize = 21;
+  templateSettings.Kendall.resume.title.lineHeight = 1;
+  templateSettings.Kendall.resume.title.color =
+    templateSettings.Kendall.base.colors[3];
+  templateSettings.Kendall.resume.contactDetails.margin[0] = 15;
+  templateSettings.Kendall.resume.contactDetails.border[0] = 1;
+  templateSettings.Kendall.resume.contactDetails.borderColor =
+    templateSettings.Kendall.base.colors[4];
+  templateSettings.Kendall.resume.contactDetails.padding[0] = 15;
+  templateSettings.Kendall.resume.contactDetails.gap = 15;
+  templateSettings.Kendall.resume.contactDetails.iconColor =
+    templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.resume.body.padding = [15, 15, 15, 15];
+  templateSettings.Kendall.resume.category.gap = 15;
+  templateSettings.Kendall.resume.categoryName.isUppercase = true;
+  templateSettings.Kendall.resume.categoryName.fontWeight = 700;
+  templateSettings.Kendall.resume.categoryName.fontSize = 21;
+  templateSettings.Kendall.resume.categoryName.color =
+    templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.resume.entry.layout = 12;
+  templateSettings.Kendall.resume.entryOrganization.fontWeight = 700;
+  templateSettings.Kendall.resume.entryOrganization.fontSize = 17;
+  templateSettings.Kendall.resume.entryLocation.fontWeight = 700;
+  templateSettings.Kendall.resume.entryLocation.fontSize = 17;
+  templateSettings.Kendall.resume.entryTitle.fontWeight = 700;
+  templateSettings.Kendall.resume.entryTitle.fontSize = 17;
+  templateSettings.Kendall.resume.entryPeriod.color =
+    templateSettings.Kendall.base.colors[3];
+  templateSettings.Kendall.resume.entryHighlight.margin[0] = 10;
+  templateSettings.Kendall.resume.entryHighlight.listMarker = null;
+  templateSettings.Kendall.resume.entryHighlight.border = [1, 1, 1, 1];
+  templateSettings.Kendall.resume.entryHighlight.borderColor =
+    templateSettings.Kendall.base.colors[4];
+  templateSettings.Kendall.resume.entryHighlight.borderRadius = 4;
+  templateSettings.Kendall.resume.entryHighlight.padding = [10, 15, 10, 15];
+  templateSettings.Kendall.resume.entryTag.gap = 5;
+  templateSettings.Kendall.resume.entryTag.margin[0] = 10;
+  templateSettings.Kendall.resume.entryTag.backgroundColor =
+    templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.resume.entryTag.color =
+    templateSettings.Kendall.base.colors[7];
+  templateSettings.Kendall.resume.entryTag.fontSize = 12;
+  templateSettings.Kendall.resume.entryTag.padding = [1, 8, 1, 8];
+  templateSettings.Kendall.resume.entryTag.borderRadius = 4;
+  templateSettings.Kendall.letter.document.border = [10, 10, 10, 10];
+  templateSettings.Kendall.letter.document.borderColor =
+    templateSettings.Kendall.base.colors[0];
+  templateSettings.Kendall.letter.header.padding = [15, 15, 15, 15];
+  templateSettings.Kendall.letter.name.textAlign = "center";
+  templateSettings.Kendall.letter.name.isUppercase = true;
+  templateSettings.Kendall.letter.name.fontWeight = 800;
+  templateSettings.Kendall.letter.name.letterSpacing = -1;
+  templateSettings.Kendall.letter.name.fontSize = 26;
+  templateSettings.Kendall.letter.title.textAlign = "center";
+  templateSettings.Kendall.letter.title.isUppercase = true;
+  templateSettings.Kendall.letter.title.fontWeight = 700;
+  templateSettings.Kendall.letter.title.letterSpacing = -1;
+  templateSettings.Kendall.letter.title.fontSize = 21;
+  templateSettings.Kendall.letter.title.lineHeight = 1;
+  templateSettings.Kendall.letter.title.color =
+    templateSettings.Kendall.base.colors[3];
+  templateSettings.Kendall.letter.contactDetails.margin[0] = 15;
+  templateSettings.Kendall.letter.contactDetails.border[0] = 1;
+  templateSettings.Kendall.letter.contactDetails.borderColor =
+    templateSettings.Kendall.base.colors[4];
+  templateSettings.Kendall.letter.contactDetails.padding[0] = 15;
+  templateSettings.Kendall.letter.contactDetails.gap = 15;
+  templateSettings.Kendall.letter.contactDetails.iconColor =
+    templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.letter.senderDetails.color =
+    templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.letter.recipientDetails.color =
+    templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.letter.subject.isUppercase = true;
+  templateSettings.Kendall.letter.subject.fontWeight = 800;
+  templateSettings.Kendall.letter.reference.color =
+    templateSettings.Kendall.base.colors[2];
 }
 
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {

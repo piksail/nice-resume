@@ -5,6 +5,7 @@ export type Template =
   | "CottonCandy"
   | "Cupcake"
   | "Elegant"
+  | "Kendall"
   | "Macaron"
   | "Macchiato"
   | "NeoBrutalism"
@@ -127,7 +128,7 @@ export type ResumeSettings = CommonDocumentSettings & {
     width: number;
     gap: number; // Flex gap between aside and main columns
   };
-  body: Pick<BlockSettings, "margin">;
+  body: BlockSettings; // TODO allow editions of other body settings now (border, padding...)
   category: BlockSettings & {
     gap: number; // Flex gap between categories
   };
@@ -142,7 +143,7 @@ export type ResumeSettings = CommonDocumentSettings & {
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings;

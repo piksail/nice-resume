@@ -75,6 +75,7 @@ Templates offer an aside section on the left and a main section on the right tha
 Some themes come from other tools:
 
 - _Elegant_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=elegant) by Mudassir Ali
+- _Kendall_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=kendall) by Adam Kendall
 - _Macchiato_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=macchiato) by Alessandro Biondi
 - _OpenResume_ is the theme from [OpenResume](https://www.open-resume.com/)
 - _Paper_ is adapted from the _One Page Plus_ theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=onepage-plus)
