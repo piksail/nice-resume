@@ -62,6 +62,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           :id="`${propertyName}FontWeight`"
           v-model="settings.fontWeight"
           class="select block"
+          :disabled="!isThemeCustomized"
         >
           <option v-for="i in 9" :key="i" class="option">
             {{ `${i}00` }}

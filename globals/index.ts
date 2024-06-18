@@ -95,9 +95,7 @@ export const discouragedLayoutTemplates: {
 // TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : StackOverflow (uncredited)
 // TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Paper ++ (uncredited)
 // TODO settings réduire espace entrelistmarker et text
-// TODO bind les valeurs numériques avec du extralight, semibold dans le <select> https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight#common_weight_name_mapping
 // TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
-// TODO faire une passe sur l'editor pour customizer tout ce qui est customizable
 
 export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
 

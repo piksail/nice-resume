@@ -45,6 +45,8 @@ export type Font =
   | "Times New Roman"
   | "Yanone Kaffeesatz";
 
+export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
 export type SideSetting = number[];
 
 export type ListMarker = null | "circle" | "disc" | "hyphen" | "square";
@@ -71,7 +73,7 @@ export type TextSettings = {
   fontSize: number;
   lineHeight: number;
   letterSpacing: number;
-  fontWeight: number;
+  fontWeight: FontWeight;
   isItalic?: boolean;
   isUppercase?: boolean;
   color: string;
@@ -170,7 +172,7 @@ export type LetterSettings = CommonDocumentSettings & {
   body: {
     fontSize: number;
     lineHeight: number;
-    fontWeight: number;
+    fontWeight: FontWeight;
     color: string;
     indentation: number;
     isJustified: boolean;
