@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: 20.11
-  PNPM_VERSION: 8
+  PNPM_VERSION: 9
   # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
   A11Y_HOST: http://localhost:3000 # Nuxt preview default url:port
 
