@@ -1,20 +1,21 @@
 export default {
   legacy: false,
   locale: "en",
-  locales: [
-    {
-      code: "en",
-      name: "English",
-    },
-    {
-      code: "es",
-      name: "Español",
-    },
-    {
-      code: "fr",
-      name: "Français",
-    },
-  ],
+  locales: ["en", "fr", "br"],
+  // locales: [
+  //   {
+  //     code: "en",
+  //     name: "English",
+  //   },
+  //   {
+  //     code: "es",
+  //     name: "Español",
+  //   },
+  //   {
+  //     code: "fr",
+  //     name: "Français",
+  //   },
+  // ],
   detectBrowserLanguage: {
     useCookie: true,
     cookieKey: "i18n_redirected",

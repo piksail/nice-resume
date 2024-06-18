@@ -62,12 +62,12 @@ function exportResumeToJsonResume() {
 }
 
 function closeModal() {
-  // @ts-expect-error TODO type
+  // @ts-expect-error TOUDOUUUUUU
   dialog.value.close();
 }
 
 function openModal() {
-  // @ts-expect-error TODO type
+  // @ts-expect-error TOUDOUUUUUU
   dialog.value.showModal();
 }
 
@@ -150,11 +150,11 @@ watch(documentType, (newValue) => {
         <div class="flex gap-2 items-center">
           <input
             id="editorZoomLevel"
+            v-model="zoomLevel"
             class="w-36"
             type="range"
             min="50"
             max="150"
-            v-model="zoomLevel"
           />
           <output class="w-[3rem] text-blue-500">{{ zoomLevel }}%</output>
         </div>

@@ -40,16 +40,6 @@ export default defineNuxtConfig({
     redirectToCanonicalSiteUrl: true,
   },
   i18n: {
-    legacy: false,
-    locale: "en",
-    locales: ["en", "fr", "br"],
-    messages: {
-      en: {
-        welcome: "Welcome",
-      },
-      fr: {
-        welcome: "Bienvenue",
-      },
-    },
+    vueI18n: "./i18n.config.ts",
   },
 });
