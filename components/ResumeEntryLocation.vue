@@ -25,7 +25,10 @@ const settings = computed(() => {
 <template>
   <span
     v-if="entryLocation"
-    :style="getNodeStyle(settings.entryLocation, 'text')"
+    :style="{
+      ...getNodeStyle(settings.entryLocation, 'text'),
+      // order: settings.entryLocation.order,
+    }"
   >
     <span v-if="settings.entryLocation.beforeSeparator">
       {{ getStringFromSeparator(settings.entryLocation.beforeSeparator) }}

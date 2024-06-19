@@ -6,7 +6,10 @@ import { textSeparators } from "@/globals";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;
-  settings: TextSettings & { beforeSeparator?: TextSeparator };
+  settings: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
 }>();
 
 const { isThemeCustomized } = storeToRefs(useProfileStore());
@@ -15,6 +18,24 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 <template>
   <div class="flex flex-col gap-5">
     <div class="flex gap-5 flex-wrap">
+      <label :for="`${propertyName}TextSeparator`">
+        <span class="opacity-60">Order</span>
+        <select
+          :id="`${propertyName}Order`"
+          class="select block"
+          :disabled="!isThemeCustomized"
+          v-model="settings.order"
+        >
+          <option
+            class="option"
+            v-for="(i, index) in 4"
+            :key="index"
+            :value="i"
+          >
+            {{ i }}
+          </option>
+        </select>
+      </label>
       <label :for="`${propertyName}TextSeparator`">
         <span class="opacity-60">Text separator</span>
         <select

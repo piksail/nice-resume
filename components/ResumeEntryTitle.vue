@@ -23,7 +23,13 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <span v-if="entryTitle" :style="getNodeStyle(settings.entryTitle, 'text')">
+  <span
+    v-if="entryTitle"
+    :style="{
+      ...getNodeStyle(settings.entryTitle, 'text'),
+      // order: settings.entryTitle.order,
+    }"
+  >
     <span v-if="settings.entryTitle.beforeSeparator">
       {{ getStringFromSeparator(settings.entryTitle.beforeSeparator) }}
     </span>

@@ -158,10 +158,22 @@ export type ResumeSettings = CommonDocumentSettings & {
     layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
     gap: number; // Flex gap between entries
   };
-  entryTitle: TextSettings & { beforeSeparator?: TextSeparator };
-  entryPeriod: TextSettings & { beforeSeparator?: TextSeparator };
-  entryOrganization: TextSettings & { beforeSeparator?: TextSeparator };
-  entryLocation: TextSettings & { beforeSeparator?: TextSeparator };
+  entryTitle: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
+  entryPeriod: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
+  entryOrganization: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
+  entryLocation: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
   entrySummary: BlockSettings & TextSettings;
   entryHighlight: BlockSettings &
     TextSettings &
