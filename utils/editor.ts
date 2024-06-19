@@ -51,6 +51,8 @@ export function getListMarker(value: ListMarker) {
   switch (value) {
     case "hyphen":
       return "'- '";
+    case "triangle":
+      return "disclosure-closed";
     case null:
       return "none";
     default:
