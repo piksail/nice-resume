@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import { getStringFromSeparator } from "@/utils/string";
 import { getNodeStyle } from "@/utils/style";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
@@ -26,6 +27,9 @@ const settings = computed(() => {
     v-if="entryLocation"
     :style="getNodeStyle(settings.entryLocation, 'text')"
   >
+    <span v-if="settings.entryLocation.beforeSeparator">
+      {{ getStringFromSeparator(settings.entryLocation.beforeSeparator) }}
+    </span>
     {{ entryLocation }}
   </span>
 </template>

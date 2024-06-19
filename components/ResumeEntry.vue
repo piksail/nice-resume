@@ -37,12 +37,10 @@ const settings = computed(() => {
           v-if="entry.nature === 'experience'"
           :entry-organization="entry.organization"
         />
-        &nbsp;·&nbsp;
         <ResumeEntryPeriod
           v-if="entry.nature === 'experience'"
           :entry-period="entry.period"
         />
-        &nbsp;·&nbsp;
         <ResumeEntryLocation
           v-if="entry.nature === 'experience'"
           :entry-location="entry.location"
@@ -179,16 +177,6 @@ const settings = computed(() => {
               v-if="entry.nature === 'experience'"
               :entry-organization="entry.organization"
             />
-            <span
-              v-if="
-                entry.nature === 'experience' &&
-                entry.organization &&
-                entry.location
-              "
-              :style="{ fontSize: `${settings.entryLocation.fontSize}px` }"
-            >
-              &nbsp;-&nbsp;
-            </span>
             <ResumeEntryLocation
               v-if="entry.nature === 'experience'"
               :entry-location="entry.location"
@@ -213,15 +201,6 @@ const settings = computed(() => {
             v-if="entry.nature === 'experience'"
             :entry-organization="entry.organization"
           />
-          <!-- prettier-ignore -->
-          <span
-            v-if="
-              entry.nature === 'experience' &&
-              entry.organization &&
-              entry.location
-            "
-            :style="{ fontSize: `${settings.entryOrganization.fontSize}px`, color: settings.entryOrganization.color }"
-          >,&nbsp;</span>
           <ResumeEntryLocation
             v-if="entry.nature === 'experience'"
             :entry-location="entry.location"
@@ -244,14 +223,6 @@ const settings = computed(() => {
     <div class="flex flex-col">
       <div>
         <ResumeEntryTitle :entry-title="entry.title" />
-        <span
-          v-if="
-            entry.nature === 'experience' && entry.title && entry.organization
-          "
-          :style="{ fontSize: `${settings.entryOrganization.fontSize}px` }"
-        >
-          -
-        </span>
         <ResumeEntryOrganization
           v-if="entry.nature === 'experience'"
           :entry-organization="entry.organization"
@@ -262,15 +233,6 @@ const settings = computed(() => {
           v-if="entry.nature === 'experience'"
           :entry-period="entry.period"
         />
-        <!-- prettier-ignore -->
-        <span
-          v-if="
-            entry.nature === 'experience' &&
-            entry.period &&
-            entry.location
-          "
-          :style="{ fontSize: `${settings.entryPeriod.fontSize}px`, color: settings.entryPeriod.color }"
-        >,&nbsp;</span>
         <ResumeEntryLocation
           v-if="entry.nature === 'experience'"
           :entry-location="entry.location"
@@ -288,27 +250,10 @@ const settings = computed(() => {
     <div class="flex justify-between">
       <div>
         <ResumeEntryTitle :entry-title="entry.title" />
-        <span
-          v-if="
-            entry.nature === 'experience' && entry.title && entry.organization
-          "
-          :style="{ fontSize: `${settings.entryOrganization.fontSize}px` }"
-        >
-          &nbsp;|&nbsp;
-        </span>
         <ResumeEntryOrganization
           v-if="entry.nature === 'experience'"
           :entry-organization="entry.organization"
         />
-        <!-- prettier-ignore -->
-        <span
-          v-if="
-            entry.nature === 'experience' &&
-            entry.organization &&
-            entry.location
-          "
-          :style="{ fontSize: `${settings.entryOrganization.fontSize}px`, color: settings.entryOrganization.color }"
-        >,&nbsp;</span>
         <ResumeEntryLocation
           v-if="entry.nature === 'experience'"
           :entry-location="entry.location"
@@ -333,30 +278,10 @@ const settings = computed(() => {
         v-if="entry.nature === 'experience'"
         :entry-organization="entry.organization"
       />
-      <span
-        v-if="
-          entry.nature === 'experience' && entry.organization && entry.location
-        "
-        :style="{
-          fontSize: `${settings.entryLocation.fontSize}px`,
-          color: settings.entryLocation.color,
-        }"
-      >
-        &nbsp;|&nbsp;
-      </span>
       <ResumeEntryLocation
         v-if="entry.nature === 'experience'"
         :entry-location="entry.location"
       />
-      <span
-        v-if="entry.nature === 'experience' && entry.location && entry.period"
-        :style="{
-          fontSize: `${settings.entryPeriod.fontSize}px`,
-          color: settings.entryPeriod.color,
-        }"
-      >
-        &nbsp;|&nbsp;
-      </span>
       <ResumeEntryPeriod
         v-if="entry.nature === 'experience'"
         :entry-period="entry.period"

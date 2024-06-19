@@ -814,8 +814,10 @@ if (templateSettings.Care.resume && templateSettings.Care.letter) {
     templateSettings.Care.base.colors[2];
   templateSettings.Care.resume.entryOrganization.color =
     templateSettings.Care.base.colors[4];
+  templateSettings.Care.resume.entryOrganization.beforeSeparator = "|";
   templateSettings.Care.resume.entryLocation.color =
     templateSettings.Care.base.colors[1];
+  templateSettings.Care.resume.entryLocation.beforeSeparator = ",";
   templateSettings.Care.resume.entryPeriod.color =
     templateSettings.Care.base.colors[2];
   templateSettings.Care.resume.entryHighlight.listMarker = "disc";
@@ -916,10 +918,12 @@ if (
     templateBaseSettings.CottonCandy.colors[3];
   templateSettings.CottonCandy.resume.entryPeriod.color =
     templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryPeriod.beforeSeparator = "·";
   templateSettings.CottonCandy.resume.entryOrganization.color =
     templateBaseSettings.CottonCandy.colors[3];
   templateSettings.CottonCandy.resume.entryLocation.color =
     templateBaseSettings.CottonCandy.colors[3];
+  templateSettings.CottonCandy.resume.entryLocation.beforeSeparator = "·";
   templateSettings.CottonCandy.resume.entrySummary.color =
     templateBaseSettings.CottonCandy.colors[3];
   templateSettings.CottonCandy.resume.entryHighlight.color =
@@ -1060,6 +1064,7 @@ if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
     templateSettings.Elegant.base.colors[1];
   templateSettings.Elegant.resume.entryPeriod.fontSize = 11;
   templateSettings.Elegant.resume.entryPeriod.fontWeight = 500;
+  templateSettings.Elegant.resume.entryLocation.beforeSeparator = ",";
   templateSettings.Elegant.resume.entryLocation.color =
     templateSettings.Elegant.base.colors[1];
   templateSettings.Elegant.resume.entryLocation.fontSize = 11;
@@ -1430,9 +1435,11 @@ if (
   templateSettings.NeoBrutalism.resume.entryOrganization.fontWeight = 700;
   templateSettings.NeoBrutalism.resume.entryOrganization.color =
     templateSettings.NeoBrutalism.base.colors[8];
+  templateSettings.NeoBrutalism.resume.entryPeriod.beforeSeparator = "·";
   templateSettings.NeoBrutalism.resume.entryPeriod.fontWeight = 700;
   templateSettings.NeoBrutalism.resume.entryPeriod.color =
     templateSettings.NeoBrutalism.base.colors[8];
+  templateSettings.NeoBrutalism.resume.entryLocation.beforeSeparator = "·";
   templateSettings.NeoBrutalism.resume.entryLocation.fontWeight = 700;
   templateSettings.NeoBrutalism.resume.entryLocation.color =
     templateSettings.NeoBrutalism.base.colors[8];
@@ -1575,6 +1582,7 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
   templateSettings.Oilcloth.resume.entryTitle.fontWeight = 900;
   templateSettings.Oilcloth.resume.entryOrganization.fontWeight = 300;
   templateSettings.Oilcloth.resume.entryOrganization.lineHeight = 1;
+  templateSettings.Oilcloth.resume.entryLocation.beforeSeparator = "-";
   templateSettings.Oilcloth.resume.entryLocation.fontWeight = 300;
   templateSettings.Oilcloth.resume.entryLocation.lineHeight = 1;
   templateSettings.Oilcloth.resume.entrySummary.color =
@@ -1655,6 +1663,7 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.entry.layout = 7;
   templateSettings.OpenResume.resume.entryTitle.fontWeight = 600;
   templateSettings.OpenResume.resume.entrySummary.isItalic = true;
+  templateSettings.OpenResume.resume.entryLocation.beforeSeparator = ",";
   templateSettings.OpenResume.resume.entryHighlight.listMarker = "disc";
   templateSettings.OpenResume.resume.entryHighlight.fontSize = 12;
   templateSettings.OpenResume.resume.entryTag.margin[0] = 10;
@@ -1726,7 +1735,9 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
   templateSettings.Paper.resume.entry.layout = 9;
   templateSettings.Paper.resume.entryTitle.fontWeight = 700;
   templateSettings.Paper.resume.entryTitle.fontSize = 13;
+  templateSettings.Paper.resume.entryOrganization.beforeSeparator = "|";
   templateSettings.Paper.resume.entryOrganization.fontSize = 13;
+  templateSettings.Paper.resume.entryLocation.beforeSeparator = ",";
   templateSettings.Paper.resume.entryLocation.fontSize = 13;
   templateSettings.Paper.resume.entryPeriod.fontSize = 13;
   templateSettings.Paper.resume.entrySummary.fontSize = 13;
@@ -1890,8 +1901,10 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
   templateSettings.Red.resume.categoryName.fontSize = 28;
   templateSettings.Red.resume.categoryName.textAlign = "center";
   templateSettings.Red.resume.entry.layout = 8;
+  templateSettings.Red.resume.entryOrganization.beforeSeparator = "-";
   templateSettings.Red.resume.entryOrganization.color =
     templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.entryLocation.beforeSeparator = ",";
   templateSettings.Red.resume.entrySummary.fontSize = 12;
   templateSettings.Red.resume.entryHighlight.fontSize = 12;
   templateSettings.Red.resume.entryHighlight.isItalic = true;
@@ -1990,9 +2003,11 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.entryOrganization.fontSize = 12;
   templateSettings.Stone.resume.entryOrganization.color =
     templateBaseSettings.Stone.colors[1];
+  templateSettings.Stone.resume.entryLocation.beforeSeparator = "|";
   templateSettings.Stone.resume.entryLocation.fontSize = 12;
   templateSettings.Stone.resume.entryLocation.color =
     templateBaseSettings.Stone.colors[1];
+  templateSettings.Stone.resume.entryPeriod.beforeSeparator = "|";
   templateSettings.Stone.resume.entryPeriod.fontSize = 12;
   templateSettings.Stone.resume.entryPeriod.color =
     templateBaseSettings.Stone.colors[1];
@@ -2075,6 +2090,8 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
   templateSettings.Toothpaste.resume.entryTitle.fontSize = 20;
   templateSettings.Toothpaste.resume.entryTitle.color =
     templateBaseSettings.Toothpaste.colors[1];
+  templateSettings.Toothpaste.resume.entryPeriod.beforeSeparator = "·";
+  templateSettings.Toothpaste.resume.entryLocation.beforeSeparator = "·";
   templateSettings.Toothpaste.resume.entryHighlight.isItalic = true;
   templateSettings.Toothpaste.resume.entryTag.backgroundColor = "transparent";
   templateSettings.Toothpaste.resume.entryTag.border = [1, 1, 1, 1];
