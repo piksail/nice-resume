@@ -1,6 +1,6 @@
 # Nice Resume
 
-![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat) ![GitHub CI](https://github.com/Benjent/nice-resume/actions/workflows/deploy.yaml/badge.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat) ![GitHub CI](https://github.com/Piksail/nice-resume/actions/workflows/deploy.yaml/badge.svg)
 
 ![GitHub Pages badge](https://img.shields.io/badge/GitHub_Pages-222222?logo=github&logoColor=white) ![Nuxt badge](https://img.shields.io/badge/Nuxt-00DC82?logo=nuxtdotjs&logoColor=white) ![Tailwind CSS badge](https://img.shields.io/badge/Tailwind_CSS_-0ea5e9?logo=tailwindcss&logoColor=white) ![Conventional commits badge](https://img.shields.io/badge/Conventional_commits-fa6673?logo=conventionalcommits&logoColor=white) ![ESLint badge](https://img.shields.io/badge/ESLint-4b32c3?logo=eslint&logoColor=white)
 
@@ -8,7 +8,7 @@ Edit your resume and your cover letter, choose a nice template and save your wor
 
 This is a [Nuxt](https://nuxt.com/) project bootstrapped with Nuxi.
 
-[See it live](https://benjent.github.io/nice-resume/).
+[See it live](https://piksail.github.io/nice-resume/).
 
 ## Resources
 
