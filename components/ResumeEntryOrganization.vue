@@ -30,6 +30,6 @@ const settings = computed(() => {
     <span v-if="settings.entryOrganization.beforeSeparator">
       {{ getStringFromSeparator(settings.entryOrganization.beforeSeparator) }}
     </span>
-    {{ entryOrganization }}
+    <span>{{ entryOrganization }}</span>
   </span>
 </template>

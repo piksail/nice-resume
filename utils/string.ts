@@ -17,9 +17,9 @@ export function getStringFromSeparator(separator: TextSeparator) {
     case "·":
     case "*":
     case ">":
-      return ` ${separator} `;
+      return `\xa0${separator}\xa0`;
     case ",":
-      return `${separator} `;
+      return `${separator}\xa0`;
     default:
       return separator;
   }

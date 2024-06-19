@@ -29,6 +29,7 @@ const settings = computed(() => {
 </script>
 
 <template>
+  <!-- TODO remove all flex gaps -->
   <template v-if="settings.entry.layout === 1">
     <div class="flex gap-4 items-center">
       <ResumeEntryTitle :entry-title="entry.title" class="flex-1" />
@@ -343,7 +344,6 @@ const settings = computed(() => {
     <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
   <template v-else>
-    <!-- TODO customize gap-4 here -->
     <div class="flex gap-4 items-center">
       <ResumeEntryPeriod
         v-if="entry.nature === 'experience'"

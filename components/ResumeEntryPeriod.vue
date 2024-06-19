@@ -27,6 +27,6 @@ const settings = computed(() => {
     <span v-if="settings.entryPeriod.beforeSeparator">
       {{ getStringFromSeparator(settings.entryPeriod.beforeSeparator) }}
     </span>
-    {{ entryPeriod }}
+    <span>{{ entryPeriod }}</span>
   </span>
 </template>

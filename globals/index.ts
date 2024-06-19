@@ -13,6 +13,7 @@ import type {
   Template,
   TemplateBaseSettings,
   TemplateSettings,
+  TextSeparator,
 } from "@/types";
 
 export const documentTypes: Array<DocumentType> = ["resume", "letter"];
@@ -96,6 +97,16 @@ export const discouragedLayoutTemplates: {
 // TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Paper ++ (uncredited)
 // TODO settings réduire espace entrelistmarker et text
 // TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
+
+export const textSeparators: TextSeparator[] = [
+  "|",
+  "-",
+  "·",
+  "*",
+  ">",
+  ",",
+  " ",
+];
 
 export const listMarkers: ListMarker[] = [
   "circle",

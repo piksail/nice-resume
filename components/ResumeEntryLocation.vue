@@ -30,6 +30,6 @@ const settings = computed(() => {
     <span v-if="settings.entryLocation.beforeSeparator">
       {{ getStringFromSeparator(settings.entryLocation.beforeSeparator) }}
     </span>
-    {{ entryLocation }}
+    <span>{{ entryLocation }}</span>
   </span>
 </template>

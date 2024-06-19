@@ -27,6 +27,6 @@ const settings = computed(() => {
     <span v-if="settings.entryTitle.beforeSeparator">
       {{ getStringFromSeparator(settings.entryTitle.beforeSeparator) }}
     </span>
-    {{ entryTitle }}
+    <span>{{ entryTitle }}</span>
   </span>
 </template>
