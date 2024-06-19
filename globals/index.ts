@@ -97,7 +97,13 @@ export const discouragedLayoutTemplates: {
 // TODO settings réduire espace entrelistmarker et text
 // TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
 
-export const listMarkers: ListMarker[] = ["circle", "disc", "hyphen", "square"];
+export const listMarkers: ListMarker[] = [
+  "circle",
+  "disc",
+  "hyphen",
+  "square",
+  "triangle",
+];
 
 export const commonDocumentSettings: CommonDocumentSettings = {
   document: {
