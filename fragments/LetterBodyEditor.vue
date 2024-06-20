@@ -20,7 +20,7 @@ function addParagraph() {
 </script>
 
 <template>
-  <EditorCategory id="Body" class="w-full">
+  <EditorCategory id="Body">
     <template v-slot:header>Body</template>
     <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">

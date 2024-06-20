@@ -113,7 +113,6 @@ function toggleCategoryVisibility(category: Category) {
 
 <template>
   <EditorCategory
-    class="w-full"
     v-for="(category, categoryIndex) in categories"
     :key="categoryIndex"
     :id="category.name"

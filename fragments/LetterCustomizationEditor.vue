@@ -61,7 +61,7 @@ watch(
 </script>
 
 <template>
-  <EditorCategory id="Customization" class="w-full">
+  <EditorCategory id="Customization">
     <template v-slot:header>Customization</template>
     <ul class="flex flex-col gap-10 mb-4">
       <li class="border-b-2 border-white border-opacity-5 pb-12">

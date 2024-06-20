@@ -36,7 +36,7 @@ function addSenderDetail() {
 </script>
 
 <template>
-  <EditorCategory id="Header" class="w-full">
+  <EditorCategory id="Header">
     <template v-slot:header>Header</template>
     <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">
