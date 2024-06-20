@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "engines": {
-    "node": "20.11",
+    "node": "22.3",
     "pnpm": "^9.4.0"
   },
   "scripts": {
@@ -22,10 +22,10 @@
     "prepare": "husky",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "NUXT_DISABLE_BUILD_CACHE=true vitest run; pnpm exec playwright test e2e",
-    "test:unit": "NUXT_DISABLE_BUILD_CACHE=true vitest run",
-    "test:playwright": "NUXT_DISABLE_BUILD_CACHE=true pnpm exec playwright test e2e",
-    "coverage": "NUXT_DISABLE_BUILD_CACHE=true vitest run --coverage",
+    "test": "vitest run; pnpm exec playwright test e2e",
+    "test:unit": "vitest run",
+    "test:playwright": "pnpm exec playwright test e2e",
+    "coverage": "vitest run --coverage",
     "typescript": "nuxt typecheck"
   },
   "dependencies": {
@@ -34,7 +34,8 @@
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.12.2",
-    "nuxt-build-cache": "^0.1.1",
+    "@nuxt/kit": "^3.12.2",
+    "@nuxt/schema": "^3.12.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
@@ -43,7 +44,10 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@nuxt/eslint": "^0.3.13",
     "@nuxt/test-utils": "^3.13.1",
+    "@nuxt/types": "^2.17.4",
+    "@nuxt/typescript-build": "^3.0.2",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@playwright/test": "^1.44.1",
@@ -62,9 +66,9 @@
     "lint-staged": "^15.2.7",
     "nuxt-svgo": "^4.0.1",
     "prettier": "^3.3.2",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "vitest": "^1.6.0",
     "vue-tsc": "^1.8.27"
   },
-  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }

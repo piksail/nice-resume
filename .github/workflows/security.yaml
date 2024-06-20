@@ -3,10 +3,10 @@ name: Code checks
 on:
   push:
     branches: [$default-branch]
-  pull_request:
+  main:
 
 env:
-  NODE_VERSION: 20.11
+  NODE_VERSION: 22.3
   PNPM_VERSION: 9
 
 jobs:
