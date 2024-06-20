@@ -123,7 +123,7 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     backgroundColor: "#ffffff",
     borderStyle: "solid",
     borderColor: "#000000",
-    margin: [40, 40, 40, 40], // TODO [80, 80, 80, 80]; feel VERY nice
+    margin: [60, 60, 60, 60],
     border: [0, 0, 0, 0],
   },
   header: {
@@ -794,6 +794,16 @@ if (templateSettings.default.resume && templateSettings.default.letter) {
   templateSettings.default.resume.entryHighlight.fontSize = 13;
   templateSettings.default.resume.entryHighlight.isItalic = true;
   templateSettings.default.resume.entryTag.margin[0] = 15;
+  templateSettings.default.letter.name.fontWeight = 600;
+  templateSettings.default.letter.name.letterSpacing = 2;
+  templateSettings.default.letter.title.color =
+    templateBaseSettings.default.colors[1];
+  templateSettings.default.letter.title.letterSpacing = 1;
+  templateSettings.default.letter.about.isItalic = true;
+  templateSettings.default.letter.about.color =
+    templateBaseSettings.default.colors[1];
+  templateSettings.default.letter.contactDetails.margin = [10, 0, 10, 0];
+  templateSettings.default.letter.contactDetails.fontSize = 12;
 }
 
 if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
