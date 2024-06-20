@@ -21,7 +21,10 @@ function toggleDisplay() {
 </script>
 
 <template>
-  <div :id="id" class="flex flex-col bg-white bg-opacity-10 rounded w-full">
+  <div
+    :id="id"
+    class="flex flex-col max-w-[860px] bg-white bg-opacity-10 rounded w-full"
+  >
     <header
       :class="`p-6 flex justify-between items-center rounded bg-white ${isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'} text-pink-500 shadow-lg`"
     >

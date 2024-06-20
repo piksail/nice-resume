@@ -384,7 +384,7 @@ onMounted(() => {
       </template>
     </header>
     <div
-      class="flex flex-col gap-8 p-4 lg:p-8 w-full max-w-[860px] mx-auto overflow-y-auto scroll-smooth"
+      class="flex flex-col gap-8 p-4 lg:p-8 w-full mx-auto overflow-y-auto scroll-smooth"
     >
       <PersonalDetailsEditor />
       <template v-if="documentType === 'letter'">
