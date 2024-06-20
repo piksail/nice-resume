@@ -43,7 +43,7 @@ function changeContactDetaiType(
 </script>
 
 <template>
-  <EditorCategory id="Details" class="w-full">
+  <EditorCategory id="Details">
     <template v-slot:header>Details</template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="detailsName">
