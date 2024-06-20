@@ -14,6 +14,7 @@ export type Template =
   | "Paper"
   | "Pharmacy"
   | "Red"
+  | "StackOverflow"
   | "Stone"
   | "Toothpaste"
   | "Wiki";
@@ -28,6 +29,7 @@ export type Font =
   | "Caveat"
   | "Fira Sans"
   | "Fira Sans Condensed"
+  | "Helvetica"
   | "Josefin Sans"
   | "Kaisei Tokumin"
   | "Karla"
@@ -49,6 +51,10 @@ export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
 export type SideSetting = number[];
 
+export type BorderStyle = "dashed" | "dotted" | "solid";
+
+export type TextSeparator = "|" | "-" | "·" | "*" | ">" | "," | " ";
+
 export type ListMarker =
   | null
   | "circle"
@@ -67,7 +73,7 @@ export type BlockSettings = {
   backgroundColor: string;
   padding: SideSetting;
   border: SideSetting;
-  borderStyle: "dashed" | "dotted" | "solid";
+  borderStyle: BorderStyle;
   borderColor: string;
   borderRadius: number;
   margin: SideSetting;
@@ -107,7 +113,7 @@ export type DocumentSettings = {
   backgroundColor: string;
   margin: SideSetting;
   border: SideSetting;
-  borderStyle: "dashed" | "dotted" | "solid";
+  borderStyle: BorderStyle;
   borderColor: string;
 };
 
@@ -154,10 +160,22 @@ export type ResumeSettings = CommonDocumentSettings & {
     layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
     gap: number; // Flex gap between entries
   };
-  entryTitle: TextSettings;
-  entryPeriod: TextSettings;
-  entryOrganization: TextSettings;
-  entryLocation: TextSettings;
+  entryTitle: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
+  entryPeriod: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
+  entryOrganization: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
+  entryLocation: TextSettings & {
+    order: 1 | 2 | 3 | 4;
+    beforeSeparator?: TextSeparator;
+  };
   entrySummary: BlockSettings & TextSettings;
   entryHighlight: BlockSettings &
     TextSettings &

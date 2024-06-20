@@ -25,6 +25,7 @@ import {
 import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import Button from "@/components/Button.vue";
 import EditorCategory from "@/components/EditorCategory.vue";
+import EntryHeaderItemSettingsEditor from "@/components/EntryHeaderItemSettingsEditor.vue";
 import ListActions from "@/components/ListActions.vue";
 import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
@@ -231,6 +232,10 @@ function toggleCategoryVisibility(category: Category) {
               property-name="entryTitle"
               :settings="settings.entryTitle"
             />
+            <EntryHeaderItemSettingsEditor
+              property-name="entryTitle"
+              :settings="settings.entryTitle"
+            />
           </div>
         </li>
         <li class="border-b-2 border-white border-opacity-5 pb-12">
@@ -242,17 +247,24 @@ function toggleCategoryVisibility(category: Category) {
               property-name="entryPeriod"
               :settings="settings.entryPeriod"
             />
+            <EntryHeaderItemSettingsEditor
+              property-name="entryPeriod"
+              :settings="settings.entryPeriod"
+            />
           </div>
         </li>
         <li class="border-b-2 border-white border-opacity-5 pb-12">
           <header>
             <div class="uppercase font-bold text-lg mb-5">
               Entry organization
-              <!-- TODO custom label here-->
             </div>
           </header>
           <div class="flex flex-col gap-5">
             <TextSettingsEditor
+              property-name="entryOrganization"
+              :settings="settings.entryOrganization"
+            />
+            <EntryHeaderItemSettingsEditor
               property-name="entryOrganization"
               :settings="settings.entryOrganization"
             />
@@ -264,6 +276,10 @@ function toggleCategoryVisibility(category: Category) {
           </header>
           <div class="flex flex-col gap-5">
             <TextSettingsEditor
+              property-name="entryLocation"
+              :settings="settings.entryLocation"
+            />
+            <EntryHeaderItemSettingsEditor
               property-name="entryLocation"
               :settings="settings.entryLocation"
             />
