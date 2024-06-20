@@ -6,12 +6,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     "@pinia/nuxt",
+    "@nuxt/eslint",
     "@nuxtjs/tailwindcss",
     "nuxt-svgo",
-    "nuxt-build-cache",
     "@nuxt/test-utils/module",
     "@pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/seo",
+    "@nuxtjs/i18n",
   ],
   ssr: false,
   app: {
@@ -30,13 +31,15 @@ export default defineNuxtConfig({
     storage: "localStorage",
   },
   site: {
-    url: "https://piksail.github.io/nice-resume/",
+    url: "https://piksail.github.io/",
     name: "Nice Resume",
     description: "CV/Resume template for developers",
-    defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
     indexable: false,
   },
   seo: {
     redirectToCanonicalSiteUrl: true,
+  },
+  i18n: {
+    vueI18n: "./i18n.config.ts",
   },
 });

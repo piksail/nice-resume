@@ -10,8 +10,12 @@ import { documentTypes, templates } from "@/globals";
 import { download } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import packageJson from "../package.json";
+import { useI18n } from "#imports";
 
 console.info("Version: ", packageJson.version);
+
+// @ts-expect-error - You see the error here, it's not a problem
+const { setLocale } = useI18n();
 
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
 const { name, template, title } = storeToRefs(useProfileStore());
@@ -58,12 +62,12 @@ function exportResumeToJsonResume() {
 }
 
 function closeModal() {
-  // @ts-expect-error TODO type
+  // @ts-expect-error TOUDOUUUUUU
   dialog.value.close();
 }
 
 function openModal() {
-  // @ts-expect-error TODO type
+  // @ts-expect-error TOUDOUUUUUU
   dialog.value.showModal();
 }
 
@@ -109,9 +113,9 @@ watch(documentType, (newValue) => {
         class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center text-4xl font-black tracking-widest uppercase"
         :data-version="packageJson.version"
       >
-        Nice
+        {{ $t("nice") }}
         <br />
-        Resume
+        {{ $t("resume") }}
       </h1>
     </NuxtLink>
     <div class="flex items-end gap-8 h-[60%]">
@@ -146,11 +150,11 @@ watch(documentType, (newValue) => {
         <div class="flex gap-2 items-center">
           <input
             id="editorZoomLevel"
+            v-model="zoomLevel"
             class="w-36"
             type="range"
             min="50"
             max="150"
-            v-model="zoomLevel"
           />
           <output class="w-[3rem] text-blue-500">{{ zoomLevel }}%</output>
         </div>
@@ -160,6 +164,15 @@ watch(documentType, (newValue) => {
         <DocumentArrowDownIcon class="h-6" />
         Download
       </button>
+    </div>
+    <div>
+      <div>
+        <button @click="setLocale('en')">en</button>
+        <br />
+        <button @click="setLocale('fr')">fr</button>
+        <br />
+        <button @click="setLocale('br')">br</button>
+      </div>
     </div>
   </header>
 </template>
