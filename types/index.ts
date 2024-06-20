@@ -14,6 +14,7 @@ export type Template =
   | "Paper"
   | "Pharmacy"
   | "Red"
+  | "StackOverflow"
   | "Stone"
   | "Toothpaste"
   | "Wiki";
@@ -28,6 +29,7 @@ export type Font =
   | "Caveat"
   | "Fira Sans"
   | "Fira Sans Condensed"
+  | "Helvetica"
   | "Josefin Sans"
   | "Kaisei Tokumin"
   | "Karla"

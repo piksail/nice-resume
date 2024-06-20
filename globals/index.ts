@@ -59,6 +59,7 @@ export const templates: Array<Template> = [
   "Paper",
   "Pharmacy",
   "Red",
+  "StackOverflow",
   "Stone",
   "Toothpaste",
   "Wiki",
@@ -88,12 +89,12 @@ export const discouragedLayoutTemplates: {
   Paper: [],
   Pharmacy: [],
   Red: ["full"],
+  StackOverflow: [],
   Stone: [],
   Toothpaste: ["aside"],
   Wiki: [],
 };
 
-// TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : StackOverflow (uncredited)
 // TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Paper ++ (uncredited)
 // TODO settings réduire espace entrelistmarker et text
 // TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
@@ -591,6 +592,21 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Mulish",
     displayFont: "League Gothic",
   },
+  StackOverflow: {
+    isLetterMarginless: false,
+    colors: [
+      "#202931",
+      "#ff6d1f",
+      "#757575",
+      "#606d76",
+      "#f1f8ff",
+      "#3e6d8e",
+      "#dfeaf1",
+      "#ffffff",
+      "#40484f",
+    ],
+    bodyFont: "Helvetica",
+  },
   Stone: {
     isLetterMarginless: false,
     colors: ["#000000", "#a1a1aa", "#e4e4e7", "#52525b"],
@@ -683,6 +699,11 @@ export const templateSettings: TemplateSettings = {
   },
   Red: {
     base: templateBaseSettings.Red,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
+  StackOverflow: {
+    base: templateBaseSettings.StackOverflow,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
@@ -2013,6 +2034,93 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
   templateSettings.Red.letter.subject.fontWeight = 600;
   templateSettings.Red.letter.reference.color =
     templateBaseSettings.Red.colors[0];
+}
+
+if (
+  templateSettings.StackOverflow.resume &&
+  templateSettings.StackOverflow.letter
+) {
+  templateSettings.StackOverflow.resume.name.fontSize = 36;
+  templateSettings.StackOverflow.resume.name.fontWeight = 100;
+  templateSettings.StackOverflow.resume.name.lineHeight = 1.2;
+  templateSettings.StackOverflow.resume.title.fontSize = 22;
+  templateSettings.StackOverflow.resume.title.fontWeight = 300;
+  templateSettings.StackOverflow.resume.title.color =
+    templateSettings.StackOverflow.base.colors[3];
+  templateSettings.StackOverflow.resume.contactDetails.listOrientation = "row";
+  templateSettings.StackOverflow.resume.contactDetails.gap = 18;
+  templateSettings.StackOverflow.resume.contactDetails.color =
+    templateSettings.StackOverflow.base.colors[5];
+  templateSettings.StackOverflow.resume.contactDetails.iconColor =
+    templateSettings.StackOverflow.base.colors[6];
+  templateSettings.StackOverflow.resume.about.margin[0] = 20;
+  templateSettings.StackOverflow.resume.body.margin[0] = 10;
+  templateSettings.StackOverflow.resume.category.margin[0] = 10;
+  templateSettings.StackOverflow.resume.categoryName.isUppercase = true;
+  templateSettings.StackOverflow.resume.categoryName.fontSize = 12;
+  templateSettings.StackOverflow.resume.categoryName.fontWeight = 600;
+  templateSettings.StackOverflow.resume.categoryName.color =
+    templateSettings.StackOverflow.base.colors[1];
+  templateSettings.StackOverflow.resume.categoryName.width = "fit";
+  templateSettings.StackOverflow.resume.categoryName.padding = [0, 12, 6, 0];
+  templateSettings.StackOverflow.resume.categoryNameSeparator.position =
+    "right";
+  templateSettings.StackOverflow.resume.categoryNameSeparator.margin[2] = 8;
+  templateSettings.StackOverflow.resume.categoryNameSeparator.width = 100;
+  templateSettings.StackOverflow.resume.categoryNameSeparator.height = 1;
+  templateSettings.StackOverflow.resume.categoryNameSeparator.backgroundColor =
+    templateSettings.StackOverflow.base.colors[6];
+  templateSettings.StackOverflow.resume.entry.layout = 9;
+  templateSettings.StackOverflow.resume.entryTitle.fontWeight = 600;
+  templateSettings.StackOverflow.resume.entryOrganization.order = 2;
+  templateSettings.StackOverflow.resume.entryOrganization.beforeSeparator = "|";
+  templateSettings.StackOverflow.resume.entryOrganization.fontSize = 12;
+  templateSettings.StackOverflow.resume.entryOrganization.color =
+    templateSettings.StackOverflow.base.colors[3];
+  templateSettings.StackOverflow.resume.entryLocation.order = 3;
+  templateSettings.StackOverflow.resume.entryLocation.beforeSeparator = ",";
+  templateSettings.StackOverflow.resume.entryLocation.fontSize = 12;
+  templateSettings.StackOverflow.resume.entryLocation.color =
+    templateSettings.StackOverflow.base.colors[3];
+  templateSettings.StackOverflow.resume.entryPeriod.order = 4;
+  templateSettings.StackOverflow.resume.entryPeriod.fontWeight = 600;
+  templateSettings.StackOverflow.resume.entrySummary.fontSize = 12;
+  templateSettings.StackOverflow.resume.entryHighlight.fontSize = 12;
+  templateSettings.StackOverflow.resume.entryTag.gap = 2;
+  templateSettings.StackOverflow.resume.entryTag.padding = [4, 5, 4, 5];
+  templateSettings.StackOverflow.resume.entryTag.backgroundColor =
+    templateSettings.StackOverflow.base.colors[6];
+  templateSettings.StackOverflow.resume.entryTag.color =
+    templateSettings.StackOverflow.base.colors[5];
+  templateSettings.StackOverflow.resume.entryTag.fontSize = 12;
+  templateSettings.StackOverflow.resume.entryTag.borderRadius = 0;
+  templateSettings.StackOverflow.letter.name.fontSize = 36;
+  templateSettings.StackOverflow.letter.name.fontWeight = 100;
+  templateSettings.StackOverflow.letter.name.lineHeight = 1.2;
+  templateSettings.StackOverflow.letter.title.fontSize = 22;
+  templateSettings.StackOverflow.letter.title.fontWeight = 300;
+  templateSettings.StackOverflow.letter.title.color =
+    templateSettings.StackOverflow.base.colors[3];
+  templateSettings.StackOverflow.letter.contactDetails.listOrientation = "row";
+  templateSettings.StackOverflow.letter.contactDetails.gap = 18;
+  templateSettings.StackOverflow.letter.contactDetails.color =
+    templateSettings.StackOverflow.base.colors[5];
+  templateSettings.StackOverflow.letter.contactDetails.iconColor =
+    templateSettings.StackOverflow.base.colors[6];
+  templateSettings.StackOverflow.letter.senderDetails.fontSize = 12;
+  templateSettings.StackOverflow.letter.senderDetails.color =
+    templateSettings.StackOverflow.base.colors[3];
+  templateSettings.StackOverflow.letter.recipientDetails.fontSize = 12;
+  templateSettings.StackOverflow.letter.recipientDetails.color =
+    templateSettings.StackOverflow.base.colors[3];
+  templateSettings.StackOverflow.letter.subject.fontWeight = 600;
+  templateSettings.StackOverflow.letter.reference.padding = [4, 5, 4, 5];
+  templateSettings.StackOverflow.letter.reference.backgroundColor =
+    templateSettings.StackOverflow.base.colors[6];
+  templateSettings.StackOverflow.letter.reference.color =
+    templateSettings.StackOverflow.base.colors[5];
+  templateSettings.StackOverflow.letter.reference.fontSize = 12;
+  templateSettings.StackOverflow.letter.body.isJustified = false;
 }
 
 if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
