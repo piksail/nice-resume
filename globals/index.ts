@@ -95,9 +95,8 @@ export const discouragedLayoutTemplates: {
   Wiki: [],
 };
 
-// TODO add remaining themes from JSON Resume.oirg : https://jsonresume.org/themes : Paper ++ (uncredited)
 // TODO settings réduire espace entrelistmarker et text
-// TODO better UX for choosing header layout (en mettre moins + autoriser le d-flex ? avec order et tout ?)
+// TODO better UX for choosing header layout
 
 export const textSeparators: TextSeparator[] = [
   "|",
@@ -482,7 +481,7 @@ export const letterSettings: LetterSettings = {
 export const templateBaseSettings: TemplateBaseSettings = {
   default: {
     isLetterMarginless: false,
-    colors: ["#000000"],
+    colors: ["#f1f1f1", "#717171", "#000000"],
     bodyFont: "sans-serif",
   },
   Aster: {
@@ -763,6 +762,39 @@ function scaffoldTemplateSettings(
 Object.entries(templateBaseSettings).forEach(([key, value]) => {
   scaffoldTemplateSettings(key as Template, value, value.isLetterMarginless);
 });
+
+if (templateSettings.default.resume && templateSettings.default.letter) {
+  templateSettings.default.resume.header.margin[2] = 20;
+  templateSettings.default.resume.name.fontWeight = 600;
+  templateSettings.default.resume.name.letterSpacing = 2;
+  templateSettings.default.resume.title.color =
+    templateBaseSettings.default.colors[1];
+  templateSettings.default.resume.title.letterSpacing = 1;
+  templateSettings.default.resume.about.isItalic = true;
+  templateSettings.default.resume.about.color =
+    templateBaseSettings.default.colors[1];
+  templateSettings.default.resume.contactDetails.margin = [10, 0, 10, 0];
+  templateSettings.default.resume.contactDetails.fontSize = 12;
+  templateSettings.default.resume.category.margin[0] = 10;
+  templateSettings.default.resume.categoryName.fontSize = 16;
+  templateSettings.default.resume.categoryName.fontWeight = 600;
+  templateSettings.default.resume.categoryName.letterSpacing = 1;
+  templateSettings.default.resume.entry.layout = 2;
+  templateSettings.default.resume.entry.margin[2] = 30;
+  templateSettings.default.resume.entryTitle.fontSize = 15;
+  templateSettings.default.resume.entryPeriod.fontSize = 12;
+  templateSettings.default.resume.entryPeriod.color =
+    templateBaseSettings.default.colors[1];
+  templateSettings.default.resume.entryLocation.fontSize = 12;
+  templateSettings.default.resume.entryLocation.color =
+    templateBaseSettings.default.colors[1];
+  templateSettings.default.resume.entrySummary.margin[0] = 10;
+  templateSettings.default.resume.entryHighlight.margin[0] = 5;
+  templateSettings.default.resume.entryHighlight.lineHeight = 1.2;
+  templateSettings.default.resume.entryHighlight.fontSize = 13;
+  templateSettings.default.resume.entryHighlight.isItalic = true;
+  templateSettings.default.resume.entryTag.margin[0] = 15;
+}
 
 if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
   templateSettings.Aster.resume.document.margin = [0, 0, 0, 0];
