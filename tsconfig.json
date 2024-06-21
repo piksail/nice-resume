@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -9,9 +10,12 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["vitest/globals"],
-
-    /* Bundler mode */
+    "types": [
+      "@nuxt/types",
+      "@nuxt/typescript-build",
+      "@types/node",
+      "vitest/globals"
+    ] /* Bundler mode */,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
