@@ -5,7 +5,17 @@
     "module": "ESNext",
     "lib": ["ES2020", "ES2021.String", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "types": ["vitest/globals"],
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    },
+    "types": [
+      "@nuxt/types",
+      "@nuxt/typescript-build",
+      "@types/node",
+      "vitest/globals"
+    ],
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
