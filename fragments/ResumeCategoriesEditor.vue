@@ -194,6 +194,41 @@ function toggleCategoryVisibility(category: Category) {
       <ul class="flex flex-col gap-10 mb-4">
         <li class="border-b-2 border-white border-opacity-5 pb-12">
           <header>
+            <div class="uppercase font-bold text-lg mb-5">Aside</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="aside"
+              :settings="settings.aside"
+            />
+            <label for="asideWith">
+              <span class="opacity-60">Width</span>
+              <div class="flex gap-2 items-center">
+                <input
+                  id="asideWith"
+                  type="range"
+                  min="0"
+                  max="100"
+                  v-model="settings.aside.width"
+                />
+                <output class="w-[3rem]">{{ settings.aside.width }}%</output>
+              </div>
+            </label>
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Body</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="body"
+              :settings="settings.body"
+            />
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
             <div class="uppercase font-bold text-lg mb-5">Category</div>
           </header>
           <div class="flex flex-col gap-5">

@@ -31,12 +31,15 @@ const isLayoutFixed = computed(() =>
 </script>
 
 <template>
-  <div class="flex" :style="{ gap: `${settings.aside.gap}px` }">
+  <div class="flex">
     <aside
-      v-if="categories.some((category) => category.layout === 'aside')"
+      v-if="
+        !isLayoutFixed &&
+        categories.some((category) => category.layout === 'aside')
+      "
       class="flex flex-col"
       :style="{
-        gap: `${settings.category.gap}px`,
+        ...getNodeStyle(settings.aside, 'block'),
         width: `${settings.aside.width}%`,
       }"
     >
@@ -120,7 +123,9 @@ const isLayoutFixed = computed(() =>
     >
       <section
         v-for="(category, categoryIndex) in categories.filter(
-          (category) => category.isVisible && category.layout !== 'aside',
+          (category) =>
+            category.isVisible &&
+            ((!isLayoutFixed && category.layout !== 'aside') || isLayoutFixed),
         )"
         :key="categoryIndex"
         :class="

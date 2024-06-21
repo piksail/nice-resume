@@ -111,22 +111,6 @@ watch(
             v-model="settings.document.margin[i - 1]"
           />
         </div>
-        <div class="flex gap-5">
-          <label for="asideWith">
-            <!-- TODO we'll need to adhust aside margin as well -->
-            <span class="opacity-60">Aside width</span>
-            <div class="flex gap-2 items-center">
-              <input
-                id="asideWith"
-                type="range"
-                min="0"
-                max="100"
-                v-model="settings.aside.width"
-              />
-              <output class="w-[3rem]">{{ settings.aside.width }}%</output>
-            </div>
-          </label>
-        </div>
       </li>
     </ul>
   </EditorCategory>

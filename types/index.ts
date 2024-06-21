@@ -143,12 +143,10 @@ export type CommonDocumentSettings = {
 };
 
 export type ResumeSettings = CommonDocumentSettings & {
-  // TODO provide Pick<BlockSettings, "margin">; to aside as well
-  aside: {
+  aside: BlockSettings & {
     width: number;
-    gap: number; // Flex gap between aside and main columns
   };
-  body: BlockSettings; // TODO allow editions of other body settings now (border, padding...)
+  body: BlockSettings;
   category: BlockSettings & {
     gap: number; // Flex gap between categories
   };
