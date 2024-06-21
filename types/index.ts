@@ -125,6 +125,12 @@ export type CommonDocumentSettings = {
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
   about: BlockSettings & TitleSettings;
+  aboutQuote: Omit<
+    TextSettings,
+    "letterSpacing" | "lineHeight" | "isUppercase"
+  > & {
+    isShown: boolean;
+  };
   contactDetails: BlockSettings &
     TextSettings &
     ListSettings & {

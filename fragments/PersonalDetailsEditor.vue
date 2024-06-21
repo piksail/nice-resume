@@ -6,13 +6,16 @@ import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
 import type { ContactDetail } from "@/types";
-import { contactIcons, socialIcons } from "@/globals";
+import { contactIcons, fonts, socialIcons } from "@/globals";
+import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import EditorCategory from "@/components/EditorCategory.vue";
 import ListActions from "@/components/ListActions.vue";
+import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
+import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 
-const { name, title } = storeToRefs(useProfileStore());
+const { isThemeCustomized, name, title } = storeToRefs(useProfileStore());
 
-const { about, contactDetails } = storeToRefs(useResumeStore());
+const { about, contactDetails, settings } = storeToRefs(useResumeStore());
 
 function addContactDetail() {
   const contactDetail: ContactDetail = {
@@ -45,6 +48,202 @@ function changeContactDetaiType(
 <template>
   <EditorCategory id="Details">
     <template v-slot:header>Details</template>
+    <template v-slot:style>
+      <ul class="flex flex-col gap-10 mb-4">
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Name</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="name"
+              :settings="settings.name"
+            />
+            <TextSettingsEditor
+              property-name="name"
+              :settings="settings.name"
+            />
+            <TitleSettingsEditor
+              property-name="name"
+              :settings="settings.name"
+            />
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Title</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="title"
+              :settings="settings.title"
+            />
+            <TextSettingsEditor
+              property-name="title"
+              :settings="settings.title"
+            />
+            <TitleSettingsEditor
+              property-name="title"
+              :settings="settings.title"
+            />
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">About</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="about"
+              :settings="settings.about"
+            />
+            <TextSettingsEditor
+              property-name="about"
+              :settings="settings.about"
+            />
+            <TitleSettingsEditor
+              property-name="about"
+              :settings="settings.about"
+            />
+          </div>
+        </li>
+        <li class="border-b-2 border-white border-opacity-5 pb-12">
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">About quote</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <label for="aboutQuoteIsShown">
+              <input
+                id="aboutQuoteIsShown"
+                class="input"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="settings.aboutQuote.isShown"
+              />
+              <span class="opacity-60">Is shown</span>
+            </label>
+          </div>
+          <div class="flex flex-col gap-5 flex-wrap">
+            <div class="flex gap-5 flex-wrap">
+              <label class="flex flex-col" for="aboutQuoteFont">
+                <span class="opacity-60">Font</span>
+                <select
+                  id="aboutQuoteFont"
+                  class="select block"
+                  :disabled="!isThemeCustomized"
+                  v-model="settings.aboutQuote.font"
+                >
+                  <option class="option" value="inherit">
+                    default (inherit from document font)
+                  </option>
+                  <option v-for="font in fonts" :key="font" class="option">
+                    {{ font }}
+                  </option>
+                </select>
+              </label>
+              <Field
+                id="aboutQuoteFontSize"
+                label="Font size"
+                type="number"
+                :disabled="!isThemeCustomized"
+                v-model="settings.aboutQuote.fontSize"
+              />
+              <label class="flex flex-col" for="aboutQuoteFontWeight">
+                <span class="opacity-60">Font weight</span>
+                <select
+                  id="aboutQuoteFontWeight"
+                  v-model="settings.aboutQuote.fontWeight"
+                  class="select block"
+                  :disabled="!isThemeCustomized"
+                >
+                  <option v-for="i in 9" :key="i" class="option">
+                    {{ `${i}00` }}
+                  </option>
+                </select>
+              </label>
+              <label for="aboutQuoteIsItalic">
+                <input
+                  id="aboutQuoteIsItalic"
+                  class="input"
+                  type="checkbox"
+                  :disabled="!isThemeCustomized"
+                  v-model="settings.aboutQuote.isItalic"
+                />
+                <span class="opacity-60">Italic</span>
+              </label>
+              <Field
+                id="aboutQuoteColor"
+                label="Color"
+                type="color"
+                :disabled="!isThemeCustomized"
+                v-model="settings.aboutQuote.color"
+              />
+            </div>
+          </div>
+        </li>
+        <li>
+          <header>
+            <div class="uppercase font-bold text-lg mb-5">Contact details</div>
+          </header>
+          <div class="flex flex-col gap-5">
+            <BlockSettingsEditor
+              property-name="contactDetails"
+              :settings="settings.contactDetails"
+            />
+            <TextSettingsEditor
+              property-name="contactDetails"
+              :settings="settings.contactDetails"
+            />
+            <div class="flex gap-5 flew-wrap">
+              <label class="flex flex-col" for="contactDetailsAlignment">
+                <span class="opacity-60">Alignment</span>
+                <select
+                  id="contactDetailsAlignment"
+                  class="select block"
+                  :disabled="!isThemeCustomized"
+                  v-model="settings.contactDetails.alignment"
+                >
+                  <option class="option" value="start">start</option>
+                  <option class="option" value="center">center</option>
+                  <option class="option" value="end">end</option>
+                </select>
+              </label>
+              <Field
+                id="contactDetailsGap"
+                label="Gap"
+                type="number"
+                :disabled="!isThemeCustomized"
+                v-model="settings.contactDetails.gap"
+              />
+              <label for="contactDetailsIsIconFirst">
+                <input
+                  id="contactDetailsIsIconFirst"
+                  class="input"
+                  type="checkbox"
+                  :disabled="!isThemeCustomized"
+                  v-model="settings.aboutQuote.isShown"
+                />
+                <span class="opacity-60">Is icon first</span>
+              </label>
+              <Field
+                id="contactDetailsIconGap"
+                label="Icon gap"
+                type="number"
+                :disabled="!isThemeCustomized"
+                v-model="settings.contactDetails.iconGap"
+              />
+              <Field
+                id="contactDetailsIconColor"
+                label="Icon color"
+                type="color"
+                :disabled="!isThemeCustomized"
+                v-model="settings.contactDetails.iconColor"
+              />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="detailsName">
         <span class="opacity-60">Name</span>

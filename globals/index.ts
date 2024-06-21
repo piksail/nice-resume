@@ -190,6 +190,14 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
   },
+  aboutQuote: {
+    font: "inherit",
+    fontSize: 14 * 3,
+    fontWeight: 400,
+    isItalic: false,
+    color: "currentColor",
+    isShown: false,
+  },
   contactDetails: {
     font: "inherit",
     fontSize: 14,
@@ -983,6 +991,9 @@ if (
     templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.resume.contactDetails.iconColor =
     templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.aboutQuote.isShown = true;
+  templateSettings.CottonCandy.resume.aboutQuote.color =
+    templateBaseSettings.CottonCandy.colors[1];
   templateSettings.CottonCandy.resume.category.gap = 0;
   templateSettings.CottonCandy.resume.category.padding = [24, 40, 24, 40];
   templateSettings.CottonCandy.resume.category.backgroundColor =
