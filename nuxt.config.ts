@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/tailwindcss",
     "nuxt-svgo",
-    "nuxt-build-cache",
     "@nuxt/test-utils/module",
     "@pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/seo",

@@ -1,9 +1,10 @@
 name: Code checks
 
 on:
+  workflow_dispatch:
   push:
-    branches: [$default-branch]
-  pull_request:
+    branches:
+      - main
 
 env:
   NODE_VERSION: 20.11
