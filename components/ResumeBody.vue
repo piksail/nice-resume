@@ -23,6 +23,7 @@ const {
   contactDetails,
   isHeaderSimple,
   settings: storeSettings,
+  simpleHeaderCategoryName,
 } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
@@ -88,8 +89,7 @@ const bodyCategories = computed(() =>
           paddingLeft: `${settings.category.padding[3]}px`,
         }"
       >
-        <!-- TODO allow custom name -->
-        <ResumeCategoryName :category-name="'About'" />
+        <ResumeCategoryName :category-name="simpleHeaderCategoryName" />
         <div
           class="flex flex-col"
           :style="{
@@ -204,8 +204,7 @@ const bodyCategories = computed(() =>
           ...getNodeStyle(settings.category, 'block'),
         }"
       >
-        <!-- TODO allow custom name -->
-        <ResumeCategoryName :category-name="'About'" />
+        <ResumeCategoryName :category-name="simpleHeaderCategoryName" />
         <div
           class="flex flex-col flex-1"
           :style="{
