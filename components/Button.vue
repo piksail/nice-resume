@@ -23,7 +23,7 @@ defineEmits(["click"]);
       :class="
         inverted
           ? 'text-white'
-          : 'textGradient  font-black tracking-widest uppercase'
+          : 'textGradient font-black tracking-widest uppercase'
       "
     >
       <slot />

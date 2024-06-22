@@ -536,6 +536,13 @@ function toggleCategoryVisibility(category: Category) {
   </EditorCategory>
 
   <footer class="flex justify-center">
-    <Button class="shadow-lg w-full" @click="addCategory">Add category</Button>
+    <button
+      class="button w-full border-dashed border-white/20 border-2"
+      @click="addCategory"
+    >
+      <span class="buttonLabel font-black tracking-widest uppercase">
+        Add category
+      </span>
+    </button>
   </footer>
 </template>
