@@ -43,6 +43,7 @@ So far, tools we believe are best out there are :
 
 - [Nuxt](https://nuxt.com/)
 - [Vue](https://vuejs.org/)
+- [Headless UI](https://headlessui.com/v1/vue)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Heroicons](https://heroicons.com/)
 - [Simple Icons](https://simpleicons.org/) (for brand icons) through [Vue3 Simple Icons](https://vue3-simple-icons.wyatt-herkamp.dev/)

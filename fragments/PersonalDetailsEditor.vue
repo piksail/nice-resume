@@ -50,9 +50,9 @@ function changeContactDetaiType(
     <template v-slot:header>Details</template>
     <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Name</div>
+            <div class="sectionHeading">Name</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -69,9 +69,9 @@ function changeContactDetaiType(
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Title</div>
+            <div class="sectionHeading">Title</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -88,9 +88,9 @@ function changeContactDetaiType(
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">About</div>
+            <div class="sectionHeading">About</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -107,9 +107,9 @@ function changeContactDetaiType(
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">About quote</div>
+            <div class="sectionHeading">About quote</div>
           </header>
           <div class="flex flex-col gap-5">
             <label for="aboutQuoteIsShown">
@@ -120,13 +120,13 @@ function changeContactDetaiType(
                 :disabled="!isThemeCustomized"
                 v-model="settings.aboutQuote.isShown"
               />
-              <span class="opacity-60">Is shown</span>
+              <span class="label">Is shown</span>
             </label>
           </div>
           <div class="flex flex-col gap-5 flex-wrap">
             <div class="flex gap-5 flex-wrap">
               <label class="flex flex-col" for="aboutQuoteFont">
-                <span class="opacity-60">Font</span>
+                <span class="label">Font</span>
                 <select
                   id="aboutQuoteFont"
                   class="select block"
@@ -149,7 +149,7 @@ function changeContactDetaiType(
                 v-model="settings.aboutQuote.fontSize"
               />
               <label class="flex flex-col" for="aboutQuoteFontWeight">
-                <span class="opacity-60">Font weight</span>
+                <span class="label">Font weight</span>
                 <select
                   id="aboutQuoteFontWeight"
                   v-model="settings.aboutQuote.fontWeight"
@@ -169,7 +169,7 @@ function changeContactDetaiType(
                   :disabled="!isThemeCustomized"
                   v-model="settings.aboutQuote.isItalic"
                 />
-                <span class="opacity-60">Italic</span>
+                <span class="label">Italic</span>
               </label>
               <Field
                 id="aboutQuoteColor"
@@ -183,7 +183,7 @@ function changeContactDetaiType(
         </li>
         <li>
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Contact details</div>
+            <div class="sectionHeading">Contact details</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -196,7 +196,7 @@ function changeContactDetaiType(
             />
             <div class="flex gap-5 flew-wrap">
               <label class="flex flex-col" for="contactDetailsAlignment">
-                <span class="opacity-60">Alignment</span>
+                <span class="label">Alignment</span>
                 <select
                   id="contactDetailsAlignment"
                   class="select block"
@@ -223,7 +223,7 @@ function changeContactDetaiType(
                   :disabled="!isThemeCustomized"
                   v-model="settings.aboutQuote.isShown"
                 />
-                <span class="opacity-60">Is icon first</span>
+                <span class="label">Is icon first</span>
               </label>
               <Field
                 id="contactDetailsIconGap"
@@ -246,20 +246,20 @@ function changeContactDetaiType(
     </template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="detailsName">
-        <span class="opacity-60">Name</span>
+        <span class="label">Name</span>
         <input id="detailsName" class="input" v-model="name" />
       </label>
       <label class="flex flex-col" for="detailsTitle">
-        <span class="opacity-60">Title</span>
+        <span class="label">Title</span>
         <input id="detailsTitle" class="input" v-model="title" />
       </label>
       <label class="flex flex-col" for="detailsAbout">
-        <span class="opacity-60">About</span>
+        <span class="label">About</span>
         <textarea id="detailsAbout" class="input" v-model="about" />
       </label>
       <label class="flex flex-col" for="contactDetails">
         <div class="flex gap-2">
-          <span class="opacity-60">Contact details</span>
+          <span class="label">Contact details</span>
           <button
             title="Add detail"
             class="bg-blue-500 size-7 text-white rounded-full"
@@ -284,9 +284,9 @@ function changeContactDetaiType(
                 v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"
               />
-              <!-- TODO use nice toggle component -->
+              <!-- TODO use nice switch component -->
               <label for="documentType">
-                Type
+                <span class="label">Type</span>
                 <select
                   id="detailType"
                   :value="detail.type"
@@ -304,7 +304,7 @@ function changeContactDetaiType(
                 </select>
               </label>
               <label for="detailIcon">
-                Icon
+                <span class="label">Icon</span>
                 <select
                   id="detailIcon"
                   :value="detail.icon"

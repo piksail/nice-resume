@@ -64,26 +64,21 @@ watch(
   <EditorCategory id="Customization">
     <template v-slot:header>Customization</template>
     <ul class="flex flex-col gap-10 mb-4">
-      <li class="border-b-2 border-white border-opacity-5 pb-12">
+      <li class="sectionSeparator">
         <div class="flex gap-5">
-          <!-- TODO use nice toggle component -->
-          <label class="cursor-pointer" for="isThemeCustomized">
-            <input
-              id="isThemeCustomized"
-              class="input"
-              type="checkbox"
-              v-model="isThemeCustomized"
-            />
-            <span class="opacity-60">Use custom theme</span>
-          </label>
+          <Field
+            type="toggle"
+            label="Use custom theme"
+            v-model="isThemeCustomized"
+          />
           <Button v-if="isThemeCustomized" @click="resetStyle">
             Reset style
           </Button>
         </div>
       </li>
-      <li class="border-b-2 border-white border-opacity-5 pb-12">
+      <li class="sectionSeparator">
         <header>
-          <div class="uppercase font-bold text-lg mb-5">Palette</div>
+          <div class="sectionHeading">Palette</div>
         </header>
         <div class="flex gap-5">
           <Field
@@ -99,7 +94,7 @@ watch(
       </li>
       <li>
         <header>
-          <div class="uppercase font-bold text-lg mb-5">Document</div>
+          <div class="sectionHeading">Document</div>
         </header>
         <div class="flex gap-5">
           <Field
@@ -115,7 +110,7 @@ watch(
         </div>
         <div class="flex gap-5">
           <label class="flex flex-col" for="documentBodyFont">
-            <span class="opacity-60">Font</span>
+            <span class="label">Font</span>
             <select
               id="documentBodyFont"
               class="select block"

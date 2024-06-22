@@ -17,7 +17,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
   <div class="flex flex-col gap-5 flex-wrap">
     <div class="flex gap-5 flex-wrap">
       <label class="flex flex-col" :for="`${propertyName}Font`">
-        <span class="opacity-60">Font</span>
+        <span class="label">Font</span>
         <select
           :id="`${propertyName}Font`"
           class="select block"
@@ -57,7 +57,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
     </div>
     <div class="flex gap-5 flex-wrap">
       <label class="flex flex-col" :for="`${propertyName}FontWeight`">
-        <span class="opacity-60">Font weight</span>
+        <span class="label">Font weight</span>
         <select
           :id="`${propertyName}FontWeight`"
           v-model="settings.fontWeight"
@@ -77,7 +77,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           :disabled="!isThemeCustomized"
           v-model="settings.isItalic"
         />
-        <span class="opacity-60">Italic</span>
+        <span class="label">Italic</span>
       </label>
       <label :for="`${propertyName}IsUppercase`">
         <input
@@ -87,7 +87,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           :disabled="!isThemeCustomized"
           v-model="settings.isUppercase"
         />
-        <span class="opacity-60">Uppercase</span>
+        <span class="label">Uppercase</span>
       </label>
       <Field
         :id="`${propertyName}Color`"

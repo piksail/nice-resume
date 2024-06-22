@@ -123,7 +123,7 @@ function toggleCategoryVisibility(category: Category) {
       <template v-if="category.isVisible">
         <div class="flex items-baseline gap-8">
           <label for="name">
-            Category name
+            <span class="label opacity-100">Category name</span>
             <input
               id="name"
               class="input text-blue-500 block bg-blue-700 bg-opacity-5"
@@ -131,7 +131,7 @@ function toggleCategoryVisibility(category: Category) {
             />
           </label>
           <label for="type">
-            Type
+            <span class="label opacity-100">Type</span>
             <select
               id="type"
               :value="category.type"
@@ -149,7 +149,7 @@ function toggleCategoryVisibility(category: Category) {
             </select>
           </label>
           <label for="layout">
-            Layout
+            <span class="label opacity-100">Layout</span>
             <select
               id="layout"
               :disabled="fixedLayoutTemplates.includes(template)"
@@ -192,9 +192,9 @@ function toggleCategoryVisibility(category: Category) {
     </template>
     <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Aside</div>
+            <div class="sectionHeading">Aside</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -203,7 +203,7 @@ function toggleCategoryVisibility(category: Category) {
             />
             <div class="flex gap-5 flex-wrap">
               <label for="asideWith">
-                <span class="opacity-60">Width</span>
+                <span class="label">Width</span>
                 <div class="flex gap-2 items-center">
                   <input
                     id="asideWith"
@@ -223,14 +223,14 @@ function toggleCategoryVisibility(category: Category) {
                   :disabled="!isThemeCustomized"
                   v-model="settings.aside.isRightPositioned"
                 />
-                <span class="opacity-60">Right side</span>
+                <span class="label">Right side</span>
               </label>
             </div>
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Body</div>
+            <div class="sectionHeading">Body</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -239,9 +239,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Category</div>
+            <div class="sectionHeading">Category</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -250,9 +250,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Category name</div>
+            <div class="sectionHeading">Category name</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -269,9 +269,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Entry title</div>
+            <div class="sectionHeading">Entry title</div>
           </header>
           <div class="flex flex-col gap-5">
             <TextSettingsEditor
@@ -284,9 +284,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Entry period</div>
+            <div class="sectionHeading">Entry period</div>
           </header>
           <div class="flex flex-col gap-5">
             <TextSettingsEditor
@@ -299,11 +299,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">
-              Entry organization
-            </div>
+            <div class="sectionHeading">Entry organization</div>
           </header>
           <div class="flex flex-col gap-5">
             <TextSettingsEditor
@@ -316,9 +314,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Entry location</div>
+            <div class="sectionHeading">Entry location</div>
           </header>
           <div class="flex flex-col gap-5">
             <TextSettingsEditor
@@ -331,9 +329,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Entry summary</div>
+            <div class="sectionHeading">Entry summary</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -346,9 +344,9 @@ function toggleCategoryVisibility(category: Category) {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Highlight</div>
+            <div class="sectionHeading">Highlight</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -393,12 +391,10 @@ function toggleCategoryVisibility(category: Category) {
       <li
         v-for="(entry, entryIndex) in category.entries"
         :key="entryIndex"
-        class="border-b-2 border-white border-opacity-5 pb-12"
+        class="sectionSeparator"
       >
         <header class="flex items-center justify-between">
-          <div class="uppercase font-bold text-lg mb-5">
-            Entry #{{ entryIndex + 1 }}
-          </div>
+          <div class="sectionHeading">Entry #{{ entryIndex + 1 }}</div>
           <ListActions
             class="mb-2"
             :index="entryIndex"
@@ -410,14 +406,14 @@ function toggleCategoryVisibility(category: Category) {
         </header>
         <div class="flex flex-col gap-5">
           <label class="flex flex-col flex-1" for="title">
-            <span class="opacity-60">
+            <span class="label">
               {{ getEntryTitleLabel(entry.type) }}
             </span>
             <input id="title" class="input" v-model="entry.title" />
           </label>
           <template v-if="entry.nature === 'experience'">
             <label class="flex flex-col" for="organization">
-              <span class="opacity-60">
+              <span class="label">
                 {{ getExperienceOrganizationLabel(entry.type) }}
               </span>
               <input
@@ -427,21 +423,21 @@ function toggleCategoryVisibility(category: Category) {
               />
             </label>
             <label class="flex flex-col" for="location">
-              <span class="opacity-60">Location</span>
+              <span class="label">Location</span>
               <input id="location" class="input" v-model="entry.location" />
             </label>
             <label class="flex flex-col" for="period">
-              <span class="opacity-60">Period</span>
+              <span class="label">Period</span>
               <input id="period" class="input" v-model="entry.period" />
             </label>
             <label class="flex flex-col" for="summary">
-              <span class="opacity-60">Description</span>
+              <span class="label">Description</span>
               <textarea id="summary" class="input" v-model="entry.summary" />
             </label>
           </template>
           <label class="flex flex-col" for="highlights">
             <div class="flex gap-2">
-              <span class="opacity-60">Highlights</span>
+              <span class="label">Highlights</span>
               <button
                 id="highlights"
                 title="Add highlight"
@@ -479,7 +475,7 @@ function toggleCategoryVisibility(category: Category) {
           </label>
           <label class="flex flex-col" for="tags">
             <div class="flex gap-2">
-              <span class="opacity-60">Tags</span>
+              <span class="label">Tags</span>
               <button
                 id="tags"
                 title="Add tag"

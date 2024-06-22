@@ -26,7 +26,7 @@ function addParagraph() {
       <ul class="flex flex-col gap-10 mb-4">
         <li>
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Paragraphs</div>
+            <div class="sectionHeading">Paragraphs</div>
           </header>
           <div class="flex flex-col gap-5">
             <div class="flex gap-5 flex-wrap">
@@ -67,7 +67,7 @@ function addParagraph() {
                   :disabled="!isThemeCustomized"
                   v-model="settings.body.isJustified"
                 />
-                <span class="opacity-60">Justified</span>
+                <span class="label">Justified</span>
               </label>
               <label for="bodyIsSignatureRightAligned">
                 <input
@@ -77,7 +77,7 @@ function addParagraph() {
                   :disabled="!isThemeCustomized"
                   v-model="settings.body.isSignatureRightAligned"
                 />
-                <span class="opacity-60">Signature on the right</span>
+                <span class="label">Signature on the right</span>
               </label>
             </div>
             <div class="flex gap-5 flex-wrap">
@@ -105,7 +105,7 @@ function addParagraph() {
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="paragraphList">
         <div class="flex gap-2">
-          <span class="opacity-60">Paragraphs</span>
+          <span class="label">Paragraphs</span>
           <button
             title="Add paragraph"
             class="bg-blue-500 size-7 text-white rounded-full"

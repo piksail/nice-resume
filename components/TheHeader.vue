@@ -116,7 +116,7 @@ watch(documentType, (newValue) => {
     </NuxtLink>
     <div class="flex items-end gap-8 h-[60%]">
       <label for="template">
-        Template
+        <span class="label opacity-100">Template</span>
         <select id="template" v-model="template" class="select block">
           <option v-for="template in templates" :key="template" class="option">
             {{ template }}
@@ -125,7 +125,7 @@ watch(documentType, (newValue) => {
       </label>
 
       <label for="documentType">
-        Document
+        <span class="label opacity-100">Document</span>
         <select
           id="documentType"
           v-model="documentType"
@@ -142,7 +142,7 @@ watch(documentType, (newValue) => {
       </label>
 
       <label for="editorZoomLevel">
-        Zoom
+        <span class="label opacity-100">Zoom</span>
         <div class="flex gap-2 items-center">
           <input
             id="editorZoomLevel"

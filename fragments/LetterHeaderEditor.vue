@@ -40,10 +40,10 @@ function addSenderDetail() {
     <template v-slot:header>Header</template>
     <template v-slot:style>
       <ul class="flex flex-col gap-10 mb-4">
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
             <!-- TODO sender is not always set (condition with "use simple layout") -->
-            <div class="uppercase font-bold text-lg mb-5">Sender</div>
+            <div class="sectionHeading">Sender</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -63,9 +63,9 @@ function addSenderDetail() {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Recipient</div>
+            <div class="sectionHeading">Recipient</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -85,9 +85,9 @@ function addSenderDetail() {
             />
           </div>
         </li>
-        <li class="border-b-2 border-white border-opacity-5 pb-12">
+        <li class="sectionSeparator">
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Subject</div>
+            <div class="sectionHeading">Subject</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -106,7 +106,7 @@ function addSenderDetail() {
         </li>
         <li>
           <header>
-            <div class="uppercase font-bold text-lg mb-5">Reference</div>
+            <div class="sectionHeading">Reference</div>
           </header>
           <div class="flex flex-col gap-5">
             <BlockSettingsEditor
@@ -127,19 +127,14 @@ function addSenderDetail() {
     </template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="senderDetails">
-        <!-- TODO use nice toggle component -->
-        <label class="cursor-pointer" for="isHeaderSimple">
-          <input
-            id="isHeaderSimple"
-            class="input"
-            type="checkbox"
-            v-model="isHeaderSimple"
-          />
-          <span class="opacity-60">Use simple layout</span>
-        </label>
+        <Field
+          type="toggle"
+          label="Use sender layout"
+          v-model="isHeaderSimple"
+        />
         <template v-if="isHeaderSimple">
           <div class="flex gap-2">
-            <span class="opacity-60">Sender details</span>
+            <span class="label">Sender details</span>
             <button
               title="Add detail"
               class="bg-blue-500 size-7 text-white rounded-full"
@@ -177,7 +172,7 @@ function addSenderDetail() {
       </label>
       <label class="flex flex-col" for="recipientDetails">
         <div class="flex gap-2">
-          <span class="opacity-60">Recipient details</span>
+          <span class="label">Recipient details</span>
           <button
             title="Add detail"
             class="bg-blue-500 size-7 text-white rounded-full"
@@ -213,11 +208,11 @@ function addSenderDetail() {
         </ul>
       </label>
       <label class="flex flex-col" for="letterSubject">
-        <span class="opacity-60">Subject</span>
+        <span class="label">Subject</span>
         <textarea id="letterSubject" class="input" v-model="subject" />
       </label>
       <label class="flex flex-col" for="letterReference">
-        <span class="opacity-60">Reference</span>
+        <span class="label">Reference</span>
         <input id="letterReference" class="input" v-model="reference" />
       </label>
     </div>
