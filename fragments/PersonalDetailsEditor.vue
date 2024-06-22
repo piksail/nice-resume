@@ -322,7 +322,7 @@ function changeContactDetaiType(
                   <template v-if="detail.type === 'social'">
                     <option
                       v-for="icon in socialIcons"
-                      :key="icon as string"
+                      :key="`${icon}`"
                       class="option"
                     >
                       {{ icon }}
@@ -331,7 +331,7 @@ function changeContactDetaiType(
                   <template v-else>
                     <option
                       v-for="icon in contactIcons"
-                      :key="icon as string"
+                      :key="`${icon}`"
                       class="option"
                     >
                       {{ icon }}
