@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import {
   EyeIcon,
@@ -106,6 +106,17 @@ function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
 }
 
+async function moveThenScroll(
+  moveFunction: typeof moveUp | typeof moveDown,
+  categories: Category[],
+  categoryIndex: number,
+  categoryName: Category["name"],
+) {
+  moveFunction(categories, categoryIndex);
+  await nextTick(); // Wait for the category to be rendered to the new position before scrolling to it
+  document.getElementById(categoryName)?.scrollIntoView();
+}
+
 function toggleCategoryVisibility(category: Category) {
   category.isVisible = !category.isVisible;
 }
@@ -171,9 +182,14 @@ function toggleCategoryVisibility(category: Category) {
         </div>
         <ListActions
           :index="categoryIndex"
+          :is-header="true"
           :list-length="categories.length"
-          @moveUp="moveUp(categories, categoryIndex)"
-          @moveDown="moveDown(categories, categoryIndex)"
+          @moveUp="
+            moveThenScroll(moveUp, categories, categoryIndex, category.name)
+          "
+          @moveDown="
+            moveThenScroll(moveDown, categories, categoryIndex, category.name)
+          "
           @remove="remove(categories, categoryIndex)"
         />
       </template>
