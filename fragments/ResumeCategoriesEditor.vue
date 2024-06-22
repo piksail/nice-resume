@@ -152,7 +152,7 @@ function toggleCategoryVisibility(category: Category) {
                   ($event.target as HTMLInputElement).value as Category['type'],
                 )
               "
-              class="select block capitalize px-2 py-1 pl-0"
+              class="select block text-blue-500 capitalize px-2 py-1 pl-0"
             >
               <option v-for="item in types" :key="item" class="option">
                 {{ item }}
@@ -172,7 +172,7 @@ function toggleCategoryVisibility(category: Category) {
                     .value as Category['layout'],
                 )
               "
-              class="select block capitalize px-2 py-1 pl-0 disabled:cursor-not-allowed"
+              class="select block text-blue-500 capitalize px-2 py-1 pl-0 disabled:cursor-not-allowed"
             >
               <option v-for="item in layouts" :key="item" class="option">
                 {{ item }}
