@@ -266,11 +266,13 @@ function changeContactDetaiType(
         label="Consider about and details a dedicated category*"
         v-model="isHeaderSimple"
       />
-      <p v-if="isHeaderSimple">
-        *When on, about and details are styled through the Entry style editor.
-      </p>
-      <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
-      <Field label="Category name" v-model="simpleHeaderCategoryName" />
+      <template v-if="isHeaderSimple">
+        <p>
+          *When on, about and details are styled through the Entry style editor.
+        </p>
+        <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
+        <Field label="Category name" v-model="simpleHeaderCategoryName" />
+      </template>
       <label class="flex flex-col" for="detailsAbout">
         <span class="label">About</span>
         <textarea id="detailsAbout" class="input" v-model="about" />
