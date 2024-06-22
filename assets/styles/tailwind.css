@@ -12,10 +12,10 @@
 
 @layer components {
   .button {
-    @apply bg-white px-3 py-2 rounded;
+    @apply px-3 py-2 rounded shadow;
   }
   .buttonLabel {
-    @apply bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase;
+    @apply text-center;
   }
   .input {
     @apply bg-black bg-opacity-10 rounded px-2 py-1 text-sm;
@@ -40,5 +40,8 @@
   }
   .select {
     @apply cursor-pointer bg-white text-blue-500 text-sm;
+  }
+  .textGradient {
+    @apply bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text;
   }
 }

@@ -91,6 +91,7 @@ watch(documentType, (newValue) => {
 </script>
 
 <template>
+  <!-- TODO close top-right -->
   <dialog
     ref="dialog"
     class="print:hidden max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
@@ -130,9 +131,7 @@ watch(documentType, (newValue) => {
         />
         <span class="label opacity-100">JSON Resume compatible data*</span>
       </label>
-      <Button class="shadow" @click="downloadSelection">
-        Download selection
-      </Button>
+      <Button @click="downloadSelection">Download selection</Button>
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
         double-check dates, highlights and tags, and add missing elements such
@@ -198,15 +197,12 @@ watch(documentType, (newValue) => {
         </div>
       </label>
 
-      <button
-        class="button bg-gradient-to-br from-blue-700 to-pink-500 text-white"
-        @click="openModal"
-      >
-        <span class="flex items-center gap-1">
+      <Button inverted @click="openModal">
+        <template v-slot:startIcon>
           <DocumentArrowDownIcon class="h-6" />
-          Download
-        </span>
-      </button>
+        </template>
+        Download
+      </Button>
     </div>
   </header>
 </template>
