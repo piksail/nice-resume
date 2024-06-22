@@ -31,7 +31,10 @@ const isLayoutFixed = computed(() =>
 </script>
 
 <template>
-  <div class="flex">
+  <div
+    class="flex"
+    :class="settings.aside.isRightPositioned ? 'flex-row-reverse' : 'flex-row'"
+  >
     <aside
       v-if="
         !isLayoutFixed &&

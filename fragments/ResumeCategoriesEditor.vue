@@ -201,19 +201,31 @@ function toggleCategoryVisibility(category: Category) {
               property-name="aside"
               :settings="settings.aside"
             />
-            <label for="asideWith">
-              <span class="opacity-60">Width</span>
-              <div class="flex gap-2 items-center">
+            <div class="flex gap-5 flex-wrap">
+              <label for="asideWith">
+                <span class="opacity-60">Width</span>
+                <div class="flex gap-2 items-center">
+                  <input
+                    id="asideWith"
+                    type="range"
+                    min="0"
+                    max="100"
+                    v-model="settings.aside.width"
+                  />
+                  <output class="w-[3rem]">{{ settings.aside.width }}%</output>
+                </div>
+              </label>
+              <label for="asideIsRightPositioned">
                 <input
-                  id="asideWith"
-                  type="range"
-                  min="0"
-                  max="100"
-                  v-model="settings.aside.width"
+                  id="asideIsRightPositioned"
+                  class="input"
+                  type="checkbox"
+                  :disabled="!isThemeCustomized"
+                  v-model="settings.aside.isRightPositioned"
                 />
-                <output class="w-[3rem]">{{ settings.aside.width }}%</output>
-              </div>
-            </label>
+                <span class="opacity-60">Right side</span>
+              </label>
+            </div>
           </div>
         </li>
         <li class="border-b-2 border-white border-opacity-5 pb-12">

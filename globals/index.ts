@@ -235,6 +235,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     width: 25, // Percentage
+    isRightPositioned: false,
   },
   body: {
     backgroundColor: "transparent",

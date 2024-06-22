@@ -145,6 +145,7 @@ export type CommonDocumentSettings = {
 export type ResumeSettings = CommonDocumentSettings & {
   aside: BlockSettings & {
     width: number;
+    isRightPositioned: boolean;
   };
   body: BlockSettings;
   category: BlockSettings & {
