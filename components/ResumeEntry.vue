@@ -456,7 +456,7 @@ const fourthItem = computed(() => {
           v-bind="fourthItem?.props"
         />
       </div>
-      <div class="w-[60%]">
+      <div class="w-[75%]">
         <ResumeEntrySummary
           v-if="entry.nature === 'experience'"
           :entry-summary="entry.summary"

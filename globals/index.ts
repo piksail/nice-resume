@@ -59,6 +59,7 @@ export const templates: Array<Template> = [
   "Paper",
   "Pharmacy",
   "Red",
+  "Shelf",
   "StackOverflow",
   "Stone",
   "Toothpaste",
@@ -89,6 +90,7 @@ export const discouragedLayoutTemplates: {
   Paper: [],
   Pharmacy: [],
   Red: ["full"],
+  Shelf: ["aside", "half"],
   StackOverflow: [],
   Stone: [],
   Toothpaste: ["aside"],
@@ -606,6 +608,12 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Mulish",
     displayFont: "League Gothic",
   },
+  Shelf: {
+    isLetterMarginless: false,
+    colors: ["#000000"],
+    bodyFont: "Archivo",
+    displayFont: "Crimson Text",
+  },
   StackOverflow: {
     isLetterMarginless: false,
     colors: [
@@ -713,6 +721,11 @@ export const templateSettings: TemplateSettings = {
   },
   Red: {
     base: templateBaseSettings.Red,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
+  Shelf: {
+    base: templateBaseSettings.Shelf,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
@@ -2114,6 +2127,36 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
   templateSettings.Red.letter.subject.fontWeight = 600;
   templateSettings.Red.letter.reference.color =
     templateBaseSettings.Red.colors[0];
+}
+
+if (templateSettings.Shelf.resume && templateSettings.Shelf.letter) {
+  templateSettings.Shelf.resume.header.layout = 2;
+  templateSettings.Shelf.resume.name.font =
+    templateSettings.Shelf.base.displayFont;
+  templateSettings.Shelf.resume.name.fontSize = 40;
+  templateSettings.Shelf.resume.name.fontWeight = 900;
+  templateSettings.Shelf.resume.name.lineHeight = 1.1;
+  templateSettings.Shelf.resume.title.fontSize = 22;
+  templateSettings.Shelf.resume.title.fontWeight = 300;
+  templateSettings.Shelf.resume.title.letterSpacing = 2;
+  templateSettings.Shelf.resume.about.fontSize = 12;
+  templateSettings.Shelf.resume.contactDetails.fontSize = 12;
+  templateSettings.Shelf.resume.category.margin[0] = 16;
+  templateSettings.Shelf.resume.categoryName.fontWeight = 300;
+  templateSettings.Shelf.resume.categoryName.letterSpacing = 2;
+  templateSettings.Shelf.resume.categoryName.margin[2] = 22;
+  templateSettings.Shelf.resume.entry.layout = 13;
+  // TODO align center or right when entryHeader exists
+  templateSettings.Shelf.resume.entryPeriod.order = 1;
+  templateSettings.Shelf.resume.entryPeriod.fontSize = 12;
+  templateSettings.Shelf.resume.entryTitle.order = 2;
+  templateSettings.Shelf.resume.entryTitle.fontWeight = 700;
+  templateSettings.Shelf.resume.entryOrganization.fontSize = 12;
+  templateSettings.Shelf.resume.entryLocation.fontSize = 12;
+  templateSettings.Shelf.resume.entrySummary.lineHeight = 1.1;
+  templateSettings.Shelf.resume.entryHighlight.margin[0] = 8;
+  templateSettings.Shelf.resume.entryHighlight.fontSize = 12;
+  templateSettings.Shelf.resume.entryTag.margin[0] = 8;
 }
 
 if (
