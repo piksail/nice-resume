@@ -156,9 +156,14 @@ watch(documentType, (newValue) => {
         </div>
       </label>
 
-      <button class="text-blue-500 flex items-center gap-1" @click="openModal">
-        <DocumentArrowDownIcon class="h-6" />
-        Download
+      <button
+        class="button bg-gradient-to-br from-blue-700 to-pink-500 text-white"
+        @click="openModal"
+      >
+        <span class="flex items-center gap-1">
+          <DocumentArrowDownIcon class="h-6" />
+          Download
+        </span>
       </button>
     </div>
   </header>
