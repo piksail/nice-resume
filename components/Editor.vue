@@ -355,21 +355,28 @@ onMounted(() => {
         class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"
       >
         <span class="text-pink-500">Navigate to</span>
-        <a href="#Details">Details</a>
+        <a href="#Details" class="underline-offset-4 hover:underline">
+          Details
+        </a>
         <template v-if="documentType === 'letter'">
-          <a href="#Header">Header</a>
-          <a href="#Body">Body</a>
+          <a href="#Header" class="underline-offset-4 hover:underline">
+            Header
+          </a>
+          <a href="#Body" class="underline-offset-4 hover:underline">Body</a>
         </template>
         <template v-else>
           <a
             v-for="category in categories"
             :key="category.name"
             :href="`#${category.name}`"
+            class="underline-offset-4 hover:underline"
           >
             {{ category.name }}
           </a>
         </template>
-        <a href="#Customization">Customization</a>
+        <a href="#Customization" class="underline-offset-4 hover:underline">
+          Customization
+        </a>
       </nav>
       <template v-if="documentType === 'resume'">
         <p v-if="isLayoutDisabled" class="text-center px-10 py-2 bg-amber-500">
