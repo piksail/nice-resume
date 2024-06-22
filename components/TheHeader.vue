@@ -158,7 +158,11 @@ watch(documentType, (newValue) => {
     <div class="flex items-end gap-8 h-[60%]">
       <label for="template">
         <span class="label opacity-100">Template</span>
-        <select id="template" v-model="template" class="select block">
+        <select
+          id="template"
+          v-model="template"
+          class="select block text-blue-500"
+        >
           <option v-for="template in templates" :key="template" class="option">
             {{ template }}
           </option>
@@ -170,7 +174,7 @@ watch(documentType, (newValue) => {
         <select
           id="documentType"
           v-model="documentType"
-          class="select block capitalize"
+          class="select block capitalize text-blue-500"
         >
           <option
             v-for="documentType in documentTypes"

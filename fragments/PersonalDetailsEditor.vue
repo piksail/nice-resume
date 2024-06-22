@@ -29,6 +29,8 @@ function addContactDetail() {
   focusNextInput("#contactDetailList input");
 }
 
+// TODO streamliner les select/option pour qu'il y a utils.capitalize(value) et :value="value"
+
 function changeContactDetailIcon(
   contactDetail: ContactDetail,
   value: ContactDetail["icon"],
@@ -297,7 +299,7 @@ function changeContactDetaiType(
                         .value as ContactDetail['type'],
                     )
                   "
-                  class="select block capitalize bg-transparent text-white"
+                  class="select block capitalize text-white"
                 >
                   <option class="option">personal</option>
                   <option class="option">social</option>

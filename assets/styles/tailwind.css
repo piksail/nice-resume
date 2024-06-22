@@ -39,7 +39,7 @@
     @apply border-b-2 border-white border-opacity-5 pb-12;
   }
   .select {
-    @apply cursor-pointer bg-white text-blue-500 text-sm;
+    @apply cursor-pointer bg-transparent text-sm;
   }
   .textGradient {
     @apply bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text;

@@ -390,19 +390,19 @@ onMounted(() => {
         </p>
       </template>
     </header>
-    <div
-      class="flex flex-col gap-8 p-4 lg:p-8 w-full max-w-[860px] mx-auto overflow-y-auto scroll-smooth"
-    >
-      <PersonalDetailsEditor />
-      <template v-if="documentType === 'letter'">
-        <LetterHeaderEditor />
-        <LetterBodyEditor />
-        <LetterCustomizationEditor />
-      </template>
-      <template v-else>
-        <ResumeCategoriesEditor />
-        <ResumeCustomizationEditor />
-      </template>
-    </div>
+    <section class="w-full overflow-y-auto scroll-smooth">
+      <div class="flex flex-col gap-8 p-4 lg:p-8 max-w-[860px] mx-auto">
+        <PersonalDetailsEditor />
+        <template v-if="documentType === 'letter'">
+          <LetterHeaderEditor />
+          <LetterBodyEditor />
+          <LetterCustomizationEditor />
+        </template>
+        <template v-else>
+          <ResumeCategoriesEditor />
+          <ResumeCustomizationEditor />
+        </template>
+      </div>
+    </section>
   </main>
 </template>
