@@ -15,7 +15,8 @@ import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 
 const { isThemeCustomized, name, title } = storeToRefs(useProfileStore());
 
-const { about, contactDetails, settings } = storeToRefs(useResumeStore());
+const { about, contactDetails, isHeaderSimple, settings } =
+  storeToRefs(useResumeStore());
 
 function addContactDetail() {
   const contactDetail: ContactDetail = {
@@ -255,6 +256,15 @@ function changeContactDetaiType(
         <span class="label">Title</span>
         <input id="detailsTitle" class="input" v-model="title" />
       </label>
+      <Field
+        type="toggle"
+        label="Consider about and details a dedicated category*"
+        v-model="isHeaderSimple"
+      />
+      <p v-if="isHeaderSimple">
+        *When on, about and details are styled through the Entry style editor.
+      </p>
+      <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
       <label class="flex flex-col" for="detailsAbout">
         <span class="label">About</span>
         <textarea id="detailsAbout" class="input" v-model="about" />

@@ -14,7 +14,7 @@ import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDeta
 const { documentType } = storeToRefs(useEditorStore());
 const { name, template, title } = storeToRefs(useProfileStore());
 
-const { about, contactDetails } = storeToRefs(useResumeStore());
+const { about, contactDetails, isHeaderSimple } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
   return templateSettings[template.value][documentType.value];
@@ -28,16 +28,22 @@ const settings = computed(() => {
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
       </div>
-      <DocumentHeaderContactDetails :contact-details="contactDetails" />
-      <DocumentHeaderAbout :about="about" />
+      <DocumentHeaderContactDetails
+        v-if="!isHeaderSimple"
+        :contact-details="contactDetails"
+      />
+      <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
     </template>
     <template v-else-if="settings.header.layout === 2">
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderAbout :about="about" />
+        <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
       </div>
-      <DocumentHeaderContactDetails :contact-details="contactDetails" />
+      <DocumentHeaderContactDetails
+        v-if="!isHeaderSimple"
+        :contact-details="contactDetails"
+      />
     </template>
     <template v-else-if="settings.header.layout === 3">
       <div class="flex-col">
@@ -47,32 +53,44 @@ const settings = computed(() => {
           <span v-if="name && title" :style="{ fontSize: `${settings.name.fontSize}px`, color: settings.name.color }">,&nbsp;</span>
           <DocumentHeaderTitle :title="title" />
         </div>
-        <DocumentHeaderContactDetails :contact-details="contactDetails" />
-        <DocumentHeaderAbout :about="about" />
+        <DocumentHeaderContactDetails
+          v-if="!isHeaderSimple"
+          :contact-details="contactDetails"
+        />
+        <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
       </div>
     </template>
     <template v-else-if="settings.header.layout === 4">
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
-        <DocumentHeaderContactDetails :contact-details="contactDetails" />
+        <DocumentHeaderContactDetails
+          v-if="!isHeaderSimple"
+          :contact-details="contactDetails"
+        />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderAbout :about="about" />
+        <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
       </div>
     </template>
     <template v-else-if="settings.header.layout === 5">
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderAbout :about="about" />
-        <DocumentHeaderContactDetails :contact-details="contactDetails" />
+        <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
+        <DocumentHeaderContactDetails
+          v-if="!isHeaderSimple"
+          :contact-details="contactDetails"
+        />
       </div>
     </template>
     <template v-else>
       <div class="flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
-        <DocumentHeaderContactDetails :contact-details="contactDetails" />
-        <DocumentHeaderAbout :about="about" />
+        <DocumentHeaderContactDetails
+          v-if="!isHeaderSimple"
+          :contact-details="contactDetails"
+        />
+        <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
       </div>
     </template>
   </header>

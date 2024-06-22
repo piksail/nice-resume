@@ -17,7 +17,13 @@ import ResumeEntryTags from "./ResumeEntryTags.vue";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
-const { categories, settings: storeSettings } = storeToRefs(useResumeStore());
+const {
+  about,
+  categories,
+  contactDetails,
+  isHeaderSimple,
+  settings: storeSettings,
+} = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
   return isThemeCustomized.value
@@ -27,6 +33,21 @@ const settings = computed(() => {
 
 const isLayoutFixed = computed(() =>
   fixedLayoutTemplates.includes(template.value),
+);
+
+const asideCategories = computed(() =>
+  categories.value.filter(
+    (category) => category.isVisible && category.layout === "aside",
+  ),
+);
+
+const bodyCategories = computed(() =>
+  categories.value.filter(
+    (category) =>
+      category.isVisible &&
+      ((!isLayoutFixed.value && category.layout !== "aside") ||
+        isLayoutFixed.value),
+  ),
 );
 </script>
 
@@ -38,7 +59,9 @@ const isLayoutFixed = computed(() =>
     <aside
       v-if="
         !isLayoutFixed &&
-        categories.some((category) => category.layout === 'aside')
+        categories.some(
+          (category) => category.isVisible && category.layout === 'aside',
+        )
       "
       class="flex flex-col"
       :style="{
@@ -47,9 +70,54 @@ const isLayoutFixed = computed(() =>
       }"
     >
       <div
-        v-for="(category, categoryIndex) in categories.filter(
-          (category) => category.isVisible && category.layout === 'aside',
-        )"
+        v-if="isHeaderSimple"
+        :style="{
+          backgroundColor: settings.category.backgroundColor,
+          marginTop: `${settings.category.margin[0]}px`,
+          marginRight: `${settings.category.margin[1]}px`,
+          marginBottom: `${settings.category.margin[2]}px`,
+          marginLeft: `${settings.category.margin[3]}px`,
+          borderTop: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[0]}px`,
+          borderRight: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[1]}px`,
+          borderBottom: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[2]}px`,
+          borderLeft: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[3]}px`,
+          borderRadius: `${settings.category.borderRadius}px`,
+          paddingTop: `${settings.category.padding[0]}px`,
+          paddingRight: `${settings.category.padding[1]}px`,
+          paddingBottom: `${settings.category.padding[2]}px`,
+          paddingLeft: `${settings.category.padding[3]}px`,
+        }"
+      >
+        <!-- TODO allow custom name -->
+        <ResumeCategoryName :category-name="'About'" />
+        <div
+          class="flex flex-col"
+          :style="{
+            backgroundColor: settings.entry.backgroundColor,
+            marginTop: `${settings.entry.margin[0]}px`,
+            marginRight: `${settings.entry.margin[1]}px`,
+            marginBottom: `${settings.entry.margin[2]}px`,
+            marginLeft: `${settings.entry.margin[3]}px`,
+            borderTop: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[0]}px`,
+            borderRight: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[1]}px`,
+            borderBottom: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[2]}px`,
+            borderLeft: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[3]}px`,
+            borderRadius: `${settings.entry.borderRadius}px`,
+            paddingTop: `${settings.entry.padding[0]}px`,
+            paddingRight: `${settings.entry.padding[1]}px`,
+            paddingBottom: `${settings.entry.padding[2]}px`,
+            paddingLeft: `${settings.entry.padding[3]}px`,
+            gap: `${settings.entry.gap}px`,
+          }"
+        >
+          <ResumeEntrySummary :entry-summary="about" />
+          <ResumeEntryHighlights
+            :entry-highlights="contactDetails.map((detail) => detail.value)"
+          />
+        </div>
+      </div>
+      <div
+        v-for="(category, categoryIndex) in asideCategories"
         :key="categoryIndex"
         :style="{
           backgroundColor: settings.category.backgroundColor,
@@ -125,11 +193,34 @@ const isLayoutFixed = computed(() =>
       }"
     >
       <section
-        v-for="(category, categoryIndex) in categories.filter(
-          (category) =>
-            category.isVisible &&
-            ((!isLayoutFixed && category.layout !== 'aside') || isLayoutFixed),
-        )"
+        v-if="isHeaderSimple && (!asideCategories.length || isLayoutFixed)"
+        :class="
+          bodyCategories[0]?.layout === 'half' && !isLayoutFixed
+            ? 'col-span-1'
+            : 'col-span-2'
+        "
+        :style="{
+          display: settings.categoryName.isAside ? 'flex' : 'initial',
+          ...getNodeStyle(settings.category, 'block'),
+        }"
+      >
+        <!-- TODO allow custom name -->
+        <ResumeCategoryName :category-name="'About'" />
+        <div
+          class="flex flex-col flex-1"
+          :style="{
+            ...getNodeStyle(settings.entry, 'block'),
+            gap: `${settings.entry.gap}px`,
+          }"
+        >
+          <ResumeEntrySummary :entry-summary="about" />
+          <ResumeEntryHighlights
+            :entry-highlights="contactDetails.map((detail) => detail.value)"
+          />
+        </div>
+      </section>
+      <section
+        v-for="(category, categoryIndex) in bodyCategories"
         :key="categoryIndex"
         :class="
           category.layout === 'half' && !isLayoutFixed

@@ -7,6 +7,7 @@ import { resumeSettings } from "@/globals";
 export const useResumeStore = defineStore("resume", {
   state: () => ({
     // Content
+    isHeaderSimple: false,
     about: "",
     categories: [] as Category[],
     contactDetails: [] as ContactDetail[],
