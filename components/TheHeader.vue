@@ -9,6 +9,8 @@ import { useResumeStore } from "@/stores/resume";
 import { documentTypes, templates } from "@/globals";
 import { download } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
+import { capitalize } from "@/utils/string";
+import Button from "@/components/Button.vue";
 import packageJson from "../package.json";
 
 console.info("Version: ", packageJson.version);
@@ -18,9 +20,27 @@ const { name, template, title } = storeToRefs(useProfileStore());
 const { about, categories, contactDetails } = storeToRefs(useResumeStore());
 
 const dialog = ref(null);
+const isExportToPdfIncluded = ref(true);
+const isExportToJsonIncluded = ref(false);
+const isExportToJsonResumeIncluded = ref(false);
 
 function downloadPdf() {
   window.print();
+}
+
+/**
+ * Download selected files.
+ */
+function downloadSelection() {
+  if (isExportToJsonIncluded.value) {
+    exportToJson();
+  }
+  if (isExportToJsonResumeIncluded.value) {
+    exportResumeToJsonResume();
+  }
+  if (isExportToPdfIncluded.value) {
+    downloadPdf();
+  }
   closeModal();
 }
 
@@ -38,7 +58,6 @@ function exportToJson() {
     letter: JSON.parse(rawLetter ?? ""),
   };
   download(toExport, "nice-resume");
-  closeModal();
 }
 
 /**
@@ -54,7 +73,6 @@ function exportResumeToJsonResume() {
   };
   const toExport = formatResumeAsJsonResume(resume);
   download(toExport, "nice-resume-to-json-resume");
-  closeModal();
 }
 
 function closeModal() {
@@ -80,16 +98,40 @@ watch(documentType, (newValue) => {
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       What do you want to download?
     </p>
-    <!-- TODO use checkbox instead -->
-    <div class="flex flex-col gap-4">
-      <Button class="shadow" @click="downloadPdf">
-        {{ documentType }} as PDF
-      </Button>
-      <Button class="shadow" @click="exportToJson">
-        Nice Resume data (save it for later)
-      </Button>
-      <Button class="shadow" @click="exportResumeToJsonResume">
-        JSON Resume compatible data*
+    <div class="flex flex-col gap-4 text-blue-500">
+      <label for="isExportToPdfIncluded">
+        <input
+          id="isExportToPdfIncluded"
+          class="input"
+          type="checkbox"
+          v-model="isExportToPdfIncluded"
+        />
+        <span class="label opacity-100">
+          {{ capitalize(documentType) }} as PDF
+        </span>
+      </label>
+      <label for="isExportToJsonIncluded">
+        <input
+          id="isExportToJsonIncluded"
+          class="input"
+          type="checkbox"
+          v-model="isExportToJsonIncluded"
+        />
+        <span class="label opacity-100">
+          Nice Resume data (save it for later)
+        </span>
+      </label>
+      <label for="isExportToJsonResumeIncluded">
+        <input
+          id="isExportToJsonResumeIncluded"
+          class="input"
+          type="checkbox"
+          v-model="isExportToJsonResumeIncluded"
+        />
+        <span class="label opacity-100">JSON Resume compatible data*</span>
+      </label>
+      <Button class="shadow" @click="downloadSelection">
+        Download selection
       </Button>
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
