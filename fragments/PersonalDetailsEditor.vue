@@ -297,7 +297,7 @@ function changeContactDetaiType(
                         .value as ContactDetail['type'],
                     )
                   "
-                  class="select block capitalize"
+                  class="select block capitalize bg-transparent text-white"
                 >
                   <option class="option">personal</option>
                   <option class="option">social</option>
