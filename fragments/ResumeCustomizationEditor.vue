@@ -104,7 +104,7 @@ watch(
             type="number"
             :label="`Margin ${getSideIndexLabel(i)}`"
             :disabled="!isThemeCustomized"
-            v-model="settings.document.margin[i - 1]"
+            v-model="settings.document.padding[i - 1]"
           />
         </div>
       </li>

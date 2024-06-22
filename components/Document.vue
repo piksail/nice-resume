@@ -30,14 +30,14 @@ const settings = computed(() => {
       color: settings.document.color,
       fontFamily: settings.document.bodyFont,
       backgroundColor: settings.document.backgroundColor,
-      marginTop: `${settings.document.margin[0]}px`,
-      marginRight: `${settings.document.margin[1]}px`,
-      marginBottom: `${settings.document.margin[2]}px`,
-      marginLeft: `${settings.document.margin[3]}px`,
       borderTop: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[0]}px`,
       borderRight: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[1]}px`,
       borderBottom: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[2]}px`,
       borderLeft: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[3]}px`,
+      paddingTop: `${settings.document.padding[0]}px`,
+      paddingRight: `${settings.document.padding[1]}px`,
+      paddingBottom: `${settings.document.padding[2]}px`,
+      paddingLeft: `${settings.document.padding[3]}px`,
     }"
   >
     <DocumentHeader v-if="documentType === 'resume' || !isHeaderSimple" />

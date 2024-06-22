@@ -99,7 +99,7 @@ export type TitleSettings = TextSettings & {
 };
 
 export type BaseSettings = {
-  isLetterMarginless: boolean;
+  isLetterPaddingless: boolean;
   colors: string[];
   bodyFont: Font;
   displayFont?: Font;
@@ -113,10 +113,10 @@ export type DocumentSettings = {
   bodyFont: Font;
   color: string;
   backgroundColor: string;
-  margin: SideSetting;
   border: SideSetting;
   borderStyle: BorderStyle;
   borderColor: string;
+  padding: SideSetting;
 };
 
 export type CommonDocumentSettings = {
