@@ -5,9 +5,15 @@ import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import type {
+  CommonStyleEditorTab,
+  LetterStyleEditorTab,
+  ResumeStyleEditorTab,
+} from "@/types";
 import { getSideIndexLabel } from "@/utils/editor";
 import { fonts, templateSettings } from "@/globals";
 import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
+import EntryHeaderItemSettingsEditor from "@/components/EntryHeaderItemSettingsEditor.vue";
 import Field from "@/components/Field.vue";
 import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
@@ -20,13 +26,29 @@ const { settings: resumeSettings } = storeToRefs(useResumeStore());
 const { isHeaderSimple, settings: letterSettings } =
   storeToRefs(useLetterStore());
 
-const currentTab = ref("");
+type Tab = ResumeStyleEditorTab | LetterStyleEditorTab | "";
+const tab = ref<Tab>("");
 const isStyleEditorOpen = ref(false);
 
 const tabs = computed(() => {
-  const tabs = ["Document", "Profile", "About"];
-  const letterTabs = [...tabs, "Address details", "Subject", "Body"];
-  const resumeTabs = [...tabs, "Sections", "Category", "Entry"];
+  const tabs: CommonStyleEditorTab[] = [
+    "Document",
+    "Profile",
+    "About",
+    "Contact",
+  ];
+  const letterTabs: LetterStyleEditorTab[] = [
+    ...tabs,
+    "Address details",
+    "Subject",
+    "Body",
+  ];
+  const resumeTabs: ResumeStyleEditorTab[] = [
+    ...tabs,
+    "Sections",
+    "Category",
+    "Entry",
+  ];
   return documentType.value === "letter" ? letterTabs : resumeTabs;
 });
 
@@ -38,21 +60,21 @@ function resetStyle() {
   }
 }
 
-function setCurrentTab(value: string) {
-  if (currentTab.value === value) {
-    currentTab.value = "";
+function setTab(value: Tab) {
+  if (tab.value === value) {
+    tab.value = "";
   } else {
-    currentTab.value = value;
+    tab.value = value;
   }
 }
 </script>
 
 <template>
   <div
-    v-if="isStyleEditorOpen && currentTab"
-    class="h-[260px] overflow-auto flex flex-col gap-5 bg-white p-6 rounded shadow-lg text-blue-500 mb-4"
+    v-if="isStyleEditorOpen && tab"
+    class="h-[260px] overflow-auto flex flex-col gap-5 bg-white p-6 rounded shadow-lg text-pink-500 mb-4"
   >
-    <template v-if="currentTab === 'Document'">
+    <template v-if="tab === 'Document'">
       <header>
         <div class="sectionHeading">Document</div>
       </header>
@@ -81,7 +103,7 @@ function setCurrentTab(value: string) {
         </select>
       </label>
     </template>
-    <template v-else-if="currentTab === 'Address details'">
+    <template v-else-if="tab === 'Address details'">
       <div v-if="isHeaderSimple" class="sectionSeparator">
         <header>
           <div class="sectionHeading">Sender details</div>
@@ -123,7 +145,7 @@ function setCurrentTab(value: string) {
         />
       </div>
     </template>
-    <template v-else-if="currentTab === 'Subject'">
+    <template v-else-if="tab === 'Subject'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Subject</div>
@@ -159,7 +181,7 @@ function setCurrentTab(value: string) {
         />
       </div>
     </template>
-    <template v-else-if="currentTab === 'Body'">
+    <template v-else-if="tab === 'Body'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Paragraphs</div>
@@ -237,7 +259,7 @@ function setCurrentTab(value: string) {
         />
       </div>
     </template>
-    <template v-else-if="currentTab === 'Details'">
+    <template v-else-if="tab === 'Profile'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Name</div>
@@ -273,7 +295,7 @@ function setCurrentTab(value: string) {
         />
       </div>
     </template>
-    <template v-else-if="currentTab === 'About'">
+    <template v-else-if="tab === 'About'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">About</div>
@@ -361,6 +383,8 @@ function setCurrentTab(value: string) {
           />
         </div>
       </div>
+    </template>
+    <template v-else-if="tab === 'Contact'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Contact details</div>
@@ -421,7 +445,7 @@ function setCurrentTab(value: string) {
         </div>
       </div>
     </template>
-    <template v-else-if="currentTab === 'Sections'">
+    <template v-else-if="tab === 'Sections'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Aside</div>
@@ -472,7 +496,7 @@ function setCurrentTab(value: string) {
         </div>
       </div>
     </template>
-    <template v-else-if="currentTab === 'Category'">
+    <template v-else-if="tab === 'Category'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Category</div>
@@ -511,7 +535,7 @@ function setCurrentTab(value: string) {
         </div>
       </div>
     </template>
-    <template v-else-if="currentTab === 'Entry'">
+    <template v-else-if="tab === 'Entry'">
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Entry</div>
@@ -651,7 +675,7 @@ function setCurrentTab(value: string) {
           class="button bg-white"
           v-for="(tab, index) in tabs"
           :key="index"
-          @click="setCurrentTab(tab)"
+          @click="setTab(tab)"
         >
           <span class="textGradient">{{ tab }}</span>
         </button>

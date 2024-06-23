@@ -15,8 +15,11 @@ import packageJson from "../package.json";
 console.info("Version: ", packageJson.version);
 
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
-const { name, template, title } = storeToRefs(useProfileStore());
-const { about, categories, contactDetails } = storeToRefs(useResumeStore());
+
+const { about, contactDetails, name, template, title } =
+  storeToRefs(useProfileStore());
+
+const { categories } = storeToRefs(useResumeStore());
 
 const dialog = ref(null);
 const isExportToPdfIncluded = ref(true);

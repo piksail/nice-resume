@@ -12,9 +12,11 @@ import DocumentHeaderTitle from "@/components/DocumentHeaderTitle.vue";
 import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDetails.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
-const { name, template, title } = storeToRefs(useProfileStore());
 
-const { about, contactDetails, isHeaderSimple } = storeToRefs(useResumeStore());
+const { about, contactDetails, name, template, title } =
+  storeToRefs(useProfileStore());
+
+const { isHeaderSimple } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
   return templateSettings[template.value][documentType.value];

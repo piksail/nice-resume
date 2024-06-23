@@ -221,6 +221,20 @@ export type TemplateSettings = {
   };
 };
 
+export type CommonStyleEditorTab = "Document" | "Profile" | "About" | "Contact";
+
+export type ResumeStyleEditorTab =
+  | CommonStyleEditorTab
+  | "Sections"
+  | "Category"
+  | "Entry";
+
+export type LetterStyleEditorTab =
+  | CommonStyleEditorTab
+  | "Address details"
+  | "Subject"
+  | "Body";
+
 export type DetailIcon =
   | null
   | "default"

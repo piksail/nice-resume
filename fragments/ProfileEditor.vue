@@ -10,9 +10,9 @@ import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
-const { name, title } = storeToRefs(useProfileStore());
+const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
 
-const { about, contactDetails, isHeaderSimple, simpleHeaderCategoryName } =
+const { isHeaderSimple, simpleHeaderCategoryName } =
   storeToRefs(useResumeStore());
 
 function addContactDetail() {

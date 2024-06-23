@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Category, ContactDetail } from "@/types";
+import type { Category } from "@/types";
 import { resumeSettings } from "@/globals";
 
 // Use option API to take advantage of automatic persistence
@@ -7,9 +7,7 @@ import { resumeSettings } from "@/globals";
 export const useResumeStore = defineStore("resume", {
   state: () => ({
     // Content
-    about: "",
     categories: [] as Category[],
-    contactDetails: [] as ContactDetail[],
     isHeaderSimple: false,
     simpleHeaderCategoryName: "",
 

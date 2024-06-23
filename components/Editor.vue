@@ -74,10 +74,11 @@ function openModal() {
 }
 
 function generateStores() {
+  // Profile
   profile.name.value = "Firstname Lastname";
   profile.title.value = "Title";
-  resume.about.value = "About";
-  resume.contactDetails.value = [
+  profile.about.value = "About";
+  profile.contactDetails.value = [
     { type: "personal", icon: "drivingLicense", value: "Driving license" },
     { type: "personal", icon: "address", value: "Address" },
     { type: "personal", icon: "email", value: "email@email.com" },
@@ -86,6 +87,8 @@ function generateStores() {
     { type: "social", icon: "linkedIn", value: "linkedin.com" },
     { type: "social", icon: "viadeo", value: "viadeo.com" },
   ];
+
+  // Resume
   resume.categories.value = [
     {
       nature: "experience",
@@ -162,6 +165,8 @@ function generateStores() {
       isVisible: true,
     },
   ];
+
+  // Letter
   letter.senderDetails.value = [
     "Firstname Lastname",
     "Streetnumber Streetname Street",

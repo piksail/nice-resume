@@ -15,12 +15,11 @@ import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
 import ResumeEntryTags from "./ResumeEntryTags.vue";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { about, contactDetails, isThemeCustomized, template } =
+  storeToRefs(useProfileStore());
 
 const {
-  about,
   categories,
-  contactDetails,
   isHeaderSimple,
   settings: storeSettings,
   simpleHeaderCategoryName,

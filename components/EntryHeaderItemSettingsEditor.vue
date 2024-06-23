@@ -19,7 +19,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
   <div class="flex flex-col gap-5">
     <div class="flex gap-5 flex-wrap">
       <label :for="`${propertyName}TextSeparator`">
-        <span class="label opacity-60">Order</span>
+        <span class="label">Order</span>
         <select
           :id="`${propertyName}Order`"
           class="select block"
@@ -37,7 +37,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         </select>
       </label>
       <label :for="`${propertyName}TextSeparator`">
-        <span class="label opacity-60">Text separator</span>
+        <span class="label">Text separator</span>
         <select
           :id="`${propertyName}TextSeparator`"
           class="select block"

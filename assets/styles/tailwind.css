@@ -39,7 +39,7 @@
     @apply border-b-2 border-white border-opacity-5 pb-12;
   }
   .select {
-    @apply cursor-pointer bg-transparent text-sm;
+    @apply text-blue-500 cursor-pointer bg-transparent text-sm;
   }
   .slotButton {
     @apply border-dashed border-white/20 border-2 text-white/60 uppercase tracking-widest hover:border-white/80 hover:text-white;
