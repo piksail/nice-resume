@@ -42,7 +42,7 @@ const description = ref(
       </Card>
       <div class="max-w-screen-md mx-auto">
         <p class="text-lg font-thin text-right">
-          No cookies. No signup. No payment.
+          No cookies. No signup. No payment. Privacy-friendly.
         </p>
       </div>
     </section>
