@@ -80,7 +80,11 @@ function generateStores() {
   profile.about.value = "About";
   profile.contactDetails.value = [
     { type: "personal", icon: "drivingLicense", value: "Driving license" },
-    { type: "personal", icon: "address", value: "Address" },
+    {
+      type: "personal",
+      icon: "address",
+      value: "Streetnumber street Streetname, ZIPCODE City Country",
+    },
     { type: "personal", icon: "email", value: "email@email.com" },
     { type: "personal", icon: "phone", value: "061122334455" },
     { type: "social", icon: "gitHub", value: "github.com" },
@@ -169,13 +173,13 @@ function generateStores() {
   // Letter
   letter.senderDetails.value = [
     "Firstname Lastname",
-    "Streetnumber Streetname Street",
-    "Zip code City Country",
+    "Streetnumber street Streetname",
+    "ZIPCODE City Country",
   ];
   letter.recipientDetails.value = [
     "Firstname Lastname",
-    "Streetnumber Streetname Street",
-    "Zip code City Country",
+    "Streetnumber street Streetname",
+    "ZIPCODE City Country",
   ];
   letter.subject.value = "Cover letter subject";
   letter.reference.value = "Ref.: Advertisement reference";
