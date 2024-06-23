@@ -569,7 +569,6 @@ export const templateBaseSettings: TemplateBaseSettings = {
     colors: [
       "#000000",
       "#ffffff",
-      // TODO reorder colors
       "#fdba74",
       "#fef08a",
       "#86efac",

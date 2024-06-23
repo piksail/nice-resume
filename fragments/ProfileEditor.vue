@@ -98,7 +98,6 @@ function changeContactDetaiType(
                 v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"
               />
-              <!-- TODO use nice switch component -->
               <label for="documentType">
                 <span class="label opacity-60">Type</span>
                 <select

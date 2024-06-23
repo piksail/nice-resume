@@ -44,7 +44,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           </option>
         </select>
       </label>
-      <!-- TODO toggle button -->
       <Field
         :id="`${propertyName}ListMarkerColor`"
         label="List marker color"
