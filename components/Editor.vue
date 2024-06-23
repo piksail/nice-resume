@@ -376,11 +376,11 @@ onMounted(() => {
         class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"
       >
         <a
-          href="#Details"
+          href="#Profile"
           class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
         >
           <UserIcon class="w-4" />
-          Details
+          Profile
         </a>
         <template v-if="documentType === 'letter'">
           <a

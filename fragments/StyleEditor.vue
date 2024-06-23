@@ -24,7 +24,7 @@ const currentTab = ref("");
 const isStyleEditorOpen = ref(false);
 
 const tabs = computed(() => {
-  const tabs = ["Document", "Details", "About"];
+  const tabs = ["Document", "Profile", "About"];
   const letterTabs = [...tabs, "Address details", "Subject", "Body"];
   const resumeTabs = [...tabs, "Sections", "Category", "Entry"];
   return documentType.value === "letter" ? letterTabs : resumeTabs;

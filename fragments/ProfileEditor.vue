@@ -46,12 +46,11 @@ function changeContactDetaiType(
 </script>
 
 <template>
-  <EditorCategory id="Details">
-    <!-- TODO rename Profile -->
-    <template v-slot:header>Details</template>
+  <EditorCategory id="Profile">
+    <template v-slot:header>Profile</template>
     <div class="flex flex-col gap-5">
-      <Field id="detailsName" label="Name" transparent v-model="name" />
-      <Field id="detailsTitle" label="Title" transparent v-model="title" />
+      <Field id="profileName" label="Name" transparent v-model="name" />
+      <Field id="profileTitle" label="Title" transparent v-model="title" />
       <Field
         type="toggle"
         label="Consider about and details a dedicated category*"
