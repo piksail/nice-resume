@@ -10,6 +10,7 @@ import { documentTypes, templates } from "@/globals";
 import { download } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
+import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
 
 console.info("Version: ", packageJson.version);
@@ -101,34 +102,25 @@ watch(documentType, (newValue) => {
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       What do you want to download?
     </p>
-    <div class="flex flex-col gap-4 text-blue-500">
-      <label for="isExportToPdfIncluded">
-        <input
-          id="isExportToPdfIncluded"
-          class="input"
-          type="checkbox"
-          v-model="isExportToPdfIncluded"
-        />
-        <span class="label">{{ capitalize(documentType) }} as PDF</span>
-      </label>
-      <label for="isExportToJsonIncluded">
-        <input
-          id="isExportToJsonIncluded"
-          class="input"
-          type="checkbox"
-          v-model="isExportToJsonIncluded"
-        />
-        <span class="label">Nice Resume data (save it for later)</span>
-      </label>
-      <label for="isExportToJsonResumeIncluded">
-        <input
-          id="isExportToJsonResumeIncluded"
-          class="input"
-          type="checkbox"
-          v-model="isExportToJsonResumeIncluded"
-        />
-        <span class="label">JSON Resume compatible data*</span>
-      </label>
+    <div class="flex flex-col gap-4">
+      <Field
+        id="isExportToPdfIncluded"
+        :label="`${capitalize(documentType)} as PDF`"
+        type="checkbox"
+        v-model="isExportToPdfIncluded"
+      />
+      <Field
+        id="isExportToJsonIncluded"
+        label="Nice Resume data (save it for later)"
+        type="checkbox"
+        v-model="isExportToJsonIncluded"
+      />
+      <Field
+        id="isExportToJsonResumeIncluded"
+        label="JSON Resume compatible data*"
+        type="checkbox"
+        v-model="isExportToJsonResumeIncluded"
+      />
       <button class="button bg-white" @click="downloadSelection">
         <span class="textGradient">Download selection</span>
       </button>

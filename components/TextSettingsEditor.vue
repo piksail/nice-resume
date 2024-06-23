@@ -69,26 +69,20 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           </option>
         </select>
       </label>
-      <label :for="`${propertyName}IsItalic`">
-        <input
-          :id="`${propertyName}IsItalic`"
-          class="input"
-          type="checkbox"
-          :disabled="!isThemeCustomized"
-          v-model="settings.isItalic"
-        />
-        <span class="label">Italic</span>
-      </label>
-      <label :for="`${propertyName}IsUppercase`">
-        <input
-          :id="`${propertyName}IsUppercase`"
-          class="input"
-          type="checkbox"
-          :disabled="!isThemeCustomized"
-          v-model="settings.isUppercase"
-        />
-        <span class="label">Uppercase</span>
-      </label>
+      <Field
+        :id="`${propertyName}IsItalic`"
+        label="Italic"
+        type="checkbox"
+        :disabled="!isThemeCustomized"
+        v-model="settings.isItalic"
+      />
+      <Field
+        :id="`${propertyName}IsUppercase`"
+        label="Uppercase"
+        type="checkbox"
+        :disabled="!isThemeCustomized"
+        v-model="settings.isUppercase"
+      />
       <Field
         :id="`${propertyName}Color`"
         label="Color"

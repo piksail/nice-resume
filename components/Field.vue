@@ -38,6 +38,22 @@ const model = defineModel();
       </SwitchLabel>
     </div>
   </SwitchGroup>
+  <label
+    v-else-if="type === 'checkbox'"
+    class="flex gap-1 items-center"
+    :for="id"
+  >
+    <input
+      :id="id"
+      class="input"
+      type="checkbox"
+      :disabled="disabled"
+      v-model="model"
+    />
+    <span class="label" :class="transparent ? 'text-white' : 'text-blue-500'">
+      {{ label }}
+    </span>
+  </label>
   <label v-else class="flex flex-col" :for="id">
     <span class="label" :class="transparent ? 'opacity-60' : 'opacity-100'">
       {{ label }}

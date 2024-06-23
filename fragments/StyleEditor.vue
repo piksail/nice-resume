@@ -217,26 +217,20 @@ function setTab(value: Tab) {
               :disabled="!isThemeCustomized"
               v-model="letterSettings.body.indentation"
             />
-            <label for="bodyIsJustified">
-              <input
-                id="bodyIsJustified"
-                class="input"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="letterSettings.body.isJustified"
-              />
-              <span class="label">Justified</span>
-            </label>
-            <label for="bodyIsSignatureRightAligned">
-              <input
-                id="bodyIsSignatureRightAligned"
-                class="input"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="letterSettings.body.isSignatureRightAligned"
-              />
-              <span class="label">Signature on the right</span>
-            </label>
+            <Field
+              id="bodyIsJustified"
+              label="Justified"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="letterSettings.body.isJustified"
+            />
+            <Field
+              id="bodyIsSignatureRightAligned"
+              label="Signature on the right"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="letterSettings.body.isSignatureRightAligned"
+            />
           </div>
           <div class="flex gap-5 flex-wrap">
             <Field
@@ -317,16 +311,13 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">About quote</div>
         </header>
-        <label for="aboutQuoteIsShown">
-          <input
-            id="aboutQuoteIsShown"
-            class="input"
-            type="checkbox"
-            :disabled="!isThemeCustomized"
-            v-model="resumeSettings.aboutQuote.isShown"
-          />
-          <span class="label">Is shown</span>
-        </label>
+        <Field
+          id="aboutQuoteIsShown"
+          label="Show quote"
+          type="checkbox"
+          :disabled="!isThemeCustomized"
+          v-model="resumeSettings.aboutQuote.isShown"
+        />
         <div class="flex gap-5 flex-wrap">
           <label class="flex flex-col" for="aboutQuoteFont">
             <span class="label">Font</span>
@@ -364,16 +355,13 @@ function setTab(value: Tab) {
               </option>
             </select>
           </label>
-          <label for="aboutQuoteIsItalic">
-            <input
-              id="aboutQuoteIsItalic"
-              class="input"
-              type="checkbox"
-              :disabled="!isThemeCustomized"
-              v-model="resumeSettings.aboutQuote.isItalic"
-            />
-            <span class="label">Italic</span>
-          </label>
+          <Field
+            id="aboutQuoteIsItalic"
+            label="Italic"
+            type="checkbox"
+            :disabled="!isThemeCustomized"
+            v-model="resumeSettings.aboutQuote.isItalic"
+          />
           <Field
             id="aboutQuoteColor"
             label="Color"
@@ -418,16 +406,13 @@ function setTab(value: Tab) {
             :disabled="!isThemeCustomized"
             v-model="resumeSettings.contactDetails.gap"
           />
-          <label for="contactDetailsIsIconFirst">
-            <input
-              id="contactDetailsIsIconFirst"
-              class="input"
-              type="checkbox"
-              :disabled="!isThemeCustomized"
-              v-model="resumeSettings.aboutQuote.isShown"
-            />
-            <span class="label">Is icon first</span>
-          </label>
+          <Field
+            id="contactDetailsIsIconFirst"
+            label="Icon first"
+            type="checkbox"
+            :disabled="!isThemeCustomized"
+            v-model="resumeSettings.contactDetails.isIconFirst"
+          />
           <Field
             id="contactDetailsIconGap"
             label="Icon gap"
@@ -471,16 +456,13 @@ function setTab(value: Tab) {
                 </output>
               </div>
             </label>
-            <label for="asideIsRightPositioned">
-              <input
-                id="asideIsRightPositioned"
-                class="input"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="resumeSettings.aside.isRightPositioned"
-              />
-              <span class="label">Right side</span>
-            </label>
+            <Field
+              id="asideIsRightPositioned"
+              label="Right side"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="resumeSettings.aside.isRightPositioned"
+            />
           </div>
         </div>
       </div>
