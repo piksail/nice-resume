@@ -742,17 +742,15 @@ function setTab(value: Tab) {
           <span class="textGradient">{{ tab }}</span>
         </button>
       </nav>
-      <div class="flex gap-5">
-        <Field
-          type="toggle"
-          label="Apply custom style"
-          v-model="isThemeCustomized"
-        />
-        <button class="button bg-white flex-1" @click="resetStyle">
-          <span class="textGradient">Reset style</span>
-        </button>
-      </div>
+      <button class="button bg-white flex-1" @click="resetStyle">
+        <span class="textGradient">Reset style</span>
+      </button>
     </template>
     <Field type="toggle" label="Customize" v-model="isStyleEditorOpen" />
+    <Field
+      type="toggle"
+      label="Apply custom style"
+      v-model="isThemeCustomized"
+    />
   </div>
 </template>
