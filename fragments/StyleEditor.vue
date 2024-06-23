@@ -7,7 +7,11 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { getSideIndexLabel } from "@/utils/editor";
 import { fonts, templateSettings } from "@/globals";
+import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import Field from "@/components/Field.vue";
+import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
+import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
+import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
@@ -46,7 +50,7 @@ function setCurrentTab(value: string) {
 <template>
   <div
     v-if="isStyleEditorOpen && currentTab"
-    class="h-[260px] overflow-auto flex flex-col gap-5 bg-white px-3 py-2 rounded shadow-lg text-blue-500 mb-4"
+    class="h-[260px] overflow-auto flex flex-col gap-5 bg-white p-6 rounded shadow-lg text-blue-500 mb-4"
   >
     <template v-if="currentTab === 'Document'">
       <header>

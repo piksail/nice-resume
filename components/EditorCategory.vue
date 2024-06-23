@@ -20,7 +20,10 @@ function toggleDisplay() {
     class="flex flex-col bg-white bg-opacity-10 rounded w-full scroll-mt-8"
   >
     <header
-      :class="`p-6 flex justify-between items-center rounded bg-white ${isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'} text-pink-500 shadow-lg`"
+      class="flex justify-between items-center rounded bg-white text-pink-500 p-6 shadow-lg"
+      :class="
+        isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'
+      "
     >
       <slot name="header" />
       <button
