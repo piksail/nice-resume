@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  PlusCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -22,7 +18,6 @@ import {
   experienceTypes,
   fixedLayoutTemplates,
 } from "@/globals";
-import Button from "@/components/Button.vue";
 import EditorCategory from "@/components/EditorCategory.vue";
 import ListActions from "@/components/ListActions.vue";
 
@@ -250,17 +245,7 @@ function toggleCategoryVisibility(category: Category) {
             </label>
           </template>
           <label class="flex flex-col" for="highlights">
-            <div class="flex gap-2">
-              <span class="label">Highlights</span>
-              <button
-                id="highlights"
-                title="Add highlight"
-                class="text-white bg-blue-500 rounded-full size-7"
-                @click="addHighlight(entry, entryIndex)"
-              >
-                <PlusCircleIcon class="size-full" />
-              </button>
-            </div>
+            <span class="label">Highlights</span>
             <ul
               v-if="entry.highlights.length"
               :id="`highlightList${entryIndex}`"
@@ -285,20 +270,16 @@ function toggleCategoryVisibility(category: Category) {
                   @remove="remove(entry.highlights, highlightIndex)"
                 />
               </li>
+              <button
+                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+                @click="addHighlight(entry, entryIndex)"
+              >
+                Add highlight
+              </button>
             </ul>
           </label>
           <label class="flex flex-col" for="tags">
-            <div class="flex gap-2">
-              <span class="label">Tags</span>
-              <button
-                id="tags"
-                title="Add tag"
-                class="text-white bg-blue-500 rounded-full size-7"
-                @click="addTag(entry, entryIndex)"
-              >
-                <PlusCircleIcon class="size-full" />
-              </button>
-            </div>
+            <span class="label">Tags</span>
             <ul
               v-if="entry.tags.length"
               :id="`tagList${entryIndex}`"
@@ -323,24 +304,27 @@ function toggleCategoryVisibility(category: Category) {
                   @remove="remove(entry.tags, tagIndex)"
                 />
               </li>
+              <button
+                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+                @click="addTag(entry, entryIndex)"
+              >
+                Add tag
+              </button>
             </ul>
           </label>
         </div>
       </li>
     </ul>
     <footer class="flex justify-center">
-      <Button @click="addEntry(category)">Add entry</Button>
+      <button class="button bg-white" @click="addEntry(category)">
+        <span class="textGradient">Add entry</span>
+      </button>
     </footer>
   </EditorCategory>
 
   <footer class="flex justify-center">
-    <button
-      class="button w-full border-dashed border-white/20 border-2"
-      @click="addCategory"
-    >
-      <span class="buttonLabel font-black tracking-widest uppercase">
-        Add category
-      </span>
+    <button class="button slotButton w-full shadow-none" @click="addCategory">
+      <span class="font-black tracking-widest uppercase">Add category</span>
     </button>
   </footer>
 </template>

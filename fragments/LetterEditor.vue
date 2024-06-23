@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
@@ -46,16 +45,7 @@ function addSenderDetail() {
           v-model="isHeaderSimple"
         />
         <template v-if="isHeaderSimple">
-          <div class="flex gap-2">
-            <span class="label">Sender details</span>
-            <button
-              title="Add detail"
-              class="bg-blue-500 size-7 text-white rounded-full"
-              @click="addSenderDetail"
-            >
-              <PlusCircleIcon class="size-full" />
-            </button>
-          </div>
+          <span class="label">Sender details</span>
           <ul
             v-if="senderDetails.length"
             id="recipientDetailList"
@@ -69,7 +59,7 @@ function addSenderDetail() {
               <input
                 class="input w-[70%]"
                 v-model="senderDetails[index]"
-                @keydown.enter.prevent="addRecipientDetail"
+                @keydown.enter.prevent="addSenderDetail"
               />
               <ListActions
                 class="mb-2"
@@ -80,20 +70,17 @@ function addSenderDetail() {
                 @remove="remove(senderDetails, index)"
               />
             </li>
+            <button
+              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+              @click="addSenderDetail"
+            >
+              Add detail
+            </button>
           </ul>
         </template>
       </label>
       <label class="flex flex-col" for="recipientDetails">
-        <div class="flex gap-2">
-          <span class="label">Recipient details</span>
-          <button
-            title="Add detail"
-            class="bg-blue-500 size-7 text-white rounded-full"
-            @click="addRecipientDetail"
-          >
-            <PlusCircleIcon class="size-full" />
-          </button>
-        </div>
+        <span class="label">Recipient details</span>
         <ul
           v-if="recipientDetails.length"
           id="recipientDetailList"
@@ -118,6 +105,12 @@ function addSenderDetail() {
               @remove="remove(recipientDetails, index)"
             />
           </li>
+          <button
+            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+            @click="addRecipientDetail"
+          >
+            Add detail
+          </button>
         </ul>
       </label>
       <label class="flex flex-col" for="letterSubject">
@@ -134,16 +127,7 @@ function addSenderDetail() {
     <template v-slot:header>Body</template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="paragraphList">
-        <div class="flex gap-2">
-          <span class="label">Paragraphs</span>
-          <button
-            title="Add paragraph"
-            class="bg-blue-500 size-7 text-white rounded-full"
-            @click="addParagraph"
-          >
-            <PlusCircleIcon class="size-full" />
-          </button>
-        </div>
+        <span class="label">Paragraphs</span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">
           <li
             v-for="(_paragraph, index) in paragraphs"
@@ -164,6 +148,12 @@ function addSenderDetail() {
               @remove="remove(paragraphs, index)"
             />
           </li>
+          <button
+            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+            @click="addParagraph"
+          >
+            Add paragraph
+          </button>
         </ul>
       </label>
     </div>

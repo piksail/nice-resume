@@ -27,7 +27,6 @@ import ProfileEditor from "@/fragments/ProfileEditor.vue";
 import ResumeEditor from "@/fragments/ResumeEditor.vue";
 import StyleEditor from "@/fragments/StyleEditor.vue";
 import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
-import Button from "./Button.vue";
 
 const { documentType } = defineProps<{
   documentType: "letter" | "resume";
@@ -325,20 +324,17 @@ onMounted(() => {
       How do you want to start editing?
     </p>
     <div class="flex flex-col gap-4">
-      <Button class="shadow" @click="closeModal">
-        Continue where I left off
-      </Button>
-      <Button class="shadow" @click="resetStores">Start from scratch</Button>
-      <Button class="shadow" @click="generateStores">
-        Edit pre-filled data
-      </Button>
-      <label
-        for="editorSaveFileReader"
-        class="shadow bg-white px-3 py-2 rounded cursor-pointer text-center"
-      >
-        <span
-          class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
-        >
+      <button class="button bg-white" @click="closeModal">
+        <span class="textGradient">Continue where I left off</span>
+      </button>
+      <button class="button bg-white" @click="resetStores">
+        <span class="textGradient">Start from scratch</span>
+      </button>
+      <button class="button bg-white" @click="generateStores">
+        <span class="textGradient">Edit pre-filled data</span>
+      </button>
+      <label for="editorSaveFileReader" class="button bg-white cursor-pointer">
+        <span class="textGradient">
           Import a save file from a previous session
         </span>
         <input
@@ -351,13 +347,9 @@ onMounted(() => {
       </label>
       <label
         for="editorJsonResumeFileReader"
-        class="shadow bg-white px-3 py-2 rounded cursor-pointer text-center"
+        class="button bg-white cursor-pointer"
       >
-        <span
-          class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
-        >
-          Import a JSON Resume file*
-        </span>
+        <span class="textGradient">Import a JSON Resume file*</span>
         <input
           id="editorJsonResumeFileReader"
           class="hidden"
@@ -366,8 +358,6 @@ onMounted(() => {
           @change="importFromJsonResume"
         />
       </label>
-      <!-- <Button>Import LinkedIn profile</Button> -->
-      <!-- <Button>Import Viadeo profile</Button> -->
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
         double-check dates, highlights and tags after import, and be informed

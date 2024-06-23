@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -74,16 +73,8 @@ function changeContactDetaiType(
         <textarea id="detailsAbout" class="input" v-model="about" />
       </label>
       <label class="flex flex-col" for="contactDetails">
-        <div class="flex gap-2">
-          <span class="label">Contact details</span>
-          <button
-            title="Add detail"
-            class="bg-blue-500 size-7 text-white rounded-full"
-            @click="addContactDetail"
-          >
-            <PlusCircleIcon class="size-full" />
-          </button>
-        </div>
+        <span class="label">Contact details</span>
+
         <ul
           v-if="contactDetails.length"
           id="contactDetailList"
@@ -165,6 +156,12 @@ function changeContactDetaiType(
               @remove="remove(contactDetails, detailIndex)"
             />
           </li>
+          <button
+            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+            @click="addContactDetail"
+          >
+            Add detail
+          </button>
         </ul>
       </label>
     </div>

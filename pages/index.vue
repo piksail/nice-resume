@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Button from "@/components/Button.vue";
 import Card from "@/components/Card.vue";
 
 const title = ref("Nice resume");
@@ -36,7 +35,9 @@ const description = ref(
           simple
         </p>
         <NuxtLink to="/resume">
-          <Button class="block mx-auto mt-8">Get started</Button>
+          <button class="button bg-white mx-auto mt-8">
+            <span class="textGradient">Get started</span>
+          </button>
         </NuxtLink>
       </Card>
       <div class="max-w-screen-md mx-auto">

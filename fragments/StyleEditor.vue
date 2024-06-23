@@ -7,7 +7,7 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { getSideIndexLabel } from "@/utils/editor";
 import { fonts, templateSettings } from "@/globals";
-import Button from "@/components/Button.vue";
+import Field from "@/components/Field.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
@@ -622,13 +622,14 @@ function setCurrentTab(value: string) {
   <div class="flex flex-col gap-5 justify-between bg-transparent">
     <template v-if="isStyleEditorOpen">
       <nav class="flex items-center gap-2">
-        <Button
+        <button
+          class="button bg-white"
           v-for="(tab, index) in tabs"
           :key="index"
           @click="setCurrentTab(tab)"
         >
-          {{ tab }}
-        </Button>
+          <span class="textGradient">{{ tab }}</span>
+        </button>
       </nav>
       <div class="flex gap-5">
         <Field
@@ -636,7 +637,9 @@ function setCurrentTab(value: string) {
           label="Apply custom style"
           v-model="isThemeCustomized"
         />
-        <Button class="flex-1" @click="resetStyle">Reset style</Button>
+        <button class="button bg-white flex-1" @click="resetStyle">
+          <span class="textGradient">Reset style</span>
+        </button>
       </div>
     </template>
     <Field type="toggle" label="Customize" v-model="isStyleEditorOpen" />

@@ -10,7 +10,6 @@ import { documentTypes, templates } from "@/globals";
 import { download } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
-import Button from "@/components/Button.vue";
 import packageJson from "../package.json";
 
 console.info("Version: ", packageJson.version);
@@ -131,7 +130,9 @@ watch(documentType, (newValue) => {
         />
         <span class="label opacity-100">JSON Resume compatible data*</span>
       </label>
-      <Button @click="downloadSelection">Download selection</Button>
+      <button class="button bg-white" @click="downloadSelection">
+        <span class="textGradient">Download selection</span>
+      </button>
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
         double-check dates, highlights and tags, and add missing elements such
@@ -147,7 +148,7 @@ watch(documentType, (newValue) => {
   >
     <NuxtLink to="/">
       <h1
-        class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center text-4xl font-black tracking-widest uppercase"
+        class="bgGradient textGradient text-center text-4xl"
         :data-version="packageJson.version"
       >
         Nice
@@ -201,12 +202,10 @@ watch(documentType, (newValue) => {
         </div>
       </label>
 
-      <Button inverted @click="openModal">
-        <template v-slot:startIcon>
-          <DocumentArrowDownIcon class="h-6" />
-        </template>
+      <button class="button bgGradient text-white" @click="openModal">
+        <DocumentArrowDownIcon class="h-6" />
         Download
-      </Button>
+      </button>
     </div>
   </header>
 </template>
