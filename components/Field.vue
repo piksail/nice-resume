@@ -50,7 +50,14 @@ const model = defineModel();
       :disabled="disabled"
       v-model="model"
     />
-    <span class="label" :class="transparent ? 'text-white' : 'text-blue-500'">
+    <span
+      class="label"
+      :class="[
+        !disabled ? 'cursor-pointer' : 'cursor-auto',
+        ,
+        transparent ? 'text-white' : 'text-blue-500',
+      ]"
+    >
       {{ label }}
     </span>
   </label>
