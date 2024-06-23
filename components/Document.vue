@@ -25,7 +25,7 @@ const settings = computed(() => {
 
 <template>
   <div
-    class="relative h-full w-full flex flex-col"
+    class="relative w-full flex flex-col"
     :style="{
       color: settings.document.color,
       fontFamily: settings.document.bodyFont,

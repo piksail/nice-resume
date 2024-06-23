@@ -85,7 +85,7 @@ function changeContactDetaiType(
             :key="detailIndex"
             class="inputListItem"
           >
-            <div class="flex w-[70%] gap-3 items-end">
+            <div class="flex flex-col md:flex-row w-[70%] gap-3 md:items-end">
               <input
                 class="input flex-1"
                 v-model="contactDetails[detailIndex].value"

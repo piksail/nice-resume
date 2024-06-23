@@ -5,12 +5,13 @@ export default defineNuxtConfig({
   css: ["@/assets/styles/index.css"],
   devtools: { enabled: true },
   modules: [
-    "@pinia/nuxt",
-    "@nuxtjs/tailwindcss",
-    "nuxt-svgo",
     "@nuxt/test-utils/module",
-    "@pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/seo",
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@vueuse/nuxt",
+    "nuxt-svgo",
   ],
   ssr: false,
   app: {

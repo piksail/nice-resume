@@ -20,7 +20,7 @@ function toggleDisplay() {
     class="flex flex-col bg-white bg-opacity-10 rounded w-full scroll-mt-8"
   >
     <header
-      class="flex justify-between items-center rounded bg-white text-pink-500 p-6 shadow-lg"
+      class="flex justify-between items-center rounded bg-white text-pink-500 p-4 md:p-6 shadow-lg"
       :class="
         isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'
       "
@@ -36,7 +36,7 @@ function toggleDisplay() {
         <ChevronDownIcon v-else class="size-full" />
       </button>
     </header>
-    <div class="p-10 pt-6" v-if="isOpen && !isHidden">
+    <div class="p-6 md:p-10" v-if="isOpen && !isHidden">
       <slot />
     </div>
   </div>

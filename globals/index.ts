@@ -18,6 +18,8 @@ import type {
   TextSeparator,
 } from "@/types";
 
+export const A4_RATIO = 297 / 210;
+
 export const documentTypes: Array<DocumentType> = ["resume", "letter"];
 
 export const fonts: Font[] = [
