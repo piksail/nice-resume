@@ -100,7 +100,6 @@ export const discouragedLayoutTemplates: {
 };
 
 // TODO settings réduire espace entrelistmarker et text
-// TODO better UX for choosing header layout
 
 export const textSeparators: TextSeparator[] = [
   "|",
