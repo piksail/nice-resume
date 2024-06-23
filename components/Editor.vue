@@ -339,42 +339,52 @@ onMounted(() => {
         How do you want to start editing?
       </p>
       <div class="flex flex-col gap-4">
-        <button class="button bg-white" @click="closeModal">
-          <span class="textGradient">Continue where I left off</span>
+        <button class="button bgGradient p-[2px]" @click="closeModal">
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Continue where I left off</span>
+          </div>
         </button>
-        <button class="button bg-white" @click="resetStores">
-          <span class="textGradient">Start from scratch</span>
+        <button class="button bgGradient p-[2px]" @click="resetStores">
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Start from scratch</span>
+          </div>
         </button>
-        <button class="button bg-white" @click="generateStores">
-          <span class="textGradient">Edit pre-filled data</span>
+        <button class="button bgGradient p-[2px]" @click="generateStores">
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Edit pre-filled data</span>
+          </div>
         </button>
         <label
           for="editorSaveFileReader"
-          class="button bg-white cursor-pointer"
+          class="button bgGradient p-[2px] cursor-pointer"
         >
-          <span class="textGradient">
-            Import a save file from a previous session
-          </span>
-          <input
-            id="editorSaveFileReader"
-            class="hidden"
-            type="file"
-            accept=".json"
-            @change="importFromJson"
-          />
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">
+              Import a save file from a previous session
+            </span>
+            <input
+              id="editorSaveFileReader"
+              class="hidden"
+              type="file"
+              accept=".json"
+              @change="importFromJson"
+            />
+          </div>
         </label>
         <label
           for="editorJsonResumeFileReader"
-          class="button bg-white cursor-pointer"
+          class="button bgGradient p-[2px] cursor-pointer"
         >
-          <span class="textGradient">Import a JSON Resume file*</span>
-          <input
-            id="editorJsonResumeFileReader"
-            class="hidden"
-            type="file"
-            accept=".json"
-            @change="importFromJsonResume"
-          />
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Import a JSON Resume file*</span>
+            <input
+              id="editorJsonResumeFileReader"
+              class="hidden"
+              type="file"
+              accept=".json"
+              @change="importFromJsonResume"
+            />
+          </div>
         </label>
         <p class="text-blue-500 text-center">
           *Full compatibility will be soon available. In The meantime,

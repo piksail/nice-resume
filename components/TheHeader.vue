@@ -116,8 +116,10 @@ function openModal() {
         type="checkbox"
         v-model="isExportToJsonResumeIncluded"
       />
-      <button class="button bg-white" @click="downloadSelection">
-        <span class="textGradient">Download selection</span>
+      <button class="button bgGradient p-[2px]" @click="downloadSelection">
+        <div class="button bg-white h-full w-full rounded-sm">
+          <span class="textGradient">Download selection</span>
+        </div>
       </button>
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
