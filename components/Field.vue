@@ -29,7 +29,9 @@ const model = defineModel();
           class="inline-block h-4 w-4 transform rounded-full transition-transform"
         />
       </Switch>
-      <SwitchLabel class="label opacity-100 ml-2">{{ label }}</SwitchLabel>
+      <SwitchLabel class="label cursor-pointer ml-2">
+        {{ label }}
+      </SwitchLabel>
     </div>
   </SwitchGroup>
   <label v-else class="flex flex-col" :for="id">
