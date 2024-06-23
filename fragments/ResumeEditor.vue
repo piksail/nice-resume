@@ -198,7 +198,7 @@ function toggleCategoryVisibility(category: Category) {
       <li
         v-for="(entry, entryIndex) in category.entries"
         :key="entryIndex"
-        class="sectionSeparator"
+        class="sectionSeparator border-white/10"
       >
         <header class="flex items-center justify-between">
           <div class="sectionHeading">Entry #{{ entryIndex + 1 }}</div>

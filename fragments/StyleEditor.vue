@@ -81,33 +81,35 @@ function setTab(value: Tab) {
     class="h-[260px] overflow-auto flex flex-col gap-5 bg-white p-6 rounded shadow-lg text-pink-500 mb-4"
   >
     <template v-if="tab === 'Document'">
-      <header>
-        <div class="sectionHeading">Document</div>
-      </header>
-      <div class="flex gap-5 flex-wrap">
-        <Field
-          v-for="i in 4"
-          :key="i"
-          :id="`documentMargin${i}`"
-          type="number"
-          :label="`Margin ${getSideIndexLabel(i)}`"
-          :disabled="!isThemeCustomized"
-          v-model="documentTypeSettings.document.padding[i - 1]"
-        />
+      <div>
+        <header>
+          <div class="sectionHeading">Document</div>
+        </header>
+        <div class="flex gap-5 flex-wrap">
+          <Field
+            v-for="i in 4"
+            :key="i"
+            :id="`documentMargin${i}`"
+            type="number"
+            :label="`Margin ${getSideIndexLabel(i)}`"
+            :disabled="!isThemeCustomized"
+            v-model="documentTypeSettings.document.padding[i - 1]"
+          />
+        </div>
+        <label class="flex flex-col" for="documentBodyFont">
+          <span class="label">Font</span>
+          <select
+            id="documentBodyFont"
+            class="select block"
+            :disabled="!isThemeCustomized"
+            v-model="documentTypeSettings.document.bodyFont"
+          >
+            <option v-for="font in fonts" :key="font" class="option">
+              {{ font }}
+            </option>
+          </select>
+        </label>
       </div>
-      <label class="flex flex-col" for="documentBodyFont">
-        <span class="label">Font</span>
-        <select
-          id="documentBodyFont"
-          class="select block"
-          :disabled="!isThemeCustomized"
-          v-model="documentTypeSettings.document.bodyFont"
-        >
-          <option v-for="font in fonts" :key="font" class="option">
-            {{ font }}
-          </option>
-        </select>
-      </label>
     </template>
     <template v-else-if="tab === 'Address details'">
       <div v-if="isHeaderSimple" class="sectionSeparator">
@@ -130,7 +132,7 @@ function setTab(value: Tab) {
           v-model="letterSettings.senderDetails.gap"
         />
       </div>
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Recipient details</div>
         </header>
@@ -169,7 +171,7 @@ function setTab(value: Tab) {
           :settings="letterSettings.subject"
         />
       </div>
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Reference</div>
         </header>
@@ -188,7 +190,7 @@ function setTab(value: Tab) {
       </div>
     </template>
     <template v-else-if="tab === 'Body'">
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Paragraphs</div>
         </header>
@@ -277,7 +279,7 @@ function setTab(value: Tab) {
           :settings="documentTypeSettings.name"
         />
       </div>
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Title</div>
         </header>
@@ -313,7 +315,7 @@ function setTab(value: Tab) {
           :settings="documentTypeSettings.about"
         />
       </div>
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">About quote</div>
         </header>
@@ -379,7 +381,7 @@ function setTab(value: Tab) {
       </div>
     </template>
     <template v-else-if="tab === 'Contact'">
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Contact details</div>
         </header>
@@ -437,6 +439,7 @@ function setTab(value: Tab) {
       </div>
     </template>
     <template v-else-if="tab === 'Sections'">
+      <!-- TODO header settings here -->
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Aside</div>
@@ -472,7 +475,7 @@ function setTab(value: Tab) {
           </div>
         </div>
       </div>
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Body</div>
         </header>
@@ -503,7 +506,7 @@ function setTab(value: Tab) {
           />
         </div>
       </div>
-      <div class="sectionSeparator">
+      <div>
         <header>
           <div class="sectionHeading">Category name</div>
         </header>
