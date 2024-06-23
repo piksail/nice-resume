@@ -22,7 +22,7 @@ useResizeObserver(preview, (nodes) => {
 <template>
   <aside
     ref="preview"
-    class="print:!block mx-auto relative xl:w-[210mm] xl:!h-screen overflow-y-auto"
+    class="print:!block mx-auto relative xl:w-[210mm] xl:!h-screen overflow-y-auto group"
     :style="`height: ${previewHeight}px;`"
   >
     <Document
@@ -30,7 +30,7 @@ useResizeObserver(preview, (nodes) => {
       :style="`transform: scale(${zoomLevel / 100}); transform-origin: top left;`"
     />
     <PreviewZoom
-      class="print:hidden hidden xl:block xl:fixed xl:z-10 xl:right-8 xl:bottom-8 xl:bg-white xl:px-6 xl:py-3 xl:rounded xl:shadow-lg"
+      class="print:hidden hidden xl:block xl:fixed xl:z-10 xl:right-8 xl:bottom-8 xl:bg-white xl:px-6 xl:py-3 xl:rounded xl:shadow-lg opacity-0 group-hover:opacity-100 transition"
     />
   </aside>
 </template>
