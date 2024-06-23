@@ -42,7 +42,7 @@
     @apply cursor-pointer bg-transparent text-sm;
   }
   .slotButton {
-    @apply border-dashed border-white/20 border-2 text-white uppercase tracking-widest;
+    @apply border-dashed border-white/20 border-2 text-white/60 uppercase tracking-widest hover:border-white/80 hover:text-white;
   }
   .textGradient {
     @apply bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text uppercase tracking-widest font-black;
