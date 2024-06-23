@@ -106,9 +106,7 @@ watch(documentType, (newValue) => {
           type="checkbox"
           v-model="isExportToPdfIncluded"
         />
-        <span class="label opacity-100">
-          {{ capitalize(documentType) }} as PDF
-        </span>
+        <span class="label">{{ capitalize(documentType) }} as PDF</span>
       </label>
       <label for="isExportToJsonIncluded">
         <input
@@ -117,9 +115,7 @@ watch(documentType, (newValue) => {
           type="checkbox"
           v-model="isExportToJsonIncluded"
         />
-        <span class="label opacity-100">
-          Nice Resume data (save it for later)
-        </span>
+        <span class="label">Nice Resume data (save it for later)</span>
       </label>
       <label for="isExportToJsonResumeIncluded">
         <input
@@ -128,7 +124,7 @@ watch(documentType, (newValue) => {
           type="checkbox"
           v-model="isExportToJsonResumeIncluded"
         />
-        <span class="label opacity-100">JSON Resume compatible data*</span>
+        <span class="label">JSON Resume compatible data*</span>
       </label>
       <button class="button bg-white" @click="downloadSelection">
         <span class="textGradient">Download selection</span>
@@ -158,7 +154,7 @@ watch(documentType, (newValue) => {
     </NuxtLink>
     <div class="flex items-end gap-8 h-[60%]">
       <label for="template">
-        <span class="label opacity-100">Template</span>
+        <span class="label">Template</span>
         <select
           id="template"
           v-model="template"
@@ -171,7 +167,7 @@ watch(documentType, (newValue) => {
       </label>
 
       <label for="documentType">
-        <span class="label opacity-100">Document</span>
+        <span class="label">Document</span>
         <select
           id="documentType"
           v-model="documentType"
@@ -188,7 +184,7 @@ watch(documentType, (newValue) => {
       </label>
 
       <label for="editorZoomLevel">
-        <span class="label opacity-100">Zoom</span>
+        <span class="label">Zoom</span>
         <div class="flex gap-2 items-center">
           <input
             id="editorZoomLevel"

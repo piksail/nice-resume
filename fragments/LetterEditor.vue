@@ -45,7 +45,7 @@ function addSenderDetail() {
           v-model="isHeaderSimple"
         />
         <template v-if="isHeaderSimple">
-          <span class="label">Sender details</span>
+          <span class="label opacity-60">Sender details</span>
           <ul
             v-if="senderDetails.length"
             id="recipientDetailList"
@@ -80,7 +80,7 @@ function addSenderDetail() {
         </template>
       </label>
       <label class="flex flex-col" for="recipientDetails">
-        <span class="label">Recipient details</span>
+        <span class="label opacity-60">Recipient details</span>
         <ul
           v-if="recipientDetails.length"
           id="recipientDetailList"
@@ -114,11 +114,11 @@ function addSenderDetail() {
         </ul>
       </label>
       <label class="flex flex-col" for="letterSubject">
-        <span class="label">Subject</span>
+        <span class="label opacity-60">Subject</span>
         <textarea id="letterSubject" class="input" v-model="subject" />
       </label>
       <label class="flex flex-col" for="letterReference">
-        <span class="label">Reference</span>
+        <span class="label opacity-60">Reference</span>
         <input id="letterReference" class="input" v-model="reference" />
       </label>
     </div>
@@ -127,7 +127,7 @@ function addSenderDetail() {
     <template v-slot:header>Body</template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="paragraphList">
-        <span class="label">Paragraphs</span>
+        <span class="label opacity-60">Paragraphs</span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">
           <li
             v-for="(_paragraph, index) in paragraphs"

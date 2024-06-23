@@ -49,11 +49,11 @@ function changeContactDetaiType(
     <template v-slot:header>Details</template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="detailsName">
-        <span class="label">Name</span>
+        <span class="label opacity-60">Name</span>
         <input id="detailsName" class="input" v-model="name" />
       </label>
       <label class="flex flex-col" for="detailsTitle">
-        <span class="label">Title</span>
+        <span class="label opacity-60">Title</span>
         <input id="detailsTitle" class="input" v-model="title" />
       </label>
       <Field
@@ -66,14 +66,21 @@ function changeContactDetaiType(
           *When on, about and details are styled through the Entry style editor.
         </p>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
-        <Field label="Category name" v-model="simpleHeaderCategoryName" />
+        <label class="flex flex-col" for="detailsTitle">
+          <span class="label opacity-60">Category name</span>
+          <input
+            id="detailsTitle"
+            class="input"
+            v-model="simpleHeaderCategoryName"
+          />
+        </label>
       </template>
       <label class="flex flex-col" for="detailsAbout">
-        <span class="label">About</span>
+        <span class="label opacity-60">About</span>
         <textarea id="detailsAbout" class="input" v-model="about" />
       </label>
       <label class="flex flex-col" for="contactDetails">
-        <span class="label">Contact details</span>
+        <span class="label opacity-60">Contact details</span>
 
         <ul
           v-if="contactDetails.length"
@@ -93,7 +100,7 @@ function changeContactDetaiType(
               />
               <!-- TODO use nice switch component -->
               <label for="documentType">
-                <span class="label">Type</span>
+                <span class="label opacity-60">Type</span>
                 <select
                   id="detailType"
                   :value="detail.type"
@@ -111,7 +118,7 @@ function changeContactDetaiType(
                 </select>
               </label>
               <label for="detailIcon">
-                <span class="label">Icon</span>
+                <span class="label opacity-60">Icon</span>
                 <select
                   id="detailIcon"
                   :value="detail.icon"

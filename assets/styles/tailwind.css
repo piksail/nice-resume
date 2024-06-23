@@ -27,7 +27,7 @@
     @apply flex items-center justify-between gap-4;
   }
   .label {
-    @apply opacity-60 text-sm;
+    @apply text-sm;
   }
   .option {
     @apply bg-white text-blue-500 capitalize m-0;

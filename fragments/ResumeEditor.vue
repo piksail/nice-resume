@@ -124,7 +124,7 @@ function toggleCategoryVisibility(category: Category) {
       <template v-if="category.isVisible">
         <div class="flex items-baseline gap-8">
           <label for="name">
-            <span class="label opacity-100">Category name</span>
+            <span class="label">Category name</span>
             <input
               id="name"
               class="input text-blue-500 block bg-blue-700 bg-opacity-5"
@@ -132,7 +132,7 @@ function toggleCategoryVisibility(category: Category) {
             />
           </label>
           <label for="type">
-            <span class="label opacity-100">Type</span>
+            <span class="label">Type</span>
             <select
               id="type"
               :value="category.type"
@@ -150,7 +150,7 @@ function toggleCategoryVisibility(category: Category) {
             </select>
           </label>
           <label for="layout">
-            <span class="label opacity-100">Layout</span>
+            <span class="label">Layout</span>
             <select
               id="layout"
               :disabled="fixedLayoutTemplates.includes(template)"
@@ -215,14 +215,14 @@ function toggleCategoryVisibility(category: Category) {
         </header>
         <div class="flex flex-col gap-5">
           <label class="flex flex-col flex-1" for="title">
-            <span class="label">
+            <span class="label opacity-60">
               {{ getEntryTitleLabel(entry.type) }}
             </span>
             <input id="title" class="input" v-model="entry.title" />
           </label>
           <template v-if="entry.nature === 'experience'">
             <label class="flex flex-col" for="organization">
-              <span class="label">
+              <span class="label opacity-60">
                 {{ getExperienceOrganizationLabel(entry.type) }}
               </span>
               <input
@@ -232,20 +232,20 @@ function toggleCategoryVisibility(category: Category) {
               />
             </label>
             <label class="flex flex-col" for="location">
-              <span class="label">Location</span>
+              <span class="label opacity-60">Location</span>
               <input id="location" class="input" v-model="entry.location" />
             </label>
             <label class="flex flex-col" for="period">
-              <span class="label">Period</span>
+              <span class="label opacity-60">Period</span>
               <input id="period" class="input" v-model="entry.period" />
             </label>
             <label class="flex flex-col" for="summary">
-              <span class="label">Description</span>
+              <span class="label opacity-60">Description</span>
               <textarea id="summary" class="input" v-model="entry.summary" />
             </label>
           </template>
           <label class="flex flex-col" for="highlights">
-            <span class="label">Highlights</span>
+            <span class="label opacity-60">Highlights</span>
             <ul
               v-if="entry.highlights.length"
               :id="`highlightList${entryIndex}`"
@@ -279,7 +279,7 @@ function toggleCategoryVisibility(category: Category) {
             </ul>
           </label>
           <label class="flex flex-col" for="tags">
-            <span class="label">Tags</span>
+            <span class="label opacity-60">Tags</span>
             <ul
               v-if="entry.tags.length"
               :id="`tagList${entryIndex}`"
