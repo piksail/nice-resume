@@ -3,6 +3,8 @@ const { inverted } = defineProps<{
   inverted?: boolean;
 }>();
 
+// TODO this component should not exist. It should all be done through TW classes
+
 defineEmits(["click"]);
 </script>
 

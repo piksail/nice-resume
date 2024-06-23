@@ -2,25 +2,25 @@
 import { storeToRefs } from "pinia";
 import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useLetterStore } from "@/stores/letter";
-import { useProfileStore } from "@/stores/profile";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
 import EditorCategory from "@/components/EditorCategory.vue";
-import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import ListActions from "@/components/ListActions.vue";
-import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
-import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
-
-const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 const {
   isHeaderSimple,
+  paragraphs,
   recipientDetails,
   reference,
   senderDetails,
-  settings,
   subject,
 } = storeToRefs(useLetterStore());
+
+function addParagraph() {
+  paragraphs.value.push("");
+
+  focusNextInput("#paragraphList textarea");
+}
 
 function addRecipientDetail() {
   recipientDetails.value.push("");
@@ -38,93 +38,6 @@ function addSenderDetail() {
 <template>
   <EditorCategory id="Header">
     <template v-slot:header>Header</template>
-    <template v-slot:style>
-      <ul class="flex flex-col gap-10 mb-4">
-        <li class="sectionSeparator">
-          <header>
-            <!-- TODO sender is not always set (condition with "use simple layout") -->
-            <div class="sectionHeading">Sender</div>
-          </header>
-          <div class="flex flex-col gap-5">
-            <BlockSettingsEditor
-              property-name="senderDetails"
-              :settings="settings.senderDetails"
-            />
-            <TextSettingsEditor
-              property-name="senderDetails"
-              :settings="settings.senderDetails"
-            />
-            <Field
-              id="senderDetailsGap"
-              label="Gap"
-              type="number"
-              :disabled="!isThemeCustomized"
-              v-model="settings.senderDetails.gap"
-            />
-          </div>
-        </li>
-        <li class="sectionSeparator">
-          <header>
-            <div class="sectionHeading">Recipient</div>
-          </header>
-          <div class="flex flex-col gap-5">
-            <BlockSettingsEditor
-              property-name="recipientDetails"
-              :settings="settings.recipientDetails"
-            />
-            <TextSettingsEditor
-              property-name="recipientDetails"
-              :settings="settings.recipientDetails"
-            />
-            <Field
-              id="recipientDetailsGap"
-              label="Gap"
-              type="number"
-              :disabled="!isThemeCustomized"
-              v-model="settings.recipientDetails.gap"
-            />
-          </div>
-        </li>
-        <li class="sectionSeparator">
-          <header>
-            <div class="sectionHeading">Subject</div>
-          </header>
-          <div class="flex flex-col gap-5">
-            <BlockSettingsEditor
-              property-name="subject"
-              :settings="settings.subject"
-            />
-            <TextSettingsEditor
-              property-name="subject"
-              :settings="settings.subject"
-            />
-            <TitleSettingsEditor
-              property-name="subject"
-              :settings="settings.subject"
-            />
-          </div>
-        </li>
-        <li>
-          <header>
-            <div class="sectionHeading">Reference</div>
-          </header>
-          <div class="flex flex-col gap-5">
-            <BlockSettingsEditor
-              property-name="reference"
-              :settings="settings.reference"
-            />
-            <TextSettingsEditor
-              property-name="reference"
-              :settings="settings.reference"
-            />
-            <TitleSettingsEditor
-              property-name="reference"
-              :settings="settings.reference"
-            />
-          </div>
-        </li>
-      </ul>
-    </template>
     <div class="flex flex-col gap-5">
       <label class="flex flex-col" for="senderDetails">
         <Field
@@ -214,6 +127,44 @@ function addSenderDetail() {
       <label class="flex flex-col" for="letterReference">
         <span class="label">Reference</span>
         <input id="letterReference" class="input" v-model="reference" />
+      </label>
+    </div>
+  </EditorCategory>
+  <EditorCategory id="Body">
+    <template v-slot:header>Body</template>
+    <div class="flex flex-col gap-5">
+      <label class="flex flex-col" for="paragraphList">
+        <div class="flex gap-2">
+          <span class="label">Paragraphs</span>
+          <button
+            title="Add paragraph"
+            class="bg-blue-500 size-7 text-white rounded-full"
+            @click="addParagraph"
+          >
+            <PlusCircleIcon class="size-full" />
+          </button>
+        </div>
+        <ul v-if="paragraphs.length" id="paragraphList" class="inputList">
+          <li
+            v-for="(_paragraph, index) in paragraphs"
+            :key="index"
+            class="inputListItem"
+          >
+            <textarea
+              class="input w-[70%]"
+              v-model="paragraphs[index]"
+              @keydown.enter.prevent="addParagraph"
+            />
+            <ListActions
+              class="mb-2"
+              :index="index"
+              :list-length="paragraphs.length"
+              @moveUp="moveUp(paragraphs, index)"
+              @moveDown="moveDown(paragraphs, index)"
+              @remove="remove(paragraphs, index)"
+            />
+          </li>
+        </ul>
       </label>
     </div>
   </EditorCategory>

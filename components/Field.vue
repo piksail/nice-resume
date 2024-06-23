@@ -17,7 +17,7 @@ const model = defineModel();
     <div class="flex items-center">
       <Switch
         v-model="model as boolean"
-        :class="model ? 'bg-white' : 'bg-black bg-opacity-10'"
+        :class="model ? 'bg-white shadow' : 'bg-black bg-opacity-10'"
         class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
       >
         <span
@@ -29,7 +29,7 @@ const model = defineModel();
           class="inline-block h-4 w-4 transform rounded-full transition-transform"
         />
       </Switch>
-      <SwitchLabel class="label ml-2">{{ label }}</SwitchLabel>
+      <SwitchLabel class="label opacity-100 ml-2">{{ label }}</SwitchLabel>
     </div>
   </SwitchGroup>
   <label v-else class="flex flex-col" :for="id">

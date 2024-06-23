@@ -1,18 +1,31 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, type Component } from "vue";
 import { storeToRefs } from "pinia";
-import type { Asset, Experience, Export } from "@/types";
+import {
+  AcademicCapIcon,
+  BookOpenIcon,
+  BriefcaseIcon,
+  CheckBadgeIcon,
+  CubeIcon,
+  DocumentTextIcon,
+  EnvelopeOpenIcon,
+  HeartIcon,
+  LanguageIcon,
+  LifebuoyIcon,
+  TrophyIcon,
+  UserIcon,
+  WrenchIcon,
+} from "@heroicons/vue/16/solid";
+import type { Asset, Category, Experience, Export } from "@/types";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { getRandomAsset, getRandomExperience } from "@/utils/random";
 import { capitalize } from "@/utils/string";
-import LetterBodyEditor from "@/fragments/LetterBodyEditor.vue";
-import LetterCustomizationEditor from "@/fragments/LetterCustomizationEditor.vue";
-import ResumeCategoriesEditor from "@/fragments/ResumeCategoriesEditor.vue";
-import ResumeCustomizationEditor from "@/fragments/ResumeCustomizationEditor.vue";
-import LetterHeaderEditor from "@/fragments/LetterHeaderEditor.vue";
-import PersonalDetailsEditor from "@/fragments/PersonalDetailsEditor.vue";
+import LetterEditor from "@/fragments/LetterEditor.vue";
+import ProfileEditor from "@/fragments/ProfileEditor.vue";
+import ResumeEditor from "@/fragments/ResumeEditor.vue";
+import StyleEditor from "@/fragments/StyleEditor.vue";
 import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
 import Button from "./Button.vue";
 
@@ -172,6 +185,22 @@ function generateStores() {
   ];
 
   closeModal();
+}
+
+function getCategoryIcon(categoryType: Category["type"]) {
+  const iconMapper: { [key in Category["type"]]: Component } = {
+    award: TrophyIcon,
+    certificate: CheckBadgeIcon,
+    education: AcademicCapIcon,
+    interest: HeartIcon,
+    language: LanguageIcon,
+    project: CubeIcon,
+    publication: BookOpenIcon,
+    skill: WrenchIcon,
+    voluntary: LifebuoyIcon,
+    work: BriefcaseIcon,
+  };
+  return iconMapper[categoryType];
 }
 
 function importFromJson(event: Event) {
@@ -349,34 +378,47 @@ onMounted(() => {
       </p>
     </div>
   </dialog>
-  <main class="print:hidden flex flex-col xl:flex-row text-white flex-1">
+  <main
+    class="print:hidden relative flex flex-col xl:flex-row text-white flex-1"
+  >
     <header class="sticky z-10 top-[100px] lg:top-0">
       <nav
         class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"
       >
-        <span class="text-pink-500">Navigate to</span>
-        <a href="#Details" class="underline-offset-4 hover:underline">
+        <a
+          href="#Details"
+          class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+        >
+          <UserIcon class="w-4" />
           Details
         </a>
         <template v-if="documentType === 'letter'">
-          <a href="#Header" class="underline-offset-4 hover:underline">
+          <a
+            href="#Header"
+            class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+          >
+            <EnvelopeOpenIcon class="w-4" />
             Header
           </a>
-          <a href="#Body" class="underline-offset-4 hover:underline">Body</a>
+          <a
+            href="#Body"
+            class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+          >
+            <DocumentTextIcon class="w-4" />
+            Body
+          </a>
         </template>
         <template v-else>
           <a
             v-for="category in categories"
             :key="category.name"
             :href="`#${category.name}`"
-            class="underline-offset-4 hover:underline"
+            class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
           >
+            <component :is="getCategoryIcon(category.type)" class="w-4" />
             {{ category.name }}
           </a>
         </template>
-        <a href="#Customization" class="underline-offset-4 hover:underline">
-          Customization
-        </a>
       </nav>
       <template v-if="documentType === 'resume'">
         <p v-if="isLayoutDisabled" class="text-center px-10 py-2 bg-amber-500">
@@ -392,17 +434,13 @@ onMounted(() => {
     </header>
     <section class="w-full overflow-y-auto scroll-smooth">
       <div class="flex flex-col gap-8 p-4 lg:p-8 max-w-[860px] mx-auto">
-        <PersonalDetailsEditor />
-        <template v-if="documentType === 'letter'">
-          <LetterHeaderEditor />
-          <LetterBodyEditor />
-          <LetterCustomizationEditor />
-        </template>
-        <template v-else>
-          <ResumeCategoriesEditor />
-          <ResumeCustomizationEditor />
-        </template>
+        <ProfileEditor />
+        <LetterEditor v-if="documentType === 'letter'" />
+        <ResumeEditor v-else />
       </div>
     </section>
+    <footer class="fixed z-10 bottom-8 left-8 overflow-x-auto">
+      <StyleEditor />
+    </footer>
   </main>
 </template>
