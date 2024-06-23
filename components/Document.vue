@@ -6,6 +6,9 @@ import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
+import DocumentHeader from "./DocumentHeader.vue";
+import LetterBody from "./LetterBody.vue";
+import ResumeBody from "./ResumeBody.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
