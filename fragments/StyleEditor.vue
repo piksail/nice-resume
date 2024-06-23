@@ -478,6 +478,13 @@ function setCurrentTab(value: string) {
           <div class="sectionHeading">Category</div>
         </header>
         <div class="flex flex-col gap-5">
+          <Field
+            id="categoryGap"
+            label="Gap"
+            type="number"
+            :disabled="!isThemeCustomized"
+            v-model="resumeSettings.category.gap"
+          />
           <BlockSettingsEditor
             property-name="category"
             :settings="resumeSettings.category"
@@ -505,6 +512,20 @@ function setCurrentTab(value: string) {
       </div>
     </template>
     <template v-else-if="currentTab === 'Entry'">
+      <div class="sectionSeparator">
+        <header>
+          <div class="sectionHeading">Entry</div>
+        </header>
+        <div class="flex flex-col gap-5">
+          <Field
+            id="entryGap"
+            label="Gap"
+            type="number"
+            :disabled="!isThemeCustomized"
+            v-model="resumeSettings.entry.gap"
+          />
+        </div>
+      </div>
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Entry title</div>
