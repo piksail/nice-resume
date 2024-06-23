@@ -19,6 +19,7 @@ import {
   fixedLayoutTemplates,
 } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
+import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
@@ -123,14 +124,11 @@ function toggleCategoryVisibility(category: Category) {
     <template v-slot:header>
       <template v-if="category.isVisible">
         <div class="flex items-baseline gap-8">
-          <label for="name">
-            <span class="label">Category name</span>
-            <input
-              id="name"
-              class="input text-blue-500 block bg-blue-700 bg-opacity-5"
-              v-model="category.name"
-            />
-          </label>
+          <Field
+            id="categoryName"
+            label="Category name"
+            v-model="category.name"
+          />
           <label for="type">
             <span class="label">Type</span>
             <select
@@ -214,35 +212,38 @@ function toggleCategoryVisibility(category: Category) {
           />
         </header>
         <div class="flex flex-col gap-5">
-          <label class="flex flex-col flex-1" for="title">
-            <span class="label opacity-60">
-              {{ getEntryTitleLabel(entry.type) }}
-            </span>
-            <input id="title" class="input" v-model="entry.title" />
-          </label>
+          <Field
+            id="entryTitle"
+            :label="getEntryTitleLabel(entry.type)"
+            transparent
+            v-model="entry.title"
+          />
           <template v-if="entry.nature === 'experience'">
-            <label class="flex flex-col" for="organization">
-              <span class="label opacity-60">
-                {{ getExperienceOrganizationLabel(entry.type) }}
-              </span>
-              <input
-                id="organization"
-                class="input"
-                v-model="entry.organization"
-              />
-            </label>
-            <label class="flex flex-col" for="location">
-              <span class="label opacity-60">Location</span>
-              <input id="location" class="input" v-model="entry.location" />
-            </label>
-            <label class="flex flex-col" for="period">
-              <span class="label opacity-60">Period</span>
-              <input id="period" class="input" v-model="entry.period" />
-            </label>
-            <label class="flex flex-col" for="summary">
-              <span class="label opacity-60">Description</span>
-              <textarea id="summary" class="input" v-model="entry.summary" />
-            </label>
+            <Field
+              id="entryOrganization"
+              :label="getExperienceOrganizationLabel(entry.type)"
+              transparent
+              v-model="entry.organization"
+            />
+            <Field
+              id="entryLocation"
+              label="Location"
+              transparent
+              v-model="entry.location"
+            />
+            <Field
+              id="entryPeriod"
+              label="Period"
+              transparent
+              v-model="entry.period"
+            />
+            <Field
+              id="entrySummary"
+              label="Description"
+              transparent
+              type="textarea"
+              v-model="entry.summary"
+            />
           </template>
           <label class="flex flex-col" for="highlights">
             <span class="label opacity-60">Highlights</span>

@@ -7,6 +7,7 @@ import { focusNextInput } from "@/utils/editor";
 import type { ContactDetail } from "@/types";
 import { contactIcons, socialIcons } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
+import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
 const { name, title } = storeToRefs(useProfileStore());
@@ -46,16 +47,11 @@ function changeContactDetaiType(
 
 <template>
   <EditorCategory id="Details">
+    <!-- TODO rename Profile -->
     <template v-slot:header>Details</template>
     <div class="flex flex-col gap-5">
-      <label class="flex flex-col" for="detailsName">
-        <span class="label opacity-60">Name</span>
-        <input id="detailsName" class="input" v-model="name" />
-      </label>
-      <label class="flex flex-col" for="detailsTitle">
-        <span class="label opacity-60">Title</span>
-        <input id="detailsTitle" class="input" v-model="title" />
-      </label>
+      <Field id="detailsName" label="Name" transparent v-model="name" />
+      <Field id="detailsTitle" label="Title" transparent v-model="title" />
       <Field
         type="toggle"
         label="Consider about and details a dedicated category*"
@@ -66,22 +62,22 @@ function changeContactDetaiType(
           *When on, about and details are styled through the Entry style editor.
         </p>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
-        <label class="flex flex-col" for="detailsTitle">
-          <span class="label opacity-60">Category name</span>
-          <input
-            id="detailsTitle"
-            class="input"
-            v-model="simpleHeaderCategoryName"
-          />
-        </label>
+        <Field
+          id="detailsCategoryName"
+          label="Category name"
+          transparent
+          v-model="simpleHeaderCategoryName"
+        />
       </template>
-      <label class="flex flex-col" for="detailsAbout">
-        <span class="label opacity-60">About</span>
-        <textarea id="detailsAbout" class="input" v-model="about" />
-      </label>
+      <Field
+        id="detailsAbout"
+        label="About"
+        type="textarea"
+        transparent
+        v-model="about"
+      />
       <label class="flex flex-col" for="contactDetails">
         <span class="label opacity-60">Contact details</span>
-
         <ul
           v-if="contactDetails.length"
           id="contactDetailList"

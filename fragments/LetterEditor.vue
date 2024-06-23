@@ -4,6 +4,7 @@ import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
 import EditorCategory from "@/components/EditorCategory.vue";
+import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
 const {
@@ -113,14 +114,19 @@ function addSenderDetail() {
           </button>
         </ul>
       </label>
-      <label class="flex flex-col" for="letterSubject">
-        <span class="label opacity-60">Subject</span>
-        <textarea id="letterSubject" class="input" v-model="subject" />
-      </label>
-      <label class="flex flex-col" for="letterReference">
-        <span class="label opacity-60">Reference</span>
-        <input id="letterReference" class="input" v-model="reference" />
-      </label>
+      <Field
+        id="letterSubject"
+        label="Subject"
+        transparent
+        type="textarea"
+        v-model="subject"
+      />
+      <Field
+        id="letterReference"
+        label="Advertisement reference"
+        transparent
+        v-model="reference"
+      />
     </div>
   </EditorCategory>
   <EditorCategory id="Body">

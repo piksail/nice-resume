@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
-const { disabled, label, id, step, type } = defineProps<{
+const { disabled, label, id, step, transparent, type } = defineProps<{
   disabled?: boolean;
   id?: string;
   label: string;
   step?: string;
+  transparent?: boolean;
   type?: string;
 }>();
 
@@ -29,20 +30,34 @@ const model = defineModel();
           class="inline-block h-4 w-4 transform rounded-full transition-transform"
         />
       </Switch>
-      <SwitchLabel class="label cursor-pointer ml-2">
+      <SwitchLabel
+        class="label cursor-pointer ml-2"
+        :class="transparent ? 'opacity-60' : 'opacity-100'"
+      >
         {{ label }}
       </SwitchLabel>
     </div>
   </SwitchGroup>
   <label v-else class="flex flex-col" :for="id">
-    <span class="label">{{ label }}</span>
-    <input
+    <span class="label" :class="transparent ? 'opacity-60' : 'opacity-100'">
+      {{ label }}
+    </span>
+    <textarea
+      v-if="type === 'textarea'"
       :id="id"
       class="input"
-      :class="{
-        'cursor-pointer': type === 'color' && !disabled,
-        'w-20': type === 'number',
-      }"
+      :disabled="disabled"
+      v-model="model as string"
+    />
+    <input
+      v-else
+      :id="id"
+      class="input"
+      :class="[
+        type === 'color' && !disabled ? 'cursor-pointer' : 'cursor-auto',
+        type === 'number' ? 'w-20' : 'w-auto',
+        transparent ? '' : 'bg-blue-700 bg-opacity-5 text-blue-500',
+      ]"
       :type="type || 'text'"
       :step="step"
       :disabled="disabled"
