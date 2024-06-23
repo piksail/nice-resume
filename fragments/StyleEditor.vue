@@ -30,6 +30,12 @@ type Tab = ResumeStyleEditorTab | LetterStyleEditorTab | "";
 const tab = ref<Tab>("");
 const isStyleEditorOpen = ref(false);
 
+const documentTypeSettings = computed(() => {
+  return documentType.value === "letter"
+    ? letterSettings.value
+    : resumeSettings.value;
+});
+
 const tabs = computed(() => {
   const tabs: CommonStyleEditorTab[] = [
     "Document",
@@ -86,7 +92,7 @@ function setTab(value: Tab) {
           type="number"
           :label="`Margin ${getSideIndexLabel(i)}`"
           :disabled="!isThemeCustomized"
-          v-model="resumeSettings.document.padding[i - 1]"
+          v-model="documentTypeSettings.document.padding[i - 1]"
         />
       </div>
       <label class="flex flex-col" for="documentBodyFont">
@@ -95,7 +101,7 @@ function setTab(value: Tab) {
           id="documentBodyFont"
           class="select block"
           :disabled="!isThemeCustomized"
-          v-model="resumeSettings.document.bodyFont"
+          v-model="documentTypeSettings.document.bodyFont"
         >
           <option v-for="font in fonts" :key="font" class="option">
             {{ font }}
@@ -260,15 +266,15 @@ function setTab(value: Tab) {
         </header>
         <BlockSettingsEditor
           property-name="name"
-          :settings="resumeSettings.name"
+          :settings="documentTypeSettings.name"
         />
         <TextSettingsEditor
           property-name="name"
-          :settings="resumeSettings.name"
+          :settings="documentTypeSettings.name"
         />
         <TitleSettingsEditor
           property-name="name"
-          :settings="resumeSettings.name"
+          :settings="documentTypeSettings.name"
         />
       </div>
       <div class="sectionSeparator">
@@ -277,15 +283,15 @@ function setTab(value: Tab) {
         </header>
         <BlockSettingsEditor
           property-name="title"
-          :settings="resumeSettings.title"
+          :settings="documentTypeSettings.title"
         />
         <TextSettingsEditor
           property-name="title"
-          :settings="resumeSettings.title"
+          :settings="documentTypeSettings.title"
         />
         <TitleSettingsEditor
           property-name="title"
-          :settings="resumeSettings.title"
+          :settings="documentTypeSettings.title"
         />
       </div>
     </template>
@@ -296,15 +302,15 @@ function setTab(value: Tab) {
         </header>
         <BlockSettingsEditor
           property-name="about"
-          :settings="resumeSettings.about"
+          :settings="documentTypeSettings.about"
         />
         <TextSettingsEditor
           property-name="about"
-          :settings="resumeSettings.about"
+          :settings="documentTypeSettings.about"
         />
         <TitleSettingsEditor
           property-name="about"
-          :settings="resumeSettings.about"
+          :settings="documentTypeSettings.about"
         />
       </div>
       <div class="sectionSeparator">
@@ -316,7 +322,7 @@ function setTab(value: Tab) {
           label="Show quote"
           type="checkbox"
           :disabled="!isThemeCustomized"
-          v-model="resumeSettings.aboutQuote.isShown"
+          v-model="documentTypeSettings.aboutQuote.isShown"
         />
         <div class="flex gap-5 flex-wrap">
           <label class="flex flex-col" for="aboutQuoteFont">
@@ -325,7 +331,7 @@ function setTab(value: Tab) {
               id="aboutQuoteFont"
               class="select block"
               :disabled="!isThemeCustomized"
-              v-model="resumeSettings.aboutQuote.font"
+              v-model="documentTypeSettings.aboutQuote.font"
             >
               <option class="option" value="inherit">
                 default (inherit from document font)
@@ -340,13 +346,13 @@ function setTab(value: Tab) {
             label="Font size"
             type="number"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.aboutQuote.fontSize"
+            v-model="documentTypeSettings.aboutQuote.fontSize"
           />
           <label class="flex flex-col" for="aboutQuoteFontWeight">
             <span class="label">Font weight</span>
             <select
               id="aboutQuoteFontWeight"
-              v-model="resumeSettings.aboutQuote.fontWeight"
+              v-model="documentTypeSettings.aboutQuote.fontWeight"
               class="select block"
               :disabled="!isThemeCustomized"
             >
@@ -360,14 +366,14 @@ function setTab(value: Tab) {
             label="Italic"
             type="checkbox"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.aboutQuote.isItalic"
+            v-model="documentTypeSettings.aboutQuote.isItalic"
           />
           <Field
             id="aboutQuoteColor"
             label="Color"
             type="color"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.aboutQuote.color"
+            v-model="documentTypeSettings.aboutQuote.color"
           />
         </div>
       </div>
@@ -379,11 +385,11 @@ function setTab(value: Tab) {
         </header>
         <BlockSettingsEditor
           property-name="contactDetails"
-          :settings="resumeSettings.contactDetails"
+          :settings="documentTypeSettings.contactDetails"
         />
         <TextSettingsEditor
           property-name="contactDetails"
-          :settings="resumeSettings.contactDetails"
+          :settings="documentTypeSettings.contactDetails"
         />
         <div class="flex gap-5 flew-wrap">
           <label class="flex flex-col" for="contactDetailsAlignment">
@@ -392,7 +398,7 @@ function setTab(value: Tab) {
               id="contactDetailsAlignment"
               class="select block"
               :disabled="!isThemeCustomized"
-              v-model="resumeSettings.contactDetails.alignment"
+              v-model="documentTypeSettings.contactDetails.alignment"
             >
               <option class="option" value="start">start</option>
               <option class="option" value="center">center</option>
@@ -404,28 +410,28 @@ function setTab(value: Tab) {
             label="Gap"
             type="number"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.contactDetails.gap"
+            v-model="documentTypeSettings.contactDetails.gap"
           />
           <Field
             id="contactDetailsIsIconFirst"
             label="Icon first"
             type="checkbox"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.contactDetails.isIconFirst"
+            v-model="documentTypeSettings.contactDetails.isIconFirst"
           />
           <Field
             id="contactDetailsIconGap"
             label="Icon gap"
             type="number"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.contactDetails.iconGap"
+            v-model="documentTypeSettings.contactDetails.iconGap"
           />
           <Field
             id="contactDetailsIconColor"
             label="Icon color"
             type="color"
             :disabled="!isThemeCustomized"
-            v-model="resumeSettings.contactDetails.iconColor"
+            v-model="documentTypeSettings.contactDetails.iconColor"
           />
         </div>
       </div>
