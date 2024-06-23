@@ -5,8 +5,10 @@ import type {
   CommonDocumentSettings,
   ContactDetail,
   DocumentType,
+  EntryLayout,
   Experience,
   Font,
+  HeaderLayout,
   LetterSettings,
   ListMarker,
   ResumeSettings,
@@ -116,6 +118,12 @@ export const listMarkers: ListMarker[] = [
   "hyphen",
   "square",
   "triangle",
+];
+
+export const headerLayouts: HeaderLayout[] = [0, 1, 2, 3, 4, 5];
+
+export const entryLayouts: EntryLayout[] = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
 ];
 
 export const commonDocumentSettings: CommonDocumentSettings = {

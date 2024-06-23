@@ -57,6 +57,24 @@ export type BorderStyle = "dashed" | "dotted" | "solid";
 
 export type TextSeparator = "|" | "-" | "·" | "*" | ">" | "," | " ";
 
+export type HeaderLayout = 0 | 1 | 2 | 3 | 4 | 5;
+
+export type EntryLayout =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13;
+
 export type ListMarker =
   | null
   | "circle"
@@ -122,7 +140,7 @@ export type DocumentSettings = {
 export type CommonDocumentSettings = {
   document: DocumentSettings;
   header: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5;
+    layout: HeaderLayout;
   };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
@@ -164,7 +182,7 @@ export type ResumeSettings = CommonDocumentSettings & {
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
+    layout: EntryLayout;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings & {

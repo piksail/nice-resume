@@ -2,9 +2,9 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
+import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import DocumentHeaderAbout from "@/components/DocumentHeaderAbout.vue";
 import DocumentHeaderName from "@/components/DocumentHeaderName.vue";
@@ -13,13 +13,16 @@ import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDeta
 
 const { documentType } = storeToRefs(useEditorStore());
 
-const { about, contactDetails, name, template, title } =
-  storeToRefs(useProfileStore());
+const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
 
-const { isHeaderSimple } = storeToRefs(useResumeStore());
+const { isHeaderSimple, settings: resumeSettings } =
+  storeToRefs(useResumeStore());
+const { settings: letterSettings } = storeToRefs(useLetterStore());
 
 const settings = computed(() => {
-  return templateSettings[template.value][documentType.value];
+  return documentType.value === "letter"
+    ? letterSettings.value
+    : resumeSettings.value;
 });
 </script>
 

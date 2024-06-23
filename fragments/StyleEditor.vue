@@ -11,7 +11,12 @@ import type {
   ResumeStyleEditorTab,
 } from "@/types";
 import { getSideIndexLabel } from "@/utils/editor";
-import { fonts, templateSettings } from "@/globals";
+import {
+  entryLayouts,
+  fonts,
+  headerLayouts,
+  templateSettings,
+} from "@/globals";
 import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import EntryHeaderItemSettingsEditor from "@/components/EntryHeaderItemSettingsEditor.vue";
 import Field from "@/components/Field.vue";
@@ -85,30 +90,32 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">Document</div>
         </header>
-        <div class="flex gap-5 flex-wrap">
-          <Field
-            v-for="i in 4"
-            :key="i"
-            :id="`documentMargin${i}`"
-            type="number"
-            :label="`Margin ${getSideIndexLabel(i)}`"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.document.padding[i - 1]"
-          />
+        <div class="flex flex-col gap-5">
+          <div class="flex gap-5 flex-wrap">
+            <Field
+              v-for="i in 4"
+              :key="i"
+              :id="`documentMargin${i}`"
+              type="number"
+              :label="`Margin ${getSideIndexLabel(i)}`"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.document.padding[i - 1]"
+            />
+          </div>
+          <label class="flex flex-col" for="documentBodyFont">
+            <span class="label">Font</span>
+            <select
+              id="documentBodyFont"
+              class="select block"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.document.bodyFont"
+            >
+              <option v-for="font in fonts" :key="font" class="option">
+                {{ font }}
+              </option>
+            </select>
+          </label>
         </div>
-        <label class="flex flex-col" for="documentBodyFont">
-          <span class="label">Font</span>
-          <select
-            id="documentBodyFont"
-            class="select block"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.document.bodyFont"
-          >
-            <option v-for="font in fonts" :key="font" class="option">
-              {{ font }}
-            </option>
-          </select>
-        </label>
       </div>
     </template>
     <template v-else-if="tab === 'Address details'">
@@ -116,41 +123,45 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">Sender details</div>
         </header>
-        <BlockSettingsEditor
-          property-name="senderDetails"
-          :settings="letterSettings.senderDetails"
-        />
-        <TextSettingsEditor
-          property-name="senderDetails"
-          :settings="letterSettings.senderDetails"
-        />
-        <Field
-          id="senderDetailsGap"
-          label="Gap"
-          type="number"
-          :disabled="!isThemeCustomized"
-          v-model="letterSettings.senderDetails.gap"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="senderDetails"
+            :settings="letterSettings.senderDetails"
+          />
+          <TextSettingsEditor
+            property-name="senderDetails"
+            :settings="letterSettings.senderDetails"
+          />
+          <Field
+            id="senderDetailsGap"
+            label="Gap"
+            type="number"
+            :disabled="!isThemeCustomized"
+            v-model="letterSettings.senderDetails.gap"
+          />
+        </div>
       </div>
       <div>
         <header>
           <div class="sectionHeading">Recipient details</div>
         </header>
-        <BlockSettingsEditor
-          property-name="recipientDetails"
-          :settings="letterSettings.recipientDetails"
-        />
-        <TextSettingsEditor
-          property-name="recipientDetails"
-          :settings="letterSettings.recipientDetails"
-        />
-        <Field
-          id="recipientDetailsGap"
-          label="Gap"
-          type="number"
-          :disabled="!isThemeCustomized"
-          v-model="letterSettings.recipientDetails.gap"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="recipientDetails"
+            :settings="letterSettings.recipientDetails"
+          />
+          <TextSettingsEditor
+            property-name="recipientDetails"
+            :settings="letterSettings.recipientDetails"
+          />
+          <Field
+            id="recipientDetailsGap"
+            label="Gap"
+            type="number"
+            :disabled="!isThemeCustomized"
+            v-model="letterSettings.recipientDetails.gap"
+          />
+        </div>
       </div>
     </template>
     <template v-else-if="tab === 'Subject'">
@@ -158,35 +169,39 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">Subject</div>
         </header>
-        <BlockSettingsEditor
-          property-name="subject"
-          :settings="letterSettings.subject"
-        />
-        <TextSettingsEditor
-          property-name="subject"
-          :settings="letterSettings.subject"
-        />
-        <TitleSettingsEditor
-          property-name="subject"
-          :settings="letterSettings.subject"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="subject"
+            :settings="letterSettings.subject"
+          />
+          <TextSettingsEditor
+            property-name="subject"
+            :settings="letterSettings.subject"
+          />
+          <TitleSettingsEditor
+            property-name="subject"
+            :settings="letterSettings.subject"
+          />
+        </div>
       </div>
       <div>
         <header>
           <div class="sectionHeading">Reference</div>
         </header>
-        <BlockSettingsEditor
-          property-name="reference"
-          :settings="letterSettings.reference"
-        />
-        <TextSettingsEditor
-          property-name="reference"
-          :settings="letterSettings.reference"
-        />
-        <TitleSettingsEditor
-          property-name="reference"
-          :settings="letterSettings.reference"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="reference"
+            :settings="letterSettings.reference"
+          />
+          <TextSettingsEditor
+            property-name="reference"
+            :settings="letterSettings.reference"
+          />
+          <TitleSettingsEditor
+            property-name="reference"
+            :settings="letterSettings.reference"
+          />
+        </div>
       </div>
     </template>
     <template v-else-if="tab === 'Body'">
@@ -266,35 +281,39 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">Name</div>
         </header>
-        <BlockSettingsEditor
-          property-name="name"
-          :settings="documentTypeSettings.name"
-        />
-        <TextSettingsEditor
-          property-name="name"
-          :settings="documentTypeSettings.name"
-        />
-        <TitleSettingsEditor
-          property-name="name"
-          :settings="documentTypeSettings.name"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="name"
+            :settings="documentTypeSettings.name"
+          />
+          <TextSettingsEditor
+            property-name="name"
+            :settings="documentTypeSettings.name"
+          />
+          <TitleSettingsEditor
+            property-name="name"
+            :settings="documentTypeSettings.name"
+          />
+        </div>
       </div>
       <div>
         <header>
           <div class="sectionHeading">Title</div>
         </header>
-        <BlockSettingsEditor
-          property-name="title"
-          :settings="documentTypeSettings.title"
-        />
-        <TextSettingsEditor
-          property-name="title"
-          :settings="documentTypeSettings.title"
-        />
-        <TitleSettingsEditor
-          property-name="title"
-          :settings="documentTypeSettings.title"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="title"
+            :settings="documentTypeSettings.title"
+          />
+          <TextSettingsEditor
+            property-name="title"
+            :settings="documentTypeSettings.title"
+          />
+          <TitleSettingsEditor
+            property-name="title"
+            :settings="documentTypeSettings.title"
+          />
+        </div>
       </div>
     </template>
     <template v-else-if="tab === 'About'">
@@ -302,81 +321,85 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">About</div>
         </header>
-        <BlockSettingsEditor
-          property-name="about"
-          :settings="documentTypeSettings.about"
-        />
-        <TextSettingsEditor
-          property-name="about"
-          :settings="documentTypeSettings.about"
-        />
-        <TitleSettingsEditor
-          property-name="about"
-          :settings="documentTypeSettings.about"
-        />
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="about"
+            :settings="documentTypeSettings.about"
+          />
+          <TextSettingsEditor
+            property-name="about"
+            :settings="documentTypeSettings.about"
+          />
+          <TitleSettingsEditor
+            property-name="about"
+            :settings="documentTypeSettings.about"
+          />
+        </div>
       </div>
       <div>
         <header>
           <div class="sectionHeading">About quote</div>
         </header>
-        <Field
-          id="aboutQuoteIsShown"
-          label="Show quote"
-          type="checkbox"
-          :disabled="!isThemeCustomized"
-          v-model="documentTypeSettings.aboutQuote.isShown"
-        />
-        <div class="flex gap-5 flex-wrap">
-          <label class="flex flex-col" for="aboutQuoteFont">
-            <span class="label">Font</span>
-            <select
-              id="aboutQuoteFont"
-              class="select block"
-              :disabled="!isThemeCustomized"
-              v-model="documentTypeSettings.aboutQuote.font"
-            >
-              <option class="option" value="inherit">
-                default (inherit from document font)
-              </option>
-              <option v-for="font in fonts" :key="font" class="option">
-                {{ font }}
-              </option>
-            </select>
-          </label>
+        <div class="flex flex-col gap-5">
           <Field
-            id="aboutQuoteFontSize"
-            label="Font size"
-            type="number"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.aboutQuote.fontSize"
-          />
-          <label class="flex flex-col" for="aboutQuoteFontWeight">
-            <span class="label">Font weight</span>
-            <select
-              id="aboutQuoteFontWeight"
-              v-model="documentTypeSettings.aboutQuote.fontWeight"
-              class="select block"
-              :disabled="!isThemeCustomized"
-            >
-              <option v-for="i in 9" :key="i" class="option">
-                {{ `${i}00` }}
-              </option>
-            </select>
-          </label>
-          <Field
-            id="aboutQuoteIsItalic"
-            label="Italic"
+            id="aboutQuoteIsShown"
+            label="Show quote"
             type="checkbox"
             :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.aboutQuote.isItalic"
+            v-model="documentTypeSettings.aboutQuote.isShown"
           />
-          <Field
-            id="aboutQuoteColor"
-            label="Color"
-            type="color"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.aboutQuote.color"
-          />
+          <div class="flex gap-5 flex-wrap">
+            <label class="flex flex-col" for="aboutQuoteFont">
+              <span class="label">Font</span>
+              <select
+                id="aboutQuoteFont"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="documentTypeSettings.aboutQuote.font"
+              >
+                <option class="option" value="inherit">
+                  default (inherit from document font)
+                </option>
+                <option v-for="font in fonts" :key="font" class="option">
+                  {{ font }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="aboutQuoteFontSize"
+              label="Font size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.aboutQuote.fontSize"
+            />
+            <label class="flex flex-col" for="aboutQuoteFontWeight">
+              <span class="label">Font weight</span>
+              <select
+                id="aboutQuoteFontWeight"
+                v-model="documentTypeSettings.aboutQuote.fontWeight"
+                class="select block"
+                :disabled="!isThemeCustomized"
+              >
+                <option v-for="i in 9" :key="i" class="option">
+                  {{ `${i}00` }}
+                </option>
+              </select>
+            </label>
+            <Field
+              id="aboutQuoteIsItalic"
+              label="Italic"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.aboutQuote.isItalic"
+            />
+            <Field
+              id="aboutQuoteColor"
+              label="Color"
+              type="color"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.aboutQuote.color"
+            />
+          </div>
         </div>
       </div>
     </template>
@@ -385,61 +408,91 @@ function setTab(value: Tab) {
         <header>
           <div class="sectionHeading">Contact details</div>
         </header>
-        <BlockSettingsEditor
-          property-name="contactDetails"
-          :settings="documentTypeSettings.contactDetails"
-        />
-        <TextSettingsEditor
-          property-name="contactDetails"
-          :settings="documentTypeSettings.contactDetails"
-        />
-        <div class="flex gap-5 flew-wrap">
-          <label class="flex flex-col" for="contactDetailsAlignment">
-            <span class="label">Alignment</span>
-            <select
-              id="contactDetailsAlignment"
-              class="select block"
+        <div class="flex flex-col gap-5">
+          <BlockSettingsEditor
+            property-name="contactDetails"
+            :settings="documentTypeSettings.contactDetails"
+          />
+          <TextSettingsEditor
+            property-name="contactDetails"
+            :settings="documentTypeSettings.contactDetails"
+          />
+          <div class="flex gap-5 flew-wrap">
+            <label class="flex flex-col" for="contactDetailsAlignment">
+              <span class="label">Alignment</span>
+              <select
+                id="contactDetailsAlignment"
+                class="select block"
+                :disabled="!isThemeCustomized"
+                v-model="documentTypeSettings.contactDetails.alignment"
+              >
+                <option class="option" value="start">start</option>
+                <option class="option" value="center">center</option>
+                <option class="option" value="end">end</option>
+              </select>
+            </label>
+            <Field
+              id="contactDetailsGap"
+              label="Gap"
+              type="number"
               :disabled="!isThemeCustomized"
-              v-model="documentTypeSettings.contactDetails.alignment"
-            >
-              <option class="option" value="start">start</option>
-              <option class="option" value="center">center</option>
-              <option class="option" value="end">end</option>
-            </select>
-          </label>
-          <Field
-            id="contactDetailsGap"
-            label="Gap"
-            type="number"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.contactDetails.gap"
-          />
-          <Field
-            id="contactDetailsIsIconFirst"
-            label="Icon first"
-            type="checkbox"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.contactDetails.isIconFirst"
-          />
-          <Field
-            id="contactDetailsIconGap"
-            label="Icon gap"
-            type="number"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.contactDetails.iconGap"
-          />
-          <Field
-            id="contactDetailsIconColor"
-            label="Icon color"
-            type="color"
-            :disabled="!isThemeCustomized"
-            v-model="documentTypeSettings.contactDetails.iconColor"
-          />
+              v-model="documentTypeSettings.contactDetails.gap"
+            />
+            <Field
+              id="contactDetailsIsIconFirst"
+              label="Icon first"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.isIconFirst"
+            />
+            <Field
+              id="contactDetailsIconGap"
+              label="Icon gap"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.iconGap"
+            />
+            <Field
+              id="contactDetailsIconColor"
+              label="Icon color"
+              type="color"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.iconColor"
+            />
+          </div>
         </div>
       </div>
     </template>
     <template v-else-if="tab === 'Sections'">
-      <!-- TODO header settings here -->
+      <div class="sectionSeparator">
+        <header>
+          <div class="sectionHeading">Header</div>
+        </header>
+        <div class="flex flex-col gap-5">
+          <label class="flex flex-col" for="headerLayout">
+            <span class="label">Layout</span>
+            <select
+              id="headerLayout"
+              class="select block"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.header.layout"
+            >
+              <option
+                v-for="layout in headerLayouts"
+                :key="layout"
+                class="option"
+                :value="layout"
+              >
+                {{ layout }}
+              </option>
+            </select>
+          </label>
+          <BlockSettingsEditor
+            property-name="header"
+            :settings="resumeSettings.header"
+          />
+        </div>
+      </div>
       <div class="sectionSeparator">
         <header>
           <div class="sectionHeading">Aside</div>
@@ -532,6 +585,24 @@ function setTab(value: Tab) {
           <div class="sectionHeading">Entry</div>
         </header>
         <div class="flex flex-col gap-5">
+          <label class="flex flex-col" for="entryLayout">
+            <span class="label">Layout</span>
+            <select
+              id="entryLayout"
+              class="select block"
+              :disabled="!isThemeCustomized"
+              v-model="resumeSettings.entry.layout"
+            >
+              <option
+                v-for="layout in entryLayouts"
+                :key="layout"
+                class="option"
+                :value="layout"
+              >
+                {{ layout }}
+              </option>
+            </select>
+          </label>
           <Field
             id="entryGap"
             label="Gap"
