@@ -26,7 +26,7 @@ useResizeObserver(preview, (nodes) => {
     :style="`height: ${previewHeight}px;`"
   >
     <Document
-      class="print:transform-none"
+      class="print:!transform-none"
       :style="`transform: scale(${zoomLevel / 100}); transform-origin: top left;`"
     />
     <PreviewZoom
