@@ -6,7 +6,7 @@ import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { documentTypes, templates } from "@/globals";
-import { download } from "@/utils/file";
+import { download, downloadHtml } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
 import Field from "@/components/Field.vue";
@@ -22,7 +22,8 @@ const { about, contactDetails, name, template, title } =
 const { categories } = storeToRefs(useResumeStore());
 
 const dialog = ref(null);
-const isExportToPdfIncluded = ref(true);
+const isExportError = ref(false);
+const isDocumentExportIncluded = ref(true);
 const isExportToJsonIncluded = ref(false);
 const isExportToJsonResumeIncluded = ref(false);
 
@@ -34,14 +35,24 @@ function downloadPdf() {
  * Download selected files.
  */
 function downloadSelection() {
+  isExportError.value = false;
   if (isExportToJsonIncluded.value) {
     exportToJson();
   }
-  if (isExportToJsonResumeIncluded.value) {
+  if (documentType.value === "resume" && isExportToJsonResumeIncluded.value) {
     exportResumeToJsonResume();
   }
-  if (isExportToPdfIncluded.value) {
-    downloadPdf();
+  if (isDocumentExportIncluded.value) {
+    if (documentType.value === "email") {
+      const preview = document.getElementById("preview");
+      if (!preview) {
+        isExportError.value = true;
+      } else {
+        downloadHtml(preview, "nice-resume-email");
+      }
+    } else {
+      downloadPdf();
+    }
   }
   closeModal();
 }
@@ -53,11 +64,13 @@ function exportToJson() {
   const rawProfile = localStorage.getItem("profile");
   const rawResume = localStorage.getItem("resume");
   const rawLetter = localStorage.getItem("letter");
+  const rawEmail = localStorage.getItem("Email");
   const toExport = {
     isNiceResumeExport: true,
     profile: JSON.parse(rawProfile ?? ""),
     resume: JSON.parse(rawResume ?? ""),
     letter: JSON.parse(rawLetter ?? ""),
+    email: JSON.parse(rawEmail ?? ""),
   };
   download(toExport, "nice-resume");
 }
@@ -99,36 +112,43 @@ function openModal() {
     </p>
     <div class="flex flex-col gap-4">
       <Field
-        id="isExportToPdfIncluded"
-        :label="`${capitalize(documentType)} as PDF`"
+        id="isDocumentExportIncluded"
+        :label="`${capitalize(documentType)} as ${documentType === 'email' ? 'HTML' : 'PDF'}`"
         type="checkbox"
-        v-model="isExportToPdfIncluded"
+        v-model="isDocumentExportIncluded"
       />
-      <Field
-        id="isExportToJsonIncluded"
-        label="Nice Resume data (save it for later)"
-        type="checkbox"
-        v-model="isExportToJsonIncluded"
-      />
-      <Field
-        id="isExportToJsonResumeIncluded"
-        label="JSON Resume compatible data*"
-        type="checkbox"
-        v-model="isExportToJsonResumeIncluded"
-      />
+      <div>
+        <Field
+          id="isExportToJsonIncluded"
+          label="Nice Resume data (save it for later)*"
+          type="checkbox"
+          v-model="isExportToJsonIncluded"
+        />
+        <p class="text-xs">
+          *This includes all documents (resume, cover letter, email signature)
+        </p>
+      </div>
+      <div v-if="documentType === 'resume'">
+        <Field
+          id="isExportToJsonResumeIncluded"
+          label="JSON Resume compatible data*"
+          type="checkbox"
+          v-model="isExportToJsonResumeIncluded"
+        />
+        <p class="text-xs">
+          *Full compatibility will be soon available. In The meantime,
+          double-check dates, highlights and tags, and add missing elements such
+          as profile image and references directly in JSON Resume.
+        </p>
+      </div>
       <button class="button bgGradient p-[2px]" @click="downloadSelection">
         <div class="button bg-white h-full w-full rounded-sm">
           <span class="textGradient">Download selection</span>
         </div>
       </button>
-      <p class="text-blue-500 text-center">
-        *Full compatibility will be soon available. In The meantime,
-        double-check dates, highlights and tags, and add missing elements such
-        as profile image and references directly in JSON Resume.
+      <p v-if="isExportError" class="text-red-500 text-center">
+        Error exporting data.
       </p>
-      <!-- <p v-if="isImportError" class="text-red-500 text-center">
-        Error exporting data. TODO handle errors
-      </p> -->
     </div>
   </dialog>
   <header

@@ -20,7 +20,7 @@ export type Template =
   | "Toothpaste"
   | "Wiki";
 
-export type DocumentType = "letter" | "resume";
+export type DocumentType = "letter" | "resume" | "email";
 
 export type Font =
   | "inherit"
@@ -138,10 +138,6 @@ export type DocumentSettings = {
 };
 
 export type CommonDocumentSettings = {
-  document: DocumentSettings;
-  header: BlockSettings & {
-    layout: HeaderLayout;
-  };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
   about: BlockSettings & TitleSettings;
@@ -155,6 +151,7 @@ export type CommonDocumentSettings = {
     TextSettings &
     ListSettings & {
       alignment: "start" | "center" | "end";
+      iconSize: number;
       iconColor: string;
       iconGap: number;
       isIconFirst: boolean;
@@ -162,7 +159,14 @@ export type CommonDocumentSettings = {
     };
 };
 
-export type ResumeSettings = CommonDocumentSettings & {
+export type PaperDocumentSettings = CommonDocumentSettings & {
+  document: DocumentSettings;
+  header: BlockSettings & {
+    layout: HeaderLayout;
+  };
+};
+
+export type ResumeSettings = PaperDocumentSettings & {
   aside: BlockSettings & {
     width: number;
     isRightPositioned: boolean;
@@ -213,7 +217,7 @@ export type ResumeSettings = CommonDocumentSettings & {
     };
 };
 
-export type LetterSettings = CommonDocumentSettings & {
+export type LetterSettings = PaperDocumentSettings & {
   senderDetails: BlockSettings & TitleSettings & { gap: number };
   recipientDetails: BlockSettings & TitleSettings & { gap: number };
   subject: BlockSettings & TitleSettings;
@@ -231,11 +235,16 @@ export type LetterSettings = CommonDocumentSettings & {
   };
 };
 
+export type EmailSettings = CommonDocumentSettings & {
+  document: DocumentSettings & { layout: HeaderLayout };
+};
+
 export type TemplateSettings = {
   [T in Template]: {
     base: BaseSettings;
     resume: ResumeSettings;
     letter: LetterSettings;
+    email: EmailSettings;
   };
 };
 
@@ -249,9 +258,12 @@ export type ResumeStyleEditorTab =
 
 export type LetterStyleEditorTab =
   | CommonStyleEditorTab
+  | "Header"
   | "Address details"
   | "Subject"
   | "Body";
+
+export type EmailStyleEditorTab = CommonStyleEditorTab | "Signature";
 
 export type DetailIcon =
   | null

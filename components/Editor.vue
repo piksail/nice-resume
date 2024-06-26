@@ -10,6 +10,7 @@ import {
   CubeIcon,
   DocumentCheckIcon,
   DocumentTextIcon,
+  EnvelopeIcon,
   EnvelopeOpenIcon,
   HeartIcon,
   LanguageIcon,
@@ -26,11 +27,12 @@ import { useResumeStore } from "@/stores/resume";
 import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
 import { getRandomAsset, getRandomExperience } from "@/utils/random";
 import { capitalize } from "@/utils/string";
-import TheHeader from "@/components/TheHeader.vue";
+import EmailEditor from "@/fragments/EmailEditor.vue";
 import LetterEditor from "@/fragments/LetterEditor.vue";
 import ProfileEditor from "@/fragments/ProfileEditor.vue";
 import ResumeEditor from "@/fragments/ResumeEditor.vue";
 import StyleEditor from "@/fragments/StyleEditor.vue";
+import TheHeader from "@/components/TheHeader.vue";
 import Preview from "./Preview.vue";
 import EditorCategory from "./EditorCategory.vue";
 import PreviewZoom from "./PreviewZoom.vue";
@@ -416,7 +418,15 @@ onMounted(() => {
             <UserIcon class="w-4" />
             Profile
           </a>
-          <template v-if="documentType === 'letter'">
+          <a
+            v-if="documentType === 'email'"
+            href="#Signature"
+            class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+          >
+            <EnvelopeIcon class="w-4" />
+            Signature
+          </a>
+          <template v-else-if="documentType === 'letter'">
             <a
               href="#Header"
               class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
@@ -478,7 +488,8 @@ onMounted(() => {
               <Preview />
             </EditorCategory>
             <ProfileEditor />
-            <LetterEditor v-if="documentType === 'letter'" />
+            <EmailEditor v-if="documentType === 'email'" />
+            <LetterEditor v-else-if="documentType === 'letter'" />
             <ResumeEditor v-else />
           </div>
         </section>
