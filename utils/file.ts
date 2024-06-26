@@ -16,6 +16,20 @@ export function download(object: object, fileName: string) {
 }
 
 /**
+ * Download an HTML node without opening a tab.
+ */
+export function downloadHtml(node: HTMLElement, fileName: string) {
+  const dataString =
+    "data:text/html;charset=utf-8," + encodeURIComponent(node.innerHTML);
+  const downloadAnchorNode = document.createElement("a");
+  downloadAnchorNode.setAttribute("href", dataString);
+  downloadAnchorNode.setAttribute("download", fileName + ".html");
+  document.body.appendChild(downloadAnchorNode);
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
+/**
  * Get the height given the width to preserve the A4 ratio.
  */
 export function getA4Height(width: number) {

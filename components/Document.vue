@@ -7,6 +7,7 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { templateSettings } from "@/globals";
 import DocumentHeader from "./DocumentHeader.vue";
+import EmailSignature from "./EmailSignature.vue";
 import LetterBody from "./LetterBody.vue";
 import ResumeBody from "./ResumeBody.vue";
 
@@ -43,8 +44,11 @@ const settings = computed(() => {
       paddingLeft: `${settings.document.padding[3]}px`,
     }"
   >
-    <DocumentHeader v-if="documentType === 'resume' || !isHeaderSimple" />
-    <LetterBody v-if="documentType === 'letter'" />
-    <ResumeBody v-else />
+    <EmailSignature v-if="documentType === 'email'" />
+    <template v-else>
+      <DocumentHeader v-if="documentType === 'resume' || !isHeaderSimple" />
+      <LetterBody v-if="documentType === 'letter'" />
+      <ResumeBody v-else />
+    </template>
   </div>
 </template>
