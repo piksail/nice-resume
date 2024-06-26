@@ -15,7 +15,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
   <div class="flex flex-col gap-5 flex-wrap">
     <div class="flex gap-5 flex-wrap">
       <label class="flex flex-col" :for="`${propertyName}Align`">
-        <span class="opacity-60">Alignment</span>
+        <span class="label">Alignment</span>
         <select
           :id="`${propertyName}Align`"
           class="select block"

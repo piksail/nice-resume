@@ -1,24 +1,41 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, type Component } from "vue";
+
 import { storeToRefs } from "pinia";
-import type { Asset, Experience, Export } from "@/types";
+import {
+  AcademicCapIcon,
+  BookOpenIcon,
+  BriefcaseIcon,
+  CheckBadgeIcon,
+  CubeIcon,
+  DocumentCheckIcon,
+  DocumentTextIcon,
+  EnvelopeOpenIcon,
+  HeartIcon,
+  LanguageIcon,
+  LifebuoyIcon,
+  TrophyIcon,
+  UserIcon,
+  WrenchIcon,
+} from "@heroicons/vue/16/solid";
+import type { Asset, Category, Experience, Export } from "@/types";
+import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
 import { getRandomAsset, getRandomExperience } from "@/utils/random";
 import { capitalize } from "@/utils/string";
-import LetterBodyEditor from "@/fragments/LetterBodyEditor.vue";
-import LetterCustomizationEditor from "@/fragments/LetterCustomizationEditor.vue";
-import ResumeCategoriesEditor from "@/fragments/ResumeCategoriesEditor.vue";
-import ResumeCustomizationEditor from "@/fragments/ResumeCustomizationEditor.vue";
-import LetterHeaderEditor from "@/fragments/LetterHeaderEditor.vue";
-import PersonalDetailsEditor from "@/fragments/PersonalDetailsEditor.vue";
-import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
-import Button from "./Button.vue";
+import TheHeader from "@/components/TheHeader.vue";
+import LetterEditor from "@/fragments/LetterEditor.vue";
+import ProfileEditor from "@/fragments/ProfileEditor.vue";
+import ResumeEditor from "@/fragments/ResumeEditor.vue";
+import StyleEditor from "@/fragments/StyleEditor.vue";
+import Preview from "./Preview.vue";
+import EditorCategory from "./EditorCategory.vue";
+import PreviewZoom from "./PreviewZoom.vue";
 
-const { documentType } = defineProps<{
-  documentType: "letter" | "resume";
-}>();
+const { documentType } = storeToRefs(useEditorStore());
 
 const { template } = storeToRefs(useProfileStore());
 
@@ -62,18 +79,25 @@ function openModal() {
 }
 
 function generateStores() {
+  // Profile
   profile.name.value = "Firstname Lastname";
   profile.title.value = "Title";
-  resume.about.value = "About";
-  resume.contactDetails.value = [
+  profile.about.value = "About";
+  profile.contactDetails.value = [
     { type: "personal", icon: "drivingLicense", value: "Driving license" },
-    { type: "personal", icon: "address", value: "Address" },
+    {
+      type: "personal",
+      icon: "address",
+      value: "Streetnumber street Streetname, ZIPCODE City Country",
+    },
     { type: "personal", icon: "email", value: "email@email.com" },
     { type: "personal", icon: "phone", value: "061122334455" },
     { type: "social", icon: "gitHub", value: "github.com" },
     { type: "social", icon: "linkedIn", value: "linkedin.com" },
     { type: "social", icon: "viadeo", value: "viadeo.com" },
   ];
+
+  // Resume
   resume.categories.value = [
     {
       nature: "experience",
@@ -150,18 +174,20 @@ function generateStores() {
       isVisible: true,
     },
   ];
+
+  // Letter
   letter.senderDetails.value = [
     "Firstname Lastname",
-    "Streetnumber Streetname Street",
-    "Zip code City Country",
+    "Streetnumber street Streetname",
+    "ZIPCODE City Country",
   ];
   letter.recipientDetails.value = [
     "Firstname Lastname",
-    "Streetnumber Streetname Street",
-    "Zip code City Country",
+    "Streetnumber street Streetname",
+    "ZIPCODE City Country",
   ];
   letter.subject.value = "Cover letter subject";
-  letter.reference.value = "Ref.: Application reference";
+  letter.reference.value = "Ref.: Advertisement reference";
   letter.paragraphs.value = [
     "Salutation,",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -172,6 +198,22 @@ function generateStores() {
   ];
 
   closeModal();
+}
+
+function getCategoryIcon(categoryType: Category["type"]) {
+  const iconMapper: { [key in Category["type"]]: Component } = {
+    award: TrophyIcon,
+    certificate: CheckBadgeIcon,
+    education: AcademicCapIcon,
+    interest: HeartIcon,
+    language: LanguageIcon,
+    project: CubeIcon,
+    publication: BookOpenIcon,
+    skill: WrenchIcon,
+    voluntary: LifebuoyIcon,
+    work: BriefcaseIcon,
+  };
+  return iconMapper[categoryType];
 }
 
 function importFromJson(event: Event) {
@@ -288,114 +330,164 @@ onMounted(() => {
 </script>
 
 <template>
-  <dialog
-    ref="dialog"
-    class="print:hidden max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-  >
-    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
-      How do you want to start editing?
-    </p>
-    <div class="flex flex-col gap-4">
-      <Button class="shadow" @click="closeModal">
-        Continue where I left off
-      </Button>
-      <Button class="shadow" @click="resetStores">Start from scratch</Button>
-      <Button class="shadow" @click="generateStores">
-        Edit pre-filled data
-      </Button>
-      <label
-        for="editorSaveFileReader"
-        class="shadow bg-white px-3 py-2 rounded cursor-pointer text-center"
-      >
-        <span
-          class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
-        >
-          Import a save file from a previous session
-        </span>
-        <input
-          id="editorSaveFileReader"
-          class="hidden"
-          type="file"
-          accept=".json"
-          @change="importFromJson"
-        />
-      </label>
-      <label
-        for="editorJsonResumeFileReader"
-        class="shadow bg-white px-3 py-2 rounded cursor-pointer text-center"
-      >
-        <span
-          class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center font-black tracking-widest uppercase"
-        >
-          Import a JSON Resume file*
-        </span>
-        <input
-          id="editorJsonResumeFileReader"
-          class="hidden"
-          type="file"
-          accept=".json"
-          @change="importFromJsonResume"
-        />
-      </label>
-      <!-- <Button>Import LinkedIn profile</Button> -->
-      <!-- <Button>Import Viadeo profile</Button> -->
-      <p class="text-blue-500 text-center">
-        *Full compatibility will be soon available. In The meantime,
-        double-check dates, highlights and tags after import, and be informed
-        that profile image and references are not supported yet.
-      </p>
-      <p v-if="isImportError" class="text-red-500 text-center">
-        Error while importing data from local file.
-      </p>
-    </div>
-  </dialog>
-  <main class="print:hidden flex flex-col xl:flex-row text-white flex-1">
-    <header class="sticky z-10 top-[100px] lg:top-0">
-      <nav
-        class="bg-white xl:bg-transparent px-10 py-2 xl:p-8 text-blue-500 xl:text-white flex xl:flex-col gap-x-5 flex-wrap"
-      >
-        <span class="text-pink-500">Navigate to</span>
-        <a href="#Details">Details</a>
-        <template v-if="documentType === 'letter'">
-          <a href="#Header">Header</a>
-          <a href="#Body">Body</a>
-        </template>
-        <template v-else>
-          <a
-            v-for="category in categories"
-            :key="category.name"
-            :href="`#${category.name}`"
-          >
-            {{ category.name }}
-          </a>
-        </template>
-        <a href="#Customization">Customization</a>
-      </nav>
-      <template v-if="documentType === 'resume'">
-        <p v-if="isLayoutDisabled" class="text-center px-10 py-2 bg-amber-500">
-          Category layouts are fixed for this template.
-        </p>
-        <p
-          v-if="isLayoutDiscouraged"
-          class="text-center px-10 py-2 bg-amber-500"
-        >
-          {{ discouragedLayoutText }}
-        </p>
-      </template>
-    </header>
-    <div
-      class="flex flex-col gap-8 p-4 lg:p-8 w-full max-w-[860px] mx-auto overflow-y-auto scroll-smooth"
+  <div class="print:hidden flex flex-col xl:w-[calc(100%-210mm)] h-screen">
+    <dialog
+      ref="dialog"
+      class="max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
     >
-      <PersonalDetailsEditor />
-      <template v-if="documentType === 'letter'">
-        <LetterHeaderEditor />
-        <LetterBodyEditor />
-        <LetterCustomizationEditor />
-      </template>
-      <template v-else>
-        <ResumeCategoriesEditor />
-        <ResumeCustomizationEditor />
-      </template>
+      <p class="mb-8 text-center text-2xl font-bold text-pink-500">
+        How do you want to start editing?
+      </p>
+      <div class="flex flex-col gap-4">
+        <button class="button bgGradient p-[2px]" @click="closeModal">
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Continue where I left off</span>
+          </div>
+        </button>
+        <button class="button bgGradient p-[2px]" @click="resetStores">
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Start from scratch</span>
+          </div>
+        </button>
+        <button class="button bgGradient p-[2px]" @click="generateStores">
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Edit pre-filled data</span>
+          </div>
+        </button>
+        <label
+          for="editorSaveFileReader"
+          class="button bgGradient p-[2px] cursor-pointer"
+        >
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">
+              Import a save file from a previous session
+            </span>
+            <input
+              id="editorSaveFileReader"
+              class="hidden"
+              type="file"
+              accept=".json"
+              @change="importFromJson"
+            />
+          </div>
+        </label>
+        <label
+          for="editorJsonResumeFileReader"
+          class="button bgGradient p-[2px] cursor-pointer"
+        >
+          <div class="button bg-white h-full w-full rounded-sm">
+            <span class="textGradient">Import a JSON Resume file*</span>
+            <input
+              id="editorJsonResumeFileReader"
+              class="hidden"
+              type="file"
+              accept=".json"
+              @change="importFromJsonResume"
+            />
+          </div>
+        </label>
+        <p class="text-blue-500 text-center">
+          *Full compatibility will be soon available. In The meantime,
+          double-check dates, highlights and tags after import, and be informed
+          that profile image and references are not supported yet.
+        </p>
+        <p v-if="isImportError" class="text-red-500 text-center">
+          Error while importing data from local file.
+        </p>
+      </div>
+    </dialog>
+    <TheHeader />
+    <div class="flex">
+      <aside>
+        <nav
+          class="flex flex-col gap-x-5 gap-y-2 text-white p-4 pr-0 lg:p-8 text-sm md:text-base"
+        >
+          <a
+            href="#Preview"
+            class="flex xl:hidden underline-offset-4 hover:underline gap-1 items-center w-fit"
+          >
+            <DocumentCheckIcon class="w-4" />
+            Preview
+          </a>
+          <a
+            href="#Profile"
+            class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+          >
+            <UserIcon class="w-4" />
+            Profile
+          </a>
+          <template v-if="documentType === 'letter'">
+            <a
+              href="#Header"
+              class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+            >
+              <EnvelopeOpenIcon class="w-4" />
+              Header
+            </a>
+            <a
+              href="#Body"
+              class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+            >
+              <DocumentTextIcon class="w-4" />
+              Body
+            </a>
+          </template>
+          <template v-else>
+            <a
+              v-for="category in categories"
+              :key="category.name"
+              :href="`#${category.name}`"
+              class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+            >
+              <component :is="getCategoryIcon(category.type)" class="w-4" />
+              {{ category.name }}
+            </a>
+          </template>
+        </nav>
+      </aside>
+      <main
+        class="relative h-[calc(100vh-100px)] overflow-y-auto flex text-white flex-1"
+      >
+        <header class="sticky z-10 top-[100px] lg:top-0">
+          <template v-if="documentType === 'resume'">
+            <p
+              v-if="isLayoutDisabled"
+              class="text-center px-10 py-2 bg-amber-500"
+            >
+              Category layouts are fixed for this template.
+            </p>
+            <p
+              v-if="isLayoutDiscouraged"
+              class="text-center px-10 py-2 bg-amber-500"
+            >
+              {{ discouragedLayoutText }}
+            </p>
+          </template>
+        </header>
+        <section class="w-full overflow-y-auto scroll-smooth">
+          <div
+            class="flex flex-col gap-4 lg:gap-8 p-4 lg:p-8 max-w-[860px] mx-auto"
+          >
+            <EditorCategory id="Preview" class="block xl:hidden">
+              <template v-slot:header>
+                <div class="flex items-center gap-8">
+                  <div>Preview</div>
+                  <PreviewZoom />
+                </div>
+              </template>
+              <Preview />
+            </EditorCategory>
+            <ProfileEditor />
+            <LetterEditor v-if="documentType === 'letter'" />
+            <ResumeEditor v-else />
+          </div>
+        </section>
+        <footer
+          class="fixed z-10 bottom-4 left-4 lg:bottom-8 lg:left-8 overflow-x-auto"
+        >
+          <StyleEditor />
+        </footer>
+      </main>
     </div>
-  </main>
+  </div>
 </template>

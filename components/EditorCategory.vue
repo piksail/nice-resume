@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  IdentificationIcon,
-  PaintBrushIcon,
-} from "@heroicons/vue/24/outline";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/vue/24/outline";
 
 const { id, isHidden } = defineProps<{
   id: string;
   isHidden?: boolean;
 }>();
 
-const isCustomizing = ref(false);
 const isOpen = ref(true);
 
 function toggleDisplay() {
@@ -21,9 +15,15 @@ function toggleDisplay() {
 </script>
 
 <template>
-  <div :id="id" class="flex flex-col bg-white bg-opacity-10 rounded w-full">
+  <div
+    :id="id"
+    class="flex flex-col bg-white bg-opacity-10 rounded w-full scroll-mt-8"
+  >
     <header
-      :class="`p-6 flex justify-between items-center rounded bg-white ${isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'} text-pink-500 shadow-lg`"
+      class="flex justify-between items-center rounded bg-white text-pink-500 p-4 md:p-6 shadow-lg"
+      :class="
+        isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'
+      "
     >
       <slot name="header" />
       <button
@@ -36,28 +36,8 @@ function toggleDisplay() {
         <ChevronDownIcon v-else class="size-full" />
       </button>
     </header>
-    <div class="p-10 pt-6" v-if="isOpen && !isHidden">
-      <!-- TODO tab component -->
-      <div class="flex justify-around">
-        <button
-          class="flex items-center gap-2 border-b-2 border-transparent pb-2"
-          :class="!isCustomizing && 'border-white'"
-          @click="isCustomizing = false"
-        >
-          <IdentificationIcon class="h-6" />
-          Texts
-        </button>
-        <button
-          class="flex items-center gap-2 border-b-2 border-transparent pb-2"
-          :class="isCustomizing && 'border-white'"
-          @click="isCustomizing = true"
-        >
-          <PaintBrushIcon class="h-6" />
-          Styles
-        </button>
-      </div>
-      <slot v-if="isCustomizing" name="style" />
-      <slot v-else />
+    <div class="p-6 md:p-10" v-if="isOpen && !isHidden">
+      <slot />
     </div>
   </div>
 </template>

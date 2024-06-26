@@ -436,6 +436,36 @@ const fourthItem = computed(() => {
     <ResumeEntryHighlights :entry-highlights="entry.highlights" />
     <ResumeEntryTags :entry-tags="entry.tags" />
   </template>
+  <template v-else-if="settings.entry.layout === 13">
+    <div class="flex">
+      <div class="flex flex-col w-[25%]">
+        <component :is="firstItem?.component" v-bind="firstItem?.props" />
+        <component
+          v-if="entry.nature === 'experience'"
+          :is="secondItem?.component"
+          v-bind="secondItem?.props"
+        />
+        <component
+          v-if="entry.nature === 'experience'"
+          :is="thirdItem?.component"
+          v-bind="thirdItem?.props"
+        />
+        <component
+          v-if="entry.nature === 'experience'"
+          :is="fourthItem?.component"
+          v-bind="fourthItem?.props"
+        />
+      </div>
+      <div class="w-[75%]">
+        <ResumeEntrySummary
+          v-if="entry.nature === 'experience'"
+          :entry-summary="entry.summary"
+        />
+        <ResumeEntryHighlights :entry-highlights="entry.highlights" />
+        <ResumeEntryTags :entry-tags="entry.tags" />
+      </div>
+    </div>
+  </template>
   <template v-else>
     <div class="flex items-center">
       <component :is="firstItem?.component" v-bind="firstItem?.props" />

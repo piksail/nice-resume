@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useError } from "nuxt/app";
-import Button from "@/components/Button.vue";
 import Card from "@/components/Card.vue";
 
 const error = useError();
@@ -17,7 +16,9 @@ const error = useError();
         </p>
         <p v-if="error">{{ error.message }}</p>
         <NuxtLink to="/">
-          <Button class="block mx-auto mt-8">Go to home page</Button>
+          <button class="button bg-white mx-auto mt-8">
+            <span class="textGradient">Go to home page</span>
+          </button>
         </NuxtLink>
       </Card>
     </section>

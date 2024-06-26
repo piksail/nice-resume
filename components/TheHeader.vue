@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { navigateTo } from "nuxt/app";
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { DocumentArrowDownIcon } from "@heroicons/vue/24/outline";
 import { useEditorStore } from "@/stores/editor";
@@ -9,18 +8,41 @@ import { useResumeStore } from "@/stores/resume";
 import { documentTypes, templates } from "@/globals";
 import { download } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
+import { capitalize } from "@/utils/string";
+import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
 
 console.info("Version: ", packageJson.version);
 
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
-const { name, template, title } = storeToRefs(useProfileStore());
-const { about, categories, contactDetails } = storeToRefs(useResumeStore());
+
+const { about, contactDetails, name, template, title } =
+  storeToRefs(useProfileStore());
+
+const { categories } = storeToRefs(useResumeStore());
 
 const dialog = ref(null);
+const isExportToPdfIncluded = ref(true);
+const isExportToJsonIncluded = ref(false);
+const isExportToJsonResumeIncluded = ref(false);
 
 function downloadPdf() {
   window.print();
+}
+
+/**
+ * Download selected files.
+ */
+function downloadSelection() {
+  if (isExportToJsonIncluded.value) {
+    exportToJson();
+  }
+  if (isExportToJsonResumeIncluded.value) {
+    exportResumeToJsonResume();
+  }
+  if (isExportToPdfIncluded.value) {
+    downloadPdf();
+  }
   closeModal();
 }
 
@@ -38,7 +60,6 @@ function exportToJson() {
     letter: JSON.parse(rawLetter ?? ""),
   };
   download(toExport, "nice-resume");
-  closeModal();
 }
 
 /**
@@ -54,7 +75,6 @@ function exportResumeToJsonResume() {
   };
   const toExport = formatResumeAsJsonResume(resume);
   download(toExport, "nice-resume-to-json-resume");
-  closeModal();
 }
 
 function closeModal() {
@@ -66,31 +86,41 @@ function openModal() {
   // @ts-expect-error TODO type
   dialog.value.showModal();
 }
-
-watch(documentType, (newValue) => {
-  newValue === "letter" ? navigateTo("/letter") : navigateTo("/resume");
-});
 </script>
 
 <template>
+  <!-- TODO close top-right -->
   <dialog
     ref="dialog"
-    class="print:hidden max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    class="max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
   >
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       What do you want to download?
     </p>
-    <!-- TODO use checkbox instead -->
     <div class="flex flex-col gap-4">
-      <Button class="shadow" @click="downloadPdf">
-        {{ documentType }} as PDF
-      </Button>
-      <Button class="shadow" @click="exportToJson">
-        Nice Resume data (save it for later)
-      </Button>
-      <Button class="shadow" @click="exportResumeToJsonResume">
-        JSON Resume compatible data*
-      </Button>
+      <Field
+        id="isExportToPdfIncluded"
+        :label="`${capitalize(documentType)} as PDF`"
+        type="checkbox"
+        v-model="isExportToPdfIncluded"
+      />
+      <Field
+        id="isExportToJsonIncluded"
+        label="Nice Resume data (save it for later)"
+        type="checkbox"
+        v-model="isExportToJsonIncluded"
+      />
+      <Field
+        id="isExportToJsonResumeIncluded"
+        label="JSON Resume compatible data*"
+        type="checkbox"
+        v-model="isExportToJsonResumeIncluded"
+      />
+      <button class="button bgGradient p-[2px]" @click="downloadSelection">
+        <div class="button bg-white h-full w-full rounded-sm">
+          <span class="textGradient">Download selection</span>
+        </div>
+      </button>
       <p class="text-blue-500 text-center">
         *Full compatibility will be soon available. In The meantime,
         double-check dates, highlights and tags, and add missing elements such
@@ -102,11 +132,11 @@ watch(documentType, (newValue) => {
     </div>
   </dialog>
   <header
-    class="print:hidden sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 bg-white text-pink-500 shadow-lg"
+    class="sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 bg-white text-pink-500 shadow-lg"
   >
     <NuxtLink to="/">
       <h1
-        class="bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text text-center text-4xl font-black tracking-widest uppercase"
+        class="bgGradient textGradient text-center text-4xl"
         :data-version="packageJson.version"
       >
         Nice
@@ -116,8 +146,12 @@ watch(documentType, (newValue) => {
     </NuxtLink>
     <div class="flex items-end gap-8 h-[60%]">
       <label for="template">
-        Template
-        <select id="template" v-model="template" class="select block">
+        <span class="label">Template</span>
+        <select
+          id="template"
+          v-model="template"
+          class="select block text-blue-500"
+        >
           <option v-for="template in templates" :key="template" class="option">
             {{ template }}
           </option>
@@ -125,11 +159,11 @@ watch(documentType, (newValue) => {
       </label>
 
       <label for="documentType">
-        Document
+        <span class="label">Document</span>
         <select
           id="documentType"
           v-model="documentType"
-          class="select block capitalize"
+          class="select block capitalize text-blue-500"
         >
           <option
             v-for="documentType in documentTypes"
@@ -140,9 +174,8 @@ watch(documentType, (newValue) => {
           </option>
         </select>
       </label>
-
-      <label for="editorZoomLevel">
-        Zoom
+      <label for="editorZoomLevel" class="hidden">
+        <span class="label">Zoom</span>
         <div class="flex gap-2 items-center">
           <input
             id="editorZoomLevel"
@@ -156,7 +189,7 @@ watch(documentType, (newValue) => {
         </div>
       </label>
 
-      <button class="text-blue-500 flex items-center gap-1" @click="openModal">
+      <button class="button bgGradient text-white" @click="openModal">
         <DocumentArrowDownIcon class="h-6" />
         Download
       </button>

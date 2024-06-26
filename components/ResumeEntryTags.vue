@@ -24,7 +24,7 @@ const settings = computed(() => {
 <template>
   <ul
     v-if="entryTags.length"
-    class="flex"
+    class="flex flex-wrap"
     :style="{
       marginTop: `${settings.entryTag.margin[0]}px`,
       marginRight: `${settings.entryTag.margin[1]}px`,

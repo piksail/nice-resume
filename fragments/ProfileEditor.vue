@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -8,11 +7,13 @@ import { focusNextInput } from "@/utils/editor";
 import type { ContactDetail } from "@/types";
 import { contactIcons, socialIcons } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
+import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
-const { name, title } = storeToRefs(useProfileStore());
+const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
 
-const { about, contactDetails } = storeToRefs(useResumeStore());
+const { isHeaderSimple, simpleHeaderCategoryName } =
+  storeToRefs(useResumeStore());
 
 function addContactDetail() {
   const contactDetail: ContactDetail = {
@@ -43,32 +44,37 @@ function changeContactDetaiType(
 </script>
 
 <template>
-  <EditorCategory id="Details">
-    <template v-slot:header>Details</template>
+  <EditorCategory id="Profile">
+    <template v-slot:header>Profile</template>
     <div class="flex flex-col gap-5">
-      <label class="flex flex-col" for="detailsName">
-        <span class="opacity-60">Name</span>
-        <input id="detailsName" class="input" v-model="name" />
-      </label>
-      <label class="flex flex-col" for="detailsTitle">
-        <span class="opacity-60">Title</span>
-        <input id="detailsTitle" class="input" v-model="title" />
-      </label>
-      <label class="flex flex-col" for="detailsAbout">
-        <span class="opacity-60">About</span>
-        <textarea id="detailsAbout" class="input" v-model="about" />
-      </label>
+      <Field id="profileName" label="Name" transparent v-model="name" />
+      <Field id="profileTitle" label="Title" transparent v-model="title" />
+      <Field
+        type="toggle"
+        label="Consider about and details a dedicated category*"
+        v-model="isHeaderSimple"
+      />
+      <template v-if="isHeaderSimple">
+        <p>
+          *When on, about and details are styled through the Entry style editor.
+        </p>
+        <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
+        <Field
+          id="detailsCategoryName"
+          label="Category name"
+          transparent
+          v-model="simpleHeaderCategoryName"
+        />
+      </template>
+      <Field
+        id="detailsAbout"
+        label="About"
+        type="textarea"
+        transparent
+        v-model="about"
+      />
       <label class="flex flex-col" for="contactDetails">
-        <div class="flex gap-2">
-          <span class="opacity-60">Contact details</span>
-          <button
-            title="Add detail"
-            class="bg-blue-500 size-7 text-white rounded-full"
-            @click="addContactDetail"
-          >
-            <PlusCircleIcon class="size-full" />
-          </button>
-        </div>
+        <span class="label opacity-60">Contact details</span>
         <ul
           v-if="contactDetails.length"
           id="contactDetailList"
@@ -79,15 +85,14 @@ function changeContactDetaiType(
             :key="detailIndex"
             class="inputListItem"
           >
-            <div class="flex w-[70%] gap-3 items-end">
+            <div class="flex flex-col md:flex-row w-[70%] gap-3 md:items-end">
               <input
                 class="input flex-1"
                 v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"
               />
-              <!-- TODO use nice toggle component -->
               <label for="documentType">
-                Type
+                <span class="label opacity-60">Type</span>
                 <select
                   id="detailType"
                   :value="detail.type"
@@ -98,14 +103,14 @@ function changeContactDetaiType(
                         .value as ContactDetail['type'],
                     )
                   "
-                  class="select block capitalize"
+                  class="select block capitalize text-white"
                 >
                   <option class="option">personal</option>
                   <option class="option">social</option>
                 </select>
               </label>
               <label for="detailIcon">
-                Icon
+                <span class="label opacity-60">Icon</span>
                 <select
                   id="detailIcon"
                   :value="detail.icon"
@@ -123,7 +128,7 @@ function changeContactDetaiType(
                   <template v-if="detail.type === 'social'">
                     <option
                       v-for="icon in socialIcons"
-                      :key="icon as string"
+                      :key="`${icon}`"
                       class="option"
                     >
                       {{ icon }}
@@ -132,7 +137,7 @@ function changeContactDetaiType(
                   <template v-else>
                     <option
                       v-for="icon in contactIcons"
-                      :key="icon as string"
+                      :key="`${icon}`"
                       class="option"
                     >
                       {{ icon }}
@@ -150,6 +155,12 @@ function changeContactDetaiType(
               @remove="remove(contactDetails, detailIndex)"
             />
           </li>
+          <button
+            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+            @click="addContactDetail"
+          >
+            Add detail
+          </button>
         </ul>
       </label>
     </div>

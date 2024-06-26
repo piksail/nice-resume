@@ -14,6 +14,7 @@ export type Template =
   | "Paper"
   | "Pharmacy"
   | "Red"
+  | "Shelf"
   | "StackOverflow"
   | "Stone"
   | "Toothpaste"
@@ -27,6 +28,7 @@ export type Font =
   | "serif"
   | "Archivo"
   | "Caveat"
+  | "Crimson Text"
   | "Fira Sans"
   | "Fira Sans Condensed"
   | "Helvetica"
@@ -54,6 +56,24 @@ export type SideSetting = number[];
 export type BorderStyle = "dashed" | "dotted" | "solid";
 
 export type TextSeparator = "|" | "-" | "·" | "*" | ">" | "," | " ";
+
+export type HeaderLayout = 0 | 1 | 2 | 3 | 4 | 5;
+
+export type EntryLayout =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13;
 
 export type ListMarker =
   | null
@@ -97,7 +117,7 @@ export type TitleSettings = TextSettings & {
 };
 
 export type BaseSettings = {
-  isLetterMarginless: boolean;
+  isLetterPaddingless: boolean;
   colors: string[];
   bodyFont: Font;
   displayFont?: Font;
@@ -111,20 +131,26 @@ export type DocumentSettings = {
   bodyFont: Font;
   color: string;
   backgroundColor: string;
-  margin: SideSetting;
   border: SideSetting;
   borderStyle: BorderStyle;
   borderColor: string;
+  padding: SideSetting;
 };
 
 export type CommonDocumentSettings = {
   document: DocumentSettings;
   header: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5;
+    layout: HeaderLayout;
   };
   name: BlockSettings & TitleSettings;
   title: BlockSettings & TitleSettings;
   about: BlockSettings & TitleSettings;
+  aboutQuote: Omit<
+    TextSettings,
+    "letterSpacing" | "lineHeight" | "isUppercase"
+  > & {
+    isShown: boolean;
+  };
   contactDetails: BlockSettings &
     TextSettings &
     ListSettings & {
@@ -137,12 +163,11 @@ export type CommonDocumentSettings = {
 };
 
 export type ResumeSettings = CommonDocumentSettings & {
-  // TODO provide Pick<BlockSettings, "margin">; to aside as well
-  aside: {
+  aside: BlockSettings & {
     width: number;
-    gap: number; // Flex gap between aside and main columns
+    isRightPositioned: boolean;
   };
-  body: BlockSettings; // TODO allow editions of other body settings now (border, padding...)
+  body: BlockSettings;
   category: BlockSettings & {
     gap: number; // Flex gap between categories
   };
@@ -157,7 +182,7 @@ export type ResumeSettings = CommonDocumentSettings & {
     width?: number | "fit";
   };
   entry: BlockSettings & {
-    layout: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+    layout: EntryLayout;
     gap: number; // Flex gap between entries
   };
   entryTitle: TextSettings & {
@@ -213,6 +238,20 @@ export type TemplateSettings = {
     letter: LetterSettings;
   };
 };
+
+export type CommonStyleEditorTab = "Document" | "Profile" | "About" | "Contact";
+
+export type ResumeStyleEditorTab =
+  | CommonStyleEditorTab
+  | "Sections"
+  | "Category"
+  | "Entry";
+
+export type LetterStyleEditorTab =
+  | CommonStyleEditorTab
+  | "Address details"
+  | "Subject"
+  | "Body";
 
 export type DetailIcon =
   | null

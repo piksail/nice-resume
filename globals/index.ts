@@ -5,8 +5,10 @@ import type {
   CommonDocumentSettings,
   ContactDetail,
   DocumentType,
+  EntryLayout,
   Experience,
   Font,
+  HeaderLayout,
   LetterSettings,
   ListMarker,
   ResumeSettings,
@@ -15,6 +17,8 @@ import type {
   TemplateSettings,
   TextSeparator,
 } from "@/types";
+
+export const A4_RATIO = 297 / 210;
 
 export const documentTypes: Array<DocumentType> = ["resume", "letter"];
 
@@ -59,6 +63,7 @@ export const templates: Array<Template> = [
   "Paper",
   "Pharmacy",
   "Red",
+  "Shelf",
   "StackOverflow",
   "Stone",
   "Toothpaste",
@@ -89,6 +94,7 @@ export const discouragedLayoutTemplates: {
   Paper: [],
   Pharmacy: [],
   Red: ["full"],
+  Shelf: ["aside", "half"],
   StackOverflow: [],
   Stone: [],
   Toothpaste: ["aside"],
@@ -96,7 +102,6 @@ export const discouragedLayoutTemplates: {
 };
 
 // TODO settings réduire espace entrelistmarker et text
-// TODO better UX for choosing header layout
 
 export const textSeparators: TextSeparator[] = [
   "|",
@@ -116,6 +121,12 @@ export const listMarkers: ListMarker[] = [
   "triangle",
 ];
 
+export const headerLayouts: HeaderLayout[] = [0, 1, 2, 3, 4, 5];
+
+export const entryLayouts: EntryLayout[] = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+];
+
 export const commonDocumentSettings: CommonDocumentSettings = {
   document: {
     bodyFont: "sans-serif",
@@ -123,8 +134,8 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     backgroundColor: "#ffffff",
     borderStyle: "solid",
     borderColor: "#000000",
-    margin: [60, 60, 60, 60],
     border: [0, 0, 0, 0],
+    padding: [60, 60, 60, 60],
   },
   header: {
     layout: 0,
@@ -190,6 +201,14 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
   },
+  aboutQuote: {
+    font: "inherit",
+    fontSize: 14 * 3,
+    fontWeight: 400,
+    isItalic: false,
+    color: "currentColor",
+    isShown: false,
+  },
   contactDetails: {
     font: "inherit",
     fontSize: 14,
@@ -219,8 +238,15 @@ export const commonDocumentSettings: CommonDocumentSettings = {
 export const resumeSettings: ResumeSettings = {
   ...commonDocumentSettings,
   aside: {
-    width: 20, // Percentage
-    gap: 16,
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "#000000",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+    width: 25, // Percentage
+    isRightPositioned: false,
   },
   body: {
     backgroundColor: "transparent",
@@ -480,35 +506,35 @@ export const letterSettings: LetterSettings = {
 
 export const templateBaseSettings: TemplateBaseSettings = {
   default: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#f1f1f1", "#717171", "#000000"],
     bodyFont: "sans-serif",
   },
   Aster: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#713c97", "#f6881f", "#ffffff", "#000000"],
     bodyFont: "Fira Sans",
   },
   Care: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: ["#7cbaa4", "#ffe7c9", "#ffe6e9", "#ffbec9", "#ffeca6", "#ffffff"],
     bodyFont: "Poppins",
     displayFont: "Playwrite AU NSW",
   },
   CottonCandy: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#ed3660", "#5662e8", "#e8afcf", "#ffffff", "#1e1e1e"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
   },
   Cupcake: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#f2b150", "#e593aa", "#a9d7e2", "#231f20"],
     bodyFont: "Open Sans Condensed",
     displayFont: "Yanone Kaffeesatz",
   },
   Elegant: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: [
       "#707070",
       "#777777",
@@ -521,7 +547,7 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Lato",
   },
   Kendall: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: [
       "#334960",
       "#32475c",
@@ -536,23 +562,22 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Open Sans",
   },
   Macaron: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: ["#d88277", "#f8aaa6", "#f8d5cd", "#f8f4f2", "#ffffff", "#414e66"],
     bodyFont: "Karla",
     displayFont: "Caveat",
   },
   Macchiato: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: ["#56817a", "#f8f8ff", "#39424b"],
     bodyFont: "Lato",
     displayFont: "Josefin Sans",
   },
   NeoBrutalism: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: [
       "#000000",
       "#ffffff",
-      // TODO reorder colors
       "#fdba74",
       "#fef08a",
       "#86efac",
@@ -565,34 +590,40 @@ export const templateBaseSettings: TemplateBaseSettings = {
     displayFont: "Archivo",
   },
   Oilcloth: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: ["#0f9ef8", "#ff9b08", "#43a385", "#ffffff", "#231f20"],
     bodyFont: "Open Sans",
     displayFont: "Yanone Kaffeesatz",
   },
   OpenResume: {
-    isLetterMarginless: true,
+    isLetterPaddingless: true,
     colors: ["#38bdf8", "#000000"],
     bodyFont: "Roboto",
   },
   Paper: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#cfcfcf", "#000000"],
     bodyFont: "Times New Roman",
   },
   Pharmacy: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#06b6d4", "#475569", "#94a3b8", "#0f172a"],
     bodyFont: "Libre Franklin",
   },
   Red: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#ab3134", "#231f20"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
   },
+  Shelf: {
+    isLetterPaddingless: false,
+    colors: ["#000000"],
+    bodyFont: "Archivo",
+    displayFont: "Crimson Text",
+  },
   StackOverflow: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: [
       "#202931",
       "#ff6d1f",
@@ -607,19 +638,19 @@ export const templateBaseSettings: TemplateBaseSettings = {
     bodyFont: "Helvetica",
   },
   Stone: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#000000", "#a1a1aa", "#e4e4e7", "#52525b"],
     bodyFont: "sans-serif",
     displayFont: "Kaisei Tokumin",
   },
   Toothpaste: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#ed3660", "#5662e8", "#e8afcf", "#1e1e1e"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
   },
   Wiki: {
-    isLetterMarginless: false,
+    isLetterPaddingless: false,
     colors: ["#1e3a8a", "#000000"],
     bodyFont: "Fira Sans",
   },
@@ -701,6 +732,11 @@ export const templateSettings: TemplateSettings = {
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
   },
+  Shelf: {
+    base: templateBaseSettings.Shelf,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+  },
   StackOverflow: {
     base: templateBaseSettings.StackOverflow,
     resume: structuredClone(resumeSettings),
@@ -726,7 +762,7 @@ export const templateSettings: TemplateSettings = {
 function scaffoldTemplateSettings(
   template: Template,
   baseSettings: BaseSettings,
-  isLetterMarginless: boolean,
+  isLetterPaddingless: boolean,
 ) {
   const settings = {
     base: baseSettings,
@@ -740,8 +776,8 @@ function scaffoldTemplateSettings(
   settings.letter.document.color =
     baseSettings.colors[baseSettings.colors.length - 1];
 
-  if (isLetterMarginless) {
-    settings.letter.document.margin = [0, 0, 0, 0];
+  if (isLetterPaddingless) {
+    settings.letter.document.padding = [0, 0, 0, 0];
     settings.letter.senderDetails.margin[0] = 64;
     settings.letter.senderDetails.margin[1] = 64;
     settings.letter.senderDetails.margin[3] = 64;
@@ -760,7 +796,7 @@ function scaffoldTemplateSettings(
 }
 
 Object.entries(templateBaseSettings).forEach(([key, value]) => {
-  scaffoldTemplateSettings(key as Template, value, value.isLetterMarginless);
+  scaffoldTemplateSettings(key as Template, value, value.isLetterPaddingless);
 });
 
 if (templateSettings.default.resume && templateSettings.default.letter) {
@@ -807,7 +843,7 @@ if (templateSettings.default.resume && templateSettings.default.letter) {
 }
 
 if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
-  templateSettings.Aster.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Aster.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Aster.resume.header.layout = 2;
   templateSettings.Aster.resume.header.margin = [32, 32, 32, 32];
   templateSettings.Aster.resume.contactDetails.alignment = "end";
@@ -850,7 +886,7 @@ if (templateSettings.Aster.resume && templateSettings.Aster.letter) {
 }
 
 if (templateSettings.Care.resume && templateSettings.Care.letter) {
-  templateSettings.Care.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Care.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Care.resume.document.backgroundColor =
     templateSettings.Care.base.colors[0];
   templateSettings.Care.resume.document.color =
@@ -957,7 +993,7 @@ if (
   templateSettings.CottonCandy.resume &&
   templateSettings.CottonCandy.letter
 ) {
-  templateSettings.CottonCandy.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.CottonCandy.resume.document.padding = [0, 0, 0, 0];
   templateSettings.CottonCandy.resume.header.layout = 1;
   templateSettings.CottonCandy.resume.header.padding = [24, 40, 24, 40];
   templateSettings.CottonCandy.resume.name.font =
@@ -983,10 +1019,15 @@ if (
     templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.resume.contactDetails.iconColor =
     templateBaseSettings.CottonCandy.colors[0];
+  templateSettings.CottonCandy.resume.aboutQuote.isShown = true;
+  templateSettings.CottonCandy.resume.aboutQuote.color =
+    templateBaseSettings.CottonCandy.colors[1];
+  templateSettings.CottonCandy.resume.aside.backgroundColor =
+    templateBaseSettings.CottonCandy.colors[1];
+  templateSettings.CottonCandy.resume.body.backgroundColor =
+    templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.resume.category.gap = 0;
   templateSettings.CottonCandy.resume.category.padding = [24, 40, 24, 40];
-  templateSettings.CottonCandy.resume.category.backgroundColor =
-    templateBaseSettings.CottonCandy.colors[0];
   templateSettings.CottonCandy.resume.categoryName.font =
     templateBaseSettings.CottonCandy.displayFont;
   templateSettings.CottonCandy.resume.categoryName.fontSize = 24;
@@ -1118,7 +1159,7 @@ if (templateSettings.Cupcake.resume && templateSettings.Cupcake.letter) {
 }
 
 if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
-  templateSettings.Elegant.resume.document.margin = [50, 50, 50, 50];
+  templateSettings.Elegant.resume.document.padding = [50, 50, 50, 50];
   templateSettings.Elegant.resume.header.layout = 0;
   templateSettings.Elegant.resume.name.textAlign = "center";
   templateSettings.Elegant.resume.name.fontSize = 24;
@@ -1135,6 +1176,8 @@ if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
     templateSettings.Elegant.base.colors[1];
   templateSettings.Elegant.resume.contactDetails.color =
     templateSettings.Elegant.base.colors[6];
+  templateSettings.Elegant.resume.aside.margin[0] = 20;
+  templateSettings.Elegant.resume.aside.margin[1] = 40;
   templateSettings.Elegant.resume.body.margin[0] = 20;
   templateSettings.Elegant.resume.category.gap = 20;
   templateSettings.Elegant.resume.categoryName.color =
@@ -1178,7 +1221,7 @@ if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
   templateSettings.Elegant.resume.entryTag.fontWeight = 700;
   templateSettings.Elegant.resume.entryTag.fontSize = 14;
   templateSettings.Elegant.resume.entryTag.lineHeight = 1;
-  templateSettings.Elegant.letter.document.margin = [50, 50, 50, 50];
+  templateSettings.Elegant.letter.document.padding = [50, 50, 50, 50];
   templateSettings.Elegant.letter.header.layout = 0;
   templateSettings.Elegant.letter.name.textAlign = "center";
   templateSettings.Elegant.letter.name.fontSize = 24;
@@ -1206,7 +1249,7 @@ if (templateSettings.Elegant.resume && templateSettings.Elegant.letter) {
 }
 
 if (templateSettings.Kendall.resume && templateSettings.Kendall.letter) {
-  templateSettings.Kendall.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Kendall.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Kendall.resume.document.border = [10, 10, 10, 10];
   templateSettings.Kendall.resume.document.borderColor =
     templateSettings.Kendall.base.colors[0];
@@ -1232,6 +1275,8 @@ if (templateSettings.Kendall.resume && templateSettings.Kendall.letter) {
   templateSettings.Kendall.resume.contactDetails.gap = 15;
   templateSettings.Kendall.resume.contactDetails.iconColor =
     templateSettings.Kendall.base.colors[2];
+  templateSettings.Kendall.resume.aside.width = 33;
+  templateSettings.Kendall.resume.aside.padding = [15, 15, 15, 15];
   templateSettings.Kendall.resume.body.padding = [15, 15, 15, 15];
   templateSettings.Kendall.resume.category.gap = 15;
   templateSettings.Kendall.resume.categoryName.isUppercase = true;
@@ -1304,7 +1349,7 @@ if (templateSettings.Kendall.resume && templateSettings.Kendall.letter) {
 }
 
 if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
-  templateSettings.Macaron.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Macaron.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Macaron.resume.header.layout = 0;
   templateSettings.Macaron.resume.header.margin = [68, 0, 20, 0];
   templateSettings.Macaron.resume.header.border = [1, 0, 1, 0];
@@ -1330,6 +1375,7 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
   templateSettings.Macaron.resume.about.fontSize = 16;
   templateSettings.Macaron.resume.about.fontWeight = 500;
   templateSettings.Macaron.resume.aside.width = 25;
+  templateSettings.Macaron.resume.aside.margin = [40, 0, 40, 40];
   templateSettings.Macaron.resume.body.margin = [40, 40, 40, 40];
   templateSettings.Macaron.resume.category.gap = 30;
   templateSettings.Macaron.resume.categoryName.color =
@@ -1390,7 +1436,7 @@ if (templateSettings.Macaron.resume && templateSettings.Macaron.letter) {
 }
 
 if (templateSettings.Macchiato.resume && templateSettings.Macchiato.letter) {
-  templateSettings.Macchiato.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Macchiato.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Macchiato.resume.document.border = [10, 0, 0, 0];
   templateSettings.Macchiato.resume.document.borderColor =
     templateBaseSettings.Macchiato.colors[0];
@@ -1465,7 +1511,7 @@ if (
   templateSettings.NeoBrutalism.resume &&
   templateSettings.NeoBrutalism.letter
 ) {
-  templateSettings.NeoBrutalism.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.NeoBrutalism.resume.document.padding = [0, 0, 0, 0];
   templateSettings.NeoBrutalism.resume.document.color =
     templateSettings.NeoBrutalism.base.colors[0];
   templateSettings.NeoBrutalism.resume.document.backgroundColor =
@@ -1515,6 +1561,12 @@ if (
   templateSettings.NeoBrutalism.resume.contactDetails.padding = [
     22, 22, 22, 22,
   ];
+  templateSettings.NeoBrutalism.resume.aside.padding = [22, 22, 22, 22];
+  templateSettings.NeoBrutalism.resume.aside.backgroundColor =
+    templateSettings.NeoBrutalism.base.colors[6];
+  templateSettings.NeoBrutalism.resume.aside.borderColor =
+    templateSettings.NeoBrutalism.base.colors[0];
+  templateSettings.NeoBrutalism.resume.aside.border[1] = 4;
   templateSettings.NeoBrutalism.resume.body.margin = [22, 22, 22, 22];
   templateSettings.NeoBrutalism.resume.categoryName.backgroundColor =
     templateSettings.NeoBrutalism.base.colors[7];
@@ -1644,7 +1696,7 @@ if (
 }
 
 if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
-  templateSettings.Oilcloth.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Oilcloth.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Oilcloth.resume.document.border = [15, 0, 20, 0];
   templateSettings.Oilcloth.resume.document.borderColor =
     templateBaseSettings.Oilcloth.colors[1];
@@ -1670,6 +1722,7 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
     templateBaseSettings.Oilcloth.colors[3];
   templateSettings.Oilcloth.resume.contactDetails.iconColor =
     templateBaseSettings.Oilcloth.colors[1];
+  templateSettings.Oilcloth.resume.aside.margin = [40, 0, 40, 40];
   templateSettings.Oilcloth.resume.body.margin = [40, 40, 40, 40];
   templateSettings.Oilcloth.resume.category.gap = 40;
   templateSettings.Oilcloth.resume.categoryName.isUppercase = true;
@@ -1738,7 +1791,7 @@ if (templateSettings.Oilcloth.resume && templateSettings.Oilcloth.letter) {
 }
 
 if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
-  templateSettings.OpenResume.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.OpenResume.resume.document.padding = [0, 0, 0, 0];
   templateSettings.OpenResume.resume.document.border = [8, 0, 0, 0];
   templateSettings.OpenResume.resume.document.borderColor =
     templateBaseSettings.OpenResume.colors[0];
@@ -1758,6 +1811,7 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
   templateSettings.OpenResume.resume.contactDetails.gap = 40;
   templateSettings.OpenResume.resume.about.isItalic = true;
   templateSettings.OpenResume.resume.about.textAlign = "center";
+  templateSettings.OpenResume.resume.aside.margin = [24, 0, 24, 48];
   templateSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
   templateSettings.OpenResume.resume.categoryName.fontWeight = 700;
   templateSettings.OpenResume.resume.categoryName.fontSize = 12;
@@ -1820,7 +1874,7 @@ if (templateSettings.OpenResume.resume && templateSettings.OpenResume.letter) {
 }
 
 if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
-  templateSettings.Paper.resume.document.margin = [80, 80, 80, 80];
+  templateSettings.Paper.resume.document.padding = [80, 80, 80, 80];
   templateSettings.Paper.resume.header.layout = 3;
   templateSettings.Paper.resume.name.fontSize = 20;
   templateSettings.Paper.resume.title.fontSize = 20;
@@ -1862,7 +1916,7 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
   templateSettings.Paper.resume.entryTag.color =
     templateBaseSettings.Paper.colors[0];
   templateSettings.Paper.resume.entryTag.backgroundColor = "transparent";
-  templateSettings.Paper.letter.document.margin = [80, 80, 80, 80];
+  templateSettings.Paper.letter.document.padding = [80, 80, 80, 80];
   templateSettings.Paper.letter.header.layout = 3;
   templateSettings.Paper.letter.name.fontSize = 20;
   templateSettings.Paper.letter.title.fontSize = 20;
@@ -1883,7 +1937,7 @@ if (templateSettings.Paper.resume && templateSettings.Paper.letter) {
 }
 
 if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
-  templateSettings.Pharmacy.resume.document.margin = [48, 48, 48, 48];
+  templateSettings.Pharmacy.resume.document.padding = [48, 48, 48, 48];
   templateSettings.Pharmacy.resume.header.layout = 4;
   templateSettings.Pharmacy.resume.name.color =
     templateBaseSettings.Pharmacy.colors[0];
@@ -1907,6 +1961,9 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
   templateSettings.Pharmacy.resume.about.color =
     templateBaseSettings.Pharmacy.colors[2];
   templateSettings.Pharmacy.resume.about.textAlign = "center";
+  templateSettings.Pharmacy.resume.aside.margin[0] = 25;
+  templateSettings.Pharmacy.resume.aside.margin[1] = 25;
+  templateSettings.Pharmacy.resume.body.margin[0] = 25;
   templateSettings.Pharmacy.resume.category.gap = 34;
   templateSettings.Pharmacy.resume.categoryName.margin[2] = 6;
   templateSettings.Pharmacy.resume.categoryName.isUppercase = true;
@@ -1941,7 +1998,7 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
   templateSettings.Pharmacy.resume.entryTag.borderColor =
     templateBaseSettings.Pharmacy.colors[2];
   templateSettings.Pharmacy.resume.entryTag.gap = 20;
-  templateSettings.Pharmacy.letter.document.margin = [48, 48, 48, 48];
+  templateSettings.Pharmacy.letter.document.padding = [48, 48, 48, 48];
   templateSettings.Pharmacy.letter.header.layout = 0;
   templateSettings.Pharmacy.letter.name.color =
     templateBaseSettings.Pharmacy.colors[0];
@@ -1979,7 +2036,7 @@ if (templateSettings.Pharmacy.resume && templateSettings.Pharmacy.letter) {
 }
 
 if (templateSettings.Red.resume && templateSettings.Red.letter) {
-  templateSettings.Red.resume.document.margin = [48, 56, 48, 56];
+  templateSettings.Red.resume.document.padding = [48, 56, 48, 56];
   templateSettings.Red.resume.header.layout = 1;
   templateSettings.Red.resume.header.padding = [24, 40, 24, 40];
   templateSettings.Red.resume.name.font = templateBaseSettings.Red.displayFont;
@@ -2009,6 +2066,8 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
     templateBaseSettings.Red.colors[0];
   templateSettings.Red.resume.contactDetails.iconColor =
     templateBaseSettings.Red.colors[0];
+  templateSettings.Red.resume.aside.margin[0] = 22;
+  templateSettings.Red.resume.aside.margin[1] = 22;
   templateSettings.Red.resume.body.margin[0] = 22;
   templateSettings.Red.resume.categoryName.isUppercase = true;
   templateSettings.Red.resume.categoryName.font =
@@ -2033,7 +2092,7 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
   templateSettings.Red.resume.entryHighlight.color =
     templateBaseSettings.Red.colors[1];
   templateSettings.Red.resume.entryTag.isUppercase = true;
-  templateSettings.Red.letter.document.margin = [48, 56, 48, 56];
+  templateSettings.Red.letter.document.padding = [48, 56, 48, 56];
   templateSettings.Red.letter.header.layout = 1;
   templateSettings.Red.letter.header.padding = [24, 40, 24, 40];
   templateSettings.Red.letter.name.font = templateBaseSettings.Red.displayFont;
@@ -2078,6 +2137,36 @@ if (templateSettings.Red.resume && templateSettings.Red.letter) {
     templateBaseSettings.Red.colors[0];
 }
 
+if (templateSettings.Shelf.resume && templateSettings.Shelf.letter) {
+  templateSettings.Shelf.resume.header.layout = 2;
+  templateSettings.Shelf.resume.name.font =
+    templateSettings.Shelf.base.displayFont;
+  templateSettings.Shelf.resume.name.fontSize = 40;
+  templateSettings.Shelf.resume.name.fontWeight = 900;
+  templateSettings.Shelf.resume.name.lineHeight = 1.1;
+  templateSettings.Shelf.resume.title.fontSize = 22;
+  templateSettings.Shelf.resume.title.fontWeight = 300;
+  templateSettings.Shelf.resume.title.letterSpacing = 2;
+  templateSettings.Shelf.resume.about.fontSize = 12;
+  templateSettings.Shelf.resume.contactDetails.fontSize = 12;
+  templateSettings.Shelf.resume.category.margin[0] = 16;
+  templateSettings.Shelf.resume.categoryName.fontWeight = 300;
+  templateSettings.Shelf.resume.categoryName.letterSpacing = 2;
+  templateSettings.Shelf.resume.categoryName.margin[2] = 22;
+  templateSettings.Shelf.resume.entry.layout = 13;
+  // TODO align center or right when entryHeader exists
+  templateSettings.Shelf.resume.entryPeriod.order = 1;
+  templateSettings.Shelf.resume.entryPeriod.fontSize = 12;
+  templateSettings.Shelf.resume.entryTitle.order = 2;
+  templateSettings.Shelf.resume.entryTitle.fontWeight = 700;
+  templateSettings.Shelf.resume.entryOrganization.fontSize = 12;
+  templateSettings.Shelf.resume.entryLocation.fontSize = 12;
+  templateSettings.Shelf.resume.entrySummary.lineHeight = 1.1;
+  templateSettings.Shelf.resume.entryHighlight.margin[0] = 8;
+  templateSettings.Shelf.resume.entryHighlight.fontSize = 12;
+  templateSettings.Shelf.resume.entryTag.margin[0] = 8;
+}
+
 if (
   templateSettings.StackOverflow.resume &&
   templateSettings.StackOverflow.letter
@@ -2096,6 +2185,8 @@ if (
   templateSettings.StackOverflow.resume.contactDetails.iconColor =
     templateSettings.StackOverflow.base.colors[6];
   templateSettings.StackOverflow.resume.about.margin[0] = 20;
+  templateSettings.StackOverflow.resume.aside.margin[0] = 10;
+  templateSettings.StackOverflow.resume.aside.margin[1] = 10;
   templateSettings.StackOverflow.resume.body.margin[0] = 10;
   templateSettings.StackOverflow.resume.category.margin[0] = 10;
   templateSettings.StackOverflow.resume.categoryName.isUppercase = true;
@@ -2189,6 +2280,7 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.about.borderColor =
     templateBaseSettings.Stone.colors[2];
   templateSettings.Stone.resume.aside.width = 25;
+  templateSettings.Stone.resume.aside.margin[1] = 25;
   templateSettings.Stone.resume.category.padding = [25, 0, 25, 0];
   templateSettings.Stone.resume.category.border[0] = 1;
   templateSettings.Stone.resume.category.borderColor =
@@ -2224,7 +2316,7 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
   templateSettings.Stone.resume.entryTag.padding = [2, 10, 2, 10];
   templateSettings.Stone.resume.entryTag.borderRadius = 0;
   templateSettings.Stone.resume.entryTag.fontSize = 12;
-  templateSettings.Stone.letter.document.margin = [48, 48, 48, 48];
+  templateSettings.Stone.letter.document.padding = [48, 48, 48, 48];
   templateSettings.Stone.letter.header.layout = 0;
   templateSettings.Stone.letter.name.font =
     templateBaseSettings.Stone.displayFont;
@@ -2261,7 +2353,7 @@ if (templateSettings.Stone.resume && templateSettings.Stone.letter) {
 }
 
 if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
-  templateSettings.Toothpaste.resume.document.margin = [0, 0, 0, 0];
+  templateSettings.Toothpaste.resume.document.padding = [0, 0, 0, 0];
   templateSettings.Toothpaste.resume.header.layout = 1;
   templateSettings.Toothpaste.resume.header.padding = [24, 40, 24, 40];
   templateSettings.Toothpaste.resume.name.font =
@@ -2281,6 +2373,9 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
   templateSettings.Toothpaste.resume.contactDetails.fontSize = 12;
   templateSettings.Toothpaste.resume.about.textAlign = "center";
   templateSettings.Toothpaste.resume.about.fontSize = 12;
+  templateSettings.Toothpaste.resume.aside.border[1] = 2;
+  templateSettings.Toothpaste.resume.aside.borderColor =
+    templateBaseSettings.Toothpaste.colors[0];
   templateSettings.Toothpaste.resume.category.gap = 0;
   templateSettings.Toothpaste.resume.category.padding = [24, 40, 24, 40];
   templateSettings.Toothpaste.resume.category.border[0] = 2;
@@ -2341,7 +2436,7 @@ if (templateSettings.Toothpaste.resume && templateSettings.Toothpaste.letter) {
 }
 
 if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
-  templateSettings.Wiki.resume.document.margin = [24, 30, 24, 30];
+  templateSettings.Wiki.resume.document.padding = [24, 30, 24, 30];
   templateSettings.Wiki.resume.header.layout = 2;
   templateSettings.Wiki.resume.name.textAlign = "center";
   templateSettings.Wiki.resume.name.fontSize = 30;
@@ -2352,6 +2447,7 @@ if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
   templateSettings.Wiki.resume.about.fontSize = 12;
   templateSettings.Wiki.resume.contactDetails.alignment = "end";
   templateSettings.Wiki.resume.contactDetails.fontSize = 12;
+  templateSettings.Wiki.resume.aside.margin[1] = 20;
   templateSettings.Wiki.resume.category.gap = 20;
   templateSettings.Wiki.resume.categoryName.isUppercase = true;
   templateSettings.Wiki.resume.categoryName.color =
@@ -2378,7 +2474,7 @@ if (templateSettings.Wiki.resume && templateSettings.Wiki.letter) {
   templateSettings.Wiki.resume.entryTag.color =
     templateBaseSettings.Wiki.colors[0];
   templateSettings.Wiki.resume.entryTag.borderRadius = 0;
-  templateSettings.Wiki.letter.document.margin = [24, 30, 24, 30];
+  templateSettings.Wiki.letter.document.padding = [24, 30, 24, 30];
   templateSettings.Wiki.letter.header.layout = 2;
   templateSettings.Wiki.letter.name.textAlign = "center";
   templateSettings.Wiki.letter.name.fontSize = 30;

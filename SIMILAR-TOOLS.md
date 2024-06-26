@@ -67,7 +67,7 @@ A more comprehensive list of tools we tried (when possible) below :
 | CV Maker            | No         | No           | No         | Yes            | No     | No          | No                | 9         | All      | No           | No              |
 | CV-Template         | Freemium   | No           | Direct     | Yes            | H      | No          | SM                | 17        | All      | No           | No              |
 | Do You Buzz         | ?          | No           | ?          | ?              | ?      | ?           | ?                 | ?         | ?        | ?            | ?               |
-| Enhancv             | TODO       | No           | Direct     | Yes            | AI     | No          | Full              | 14        | All      | No           | Yes             |
+| Enhancv             | ?          | No           | Direct     | Yes            | AI     | No          | Full              | 14        | All      | No           | Yes             |
 | Europass            | Free       | Yes          | No         | Yes            | No     | ?           | SM                | 4         | Single   | No           | No              |
 | FlowCV              | Freemium   | Yes          | Direct     | Yes            | AI     | No          | Yes               | 62        | All      | Yes          | No              |
 | Gitconnected        | Yes        | No           | No         | Yes            | No     | No          | No                | 3         | All      | No           | ?               |

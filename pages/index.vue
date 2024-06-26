@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Button from "@/components/Button.vue";
 import Card from "@/components/Card.vue";
 
 const title = ref("Nice resume");
@@ -35,18 +34,20 @@ const description = ref(
           <i class="font-serif">that</i>
           simple
         </p>
-        <NuxtLink to="/resume">
-          <Button class="block mx-auto mt-8">Get started</Button>
+        <NuxtLink to="/editor">
+          <button class="button bg-white mx-auto mt-8">
+            <span class="textGradient">Get started</span>
+          </button>
         </NuxtLink>
       </Card>
       <div class="max-w-screen-md mx-auto">
         <p class="text-lg font-thin text-right">
-          No cookies. No signup. No payment.
+          No cookies. No signup. No payment. Privacy-friendly.
         </p>
       </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-32">Pick a design</h2>
+      <h2 class="text-5xl font-bold mb-32">Pick a design</h2>
       <div class="relative h-[calc((400px*1.414)+50px)] mx-auto group">
         <img
           src="/paper-example.png"
@@ -66,11 +67,11 @@ const description = ref(
       </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-32">Build your resume</h2>
+      <h2 class="text-5xl font-bold mb-32 text-right">Build your resume</h2>
       <p>TODO screenshot editor</p>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-32">Write your cover letter</h2>
+      <h2 class="text-5xl font-bold mb-32">Write your cover letter</h2>
       <div class="flex gap-10">
         <p class="flex-1">TODO screenshot editor</p>
         <img
@@ -81,7 +82,9 @@ const description = ref(
       </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-32">Adapt the design to your need</h2>
+      <h2 class="text-5xl font-bold mb-32 text-right">
+        Adapt the design to your need
+      </h2>
       <p class="flex-1">TODO screenshot style editor</p>
     </section>
     <NuxtPage />

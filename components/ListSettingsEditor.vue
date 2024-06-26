@@ -26,7 +26,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         v-model="settings.gap"
       />
       <label :for="`${propertyName}ListMarker`">
-        <span class="opacity-60">List marker</span>
+        <span class="label">List marker</span>
         <select
           :id="`${propertyName}ListMarker`"
           class="select block"
@@ -44,7 +44,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           </option>
         </select>
       </label>
-      <!-- TODO toggle button -->
       <Field
         :id="`${propertyName}ListMarkerColor`"
         label="List marker color"

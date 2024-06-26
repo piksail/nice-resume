@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useEditorStore } from "@/stores/editor";
+// import { storeToRefs } from "pinia";
+// import { useEditorStore } from "@/stores/editor";
 import Editor from "@/components/Editor.vue";
 import Preview from "@/components/Preview.vue";
 
-const { documentType } = storeToRefs(useEditorStore());
-documentType.value = "resume";
+// TODO adapt metadata according to documentType
+// const { documentType } = storeToRefs(useEditorStore());
 
 const title = ref("Nice resume");
 </script>
@@ -17,9 +17,9 @@ const title = ref("Nice resume");
     <Meta name="description" :content="title" />
   </Head>
   <NuxtLayout name="editor">
-    <Editor document-type="resume" />
+    <Editor />
     <template v-slot:preview>
-      <Preview />
+      <Preview class="hidden xl:block" />
     </template>
   </NuxtLayout>
 </template>
