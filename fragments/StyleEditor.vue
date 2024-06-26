@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
+import { useEmailStore } from "@/stores/email";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import type {
   CommonStyleEditorTab,
+  EmailSettings,
+  EmailStyleEditorTab,
+  LetterSettings,
   LetterStyleEditorTab,
+  ResumeSettings,
   ResumeStyleEditorTab,
 } from "@/types";
 import { getSideIndexLabel } from "@/utils/editor";
@@ -30,12 +35,18 @@ const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 const { settings: resumeSettings } = storeToRefs(useResumeStore());
 const { isHeaderSimple, settings: letterSettings } =
   storeToRefs(useLetterStore());
+const { settings: emailSettings } = storeToRefs(useEmailStore());
 
-type Tab = ResumeStyleEditorTab | LetterStyleEditorTab | "";
+type Tab =
+  | ResumeStyleEditorTab
+  | LetterStyleEditorTab
+  | EmailStyleEditorTab
+  | "";
 const tab = ref<Tab>("");
 const isStyleEditorOpen = ref(false);
 
 const documentTypeSettings = computed(() => {
+  if (documentType.value === "email") return emailSettings.value;
   return documentType.value === "letter"
     ? letterSettings.value
     : resumeSettings.value;
@@ -48,8 +59,10 @@ const tabs = computed(() => {
     "About",
     "Contact",
   ];
+  const emailTabs: EmailStyleEditorTab[] = [...tabs, "Signature"];
   const letterTabs: LetterStyleEditorTab[] = [
     ...tabs,
+    "Header",
     "Address details",
     "Subject",
     "Body",
@@ -60,11 +73,14 @@ const tabs = computed(() => {
     "Category",
     "Entry",
   ];
+  if (documentType.value === "email") return emailTabs;
   return documentType.value === "letter" ? letterTabs : resumeTabs;
 });
 
 function resetStyle() {
-  if (documentType.value === "letter") {
+  if (documentType.value === "email") {
+    emailSettings.value = templateSettings[template.value].email;
+  } else if (documentType.value === "letter") {
     letterSettings.value = templateSettings[template.value].letter;
   } else {
     resumeSettings.value = templateSettings[template.value].resume;
@@ -78,6 +94,11 @@ function setTab(value: Tab) {
     tab.value = value;
   }
 }
+
+watch(documentType, () => {
+  isStyleEditorOpen.value = false;
+  setTab("");
+});
 </script>
 
 <template>
@@ -115,6 +136,69 @@ function setTab(value: Tab) {
               </option>
             </select>
           </label>
+        </div>
+      </div>
+    </template>
+    <template v-else-if="tab === 'Signature'">
+      <div>
+        <header>
+          <div class="sectionHeading">Signature</div>
+        </header>
+        <div class="flex flex-col gap-5">
+          <label class="flex flex-col" for="headerLayout">
+            <span class="label">Layout</span>
+            <select
+              id="headerLayout"
+              class="select block"
+              :disabled="!isThemeCustomized"
+              v-model="(documentTypeSettings as EmailSettings).document.layout"
+            >
+              <option
+                v-for="layout in headerLayouts"
+                :key="layout"
+                class="option"
+                :value="layout"
+              >
+                {{ layout }}
+              </option>
+            </select>
+          </label>
+          <!-- <BlockSettingsEditor
+            property-name="signature"
+            :settings="emailSettings.document"
+          /> -->
+          <!-- TODO other settings -->
+        </div>
+      </div>
+    </template>
+    <template v-else-if="tab === 'Header'">
+      <div>
+        <header>
+          <div class="sectionHeading">Header</div>
+        </header>
+        <div class="flex flex-col gap-5">
+          <label class="flex flex-col" for="headerLayout">
+            <span class="label">Layout</span>
+            <select
+              id="headerLayout"
+              class="select block"
+              :disabled="!isThemeCustomized"
+              v-model="(documentTypeSettings as LetterSettings).header.layout"
+            >
+              <option
+                v-for="layout in headerLayouts"
+                :key="layout"
+                class="option"
+                :value="layout"
+              >
+                {{ layout }}
+              </option>
+            </select>
+          </label>
+          <BlockSettingsEditor
+            property-name="header"
+            :settings="(documentTypeSettings as LetterSettings).header"
+          />
         </div>
       </div>
     </template>
@@ -453,6 +537,13 @@ function setTab(value: Tab) {
               v-model="documentTypeSettings.contactDetails.iconGap"
             />
             <Field
+              id="contactDetailsIconSize"
+              label="Icon size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.iconSize"
+            />
+            <Field
               id="contactDetailsIconColor"
               label="Icon color"
               type="color"
@@ -475,7 +566,10 @@ function setTab(value: Tab) {
               id="headerLayout"
               class="select block"
               :disabled="!isThemeCustomized"
-              v-model="documentTypeSettings.header.layout"
+              v-model="
+                (documentTypeSettings as ResumeSettings | LetterSettings).header
+                  .layout
+              "
             >
               <option
                 v-for="layout in headerLayouts"
