@@ -271,13 +271,13 @@ function toggleCategoryVisibility(category: Category) {
                   @remove="remove(entry.highlights, highlightIndex)"
                 />
               </li>
-              <button
-                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-                @click="addHighlight(entry, entryIndex)"
-              >
-                Add highlight
-              </button>
             </ul>
+            <button
+              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+              @click="addHighlight(entry, entryIndex)"
+            >
+              Add highlight
+            </button>
           </label>
           <label class="flex flex-col" for="tags">
             <span class="label opacity-60">Tags</span>
@@ -305,13 +305,13 @@ function toggleCategoryVisibility(category: Category) {
                   @remove="remove(entry.tags, tagIndex)"
                 />
               </li>
-              <button
-                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-                @click="addTag(entry, entryIndex)"
-              >
-                Add tag
-              </button>
             </ul>
+            <button
+              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+              @click="addTag(entry, entryIndex)"
+            >
+              Add tag
+            </button>
           </label>
         </div>
       </li>
