@@ -114,32 +114,28 @@ function openModal() {
       <Field
         id="isDocumentExportIncluded"
         :label="`${capitalize(documentType)} as ${documentType === 'email' ? 'HTML' : 'PDF'}`"
-        type="checkbox"
+        type="checkbutton"
         v-model="isDocumentExportIncluded"
       />
       <div>
         <Field
           id="isExportToJsonIncluded"
-          label="Nice Resume data (save it for later)*"
-          type="checkbox"
+          label="Nice Resume data (save it for later)"
+          sub-label="This includes all documents (resume, cover letter, email signature)"
+          type="checkbutton"
           v-model="isExportToJsonIncluded"
         />
-        <p class="text-xs">
-          *This includes all documents (resume, cover letter, email signature)
-        </p>
       </div>
       <div v-if="documentType === 'resume'">
         <Field
           id="isExportToJsonResumeIncluded"
-          label="JSON Resume compatible data*"
-          type="checkbox"
+          label="JSON Resume compatible data"
+          sub-label="Full compatibility will be soon available. In The meantime,
+          double-check dates, highlights and tags, and add missing elements such
+          as profile image and references directly in JSON Resume."
+          type="checkbutton"
           v-model="isExportToJsonResumeIncluded"
         />
-        <p class="text-xs">
-          *Full compatibility will be soon available. In The meantime,
-          double-check dates, highlights and tags, and add missing elements such
-          as profile image and references directly in JSON Resume.
-        </p>
       </div>
       <button class="button bgGradient p-[2px]" @click="downloadSelection">
         <div class="button bg-white h-full w-full rounded-sm">
