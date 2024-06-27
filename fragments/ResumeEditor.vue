@@ -97,6 +97,19 @@ function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
 }
 
+function getEntryHeading(entry: Asset | Experience, entryIndex: number) {
+  if (entry.nature === "experience" && entry.title) {
+    return entry.organization
+      ? `${entry.title} at ${entry.organization}`
+      : entry.title;
+  }
+  if (entry.nature === "asset") {
+    return entry.title;
+  }
+
+  return `Entry #${entryIndex + 1}`;
+}
+
 async function moveThenScroll(
   moveFunction: typeof moveUp | typeof moveDown,
   categories: Category[],
@@ -201,7 +214,9 @@ function toggleCategoryVisibility(category: Category) {
         class="sectionSeparator border-white/10"
       >
         <header class="flex items-center justify-between">
-          <div class="sectionHeading">Entry #{{ entryIndex + 1 }}</div>
+          <div class="sectionHeading">
+            {{ getEntryHeading(entry, entryIndex) }}
+          </div>
           <ListActions
             class="mb-2"
             :index="entryIndex"
