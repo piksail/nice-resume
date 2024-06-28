@@ -40,7 +40,7 @@ const settings = computed(() => {
       :style="{
         fontFamily: settings.entryHighlight.font,
         fontSize: `${settings.entryHighlight.fontSize}px`,
-        lineHeight: settings.entryHighlight.lineHeight,
+        lineHeight: settings.entryHighlight.lineHeight ?? 'normal',
         fontWeight: settings.entryHighlight.fontWeight,
         fontStyle: settings.entryHighlight.isItalic ? 'italic' : 'initial',
         textTransform: settings.entryHighlight.isUppercase

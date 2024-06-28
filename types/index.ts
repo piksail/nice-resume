@@ -103,7 +103,7 @@ export type BlockSettings = {
 export type TextSettings = {
   font?: Font;
   fontSize: number;
-  lineHeight: number;
+  lineHeight?: number | "normal";
   letterSpacing: number;
   fontWeight: FontWeight;
   isItalic?: boolean;
@@ -168,7 +168,7 @@ export type PaperDocumentSettings = CommonDocumentSettings & {
 
 export type ResumeSettings = PaperDocumentSettings & {
   aside: BlockSettings & {
-    width: number;
+    width: number; // Percentage
     isRightPositioned: boolean;
   };
   body: BlockSettings;
@@ -177,7 +177,7 @@ export type ResumeSettings = PaperDocumentSettings & {
   };
   categoryName: BlockSettings &
     TitleSettings & {
-      width?: number | "fit";
+      width?: number | "fit"; // Percentage
       isAside: boolean;
     };
   categoryNameSeparator: BlockSettings & {
@@ -224,7 +224,7 @@ export type LetterSettings = PaperDocumentSettings & {
   reference: BlockSettings & TitleSettings & { isBeforeSubject: boolean };
   body: {
     fontSize: number;
-    lineHeight: number;
+    lineHeight?: number | "normal"; // Unitless
     fontWeight: FontWeight;
     color: string;
     indentation: number;

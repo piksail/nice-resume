@@ -66,7 +66,7 @@ const settings = computed(() => {
   <section
     :style="{
       fontSize: `${settings.body.fontSize}px`,
-      lineHeight: settings.body.lineHeight,
+      lineHeight: settings.body.lineHeight ?? 'normal',
       fontWeight: settings.body.fontWeight,
       textAlign: settings.body.isJustified ? 'justify' : 'left',
       color: settings.body.color,
