@@ -19,6 +19,7 @@ import {
   experienceTypes,
   fixedLayoutTemplates,
 } from "@/globals";
+import useDialog from "~/composables/use-dialog";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
@@ -27,9 +28,10 @@ const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
 const { categories } = storeToRefs(useResumeStore());
 
+const { dialog, openModal, closeModal } = useDialog();
+
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
-const dialog = ref(null);
 const indexToRemove = ref();
 
 function addCategory() {
@@ -105,11 +107,6 @@ function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
 }
 
-function closeModal() {
-  // @ts-expect-error TODO type
-  dialog.value.close();
-}
-
 async function moveThenScroll(
   moveFunction: typeof moveUp | typeof moveDown,
   categories: Category[],
@@ -119,11 +116,6 @@ async function moveThenScroll(
   moveFunction(categories, categoryIndex);
   await nextTick(); // Wait for the category to be rendered to the new position before scrolling to it
   document.getElementById(categoryName)?.scrollIntoView();
-}
-
-function openModal() {
-  // @ts-expect-error TODO type
-  dialog.value.showModal();
 }
 
 function removeCategory() {
@@ -138,10 +130,7 @@ function toggleCategoryVisibility(category: Category) {
 
 <template>
   <!-- TODO close top-right -->
-  <dialog
-    ref="dialog"
-    class="max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-  >
+  <dialog ref="dialog" class="dialog max-w-screen-sm">
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       Confirm category deletion?
     </p>

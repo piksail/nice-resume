@@ -28,6 +28,7 @@ import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
 import { getEntryHeading } from "@/utils/editor";
 import { getRandomAsset, getRandomExperience } from "@/utils/random";
 import { capitalize } from "@/utils/string";
+import useDialog from "~/composables/use-dialog";
 import EmailEditor from "@/fragments/EmailEditor.vue";
 import LetterEditor from "@/fragments/LetterEditor.vue";
 import ProfileEditor from "@/fragments/ProfileEditor.vue";
@@ -51,7 +52,8 @@ const resume = storeToRefs(resumeStore);
 const letterStore = useLetterStore();
 const letter = storeToRefs(letterStore);
 
-const dialog = ref(null);
+const { dialog, openModal, closeModal } = useDialog();
+
 const isImportError = ref(false);
 
 const isLayoutDisabled = computed(() =>
@@ -70,16 +72,6 @@ const discouragedLayoutText = computed(() => {
   const layouts = discouragedLayoutTemplates[template.value].join(" and ");
   return `${capitalize(layouts)} ${isPlural ? "layouts are" : "layout is"} discouraged for this template.`;
 });
-
-function closeModal() {
-  // @ts-expect-error TODO type
-  dialog.value.close();
-}
-
-function openModal() {
-  // @ts-expect-error TODO type
-  dialog.value.showModal();
-}
 
 function generateStores() {
   // Profile
@@ -334,10 +326,7 @@ onMounted(() => {
 
 <template>
   <div class="print:hidden flex flex-col xl:w-[calc(100%-210mm)] h-screen">
-    <dialog
-      ref="dialog"
-      class="max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-    >
+    <dialog ref="dialog" class="dialog max-w-screen-sm">
       <p class="mb-8 text-center text-2xl font-bold text-pink-500">
         How do you want to start editing?
       </p>

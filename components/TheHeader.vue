@@ -10,6 +10,7 @@ import { download, downloadHtml } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
 import Field from "@/components/Field.vue";
+import useDialog from "~/composables/use-dialog";
 import packageJson from "../package.json";
 
 console.info("Version: ", packageJson.version);
@@ -21,7 +22,8 @@ const { about, contactDetails, name, template, title } =
 
 const { categories } = storeToRefs(useResumeStore());
 
-const dialog = ref(null);
+const { dialog, openModal, closeModal } = useDialog();
+
 const isExportError = ref(false);
 const isDocumentExportIncluded = ref(true);
 const isExportToJsonIncluded = ref(false);
@@ -89,24 +91,11 @@ function exportResumeToJsonResume() {
   const toExport = formatResumeAsJsonResume(resume);
   download(toExport, "nice-resume-to-json-resume");
 }
-
-function closeModal() {
-  // @ts-expect-error TODO type
-  dialog.value.close();
-}
-
-function openModal() {
-  // @ts-expect-error TODO type
-  dialog.value.showModal();
-}
 </script>
 
 <template>
   <!-- TODO close top-right -->
-  <dialog
-    ref="dialog"
-    class="max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-  >
+  <dialog ref="dialog" class="dialog max-w-screen-sm">
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       What do you want to download?
     </p>
