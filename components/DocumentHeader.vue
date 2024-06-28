@@ -36,7 +36,7 @@ const settings = computed(() => {
 <template>
   <header class="flex" :style="getNodeStyle(settings.header, 'block')">
     <template v-if="settings.header.layout === 1">
-      <div class="flex flex-col">
+      <div class="flex flex-col flex-1">
         <DocumentHeaderName :name="name" />
         <DocumentHeaderTitle :title="title" />
       </div>
