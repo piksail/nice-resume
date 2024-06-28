@@ -7,6 +7,7 @@ import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import {
   focusNextInput,
+  getEntryHeading,
   getEntryTitleLabel,
   getExperienceOrganizationLabel,
 } from "@/utils/editor";
@@ -95,19 +96,6 @@ function changeCategoryType(category: Category, value: Category["type"]) {
 
 function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
-}
-
-function getEntryHeading(entry: Asset | Experience, entryIndex: number) {
-  if (entry.nature === "experience" && entry.title) {
-    return entry.organization
-      ? `${entry.title} at ${entry.organization}`
-      : entry.title;
-  }
-  if (entry.nature === "asset") {
-    return entry.title;
-  }
-
-  return `Entry #${entryIndex + 1}`;
 }
 
 async function moveThenScroll(
@@ -214,7 +202,10 @@ function toggleCategoryVisibility(category: Category) {
         class="sectionSeparator border-white/10"
       >
         <header class="flex items-center justify-between">
-          <div class="sectionHeading">
+          <div
+            :id="getEntryHeading(entry, entryIndex)"
+            class="sectionHeading scroll-mt-10"
+          >
             {{ getEntryHeading(entry, entryIndex) }}
           </div>
           <ListActions

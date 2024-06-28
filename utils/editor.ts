@@ -10,6 +10,25 @@ export async function focusNextInput(selector: string) {
   (inputs[inputs.length - 1] as HTMLInputElement).focus();
 }
 
+/**
+ * Get entry heading given the type.
+ */
+export function getEntryHeading(entry: Asset | Experience, entryIndex: number) {
+  if (entry.nature === "experience" && entry.title) {
+    return entry.organization
+      ? `${entry.title} at ${entry.organization}`
+      : entry.title;
+  }
+  if (entry.nature === "asset") {
+    return entry.title;
+  }
+
+  return `Entry #${entryIndex + 1}`;
+}
+
+/**
+ * Adapt entry title label given the type.
+ */
 export function getEntryTitleLabel(type: Asset["type"] | Experience["type"]) {
   switch (type) {
     case "education":

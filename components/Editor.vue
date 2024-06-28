@@ -25,6 +25,7 @@ import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
+import { getEntryHeading } from "@/utils/editor";
 import { getRandomAsset, getRandomExperience } from "@/utils/random";
 import { capitalize } from "@/utils/string";
 import EmailEditor from "@/fragments/EmailEditor.vue";
@@ -443,15 +444,35 @@ onMounted(() => {
             </a>
           </template>
           <template v-else>
-            <a
-              v-for="category in categories"
-              :key="category.name"
-              :href="`#${category.name}`"
-              class="underline-offset-4 hover:underline flex gap-1 items-center w-fit"
+            <div
+              v-for="(category, categoryIndex) in categories"
+              :key="categoryIndex"
             >
-              <component :is="getCategoryIcon(category.type)" class="w-4" />
-              {{ category.name }}
-            </a>
+              <div class="flex gap-1 items-center w-fit">
+                <component :is="getCategoryIcon(category.type)" class="w-4" />
+                <a
+                  :href="`#${category.name}`"
+                  class="underline-offset-4 hover:underline"
+                >
+                  {{ category.name }}
+                </a>
+              </div>
+              <ol
+                v-for="(entry, entryIndex) in category.entries"
+                :key="entryIndex"
+                class="ml-5"
+              >
+                <li>
+                  <!-- We cannot have underline effect and overflow-ellipsis effect, so the border-bottom is used to simulate underline -->
+                  <a
+                    :href="`#${getEntryHeading(entry, entryIndex)}`"
+                    class="border-transparent border-b-[1px] hover:border-white block truncate line-clamp-1 max-w-40 w-fit text-sm"
+                  >
+                    {{ getEntryHeading(entry, entryIndex) }}
+                  </a>
+                </li>
+              </ol>
+            </div>
           </template>
         </nav>
       </aside>
