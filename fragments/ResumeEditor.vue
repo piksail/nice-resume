@@ -29,6 +29,8 @@ const { categories } = storeToRefs(useResumeStore());
 
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
+const dialog = ref(null);
+const indexToRemove = ref();
 
 function addCategory() {
   const category: Category = {
@@ -86,6 +88,11 @@ function addTag(entry: Entry, entryIndex: number) {
   focusNextInput(`#tagList${entryIndex} input`);
 }
 
+function askBeforeRemove(categoryIndex: number) {
+  openModal();
+  indexToRemove.value = categoryIndex;
+}
+
 function changeCategoryType(category: Category, value: Category["type"]) {
   category.type = value;
   category.nature = (assetTypes as string[]).includes(value)
@@ -96,6 +103,11 @@ function changeCategoryType(category: Category, value: Category["type"]) {
 
 function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
+}
+
+function closeModal() {
+  // @ts-expect-error TODO type
+  dialog.value.close();
 }
 
 async function moveThenScroll(
@@ -109,12 +121,39 @@ async function moveThenScroll(
   document.getElementById(categoryName)?.scrollIntoView();
 }
 
+function openModal() {
+  // @ts-expect-error TODO type
+  dialog.value.showModal();
+}
+
+function removeCategory() {
+  remove(categories.value, indexToRemove.value);
+  closeModal();
+}
+
 function toggleCategoryVisibility(category: Category) {
   category.isVisible = !category.isVisible;
 }
 </script>
 
 <template>
+  <!-- TODO close top-right -->
+  <dialog
+    ref="dialog"
+    class="max-w-screen-sm m-auto p-16 rounded-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+  >
+    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
+      Confirm category deletion?
+    </p>
+    <div class="flex flex-col gap-4">
+      <button class="button bg-white textGradient" @click="closeModal">
+        No
+      </button>
+      <button class="button bg-red-500 text-white" @click="removeCategory">
+        Yes, delete
+      </button>
+    </div>
+  </dialog>
   <EditorCategory
     v-for="(category, categoryIndex) in categories"
     :key="categoryIndex"
@@ -179,7 +218,7 @@ function toggleCategoryVisibility(category: Category) {
           @moveDown="
             moveThenScroll(moveDown, categories, categoryIndex, category.name)
           "
-          @remove="remove(categories, categoryIndex)"
+          @remove="askBeforeRemove"
         />
       </template>
       <template v-else>
