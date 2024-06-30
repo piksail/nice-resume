@@ -96,8 +96,8 @@ function addTag(entry: Entry, entryIndex: number) {
 }
 
 function askBeforeRemove(categoryIndex: number) {
-  openModal();
   indexToRemove.value = categoryIndex;
+  openModal();
 }
 
 function changeCategoryType(category: Category, value: Category["type"]) {
@@ -137,7 +137,7 @@ function toggleCategoryVisibility(category: Category) {
   <!-- TODO close top-right -->
   <dialog ref="dialog" class="dialog max-w-screen-sm">
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
-      Confirm category deletion?
+      Confirm category {{ categories[indexToRemove].name }} deletion?
     </p>
     <div class="flex flex-col gap-4">
       <button class="button bg-white textGradient" @click="closeModal">
@@ -212,7 +212,7 @@ function toggleCategoryVisibility(category: Category) {
           @moveDown="
             moveCategory(moveDown, categories, categoryIndex, category.name)
           "
-          @remove="askBeforeRemove"
+          @remove="askBeforeRemove(categoryIndex)"
         />
       </template>
       <template v-else>
