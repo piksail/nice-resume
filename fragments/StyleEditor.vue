@@ -38,7 +38,7 @@ const { isHeaderSimple, settings: letterSettings } =
   storeToRefs(useLetterStore());
 const { settings: emailSettings } = storeToRefs(useEmailStore());
 
-const { dialog, openModal, closeModal } = useDialog();
+const { dialog, openDialog, closeDialog } = useDialog();
 
 type Tab =
   | ResumeStyleEditorTab
@@ -88,7 +88,7 @@ function resetStyle() {
   } else {
     resumeSettings.value = templateSettings[template.value].resume;
   }
-  closeModal();
+  closeDialog();
 }
 
 function setTab(value: Tab) {
@@ -112,7 +112,7 @@ watch(documentType, () => {
       Confirm style reset?
     </p>
     <div class="flex flex-col gap-4">
-      <button class="button bg-white textGradient" @click="closeModal">
+      <button class="button bg-white textGradient" @click="closeDialog">
         No
       </button>
       <button class="button bg-red-500 text-white" @click="resetStyle">
@@ -854,7 +854,7 @@ watch(documentType, () => {
           <span class="textGradient">{{ tab }}</span>
         </button>
       </nav>
-      <button class="button bg-white flex-1" @click="openModal">
+      <button class="button bg-white flex-1" @click="openDialog">
         <span class="textGradient">Reset style</span>
       </button>
     </template>

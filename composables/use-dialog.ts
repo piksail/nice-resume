@@ -3,13 +3,13 @@ import { ref } from "vue";
 export default function useDialog() {
   const dialog = ref<HTMLDialogElement>();
 
-  function closeModal() {
+  function closeDialog() {
     dialog.value?.close();
   }
 
-  function openModal() {
+  function openDialog() {
     dialog.value?.showModal();
   }
 
-  return { closeModal, dialog, openModal };
+  return { closeDialog, dialog, openDialog };
 }

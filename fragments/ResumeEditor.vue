@@ -28,7 +28,7 @@ const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
 const { categories } = storeToRefs(useResumeStore());
 
-const { dialog, openModal, closeModal } = useDialog();
+const { dialog, openDialog, closeDialog } = useDialog();
 
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
@@ -97,7 +97,7 @@ function addTag(entry: Entry, entryIndex: number) {
 
 function askBeforeRemove(categoryIndex: number) {
   indexToRemove.value = categoryIndex;
-  openModal();
+  openDialog();
 }
 
 function changeCategoryType(category: Category, value: Category["type"]) {
@@ -125,7 +125,7 @@ async function moveCategory(
 
 function removeCategory() {
   remove(categories.value, indexToRemove.value);
-  closeModal();
+  closeDialog();
 }
 
 function toggleCategoryVisibility(category: Category) {
@@ -137,10 +137,10 @@ function toggleCategoryVisibility(category: Category) {
   <!-- TODO close top-right -->
   <dialog ref="dialog" class="dialog max-w-screen-sm">
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
-      Confirm category {{ categories[indexToRemove].name }} deletion?
+      Confirm category {{ categories[indexToRemove]?.name }} deletion?
     </p>
     <div class="flex flex-col gap-4">
-      <button class="button bg-white textGradient" @click="closeModal">
+      <button class="button bg-white textGradient" @click="closeDialog">
         No
       </button>
       <button class="button bg-red-500 text-white" @click="removeCategory">
