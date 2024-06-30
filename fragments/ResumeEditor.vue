@@ -34,11 +34,12 @@ const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
 const indexToRemove = ref();
 
-function addCategory() {
+async function addCategory() {
+  const defaultCategoryName = "Name";
   const category: Category = {
     nature: "experience",
     type: "work",
-    name: "Name",
+    name: defaultCategoryName,
     entries: [],
     layout: "full",
     isVisible: true,
@@ -48,6 +49,10 @@ function addCategory() {
 
   // Add an entry to anticipate user need
   addEntry(category);
+
+  // Scroll to panel
+  await nextTick(); // Wait for the category to be rendered to the new position before scrolling to it
+  document.getElementById(defaultCategoryName)?.scrollIntoView();
 }
 
 function addEntry(category: Category) {
@@ -107,7 +112,7 @@ function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
 }
 
-async function moveThenScroll(
+async function moveCategory(
   moveFunction: typeof moveUp | typeof moveDown,
   categories: Category[],
   categoryIndex: number,
@@ -202,10 +207,10 @@ function toggleCategoryVisibility(category: Category) {
           :is-header="true"
           :list-length="categories.length"
           @moveUp="
-            moveThenScroll(moveUp, categories, categoryIndex, category.name)
+            moveCategory(moveUp, categories, categoryIndex, category.name)
           "
           @moveDown="
-            moveThenScroll(moveDown, categories, categoryIndex, category.name)
+            moveCategory(moveDown, categories, categoryIndex, category.name)
           "
           @remove="askBeforeRemove"
         />
