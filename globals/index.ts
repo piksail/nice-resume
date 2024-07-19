@@ -20,7 +20,9 @@ import type {
   TextSeparator,
 } from "@/types";
 
-export const A4_RATIO = 297 / 210;
+export const A4_HEIGHT = 297; // In mm
+export const A4_WIDTH = 210; // In mm
+export const A4_RATIO = A4_HEIGHT / A4_WIDTH;
 
 export const documentTypes: Array<DocumentType> = ["resume", "letter", "email"];
 
