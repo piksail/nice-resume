@@ -9,7 +9,7 @@ import PreviewZoom from "./PreviewZoom.vue";
 
 const { zoomLevel } = storeToRefs(useEditorStore());
 
-const preview = ref(null);
+const preview = ref<HTMLDivElement>();
 const previewHeight = ref(0);
 
 useResizeObserver(preview, (nodes) => {
