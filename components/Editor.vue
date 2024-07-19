@@ -158,23 +158,23 @@ function getCategoryIcon(categoryType: Category["type"]) {
       <main
         class="relative h-[calc(100vh-100px)] overflow-y-auto flex text-white flex-1"
       >
-        <header class="sticky z-10 top-[100px] lg:top-0">
-          <template v-if="documentType === 'resume'">
-            <p
-              v-if="isLayoutDisabled"
-              class="text-center px-10 py-2 bg-amber-500"
-            >
-              Category layouts are fixed for this template.
-            </p>
-            <p
-              v-if="isLayoutDiscouraged"
-              class="text-center px-10 py-2 bg-amber-500"
-            >
-              {{ discouragedLayoutText }}
-            </p>
-          </template>
-        </header>
         <section class="w-full overflow-y-auto scroll-smooth">
+          <header class="sticky z-10 top-0">
+            <template v-if="documentType === 'resume'">
+              <p
+                v-if="isLayoutDisabled"
+                class="text-center px-10 py-2 bg-amber-500"
+              >
+                Category layouts are fixed for this template.
+              </p>
+              <p
+                v-if="isLayoutDiscouraged"
+                class="text-center px-10 py-2 bg-amber-500"
+              >
+                {{ discouragedLayoutText }}
+              </p>
+            </template>
+          </header>
           <div
             class="flex flex-col gap-4 lg:gap-8 p-4 lg:p-8 max-w-[860px] mx-auto"
           >
