@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  NODE_VERSION: 22.3
+  NODE_VERSION: 22.5
   PNPM_VERSION: 9
   # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
   A11Y_HOST: http://localhost:3000 # Nuxt preview default url:port

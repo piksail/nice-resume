@@ -55,6 +55,7 @@ So far, tools we believe are best out there are :
 ### Project setup
 
 ```bash
+nvm use
 corepack enable pnpm
 pnpm install
 ```
