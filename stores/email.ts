@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { emailSettings } from "@/globals";
 
 // Use option API to take advantage of automatic persistence
-// @ts-expect-error - TS does not handle option API syntax
 export const useEmailStore = defineStore("email", {
   state: () => ({
     // Content
