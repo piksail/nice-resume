@@ -28,6 +28,7 @@ import Field from "@/components/Field.vue";
 import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
 import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
+import useDialog from "~/composables/use-dialog";
 
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
@@ -36,6 +37,8 @@ const { settings: resumeSettings } = storeToRefs(useResumeStore());
 const { isHeaderSimple, settings: letterSettings } =
   storeToRefs(useLetterStore());
 const { settings: emailSettings } = storeToRefs(useEmailStore());
+
+const { dialog, openDialog, closeDialog } = useDialog();
 
 type Tab =
   | ResumeStyleEditorTab
@@ -85,6 +88,7 @@ function resetStyle() {
   } else {
     resumeSettings.value = templateSettings[template.value].resume;
   }
+  closeDialog();
 }
 
 function setTab(value: Tab) {
@@ -102,6 +106,20 @@ watch(documentType, () => {
 </script>
 
 <template>
+  <!-- TODO close top-right -->
+  <dialog ref="dialog" class="dialog max-w-screen-sm">
+    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
+      Confirm style reset?
+    </p>
+    <div class="flex flex-col gap-4">
+      <button class="button bg-white textGradient" @click="closeDialog">
+        No
+      </button>
+      <button class="button bg-red-500 text-white" @click="resetStyle">
+        Yes, reset
+      </button>
+    </div>
+  </dialog>
   <div
     v-if="isStyleEditorOpen && tab"
     class="h-[260px] overflow-auto flex flex-col gap-5 bg-white p-6 rounded shadow-lg text-pink-500 mb-4"
@@ -836,7 +854,7 @@ watch(documentType, () => {
           <span class="textGradient">{{ tab }}</span>
         </button>
       </nav>
-      <button class="button bg-white flex-1" @click="resetStyle">
+      <button class="button bg-white flex-1" @click="openDialog">
         <span class="textGradient">Reset style</span>
       </button>
     </template>

@@ -18,7 +18,7 @@ export function getNodeStyle(
   if (settingsType === "text" || settingsType === "title") {
     style.fontFamily = settingsItem.font;
     style.fontSize = `${settingsItem.fontSize}px`;
-    style.lineHeight = settingsItem.lineHeight;
+    style.lineHeight = settingsItem.lineHeight ?? "normal";
     style.letterSpacing = `${settingsItem.letterSpacing}px`;
     style.fontWeight = settingsItem.fontWeight;
     style.fontStyle = settingsItem.isItalic ? "italic" : "initial";

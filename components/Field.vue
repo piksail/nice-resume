@@ -6,8 +6,15 @@ const { disabled, label, id, step, transparent, type } = defineProps<{
   id?: string;
   label: string;
   step?: string;
+  subLabel?: string;
   transparent?: boolean;
-  type?: string;
+  type?:
+    | "checkbox"
+    | "checkbutton"
+    | "color"
+    | "number"
+    | "textarea"
+    | "toggle";
 }>();
 
 const model = defineModel();
@@ -38,6 +45,33 @@ const model = defineModel();
       </SwitchLabel>
     </div>
   </SwitchGroup>
+  <label
+    v-else-if="type === 'checkbutton'"
+    class="button bgGradient p-[2px] group"
+    :for="id"
+  >
+    <div
+      class="button bg-white h-full w-full rounded-sm justify-start group-hover:bg-transparent"
+      :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
+    >
+      <input
+        :id="id"
+        class="input"
+        type="checkbox"
+        :disabled="disabled"
+        v-model="model"
+      />
+      <div class="flex flex-col ml-2">
+        <span
+          class="label text-blue-500 group-hover:text-white"
+          :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
+        >
+          {{ label }}
+        </span>
+        <span class="text-sm group-hover:text-white">{{ subLabel }}</span>
+      </div>
+    </div>
+  </label>
   <label
     v-else-if="type === 'checkbox'"
     class="flex gap-1 items-center"

@@ -7,6 +7,7 @@ import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import {
   focusNextInput,
+  getEntryHeading,
   getEntryTitleLabel,
   getExperienceOrganizationLabel,
 } from "@/utils/editor";
@@ -18,6 +19,7 @@ import {
   experienceTypes,
   fixedLayoutTemplates,
 } from "@/globals";
+import useDialog from "~/composables/use-dialog";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
@@ -26,14 +28,18 @@ const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
 const { categories } = storeToRefs(useResumeStore());
 
+const { dialog, openDialog, closeDialog } = useDialog();
+
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
+const indexToRemove = ref();
 
-function addCategory() {
+async function addCategory() {
+  const defaultCategoryName = "Name";
   const category: Category = {
     nature: "experience",
     type: "work",
-    name: "Name",
+    name: defaultCategoryName,
     entries: [],
     layout: "full",
     isVisible: true,
@@ -43,6 +49,10 @@ function addCategory() {
 
   // Add an entry to anticipate user need
   addEntry(category);
+
+  // Scroll to panel
+  await nextTick(); // Wait for the category to be rendered to the new position before scrolling to it
+  document.getElementById(defaultCategoryName)?.scrollIntoView();
 }
 
 function addEntry(category: Category) {
@@ -85,6 +95,11 @@ function addTag(entry: Entry, entryIndex: number) {
   focusNextInput(`#tagList${entryIndex} input`);
 }
 
+function askBeforeRemove(categoryIndex: number) {
+  indexToRemove.value = categoryIndex;
+  openDialog();
+}
+
 function changeCategoryType(category: Category, value: Category["type"]) {
   category.type = value;
   category.nature = (assetTypes as string[]).includes(value)
@@ -97,7 +112,7 @@ function changeCategoryLayout(category: Category, value: Category["layout"]) {
   category.layout = value;
 }
 
-async function moveThenScroll(
+async function moveCategory(
   moveFunction: typeof moveUp | typeof moveDown,
   categories: Category[],
   categoryIndex: number,
@@ -108,12 +123,31 @@ async function moveThenScroll(
   document.getElementById(categoryName)?.scrollIntoView();
 }
 
+function removeCategory() {
+  remove(categories.value, indexToRemove.value);
+  closeDialog();
+}
+
 function toggleCategoryVisibility(category: Category) {
   category.isVisible = !category.isVisible;
 }
 </script>
 
 <template>
+  <!-- TODO close top-right -->
+  <dialog ref="dialog" class="dialog max-w-screen-sm">
+    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
+      Confirm category {{ categories[indexToRemove]?.name }} deletion?
+    </p>
+    <div class="flex flex-col gap-4">
+      <button class="button bg-white textGradient" @click="closeDialog">
+        No
+      </button>
+      <button class="button bg-red-500 text-white" @click="removeCategory">
+        Yes, delete
+      </button>
+    </div>
+  </dialog>
   <EditorCategory
     v-for="(category, categoryIndex) in categories"
     :key="categoryIndex"
@@ -173,12 +207,12 @@ function toggleCategoryVisibility(category: Category) {
           :is-header="true"
           :list-length="categories.length"
           @moveUp="
-            moveThenScroll(moveUp, categories, categoryIndex, category.name)
+            moveCategory(moveUp, categories, categoryIndex, category.name)
           "
           @moveDown="
-            moveThenScroll(moveDown, categories, categoryIndex, category.name)
+            moveCategory(moveDown, categories, categoryIndex, category.name)
           "
-          @remove="remove(categories, categoryIndex)"
+          @remove="askBeforeRemove(categoryIndex)"
         />
       </template>
       <template v-else>
@@ -201,7 +235,12 @@ function toggleCategoryVisibility(category: Category) {
         class="sectionSeparator border-white/10"
       >
         <header class="flex items-center justify-between">
-          <div class="sectionHeading">Entry #{{ entryIndex + 1 }}</div>
+          <div
+            :id="getEntryHeading(entry, entryIndex)"
+            class="sectionHeading scroll-mt-10"
+          >
+            {{ getEntryHeading(entry, entryIndex) }}
+          </div>
           <ListActions
             class="mb-2"
             :index="entryIndex"
@@ -271,13 +310,13 @@ function toggleCategoryVisibility(category: Category) {
                   @remove="remove(entry.highlights, highlightIndex)"
                 />
               </li>
-              <button
-                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-                @click="addHighlight(entry, entryIndex)"
-              >
-                Add highlight
-              </button>
             </ul>
+            <button
+              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+              @click="addHighlight(entry, entryIndex)"
+            >
+              Add highlight
+            </button>
           </label>
           <label class="flex flex-col" for="tags">
             <span class="label opacity-60">Tags</span>
@@ -305,13 +344,13 @@ function toggleCategoryVisibility(category: Category) {
                   @remove="remove(entry.tags, tagIndex)"
                 />
               </li>
-              <button
-                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-                @click="addTag(entry, entryIndex)"
-              >
-                Add tag
-              </button>
             </ul>
+            <button
+              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+              @click="addTag(entry, entryIndex)"
+            >
+              Add tag
+            </button>
           </label>
         </div>
       </li>

@@ -20,7 +20,9 @@ import type {
   TextSeparator,
 } from "@/types";
 
-export const A4_RATIO = 297 / 210;
+export const A4_HEIGHT = 297; // In mm
+export const A4_WIDTH = 210; // In mm
+export const A4_RATIO = A4_HEIGHT / A4_WIDTH;
 
 export const documentTypes: Array<DocumentType> = ["resume", "letter", "email"];
 
@@ -134,7 +136,6 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     font: "inherit",
     fontSize: 22,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -152,7 +153,6 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     font: "inherit",
     fontSize: 18,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -170,7 +170,6 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -196,7 +195,6 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -253,7 +251,7 @@ export const resumeSettings: ResumeSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
-    width: 25, // Percentage
+    width: 25,
     isRightPositioned: false,
   },
   body: {
@@ -279,7 +277,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -292,7 +289,7 @@ export const resumeSettings: ResumeSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
-    width: 100, // Percentage
+    width: 100,
     isAside: false,
   },
   categoryNameSeparator: {
@@ -320,7 +317,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -332,7 +328,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -344,7 +339,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -356,7 +350,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -368,7 +361,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -385,7 +377,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -406,7 +397,6 @@ export const resumeSettings: ResumeSettings = {
     font: "inherit",
     fontSize: 12,
     letterSpacing: 0,
-    lineHeight: 1.2,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -428,7 +418,6 @@ export const letterSettings: LetterSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -447,7 +436,6 @@ export const letterSettings: LetterSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -466,7 +454,6 @@ export const letterSettings: LetterSettings = {
     font: "inherit",
     fontSize: 14,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -484,7 +471,6 @@ export const letterSettings: LetterSettings = {
     font: "inherit",
     fontSize: 12,
     letterSpacing: 0,
-    lineHeight: 1.5,
     fontWeight: 400,
     isItalic: false,
     isUppercase: false,
@@ -501,7 +487,6 @@ export const letterSettings: LetterSettings = {
   },
   body: {
     fontSize: 14,
-    lineHeight: 1.5,
     fontWeight: 400,
     color: "currentColor",
     indentation: 48,
@@ -2749,7 +2734,7 @@ templateSettings.Toothpaste.resume.categoryName.isUppercase = true;
 templateSettings.Toothpaste.resume.entry.layout = 1;
 templateSettings.Toothpaste.resume.entryTitle.font =
   templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.resume.entryTitle.fontSize = 20;
+templateSettings.Toothpaste.resume.entryTitle.fontSize = 21;
 templateSettings.Toothpaste.resume.entryTitle.color =
   templateBaseSettings.Toothpaste.colors[1];
 templateSettings.Toothpaste.resume.entryOrganization.order = 2;
