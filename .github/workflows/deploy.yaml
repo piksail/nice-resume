@@ -1,6 +1,7 @@
 # https://nuxt.com/deploy/github-pages
 # https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
 name: Deploy to GitHub Pages
+
 on:
   workflow_dispatch:
   push:
@@ -8,43 +9,19 @@ on:
       - main
 
 env:
-  NODE_VERSION: 22.3
-  PNPM_VERSION: 9
   IMAGE_NAME: nice-resume
 
 jobs:
   build:
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: pnpm/action-setup@v3
-        with:
-          version: ${{ env.PNPM_VERSION }}
-      - name: Dump version
-        run: |
-          echo "Node version: $(node -v) (aiming: ${{ env.NODE_VERSION }})"
-          echo "Npm version: $(npm --version)"
-          echo "Pnpm version: $(pnpm --version) (aiming: ${{ env.PNPM_VERSION }})"
-          echo "Git version: $(git --version)"
-      - name: Set env with commit hash
-        run: echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Run Snyk to check for Node vulnerabilities
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Setup repository
+        uses: ./.github/actions/setup_repo
       - name: "Configure baseUrl to work on Github Pages"
         run: |
           sed -i "s|baseURL: \"/\"|baseURL: \"/nice-resume/\"|g" nuxt.config.ts
-      - name: "Configure package.json version"
-        run: |
-          sed -i "s|\"version\": \"dev\"|\"version\": \"${{ env.SHORT_SHA }}\"|g" package.json
       - name: Build
         run: pnpm run build --preset github_pages
       - name: Upload artifact
@@ -61,7 +38,7 @@ jobs:
     environment:
       name: github_pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
@@ -72,7 +49,7 @@ jobs:
     permissions:
       packages: write
       contents: read
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - run: echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
@@ -92,7 +69,7 @@ jobs:
 
   docker_vulnerabilities:
     needs: container_build_push
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Run Snyk to check Docker image for vulnerabilities
         uses: snyk/actions/docker@master

@@ -1,4 +1,3 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 node ./.husky/check-lock-files.js
-pnpm exec lint-staged --concurrent true
+lint-staged --concurrent true

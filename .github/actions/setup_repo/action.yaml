@@ -1,0 +1,33 @@
+name: "Setup repository"
+description: "Install node, dependencies, version and build"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Enable corepack
+      run: corepack enable
+      shell: bash
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: package.json
+        cache: "pnpm"
+    - name: Dump versions
+      run: |
+        echo "Node version: $(node -v)"
+        echo "Pnpm version: $(pnpm --version)"
+        echo "Git version: $(git --version)"
+      shell: bash
+    - name: Set env with commit hash
+      run: echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
+      shell: bash
+    - name: "Configure package.json version"
+      run: |
+        sed -i "s|\"version\": \"dev\"|\"version\": \"${{ env.SHORT_SHA }}\"|g" package.json
+      shell: bash
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
+    - name: Build
+      run: pnpm run build
+      shell: bash

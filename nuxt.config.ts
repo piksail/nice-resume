@@ -1,5 +1,3 @@
-import { defineNuxtConfig } from "nuxt/config";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ["@/assets/styles/index.css"],
@@ -25,7 +23,6 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
-  // @ts-expect-error - TS cannot find schema for Nuxt modules
   piniaPersistedstate: {
     storage: "localStorage",
   },
@@ -39,4 +36,5 @@ export default defineNuxtConfig({
   seo: {
     redirectToCanonicalSiteUrl: true,
   },
+  compatibilityDate: "2024-07-23",
 });

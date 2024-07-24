@@ -1,32 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "ES2021.String", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-    "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
-    },
-    "types": ["vitest/globals"],
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
   "extends": "./.nuxt/tsconfig.json",
   "exclude": ["node_modules"],
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "#imports": [".nuxt/imports.d.ts"]
+    }
+  }
 }
