@@ -2,8 +2,6 @@ name: "Setup repository"
 description: "Install node, dependencies, version and build"
 
 runs:
-  using: "composite"
-  id: node_pnpm_version
   steps:
     - name: Enable corepack
       run: corepack enable
@@ -14,8 +12,8 @@ runs:
         cache: "pnpm"
     - name: Dump versions
       run: |
-        echo "Node version: $(node -v) (aiming: ${{ steps.node_pnpm_version.outputs.NODE_VERSION }})"
-        echo "Pnpm version: $(pnpm --version) (aiming: ${{ steps.node_pnpm_version.outputs.PNPM_VERSION }})"
+        echo "Node version: $(node -v)"
+        echo "Pnpm version: $(pnpm --version)"
         echo "Git version: $(git --version)"
       shell: bash
     - name: Set env with commit hash
