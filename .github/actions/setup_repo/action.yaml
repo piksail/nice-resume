@@ -11,7 +11,6 @@ runs:
       with:
         node-version-file: package.json
         cache: "pnpm"
-      shell: bash
     - name: Dump versions
       run: |
         echo "Node version: $(node -v)"
