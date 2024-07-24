@@ -49,7 +49,9 @@ jobs:
         run: pnpm run preview & pnpx wait-on $A11Y_HOST
       - name: Run pa11y
         run: |
+          pnpx pa11y --version
           pnpx pa11y $A11Y_HOST \
+            -c ./e2e/pa11y.json \
             --runner axe \
             --runner htmlcs \
             --ignore 'color-contrast;link-in-text-block;WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail'
