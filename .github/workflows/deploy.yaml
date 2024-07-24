@@ -17,7 +17,7 @@ jobs:
     steps:
      - uses: actions/checkout@v4
      - name: Setup repository
-        uses: ./.github/actions/setup_repo
+       uses: ./.github/actions/setup_repo
       - name: "Configure baseUrl to work on Github Pages"
         run: |
           sed -i "s|baseURL: \"/\"|baseURL: \"/nice-resume/\"|g" nuxt.config.ts

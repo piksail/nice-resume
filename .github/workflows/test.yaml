@@ -15,7 +15,7 @@ jobs:
     steps:
      - uses: actions/checkout@v4
      - name: Setup repository
-        uses: ./.github/actions/setup_repo
+       uses: ./.github/actions/setup_repo
       - name: pnpm audit
         run: |
           pnpm audit > ./audit.log || true
@@ -34,7 +34,7 @@ jobs:
     steps:
      - uses: actions/checkout@v4
      - name: Setup repository
-        uses: ./.github/actions/setup_repo
+       uses: ./.github/actions/setup_repo
       - name: Run tests
         run: pnpm run test:unit
 
@@ -44,7 +44,7 @@ jobs:
     steps:
      - uses: actions/checkout@v4
      - name: Setup repository
-        uses: ./.github/actions/setup_repo
+       uses: ./.github/actions/setup_repo
       - name: Launch server
         run: pnpm run preview & pnpx wait-on $A11Y_HOST
       - name: Run pa11y
@@ -64,7 +64,7 @@ jobs:
     steps:
      - uses: actions/checkout@v4
      - name: Setup repository
-        uses: ./.github/actions/setup_repo
+       uses: ./.github/actions/setup_repo
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
       - name: Launch server
