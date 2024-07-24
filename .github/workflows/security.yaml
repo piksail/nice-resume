@@ -6,13 +6,9 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   node_vulnerabilities:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Setup repository
@@ -24,7 +20,7 @@ jobs:
 
   docker_vulnerabilities:
     needs: container_build_push
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Run Snyk to check Docker image for vulnerabilities
         uses: snyk/actions/docker@master

@@ -8,17 +8,13 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    shell: bash
-
 env:
   IMAGE_NAME: nice-resume
 
 jobs:
   build:
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Setup repository
@@ -42,7 +38,7 @@ jobs:
     environment:
       name: github_pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
@@ -53,7 +49,7 @@ jobs:
     permissions:
       packages: write
       contents: read
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - run: echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
@@ -73,7 +69,7 @@ jobs:
 
   docker_vulnerabilities:
     needs: container_build_push
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Run Snyk to check Docker image for vulnerabilities
         uses: snyk/actions/docker@master

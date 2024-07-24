@@ -5,17 +5,13 @@ on:
     branches: [$default-branch]
   pull_request:
 
-defaults:
-  run:
-    shell: bash
-
 env:
   A11Y_HOST: http://localhost:3000 # Nuxt preview default url:port
 
 jobs:
   code_checks:
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Setup repository
@@ -34,7 +30,7 @@ jobs:
 
   tests:
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Setup repository
@@ -43,7 +39,7 @@ jobs:
         run: pnpm run test:unit
 
   pa11y-axe:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +57,7 @@ jobs:
   # https://playwright.dev/docs/ci-intro
   # https://playwright.dev/docs/docker
   test-playwright:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     container:
       image: mcr.microsoft.com/playwright:v1.43.0-jammy
