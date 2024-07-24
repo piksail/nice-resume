@@ -1,11 +1,16 @@
 # https://nuxt.com/deploy/github-pages
 # https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
 name: Deploy to GitHub Pages
+
 on:
   workflow_dispatch:
   push:
     branches:
       - main
+
+defaults:
+  run:
+    shell: bash
 
 env:
   IMAGE_NAME: nice-resume

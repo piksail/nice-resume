@@ -1,11 +1,14 @@
 name: "Setup repository"
 description: "Install node, dependencies, version and build"
 
+defaults:
+  run:
+    shell: bash
+
 runs:
   steps:
     - name: Enable corepack
       run: corepack enable
-      shell: bash
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -16,7 +19,6 @@ runs:
         echo "Node version: $(node -v)"
         echo "Pnpm version: $(pnpm --version)"
         echo "Git version: $(git --version)"
-      shell: bash
     - name: Set env with commit hash
       run: echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
     - name: "Configure package.json version"

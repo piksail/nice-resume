@@ -5,6 +5,10 @@ on:
     branches: [$default-branch]
   pull_request:
 
+defaults:
+  run:
+    shell: bash
+
 env:
   A11Y_HOST: http://localhost:3000 # Nuxt preview default url:port
 

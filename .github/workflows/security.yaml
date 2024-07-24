@@ -6,6 +6,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   node_vulnerabilities:
     runs-on: ubuntu-latest
