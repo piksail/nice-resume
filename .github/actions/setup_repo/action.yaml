@@ -2,6 +2,7 @@ name: "Setup repository"
 description: "Install node, dependencies, version and build"
 
 runs:
+  using: "composite"
   steps:
     - name: Enable corepack
       run: corepack enable
