@@ -47,9 +47,10 @@ jobs:
         uses: ./.github/actions/setup_repo
       - name: Launch server
         run: pnpm run preview & pnpx wait-on $A11Y_HOST
+      - name: Check pa11y version
+        run: pnpx pa11y --version
       - name: Run pa11y
         run: |
-          pnpx pa11y --version
           pnpx pa11y $A11Y_HOST \
             -c ./e2e/pa11y.json \
             --runner axe \
