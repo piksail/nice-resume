@@ -13,7 +13,8 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - name: Setup repository
+     - uses: actions/checkout@v4
+     - name: Setup repository
         uses: ./.github/actions/setup_repo
       - name: pnpm audit
         run: |
@@ -31,7 +32,8 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - name: Setup repository
+     - uses: actions/checkout@v4
+     - name: Setup repository
         uses: ./.github/actions/setup_repo
       - name: Run tests
         run: pnpm run test:unit
@@ -40,7 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Setup repository
+     - uses: actions/checkout@v4
+     - name: Setup repository
         uses: ./.github/actions/setup_repo
       - name: Launch server
         run: pnpm run preview & pnpx wait-on $A11Y_HOST
@@ -59,7 +62,8 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.43.0-jammy
     steps:
-      - name: Setup repository
+     - uses: actions/checkout@v4
+     - name: Setup repository
         uses: ./.github/actions/setup_repo
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps

@@ -10,7 +10,8 @@ jobs:
   node_vulnerabilities:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup repository
+     - uses: actions/checkout@v4
+     - name: Setup repository
         uses: ./.github/actions/setup_repo
       - name: Run Snyk to check for Node vulnerabilities
         uses: snyk/actions/node@master

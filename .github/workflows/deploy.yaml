@@ -15,7 +15,8 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - name: Setup repository
+     - uses: actions/checkout@v4
+     - name: Setup repository
         uses: ./.github/actions/setup_repo
       - name: "Configure baseUrl to work on Github Pages"
         run: |
