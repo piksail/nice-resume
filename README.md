@@ -118,7 +118,7 @@ Some themes come from other tools:
 docker run \
     --rm \
     -p 3000:3000 \
-    ghcr.io/benjent/nice-resume:latest
+    ghcr.io/piksail/nice-resume:latest
 
 # Build and run
 docker build -t nice-resume:local .

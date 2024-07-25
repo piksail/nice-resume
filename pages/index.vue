@@ -6,6 +6,8 @@ const title = ref("Nice resume");
 const description = ref(
   "Pick a design, build your resume, write your cover letter, adapt the design to your need with Nice Resume.",
 );
+// eslint-disable-next-line no-undef
+const localePath = useLocalePath();
 </script>
 
 <template>
@@ -34,7 +36,7 @@ const description = ref(
           <i class="font-serif">that</i>
           simple
         </p>
-        <NuxtLink to="/editor">
+        <NuxtLink :to="localePath('editor')">
           <button class="button bg-white mx-auto mt-8">
             <span class="textGradient">Get started</span>
           </button>

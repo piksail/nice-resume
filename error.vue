@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useError } from "nuxt/app";
 import Card from "@/components/Card.vue";
-
+// eslint-disable-next-line no-undef
+const localePath = useLocalePath();
 const error = useError();
 </script>
 
@@ -15,7 +16,7 @@ const error = useError();
           seems like something went wrong
         </p>
         <p v-if="error">{{ error.message }}</p>
-        <NuxtLink to="/">
+        <NuxtLink :to="localePath('/')">
           <button class="button bg-white mx-auto mt-8">
             <span class="textGradient">Go to home page</span>
           </button>
