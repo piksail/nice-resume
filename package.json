@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt prepare;nuxt dev",
+    "dev": "nuxt dev",
     "format": "prettier --write",
     "format:all": "pnpm run format .",
     "format:check": "prettier --check --cache",

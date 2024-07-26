@@ -32,14 +32,15 @@ export default defineNuxtConfig({
     storage: "localStorage",
   },
   i18n: {
-    locales: ["en", "fr", "br"],
+    locales: ["en", "fr"],
     defaultLocale: "en",
+    strategy: "prefix_and_default",
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "i18n_redirected",
-      redirectOn: "root", // recommended
+      redirectOn: "root",
     },
-    vueI18n: "./i18n.config.ts", // if you are using custom path, default
+    vueI18n: "./i18n.config.ts",
   },
   site: {
     url: "https://nice-resume.piksail.com/",

@@ -422,11 +422,9 @@ onMounted(() => {
     </div>
     <div>
       <div>
-        <button @click="setLocale('en')">en</button>
+        <button @click="setLocale('en')">English</button>
         <br />
-        <button @click="setLocale('fr')">fr</button>
-        <br />
-        <button @click="setLocale('br')">br</button>
+        <button @click="setLocale('fr')">Français</button>
       </div>
     </div>
   </header>
