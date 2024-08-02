@@ -6,24 +6,21 @@ FROM node:${NODE_VERSION}-alpine as base
 WORKDIR /app
 RUN corepack enable pnpm
 # Install packages first to benefit from layer caching
-COPY pnpm-lock.yaml package.json ./
-
-FROM base AS prod-deps
-RUN pnpm install --frozen-lockfile --prod
-
-FROM base AS build-deps
+COPY package.json ./
+COPY pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-FROM build-deps AS build
+FROM base as builder
+COPY --from=base /app/node_modules ./node_modules
 COPY . .
 RUN pnpm run build && pnpm store prune
 
-FROM base AS runtime
-COPY --from=prod-deps /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
+FROM base AS runner
 WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nitro
+
+COPY --from=builder /app/.output ./.output
 EXPOSE ${NUXT_PORT}
 ENV NUXT_HOST=${NUXT_HOST} \
     NUXT_PORT=${NUXT_PORT} \
