@@ -18,6 +18,11 @@ import { generateStores } from "~/utils/editor";
 
 console.info("Version: ", packageJson.version);
 
+// eslint-disable-next-line no-undef
+const { setLocale } = useI18n();
+// eslint-disable-next-line no-undef
+const localePath = useLocalePath();
+
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
 const { about, contactDetails, name, template, title } =
   storeToRefs(useProfileStore());
@@ -349,14 +354,14 @@ onMounted(() => {
   <header
     class="sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 bg-white text-pink-500 shadow-lg"
   >
-    <NuxtLink to="/">
+    <NuxtLink :to="localePath('/')">
       <h1
         class="bgGradient textGradient text-center text-4xl"
         :data-version="packageJson.version"
       >
-        Nice
+        {{ $t("nice") }}
         <br />
-        Resume
+        {{ $t("resume") }}
       </h1>
     </NuxtLink>
     <div class="flex items-end gap-8 h-[60%]">
@@ -414,6 +419,13 @@ onMounted(() => {
         <DocumentArrowDownIcon class="h-6" />
         Download
       </button>
+    </div>
+    <div>
+      <div>
+        <button @click="setLocale('en')">English</button>
+        <br />
+        <button @click="setLocale('fr')">Français</button>
+      </div>
     </div>
   </header>
 </template>

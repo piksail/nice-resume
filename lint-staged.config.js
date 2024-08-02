@@ -1,5 +1,5 @@
 export default {
-  "*.{md,html,css,json,js}": ["npm run format:check --"],
+  "*.{md,html,css,json,js,vue,yaml,yml}": ["npm run format:check --"],
   "*.{vue,ts}": [
     "npm run format:check --",
     "npm run lint:check --",

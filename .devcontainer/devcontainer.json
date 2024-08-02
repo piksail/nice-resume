@@ -25,14 +25,14 @@
     }
   },
   "postCreateCommand": "pnpm install --offline",
-  "postStartCommand": "pnpm install && pnpm postinstall",
+  "postStartCommand": "pnpm install --frozen-lockfile && pnpm postinstall",
   // Share node_modules with the host
   // "mounts": ["type=volume,target=${containerWorkspaceFolder}/node_modules"]
   "remoteUser": "node",
   "forwardPorts": [3000],
   "portsAttributes": {
     "3000": {
-      "label": "Application Port",
+      "label": "Nuxt Port",
       "onAutoForward": "notify"
     }
   }

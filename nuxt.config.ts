@@ -10,7 +10,12 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "@vueuse/nuxt",
     "nuxt-svgo",
+    "@nuxtjs/i18n",
   ],
+  alias: {
+    "~/*": "../*",
+    "@/*": "../*",
+  },
   ssr: false,
   app: {
     head: {
@@ -26,15 +31,26 @@ export default defineNuxtConfig({
   piniaPersistedstate: {
     storage: "localStorage",
   },
+  i18n: {
+    locales: ["en", "fr"],
+    defaultLocale: "en",
+    strategy: "prefix_and_default",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+    },
+    vueI18n: "./i18n.config.ts",
+  },
   site: {
-    url: "https://piksail.github.io/nice-resume/",
+    url: "https://nice-resume.piksail.com/",
     name: "Nice Resume",
     description: "CV/Resume template for developers",
-    defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
     indexable: false,
   },
   seo: {
     redirectToCanonicalSiteUrl: true,
   },
+  ogImage: { enabled: false },
   compatibilityDate: "2024-07-23",
 });
