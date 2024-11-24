@@ -70,12 +70,17 @@ const localePath = useLocalePath();
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="text-5xl font-bold mb-32 text-right">Build your resume</h2>
-      <p>TODO screenshot editor</p>
+      <div class="relative mx-auto group">
+        <img
+          src="/resume-editor-screenshot.png"
+          alt="Screenshot of the resume editor"
+          class="w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg transition-all"
+        />
+      </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="text-5xl font-bold mb-32">Write your cover letter</h2>
       <div class="flex gap-10">
-        <p class="flex-1">TODO screenshot editor</p>
         <img
           src="/macchiato-cover-letter-example.png"
           alt="Example of a cover letter written and styled with Nice Resume"
@@ -87,7 +92,13 @@ const localePath = useLocalePath();
       <h2 class="text-5xl font-bold mb-32 text-right">
         Adapt the design to your need
       </h2>
-      <p class="flex-1">TODO screenshot style editor</p>
+      <div class="relative mx-auto group">
+        <img
+          src="/style-editor.png"
+          alt="Screenshot of the style editor"
+          class="w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg transition-all"
+        />
+      </div>
     </section>
     <NuxtPage />
   </NuxtLayout>
