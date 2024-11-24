@@ -16,13 +16,12 @@ import {
   categoryTypes,
   categoryLayouts,
   experienceTypes,
-  fixedLayoutTemplates,
 } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 const { categories } = storeToRefs(useResumeStore());
 
@@ -151,7 +150,6 @@ function toggleCategoryVisibility(category: Category) {
             <span class="label">Layout</span>
             <select
               id="layout"
-              :disabled="fixedLayoutTemplates.includes(template)"
               :value="category.layout"
               @change="
                 changeCategoryLayout(
