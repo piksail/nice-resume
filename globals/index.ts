@@ -74,37 +74,6 @@ export const templates: Array<Template> = [
   "Wiki",
 ];
 
-export const fixedLayoutTemplates: Array<Template> = [
-  "Care",
-  "Cupcake",
-  "Paper",
-];
-
-export const discouragedLayoutTemplates: {
-  [T in Template]: Array<Category["layout"]>;
-} = {
-  default: [],
-  Aster: ["aside", "half"],
-  Care: [],
-  CottonCandy: ["aside"],
-  Cupcake: [],
-  Elegant: [],
-  Kendall: [],
-  Macaron: [],
-  Macchiato: [],
-  NeoBrutalism: [],
-  Oilcloth: [],
-  OpenResume: [],
-  Paper: [],
-  Pharmacy: [],
-  Red: ["full"],
-  Shelf: ["aside", "half"],
-  StackOverflow: [],
-  Stone: [],
-  Toothpaste: ["aside"],
-  Wiki: [],
-};
-
 // TODO settings réduire espace entrelistmarker et text
 
 export const textSeparators: TextSeparator[] = [

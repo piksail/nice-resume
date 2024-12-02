@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { fixedLayoutTemplates, templateSettings } from "@/globals";
+import { templateSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import ResumeCategoryName from "./ResumeCategoryName.vue";
 import ResumeEntry from "./ResumeEntry.vue";
@@ -31,10 +31,6 @@ const settings = computed(() => {
     : templateSettings[template.value].resume;
 });
 
-const isLayoutFixed = computed(() =>
-  fixedLayoutTemplates.includes(template.value),
-);
-
 const asideCategories = computed(() =>
   categories.value.filter(
     (category) => category.isVisible && category.layout === "aside",
@@ -43,10 +39,7 @@ const asideCategories = computed(() =>
 
 const bodyCategories = computed(() =>
   categories.value.filter(
-    (category) =>
-      category.isVisible &&
-      ((!isLayoutFixed.value && category.layout !== "aside") ||
-        isLayoutFixed.value),
+    (category) => category.isVisible && category.layout !== "aside",
   ),
 );
 </script>
@@ -58,7 +51,6 @@ const bodyCategories = computed(() =>
   >
     <aside
       v-if="
-        !isLayoutFixed &&
         categories.some(
           (category) => category.isVisible && category.layout === 'aside',
         )
@@ -192,11 +184,9 @@ const bodyCategories = computed(() =>
       }"
     >
       <section
-        v-if="isHeaderSimple && (!asideCategories.length || isLayoutFixed)"
+        v-if="isHeaderSimple && !asideCategories.length"
         :class="
-          bodyCategories[0]?.layout === 'half' && !isLayoutFixed
-            ? 'col-span-1'
-            : 'col-span-2'
+          bodyCategories[0]?.layout === 'half' ? 'col-span-1' : 'col-span-2'
         "
         :style="{
           display: settings.categoryName.isAside ? 'flex' : 'initial',
@@ -220,11 +210,7 @@ const bodyCategories = computed(() =>
       <section
         v-for="(category, categoryIndex) in bodyCategories"
         :key="categoryIndex"
-        :class="
-          category.layout === 'half' && !isLayoutFixed
-            ? 'col-span-1'
-            : 'col-span-2'
-        "
+        :class="category.layout === 'half' ? 'col-span-1' : 'col-span-2'"
         :style="{
           display: settings.categoryName.isAside ? 'flex' : 'initial',
           ...getNodeStyle(settings.category, 'block'),

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, type Component } from "vue";
-
+import { type Component } from "vue";
 import { storeToRefs } from "pinia";
 import {
   AcademicCapIcon,
@@ -21,11 +20,8 @@ import {
 } from "@heroicons/vue/16/solid";
 import type { Category } from "@/types";
 import { useEditorStore } from "@/stores/editor";
-import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { discouragedLayoutTemplates, fixedLayoutTemplates } from "@/globals";
 import { getEntryHeading } from "@/utils/editor";
-import { capitalize } from "@/utils/string";
 import EmailEditor from "@/fragments/EmailEditor.vue";
 import LetterEditor from "@/fragments/LetterEditor.vue";
 import ProfileEditor from "@/fragments/ProfileEditor.vue";
@@ -38,26 +34,7 @@ import PreviewZoom from "./PreviewZoom.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 
-const { template } = storeToRefs(useProfileStore());
-
 const { categories } = storeToRefs(useResumeStore());
-
-const isLayoutDisabled = computed(() =>
-  fixedLayoutTemplates.includes(template.value),
-);
-
-const isLayoutDiscouraged = computed(() => {
-  const discouragedLayouts = discouragedLayoutTemplates[template.value];
-  return categories.value.some((category) =>
-    discouragedLayouts.includes(category.layout),
-  );
-});
-
-const discouragedLayoutText = computed(() => {
-  const isPlural = discouragedLayoutTemplates[template.value].length > 1;
-  const layouts = discouragedLayoutTemplates[template.value].join(" and ");
-  return `${capitalize(layouts)} ${isPlural ? "layouts are" : "layout is"} discouraged for this template.`;
-});
 
 function getCategoryIcon(categoryType: Category["type"]) {
   const iconMapper: { [key in Category["type"]]: Component } = {
@@ -159,22 +136,6 @@ function getCategoryIcon(categoryType: Category["type"]) {
         class="relative h-[calc(100vh-100px)] overflow-y-auto flex text-white flex-1"
       >
         <section class="w-full overflow-y-auto scroll-smooth">
-          <header class="sticky z-10 top-0">
-            <template v-if="documentType === 'resume'">
-              <p
-                v-if="isLayoutDisabled"
-                class="text-center px-10 py-2 bg-amber-500"
-              >
-                Category layouts are fixed for this template.
-              </p>
-              <p
-                v-if="isLayoutDiscouraged"
-                class="text-center px-10 py-2 bg-amber-500"
-              >
-                {{ discouragedLayoutText }}
-              </p>
-            </template>
-          </header>
           <div
             class="flex flex-col gap-4 lg:gap-8 p-4 lg:p-8 max-w-[860px] mx-auto"
           >
