@@ -38,11 +38,11 @@ const settings = computed(() => {
       :key="tagIndex"
       :style="{
         ...getNodeStyle(settings.entryTag, 'text'),
-        backgroundColor: settings.entryTag.backgroundColor,
-        borderTop: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[0]}px`,
-        borderRight: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[1]}px`,
-        borderBottom: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[2]}px`,
-        borderLeft: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[3]}px`,
+        backgroundColor: `#${settings.entryTag.backgroundColor}`,
+        borderTop: `${settings.entryTag.borderStyle} #${settings.entryTag.borderColor} ${settings.entryTag.border[0]}px`,
+        borderRight: `${settings.entryTag.borderStyle} #${settings.entryTag.borderColor} ${settings.entryTag.border[1]}px`,
+        borderBottom: `${settings.entryTag.borderStyle} #${settings.entryTag.borderColor} ${settings.entryTag.border[2]}px`,
+        borderLeft: `${settings.entryTag.borderStyle} #${settings.entryTag.borderColor} ${settings.entryTag.border[3]}px`,
         borderRadius: `${settings.entryTag.borderRadius}px`,
         paddingTop: `${settings.entryTag.padding[0]}px`,
         paddingRight: `${settings.entryTag.padding[1]}px`,

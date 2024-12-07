@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import ConfirmDialog from "primevue/confirmdialog";
 // import { storeToRefs } from "pinia";
 // import { useEditorStore } from "@/stores/editor";
 import Editor from "@/components/Editor.vue";
@@ -17,6 +18,7 @@ const title = ref("Nice resume");
     <Meta name="description" :content="title" />
   </Head>
   <NuxtLayout name="editor">
+    <ConfirmDialog />
     <Editor />
     <template v-slot:preview>
       <Preview class="hidden xl:block" />

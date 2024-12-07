@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline";
-import { useProfileStore } from "@/stores/profile";
+import Button from "primevue/button";
+import InputGroup from "primevue/inputgroup";
+import InputGroupAddon from "primevue/inputgroupaddon";
+import InputText from "primevue/inputtext";
+import { useConfirm } from "primevue/useconfirm";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import {
   focusNextInput,
+  getCategoryIconClass,
   getEntryHeading,
   getEntryTitleLabel,
   getExperienceOrganizationLabel,
@@ -18,16 +22,13 @@ import {
   categoryLayouts,
   experienceTypes,
 } from "@/globals";
-import useDialog from "~/composables/use-dialog";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
-const { isThemeCustomized } = storeToRefs(useProfileStore());
-
 const { categories } = storeToRefs(useResumeStore());
 
-const { dialog, openDialog, closeDialog } = useDialog();
+const confirm = useConfirm();
 
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
@@ -41,6 +42,7 @@ async function addCategory() {
     name: defaultCategoryName,
     entries: [],
     layout: "full",
+    isLocked: false,
     isVisible: true,
   };
 
@@ -94,9 +96,46 @@ function addTag(entry: Entry, entryIndex: number) {
   focusNextInput(`#tagList${entryIndex} input`);
 }
 
-function askBeforeRemove(categoryIndex: number) {
+function askBeforeRemoveCategory(categoryIndex: number) {
   indexToRemove.value = categoryIndex;
-  openDialog();
+  confirm.require({
+    message: `Confirm category ${categories.value[indexToRemove.value]?.name} deletion?`,
+    header: "Confirmation",
+    rejectProps: {
+      label: "No",
+      severity: "secondary",
+      outlined: true,
+    },
+    acceptProps: {
+      label: "Yes, delete",
+      severity: "danger",
+    },
+    accept: () => {
+      remove(categories.value, indexToRemove.value);
+    },
+    reject: () => {},
+  });
+}
+
+function askBeforeRemoveCategoryEntry(category: Category, entryIndex: number) {
+  indexToRemove.value = entryIndex;
+  confirm.require({
+    message: `Confirm entry ${category.entries[indexToRemove.value]?.title} deletion?`,
+    header: "Confirmation",
+    rejectProps: {
+      label: "No",
+      severity: "secondary",
+      outlined: true,
+    },
+    acceptProps: {
+      label: "Yes, delete",
+      severity: "danger",
+    },
+    accept: () => {
+      remove(category.entries, indexToRemove.value);
+    },
+    reject: () => {},
+  });
 }
 
 function changeCategoryType(category: Category, value: Category["type"]) {
@@ -105,10 +144,6 @@ function changeCategoryType(category: Category, value: Category["type"]) {
     ? "asset"
     : "experience";
   category.entries = []; // Prevent inconsistency between previous and new entry types
-}
-
-function changeCategoryLayout(category: Category, value: Category["layout"]) {
-  category.layout = value;
 }
 
 async function moveCategory(
@@ -122,9 +157,8 @@ async function moveCategory(
   document.getElementById(categoryName)?.scrollIntoView();
 }
 
-function removeCategory() {
-  remove(categories.value, indexToRemove.value);
-  closeDialog();
+function toggleCategoryLock(category: Category) {
+  category.isLocked = !category.isLocked;
 }
 
 function toggleCategoryVisibility(category: Category) {
@@ -133,72 +167,42 @@ function toggleCategoryVisibility(category: Category) {
 </script>
 
 <template>
-  <!-- TODO close top-right -->
-  <dialog ref="dialog" class="dialog max-w-screen-sm">
-    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
-      Confirm category {{ categories[indexToRemove]?.name }} deletion?
-    </p>
-    <div class="flex flex-col gap-4">
-      <button class="button bg-white textGradient" @click="closeDialog">
-        No
-      </button>
-      <button class="button bg-red-500 text-white" @click="removeCategory">
-        Yes, delete
-      </button>
-    </div>
-  </dialog>
   <EditorCategory
     v-for="(category, categoryIndex) in categories"
     :key="categoryIndex"
     :id="category.name"
-    :is-customizing="isThemeCustomized"
-    :is-hidden="!category.isVisible"
+    :hidden="!category.isVisible"
+    :locked="category.isLocked"
   >
     <template v-slot:header>
-      <template v-if="category.isVisible">
+      <template v-if="category.isLocked">
+        <span>
+          <i class="pi" :class="getCategoryIconClass(category.type)" />
+          {{ category.name }}
+        </span>
+      </template>
+      <template v-else-if="category.isVisible">
         <div class="flex items-baseline gap-8">
           <Field
             id="categoryName"
-            label="Category name"
+            :label="$t('categoryName')"
             v-model="category.name"
           />
-          <label for="type">
-            <span class="label">Type</span>
-            <select
-              id="type"
-              :value="category.type"
-              @change="
-                changeCategoryType(
-                  category,
-                  ($event.target as HTMLInputElement).value as Category['type'],
-                )
-              "
-              class="select block text-blue-500 capitalize px-2 py-1 pl-0"
-            >
-              <option v-for="item in types" :key="item" class="option">
-                {{ item }}
-              </option>
-            </select>
-          </label>
-          <label for="layout">
-            <span class="label">Layout</span>
-            <select
-              id="layout"
-              :value="category.layout"
-              @change="
-                changeCategoryLayout(
-                  category,
-                  ($event.target as HTMLInputElement)
-                    .value as Category['layout'],
-                )
-              "
-              class="select block text-blue-500 capitalize px-2 py-1 pl-0 disabled:cursor-not-allowed"
-            >
-              <option v-for="item in layouts" :key="item" class="option">
-                {{ item }}
-              </option>
-            </select>
-          </label>
+          <Field
+            type="select"
+            :label="$t('type')"
+            :id="`${categoryIndex}type`"
+            :default-value="category.type"
+            @value-change="changeCategoryType(category, $event)"
+            :options="types"
+          />
+          <Field
+            type="select"
+            :label="$t('layout')"
+            :id="`${categoryIndex}layout`"
+            v-model="category.layout"
+            :options="layouts"
+          />
         </div>
         <ListActions
           :index="categoryIndex"
@@ -210,154 +214,205 @@ function toggleCategoryVisibility(category: Category) {
           @moveDown="
             moveCategory(moveDown, categories, categoryIndex, category.name)
           "
-          @remove="askBeforeRemove(categoryIndex)"
+          @remove="askBeforeRemoveCategory(categoryIndex)"
         />
       </template>
       <template v-else>
-        <span class="text-white">{{ category.name }}</span>
+        <span>{{ category.name }}</span>
       </template>
-      <button
-        id="toggleVisibility"
-        title="Toggle category visibility"
-        :class="`${category.isVisible ? 'text-pink-500' : 'text-white'} size-7 rounded-full p-1 hover:bg-blue-700 hover:bg-opacity-5`"
+    </template>
+    <template v-slot:icons>
+      <Button
+        :icon="category.isLocked ? 'pi pi-lock-open' : 'pi pi-lock'"
+        :aria-label="
+          category.isLocked
+            ? 'Hide category'
+            : 'Show category TODO localize labels'
+        "
+        variant="text"
+        :class="category.isVisible ? '' : '!text-white'"
+        @click="toggleCategoryLock(category)"
+      />
+      <Button
+        v-if="!category.isLocked"
+        :icon="category.isVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
+        :aria-label="
+          category.isVisible
+            ? 'Hide category'
+            : 'Show category TODO localize labels'
+        "
+        variant="text"
+        :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryVisibility(category)"
-      >
-        <EyeSlashIcon v-if="category.isVisible" class="size-full" />
-        <EyeIcon v-else class="size-full" />
-      </button>
+      />
     </template>
     <ul v-if="category.entries.length" class="flex flex-col gap-10 mb-4">
-      <li
-        v-for="(entry, entryIndex) in category.entries"
-        :key="entryIndex"
-        class="sectionSeparator border-white/10"
-      >
-        <header class="flex items-center justify-between">
-          <div
-            :id="getEntryHeading(entry, entryIndex)"
-            class="sectionHeading scroll-mt-10"
-          >
-            {{ getEntryHeading(entry, entryIndex) }}
+      <li v-for="(entry, entryIndex) in category.entries" :key="entryIndex">
+        <Fieldset :legend="getEntryHeading(entry, entryIndex)" toggleable>
+          <header class="flex items-center justify-between">
+            <div
+              :id="getEntryHeading(entry, entryIndex)"
+              class="sectionHeading scroll-mt-10"
+            >
+              {{ getEntryHeading(entry, entryIndex) }}
+            </div>
+            <ListActions
+              class="mb-2"
+              :index="entryIndex"
+              :list-length="category.entries.length"
+              @moveUp="moveUp(category.entries, entryIndex)"
+              @moveDown="moveDown(category.entries, entryIndex)"
+              @remove="askBeforeRemoveCategoryEntry(category, entryIndex)"
+            />
+          </header>
+          <div class="flex flex-col gap-5">
+            <Field
+              id="entryTitle"
+              :label="$t(getEntryTitleLabel(entry.type))"
+              transparent
+              v-model="entry.title"
+            />
+            <template v-if="entry.nature === 'experience'">
+              <Field
+                id="entryOrganization"
+                :label="$t(getExperienceOrganizationLabel(entry.type))"
+                transparent
+                v-model="entry.organization"
+              />
+              <Field
+                id="entryLocation"
+                :label="$t('location')"
+                transparent
+                v-model="entry.location"
+              />
+              <Field
+                id="entryPeriod"
+                :label="$t('period')"
+                transparent
+                v-model="entry.period"
+              />
+              <Field
+                id="entrySummary"
+                :label="$t('summary')"
+                transparent
+                type="textarea"
+                v-model="entry.summary"
+              />
+            </template>
+            <label class="flex flex-col gap-1" for="highlights">
+              <span class="label">{{ capitalize($t("highlights")) }}</span>
+              <ul
+                v-if="entry.highlights.length"
+                :id="`highlightList${entryIndex}`"
+                class="inputList"
+              >
+                <li
+                  v-for="(_highlight, highlightIndex) in entry.highlights"
+                  :key="highlightIndex"
+                  class="inputListItem"
+                >
+                  <InputGroup>
+                    <InputText
+                      class="!text-sm"
+                      v-model="entry.highlights[highlightIndex]"
+                      @keydown.enter.prevent="addHighlight(entry, entryIndex)"
+                    />
+                    <InputGroupAddon
+                      v-if="
+                        entry.highlights.length > 1 &&
+                        highlightIndex < entry.highlights.length - 1
+                      "
+                    >
+                      <Button
+                        icon="pi pi-arrow-down"
+                        severity="secondary"
+                        pt:icon:class="text-xs"
+                        @click="moveDown(entry.highlights, highlightIndex)"
+                      />
+                    </InputGroupAddon>
+                    <InputGroupAddon
+                      v-if="entry.highlights.length > 1 && highlightIndex > 0"
+                    >
+                      <Button
+                        icon="pi pi-arrow-up"
+                        severity="secondary"
+                        pt:icon:class="text-xs"
+                        @click="moveUp(entry.highlights, highlightIndex)"
+                      />
+                    </InputGroupAddon>
+                    <InputGroupAddon>
+                      <Button
+                        icon="pi pi-times"
+                        severity="danger"
+                        pt:icon:class="text-xs"
+                        @click="remove(entry.highlights, highlightIndex)"
+                      />
+                    </InputGroupAddon>
+                  </InputGroup>
+                </li>
+              </ul>
+              <Button
+                icon="pi pi-plus"
+                label="Add highlight"
+                severity="secondary"
+                variant="outlined"
+                @click="addHighlight(entry, entryIndex)"
+              />
+            </label>
+            <label class="flex flex-col gap-1" for="tags">
+              <span class="label">{{ capitalize($t("tags")) }}</span>
+              <ul
+                v-if="entry.tags.length"
+                :id="`tagList${entryIndex}`"
+                class="inputList"
+              >
+                <li
+                  v-for="(_tag, tagIndex) in entry.tags"
+                  :key="tagIndex"
+                  class="inputListItem"
+                >
+                  <InputText
+                    class="!text-sm w-[70%]"
+                    size="small"
+                    v-model="entry.tags[tagIndex]"
+                    @keydown.enter.prevent="addTag(entry, entryIndex)"
+                  />
+                  <ListActions
+                    :index="tagIndex"
+                    :list-length="entry.tags.length"
+                    @moveUp="moveUp(entry.tags, tagIndex)"
+                    @moveDown="moveDown(entry.tags, tagIndex)"
+                    @remove="remove(entry.tags, tagIndex)"
+                  />
+                </li>
+              </ul>
+              <button
+                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+                @click="addTag(entry, entryIndex)"
+              >
+                Add tag
+              </button>
+              <Button
+                icon="pi pi-plus"
+                label="Add tag"
+                severity="secondary"
+                variant="outlined"
+                @click="addTag(entry, entryIndex)"
+              />
+            </label>
           </div>
-          <ListActions
-            class="mb-2"
-            :index="entryIndex"
-            :list-length="category.entries.length"
-            @moveUp="moveUp(category.entries, entryIndex)"
-            @moveDown="moveDown(category.entries, entryIndex)"
-            @remove="remove(category.entries, entryIndex)"
-          />
-        </header>
-        <div class="flex flex-col gap-5">
-          <Field
-            id="entryTitle"
-            :label="getEntryTitleLabel(entry.type)"
-            transparent
-            v-model="entry.title"
-          />
-          <template v-if="entry.nature === 'experience'">
-            <Field
-              id="entryOrganization"
-              :label="getExperienceOrganizationLabel(entry.type)"
-              transparent
-              v-model="entry.organization"
-            />
-            <Field
-              id="entryLocation"
-              label="Location"
-              transparent
-              v-model="entry.location"
-            />
-            <Field
-              id="entryPeriod"
-              label="Period"
-              transparent
-              v-model="entry.period"
-            />
-            <Field
-              id="entrySummary"
-              label="Description"
-              transparent
-              type="textarea"
-              v-model="entry.summary"
-            />
-          </template>
-          <label class="flex flex-col" for="highlights">
-            <span class="label opacity-60">Highlights</span>
-            <ul
-              v-if="entry.highlights.length"
-              :id="`highlightList${entryIndex}`"
-              class="inputList"
-            >
-              <li
-                v-for="(_highlight, highlightIndex) in entry.highlights"
-                :key="highlightIndex"
-                class="inputListItem"
-              >
-                <input
-                  class="input w-[70%]"
-                  v-model="entry.highlights[highlightIndex]"
-                  @keydown.enter.prevent="addHighlight(entry, entryIndex)"
-                />
-                <ListActions
-                  class="mb-2"
-                  :index="highlightIndex"
-                  :list-length="entry.highlights.length"
-                  @moveUp="moveUp(entry.highlights, highlightIndex)"
-                  @moveDown="moveDown(entry.highlights, highlightIndex)"
-                  @remove="remove(entry.highlights, highlightIndex)"
-                />
-              </li>
-            </ul>
-            <button
-              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-              @click="addHighlight(entry, entryIndex)"
-            >
-              Add highlight
-            </button>
-          </label>
-          <label class="flex flex-col" for="tags">
-            <span class="label opacity-60">Tags</span>
-            <ul
-              v-if="entry.tags.length"
-              :id="`tagList${entryIndex}`"
-              class="inputList"
-            >
-              <li
-                v-for="(_tag, tagIndex) in entry.tags"
-                :key="tagIndex"
-                class="inputListItem"
-              >
-                <input
-                  class="input w-[70%]"
-                  v-model="entry.tags[tagIndex]"
-                  @keydown.enter.prevent="addTag(entry, entryIndex)"
-                />
-                <ListActions
-                  class="mb-2"
-                  :index="tagIndex"
-                  :list-length="entry.tags.length"
-                  @moveUp="moveUp(entry.tags, tagIndex)"
-                  @moveDown="moveDown(entry.tags, tagIndex)"
-                  @remove="remove(entry.tags, tagIndex)"
-                />
-              </li>
-            </ul>
-            <button
-              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-              @click="addTag(entry, entryIndex)"
-            >
-              Add tag
-            </button>
-          </label>
-        </div>
+        </Fieldset>
       </li>
     </ul>
-    <footer class="flex justify-center">
-      <button class="button bg-white" @click="addEntry(category)">
-        <span class="textGradient">Add entry</span>
-      </button>
-    </footer>
+    <template v-slot:footer>
+      <footer class="flex justify-center">
+        <Button
+          icon="pi pi-plus"
+          label="Add entry"
+          @click="addEntry(category)"
+        />
+      </footer>
+    </template>
   </EditorCategory>
 
   <footer class="flex justify-center">

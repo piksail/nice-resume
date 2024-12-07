@@ -38,7 +38,7 @@ const settings = useDocumentSettings();
           ? 0
           : `${settings.contactDetails.gap}px`,
       listStyleType: getListMarker(settings.contactDetails.listMarker),
-      color: settings.contactDetails.listMarkerColor,
+      color: `#${settings.contactDetails.listMarkerColor}`,
       ...getNodeStyle(settings.contactDetails, 'block'),
     }"
   >

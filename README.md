@@ -41,9 +41,10 @@ So far, tools we believe are best out there are :
 
 ### Resources
 
+- [i18n](https://www.i18next.com/)
 - [Nuxt](https://nuxt.com/)
 - [Vue](https://vuejs.org/)
-- [Headless UI](https://headlessui.com/v1/vue)
+- [PrimeVue](https://primevue.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Heroicons](https://heroicons.com/)
 - [Simple Icons](https://simpleicons.org/) (for brand icons) through [Vue3 Simple Icons](https://vue3-simple-icons.wyatt-herkamp.dev/)

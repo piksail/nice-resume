@@ -9,13 +9,12 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
 
 <template>
   <EditorCategory id="Signature">
-    <template v-slot:header>Signature</template>
+    <template v-slot:header>{{ capitalize($t("signature")) }}</template>
     <div class="flex flex-col gap-5">
       <Field
         id="isDetailClickable"
-        label="Make links clickable"
+        label="Make links clickable todo i18n"
         type="toggle"
-        transparent
         v-model="isDetailClickable"
       />
     </div>

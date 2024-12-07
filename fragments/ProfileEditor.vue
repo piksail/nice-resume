@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
+import Message from "primevue/message";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -27,13 +28,6 @@ function addContactDetail() {
   focusNextInput("#contactDetailList input");
 }
 
-function changeContactDetailIcon(
-  contactDetail: ContactDetail,
-  value: ContactDetail["icon"],
-) {
-  contactDetail.icon = value;
-}
-
 function changeContactDetaiType(
   contactDetail: ContactDetail,
   value: ContactDetail["type"],
@@ -45,36 +39,34 @@ function changeContactDetaiType(
 
 <template>
   <EditorCategory id="Profile">
-    <template v-slot:header>Profile</template>
+    <template v-slot:header>{{ capitalize($t("profile")) }}</template>
     <div class="flex flex-col gap-5">
-      <Field id="profileName" label="Name" transparent v-model="name" />
-      <Field id="profileTitle" label="Title" transparent v-model="title" />
+      <Field id="profileName" :label="$t('name')" v-model="name" />
+      <Field id="profileTitle" :label="$t('title')" v-model="title" />
       <Field
-        type="toggle"
+        type="checkbox"
         label="Consider about and details a dedicated category*"
         v-model="isHeaderSimple"
       />
       <template v-if="isHeaderSimple">
-        <p>
+        <Message size="small">
           *When on, about and details are styled through the Entry style editor.
-        </p>
+        </Message>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
         <Field
           id="detailsCategoryName"
-          label="Category name"
-          transparent
+          :label="$t('categoryName')"
           v-model="simpleHeaderCategoryName"
         />
       </template>
       <Field
         id="detailsAbout"
-        label="About"
+        :label="$t('about')"
         type="textarea"
-        transparent
         v-model="about"
       />
       <label class="flex flex-col" for="contactDetails">
-        <span class="label opacity-60">Contact details</span>
+        <span class="label">{{ capitalize($t("contactDetails")) }}</span>
         <ul
           v-if="contactDetails.length"
           id="contactDetailList"
@@ -86,65 +78,29 @@ function changeContactDetaiType(
             class="inputListItem"
           >
             <div class="flex flex-col md:flex-row w-[70%] gap-3 md:items-end">
-              <input
-                class="input flex-1"
+              <Field
                 v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"
               />
-              <label for="documentType">
-                <span class="label opacity-60">Type</span>
-                <select
-                  id="detailType"
-                  :value="detail.type"
-                  @change="
-                    changeContactDetaiType(
-                      detail,
-                      ($event.target as HTMLInputElement)
-                        .value as ContactDetail['type'],
-                    )
-                  "
-                  class="select block capitalize text-white"
-                >
-                  <option class="option">personal</option>
-                  <option class="option">social</option>
-                </select>
-              </label>
-              <label for="detailIcon">
-                <span class="label opacity-60">Icon</span>
-                <select
-                  id="detailIcon"
-                  :value="detail.icon"
-                  @change="
-                    changeContactDetailIcon(
-                      detail,
-                      ($event.target as HTMLInputElement)
-                        .value as ContactDetail['icon'],
-                    )
-                  "
-                  class="select block capitalize bg-transparent text-white"
-                >
-                  <option class="option" value="">None</option>
-                  <option class="option">default</option>
-                  <template v-if="detail.type === 'social'">
-                    <option
-                      v-for="icon in socialIcons"
-                      :key="`${icon}`"
-                      class="option"
-                    >
-                      {{ icon }}
-                    </option>
-                  </template>
-                  <template v-else>
-                    <option
-                      v-for="icon in contactIcons"
-                      :key="`${icon}`"
-                      class="option"
-                    >
-                      {{ icon }}
-                    </option>
-                  </template>
-                </select>
-              </label>
+              <Field
+                id="detailType"
+                :label="$t('type')"
+                type="selectbutton"
+                :default-value="detail.type"
+                :options="['personal', 'social']"
+                @value-change="changeContactDetaiType(detail, $event)"
+              />
+              <Field
+                id="detailIcon"
+                :label="$t('icon')"
+                type="select"
+                :options="
+                  detail.type === 'social'
+                    ? [undefined, 'default', ...socialIcons]
+                    : [undefined, 'default', ...contactIcons]
+                "
+                v-model="detail.icon"
+              />
             </div>
             <ListActions
               class="mb-2"
