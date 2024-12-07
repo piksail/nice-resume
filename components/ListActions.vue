@@ -1,45 +1,42 @@
 <script setup lang="ts">
-import {
-  ArrowDownCircleIcon,
-  ArrowUpCircleIcon,
-  XCircleIcon,
-} from "@heroicons/vue/24/outline";
+// TODO capitalize
 
 const { index, isHeader, listLength } = defineProps<{
   index: number;
   isHeader?: boolean;
   listLength: number;
 }>();
+
 defineEmits(["moveDown", "moveUp", "remove"]);
 </script>
 
 <template>
   <div class="flex justify-end gap-2">
-    <button
-      title="Move up"
+    <Button
       v-if="listLength > 1 && index > 0"
-      class="size-7 rounded-full"
-      :class="isHeader ? 'text-blue-500' : 'text-white'"
+      icon="pi pi-arrow-up"
+      :aria-label="$t('moveUp')"
+      :variant="isHeader ? 'text' : 'text'"
+      rounded
+      :severity="isHeader ? 'primary' : undefined"
       @click="$emit('moveUp')"
-    >
-      <ArrowUpCircleIcon class="size-full" />
-    </button>
-    <button
-      title="Move down"
+    />
+    <Button
       v-if="listLength > 1 && index < listLength - 1"
-      class="size-7 rounded-full"
-      :class="isHeader ? 'text-blue-500' : 'text-white'"
+      icon="pi pi-arrow-down"
+      :aria-label="$t('moveDown')"
+      :variant="isHeader ? 'text' : 'text'"
+      rounded
+      :severity="isHeader ? 'primary' : undefined"
       @click="$emit('moveDown')"
-    >
-      <ArrowDownCircleIcon class="size-full" />
-    </button>
-    <button
-      title="Remove"
-      class="size-7 rounded-full"
-      :class="isHeader ? 'text-pink-500' : 'bg-red-500 text-white'"
+    />
+    <Button
+      icon="pi pi-times"
+      :aria-label="$t('remove')"
+      :variant="isHeader ? 'text' : 'text'"
+      rounded
+      severity="danger"
       @click="$emit('remove')"
-    >
-      <XCircleIcon class="size-full" />
-    </button>
+    />
   </div>
 </template>

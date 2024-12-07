@@ -1,5 +1,5 @@
 import { nextTick } from "vue";
-import type { Asset, Experience, ListMarker } from "@/types";
+import type { Asset, Category, Experience, ListMarker } from "@/types";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
@@ -52,6 +52,7 @@ export function generateStores(
         getRandomExperience("work" as Experience["type"]),
       ],
       layout: "full",
+      isLocked: false,
       isVisible: true,
     },
     {
@@ -63,6 +64,7 @@ export function generateStores(
         getRandomExperience("education" as Experience["type"]),
       ],
       layout: "full",
+      isLocked: false,
       isVisible: true,
     },
     {
@@ -71,6 +73,7 @@ export function generateStores(
       name: "Certificates",
       entries: [getRandomExperience("certificate" as Experience["type"])],
       layout: "half",
+      isLocked: false,
       isVisible: true,
     },
     {
@@ -82,6 +85,7 @@ export function generateStores(
         getRandomExperience("publication" as Experience["type"]),
       ],
       layout: "half",
+      isLocked: false,
       isVisible: true,
     },
     {
@@ -90,6 +94,7 @@ export function generateStores(
       name: "Awards",
       entries: [getRandomExperience("award" as Experience["type"])],
       layout: "half",
+      isLocked: false,
       isVisible: true,
     },
     {
@@ -102,6 +107,7 @@ export function generateStores(
         getRandomAsset("skill" as Asset["type"]),
       ],
       layout: "half",
+      isLocked: false,
       isVisible: true,
     },
     {
@@ -114,6 +120,7 @@ export function generateStores(
         getRandomAsset("language" as Asset["type"]),
       ],
       layout: "half",
+      isLocked: false,
       isVisible: true,
     },
   ];
@@ -141,6 +148,23 @@ export function generateStores(
   ];
 
   // Email TODO
+  // TODO refactor les overrides de primevue en passthrough : https://primevue.org/passthrough/
+}
+
+export function getCategoryIconClass(categoryType: Category["type"]) {
+  const iconMapper: { [key in Category["type"]]: string } = {
+    award: "pi-trophy",
+    certificate: "pi-certified",
+    education: "pi-graduation-cap",
+    interest: "pi-heart",
+    language: "pi-language",
+    project: "pi-box",
+    publication: "pi-book",
+    skill: "pi-wrench",
+    voluntary: "pi-face-smile",
+    work: "pi-briefcase",
+  };
+  return iconMapper[categoryType];
 }
 
 /**
@@ -149,7 +173,7 @@ export function generateStores(
 export function getEntryHeading(entry: Asset | Experience, entryIndex: number) {
   if (entry.nature === "experience" && entry.title) {
     return entry.organization
-      ? `${entry.title} at ${entry.organization}`
+      ? `${entry.title} x ${entry.organization}`
       : entry.title;
   }
   if (entry.nature === "asset") {
@@ -165,15 +189,15 @@ export function getEntryHeading(entry: Asset | Experience, entryIndex: number) {
 export function getEntryTitleLabel(type: Asset["type"] | Experience["type"]) {
   switch (type) {
     case "education":
-      return "Diploma";
+      return "diploma";
     case "project":
     case "voluntary":
     case "work":
-      return "Position";
+      return "position";
     case "language":
-      return "Language";
+      return "language";
     default:
-      return "Title";
+      return "title";
   }
 }
 
@@ -183,16 +207,16 @@ export function getEntryTitleLabel(type: Asset["type"] | Experience["type"]) {
 export function getExperienceOrganizationLabel(type: Experience["type"]) {
   switch (type) {
     case "work":
-      return "Company";
+      return "company";
     case "award":
     case "education":
     case "certificate":
-      return "Institution";
+      return "institution";
     case "publication":
-      return "Publisher";
+      return "publisher";
     case "project":
     case "voluntary":
-      return "Organization";
+      return "organization";
   }
 }
 

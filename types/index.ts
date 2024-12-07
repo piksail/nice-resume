@@ -329,6 +329,7 @@ export interface Category {
   name: string;
   entries: Array<Experience | Asset>;
   layout: "aside" | "full" | "half";
+  isLocked: boolean; // Disable data edition
   isVisible: boolean; // Preserve data but exclude it from the resume
 }
 

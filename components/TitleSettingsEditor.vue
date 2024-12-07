@@ -14,19 +14,14 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 <template>
   <div class="flex flex-col gap-5 flex-wrap">
     <div class="flex gap-5 flex-wrap">
-      <label class="flex flex-col" :for="`${propertyName}Align`">
-        <span class="label">Alignment</span>
-        <select
-          :id="`${propertyName}Align`"
-          class="select block"
-          :disabled="!isThemeCustomized"
-          v-model="settings.textAlign"
-        >
-          <option class="option" value="left">left</option>
-          <option class="option" value="center">center</option>
-          <option class="option" value="right">right</option>
-        </select>
-      </label>
+      <Field
+        :id="`${propertyName}Align`"
+        type="select"
+        :label="$t('alignment')"
+        v-model="settings.textAlign"
+        :options="['left', 'center', 'right']"
+        :disabled="!isThemeCustomized"
+      />
     </div>
   </div>
 </template>

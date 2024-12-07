@@ -1,50 +1,57 @@
 <script setup lang="ts">
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import Checkbox from "primevue/checkbox";
+import ColorPicker from "primevue/colorpicker";
+import InputNumber from "primevue/inputnumber";
+import InputText from "primevue/inputtext";
+import Select from "primevue/select";
+import SelectButton from "primevue/selectbutton";
+import Textarea from "primevue/textarea";
+import ToggleButton from "primevue/togglebutton";
+import ToggleSwitch from "primevue/toggleswitch";
+import { capitalize } from "@/utils/string";
 
-const { disabled, label, id, step, transparent, type } = defineProps<{
+const { defaultValue, disabled, label, id, step, options, type } = defineProps<{
+  defaultValue?: string | null | undefined;
   disabled?: boolean;
   id?: string;
-  label: string;
-  step?: string;
+  label?: string;
+  options?: (string | number | null | undefined)[];
+  step?: number;
   subLabel?: string;
-  transparent?: boolean;
   type?:
     | "checkbox"
     | "checkbutton"
     | "color"
     | "number"
+    | "select"
+    | "selectbutton"
     | "textarea"
-    | "toggle";
+    | "toggle"
+    | "togglebutton";
 }>();
 
 const model = defineModel();
+const emit = defineEmits(["value-change"]);
 </script>
 
 <template>
-  <SwitchGroup v-if="type === 'toggle'">
-    <div class="flex items-center">
-      <Switch
-        v-model="model as boolean"
-        :class="model ? 'bg-white shadow' : 'bg-black bg-opacity-10'"
-        class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
-      >
-        <span
-          :class="
-            model
-              ? 'bg-gradient-to-br from-blue-700 to-pink-500 translate-x-6'
-              : 'bg-white translate-x-1'
-          "
-          class="inline-block h-4 w-4 transform rounded-full transition-transform"
-        />
-      </Switch>
-      <SwitchLabel
-        class="label cursor-pointer ml-2"
-        :class="transparent ? 'opacity-60' : 'opacity-100'"
-      >
-        {{ label }}
-      </SwitchLabel>
-    </div>
-  </SwitchGroup>
+  <div v-if="type === 'toggle'" class="flex items-center">
+    <ToggleSwitch v-model="model as boolean" size="small" />
+    <span class="cursor-pointer ml-2">
+      {{ capitalize(label) }}
+    </span>
+  </div>
+  <div v-else-if="type === 'togglebutton'" class="flex items-center">
+    <ToggleButton
+      v-model="model as boolean"
+      onLabel="On"
+      offLabel="Off"
+      size="small"
+    />
+    <span class="label cursor-pointer ml-2">
+      {{ capitalize(label) }}
+    </span>
+  </div>
   <label
     v-else-if="type === 'checkbutton'"
     class="button bgGradient p-[2px] group"
@@ -54,19 +61,19 @@ const model = defineModel();
       class="button bg-white h-full w-full rounded-sm justify-start group-hover:bg-transparent"
       :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
     >
-      <input
-        :id="id"
-        class="input"
-        type="checkbox"
-        :disabled="disabled"
+      <Checkbox
         v-model="model"
+        :input-id="id"
+        :disabled="disabled"
+        binary
+        size="small"
       />
       <div class="flex flex-col ml-2">
         <span
           class="label text-blue-500 group-hover:text-white"
           :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
         >
-          {{ label }}
+          {{ capitalize(label) }}
         </span>
         <span class="text-sm group-hover:text-white">{{ subLabel }}</span>
       </div>
@@ -74,51 +81,95 @@ const model = defineModel();
   </label>
   <label
     v-else-if="type === 'checkbox'"
-    class="flex gap-1 items-center"
     :for="id"
+    class="flex gap-1 items-center"
   >
-    <input
-      :id="id"
-      class="input"
-      type="checkbox"
-      :disabled="disabled"
+    <Checkbox
       v-model="model"
+      :input-id="id"
+      binary
+      :disabled="disabled"
+      size="small"
     />
     <span
-      class="label"
-      :class="[
-        !disabled ? 'cursor-pointer' : 'cursor-auto',
-        ,
-        transparent ? 'text-white' : 'text-blue-500',
-      ]"
+      class="label text-sm text-primary"
+      :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
     >
-      {{ label }}
+      {{ capitalize(label) }}
     </span>
   </label>
-  <label v-else class="flex flex-col" :for="id">
-    <span class="label" :class="transparent ? 'opacity-60' : 'opacity-100'">
-      {{ label }}
+  <label
+    v-else-if="type === 'selectbutton'"
+    :for="id"
+    class="flex flex-col gap-1"
+  >
+    <span class="label">{{ capitalize(label) }}</span>
+    <SelectButton
+      :default-value="defaultValue"
+      v-model="model"
+      :options="options"
+      size="small"
+      @value-change="(...args) => emit('value-change', ...args)"
+    />
+  </label>
+  <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
+    <span class="label">
+      {{ capitalize(label) }}
     </span>
-    <textarea
-      v-if="type === 'textarea'"
+    <Select
+      :default-value="defaultValue ?? model"
+      v-model="model"
+      :options="options"
+      :input-id="id"
+      size="small"
+      @value-change="(...args) => emit('value-change', ...args)"
+    />
+  </label>
+  <label v-else :for="id" class="flex flex-col gap-1">
+    <span class="label">
+      {{ capitalize(label) }}
+    </span>
+    <ColorPicker
+      v-if="type === 'color'"
+      :input-id="id"
+      v-model="model"
+      size="small"
+    />
+    <Textarea
+      v-else-if="type === 'textarea'"
       :id="id"
-      class="input"
       :disabled="disabled"
       v-model="model as string"
+      size="small"
     />
-    <input
+    <InputNumber
+      v-else-if="type === 'number'"
+      v-model="model as number"
+      :input-id="id"
+      :disabled="disabled"
+      showButtons
+      buttonLayout="horizontal"
+      :step="step"
+      size="small"
+      inputClass="!w-12"
+      incrementButtonClass="!w-7"
+      decrementButtonClass="!w-7"
+    >
+      <!-- TODO style en passant par inputnumber dans nuxtconfig -->
+      <template #incrementicon>
+        <span class="pi pi-plus" />
+      </template>
+      <template #decrementicon>
+        <span class="pi pi-minus" />
+      </template>
+    </InputNumber>
+    <InputText
       v-else
       :id="id"
-      class="input"
-      :class="[
-        type === 'color' && !disabled ? 'cursor-pointer' : 'cursor-auto',
-        type === 'number' ? 'w-20' : 'w-auto',
-        transparent ? '' : 'bg-blue-700 bg-opacity-5 text-blue-500',
-      ]"
       :type="type || 'text'"
-      :step="step"
       :disabled="disabled"
-      v-model="model"
+      v-model="model as string"
+      size="small"
     />
   </label>
 </template>

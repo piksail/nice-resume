@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
-import { DocumentArrowDownIcon } from "@heroicons/vue/24/outline";
+import Button from "primevue/button";
+import Message from "primevue/message";
+import Toolbar from "primevue/toolbar";
 import type { Export } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
@@ -12,18 +14,18 @@ import { download, downloadHtml } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
 import Field from "@/components/Field.vue";
-import useDialog from "~/composables/use-dialog";
 import packageJson from "../package.json";
 import { generateStores } from "~/utils/editor";
+import StyleEditor from "~/fragments/StyleEditor.vue";
 
 console.info("Version: ", packageJson.version);
 
 // eslint-disable-next-line no-undef
-const { setLocale } = useI18n();
+const { availableLocales, locale, setLocale } = useI18n();
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
-const { documentType, zoomLevel } = storeToRefs(useEditorStore());
+const { documentType } = storeToRefs(useEditorStore());
 const { about, contactDetails, name, template, title } =
   storeToRefs(useProfileStore());
 const { categories } = storeToRefs(useResumeStore());
@@ -35,16 +37,8 @@ const resume = storeToRefs(resumeStore);
 const letterStore = useLetterStore();
 const letter = storeToRefs(letterStore);
 
-const {
-  dialog: exportDialog,
-  openDialog: openExportDialog,
-  closeDialog: closeExportDialog,
-} = useDialog();
-const {
-  dialog: importDialog,
-  openDialog: openImportDialog,
-  closeDialog: closeImportDialog,
-} = useDialog();
+const isImportDialogOpen = ref(false);
+const isExportDialogOpen = ref(false);
 
 const isImportError = ref(false);
 
@@ -52,6 +46,18 @@ const isExportError = ref(false);
 const isDocumentExportIncluded = ref(true);
 const isExportToJsonIncluded = ref(false);
 const isExportToJsonResumeIncluded = ref(false);
+
+// TODO enable below code and change moon/sun icon accordingly
+// const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+// if (darkThemeMq.matches) {
+//   // Theme set to dark.
+// } else {
+//   // Theme set to light.
+// }
+
+function toggleDarkMode() {
+  document.documentElement.classList.toggle("dark-mode");
+}
 
 function downloadPdf() {
   window.print();
@@ -80,7 +86,7 @@ function downloadSelection() {
       downloadPdf();
     }
   }
-  closeExportDialog();
+  isExportDialogOpen.value = false;
 }
 
 /**
@@ -121,7 +127,7 @@ function exportResumeToJsonResume() {
  */
 function generateRandomData() {
   generateStores(profileStore, resumeStore, letterStore);
-  closeImportDialog();
+  isExportDialogOpen.value = false;
 }
 
 /**
@@ -168,7 +174,7 @@ function importFromJsonResume(event: Event) {
         }
       });
 
-      closeImportDialog();
+      isExportDialogOpen.value = false;
     };
     fileReader.onerror = function () {
       isImportError.value = true;
@@ -221,7 +227,7 @@ function importSaveFile(event: Event) {
         }
       });
 
-      closeImportDialog();
+      isImportDialogOpen.value = false;
     };
     fileReader.onerror = function () {
       isImportError.value = true;
@@ -238,21 +244,29 @@ function resetStores() {
   profileStore.$reset();
   resumeStore.$reset();
   letterStore.$reset();
-  closeImportDialog();
+  isImportDialogOpen.value = false;
 }
 
 onMounted(() => {
-  openImportDialog();
+  isImportDialogOpen.value = true;
 });
 </script>
 
 <template>
-  <dialog ref="importDialog" class="dialog max-w-screen-sm">
+  <Dialog
+    v-model:visible="isImportDialogOpen"
+    modal
+    header="Hey!"
+    class="max-w-screen-sm"
+  >
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       How do you want to start editing?
     </p>
     <div class="flex flex-col gap-4">
-      <button class="button bgGradient p-[2px]" @click="closeImportDialog">
+      <button
+        class="button bgGradient p-[2px]"
+        @click="isImportDialogOpen = false"
+      >
         <div class="button bg-white h-full w-full rounded-sm">
           <span class="textGradient">Continue where I left off</span>
         </div>
@@ -299,18 +313,23 @@ onMounted(() => {
           />
         </div>
       </label>
-      <p class="text-blue-500 text-center">
+      <Message size="small" variant="simple" class="text-center">
         *Full compatibility will be soon available. In The meantime,
         double-check dates, highlights and tags after import, and be informed
         that profile image and references are not supported yet.
-      </p>
-      <p v-if="isImportError" class="text-red-500 text-center">
+      </Message>
+      <Message v-if="isImportError" severity="error" class="text-center">
         Error while importing data from local file.
-      </p>
+      </Message>
     </div>
-  </dialog>
-  <!-- TODO close top-right -->
-  <dialog ref="exportDialog" class="dialog max-w-screen-sm">
+  </Dialog>
+
+  <Dialog
+    v-model:visible="isExportDialogOpen"
+    modal
+    header="Hey!"
+    class="max-w-screen-sm"
+  >
     <p class="mb-8 text-center text-2xl font-bold text-pink-500">
       What do you want to download?
     </p>
@@ -350,82 +369,122 @@ onMounted(() => {
         Error exporting data.
       </p>
     </div>
-  </dialog>
-  <header
-    class="sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 bg-white text-pink-500 shadow-lg"
-  >
-    <NuxtLink :to="localePath('/')">
-      <h1
-        class="bgGradient textGradient text-center text-4xl"
-        :data-version="packageJson.version"
-      >
-        {{ $t("nice") }}
-        <br />
-        {{ $t("resume") }}
-      </h1>
-    </NuxtLink>
-    <div class="flex items-end gap-8 h-[60%]">
-      <button class="button bgGradient p-[2px]" @click="openImportDialog">
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">Start again</span>
-        </div>
-      </button>
+  </Dialog>
 
-      <label for="template">
-        <span class="label">Template</span>
-        <select
-          id="template"
-          v-model="template"
-          class="select block text-blue-500"
-        >
-          <option v-for="template in templates" :key="template" class="option">
-            {{ template }}
-          </option>
-        </select>
-      </label>
-
-      <label for="documentType">
-        <span class="label">Document</span>
-        <select
-          id="documentType"
-          v-model="documentType"
-          class="select block capitalize text-blue-500"
-        >
-          <option
-            v-for="documentType in documentTypes"
-            :key="documentType"
-            class="option"
+  <header class="sticky top-0 z-10 h-[80px]">
+    <Toolbar class="h-full !border-none shadow">
+      <template #start>
+        <NuxtLink :to="localePath('/')">
+          <h1
+            class="bgGradient textGradient text-center text-2xl leading-none"
+            :data-version="packageJson.version"
           >
-            {{ documentType }}
-          </option>
-        </select>
-      </label>
-      <label for="editorZoomLevel" class="hidden">
-        <span class="label">Zoom</span>
-        <div class="flex gap-2 items-center">
-          <input
-            id="editorZoomLevel"
-            class="w-36"
-            type="range"
-            min="50"
-            max="150"
-            v-model="zoomLevel"
-          />
-          <output class="w-[3rem] text-blue-500">{{ zoomLevel }}%</output>
-        </div>
-      </label>
+            Nice
+            <br />
+            Resume
+          </h1>
+        </NuxtLink>
+      </template>
 
-      <button class="button bgGradient text-white" @click="openExportDialog">
-        <DocumentArrowDownIcon class="h-6" />
-        Download
-      </button>
-    </div>
-    <div>
-      <div>
-        <button @click="setLocale('en')">English</button>
-        <br />
-        <button @click="setLocale('fr')">Français</button>
-      </div>
-    </div>
+      <template #center>
+        <div class="flex gap-2 items-end h-[60%]">
+          <Field
+            type="selectbutton"
+            :label="$t('document')"
+            v-model="documentType"
+            :options="documentTypes"
+          />
+
+          <Field
+            id="template"
+            type="select"
+            :label="$t('theme')"
+            v-model="template"
+            :options="templates"
+          />
+
+          <StyleEditor />
+        </div>
+      </template>
+
+      <template #end>
+        <div class="flex gap-2 items-end h-[60%]">
+          <Button
+            icon="pi pi-refresh"
+            variant="outlined"
+            size="small"
+            :aria-label="capitalize($t('restart'))"
+            @click="isImportDialogOpen = true"
+          />
+          <!-- <Button label="Start again" asChild> TODO save style
+              <button
+                class="button bgGradient p-[2px]"
+                @click="isImportDialogOpen = true"
+              >
+                <div class="button bg-white h-full w-full rounded-sm">
+                  <span class="textGradient">Start again</span>
+                </div>
+              </button>
+            </Button> -->
+          <!-- <button
+              class="button bgGradient p-[2px]"
+              @click="isImportDialogOpen = true"
+            >
+              <div class="button bg-white h-full w-full rounded-sm">
+                <span class="textGradient">Start again</span>
+              </div>
+            </button> -->
+
+          <!-- <label for="editorZoomLevel" class="hidden">
+              <span class="label">Zoom</span>
+              <div class="flex gap-2 items-center">
+                <input
+                  id="editorZoomLevel"
+                  class="w-36"
+                  type="range"
+                  min="50"
+                  max="150"
+                  v-model="zoomLevel"
+                />
+                <output class="w-[3rem] text-blue-500">{{ zoomLevel }}%</output>
+              </div>
+            </label> -->
+
+          <Button
+            icon="pi pi-download"
+            size="small"
+            :aria-label="'todo phrase'"
+            @click="isExportDialogOpen = true"
+          />
+          <!-- <Button  class="bg-red-500"> TODO save style
+              <button
+                class="button bgGradient text-white"
+                @click="isExportDialogOpen = true"
+              >
+                <DocumentArrowDownIcon class="h-6" />
+                {{ $t("download") }}
+              </button>
+            </Button> -->
+
+          <Button
+            :icon="// document.documentElement.classList.includes('dark-mode')
+            //   ? 'pi pi-sun'
+            //   : 'pi pi-moon'
+            'pi pi-sun'"
+            size="small"
+            :aria-label="'todo phrase'"
+            @click="toggleDarkMode"
+          />
+
+          <Field
+            type="select"
+            :default-value="locale"
+            :options="availableLocales"
+            :aria-label="'todo phrase'"
+            @value-change="setLocale"
+          />
+        </div>
+      </template>
+    </Toolbar>
   </header>
 </template>

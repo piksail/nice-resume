@@ -44,7 +44,7 @@ const settings = computed(() => {
         <div class="flex items-baseline">
           <DocumentHeaderName :name="name" />
           <!-- prettier-ignore -->
-          <span v-if="name && title" :style="{ fontSize: `${settings.name.fontSize}px`, color: settings.name.color }">,&nbsp;</span>
+          <span v-if="name && title" :style="{ fontSize: `${settings.name.fontSize}px`, color: `#${settings.name.color}` }">,&nbsp;</span>
           <DocumentHeaderTitle :title="title" />
         </div>
         <DocumentHeaderContactDetails :contact-details="contactDetails" />
