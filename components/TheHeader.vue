@@ -97,7 +97,7 @@ function exportToJson() {
   const rawProfile = localStorage.getItem("profile");
   const rawResume = localStorage.getItem("resume");
   const rawLetter = localStorage.getItem("letter");
-  const rawEmail = localStorage.getItem("Email");
+  const rawEmail = localStorage.getItem("email");
   const toExport = {
     isNiceResumeExport: true,
     profile: JSON.parse(rawProfile ?? ""),
