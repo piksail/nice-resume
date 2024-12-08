@@ -18,43 +18,22 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 <template>
   <div class="flex flex-col gap-5">
     <div class="flex gap-5 flex-wrap">
-      <label :for="`${propertyName}TextSeparator`">
-        <span class="label">Order</span>
-        <select
-          :id="`${propertyName}Order`"
-          class="select block"
-          :disabled="!isThemeCustomized"
-          v-model="settings.order"
-        >
-          <option
-            class="option"
-            v-for="(i, index) in 4"
-            :key="index"
-            :value="i"
-          >
-            {{ i }}
-          </option>
-        </select>
-      </label>
-      <label :for="`${propertyName}TextSeparator`">
-        <span class="label">Text separator</span>
-        <select
-          :id="`${propertyName}TextSeparator`"
-          class="select block"
-          :disabled="!isThemeCustomized"
-          v-model="settings.beforeSeparator"
-        >
-          <option class="option" value="">none</option>
-          <option
-            class="option"
-            v-for="(item, index) in textSeparators"
-            :key="index"
-            :value="item"
-          >
-            {{ item }}
-          </option>
-        </select>
-      </label>
+      <Field
+        :id="`${propertyName}Order`"
+        type="select"
+        :label="$t('order')"
+        v-model="settings.order"
+        :options="[1, 2, 3, 4]"
+        :disabled="!isThemeCustomized"
+      />
+      <Field
+        :id="`${propertyName}TextSeparator`"
+        type="select"
+        :label="$t('separator')"
+        v-model="settings.beforeSeparator"
+        :options="['', ...textSeparators]"
+        :disabled="!isThemeCustomized"
+      />
     </div>
   </div>
 </template>
