@@ -316,6 +316,7 @@ function toggleCategoryVisibility(category: Category) {
                   <InputGroup>
                     <InputText
                       class="!text-sm"
+                      size="small"
                       v-model="entry.highlights[highlightIndex]"
                       @keydown.enter.prevent="addHighlight(entry, entryIndex)"
                     />
@@ -328,6 +329,7 @@ function toggleCategoryVisibility(category: Category) {
                       <Button
                         icon="pi pi-arrow-down"
                         severity="secondary"
+                        size="small"
                         pt:icon:class="text-xs"
                         @click="moveDown(entry.highlights, highlightIndex)"
                       />
@@ -338,6 +340,7 @@ function toggleCategoryVisibility(category: Category) {
                       <Button
                         icon="pi pi-arrow-up"
                         severity="secondary"
+                        size="small"
                         pt:icon:class="text-xs"
                         @click="moveUp(entry.highlights, highlightIndex)"
                       />
@@ -346,6 +349,7 @@ function toggleCategoryVisibility(category: Category) {
                       <Button
                         icon="pi pi-times"
                         severity="danger"
+                        size="small"
                         pt:icon:class="text-xs"
                         @click="remove(entry.highlights, highlightIndex)"
                       />
