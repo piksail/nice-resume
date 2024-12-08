@@ -25,6 +25,7 @@ import { getSideIndexLabel } from "@/utils/editor";
 import {
   entryLayouts,
   fonts,
+  fontWeights,
   headerLayouts,
   templateSettings,
 } from "@/globals";
@@ -430,15 +431,14 @@ watch(documentType, () => {
               v-model="documentTypeSettings.aboutQuote.isShown"
             />
             <div class="flex gap-5 flex-wrap">
-              <label class="flex flex-col" for="aboutQuoteFont">
-                <span class="label">Font</span>
-                <Select
-                  id="aboutQuoteFont"
-                  :disabled="!isThemeCustomized"
-                  v-model="documentTypeSettings.aboutQuote.font"
-                  :options="['inherit', ...fonts]"
-                />
-              </label>
+              <Field
+                id="aboutQuoteFont"
+                type="select"
+                :label="$t('font')"
+                v-model="documentTypeSettings.aboutQuote.font"
+                :options="['inherit', ...fonts]"
+                :disabled="!isThemeCustomized"
+              />
               <Field
                 id="aboutQuoteFontSize"
                 :label="$t('size')"
@@ -446,19 +446,14 @@ watch(documentType, () => {
                 :disabled="!isThemeCustomized"
                 v-model="documentTypeSettings.aboutQuote.fontSize"
               />
-              <label class="flex flex-col" for="aboutQuoteFontWeight">
-                <span class="label">Font weight</span>
-                <select
-                  id="aboutQuoteFontWeight"
-                  v-model="documentTypeSettings.aboutQuote.fontWeight"
-                  class="select block"
-                  :disabled="!isThemeCustomized"
-                >
-                  <option v-for="i in 9" :key="i" class="option">
-                    {{ `${i}00` }}
-                  </option>
-                </select>
-              </label>
+              <Field
+                id="aboutQuoteFontWeight"
+                type="select"
+                :label="$t('fontWeight')"
+                v-model="documentTypeSettings.aboutQuote.fontWeight"
+                :options="fontWeights"
+                :disabled="!isThemeCustomized"
+              />
               <Field
                 id="aboutQuoteIsItalic"
                 :label="$t('italic')"
