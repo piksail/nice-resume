@@ -77,24 +77,13 @@ export default definePreset(Lara, {
       },
     },
     formField: {
-      // paddingX: "0.5rem",
-      // paddingY: "0.25rem",
       sm: {
         paddingX: "0.25rem",
         paddingY: "0.2rem",
-        // "font.size": "0.7rem",
       },
     },
   },
   components: {
-    // button: {
-    //   // TODO this should inherit formField but doesnt. Primeue issue?
-    //   sm: {
-    //     paddingX: "0.2rem",
-    //     paddingY: "0.1rem",
-    //     // "font.size": "0.7rem",
-    //   },
-    // },
     inputText: {
       colorScheme: {
         light: {
@@ -132,12 +121,9 @@ export default definePreset(Lara, {
           },
         },
       },
-      header: {
-        padding: "1.125rem", // TODO does not work
-      },
       toggleable: {
         header: {
-          padding: "1.125rem", // TODO does not work
+          padding: "1.125rem",
         },
       },
     },
