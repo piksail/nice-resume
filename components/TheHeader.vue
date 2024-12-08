@@ -2,6 +2,8 @@
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import Button from "primevue/button";
+import Divider from "primevue/divider";
+import FileUpload, { type FileUploadSelectEvent } from "primevue/fileupload";
 import Message from "primevue/message";
 import Toolbar from "primevue/toolbar";
 import type { Export } from "@/types";
@@ -25,6 +27,11 @@ const { availableLocales, locale, setLocale } = useI18n();
 
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
+
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
 
 const { documentType } = storeToRefs(useEditorStore());
 const { about, contactDetails, name, template, title } =
@@ -134,11 +141,11 @@ function generateRandomData() {
 /**
  * Import a JSON Resume schema.
  */
-function importFromJsonResume(event: Event) {
+function importFromJsonResume(event: FileUploadSelectEvent) {
   isImportError.value = false;
+
   try {
-    // @ts-expect-error It seems there is no default <input type=file /> native TS type...
-    const file = event.currentTarget?.files[0];
+    const file = event.files[0];
 
     const fileReader = new FileReader();
     fileReader.readAsText(file, "UTF-8");
@@ -188,11 +195,11 @@ function importFromJsonResume(event: Event) {
 /**
  * Import exported JSON data from a previous session.
  */
-function importSaveFile(event: Event) {
+function importSaveFile(event: FileUploadSelectEvent) {
   isImportError.value = false;
+
   try {
-    // @ts-expect-error It seems there is no default <input type=file /> native TS type...
-    const file = event.currentTarget?.files[0];
+    const file = event.files[0];
 
     const fileReader = new FileReader();
     fileReader.readAsText(file, "UTF-8");
@@ -257,83 +264,79 @@ onMounted(() => {
   <Dialog
     v-model:visible="isImportDialogOpen"
     modal
-    header="Hey!"
+    :header="t('resumeTitle')"
     class="max-w-screen-sm"
   >
-    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
-      How do you want to start editing?
-    </p>
-    <div class="flex flex-col gap-4">
-      <button
-        class="button bgGradient p-[2px]"
+    <div class="grid grid-cols-2 gap-x-4">
+      <Button
+        icon="pi pi-play"
+        :label="t('resumeContinue')"
+        class="col-span-2"
         @click="isImportDialogOpen = false"
-      >
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">Continue where I left off</span>
-        </div>
-      </button>
-      <button class="button bgGradient p-[2px]" @click="resetStores">
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">Start from scratch</span>
-        </div>
-      </button>
-      <button class="button bgGradient p-[2px]" @click="generateRandomData">
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">Edit pre-filled data</span>
-        </div>
-      </button>
-      <label
-        for="editorSaveFileReader"
-        class="button bgGradient p-[2px] cursor-pointer"
-      >
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">
-            Import a save file from a previous session
-          </span>
-          <input
-            id="editorSaveFileReader"
-            class="hidden"
-            type="file"
-            accept=".json"
-            @change="importSaveFile"
-          />
-        </div>
-      </label>
-      <label
-        for="editorJsonResumeFileReader"
-        class="button bgGradient p-[2px] cursor-pointer"
-      >
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">Import a JSON Resume file*</span>
-          <input
-            id="editorJsonResumeFileReader"
-            class="hidden"
-            type="file"
-            accept=".json"
-            @change="importFromJsonResume"
-          />
-        </div>
-      </label>
-      <Message size="small" variant="simple" class="text-center">
-        *Full compatibility will be soon available. In The meantime,
-        double-check dates, highlights and tags after import, and be informed
-        that profile image and references are not supported yet.
-      </Message>
-      <Message v-if="isImportError" severity="error" class="text-center">
-        Error while importing data from local file.
-      </Message>
+      />
+      <Divider class="col-span-2 uppercase text-sm">
+        {{ $t("or") }}
+      </Divider>
+      <Button
+        icon="pi pi-file"
+        :label="t('resumeFromScratch')"
+        variant="outlined"
+        @click="resetStores"
+      />
+      <Button
+        icon="pi pi-file-edit"
+        :label="t('resumeFromFakeData')"
+        variant="outlined"
+        @click="generateRandomData"
+      />
+      <Divider class="col-span-2 uppercase text-sm">
+        {{ $t("or") }}
+      </Divider>
+      <FileUpload
+        class="size-full"
+        mode="basic"
+        accept="application/json"
+        auto
+        customUpload
+        chooseIcon="pi pi-file-import"
+        :chooseLabel="t('importSaveFile')"
+        :choose-button-props="{ severity: 'secondary', variant: 'outlined' }"
+        @select="importSaveFile"
+      />
+      <FileUpload
+        class="size-full"
+        mode="basic"
+        accept="application/json"
+        auto
+        customUpload
+        chooseIcon="pi pi-file-arrow-up"
+        :chooseLabel="t('importJsonResume')"
+        :choose-button-props="{ severity: 'secondary', variant: 'outlined' }"
+        @select="importFromJsonResume"
+      />
+      <div class="col-span-2 mt-4">
+        <Message size="small" variant="simple" class="text-center">
+          *Full compatibility will be soon available. In The meantime,
+          double-check dates, highlights and tags after import, and be informed
+          that profile image and references are not supported yet.
+        </Message>
+        <Message
+          v-if="isImportError"
+          severity="error"
+          class="col-span-2 text-center"
+        >
+          Error while importing data from local file.
+        </Message>
+      </div>
     </div>
   </Dialog>
 
   <Dialog
     v-model:visible="isExportDialogOpen"
     modal
-    header="Hey!"
+    :header="t('exportTitle')"
     class="max-w-screen-sm"
   >
-    <p class="mb-8 text-center text-2xl font-bold text-pink-500">
-      What do you want to download?
-    </p>
     <div class="flex flex-col gap-4">
       <Field
         id="isDocumentExportIncluded"
@@ -361,11 +364,12 @@ onMounted(() => {
           v-model="isExportToJsonResumeIncluded"
         />
       </div>
-      <button class="button bgGradient p-[2px]" @click="downloadSelection">
-        <div class="button bg-white h-full w-full rounded-sm">
-          <span class="textGradient">Download selection</span>
-        </div>
-      </button>
+      <Button
+        icon="pi pi-download"
+        :label="t('exportSubmit')"
+        variant="outlined"
+        @click="downloadSelection"
+      />
       <p v-if="isExportError" class="text-red-500 text-center">
         Error exporting data.
       </p>
@@ -488,3 +492,38 @@ onMounted(() => {
     </Toolbar>
   </header>
 </template>
+
+<i18n lang="json">
+{
+  "en": {
+    "resumeTitle": "How do you want to start editing?",
+    "resumeContinue": "Continue where you left off",
+    "resumeFromScratch": "Start from scratch",
+    "resumeFromFakeData": "Edit pre-filled data",
+    "importSaveFile": "Import a save file from a previous session",
+    "importJsonResume": "Import a JSON Resume file",
+    "exportTitle": "What do you want to download?",
+    "exportSubmit": "Download selection"
+  },
+  "es": {
+    "resumeTitle": "todo",
+    "resumeContinue": "todo",
+    "resumeFromScratch": "todo",
+    "resumeFromFakeData": "todo",
+    "importSaveFile": "todo",
+    "importJsonResume": "todo",
+    "exportTitle": "todo",
+    "exportSubmit": "todo"
+  },
+  "fr": {
+    "resumeTitle": "Comment souhaitez-vous commencer ?",
+    "resumeContinue": "Reprendre là où vous en étiez resté",
+    "resumeFromScratch": "Commencer à partir de rien",
+    "resumeFromFakeData": "Reprendre à partir d'un exemple",
+    "importSaveFile": "Importer une sauvegarde d'une session précédente",
+    "importJsonResume": "Importer fichier JSON Resume",
+    "exportTitle": "Comment souhaitez-vous exporter votre travail ?",
+    "exportSubmit": "Exporter la sélection"
+  }
+}
+</i18n>
