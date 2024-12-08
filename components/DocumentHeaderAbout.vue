@@ -19,7 +19,7 @@ const settings = useDocumentSettings();
         fontSize: `${settings.aboutQuote.fontSize}px`,
         fontWeight: settings.aboutQuote.fontWeight,
         fontStyle: settings.aboutQuote.isItalic ? 'italic' : 'initial',
-        color: `#${settings.aboutQuote.color}`,
+        color: `${settings.aboutQuote.color}`,
       }"
     >
       “

@@ -64,15 +64,15 @@ const bodyCategories = computed(() =>
       <div
         v-if="isHeaderSimple"
         :style="{
-          backgroundColor: `#${settings.category.backgroundColor}`,
+          backgroundColor: `${settings.category.backgroundColor}`,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
           marginBottom: `${settings.category.margin[2]}px`,
           marginLeft: `${settings.category.margin[3]}px`,
-          borderTop: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[0]}px`,
-          borderRight: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[1]}px`,
-          borderBottom: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[2]}px`,
-          borderLeft: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[3]}px`,
+          borderTop: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[0]}px`,
+          borderRight: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[1]}px`,
+          borderBottom: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[2]}px`,
+          borderLeft: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[3]}px`,
           borderRadius: `${settings.category.borderRadius}px`,
           paddingTop: `${settings.category.padding[0]}px`,
           paddingRight: `${settings.category.padding[1]}px`,
@@ -84,15 +84,15 @@ const bodyCategories = computed(() =>
         <div
           class="flex flex-col"
           :style="{
-            backgroundColor: `#${settings.entry.backgroundColor}`,
+            backgroundColor: `${settings.entry.backgroundColor}`,
             marginTop: `${settings.entry.margin[0]}px`,
             marginRight: `${settings.entry.margin[1]}px`,
             marginBottom: `${settings.entry.margin[2]}px`,
             marginLeft: `${settings.entry.margin[3]}px`,
-            borderTop: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[0]}px`,
-            borderRight: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[1]}px`,
-            borderBottom: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[2]}px`,
-            borderLeft: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[3]}px`,
+            borderTop: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[0]}px`,
+            borderRight: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[1]}px`,
+            borderBottom: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[2]}px`,
+            borderLeft: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[3]}px`,
             borderRadius: `${settings.entry.borderRadius}px`,
             paddingTop: `${settings.entry.padding[0]}px`,
             paddingRight: `${settings.entry.padding[1]}px`,
@@ -111,15 +111,15 @@ const bodyCategories = computed(() =>
         v-for="(category, categoryIndex) in asideCategories"
         :key="categoryIndex"
         :style="{
-          backgroundColor: `#${settings.category.backgroundColor}`,
+          backgroundColor: `${settings.category.backgroundColor}`,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
           marginBottom: `${settings.category.margin[2]}px`,
           marginLeft: `${settings.category.margin[3]}px`,
-          borderTop: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[0]}px`,
-          borderRight: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[1]}px`,
-          borderBottom: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[2]}px`,
-          borderLeft: `${settings.category.borderStyle} #${settings.category.borderColor} ${settings.category.border[3]}px`,
+          borderTop: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[0]}px`,
+          borderRight: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[1]}px`,
+          borderBottom: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[2]}px`,
+          borderLeft: `${settings.category.borderStyle} ${settings.category.borderColor} ${settings.category.border[3]}px`,
           borderRadius: `${settings.category.borderRadius}px`,
           paddingTop: `${settings.category.padding[0]}px`,
           paddingRight: `${settings.category.padding[1]}px`,
@@ -131,15 +131,15 @@ const bodyCategories = computed(() =>
         <ul
           class="flex flex-col"
           :style="{
-            backgroundColor: `#${settings.entry.backgroundColor}`,
+            backgroundColor: `${settings.entry.backgroundColor}`,
             marginTop: `${settings.entry.margin[0]}px`,
             marginRight: `${settings.entry.margin[1]}px`,
             marginBottom: `${settings.entry.margin[2]}px`,
             marginLeft: `${settings.entry.margin[3]}px`,
-            borderTop: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[0]}px`,
-            borderRight: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[1]}px`,
-            borderBottom: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[2]}px`,
-            borderLeft: `${settings.entry.borderStyle} #${settings.entry.borderColor} ${settings.entry.border[3]}px`,
+            borderTop: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[0]}px`,
+            borderRight: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[1]}px`,
+            borderBottom: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[2]}px`,
+            borderLeft: `${settings.entry.borderStyle} ${settings.entry.borderColor} ${settings.entry.border[3]}px`,
             borderRadius: `${settings.entry.borderRadius}px`,
             paddingTop: `${settings.entry.padding[0]}px`,
             paddingRight: `${settings.entry.padding[1]}px`,
