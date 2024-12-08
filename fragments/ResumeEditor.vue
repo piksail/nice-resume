@@ -229,6 +229,7 @@ function toggleCategoryVisibility(category: Category) {
             ? 'Hide category'
             : 'Show category TODO localize labels'
         "
+        rounded
         variant="text"
         :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryLock(category)"
@@ -241,6 +242,7 @@ function toggleCategoryVisibility(category: Category) {
             ? 'Hide category'
             : 'Show category TODO localize labels'
         "
+        rounded
         variant="text"
         :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryVisibility(category)"
@@ -354,8 +356,8 @@ function toggleCategoryVisibility(category: Category) {
               <Button
                 icon="pi pi-plus"
                 label="Add highlight"
-                severity="secondary"
                 variant="outlined"
+                size="small"
                 @click="addHighlight(entry, entryIndex)"
               />
             </label>
@@ -395,8 +397,8 @@ function toggleCategoryVisibility(category: Category) {
               <Button
                 icon="pi pi-plus"
                 label="Add tag"
-                severity="secondary"
                 variant="outlined"
+                size="small"
                 @click="addTag(entry, entryIndex)"
               />
             </label>
