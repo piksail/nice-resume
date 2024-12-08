@@ -154,7 +154,7 @@ export function generateStores(
 export function getCategoryIconClass(categoryType: Category["type"]) {
   const iconMapper: { [key in Category["type"]]: string } = {
     award: "pi-trophy",
-    certificate: "pi-certified",
+    certificate: "pi-verified",
     education: "pi-graduation-cap",
     interest: "pi-heart",
     language: "pi-language",
