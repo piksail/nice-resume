@@ -86,9 +86,9 @@ function changeContactDetaiType(
                 id="detailType"
                 :label="$t('type')"
                 type="selectbutton"
-                :default-value="detail.type"
                 :options="['personal', 'social']"
-                @value-change="changeContactDetaiType(detail, $event)"
+                :model-value="detail.type"
+                @update:model-value="changeContactDetaiType(detail, $event)"
               />
               <Field
                 id="detailIcon"

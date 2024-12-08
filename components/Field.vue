@@ -10,7 +10,7 @@ import ToggleButton from "primevue/togglebutton";
 import ToggleSwitch from "primevue/toggleswitch";
 import { capitalize } from "@/utils/string";
 
-const { defaultValue, disabled, label, id, step, options, type } = defineProps<{
+const { disabled, label, id, step, options, type } = defineProps<{
   defaultValue?: string | null | undefined;
   disabled?: boolean;
   id?: string;
@@ -31,8 +31,6 @@ const { defaultValue, disabled, label, id, step, options, type } = defineProps<{
 }>();
 
 const model = defineModel();
-// TODO remove all occurences of value-change to use update:modelValue (standard props)
-const emit = defineEmits(["value-change"]);
 
 function updateColor(hashlessHex: string) {
   // Primevue does not embed hash to the hex color value but it is needed for CSS
@@ -110,26 +108,13 @@ function updateColor(hashlessHex: string) {
     class="flex flex-col gap-1"
   >
     <span class="label">{{ capitalize(label) }}</span>
-    <SelectButton
-      :default-value="defaultValue"
-      v-model="model"
-      :options="options"
-      size="small"
-      @value-change="(...args) => emit('value-change', ...args)"
-    />
+    <SelectButton v-model="model" :options="options" size="small" />
   </label>
   <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
     <span class="label">
       {{ capitalize(label) }}
     </span>
-    <Select
-      :default-value="defaultValue ?? model"
-      v-model="model"
-      :options="options"
-      :input-id="id"
-      size="small"
-      @value-change="(...args) => emit('value-change', ...args)"
-    />
+    <Select v-model="model" :options="options" :input-id="id" size="small" />
   </label>
   <label v-else :for="id" class="flex flex-col gap-1">
     <span class="label">
@@ -138,9 +123,9 @@ function updateColor(hashlessHex: string) {
     <ColorPicker
       v-if="type === 'color'"
       :input-id="id"
-      :default-value="`${(model as string).replace('#', '')}`"
+      :model-value="`${(model as string).replace('#', '')}`"
       size="small"
-      @value-change="updateColor"
+      @update:model-value="updateColor"
     />
     <Textarea
       v-else-if="type === 'textarea'"

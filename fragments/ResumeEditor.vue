@@ -192,16 +192,16 @@ function toggleCategoryVisibility(category: Category) {
             type="select"
             :label="$t('type')"
             :id="`${categoryIndex}type`"
-            :default-value="category.type"
-            @value-change="changeCategoryType(category, $event)"
             :options="types"
+            :model-value="category.type"
+            @update:model-value="changeCategoryType(category, $event)"
           />
           <Field
             type="select"
             :label="$t('layout')"
             :id="`${categoryIndex}layout`"
-            v-model="category.layout"
             :options="layouts"
+            v-model="category.layout"
           />
         </div>
         <ListActions
