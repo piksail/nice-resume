@@ -69,7 +69,7 @@ const settings = computed(() => {
       lineHeight: settings.body.lineHeight ?? 'normal',
       fontWeight: settings.body.fontWeight,
       textAlign: settings.body.isJustified ? 'justify' : 'left',
-      color: `#${settings.body.color}`,
+      color: `${settings.body.color}`,
       marginTop: `${settings.body.margin[0]}px`,
       marginRight: `${settings.body.margin[1]}px`,
       marginBottom: `${settings.body.margin[2]}px`,

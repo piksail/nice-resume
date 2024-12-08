@@ -32,6 +32,11 @@ const { defaultValue, disabled, label, id, step, options, type } = defineProps<{
 
 const model = defineModel();
 const emit = defineEmits(["value-change"]);
+
+function updateColor(hashlessHex: string) {
+  // Primevue does not embed hash to the hex color value but it is needed for CSS
+  model.value = `#${hashlessHex}`;
+}
 </script>
 
 <template>
@@ -132,8 +137,9 @@ const emit = defineEmits(["value-change"]);
     <ColorPicker
       v-if="type === 'color'"
       :input-id="id"
-      v-model="model"
+      :default-value="`${(model as string).replace('#', '')}`"
       size="small"
+      @value-change="updateColor"
     />
     <Textarea
       v-else-if="type === 'textarea'"
