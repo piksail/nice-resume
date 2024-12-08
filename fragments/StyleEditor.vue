@@ -131,8 +131,9 @@ watch(documentType, () => {
 <template>
   <Drawer
     v-model:visible="isStyleEditorOpen"
-    header="Customize theme TODO locale"
+    :header="capitalize($t('customizeTheme'))"
     class="!w-[calc(100vw-210mm)]"
+    pt:mask:class="!bg-transparent"
   >
     <section class="flex flex-col gap-12">
       <template v-if="tabs.includes('Document')">
