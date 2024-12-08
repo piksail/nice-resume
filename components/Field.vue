@@ -31,6 +31,7 @@ const { defaultValue, disabled, label, id, step, options, type } = defineProps<{
 }>();
 
 const model = defineModel();
+// TODO remove all occurences of value-change to use update:modelValue (standard props)
 const emit = defineEmits(["value-change"]);
 
 function updateColor(hashlessHex: string) {

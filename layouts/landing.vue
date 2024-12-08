@@ -2,7 +2,7 @@
 import Select from "primevue/select";
 
 // eslint-disable-next-line no-undef
-const { availableLocales, locale, setLocale } = useI18n();
+const { availableLocales, locale } = useI18n();
 
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
@@ -23,10 +23,9 @@ const localePath = useLocalePath();
         </h1>
       </NuxtLink>
       <Select
-        :default-value="locale"
+        v-model="locale"
         :options="availableLocales"
-        :aria-label="'todo phrase'"
-        @value-change="setLocale"
+        :aria-label="$t('switchLanguage')"
       />
     </header>
     <slot />

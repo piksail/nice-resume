@@ -21,7 +21,7 @@ import StyleEditor from "~/fragments/StyleEditor.vue";
 console.info("Version: ", packageJson.version);
 
 // eslint-disable-next-line no-undef
-const { availableLocales, locale, setLocale } = useI18n();
+const { availableLocales, locale } = useI18n();
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
@@ -475,13 +475,11 @@ onMounted(() => {
             :aria-label="'todo phrase'"
             @click="toggleDarkMode"
           />
-
           <Field
             type="select"
-            :default-value="locale"
+            v-model="locale"
             :options="availableLocales"
-            :aria-label="'todo phrase'"
-            @value-change="setLocale"
+            :aria-label="$t('switchLanguage')"
           />
         </div>
       </template>
