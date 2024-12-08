@@ -140,6 +140,11 @@ const { t } = useI18n({
           alt="Example of a cover letter written and styled with Nice Resume"
           class="w-[400px] h-[calc(400px*1.414)] bg-white shadow hover:scale-105 transition-all"
         />
+        <img
+          src="/macchiato-cover-letter-example.png"
+          alt="Example of a cover letter written and styled with Nice Resume"
+          class="w-[400px] h-[calc(400px*1.414)] bg-white shadow hover:scale-105 transition-all"
+        />
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
             <span class="textGradient">{{ $t("sexyStart") }}</span>
