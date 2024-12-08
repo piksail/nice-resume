@@ -19,6 +19,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
       :variant="isHeader ? 'text' : 'text'"
       rounded
       :severity="isHeader ? 'primary' : undefined"
+      size="small"
       @click="$emit('moveUp')"
     />
     <Button
@@ -28,6 +29,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
       :variant="isHeader ? 'text' : 'text'"
       rounded
       :severity="isHeader ? 'primary' : undefined"
+      size="small"
       @click="$emit('moveDown')"
     />
     <Button
@@ -36,6 +38,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
       :variant="isHeader ? 'text' : 'text'"
       rounded
       severity="danger"
+      size="small"
       @click="$emit('remove')"
     />
   </div>
