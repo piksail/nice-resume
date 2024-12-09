@@ -344,26 +344,23 @@ onMounted(() => {
         type="checkbutton"
         v-model="isDocumentExportIncluded"
       />
-      <div>
-        <Field
-          id="isExportToJsonIncluded"
-          label="Nice Resume data (save it for later)"
-          sub-label="This includes all documents (resume, cover letter, email signature)"
-          type="checkbutton"
-          v-model="isExportToJsonIncluded"
-        />
-      </div>
-      <div v-if="documentType === 'resume'">
-        <Field
-          id="isExportToJsonResumeIncluded"
-          label="JSON Resume compatible data"
-          sub-label="Full compatibility will be soon available. In The meantime,
+      <Field
+        id="isExportToJsonIncluded"
+        label="Nice Resume data (save it for later)"
+        help-text="This includes all documents (resume, cover letter, email signature)"
+        type="checkbutton"
+        v-model="isExportToJsonIncluded"
+      />
+      <Field
+        v-if="documentType === 'resume'"
+        id="isExportToJsonResumeIncluded"
+        label="JSON Resume compatible data"
+        help-text="Full compatibility will be soon available. In The meantime,
           double-check dates, highlights and tags, and add missing elements such
           as profile image and references directly in JSON Resume."
-          type="checkbutton"
-          v-model="isExportToJsonResumeIncluded"
-        />
-      </div>
+        type="checkbutton"
+        v-model="isExportToJsonResumeIncluded"
+      />
       <Button
         icon="pi pi-download"
         :label="t('exportSubmit')"
