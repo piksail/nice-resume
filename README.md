@@ -42,6 +42,7 @@ So far, tools we believe are best out there are :
 ### Resources
 
 - [i18n](https://www.i18next.com/)
+- [JSON Resume](https://jsonresume.org/)
 - [Nuxt](https://nuxt.com/)
 - [Vue](https://vuejs.org/)
 - [PrimeVue](https://primevue.org/)

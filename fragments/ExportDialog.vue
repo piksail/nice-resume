@@ -104,6 +104,7 @@ function exportResumeToJsonResume() {
   });
   // Allow non-Nice Resume sections to be filled
   jsonResumeExportSteps.value.push("references");
+  isExportDialogOpen.value = false;
   isJsonResumeExportDialogOpen.value = true;
 }
 </script>

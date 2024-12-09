@@ -298,8 +298,8 @@ export interface Entry {
   nature: "asset" | "experience";
   type: string;
   title: string; // Position, Diploma, ...
-  highlights: Array<string>;
-  tags: Array<string>;
+  highlights: string[];
+  tags: string[];
 }
 
 export interface Experience extends Entry {
@@ -327,23 +327,22 @@ export interface Category {
   nature: Entry["nature"];
   type: Asset["type"] | Experience["type"];
   name: string;
-  entries: Array<Experience | Asset>;
+  entries: (Experience | Asset)[];
   layout: "aside" | "full" | "half";
   isLocked: boolean; // Disable data edition
   isVisible: boolean; // Preserve data but exclude it from the resume
 }
 
 export interface Profile {
-  isNiceResumeExport: boolean;
   template: Template;
   name: string;
   title: string;
-  contactDetails: Array<ContactDetail>;
+  contactDetails: ContactDetail[];
 }
 
 export interface Resume extends Profile {
   about: string;
-  categories: Array<Category>;
+  categories: Category[];
 }
 
 export interface Letter extends Profile {
