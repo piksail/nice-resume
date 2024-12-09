@@ -10,14 +10,14 @@ import ToggleButton from "primevue/togglebutton";
 import ToggleSwitch from "primevue/toggleswitch";
 import { capitalize } from "@/utils/string";
 
-const { disabled, label, id, step, options, type } = defineProps<{
+const { disabled, label, helpText, id, step, options, type } = defineProps<{
   defaultValue?: string | null | undefined;
   disabled?: boolean;
   id?: string;
   label?: string;
+  helpText?: string;
   options?: (string | number | null | undefined)[];
   step?: number;
-  subLabel?: string;
   type?:
     | "checkbox"
     | "checkbutton"
@@ -56,14 +56,10 @@ function updateColor(hashlessHex: string) {
       {{ capitalize(label) }}
     </span>
   </div>
-  <label
-    v-else-if="type === 'checkbutton'"
-    class="button bgGradient p-[2px] group"
-    :for="id"
-  >
-    <div
-      class="button bg-white h-full w-full rounded-sm justify-start group-hover:bg-transparent"
-      :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
+  <label v-else-if="type === 'checkbutton'" class="" :for="id">
+    <ToggleButton
+      v-model="model as boolean"
+      class="w-full !justify-start !text-left"
     >
       <Checkbox
         v-model="model"
@@ -72,16 +68,20 @@ function updateColor(hashlessHex: string) {
         binary
         size="small"
       />
-      <div class="flex flex-col ml-2">
-        <span
-          class="label text-blue-500 group-hover:text-white"
-          :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
-        >
+      <div>
+        <span>
           {{ capitalize(label) }}
         </span>
-        <span class="text-sm group-hover:text-white">{{ subLabel }}</span>
+        <Message
+          v-if="helpText"
+          size="small"
+          severity="secondary"
+          variant="simple"
+        >
+          {{ helpText }}
+        </Message>
       </div>
-    </div>
+    </ToggleButton>
   </label>
   <label
     v-else-if="type === 'checkbox'"
@@ -163,5 +163,8 @@ function updateColor(hashlessHex: string) {
       v-model="model as string"
       size="small"
     />
+    <Message v-if="helpText" size="small" severity="secondary" variant="simple">
+      {{ helpText }}
+    </Message>
   </label>
 </template>
