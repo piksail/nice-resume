@@ -26,6 +26,11 @@ import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
+
 const { categories } = storeToRefs(useResumeStore());
 
 const confirm = useConfirm();
@@ -225,9 +230,7 @@ function toggleCategoryVisibility(category: Category) {
       <Button
         :icon="category.isLocked ? 'pi pi-lock-open' : 'pi pi-lock'"
         :aria-label="
-          category.isLocked
-            ? 'Hide category'
-            : 'Show category TODO localize labels'
+          category.isLocked ? t('unlockCategory') : t('lockCategory')
         "
         rounded
         variant="text"
@@ -237,11 +240,7 @@ function toggleCategoryVisibility(category: Category) {
       <Button
         v-if="!category.isLocked"
         :icon="category.isVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
-        :aria-label="
-          category.isVisible
-            ? 'Hide category'
-            : 'Show category TODO localize labels'
-        "
+        :aria-label="category.isVisible ? t('hideCategory') : t('showCategory')"
         rounded
         variant="text"
         :class="category.isVisible ? '' : '!text-white'"
@@ -427,3 +426,26 @@ function toggleCategoryVisibility(category: Category) {
     </button>
   </footer>
 </template>
+
+<i18n lang="json">
+{
+  "en": {
+    "lockCategory": "Lock category",
+    "unlockCategory": "Unlock category",
+    "showCategory": "Show category",
+    "hideCategory": "Hide category"
+  },
+  "es": {
+    "lockCategory": "todo",
+    "unlockCategory": "todo",
+    "showCategory": "todo",
+    "hideCategory": "todo"
+  },
+  "fr": {
+    "lockCategory": "Verouiller la catégorie",
+    "unlockCategory": "Déverouiller la catégorie",
+    "showCategory": "Afficher la catégorie",
+    "hideCategory": "Cacher la catégorie"
+  }
+}
+</i18n>

@@ -4,6 +4,11 @@ import { useEmailStore } from "@/stores/email";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
+
 const { isDetailClickable } = storeToRefs(useEmailStore());
 </script>
 
@@ -13,10 +18,24 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
     <div class="formBlock">
       <Field
         id="isDetailClickable"
-        label="Make links clickable todo i18n"
-        type="toggle"
+        :label="t('makeLinksClickable')"
+        type="checkbox"
         v-model="isDetailClickable"
       />
     </div>
   </EditorCategory>
 </template>
+
+<i18n lang="json">
+{
+  "en": {
+    "makeLinksClickable": "Make links clickable"
+  },
+  "es": {
+    "makeLinksClickable": "todo"
+  },
+  "fr": {
+    "makeLinksClickable": "Rendre les liens cliquables"
+  }
+}
+</i18n>
