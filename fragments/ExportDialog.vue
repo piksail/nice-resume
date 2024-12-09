@@ -112,7 +112,7 @@ function exportResumeToJsonResume() {
   <Button
     icon="pi pi-download"
     size="small"
-    :aria-label="'todo phrase'"
+    :aria-label="capitalize($t('download'))"
     @click="isExportDialogOpen = true"
   />
 
