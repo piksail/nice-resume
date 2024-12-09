@@ -40,7 +40,7 @@ function changeContactDetaiType(
 <template>
   <EditorCategory id="Profile">
     <template v-slot:header>{{ capitalize($t("profile")) }}</template>
-    <div class="flex flex-col gap-5">
+    <div class="formBlock">
       <Field id="profileName" :label="$t('name')" v-model="name" />
       <Field id="profileTitle" :label="$t('title')" v-model="title" />
       <Field

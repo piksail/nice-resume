@@ -10,7 +10,7 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
 <template>
   <EditorCategory id="Signature">
     <template v-slot:header>{{ capitalize($t("signature")) }}</template>
-    <div class="flex flex-col gap-5">
+    <div class="formBlock">
       <Field
         id="isDetailClickable"
         label="Make links clickable todo i18n"

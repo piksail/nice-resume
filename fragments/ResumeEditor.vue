@@ -254,7 +254,7 @@ function toggleCategoryVisibility(category: Category) {
           <header class="flex items-center justify-between">
             <div
               :id="getEntryHeading(entry, entryIndex)"
-              class="sectionHeading scroll-mt-10"
+              class="uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10"
             >
               {{ getEntryHeading(entry, entryIndex) }}
             </div>
@@ -267,7 +267,7 @@ function toggleCategoryVisibility(category: Category) {
               @remove="askBeforeRemoveCategoryEntry(category, entryIndex)"
             />
           </header>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <Field
               id="entryTitle"
               :label="$t(getEntryTitleLabel(entry.type))"

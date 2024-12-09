@@ -41,7 +41,7 @@ function addSenderDetail() {
 <template>
   <EditorCategory id="Header">
     <template v-slot:header>{{ capitalize($t("header")) }}</template>
-    <div class="flex flex-col gap-5">
+    <div class="formBlock">
       <label class="flex flex-col" for="senderDetails">
         <Field
           type="checkbox"
@@ -140,7 +140,7 @@ function addSenderDetail() {
   </EditorCategory>
   <EditorCategory id="Body">
     <template v-slot:header>{{ capitalize($t("body")) }}</template>
-    <div class="flex flex-col gap-5">
+    <div class="formBlock">
       <label class="flex flex-col" for="paragraphList">
         <span class="label">{{ capitalize($t("paragraphs")) }}</span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">

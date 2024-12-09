@@ -193,7 +193,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Header')">
         <Fieldset :legend="capitalize($t('header'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <label class="flex flex-col" for="headerLayout">
               <span class="label">Layout</span>
               <Select
@@ -217,7 +217,7 @@ watch(documentType, () => {
           :legend="capitalize($t('senderDetails'))"
           toggleable
         >
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="senderDetails"
               :settings="letterSettings.senderDetails"
@@ -237,7 +237,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('recipientDetails'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="recipientDetails"
               :settings="letterSettings.recipientDetails"
@@ -259,7 +259,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Subject')">
         <Fieldset :legend="capitalize($t('subject'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="subject"
               :settings="letterSettings.subject"
@@ -276,7 +276,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('reference'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="reference"
               :settings="letterSettings.reference"
@@ -295,7 +295,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Body')">
         <Fieldset :legend="capitalize($t('paragraphs'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <div class="flex gap-5 flex-wrap">
               <Field
                 id="bodyColor"
@@ -370,7 +370,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Profile')">
         <Fieldset :legend="capitalize($t('name'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="name"
               :settings="documentTypeSettings.name"
@@ -387,7 +387,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('title'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="title"
               :settings="documentTypeSettings.title"
@@ -406,7 +406,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('About')">
         <Fieldset :legend="capitalize($t('about'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="about"
               :settings="documentTypeSettings.about"
@@ -423,7 +423,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset legend="About quote" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <Field
               id="aboutQuoteIsShown"
               label="Show quote"
@@ -476,7 +476,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Contact')">
         <Fieldset :legend="capitalize($t('contactDetails'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="contactDetails"
               :settings="documentTypeSettings.contactDetails"
@@ -537,7 +537,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Sections')">
         <Fieldset :legend="capitalize($t('header'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <label class="flex flex-col" for="headerLayout">
               <span class="label">Layout</span>
               <select
@@ -567,7 +567,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('aside'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="aside"
               :settings="resumeSettings.aside"
@@ -600,7 +600,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('body'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="body"
               :settings="resumeSettings.body"
@@ -611,7 +611,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Category')">
         <Fieldset :legend="capitalize($t('category'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <Field
               id="categoryGap"
               label="Gap"
@@ -627,7 +627,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('categoryName'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="categoryName"
               :settings="resumeSettings.categoryName"
@@ -646,7 +646,7 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Entry')">
         <Fieldset :legend="capitalize($t('entry'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <label class="flex flex-col" for="entryLayout">
               <span class="label">Layout</span>
               <select
@@ -676,7 +676,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryTitle'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <TextSettingsEditor
               property-name="entryTitle"
               :settings="resumeSettings.entryTitle"
@@ -689,7 +689,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryPeriod'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <TextSettingsEditor
               property-name="entryPeriod"
               :settings="resumeSettings.entryPeriod"
@@ -702,7 +702,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryOrganization'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <TextSettingsEditor
               property-name="entryOrganization"
               :settings="resumeSettings.entryOrganization"
@@ -715,7 +715,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryLocation'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <TextSettingsEditor
               property-name="entryLocation"
               :settings="resumeSettings.entryLocation"
@@ -728,7 +728,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entrySummary'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="entrySummary"
               :settings="resumeSettings.entrySummary"
@@ -741,7 +741,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryHighlight'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="entryHighlight"
               :settings="resumeSettings.entryHighlight"
@@ -758,7 +758,7 @@ watch(documentType, () => {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryTag'))" toggleable>
-          <div class="flex flex-col gap-5">
+          <div class="formBlock">
             <BlockSettingsEditor
               property-name="entryTag"
               :settings="resumeSettings.entryTag"

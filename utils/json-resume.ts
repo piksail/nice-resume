@@ -26,29 +26,28 @@ export function formatResumeAsJsonResume(
       image: "", // TODO
       email: resume.contactDetails.find(
         (detail) => detail.type === "personal" && detail.value.includes("@"),
-      )?.value, // TODO prompt confirmation
+      )?.value,
       phone: resume.contactDetails.find(
         (detail) =>
           detail.type === "personal" &&
-          (detail.value.startsWith("0") || detail.value.startsWith("+")), // TODO prompt confirmation
+          (detail.value.startsWith("0") || detail.value.startsWith("+")),
       )?.value,
-      url: resume.contactDetails[0]?.value,
+      url: "",
       summary: resume.about,
       location: {
-        // TODO prompt definition
-        address: "string;",
-        postalCode: "string;",
-        city: "string;",
-        countryCode: "string;",
-        region: "string;",
+        address: "",
+        postalCode: "",
+        city: "",
+        countryCode: "",
+        region: "",
       },
       profiles: resume.contactDetails
         .filter((detail) => detail.type === "social")
         .map((detail) => {
           return {
-            network: detail.icon as string, // TODO prompt confirmation
-            username: detail.value, // TODO prompt confirmation
-            url: detail.value, // TODO prompt confirmation
+            network: detail.icon as string,
+            username: resume.name,
+            url: detail.value,
           };
         }),
     },
@@ -61,7 +60,7 @@ export function formatResumeAsJsonResume(
       return {
         name: entry.organization,
         position: entry.title,
-        url: "string", // TODO
+        url: "",
         startDate,
         endDate,
         summary: entry.summary,
@@ -77,7 +76,7 @@ export function formatResumeAsJsonResume(
       return {
         organization: entry.organization,
         position: entry.title,
-        url: "string", // TODO
+        url: "",
         startDate,
         endDate,
         summary: entry.summary,
@@ -92,12 +91,12 @@ export function formatResumeAsJsonResume(
       const { startDate, endDate } = getPeriodBounds(entry.period);
       return {
         institution: entry.organization,
-        url: "string", // TODO
+        url: "",
         area: entry.title,
-        studyType: entry.title, // TODO prompt confirmation
+        studyType: entry.title,
         startDate,
         endDate,
-        score: "todo", // TODO prompt definition
+        score: "",
         courses: entry.highlights.concat(entry.tags),
       };
     }),
@@ -124,7 +123,7 @@ export function formatResumeAsJsonResume(
         name: entry.title,
         date: startDate,
         issuer: entry.organization,
-        url: "string", // TODO
+        url: "",
       };
     }),
     publications: (
@@ -138,7 +137,7 @@ export function formatResumeAsJsonResume(
         publisher: entry.organization,
         releaseDate: startDate,
         summary: entry.summary,
-        url: "string", // TODO
+        url: "",
       };
     }),
     skills: (
@@ -148,7 +147,7 @@ export function formatResumeAsJsonResume(
     ).map((entry) => {
       return {
         name: entry.title,
-        level: entry.highlights.join(", "), // TODO prompt confirmation
+        level: entry.highlights.join(", "),
         keywords: entry.tags,
       };
     }),
@@ -161,7 +160,7 @@ export function formatResumeAsJsonResume(
         language: entry.title,
         fluency: entry.highlights
           .join(", ")
-          .concat(`(${entry.tags.join(", ")})`), // TODO prompt confirmation
+          .concat(`(${entry.tags.join(", ")})`),
       };
     }),
     interests: (
@@ -186,12 +185,14 @@ export function formatResumeAsJsonResume(
         startDate,
         endDate,
         description: entry.summary,
-        highlights: entry.highlights.concat(entry.tags), // TODO prompt confirmation
-        url: "string", // TODO
+        highlights: entry.highlights.concat(entry.tags),
+        url: "",
       };
     }),
   };
   return toExport;
 }
 
-export function importResumeFromJsonResume() {}
+export function importResumeFromJsonResume() {
+  // TODO
+}

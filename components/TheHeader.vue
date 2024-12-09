@@ -5,8 +5,12 @@ import Button from "primevue/button";
 import Divider from "primevue/divider";
 import FileUpload, { type FileUploadSelectEvent } from "primevue/fileupload";
 import Message from "primevue/message";
+import Step from "primevue/step";
+import StepPanel from "primevue/steppanel";
+import Stepper from "primevue/stepper";
+import StepItem from "primevue/stepitem";
 import Toolbar from "primevue/toolbar";
-import type { Export } from "@/types";
+import type { Export, JsonResume } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
@@ -47,6 +51,10 @@ const letter = storeToRefs(letterStore);
 
 const isImportDialogOpen = ref(false);
 const isExportDialogOpen = ref(false);
+
+const isJsonResumeExportDialogOpen = ref(false);
+const jsonResumeExportSteps = ref<string[]>([]);
+const jsonResume = ref<JsonResume>();
 
 const isImportError = ref(false);
 
@@ -119,15 +127,23 @@ function exportToJson() {
  * Create and export a JSON-Resume-compliant resume as a JSON.
  */
 function exportResumeToJsonResume() {
-  const jsonResume = {
+  const resume = {
     name: name.value,
     title: title.value,
     about: about.value,
     contactDetails: contactDetails.value,
     categories: categories.value,
   };
-  const toExport = formatResumeAsJsonResume(jsonResume);
-  download(toExport, "nice-resume-to-json-resume");
+  jsonResume.value = formatResumeAsJsonResume(resume);
+  jsonResumeExportSteps.value.push("profile");
+  Object.entries(jsonResume.value).forEach(([key, value]) => {
+    if (value.length) {
+      jsonResumeExportSteps.value.push(key);
+    }
+  });
+  // Allow non-Nice Resume sections to be filled
+  jsonResumeExportSteps.value.push("references");
+  isJsonResumeExportDialogOpen.value = true;
 }
 
 /**
@@ -355,9 +371,7 @@ onMounted(() => {
         v-if="documentType === 'resume'"
         id="isExportToJsonResumeIncluded"
         label="JSON Resume compatible data"
-        help-text="Full compatibility will be soon available. In The meantime,
-          double-check dates, highlights and tags, and add missing elements such
-          as profile image and references directly in JSON Resume."
+        help-text="Fill in the gaps between Nice Resume and JSON Resume formats"
         type="checkbutton"
         v-model="isExportToJsonResumeIncluded"
       />
@@ -370,6 +384,307 @@ onMounted(() => {
       <p v-if="isExportError" class="text-red-500 text-center">
         Error exporting data.
       </p>
+    </div>
+  </Dialog>
+
+  <Dialog
+    v-model:visible="isJsonResumeExportDialogOpen"
+    modal
+    :header="t('editAndConfirmJsonResumeMapping')"
+    class="max-w-screen-lg"
+  >
+    <p>
+      Consult schema
+      <a href="https://jsonresume.org/schema">https://jsonresume.org/schema</a>
+    </p>
+    <div class="card flex justify-center" v-if="jsonResume">
+      <Stepper :value="jsonResumeExportSteps[0]" linear>
+        <StepItem
+          v-for="(step, index) in jsonResumeExportSteps"
+          :key="`jsonResumeExportStep${index}`"
+          :value="step"
+        >
+          <Step>{{ capitalize($t(step)) }}</Step>
+          <StepPanel
+            v-slot="{ activateCallback }"
+            :value="jsonResumeExportSteps[index]"
+          >
+            <div v-if="step === 'profile'" class="formBlock">
+              <Field :label="$t('email')" v-model="jsonResume.basics.email" />
+              <Field :label="$t('phone')" v-model="jsonResume.basics.phone" />
+              <Field label="URL" v-model="jsonResume.basics.url" />
+              <Field
+                :label="$t('address')"
+                v-model="jsonResume.basics.location.address"
+              />
+              <Field
+                :label="$t('postalCode')"
+                v-model="jsonResume.basics.location.postalCode"
+              />
+              <Field
+                :label="$t('city')"
+                v-model="jsonResume.basics.location.city"
+              />
+              <Field
+                :label="$t('countryCode')"
+                v-model="jsonResume.basics.location.countryCode"
+              />
+              <Field
+                :label="$t('region')"
+                v-model="jsonResume.basics.location.region"
+              />
+              <label class="flex flex-col gap-1" for="profiles">
+                <span class="label">{{ capitalize($t("profiles")) }}</span>
+                <ul
+                  v-if="jsonResume.basics.profiles.length"
+                  id="profileList"
+                  class="inputList"
+                >
+                  <li
+                    v-for="(_profile, profileIndex) in jsonResume.basics
+                      .profiles"
+                    :key="profileIndex"
+                    class="inputListItem"
+                  >
+                    <InputText
+                      class="!text-sm"
+                      size="small"
+                      v-model="jsonResume.basics.profiles[profileIndex].network"
+                    />
+                    <InputText
+                      class="!text-sm"
+                      size="small"
+                      v-model="
+                        jsonResume.basics.profiles[profileIndex].username
+                      "
+                    />
+                    <InputText
+                      class="!text-sm"
+                      size="small"
+                      v-model="jsonResume.basics.profiles[profileIndex].url"
+                    />
+                    <ListActions
+                      :index="profileIndex"
+                      :list-length="jsonResume.basics.profiles.length"
+                      @moveUp="moveUp(jsonResume.basics.profiles, profileIndex)"
+                      @moveDown="
+                        moveDown(jsonResume.basics.profiles, profileIndex)
+                      "
+                      @remove="remove(jsonResume.basics.profiles, profileIndex)"
+                    />
+                  </li>
+                </ul>
+              </label>
+            </div>
+            <div v-if="step === 'work'" class="formBlock">
+              <FormBlockRow
+                v-for="(item, index) in jsonResume.work"
+                :key="item.position"
+                :header="`${item.position} x ${item.name}`"
+              >
+                <Field label="URL" v-model="jsonResume.work[index].url" />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'volunteer'" class="formBlock">
+              <FormBlockRow
+                v-for="(item, index) in jsonResume.volunteer"
+                :key="item.position"
+                :header="item.position"
+              >
+                <Field label="URL" v-model="jsonResume.volunteer[index].url" />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'education'" class="formBlock">
+              <FormBlockRow
+                v-for="(item, index) in jsonResume.education"
+                :key="item.area"
+                :header="item.area"
+              >
+                <Field
+                  :label="$t('startDate')"
+                  v-model="jsonResume.education[index].startDate"
+                />
+                <Field
+                  :label="$t('endDate')"
+                  v-model="jsonResume.education[index].endDate"
+                />
+                <Field label="URL" v-model="jsonResume.education[index].url" />
+                <Field
+                  :label="$t('area')"
+                  v-model="jsonResume.education[index].area"
+                />
+                <Field
+                  :label="$t('studyType')"
+                  v-model="jsonResume.education[index].studyType"
+                />
+                <Field
+                  :label="$t('score')"
+                  v-model="jsonResume.education[index].score"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'awards'" class="formBlock">
+              <FormBlockRow
+                v-for="(award, index) in jsonResume.awards"
+                :key="award.title"
+                :header="award.title"
+              >
+                <Field
+                  :label="$t('date')"
+                  v-model="jsonResume.awards[index].date"
+                  helpText="Please type the date in the YYYY-MM-DD format"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'certificates'" class="formBlock">
+              <FormBlockRow
+                v-for="(certificate, index) in jsonResume.certificates"
+                :key="certificate.name"
+                :header="certificate.name"
+              >
+                <Field
+                  :label="$t('date')"
+                  v-model="jsonResume.certificates[index].date"
+                  helpText="Please type the date in the YYYY-MM-DD format"
+                />
+                <Field
+                  label="URL"
+                  v-model="jsonResume.certificates[index].url"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'publications'" class="formBlock">
+              <FormBlockRow
+                v-for="(publication, index) in jsonResume.publications"
+                :key="publication.name"
+                :header="publication.name"
+              >
+                <Field
+                  :label="$t('releaseDate')"
+                  v-model="jsonResume.publications[index].releaseDate"
+                  helpText="Please type the date in the YYYY-MM-DD format"
+                />
+                <Field
+                  label="URL"
+                  v-model="jsonResume.publications[index].url"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'skills'" class="formBlock">
+              <FormBlockRow
+                v-for="(skill, index) in jsonResume.skills"
+                :key="skill.name"
+                :header="skill.name"
+              >
+                <Field
+                  :label="$t('level')"
+                  v-model="jsonResume.skills[index].level"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'languages'" class="formBlock">
+              <FormBlockRow
+                v-for="(language, index) in jsonResume.languages"
+                :key="language.language"
+                :header="language.language"
+              >
+                <Field
+                  :label="$t('fluency')"
+                  v-model="jsonResume.languages[index].fluency"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'interests'" class="formBlock">
+              <FormBlockRow
+                v-for="(interest, index) in jsonResume.interests"
+                :key="interest.name"
+                :header="interest.name"
+              >
+                <Field
+                  :label="$t('keywords')"
+                  v-model="jsonResume.interests[index].keywords"
+                />
+              </FormBlockRow>
+            </div>
+            <div v-if="step === 'references'" class="formBlock">
+              <FormBlockRow
+                v-for="(reference, index) in jsonResume.references"
+                :key="reference.name"
+                :header="reference.name"
+              >
+                <Field
+                  :label="$t('reference')"
+                  v-model="jsonResume.references[index].reference"
+                />
+              </FormBlockRow>
+              <!-- TODO listactions order etc. add+ -->
+            </div>
+            <div v-if="step === 'projects'" class="formBlock">
+              <FormBlockRow
+                v-for="(project, index) in jsonResume.projects"
+                :key="project.name"
+                :header="project.name"
+              >
+                <Field
+                  :label="$t('startDate')"
+                  v-model="jsonResume.projects[index].startDate"
+                  helpText="Please type the date in the YYYY-MM-DD format"
+                />
+                <Field
+                  :label="$t('endDate')"
+                  v-model="jsonResume.projects[index].endDate"
+                  helpText="Please type the date in the YYYY-MM-DD format"
+                />
+                <Field label="URL" v-model="jsonResume.projects[index].url" />
+                <Field
+                  :label="$t('highlights')"
+                  v-model="jsonResume.projects[index].highlights"
+                />
+                <!-- TODOlul li listactions loop pour reorder -->
+              </FormBlockRow>
+            </div>
+            <div v-if="index === 0" class="pt-6 flex justify-end">
+              <Button
+                :label="$t('submit')"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                @click="activateCallback(jsonResumeExportSteps[index + 1])"
+              />
+            </div>
+            <div
+              v-else-if="index === jsonResumeExportSteps.length - 1"
+              class="pt-6"
+            >
+              <Button
+                :label="$t('previous')"
+                severity="secondary"
+                icon="pi pi-arrow-left"
+                @click="activateCallback(jsonResumeExportSteps[index - 1])"
+              />
+              <Button
+                :label="$t('submit')"
+                icon="pi pi-check"
+                iconPos="right"
+                @click="download(jsonResume, 'nice-resume-to-json-resume')"
+              />
+            </div>
+            <div v-else class="pt-6 flex justify-between">
+              <Button
+                :label="$t('previous')"
+                severity="secondary"
+                icon="pi pi-arrow-left"
+                @click="activateCallback(jsonResumeExportSteps[index - 1])"
+              />
+              <Button
+                :label="$t('next')"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                @click="activateCallback(jsonResumeExportSteps[index + 1])"
+              />
+            </div>
+          </StepPanel>
+        </StepItem>
+      </Stepper>
     </div>
   </Dialog>
 
@@ -500,7 +815,8 @@ onMounted(() => {
     "importSaveFile": "Import a save file from a previous session",
     "importJsonResume": "Import a JSON Resume file",
     "exportTitle": "What do you want to download?",
-    "exportSubmit": "Download selection"
+    "exportSubmit": "Download selection",
+    "editAndConfirmJsonResumeMapping": "Edit and confirm data"
   },
   "es": {
     "resumeTitle": "todo",
@@ -510,7 +826,8 @@ onMounted(() => {
     "importSaveFile": "todo",
     "importJsonResume": "todo",
     "exportTitle": "todo",
-    "exportSubmit": "todo"
+    "exportSubmit": "todo",
+    "editAndConfirmJsonResumeMapping": "todo"
   },
   "fr": {
     "resumeTitle": "Comment souhaitez-vous commencer ?",
@@ -518,9 +835,10 @@ onMounted(() => {
     "resumeFromScratch": "Commencer à partir de rien",
     "resumeFromFakeData": "Reprendre à partir d'un exemple",
     "importSaveFile": "Importer une sauvegarde d'une session précédente",
-    "importJsonResume": "Importer fichier JSON Resume",
+    "importJsonResume": "Importer un fichier JSON Resume",
     "exportTitle": "Comment souhaitez-vous exporter votre travail ?",
-    "exportSubmit": "Exporter la sélection"
+    "exportSubmit": "Exporter la sélection",
+    "editAndConfirmJsonResumeMapping": "Editez et confirmez les informations"
   }
 }
 </i18n>
