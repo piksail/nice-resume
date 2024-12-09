@@ -5,10 +5,11 @@ import Button from "primevue/button";
 import Divider from "primevue/divider";
 import FileUpload, { type FileUploadSelectEvent } from "primevue/fileupload";
 import Message from "primevue/message";
-import type { Export } from "@/types";
+import type { Export, JsonResume } from "@/types";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import { formatJsonResumeAsResume } from "@/utils/json-resume";
 import { generateStores } from "~/utils/editor";
 
 // eslint-disable-next-line no-undef
@@ -104,21 +105,12 @@ function importFromJsonResume(event: FileUploadSelectEvent) {
         return;
       }
 
-      const toImport: Export = JSON.parse(
+      const jsonResume: JsonResume = JSON.parse(
         fileReaderEvent.target.result.toString(),
       );
 
-      // TODO start user-journey to apply mapping
-      // TODO improve mapping (startDate/endDate->period)
-      // TODO improve mapping (highlights/tags->handle)
-      // TODO improve mapping (references->lost)
-
+      const toImport = formatJsonResumeAsResume(jsonResume);
       Object.entries(toImport).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (letter[key]) {
-          // @ts-expect-error Build object on the fly
-          letter[key].value = value;
-        }
         // @ts-expect-error Build object on the fly
         if (profile[key]) {
           // @ts-expect-error Build object on the fly
