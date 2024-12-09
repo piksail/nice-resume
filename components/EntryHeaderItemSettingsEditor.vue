@@ -16,7 +16,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 </script>
 
 <template>
-  <div class="flex flex-col gap-5">
+  <div class="formBlock">
     <div class="flex gap-5 flex-wrap">
       <Field
         :id="`${propertyName}Order`"

@@ -76,7 +76,7 @@ const { t } = useI18n({
         </p>
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ $t("sexyStart") }}</span>
+            <span class="textGradient">{{ t("getStarted") }}</span>
           </button>
         </NuxtLink>
       </Card>
@@ -124,7 +124,7 @@ const { t } = useI18n({
         <Card class="relative left-44 bottom-56" />
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ $t("sexyStart") }}</span>
+            <span class="textGradient">{{ t("getStarted") }}</span>
           </button>
         </NuxtLink>
       </div>
@@ -147,7 +147,7 @@ const { t } = useI18n({
         />
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ $t("sexyStart") }}</span>
+            <span class="textGradient">{{ t("getStarted") }}</span>
           </button>
         </NuxtLink>
       </div>
@@ -165,7 +165,7 @@ const { t } = useI18n({
         />
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ $t("sexyStart") }}</span>
+            <span class="textGradient">{{ t("getStarted") }}</span>
           </button>
         </NuxtLink>
       </div>
@@ -183,7 +183,7 @@ const { t } = useI18n({
         />
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ $t("sexyStart") }}</span>
+            <span class="textGradient">{{ t("getStarted") }}</span>
           </button>
         </NuxtLink>
       </div>
@@ -204,7 +204,8 @@ const { t } = useI18n({
     "stepResume": "Build your",
     "stepLetter": "Write your",
     "stepEmail": "Sign your email",
-    "stepCustomize": "Adapt the design"
+    "stepCustomize": "Adapt the design",
+    "getStarted": "Get started!"
   },
   "es": {
     "introVerb": "todo",
@@ -216,7 +217,8 @@ const { t } = useI18n({
     "stepResume": "todo",
     "stepLetter": "todo",
     "stepEmail": "todo",
-    "stepCustomize": "todo"
+    "stepCustomize": "todo",
+    "getStarted": "todo"
   },
   "fr": {
     "introVerb": "De",
@@ -228,7 +230,8 @@ const { t } = useI18n({
     "stepResume": "Composez votre",
     "stepLetter": "Rédigez votre",
     "stepEmail": "Signez votre",
-    "stepCustomize": "Adaptez le"
+    "stepCustomize": "Adaptez le",
+    "getStarted": "C'est parti !"
   }
 }
 </i18n>

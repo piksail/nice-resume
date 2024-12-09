@@ -14,7 +14,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 </script>
 
 <template>
-  <div class="flex flex-col gap-5">
+  <div class="formBlock">
     <div>
       <div class="text-sm font-semibold">{{ capitalize($t("text")) }}</div>
       <div class="flex gap-5 flex-wrap">
