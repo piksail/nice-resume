@@ -5,7 +5,6 @@ import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import Drawer from "primevue/drawer";
 import Fieldset from "primevue/fieldset";
-import Select from "primevue/select";
 import { useConfirm } from "primevue/useconfirm";
 import { useEditorStore } from "@/stores/editor";
 import { useEmailStore } from "@/stores/email";
@@ -170,18 +169,15 @@ watch(documentType, () => {
 
       <template v-if="tabs.includes('Signature')">
         <Fieldset :legend="capitalize($t('signature'))" toggleable>
-          <div class="flex flex-col gap-5">
-            <label class="flex flex-col" for="headerLayout">
-              <span class="label">Layout</span>
-              <Select
-                id="headerLayout todo wrong id"
-                :disabled="!isThemeCustomized"
-                v-model="
-                  (documentTypeSettings as EmailSettings).document.layout
-                "
-                :options="headerLayouts"
-              />
-            </label>
+          <div class="formBlock">
+            <Field
+              id="signatureLayout"
+              type="select"
+              :label="$t('layout')"
+              v-model="(documentTypeSettings as EmailSettings).document.layout"
+              :options="headerLayouts"
+              :disabled="!isThemeCustomized"
+            />
             <!-- <BlockSettingsEditor
             property-name="signature"
             :settings="emailSettings.document"
@@ -194,15 +190,14 @@ watch(documentType, () => {
       <template v-if="tabs.includes('Header')">
         <Fieldset :legend="capitalize($t('header'))" toggleable>
           <div class="formBlock">
-            <label class="flex flex-col" for="headerLayout">
-              <span class="label">Layout</span>
-              <Select
-                id="headerLayout"
-                :disabled="!isThemeCustomized"
-                v-model="(documentTypeSettings as LetterSettings).header.layout"
-                :options="headerLayouts"
-              />
-            </label>
+            <Field
+              id="headerLayout"
+              type="select"
+              :label="$t('layout')"
+              v-model="(documentTypeSettings as LetterSettings).header.layout"
+              :options="headerLayouts"
+              :disabled="!isThemeCustomized"
+            />
             <BlockSettingsEditor
               property-name="header"
               :settings="(documentTypeSettings as LetterSettings).header"
@@ -538,27 +533,17 @@ watch(documentType, () => {
       <template v-if="tabs.includes('Sections')">
         <Fieldset :legend="capitalize($t('header'))" toggleable>
           <div class="formBlock">
-            <label class="flex flex-col" for="headerLayout">
-              <span class="label">Layout</span>
-              <select
-                id="headerLayout"
-                class="select block"
-                :disabled="!isThemeCustomized"
-                v-model="
-                  (documentTypeSettings as ResumeSettings | LetterSettings)
-                    .header.layout
-                "
-              >
-                <option
-                  v-for="layout in headerLayouts"
-                  :key="layout"
-                  class="option"
-                  :value="layout"
-                >
-                  {{ layout }}
-                </option>
-              </select>
-            </label>
+            <Field
+              id="headerLayout"
+              type="select"
+              :label="$t('layout')"
+              v-model="
+                (documentTypeSettings as ResumeSettings | LetterSettings).header
+                  .layout
+              "
+              :options="headerLayouts"
+              :disabled="!isThemeCustomized"
+            />
             <BlockSettingsEditor
               property-name="header"
               :settings="resumeSettings.header"
@@ -647,24 +632,14 @@ watch(documentType, () => {
       <template v-if="tabs.includes('Entry')">
         <Fieldset :legend="capitalize($t('entry'))" toggleable>
           <div class="formBlock">
-            <label class="flex flex-col" for="entryLayout">
-              <span class="label">Layout</span>
-              <select
-                id="entryLayout"
-                class="select block"
-                :disabled="!isThemeCustomized"
-                v-model="resumeSettings.entry.layout"
-              >
-                <option
-                  v-for="layout in entryLayouts"
-                  :key="layout"
-                  class="option"
-                  :value="layout"
-                >
-                  {{ layout }}
-                </option>
-              </select>
-            </label>
+            <Field
+              id="entryLayout"
+              type="select"
+              :label="$t('layout')"
+              v-model="resumeSettings.entry.layout"
+              :options="entryLayouts"
+              :disabled="!isThemeCustomized"
+            />
             <Field
               id="entryGap"
               label="Gap"
