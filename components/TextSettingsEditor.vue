@@ -15,42 +15,39 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 <template>
   <div class="formBlock">
-    <div>
-      <div class="text-sm font-semibold">{{ capitalize($t("text")) }}</div>
-      <div class="flex gap-5 flex-wrap">
-        <Field
-          :id="`${propertyName}Font`"
-          type="select"
-          :label="$t('font')"
-          v-model="settings.font"
-          :options="['inherit', ...fonts]"
-          :disabled="!isThemeCustomized"
-        />
-        <Field
-          :id="`${propertyName}FontSize`"
-          :label="$t('size')"
-          type="number"
-          :disabled="!isThemeCustomized"
-          v-model="settings.fontSize"
-        />
-        <Field
-          :id="`${propertyName}LineHeight`"
-          :label="$t('lineHeight')"
-          type="number"
-          :disabled="!isThemeCustomized"
-          v-model="settings.lineHeight"
-          :step="0.1"
-        />
-        <Field
-          :id="`${propertyName}LetterSpacing`"
-          :label="$t('letterSpacing')"
-          type="number"
-          :disabled="!isThemeCustomized"
-          v-model="settings.letterSpacing"
-        />
-      </div>
-    </div>
-    <div class="flex gap-5 flex-wrap items-end">
+    <FormBlockRow :header="$t('text')">
+      <Field
+        :id="`${propertyName}Font`"
+        type="select"
+        :label="$t('font')"
+        v-model="settings.font"
+        :options="['inherit', ...fonts]"
+        :disabled="!isThemeCustomized"
+      />
+      <Field
+        :id="`${propertyName}FontSize`"
+        :label="$t('size')"
+        type="number"
+        :disabled="!isThemeCustomized"
+        v-model="settings.fontSize"
+      />
+      <Field
+        :id="`${propertyName}LineHeight`"
+        :label="$t('lineHeight')"
+        type="number"
+        :disabled="!isThemeCustomized"
+        v-model="settings.lineHeight"
+        :step="0.1"
+      />
+      <Field
+        :id="`${propertyName}LetterSpacing`"
+        :label="$t('letterSpacing')"
+        type="number"
+        :disabled="!isThemeCustomized"
+        v-model="settings.letterSpacing"
+      />
+    </FormBlockRow>
+    <FormBlockRow>
       <Field
         :id="`${propertyName}FontWeight`"
         type="select"
@@ -80,6 +77,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :disabled="!isThemeCustomized"
         v-model="settings.color"
       />
-    </div>
+    </FormBlockRow>
   </div>
 </template>

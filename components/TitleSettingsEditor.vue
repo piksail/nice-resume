@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia";
 import type { TitleSettings } from "@/types";
 import { useProfileStore } from "@/stores/profile";
+import FormBlockRow from "./FormBlockRow.vue";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;
@@ -13,7 +14,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 <template>
   <div class="formBlock">
-    <div class="flex gap-5 flex-wrap">
+    <FormBlockRow>
       <Field
         :id="`${propertyName}Align`"
         type="select"
@@ -22,6 +23,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :options="['left', 'center', 'right']"
         :disabled="!isThemeCustomized"
       />
-    </div>
+    </FormBlockRow>
   </div>
 </template>

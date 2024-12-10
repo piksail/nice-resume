@@ -17,32 +17,30 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 <template>
   <div class="formBlock">
-    <div>
-      <div class="text-sm font-semibold">{{ capitalize($t("list")) }}</div>
-      <div class="flex gap-5 flex-wrap">
-        <Field
-          :id="`${propertyName}Gap`"
-          :label="$t('gap')"
-          type="number"
-          :disabled="!isThemeCustomized"
-          v-model="settings.gap"
-        />
-        <Field
-          :id="`${propertyName}ListMarker`"
-          :label="$t('marker')"
-          type="select"
-          :disabled="!isThemeCustomized"
-          :options="['', ...listMarkers]"
-          v-model="settings.listMarker"
-        />
-        <Field
-          :id="`${propertyName}ListMarkerColor`"
-          :label="$t('color')"
-          type="color"
-          :disabled="!isThemeCustomized"
-          v-model="settings.listMarkerColor"
-        />
-      </div>
-    </div>
+    <FormBlockRow :header="$t('list')">
+      <Field
+        :id="`${propertyName}Gap`"
+        :label="$t('gap')"
+        type="number"
+        :disabled="!isThemeCustomized"
+        v-model="settings.gap"
+      />
+      <Field
+        :id="`${propertyName}ListMarker`"
+        :label="$t('marker')"
+        type="select"
+        :disabled="!isThemeCustomized"
+        :options="['', ...listMarkers]"
+        v-model="settings.listMarker"
+      />
+      <Field
+        :id="`${propertyName}ListMarkerColor`"
+        :label="$t('color')"
+        type="color"
+        :disabled="!isThemeCustomized"
+        v-model="settings.listMarkerColor"
+      />
+    </FormBlockRow>
+    >
   </div>
 </template>

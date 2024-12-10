@@ -34,6 +34,7 @@ import Field from "@/components/Field.vue";
 import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
 import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
+import FormBlockRow from "~/components/FormBlockRow.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
@@ -137,11 +138,8 @@ watch(documentType, () => {
     <section class="flex flex-col gap-12">
       <template v-if="tabs.includes('Document')">
         <Fieldset :legend="capitalize($t('document'))" toggleable>
-          <div class="flex flex-col gap-5">
-            <div>
-              <div class="text-sm font-semibold">
-                {{ capitalize($t("margin")) }}
-              </div>
+          <div class="formBlock">
+            <FormBlockRow :header="$t('margin')">
               <div class="grid grid-cols-4 gap-5">
                 <Field
                   v-for="i in 4"
@@ -153,8 +151,7 @@ watch(documentType, () => {
                   v-model="documentTypeSettings.document.padding[i - 1]"
                 />
               </div>
-            </div>
-
+            </FormBlockRow>
             <Field
               id="documentBodyFont"
               type="select"
@@ -291,7 +288,7 @@ watch(documentType, () => {
       <template v-if="tabs.includes('Body')">
         <Fieldset :legend="capitalize($t('paragraphs'))" toggleable>
           <div class="formBlock">
-            <div class="flex gap-5 flex-wrap">
+            <FormBlockRow>
               <Field
                 id="bodyColor"
                 type="color"
@@ -335,23 +332,18 @@ watch(documentType, () => {
                 :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.isSignatureRightAligned"
               />
-            </div>
-            <div>
-              <div class="text-sm font-semibold">
-                {{ capitalize($t("marge")) }}
-              </div>
-              <div class="flex gap-5 flex-wrap">
-                <Field
-                  v-for="i in 4"
-                  :key="i"
-                  :id="`bodyMargin${i}`"
-                  :label="$t(getSideIndexLabel(i))"
-                  type="number"
-                  :disabled="!isThemeCustomized"
-                  v-model="letterSettings.body.margin[i - 1]"
-                />
-              </div>
-            </div>
+            </FormBlockRow>
+            <FormBlockRow :header="$t('margin')">
+              <Field
+                v-for="i in 4"
+                :key="i"
+                :id="`bodyMargin${i}`"
+                :label="$t(getSideIndexLabel(i))"
+                type="number"
+                :disabled="!isThemeCustomized"
+                v-model="letterSettings.body.margin[i - 1]"
+              />
+            </FormBlockRow>
           </div>
           <Field
             id="bodyGap"
@@ -426,7 +418,7 @@ watch(documentType, () => {
               :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.aboutQuote.isShown"
             />
-            <div class="flex gap-5 flex-wrap">
+            <FormBlockRow>
               <Field
                 id="aboutQuoteFont"
                 type="select"
@@ -464,7 +456,7 @@ watch(documentType, () => {
                 :disabled="!isThemeCustomized"
                 v-model="documentTypeSettings.aboutQuote.color"
               />
-            </div>
+            </FormBlockRow>
           </div>
         </Fieldset>
       </template>
@@ -480,7 +472,7 @@ watch(documentType, () => {
               property-name="contactDetails"
               :settings="documentTypeSettings.contactDetails"
             />
-            <div class="flex gap-5 flew-wrap">
+            <FormBlockRow>
               <!-- TODO careful, on a des alignment en start/end et d'autres en left/right -->
               <Field
                 id="contactDetailsAlignment"
@@ -525,7 +517,7 @@ watch(documentType, () => {
                 :disabled="!isThemeCustomized"
                 v-model="documentTypeSettings.contactDetails.iconColor"
               />
-            </div>
+            </FormBlockRow>
           </div>
         </Fieldset>
       </template>
@@ -557,22 +549,15 @@ watch(documentType, () => {
               property-name="aside"
               :settings="resumeSettings.aside"
             />
-            <div class="flex gap-5 flex-wrap">
-              <label for="asideWith">
-                <span class="label">Width</span>
-                <div class="flex gap-2 items-center">
-                  <input
-                    id="asideWith"
-                    type="range"
-                    min="0"
-                    max="100"
-                    v-model="resumeSettings.aside.width"
-                  />
-                  <output class="w-[3rem]">
-                    {{ resumeSettings.aside.width }}%
-                  </output>
-                </div>
-              </label>
+            <FormBlockRow>
+              <Field
+                id="asideWidth"
+                :label="$t('width')"
+                type="range"
+                :min="0"
+                :max="100"
+                v-model="resumeSettings.aside.width"
+              />
               <Field
                 id="asideIsRightPositioned"
                 label="Right side"
@@ -580,7 +565,7 @@ watch(documentType, () => {
                 :disabled="!isThemeCustomized"
                 v-model="resumeSettings.aside.isRightPositioned"
               />
-            </div>
+            </FormBlockRow>
           </div>
         </Fieldset>
 

@@ -5,12 +5,23 @@ import InputNumber from "primevue/inputnumber";
 import InputText from "primevue/inputtext";
 import Select from "primevue/select";
 import SelectButton from "primevue/selectbutton";
+import Slider from "primevue/slider";
 import Textarea from "primevue/textarea";
 import ToggleButton from "primevue/togglebutton";
 import ToggleSwitch from "primevue/toggleswitch";
 import { capitalize } from "@/utils/string";
 
-const { disabled, label, helpText, id, step, options, type } = defineProps<{
+const {
+  disabled,
+  label,
+  helpText,
+  id,
+  step,
+  min = 0,
+  max = 100,
+  options,
+  type,
+} = defineProps<{
   defaultValue?: string | null | undefined;
   disabled?: boolean;
   id?: string;
@@ -18,11 +29,14 @@ const { disabled, label, helpText, id, step, options, type } = defineProps<{
   helpText?: string;
   options?: (string | number | null | undefined)[];
   step?: number;
+  min?: number;
+  max?: number;
   type?:
     | "checkbox"
     | "checkbutton"
     | "color"
     | "number"
+    | "range"
     | "select"
     | "selectbutton"
     | "textarea"
@@ -39,7 +53,20 @@ function updateColor(hashlessHex: string) {
 </script>
 
 <template>
-  <div v-if="type === 'toggle'" class="flex items-center">
+  <label v-if="type === 'range'" :for="id">
+    <span class="label">{{ capitalize(label) }}</span>
+    <div class="flex gap-2 items-center">
+      <Slider
+        :input-id="id"
+        class="w-36"
+        :min="min"
+        :max="max"
+        v-model="model as number"
+      />
+      <output class="w-[3rem]">{{ model }}%</output>
+    </div>
+  </label>
+  <div v-else-if="type === 'toggle'" class="flex items-center">
     <ToggleSwitch v-model="model as boolean" size="small" />
     <span class="cursor-pointer ml-2">
       {{ capitalize(label) }}
