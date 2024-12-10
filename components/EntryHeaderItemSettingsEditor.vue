@@ -3,6 +3,7 @@ import { storeToRefs } from "pinia";
 import type { TextSettings, TextSeparator } from "@/types";
 import { useProfileStore } from "@/stores/profile";
 import { textSeparators } from "@/globals";
+import FormBlockRow from "./FormBlockRow.vue";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;
@@ -17,7 +18,7 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
 
 <template>
   <div class="formBlock">
-    <div class="flex gap-5 flex-wrap">
+    <FormBlockRow>
       <Field
         :id="`${propertyName}Order`"
         type="select"
@@ -34,6 +35,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :options="['', ...textSeparators]"
         :disabled="!isThemeCustomized"
       />
-    </div>
+    </FormBlockRow>
   </div>
 </template>

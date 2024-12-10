@@ -124,7 +124,9 @@ export default {
       type: "type",
       uppercase: "uppercase",
       voluntary: "voluntary",
+      width: "width",
       work: "work",
+      zoom: "zoom",
     },
     es: {
       about: "todo",
@@ -250,7 +252,9 @@ export default {
       type: "todo",
       uppercase: "todo",
       voluntary: "todo",
+      width: "todo",
       work: "todo",
+      zoom: "todo",
     },
     fr: {
       about: "à propos",
@@ -376,7 +380,9 @@ export default {
       type: "type",
       uppercase: "majuscules",
       voluntary: "bénévolat",
+      width: "largeur",
       work: "professionel",
+      zoom: "zoom",
     },
   },
 };
