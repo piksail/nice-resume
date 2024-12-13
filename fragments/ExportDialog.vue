@@ -461,15 +461,20 @@ function exportResumeToJsonResume() {
 
 <i18n lang="json">
 {
+  "br": {
+    "exportTitle": "Petra 'po da pellgargañ?",
+    "exportSubmit": "Pellgargañ dibab",
+    "editAndConfirmJsonResumeMapping": "Embann ha kadarnaat roadennoù"
+  },
   "en": {
     "exportTitle": "What do you want to download?",
     "exportSubmit": "Download selection",
     "editAndConfirmJsonResumeMapping": "Edit and confirm data"
   },
   "es": {
-    "exportTitle": "todo",
-    "exportSubmit": "todo",
-    "editAndConfirmJsonResumeMapping": "todo"
+    "exportTitle": "TODO",
+    "exportSubmit": "TODO",
+    "editAndConfirmJsonResumeMapping": "TODO"
   },
   "fr": {
     "exportTitle": "Comment souhaitez-vous exporter votre travail ?",

@@ -230,6 +230,14 @@ onMounted(() => {
 
 <i18n lang="json">
 {
+  "bg": {
+    "resumeTitle": "TODO?",
+    "resumeContinue": "TODO",
+    "resumeFromScratch": "TODO",
+    "resumeFromFakeData": "TODO",
+    "importSaveFile": "Emporzhiañ gwared fichennaoueg kent estez",
+    "importJsonResume": "Emporzhiañ JSON Resume fichennaoueg"
+  },
   "en": {
     "resumeTitle": "How do you want to start editing?",
     "resumeContinue": "Continue where you left off",
@@ -239,12 +247,12 @@ onMounted(() => {
     "importJsonResume": "Import a JSON Resume file"
   },
   "es": {
-    "resumeTitle": "todo",
-    "resumeContinue": "todo",
-    "resumeFromScratch": "todo",
-    "resumeFromFakeData": "todo",
-    "importSaveFile": "todo",
-    "importJsonResume": "todo"
+    "resumeTitle": "TODO",
+    "resumeContinue": "TODO",
+    "resumeFromScratch": "TODO",
+    "resumeFromFakeData": "TODO",
+    "importSaveFile": "TODO",
+    "importJsonResume": "TODO"
   },
   "fr": {
     "resumeTitle": "Comment souhaitez-vous commencer ?",
