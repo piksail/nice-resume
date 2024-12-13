@@ -1,11 +1,21 @@
-<script setup>
-import Select from "primevue/select";
+<script setup lang="ts">
+import type { LocaleCode, RegionCode } from "~/types";
+import RegionFlag from "~/components/RegionFlag.vue";
 
 // eslint-disable-next-line no-undef
 const { availableLocales, locale, setLocale } = useI18n();
 
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
+
+const regionCodeFromLocale: { [key in LocaleCode]: RegionCode } = {
+  br: "br",
+  de: "de",
+  en: "uk",
+  es: "es",
+  fr: "fr",
+  it: "it",
+};
 </script>
 
 <template>
@@ -22,12 +32,15 @@ const localePath = useLocalePath();
           Resume
         </h1>
       </NuxtLink>
-      <Select
-        :options="availableLocales"
-        :aria-label="$t('switchLanguage')"
-        :model-value="locale"
-        @update:model-value="setLocale"
-      />
+      <div class="flex gap-3 h-1/4">
+        <RegionFlag
+          v-for="availableLocale in availableLocales"
+          :key="availableLocale"
+          :code="regionCodeFromLocale[availableLocale as LocaleCode]"
+          :class="`h-full rounded-sm ${availableLocale === locale ? '' : 'grayscale'}  cursor-pointer hover:shadow-xl hover:grayscale-0 transition duration-75`"
+          @click="setLocale(availableLocale)"
+        />
+      </div>
     </header>
     <slot />
   </div>
