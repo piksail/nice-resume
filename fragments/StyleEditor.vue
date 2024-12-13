@@ -779,13 +779,17 @@ watch(documentType, () => {
 
 <i18n lang="json">
 {
+  "br": {
+    "onLabel": "TODO",
+    "offLabel": "TODO"
+  },
   "en": {
     "onLabel": "customized",
     "offLabel": "not customized"
   },
   "es": {
-    "onLabel": "todo",
-    "offLabel": "todo"
+    "onLabel": "TODO",
+    "offLabel": "TODO"
   },
   "fr": {
     "onLabel": "modifié",

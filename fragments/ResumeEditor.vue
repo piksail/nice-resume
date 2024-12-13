@@ -438,6 +438,12 @@ function toggleCategoryVisibility(category: Category) {
 
 <i18n lang="json">
 {
+  "br": {
+    "lockCategory": "Prennañ rummad",
+    "unlockCategory": "Dibrennañ  rummad",
+    "showCategory": "Diskouez rummad",
+    "hideCategory": "Kuzhat rummad"
+  },
   "en": {
     "lockCategory": "Lock category",
     "unlockCategory": "Unlock category",
@@ -445,14 +451,14 @@ function toggleCategoryVisibility(category: Category) {
     "hideCategory": "Hide category"
   },
   "es": {
-    "lockCategory": "todo",
-    "unlockCategory": "todo",
-    "showCategory": "todo",
-    "hideCategory": "todo"
+    "lockCategory": "TODO",
+    "unlockCategory": "TODO",
+    "showCategory": "TODO",
+    "hideCategory": "TODO"
   },
   "fr": {
-    "lockCategory": "Verouiller la catégorie",
-    "unlockCategory": "Déverouiller la catégorie",
+    "lockCategory": "Verrouiller la catégorie",
+    "unlockCategory": "Déverrouiller la catégorie",
     "showCategory": "Afficher la catégorie",
     "hideCategory": "Cacher la catégorie"
   }

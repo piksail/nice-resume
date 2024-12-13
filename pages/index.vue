@@ -194,6 +194,19 @@ const { t } = useI18n({
 
 <i18n lang="json">
 {
+  "br": {
+    "introVerb": "TODO",
+    "introPossessiveAdjective": "TODO",
+    "introJobApplication": "TODO",
+    "introIndefiniteArticle": "TODO",
+    "introPowerWord": "TODO",
+    "stepTheme": "TODO",
+    "stepResume": "TODO",
+    "stepLetter": "TODO",
+    "stepEmail": "TODO",
+    "stepCustomize": "TODO",
+    "getStarted": "TODO!"
+  },
   "en": {
     "introVerb": "Make",
     "introPossessiveAdjective": "your",

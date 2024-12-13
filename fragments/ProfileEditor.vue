@@ -145,13 +145,17 @@ function changeContactDetaiType(
 
 <i18n lang="json">
 {
+  "br": {
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
+  },
   "en": {
     "considerAboutAndDetailsACategory": "Consider About and Details a decidated category",
     "howToStyleAboutAndDetailsCategory": "About and Details are styled through the Entry style editor."
   },
   "es": {
-    "considerAboutAndDetailsACategory": "todo",
-    "howToStyleAboutAndDetailsCategory": "todo"
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
   },
   "fr": {
     "considerAboutAndDetailsACategory": "Séparer À propos et Coordonnées dans une catégorie dédiée",
