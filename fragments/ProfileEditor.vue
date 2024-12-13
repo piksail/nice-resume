@@ -6,7 +6,7 @@ import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
 import type { ContactDetail } from "@/types";
-import { contactIcons, socialIcons } from "@/globals";
+import { contactIcons, iconTypes, socialIcons } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
@@ -86,20 +86,35 @@ function changeContactDetaiType(
                 id="detailType"
                 :label="$t('type')"
                 type="selectbutton"
-                :options="['personal', 'social']"
                 :model-value="detail.type"
+                optionLabel="label"
+                optionValue="value"
+                :options="
+                  iconTypes.map((type) => ({
+                    label: capitalize($t(type)),
+                    value: type,
+                  }))
+                "
                 @update:model-value="changeContactDetaiType(detail, $event)"
               />
               <Field
                 id="detailIcon"
                 :label="$t('icon')"
                 type="select"
+                v-model="detail.icon"
+                optionLabel="label"
+                optionValue="value"
                 :options="
                   detail.type === 'social'
-                    ? [undefined, 'default', ...socialIcons]
-                    : [undefined, 'default', ...contactIcons]
+                    ? [undefined, 'default', ...socialIcons].map((icon) => ({
+                        label: !icon ? '' : capitalize($t(icon)),
+                        value: icon,
+                      }))
+                    : [undefined, 'default', ...contactIcons].map((icon) => ({
+                        label: !icon ? '' : capitalize($t(icon)),
+                        value: icon,
+                      }))
                 "
-                v-model="detail.icon"
               />
             </div>
             <ListActions

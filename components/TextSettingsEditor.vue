@@ -19,10 +19,17 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
       <Field
         :id="`${propertyName}Font`"
         type="select"
+        :disabled="!isThemeCustomized"
         :label="$t('font')"
         v-model="settings.font"
-        :options="['inherit', ...fonts]"
-        :disabled="!isThemeCustomized"
+        optionLabel="label"
+        optionValue="value"
+        :options="
+          ['inherit', ...fonts].map((font) => ({
+            label: font === 'inherit' ? capitalize($t('default')) : font,
+            value: font,
+          }))
+        "
       />
       <Field
         :id="`${propertyName}FontSize`"

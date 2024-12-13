@@ -20,6 +20,10 @@ const {
   min = 0,
   max = 100,
   options,
+  optionLabel,
+  optionValue,
+  onLabel = "On",
+  offLabel = "Off",
   type,
 } = defineProps<{
   defaultValue?: string | null | undefined;
@@ -27,7 +31,11 @@ const {
   id?: string;
   label?: string;
   helpText?: string;
-  options?: (string | number | null | undefined)[];
+  options?: (string | number | null | undefined | unknown)[];
+  optionLabel?: string;
+  optionValue?: string;
+  onLabel?: string;
+  offLabel?: string;
   step?: number;
   min?: number;
   max?: number;
@@ -75,8 +83,8 @@ function updateColor(hashlessHex: string) {
   <div v-else-if="type === 'togglebutton'" class="flex items-center">
     <ToggleButton
       v-model="model as boolean"
-      onLabel="On"
-      offLabel="Off"
+      :onLabel="onLabel"
+      :offLabel="offLabel"
       size="small"
     />
     <span class="label cursor-pointer ml-2">
@@ -135,13 +143,26 @@ function updateColor(hashlessHex: string) {
     class="flex flex-col gap-1"
   >
     <span class="label">{{ capitalize(label) }}</span>
-    <SelectButton v-model="model" :options="options" size="small" />
+    <SelectButton
+      v-model="model"
+      :options="options"
+      :optionLabel="optionLabel"
+      :optionValue="optionValue"
+      size="small"
+    />
   </label>
   <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
     <span class="label">
       {{ capitalize(label) }}
     </span>
-    <Select v-model="model" :options="options" :input-id="id" size="small" />
+    <Select
+      v-model="model"
+      :options="options"
+      :optionLabel="optionLabel"
+      :optionValue="optionValue"
+      :input-id="id"
+      size="small"
+    />
   </label>
   <label v-else :for="id" class="flex flex-col gap-1">
     <span class="label">
