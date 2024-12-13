@@ -13,7 +13,12 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "@primevue/nuxt-module",
     "@vueuse/nuxt",
-    "nuxt-svgo",
+    [
+      "nuxt-svgo",
+      {
+        defaultImport: "component",
+      },
+    ],
   ],
   alias: {
     "~/*": "../*",
@@ -35,7 +40,7 @@ export default defineNuxtConfig({
     storage: "localStorage",
   },
   i18n: {
-    locales: ["br", "de", "en", "es", "fr"],
+    locales: ["br", "de", "en", "es", "fr", "it"],
     defaultLocale: "en",
     strategy: "prefix_and_default",
     detectBrowserLanguage: {

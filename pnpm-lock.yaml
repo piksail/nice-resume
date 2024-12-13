@@ -139,8 +139,8 @@ importers:
         specifier: ^15.2.7
         version: 15.2.7
       nuxt-svgo:
-        specifier: ^4.0.2
-        version: 4.0.2(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.33(typescript@5.5.4))
+        specifier: ^4.0.9
+        version: 4.0.9(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.33(typescript@5.5.4))
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -4170,8 +4170,8 @@ packages:
   nuxt-site-config@2.2.15:
     resolution: {integrity: sha512-V/gsWAeSWQi7FGoy6vicf6DXaaNJ/akail54dMWnrkcBre4PpBSwP7arZqmZZzj1mc0v7LoYqISr9qeXhcT1NA==}
 
-  nuxt-svgo@4.0.2:
-    resolution: {integrity: sha512-B5KaFJtbxtsg2q3fhzjWbNjikiMhn3UTGtLqTzZugxzUbb5OfX9x7p05DOUjjzDG2glxiUshmvTfyGRh6445Fg==}
+  nuxt-svgo@4.0.9:
+    resolution: {integrity: sha512-Rc2hLaaydVgg67QBQsk091zOezQxJoBxRm8keM/5c0NWgezIJQKl9sM3ODsMXwiqiP/bPXENo+PRfhwjiHrLlw==}
     peerDependencies:
       svgo-loader: ^4.0.0
       vue: '>=3.2.13'
@@ -5136,6 +5136,11 @@ packages:
 
   svg-tags@1.0.0:
     resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
+
+  svgo@3.0.2:
+    resolution: {integrity: sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   svgo@3.3.2:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
@@ -10598,11 +10603,11 @@ snapshots:
       - vite
       - vue
 
-  nuxt-svgo@4.0.2(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.33(typescript@5.5.4)):
+  nuxt-svgo@4.0.9(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.33(typescript@5.5.4)):
     dependencies:
       '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@4.19.0)
       mini-svg-data-uri: 1.4.4
-      svgo: 3.3.2
+      svgo: 3.0.2
       vue: 3.4.33(typescript@5.5.4)
     transitivePeerDependencies:
       - magicast
@@ -11648,6 +11653,15 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   svg-tags@1.0.0: {}
+
+  svgo@3.0.2:
+    dependencies:
+      '@trysound/sax': 0.2.0
+      commander: 7.2.0
+      css-select: 5.1.0
+      css-tree: 2.3.1
+      csso: 5.0.5
+      picocolors: 1.0.1
 
   svgo@3.3.2:
     dependencies:

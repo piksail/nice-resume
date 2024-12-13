@@ -1,3 +1,7 @@
+export type LocaleCode = "br" | "de" | "en" | "es" | "fr" | "it";
+
+export type RegionCode = "br" | "de" | "es" | "fr" | "it" | "uk";
+
 export type Template =
   | "default"
   | "Aster"
