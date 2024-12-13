@@ -121,7 +121,7 @@ function updateColor(hashlessHex: string) {
   <label
     v-else-if="type === 'checkbox'"
     :for="id"
-    class="flex gap-1 items-center"
+    class="flex gap-1 items-center w-fit"
   >
     <Checkbox
       v-model="model"
