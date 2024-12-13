@@ -166,7 +166,7 @@ function addSenderDetail() {
           </li>
           <Button
             icon="pi pi-plus"
-            label="Add paragraph"
+            :label="capitalize(`${$t('add')} ${$t('paragraph')}`)"
             severity="secondary"
             variant="outlined"
             @click="addParagraph"

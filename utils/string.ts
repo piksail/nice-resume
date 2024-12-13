@@ -4,7 +4,8 @@ import type { TextSeparator } from "@/types";
  * Capitalize the first character of a given string.
  */
 export function capitalize(string?: string) {
-  return !string?.length ? "" : `${string[0].toUpperCase()}${string.slice(1)}`;
+  if (!string?.length) return string;
+  return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
 
 /**

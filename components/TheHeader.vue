@@ -10,6 +10,7 @@ import packageJson from "../package.json";
 import ExportDialog from "~/fragments/ExportDialog.vue";
 import ImportDialog from "~/fragments/ImportDialog.vue";
 import StyleEditor from "~/fragments/StyleEditor.vue";
+import type { LocaleCode } from "~/types";
 
 console.info("Version: ", packageJson.version);
 
@@ -29,6 +30,15 @@ const { template } = storeToRefs(useProfileStore());
 // } else {
 //   // Theme set to light.
 // }
+
+const localeLabel: { [key in LocaleCode]: string } = {
+  br: "Brezhoneg",
+  de: "Deutsch",
+  en: "English",
+  es: "Español",
+  fr: "Français",
+  it: "Italiano",
+};
 
 function toggleDarkMode() {
   document.documentElement.classList.toggle("dark-mode");
@@ -57,15 +67,29 @@ function toggleDarkMode() {
             type="selectbutton"
             :label="$t('document')"
             v-model="documentType"
-            :options="documentTypes"
+            optionLabel="label"
+            optionValue="value"
+            :options="
+              documentTypes.map((document) => ({
+                label: capitalize($t(document)),
+                value: document,
+              }))
+            "
           />
 
           <Field
-            id="template"
+            id="theme"
             type="select"
             :label="$t('theme')"
             v-model="template"
-            :options="templates"
+            optionLabel="label"
+            optionValue="value"
+            :options="
+              templates.map((theme) => ({
+                label: theme === 'default' ? capitalize($t('default')) : theme,
+                value: theme,
+              }))
+            "
           />
 
           <StyleEditor />
@@ -83,14 +107,21 @@ function toggleDarkMode() {
             //   : 'pi pi-moon'
             'pi pi-sun'"
             size="small"
-            :aria-label="'todo phrase'"
+            :aria-label="'TODO phrase'"
             @click="toggleDarkMode"
           />
           <Field
             type="select"
-            :options="availableLocales"
             :aria-label="$t('switchLanguage')"
             :model-value="locale"
+            optionLabel="label"
+            optionValue="value"
+            :options="
+              availableLocales.map((locale) => ({
+                label: capitalize(localeLabel[locale as LocaleCode]),
+                value: locale,
+              }))
+            "
             @update:model-value="setLocale"
           />
         </div>

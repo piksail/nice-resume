@@ -36,6 +36,11 @@ import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
 import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 import FormBlockRow from "~/components/FormBlockRow.vue";
 
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
+
 const { documentType } = storeToRefs(useEditorStore());
 const { isThemeCustomized, template } = storeToRefs(useProfileStore());
 
@@ -422,10 +427,18 @@ watch(documentType, () => {
               <Field
                 id="aboutQuoteFont"
                 type="select"
+                :disabled="!isThemeCustomized"
                 :label="$t('font')"
                 v-model="documentTypeSettings.aboutQuote.font"
-                :options="['inherit', ...fonts]"
-                :disabled="!isThemeCustomized"
+                optionLabel="label"
+                optionValue="value"
+                :options="
+                  ['inherit', ...fonts].map((font) => ({
+                    label:
+                      font === 'inherit' ? capitalize($t('default')) : font,
+                    value: font,
+                  }))
+                "
               />
               <Field
                 id="aboutQuoteFontSize"
@@ -756,5 +769,27 @@ watch(documentType, () => {
     :disabled="!isThemeCustomized"
     @click="isStyleEditorOpen = true"
   />
-  <Field type="togglebutton" v-model="isThemeCustomized" />
+  <Field
+    type="togglebutton"
+    v-model="isThemeCustomized"
+    :onLabel="`${capitalize($t('theme'))} ${t('onLabel')}`"
+    :offLabel="`${capitalize($t('theme'))} ${t('offLabel')}`"
+  />
 </template>
+
+<i18n lang="json">
+{
+  "en": {
+    "onLabel": "customized",
+    "offLabel": "not customized"
+  },
+  "es": {
+    "onLabel": "todo",
+    "offLabel": "todo"
+  },
+  "fr": {
+    "onLabel": "modifié",
+    "offLabel": "non modifié"
+  }
+}
+</i18n>

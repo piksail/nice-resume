@@ -26,7 +26,9 @@ export const A4_RATIO = A4_HEIGHT / A4_WIDTH;
 
 export const fontWeights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-export const documentTypes: Array<DocumentType> = ["resume", "letter", "email"];
+export const documentTypes: DocumentType[] = ["resume", "letter", "email"];
+
+export const iconTypes: ContactDetail["type"][] = ["personal", "social"];
 
 export const fonts: Font[] = [
   "serif",

@@ -197,8 +197,15 @@ function toggleCategoryVisibility(category: Category) {
             type="select"
             :label="$t('type')"
             :id="`${categoryIndex}type`"
-            :options="types"
             :model-value="category.type"
+            optionLabel="label"
+            optionValue="value"
+            :options="
+              types.map((type) => ({
+                label: capitalize($t(type)),
+                value: type,
+              }))
+            "
             @update:model-value="changeCategoryType(category, $event)"
           />
           <Field
@@ -358,7 +365,7 @@ function toggleCategoryVisibility(category: Category) {
               </ul>
               <Button
                 icon="pi pi-plus"
-                label="Add highlight"
+                :label="capitalize(`${$t('add')} ${$t('highlight')}`)"
                 variant="outlined"
                 size="small"
                 @click="addHighlight(entry, entryIndex)"
@@ -399,7 +406,7 @@ function toggleCategoryVisibility(category: Category) {
               </button>
               <Button
                 icon="pi pi-plus"
-                label="Add tag"
+                :label="capitalize(`${$t('add')} ${$t('tag')}`)"
                 variant="outlined"
                 size="small"
                 @click="addTag(entry, entryIndex)"
@@ -413,7 +420,7 @@ function toggleCategoryVisibility(category: Category) {
       <footer class="flex justify-center">
         <Button
           icon="pi pi-plus"
-          label="Add entry"
+          :label="capitalize(`${$t('add')} ${$t('entry')}`)"
           @click="addEntry(category)"
         />
       </footer>
@@ -422,7 +429,9 @@ function toggleCategoryVisibility(category: Category) {
 
   <footer class="flex justify-center">
     <button class="button slotButton w-full shadow-none" @click="addCategory">
-      <span class="font-black tracking-widest uppercase">Add category</span>
+      <span class="font-black tracking-widest uppercase">
+        {{ capitalize(`${$t("add")} ${$t("category")}`) }}
+      </span>
     </button>
   </footer>
 </template>
