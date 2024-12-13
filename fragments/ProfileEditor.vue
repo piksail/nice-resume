@@ -11,6 +11,11 @@ import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
+
 const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
 
 const { isHeaderSimple, simpleHeaderCategoryName } =
@@ -45,12 +50,12 @@ function changeContactDetaiType(
       <Field id="profileTitle" :label="$t('title')" v-model="title" />
       <Field
         type="checkbox"
-        label="Consider about and details a dedicated category*"
+        :label="t('considerAboutAndDetailsACategory')"
         v-model="isHeaderSimple"
       />
       <template v-if="isHeaderSimple">
         <Message size="small">
-          *When on, about and details are styled through the Entry style editor.
+          {{ t("howToStyleAboutAndDetailsCategory") }}
         </Message>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
         <Field
@@ -137,3 +142,20 @@ function changeContactDetaiType(
     </div>
   </EditorCategory>
 </template>
+
+<i18n lang="json">
+{
+  "en": {
+    "considerAboutAndDetailsACategory": "Consider About and Details a decidated category",
+    "howToStyleAboutAndDetailsCategory": "About and Details are styled through the Entry style editor."
+  },
+  "es": {
+    "considerAboutAndDetailsACategory": "todo",
+    "howToStyleAboutAndDetailsCategory": "todo"
+  },
+  "fr": {
+    "considerAboutAndDetailsACategory": "Séparer À propos et Coordonnées dans une catégorie dédiée",
+    "howToStyleAboutAndDetailsCategory": "À propos et Coordonnées sont personnalisables dans l'éditeur de thème"
+  }
+}
+</i18n>
