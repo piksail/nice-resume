@@ -32,12 +32,12 @@ const regionCodeFromLocale: { [key in LocaleCode]: RegionCode } = {
           Resume
         </h1>
       </NuxtLink>
-      <div class="flex gap-3 h-1/4">
+      <div class="flex items-center gap-3 h-1/4">
         <RegionFlag
           v-for="availableLocale in availableLocales"
           :key="availableLocale"
           :code="regionCodeFromLocale[availableLocale as LocaleCode]"
-          :class="`h-full rounded-sm ${availableLocale === locale ? '' : 'grayscale'}  cursor-pointer hover:shadow-xl hover:grayscale-0 transition duration-75`"
+          :class="`rounded-sm ${availableLocale === locale ? 'h-full ' : 'grayscale h-2/3'}  cursor-pointer hover:shadow-xl hover:grayscale-0 transition duration-75`"
           @click="setLocale(availableLocale)"
         />
       </div>
