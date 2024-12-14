@@ -13,7 +13,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
     <Button
       v-if="listLength > 1 && index > 0"
       icon="pi pi-arrow-up"
-      :aria-label="capitalize($t('moveUp'))"
+      :aria-label="capitalize($t('toMoveUp'))"
       :variant="isHeader ? 'text' : 'text'"
       rounded
       :severity="isHeader ? 'primary' : undefined"
@@ -23,7 +23,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
     <Button
       v-if="listLength > 1 && index < listLength - 1"
       icon="pi pi-arrow-down"
-      :aria-label="capitalize($t('moveDown'))"
+      :aria-label="capitalize($t('toMoveDown'))"
       :variant="isHeader ? 'text' : 'text'"
       rounded
       :severity="isHeader ? 'primary' : undefined"
@@ -32,7 +32,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
     />
     <Button
       icon="pi pi-times"
-      :aria-label="capitalize($t('remove'))"
+      :aria-label="capitalize($t('toRemove'))"
       :variant="isHeader ? 'text' : 'text'"
       rounded
       severity="danger"

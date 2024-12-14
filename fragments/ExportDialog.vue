@@ -120,7 +120,7 @@ function exportResumeToJsonResume() {
   <SplitButton
     icon="pi pi-download"
     size="small"
-    :aria-label="capitalize($t('download'))"
+    :aria-label="capitalize($t('toDownload'))"
     :model="exportItems"
     @click="exportDocument"
   />
@@ -383,7 +383,7 @@ function exportResumeToJsonResume() {
             </div>
             <div v-if="index === 0" class="pt-6 flex justify-end">
               <Button
-                :label="$t('submit')"
+                :label="$t('toSubmit')"
                 icon="pi pi-arrow-right"
                 iconPos="right"
                 @click="activateCallback(jsonResumeExportSteps[index + 1])"
@@ -400,7 +400,7 @@ function exportResumeToJsonResume() {
                 @click="activateCallback(jsonResumeExportSteps[index - 1])"
               />
               <Button
-                :label="$t('submit')"
+                :label="$t('toSubmit')"
                 icon="pi pi-check"
                 iconPos="right"
                 @click="download(jsonResume, 'nice-resume-to-json-resume')"

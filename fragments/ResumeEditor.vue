@@ -430,7 +430,7 @@ function toggleCategoryVisibility(category: Category) {
   <footer class="flex justify-center">
     <button class="button slotButton w-full shadow-none" @click="addCategory">
       <span class="font-black tracking-widest uppercase">
-        {{ capitalize(`${$t("add")} ${$t("category")}`) }}
+        {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}
       </span>
     </button>
   </footer>
@@ -457,10 +457,10 @@ function toggleCategoryVisibility(category: Category) {
     "hideCategory": "Hide category"
   },
   "es": {
-    "lockCategory": "TODO",
-    "unlockCategory": "TODO",
-    "showCategory": "TODO",
-    "hideCategory": "TODO"
+    "lockCategory": "Bloquear la categoría",
+    "unlockCategory": "Desbloquear la categoría",
+    "showCategory": "Mostrar la categoría",
+    "hideCategory": "Ocultar la categoría"
   },
   "fr": {
     "lockCategory": "Verrouiller la catégorie",

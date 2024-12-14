@@ -136,7 +136,7 @@ watch(documentType, () => {
 <template>
   <Drawer
     v-model:visible="isStyleEditorOpen"
-    :header="capitalize($t('customizeTheme'))"
+    :header="capitalize($t('toCustomizeTheme'))"
     class="!w-[calc(100vw-210mm)]"
     pt:mask:class="!bg-transparent"
   >
@@ -486,13 +486,19 @@ watch(documentType, () => {
               :settings="documentTypeSettings.contactDetails"
             />
             <FormBlockRow>
-              <!-- TODO careful, on a des alignment en start/end et d'autres en left/right -->
               <Field
                 id="contactDetailsAlignment"
                 type="select"
                 :label="$t('alignment')"
                 v-model="documentTypeSettings.contactDetails.alignment"
-                :options="['start', 'center', 'end']"
+                optionLabel="label"
+                optionValue="value"
+                :options="
+                  ['start', 'center', 'end'].map((alignment) => ({
+                    label: capitalize($t(alignment)),
+                    value: alignment,
+                  }))
+                "
                 :disabled="!isThemeCustomized"
               />
               <Field
@@ -753,7 +759,7 @@ watch(documentType, () => {
     </section>
     <template #footer>
       <Button
-        :label="capitalize($t('reset'))"
+        :label="capitalize($t('toReset'))"
         icon="pi pi-eraser"
         class="flex-auto"
         outlined

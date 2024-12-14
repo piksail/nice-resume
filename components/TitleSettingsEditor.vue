@@ -20,7 +20,14 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         type="select"
         :label="$t('alignment')"
         v-model="settings.textAlign"
-        :options="['left', 'center', 'right']"
+        optionLabel="label"
+        optionValue="value"
+        :options="
+          ['left', 'center', 'right'].map((alignment) => ({
+            label: capitalize($t(alignment)),
+            value: alignment,
+          }))
+        "
         :disabled="!isThemeCustomized"
       />
     </FormBlockRow>

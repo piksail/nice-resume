@@ -22,5 +22,5 @@ const flag = {
 </script>
 
 <template>
-  <component :is="flag[code]" :aria-label="$t('switchLanguage')" />
+  <component :is="flag[code]" :aria-label="$t('toSwitchLanguage')" />
 </template>
