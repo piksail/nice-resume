@@ -153,7 +153,7 @@ onMounted(() => {
     icon="pi pi-refresh"
     variant="outlined"
     size="small"
-    :aria-label="capitalize($t('restart'))"
+    :aria-label="capitalize($t('toRestart'))"
     @click="isImportDialogOpen = true"
   />
 

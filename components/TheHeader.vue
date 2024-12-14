@@ -112,7 +112,7 @@ function toggleDarkMode() {
           />
           <Field
             type="select"
-            :aria-label="$t('switchLanguage')"
+            :aria-label="$t('toSwitchLanguage')"
             :model-value="locale"
             optionLabel="label"
             optionValue="value"

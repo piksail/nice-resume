@@ -72,7 +72,7 @@ const fourthItem = computed(() => {
 </script>
 
 <template>
-  <!-- TODO remove all flex gaps -->
+  <!-- TODO remove all flex gaps and think about away to style them -->
   <template v-if="settings.entry.layout === 1">
     <div class="flex gap-4 items-center">
       <component
