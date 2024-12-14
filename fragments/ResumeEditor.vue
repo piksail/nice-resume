@@ -444,6 +444,12 @@ function toggleCategoryVisibility(category: Category) {
     "showCategory": "Diskouez rummad",
     "hideCategory": "Kuzhat rummad"
   },
+  "de": {
+    "lockCategory": "Kategorie sperren",
+    "unlockCategory": "Kategorie entsperren",
+    "showCategory": "Kategorie zeigen",
+    "hideCategory": "Kategorie verstecken"
+  },
   "en": {
     "lockCategory": "Lock category",
     "unlockCategory": "Unlock category",

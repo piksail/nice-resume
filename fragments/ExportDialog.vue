@@ -466,6 +466,11 @@ function exportResumeToJsonResume() {
     "exportSubmit": "Pellgargañ dibab",
     "editAndConfirmJsonResumeMapping": "Embann ha kadarnaat roadennoù"
   },
+  "de": {
+    "exportTitle": "Was wonnen Sie herunterladen?",
+    "exportSubmit": "Auswahl herunterladen",
+    "editAndConfirmJsonResumeMapping": "Daten bearbeiten und bestätigen"
+  },
   "en": {
     "exportTitle": "What do you want to download?",
     "exportSubmit": "Download selection",

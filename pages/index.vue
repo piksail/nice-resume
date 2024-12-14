@@ -207,6 +207,19 @@ const { t } = useI18n({
     "stepCustomize": "TODO",
     "getStarted": "TODO!"
   },
+  "de": {
+    "introVerb": "Machen sie",
+    "introPossessiveAdjective": "Irhe",
+    "introJobApplication": "Kandidatur",
+    "introIndefiniteArticle": "zu einem",
+    "introPowerWord": "Kunstwerk",
+    "stepTheme": "Wählen Sie ein",
+    "stepResume": "Erstellen Irhe",
+    "stepLetter": "Schreiben Ihre",
+    "stepEmail": "Zeichen Ihre",
+    "stepCustomize": "Anpassen die",
+    "getStarted": "Anfangen"
+  },
   "en": {
     "introVerb": "Make",
     "introPossessiveAdjective": "your",
@@ -221,17 +234,17 @@ const { t } = useI18n({
     "getStarted": "Get started!"
   },
   "es": {
-    "introVerb": "todo",
-    "introPossessiveAdjective": "todo",
-    "introJobApplication": "todo",
-    "introIndefiniteArticle": "todo",
-    "introPowerWord": "todo",
-    "stepTheme": "todo",
-    "stepResume": "todo",
-    "stepLetter": "todo",
-    "stepEmail": "todo",
-    "stepCustomize": "todo",
-    "getStarted": "todo"
+    "introVerb": "TODO",
+    "introPossessiveAdjective": "TODO",
+    "introJobApplication": "TODO",
+    "introIndefiniteArticle": "TODO",
+    "introPowerWord": "TODO",
+    "stepTheme": "TODO",
+    "stepResume": "TODO",
+    "stepLetter": "TODO",
+    "stepEmail": "TODO",
+    "stepCustomize": "TODO",
+    "getStarted": "TODO"
   },
   "fr": {
     "introVerb": "De",

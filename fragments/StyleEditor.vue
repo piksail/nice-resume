@@ -783,6 +783,10 @@ watch(documentType, () => {
     "onLabel": "TODO",
     "offLabel": "TODO"
   },
+  "de": {
+    "onLabel": "angepasst",
+    "offLabel": "nicht angepasst"
+  },
   "en": {
     "onLabel": "customized",
     "offLabel": "not customized"
