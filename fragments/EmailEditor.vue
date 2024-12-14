@@ -31,6 +31,9 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
   "br": {
     "makeLinksClickable": "TODO"
   },
+  "de": {
+    "makeLinksClickable": "Links klickbar machen"
+  },
   "en": {
     "makeLinksClickable": "Make links clickable"
   },

@@ -68,7 +68,7 @@ export default {
   list: "list",
   location: "location",
   margin: "margin",
-  marker: "marker",
+  marker: "bullet",
   moveDown: "move down",
   moveUp: "move up",
   name: "name",

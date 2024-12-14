@@ -149,6 +149,10 @@ function changeContactDetaiType(
     "considerAboutAndDetailsACategory": "TODO",
     "howToStyleAboutAndDetailsCategory": "TODO"
   },
+  "de": {
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
+  },
   "en": {
     "considerAboutAndDetailsACategory": "Consider About and Details a decidated category",
     "howToStyleAboutAndDetailsCategory": "About and Details are styled through the Entry style editor."
