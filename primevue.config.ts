@@ -84,7 +84,12 @@ export default definePreset(Lara, {
     },
   },
   components: {
-    inputText: {
+    inputnumber: {
+      button: {
+        width: "1.5rem",
+      },
+    },
+    inputtext: {
       colorScheme: {
         light: {
           root: {

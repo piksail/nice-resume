@@ -192,10 +192,7 @@ function updateColor(hashlessHex: string) {
       :step="step"
       size="small"
       inputClass="!w-12"
-      incrementButtonClass="!w-7"
-      decrementButtonClass="!w-7"
     >
-      <!-- TODO style en passant par inputnumber dans nuxtconfig -->
       <template #incrementicon>
         <span class="pi pi-plus" />
       </template>
