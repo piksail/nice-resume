@@ -12,6 +12,8 @@ import type { JsonResume } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import { moveDown, moveUp, remove } from "@/utils/array";
+import { focusNextInput } from "@/utils/editor";
 import { download, downloadHtml } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
@@ -52,6 +54,12 @@ const exportItems = computed(() => {
   }
   return items;
 });
+
+function addReference(index: number) {
+  jsonResume.value?.references.push({ name: "", reference: "" });
+
+  focusNextInput(`#referenceList${index} input`);
+}
 
 function downloadPdf() {
   window.print();
@@ -128,7 +136,7 @@ function exportResumeToJsonResume() {
   <Dialog
     v-model:visible="isJsonResumeExportDialogOpen"
     modal
-    class="max-w-screen-lg"
+    class="max-w-screen-xl"
   >
     <Message icon="pi pi-info-circle">
       <a :href="jsonResumeSchemaUrl" target="_blank" class="underline">
@@ -349,13 +357,32 @@ function exportResumeToJsonResume() {
                 v-for="(reference, index) in jsonResume.references"
                 :key="reference.name"
                 :header="reference.name"
+                :id="`referenceList${index}`"
               >
+                <Field
+                  :label="$t('name')"
+                  v-model="jsonResume.references[index].name"
+                />
                 <Field
                   :label="$t('reference')"
                   v-model="jsonResume.references[index].reference"
                 />
+                <ListActions
+                  :index="index"
+                  :list-length="jsonResume.references.length"
+                  @moveUp="moveUp(jsonResume.references, index)"
+                  @moveDown="moveDown(jsonResume.references, index)"
+                  @remove="remove(jsonResume.references, index)"
+                />
               </FormBlockRow>
-              <!-- TODO listactions order etc. add+ -->
+              <Button
+                icon="pi pi-plus"
+                label="Add reference TODO translate"
+                severity="secondary"
+                variant="outlined"
+                size="small"
+                @click="addReference(index)"
+              />
             </div>
             <div v-if="step === 'projects'" class="formBlock">
               <FormBlockRow
