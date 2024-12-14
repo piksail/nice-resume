@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import Button from "primevue/button";
+import Message from "primevue/message";
+import SplitButton from "primevue/splitbutton";
 import Step from "primevue/step";
 import StepPanel from "primevue/steppanel";
 import Stepper from "primevue/stepper";
@@ -13,6 +15,7 @@ import { useResumeStore } from "@/stores/resume";
 import { download, downloadHtml } from "@/utils/file";
 import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
+import { jsonResumeSchemaUrl } from "~/globals";
 
 // eslint-disable-next-line no-undef
 const { t } = useI18n({
@@ -30,40 +33,44 @@ const jsonResumeExportSteps = ref<string[]>([]);
 const jsonResume = ref<JsonResume>();
 
 const isExportError = ref(false);
-const isDocumentExportIncluded = ref(true);
-const isExportToJsonIncluded = ref(false);
-const isExportToJsonResumeIncluded = ref(false);
 
-// TODO handle when JSON REsume is checked
+const exportItems = computed(() => {
+  const items = [
+    {
+      label: "Nice Resume data (save it for later) TODO translate",
+      icon: "pi pi-file-export",
+      command: () => exportToJson(),
+    },
+  ];
+
+  if (documentType.value === "resume") {
+    items.push({
+      label: "JSON Resume compatible data TODO",
+      icon: "pi pi-file",
+      command: () => exportResumeToJsonResume(),
+    });
+  }
+  return items;
+});
+
 function downloadPdf() {
   window.print();
 }
 
 /**
- * Download selected files.
+ * Export document to the relevant format.
  */
-function downloadSelection() {
-  isExportError.value = false;
-  if (isExportToJsonIncluded.value) {
-    exportToJson();
-  }
-  if (documentType.value === "resume" && isExportToJsonResumeIncluded.value) {
-    // TODO revoir export pour exporter lettre ET CV en .pdf
-    exportResumeToJsonResume();
-  }
-  if (isDocumentExportIncluded.value) {
-    if (documentType.value === "email") {
-      const preview = document.getElementById("preview");
-      if (!preview) {
-        isExportError.value = true;
-      } else {
-        downloadHtml(preview, "nice-resume-email");
-      }
+function exportDocument() {
+  if (documentType.value === "email") {
+    const preview = document.getElementById("preview");
+    if (!preview) {
+      isExportError.value = true;
     } else {
-      downloadPdf();
+      downloadHtml(preview, "nice-resume-email");
     }
+  } else {
+    downloadPdf();
   }
-  isExportDialogOpen.value = false;
 }
 
 /**
@@ -110,63 +117,24 @@ function exportResumeToJsonResume() {
 </script>
 
 <template>
-  <Button
+  <SplitButton
     icon="pi pi-download"
     size="small"
     :aria-label="capitalize($t('download'))"
-    @click="isExportDialogOpen = true"
+    :model="exportItems"
+    @click="exportDocument"
   />
-
-  <Dialog
-    v-model:visible="isExportDialogOpen"
-    modal
-    :header="t('exportTitle')"
-    class="max-w-screen-sm"
-  >
-    <div class="flex flex-col gap-4">
-      <Field
-        id="isDocumentExportIncluded"
-        :label="`${capitalize(documentType)} as ${documentType === 'email' ? 'HTML' : 'PDF'}`"
-        type="checkbutton"
-        v-model="isDocumentExportIncluded"
-      />
-      <Field
-        id="isExportToJsonIncluded"
-        label="Nice Resume data (save it for later)"
-        help-text="This includes all documents (resume, cover letter, email signature)"
-        type="checkbutton"
-        v-model="isExportToJsonIncluded"
-      />
-      <Field
-        v-if="documentType === 'resume'"
-        id="isExportToJsonResumeIncluded"
-        label="JSON Resume compatible data"
-        help-text="Fill in the gaps between Nice Resume and JSON Resume formats"
-        type="checkbutton"
-        v-model="isExportToJsonResumeIncluded"
-      />
-      <Button
-        icon="pi pi-download"
-        :label="t('exportSubmit')"
-        variant="outlined"
-        @click="downloadSelection"
-      />
-      <p v-if="isExportError" class="text-red-500 text-center">
-        Error exporting data.
-      </p>
-    </div>
-  </Dialog>
 
   <Dialog
     v-model:visible="isJsonResumeExportDialogOpen"
     modal
-    :header="t('editAndConfirmJsonResumeMapping')"
     class="max-w-screen-lg"
   >
-    <p>
-      Consult schema
-      <a href="https://jsonresume.org/schema">https://jsonresume.org/schema</a>
-    </p>
+    <Message icon="pi pi-info-circle">
+      <a :href="jsonResumeSchemaUrl" target="_blank" class="underline">
+        {{ t("referToSchema") }}
+      </a>
+    </Message>
     <div class="card flex justify-center" v-if="jsonResume">
       <Stepper :value="jsonResumeExportSteps[0]" linear>
         <StepItem
@@ -462,29 +430,19 @@ function exportResumeToJsonResume() {
 <i18n lang="json">
 {
   "br": {
-    "exportTitle": "Petra 'po da pellgargañ?",
-    "exportSubmit": "Pellgargañ dibab",
-    "editAndConfirmJsonResumeMapping": "Embann ha kadarnaat roadennoù"
+    "referToSchema": "TODO"
   },
   "de": {
-    "exportTitle": "Was wonnen Sie herunterladen?",
-    "exportSubmit": "Auswahl herunterladen",
-    "editAndConfirmJsonResumeMapping": "Daten bearbeiten und bestätigen"
+    "referToSchema": "Format sehen"
   },
   "en": {
-    "exportTitle": "What do you want to download?",
-    "exportSubmit": "Download selection",
-    "editAndConfirmJsonResumeMapping": "Edit and confirm data"
+    "referToSchema": "Refer to the schema"
   },
   "es": {
-    "exportTitle": "TODO",
-    "exportSubmit": "TODO",
-    "editAndConfirmJsonResumeMapping": "TODO"
+    "referToSchema": "TODO"
   },
   "fr": {
-    "exportTitle": "Comment souhaitez-vous exporter votre travail ?",
-    "exportSubmit": "Exporter la sélection",
-    "editAndConfirmJsonResumeMapping": "Editez et confirmez les informations"
+    "referToSchema": "Consulter le format"
   }
 }
 </i18n>
