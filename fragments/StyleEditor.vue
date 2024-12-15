@@ -1,7 +1,5 @@
-<!-- eslint-disable @typescript-eslint/ban-ts-comment TODO resolve TS error -->
 <script setup lang="ts">
-// @ts-nocheck
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import Drawer from "primevue/drawer";
 import Fieldset from "primevue/fieldset";
@@ -11,15 +9,6 @@ import { useEmailStore } from "@/stores/email";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import type {
-  CommonStyleEditorTab,
-  EmailSettings,
-  EmailStyleEditorTab,
-  LetterSettings,
-  LetterStyleEditorTab,
-  ResumeSettings,
-  ResumeStyleEditorTab,
-} from "@/types";
 import { getSideIndexLabel } from "@/utils/editor";
 import {
   entryLayouts,
@@ -35,6 +24,7 @@ import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
 import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 import FormBlockRow from "~/components/FormBlockRow.vue";
+import type { LetterSettings } from "~/types";
 
 // eslint-disable-next-line no-undef
 const { t } = useI18n({
@@ -51,13 +41,6 @@ const { settings: emailSettings } = storeToRefs(useEmailStore());
 
 const confirm = useConfirm();
 
-type Tab =
-  | CommonStyleEditorTab
-  | ResumeStyleEditorTab
-  | LetterStyleEditorTab
-  | EmailStyleEditorTab
-  | "";
-const tab = ref<Tab>("");
 const isStyleEditorOpen = ref(false);
 
 const documentTypeSettings = computed(() => {
@@ -65,32 +48,6 @@ const documentTypeSettings = computed(() => {
   return documentType.value === "letter"
     ? letterSettings.value
     : resumeSettings.value;
-});
-
-// TODO ne plus raisonner en tabs, raisonner en document === email ou letter et direct dans le template v-if
-const tabs = computed(() => {
-  const tabs: CommonStyleEditorTab[] = [
-    "Document",
-    "Profile",
-    "About",
-    "Contact",
-  ];
-  const emailTabs: EmailStyleEditorTab[] = [...tabs, "Signature"];
-  const letterTabs: LetterStyleEditorTab[] = [
-    ...tabs,
-    "Header",
-    "Address details",
-    "Subject",
-    "Body",
-  ];
-  const resumeTabs: ResumeStyleEditorTab[] = [
-    ...tabs,
-    "Sections",
-    "Category",
-    "Entry",
-  ];
-  if (documentType.value === "email") return emailTabs;
-  return documentType.value === "letter" ? letterTabs : resumeTabs;
 });
 
 function askBeforeResetStyle() {
@@ -118,19 +75,6 @@ function askBeforeResetStyle() {
     reject: () => {},
   });
 }
-
-function setTab(value: Tab) {
-  if (tab.value === value) {
-    tab.value = "";
-  } else {
-    tab.value = value;
-  }
-}
-
-watch(documentType, () => {
-  isStyleEditorOpen.value = false;
-  setTab("");
-});
 </script>
 
 <template>
@@ -140,56 +84,84 @@ watch(documentType, () => {
     class="!w-[calc(100vw-210mm)]"
     pt:mask:class="!bg-transparent"
   >
-    <section class="flex flex-col gap-12">
-      <template v-if="tabs.includes('Document')">
-        <Fieldset :legend="capitalize($t('document'))" toggleable>
-          <div class="formBlock">
-            <FormBlockRow :header="$t('margin')">
-              <div class="grid grid-cols-4 gap-5">
-                <Field
-                  v-for="i in 4"
-                  :key="i"
-                  :id="`documentMargin${i}`"
-                  type="number"
-                  :label="$t(getSideIndexLabel(i))"
-                  :disabled="!isThemeCustomized"
-                  v-model="documentTypeSettings.document.padding[i - 1]"
-                />
-              </div>
-            </FormBlockRow>
-            <Field
-              id="documentBodyFont"
-              type="select"
-              :label="$t('font')"
-              v-model="documentTypeSettings.document.bodyFont"
-              :options="fonts"
-              :disabled="!isThemeCustomized"
-            />
-          </div>
-        </Fieldset>
-      </template>
+    <section class="flex flex-col gap-6">
+      <Fieldset :legend="capitalize($t('document'))" toggleable>
+        <div class="formBlock">
+          <FormBlockRow :header="$t('margin')">
+            <div class="grid grid-cols-4 gap-5">
+              <Field
+                v-for="i in 4"
+                :key="i"
+                :id="`documentMargin${i}`"
+                type="number"
+                :label="$t(getSideIndexLabel(i))"
+                :disabled="!isThemeCustomized"
+                v-model="documentTypeSettings.document.padding[i - 1]"
+              />
+            </div>
+          </FormBlockRow>
+          <Field
+            id="documentBodyFont"
+            type="select"
+            :label="$t('font')"
+            v-model="documentTypeSettings.document.bodyFont"
+            :options="fonts"
+            :disabled="!isThemeCustomized"
+          />
+        </div>
+      </Fieldset>
 
-      <template v-if="tabs.includes('Signature')">
+      <template v-if="documentType === 'email'">
         <Fieldset :legend="capitalize($t('signature'))" toggleable>
           <div class="formBlock">
             <Field
-              id="signatureLayout"
+              id="headerLayout"
               type="select"
               :label="$t('layout')"
-              v-model="(documentTypeSettings as EmailSettings).document.layout"
+              v-model="emailSettings.document.layout"
               :options="headerLayouts"
               :disabled="!isThemeCustomized"
             />
-            <!-- <BlockSettingsEditor
-            property-name="signature"
-            :settings="emailSettings.document"
-          /> -->
-            <!-- TODO other settings -->
+            <FormBlockRow :header="$t('border')">
+              <Field
+                v-for="i in 4"
+                :key="i"
+                id="signatureBorder"
+                :label="$t(getSideIndexLabel(i))"
+                type="number"
+                :disabled="!isThemeCustomized"
+                v-model="emailSettings.document.border[i - 1]"
+              />
+              <Field
+                id="signatureBorderColor"
+                :label="$t('color')"
+                type="color"
+                :disabled="!isThemeCustomized"
+                v-model="emailSettings.document.borderColor"
+              />
+            </FormBlockRow>
+            <FormBlockRow :header="$t('padding')">
+              <Field
+                v-for="i in 4"
+                :key="i"
+                id="signaturePadding"
+                :label="$t(getSideIndexLabel(i))"
+                type="number"
+                :disabled="!isThemeCustomized"
+                v-model="emailSettings.document.padding[i - 1]"
+              />
+              <Field
+                id="signatureBackgroundColor"
+                :label="$t('color')"
+                type="color"
+                :disabled="!isThemeCustomized"
+                v-model="emailSettings.document.backgroundColor"
+              />
+            </FormBlockRow>
           </div>
         </Fieldset>
       </template>
-
-      <template v-if="tabs.includes('Header')">
+      <template v-else>
         <Fieldset :legend="capitalize($t('header'))" toggleable>
           <div class="formBlock">
             <Field
@@ -208,7 +180,44 @@ watch(documentType, () => {
         </Fieldset>
       </template>
 
-      <template v-if="tabs.includes('Address details')">
+      <template v-if="documentType === 'resume'">
+        <Fieldset :legend="capitalize($t('aside'))" toggleable>
+          <div class="formBlock">
+            <BlockSettingsEditor
+              property-name="aside"
+              :settings="resumeSettings.aside"
+            />
+            <FormBlockRow>
+              <Field
+                id="asideWidth"
+                :label="$t('width')"
+                type="range"
+                :min="0"
+                :max="100"
+                v-model="resumeSettings.aside.width"
+              />
+              <Field
+                id="asideIsRightPositioned"
+                label="Right side"
+                type="checkbox"
+                :disabled="!isThemeCustomized"
+                v-model="resumeSettings.aside.isRightPositioned"
+              />
+            </FormBlockRow>
+          </div>
+        </Fieldset>
+
+        <Fieldset :legend="capitalize($t('body'))" toggleable>
+          <div class="formBlock">
+            <BlockSettingsEditor
+              property-name="body"
+              :settings="resumeSettings.body"
+            />
+          </div>
+        </Fieldset>
+      </template>
+
+      <template v-if="documentType === 'letter'">
         <Fieldset
           v-if="isHeaderSimple"
           :legend="capitalize($t('senderDetails'))"
@@ -252,9 +261,7 @@ watch(documentType, () => {
             />
           </div>
         </Fieldset>
-      </template>
 
-      <template v-if="tabs.includes('Subject')">
         <Fieldset :legend="capitalize($t('subject'))" toggleable>
           <div class="formBlock">
             <BlockSettingsEditor
@@ -290,7 +297,181 @@ watch(documentType, () => {
         </Fieldset>
       </template>
 
-      <template v-if="tabs.includes('Body')">
+      <Fieldset :legend="capitalize($t('name'))" toggleable>
+        <div class="formBlock">
+          <BlockSettingsEditor
+            property-name="name"
+            :settings="documentTypeSettings.name"
+          />
+          <TextSettingsEditor
+            property-name="name"
+            :settings="documentTypeSettings.name"
+          />
+          <TitleSettingsEditor
+            property-name="name"
+            :settings="documentTypeSettings.name"
+          />
+        </div>
+      </Fieldset>
+
+      <Fieldset :legend="capitalize($t('title'))" toggleable>
+        <div class="formBlock">
+          <BlockSettingsEditor
+            property-name="title"
+            :settings="documentTypeSettings.title"
+          />
+          <TextSettingsEditor
+            property-name="title"
+            :settings="documentTypeSettings.title"
+          />
+          <TitleSettingsEditor
+            property-name="title"
+            :settings="documentTypeSettings.title"
+          />
+        </div>
+      </Fieldset>
+
+      <Fieldset :legend="capitalize($t('about'))" toggleable>
+        <div class="formBlock">
+          <BlockSettingsEditor
+            property-name="about"
+            :settings="documentTypeSettings.about"
+          />
+          <TextSettingsEditor
+            property-name="about"
+            :settings="documentTypeSettings.about"
+          />
+          <TitleSettingsEditor
+            property-name="about"
+            :settings="documentTypeSettings.about"
+          />
+        </div>
+      </Fieldset>
+
+      <Fieldset legend="About quote" toggleable>
+        <div class="formBlock">
+          <Field
+            id="aboutQuoteIsShown"
+            label="Show quote"
+            type="checkbox"
+            :disabled="!isThemeCustomized"
+            v-model="documentTypeSettings.aboutQuote.isShown"
+          />
+          <FormBlockRow>
+            <Field
+              id="aboutQuoteFont"
+              type="select"
+              :disabled="!isThemeCustomized"
+              :label="$t('font')"
+              v-model="documentTypeSettings.aboutQuote.font"
+              optionLabel="label"
+              optionValue="value"
+              :options="
+                ['inherit', ...fonts].map((font) => ({
+                  label: font === 'inherit' ? capitalize($t('default')) : font,
+                  value: font,
+                }))
+              "
+            />
+            <Field
+              id="aboutQuoteFontSize"
+              :label="$t('size')"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.aboutQuote.fontSize"
+            />
+            <Field
+              id="aboutQuoteFontWeight"
+              type="select"
+              :label="$t('fontWeight')"
+              v-model="documentTypeSettings.aboutQuote.fontWeight"
+              :options="fontWeights"
+              :disabled="!isThemeCustomized"
+            />
+            <Field
+              id="aboutQuoteIsItalic"
+              :label="$t('italic')"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.aboutQuote.isItalic"
+            />
+            <Field
+              id="aboutQuoteColor"
+              :label="$t('color')"
+              type="color"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.aboutQuote.color"
+            />
+          </FormBlockRow>
+        </div>
+      </Fieldset>
+
+      <Fieldset :legend="capitalize($t('contactDetails'))" toggleable>
+        <div class="formBlock">
+          <BlockSettingsEditor
+            property-name="contactDetails"
+            :settings="documentTypeSettings.contactDetails"
+          />
+          <TextSettingsEditor
+            property-name="contactDetails"
+            :settings="documentTypeSettings.contactDetails"
+          />
+          <FormBlockRow>
+            <Field
+              id="contactDetailsAlignment"
+              type="select"
+              :label="$t('alignment')"
+              v-model="documentTypeSettings.contactDetails.alignment"
+              optionLabel="label"
+              optionValue="value"
+              :options="
+                ['start', 'center', 'end'].map((alignment) => ({
+                  label: capitalize($t(alignment)),
+                  value: alignment,
+                }))
+              "
+              :disabled="!isThemeCustomized"
+            />
+            <Field
+              id="contactDetailsGap"
+              label="Gap"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.gap"
+            />
+            <Field
+              id="contactDetailsIsIconFirst"
+              label="Icon first"
+              type="checkbox"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.isIconFirst"
+            />
+            <Field
+              id="contactDetailsIconGap"
+              label="Icon gap"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.iconGap"
+            />
+            <Field
+              id="contactDetailsIconSize"
+              label="Icon size"
+              type="number"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.iconSize"
+            />
+            <Field
+              id="contactDetailsIconColor"
+              label="Icon color"
+              type="color"
+              :disabled="!isThemeCustomized"
+              v-model="documentTypeSettings.contactDetails.iconColor"
+            />
+          </FormBlockRow>
+        </div>
+      </Fieldset>
+
+      <template v-if="documentType === 'letter'">
         <Fieldset :legend="capitalize($t('paragraphs'))" toggleable>
           <div class="formBlock">
             <FormBlockRow>
@@ -314,7 +495,7 @@ watch(documentType, () => {
                 type="number"
                 :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.lineHeight"
-                step="0.1"
+                :step="0.1"
               />
               <Field
                 id="bodyIndentation"
@@ -360,245 +541,7 @@ watch(documentType, () => {
         </Fieldset>
       </template>
 
-      <template v-if="tabs.includes('Profile')">
-        <Fieldset :legend="capitalize($t('name'))" toggleable>
-          <div class="formBlock">
-            <BlockSettingsEditor
-              property-name="name"
-              :settings="documentTypeSettings.name"
-            />
-            <TextSettingsEditor
-              property-name="name"
-              :settings="documentTypeSettings.name"
-            />
-            <TitleSettingsEditor
-              property-name="name"
-              :settings="documentTypeSettings.name"
-            />
-          </div>
-        </Fieldset>
-
-        <Fieldset :legend="capitalize($t('title'))" toggleable>
-          <div class="formBlock">
-            <BlockSettingsEditor
-              property-name="title"
-              :settings="documentTypeSettings.title"
-            />
-            <TextSettingsEditor
-              property-name="title"
-              :settings="documentTypeSettings.title"
-            />
-            <TitleSettingsEditor
-              property-name="title"
-              :settings="documentTypeSettings.title"
-            />
-          </div>
-        </Fieldset>
-      </template>
-
-      <template v-if="tabs.includes('About')">
-        <Fieldset :legend="capitalize($t('about'))" toggleable>
-          <div class="formBlock">
-            <BlockSettingsEditor
-              property-name="about"
-              :settings="documentTypeSettings.about"
-            />
-            <TextSettingsEditor
-              property-name="about"
-              :settings="documentTypeSettings.about"
-            />
-            <TitleSettingsEditor
-              property-name="about"
-              :settings="documentTypeSettings.about"
-            />
-          </div>
-        </Fieldset>
-
-        <Fieldset legend="About quote" toggleable>
-          <div class="formBlock">
-            <Field
-              id="aboutQuoteIsShown"
-              label="Show quote"
-              type="checkbox"
-              :disabled="!isThemeCustomized"
-              v-model="documentTypeSettings.aboutQuote.isShown"
-            />
-            <FormBlockRow>
-              <Field
-                id="aboutQuoteFont"
-                type="select"
-                :disabled="!isThemeCustomized"
-                :label="$t('font')"
-                v-model="documentTypeSettings.aboutQuote.font"
-                optionLabel="label"
-                optionValue="value"
-                :options="
-                  ['inherit', ...fonts].map((font) => ({
-                    label:
-                      font === 'inherit' ? capitalize($t('default')) : font,
-                    value: font,
-                  }))
-                "
-              />
-              <Field
-                id="aboutQuoteFontSize"
-                :label="$t('size')"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.aboutQuote.fontSize"
-              />
-              <Field
-                id="aboutQuoteFontWeight"
-                type="select"
-                :label="$t('fontWeight')"
-                v-model="documentTypeSettings.aboutQuote.fontWeight"
-                :options="fontWeights"
-                :disabled="!isThemeCustomized"
-              />
-              <Field
-                id="aboutQuoteIsItalic"
-                :label="$t('italic')"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.aboutQuote.isItalic"
-              />
-              <Field
-                id="aboutQuoteColor"
-                :label="$t('color')"
-                type="color"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.aboutQuote.color"
-              />
-            </FormBlockRow>
-          </div>
-        </Fieldset>
-      </template>
-
-      <template v-if="tabs.includes('Contact')">
-        <Fieldset :legend="capitalize($t('contactDetails'))" toggleable>
-          <div class="formBlock">
-            <BlockSettingsEditor
-              property-name="contactDetails"
-              :settings="documentTypeSettings.contactDetails"
-            />
-            <TextSettingsEditor
-              property-name="contactDetails"
-              :settings="documentTypeSettings.contactDetails"
-            />
-            <FormBlockRow>
-              <Field
-                id="contactDetailsAlignment"
-                type="select"
-                :label="$t('alignment')"
-                v-model="documentTypeSettings.contactDetails.alignment"
-                optionLabel="label"
-                optionValue="value"
-                :options="
-                  ['start', 'center', 'end'].map((alignment) => ({
-                    label: capitalize($t(alignment)),
-                    value: alignment,
-                  }))
-                "
-                :disabled="!isThemeCustomized"
-              />
-              <Field
-                id="contactDetailsGap"
-                label="Gap"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.contactDetails.gap"
-              />
-              <Field
-                id="contactDetailsIsIconFirst"
-                label="Icon first"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.contactDetails.isIconFirst"
-              />
-              <Field
-                id="contactDetailsIconGap"
-                label="Icon gap"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.contactDetails.iconGap"
-              />
-              <Field
-                id="contactDetailsIconSize"
-                label="Icon size"
-                type="number"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.contactDetails.iconSize"
-              />
-              <Field
-                id="contactDetailsIconColor"
-                label="Icon color"
-                type="color"
-                :disabled="!isThemeCustomized"
-                v-model="documentTypeSettings.contactDetails.iconColor"
-              />
-            </FormBlockRow>
-          </div>
-        </Fieldset>
-      </template>
-
-      <template v-if="tabs.includes('Sections')">
-        <Fieldset :legend="capitalize($t('header'))" toggleable>
-          <div class="formBlock">
-            <Field
-              id="headerLayout"
-              type="select"
-              :label="$t('layout')"
-              v-model="
-                (documentTypeSettings as ResumeSettings | LetterSettings).header
-                  .layout
-              "
-              :options="headerLayouts"
-              :disabled="!isThemeCustomized"
-            />
-            <BlockSettingsEditor
-              property-name="header"
-              :settings="resumeSettings.header"
-            />
-          </div>
-        </Fieldset>
-
-        <Fieldset :legend="capitalize($t('aside'))" toggleable>
-          <div class="formBlock">
-            <BlockSettingsEditor
-              property-name="aside"
-              :settings="resumeSettings.aside"
-            />
-            <FormBlockRow>
-              <Field
-                id="asideWidth"
-                :label="$t('width')"
-                type="range"
-                :min="0"
-                :max="100"
-                v-model="resumeSettings.aside.width"
-              />
-              <Field
-                id="asideIsRightPositioned"
-                label="Right side"
-                type="checkbox"
-                :disabled="!isThemeCustomized"
-                v-model="resumeSettings.aside.isRightPositioned"
-              />
-            </FormBlockRow>
-          </div>
-        </Fieldset>
-
-        <Fieldset :legend="capitalize($t('body'))" toggleable>
-          <div class="formBlock">
-            <BlockSettingsEditor
-              property-name="body"
-              :settings="resumeSettings.body"
-            />
-          </div>
-        </Fieldset>
-      </template>
-
-      <template v-if="tabs.includes('Category')">
+      <template v-if="documentType === 'resume'">
         <Fieldset :legend="capitalize($t('category'))" toggleable>
           <div class="formBlock">
             <Field
@@ -631,9 +574,7 @@ watch(documentType, () => {
             />
           </div>
         </Fieldset>
-      </template>
 
-      <template v-if="tabs.includes('Entry')">
         <Fieldset :legend="capitalize($t('entry'))" toggleable>
           <div class="formBlock">
             <Field

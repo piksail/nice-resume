@@ -1,30 +1,17 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
-import { useProfileStore } from "@/stores/profile";
-import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import useDocumentSettings from "~/composables/use-document-settings";
 import DocumentHeader from "./DocumentHeader.vue";
 import EmailSignature from "./EmailSignature.vue";
 import LetterBody from "./LetterBody.vue";
 import ResumeBody from "./ResumeBody.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
-const { settings: resumeStoreSettings } = storeToRefs(useResumeStore());
-const { isHeaderSimple, settings: letterStoreSettings } =
-  storeToRefs(useLetterStore());
+const { isHeaderSimple } = storeToRefs(useLetterStore());
 
-const settings = computed(() => {
-  if (isThemeCustomized.value) {
-    return documentType.value === "letter"
-      ? letterStoreSettings.value
-      : resumeStoreSettings.value;
-  }
-  return templateSettings[template.value][documentType.value];
-});
+const settings = useDocumentSettings();
 </script>
 
 <template>

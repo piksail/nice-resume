@@ -25,6 +25,7 @@ export default {
   default: "Standardeinstellung",
   description: "Beschreibung",
   design: "Gestaltung",
+  detail: "Kontaktdate",
   diploma: "Diplom",
   document: "Dokument",
   drivingLicense: "Führerschein",

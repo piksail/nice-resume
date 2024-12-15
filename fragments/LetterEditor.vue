@@ -79,7 +79,7 @@ function addSenderDetail() {
             </li>
             <Button
               icon="pi pi-plus"
-              label="Add detail"
+              :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
               severity="secondary"
               variant="outlined"
               @click="addSenderDetail"
@@ -118,7 +118,7 @@ function addSenderDetail() {
           </li>
           <Button
             icon="pi pi-plus"
-            label="Add detail"
+            :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
             severity="secondary"
             variant="outlined"
             @click="addRecipientDetail"
@@ -166,7 +166,7 @@ function addSenderDetail() {
           </li>
           <Button
             icon="pi pi-plus"
-            :label="capitalize(`${$t('add')} ${$t('paragraph')}`)"
+            :label="capitalize(`${$t('toAdd')} ${$t('paragraph')}`)"
             severity="secondary"
             variant="outlined"
             @click="addParagraph"

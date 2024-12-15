@@ -135,7 +135,7 @@ function changeContactDetaiType(
             class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
             @click="addContactDetail"
           >
-            Add detail
+            {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
           </button>
         </ul>
       </label>

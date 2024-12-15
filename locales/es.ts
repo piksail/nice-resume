@@ -25,6 +25,7 @@ export default {
   default: "TODO",
   description: "TODO",
   design: "TODO",
+  detail: "TODO",
   diploma: "TODO",
   document: "documento",
   drivingLicense: "TODO",

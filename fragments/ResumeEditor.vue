@@ -365,7 +365,7 @@ function toggleCategoryVisibility(category: Category) {
               </ul>
               <Button
                 icon="pi pi-plus"
-                :label="capitalize(`${$t('add')} ${$t('highlight')}`)"
+                :label="capitalize(`${$t('toAdd')} ${$t('highlight')}`)"
                 variant="outlined"
                 size="small"
                 @click="addHighlight(entry, entryIndex)"
@@ -402,11 +402,11 @@ function toggleCategoryVisibility(category: Category) {
                 class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
                 @click="addTag(entry, entryIndex)"
               >
-                Add tag
+                {{ capitalize(`${$t("toAdd")} ${$t("tag")}`) }}
               </button>
               <Button
                 icon="pi pi-plus"
-                :label="capitalize(`${$t('add')} ${$t('tag')}`)"
+                :label="capitalize(`${$t('toAdd')} ${$t('tag')}`)"
                 variant="outlined"
                 size="small"
                 @click="addTag(entry, entryIndex)"
@@ -420,7 +420,7 @@ function toggleCategoryVisibility(category: Category) {
       <footer class="flex justify-center">
         <Button
           icon="pi pi-plus"
-          :label="capitalize(`${$t('add')} ${$t('entry')}`)"
+          :label="capitalize(`${$t('toAdd')} ${$t('entry')}`)"
           @click="addEntry(category)"
         />
       </footer>

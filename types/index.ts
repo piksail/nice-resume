@@ -252,23 +252,6 @@ export type TemplateSettings = {
   };
 };
 
-export type CommonStyleEditorTab = "Document" | "Profile" | "About" | "Contact";
-
-export type ResumeStyleEditorTab =
-  | CommonStyleEditorTab
-  | "Sections"
-  | "Category"
-  | "Entry";
-
-export type LetterStyleEditorTab =
-  | CommonStyleEditorTab
-  | "Header"
-  | "Address details"
-  | "Subject"
-  | "Body";
-
-export type EmailStyleEditorTab = CommonStyleEditorTab | "Signature";
-
 export type DetailIcon =
   | null
   | "default"

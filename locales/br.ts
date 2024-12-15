@@ -25,6 +25,7 @@ export default {
   default: "fell",
   description: "deskrivadur",
   design: "ermeg",
+  detail: "TODO",
   diploma: "diplom",
   document: "teul",
   drivingLicense: "aotre-bleinañ",
