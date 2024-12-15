@@ -25,6 +25,7 @@ export default {
   default: "défaut",
   description: "description",
   design: "design",
+  detail: "coordonnée",
   diploma: "diplôme",
   document: "document",
   drivingLicense: "permis",

@@ -377,7 +377,7 @@ function exportResumeToJsonResume() {
               </FormBlockRow>
               <Button
                 icon="pi pi-plus"
-                label="Add reference TODO translate"
+                :label="capitalize(`${$t('toAdd')} ${$t('reference')}`)"
                 severity="secondary"
                 variant="outlined"
                 size="small"
@@ -405,7 +405,6 @@ function exportResumeToJsonResume() {
                   :label="$t('highlights')"
                   v-model="jsonResume.projects[index].highlights"
                 />
-                <!-- TODOlul li listactions loop pour reorder -->
               </FormBlockRow>
             </div>
             <div v-if="index === 0" class="pt-6 flex justify-end">
