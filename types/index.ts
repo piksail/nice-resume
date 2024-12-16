@@ -120,7 +120,7 @@ export type TextSettings = {
 
 export type TitleSettings = TextSettings & {
   textAlign: "left" | "center" | "right";
-  // TODO move the width? property here?
+  // TODO move the width? from categoryName property here? This could allow nice design where lastname has a line break
 };
 
 export type BaseSettings = {
