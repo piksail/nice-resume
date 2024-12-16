@@ -12,6 +12,7 @@ import type {
   HeaderLayout,
   LetterSettings,
   ListMarker,
+  ListMarkerPosition,
   PaperDocumentSettings,
   ResumeSettings,
   Template,
@@ -91,6 +92,8 @@ export const textSeparators: TextSeparator[] = [
   ",",
   " ",
 ];
+
+export const listMarkerPositions: ListMarkerPosition[] = ["inside", "outside"];
 
 export const listMarkers: ListMarker[] = [
   "circle",
@@ -177,6 +180,7 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     alignment: "start",
     listOrientation: "column",
     listMarker: null,
+    listMarkerPosition: "inside",
     listMarkerColor: "currentColor",
     iconSize: 16,
     iconColor: "currentColor",
@@ -358,6 +362,7 @@ export const resumeSettings: ResumeSettings = {
     color: "currentColor",
     listOrientation: "column",
     listMarker: "hyphen",
+    listMarkerPosition: "inside",
     listMarkerColor: "currentColor",
     backgroundColor: "transparent",
     borderStyle: "solid",

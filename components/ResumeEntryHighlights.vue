@@ -29,6 +29,7 @@ const settings = computed(() => {
     :style="{
       flexDirection: settings.entryHighlight.listOrientation,
       gap: `${settings.entryHighlight.gap}px`,
+      listStylePosition: settings.entryHighlight.listMarkerPosition,
       listStyleType: getListMarker(settings.entryHighlight.listMarker),
       color: `${settings.entryHighlight.listMarkerColor}`,
       ...getNodeStyle(settings.entryHighlight, 'block'),

@@ -37,6 +37,7 @@ const settings = useDocumentSettings();
         settings.contactDetails.listOrientation === 'row'
           ? 0
           : `${settings.contactDetails.gap}px`,
+      listStylePosition: settings.contactDetails.listMarkerPosition,
       listStyleType: getListMarker(settings.contactDetails.listMarker),
       color: `${settings.contactDetails.listMarkerColor}`,
       ...getNodeStyle(settings.contactDetails, 'block'),
