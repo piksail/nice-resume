@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import Drawer from "primevue/drawer";
 import Fieldset from "primevue/fieldset";
@@ -48,6 +48,11 @@ const documentTypeSettings = computed(() => {
   return documentType.value === "letter"
     ? letterSettings.value
     : resumeSettings.value;
+});
+
+watch(template, () => {
+  // Hide customization to see the new theme
+  isThemeCustomized.value = false;
 });
 
 function askBeforeResetStyle() {

@@ -7,7 +7,6 @@ export default {
     "./fragments/**/*.{vue,ts}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
-    "./templates/**/*.vue",
     "./app.vue",
   ],
   theme: {
