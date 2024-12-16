@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import Toolbar from "primevue/toolbar";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
-import { documentTypes, templates } from "@/globals";
+import { documentTypes, themes } from "@/globals";
 import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
 import ExportDialog from "~/fragments/ExportDialog.vue";
@@ -21,7 +21,7 @@ const { availableLocales, locale, setLocale } = useI18n();
 const localePath = useLocalePath();
 
 const { documentType } = storeToRefs(useEditorStore());
-const { template } = storeToRefs(useProfileStore());
+const { theme } = storeToRefs(useProfileStore());
 
 const localeLabel: { [key in LocaleCode]: string } = {
   br: "Brezhoneg",
@@ -81,11 +81,11 @@ const localeLabel: { [key in LocaleCode]: string } = {
             id="theme"
             type="select"
             :label="$t('theme')"
-            v-model="template"
+            v-model="theme"
             optionLabel="label"
             optionValue="value"
             :options="
-              templates.map((theme) => ({
+              themes.map((theme) => ({
                 label: theme === 'default' ? capitalize($t('default')) : theme,
                 value: theme,
               }))

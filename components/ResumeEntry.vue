@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import type { Category } from "@/types";
 import ResumeEntryLocation from "./ResumeEntryLocation.vue";
 import ResumeEntryOrganization from "./ResumeEntryOrganization.vue";
@@ -17,14 +17,14 @@ const { entry } = defineProps<{
   entry: Category["entries"][0];
 }>();
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const experienceHeaderItems = computed(() => {

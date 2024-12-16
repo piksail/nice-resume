@@ -2,7 +2,7 @@ export type LocaleCode = "br" | "de" | "en" | "es" | "fr" | "it";
 
 export type RegionCode = "br" | "de" | "es" | "fr" | "it" | "uk";
 
-export type Template =
+export type Theme =
   | "default"
   | "Aster"
   | "Care"
@@ -104,7 +104,7 @@ export type BlockSettings = {
   borderColor: string;
   borderRadius: number;
   margin: SideSetting;
-  // TODO allow width -> This allow some templates to have the same width even though their text is different
+  // TODO allow width -> This allow some themes to have the same width even though their text is different
 };
 
 export type TextSettings = {
@@ -130,8 +130,8 @@ export type BaseSettings = {
   displayFont?: Font;
 };
 
-export type TemplateBaseSettings = {
-  [T in Template]: BaseSettings;
+export type ThemeBaseSettings = {
+  [T in Theme]: BaseSettings;
 };
 
 export type DocumentSettings = {
@@ -246,8 +246,8 @@ export type EmailSettings = CommonDocumentSettings & {
   document: DocumentSettings & { layout: HeaderLayout };
 };
 
-export type TemplateSettings = {
-  [T in Template]: {
+export type ThemeSettings = {
+  [T in Theme]: {
     base: BaseSettings;
     resume: ResumeSettings;
     letter: LetterSettings;
@@ -324,7 +324,7 @@ export interface Category {
 }
 
 export interface Profile {
-  template: Template;
+  theme: Theme;
   name: string;
   title: string;
   contactDetails: ContactDetail[];

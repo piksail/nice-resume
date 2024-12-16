@@ -15,7 +15,7 @@ import {
   fonts,
   fontWeights,
   headerLayouts,
-  templateSettings,
+  themeSettings,
 } from "@/globals";
 import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import EntryHeaderItemSettingsEditor from "@/components/EntryHeaderItemSettingsEditor.vue";
@@ -32,7 +32,7 @@ const { t } = useI18n({
 });
 
 const { documentType } = storeToRefs(useEditorStore());
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: resumeSettings } = storeToRefs(useResumeStore());
 const { isHeaderSimple, settings: letterSettings } =
@@ -50,7 +50,7 @@ const documentTypeSettings = computed(() => {
     : resumeSettings.value;
 });
 
-watch(template, () => {
+watch(theme, () => {
   // Hide customization to see the new theme
   isThemeCustomized.value = false;
 });
@@ -70,11 +70,11 @@ function askBeforeResetStyle() {
     },
     accept: () => {
       if (documentType.value === "email") {
-        emailSettings.value = templateSettings[template.value].email;
+        emailSettings.value = themeSettings[theme.value].email;
       } else if (documentType.value === "letter") {
-        letterSettings.value = templateSettings[template.value].letter;
+        letterSettings.value = themeSettings[theme.value].letter;
       } else {
-        resumeSettings.value = templateSettings[template.value].resume;
+        resumeSettings.value = themeSettings[theme.value].resume;
       }
     },
     reject: () => {},

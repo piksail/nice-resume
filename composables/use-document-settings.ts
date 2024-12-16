@@ -5,12 +5,12 @@ import { useEmailStore } from "@/stores/email";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 
 export default function useDocumentSettings() {
   const { documentType } = storeToRefs(useEditorStore());
 
-  const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+  const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
   const { settings: resumeStoreSettings } = storeToRefs(useResumeStore());
   const { settings: letterStoreSettings } = storeToRefs(useLetterStore());
@@ -20,16 +20,16 @@ export default function useDocumentSettings() {
     if (documentType.value === "email") {
       return isThemeCustomized.value
         ? emailStoreSettings
-        : templateSettings[template.value][documentType.value];
+        : themeSettings[theme.value][documentType.value];
     }
     if (documentType.value === "letter") {
       return isThemeCustomized.value
         ? letterStoreSettings
-        : templateSettings[template.value][documentType.value];
+        : themeSettings[theme.value][documentType.value];
     }
     return isThemeCustomized.value
       ? resumeStoreSettings
-      : templateSettings[template.value][documentType.value];
+      : themeSettings[theme.value][documentType.value];
   });
 
   return settings.value;

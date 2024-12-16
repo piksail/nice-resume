@@ -15,9 +15,9 @@ import type {
   ListMarkerPosition,
   PaperDocumentSettings,
   ResumeSettings,
-  Template,
-  TemplateBaseSettings,
-  TemplateSettings,
+  Theme,
+  ThemeBaseSettings,
+  ThemeSettings,
   TextSeparator,
 } from "@/types";
 
@@ -58,7 +58,7 @@ export const fonts: Font[] = [
   "Yanone Kaffeesatz",
 ];
 
-export const templates: Array<Template> = [
+export const themes: Theme[] = [
   "default",
   "Aster",
   "Care",
@@ -489,7 +489,7 @@ export const emailSettings: EmailSettings = {
   },
 };
 
-export const templateBaseSettings: TemplateBaseSettings = {
+export const themeBaseSettings: ThemeBaseSettings = {
   default: {
     isLetterPaddingless: false,
     colors: ["#f1f1f1", "#717171", "#000000"],
@@ -641,132 +641,132 @@ export const templateBaseSettings: TemplateBaseSettings = {
   },
 };
 
-// TODO Find a way to loop through Templates array AND be TS-compliant
-export const templateSettings: TemplateSettings = {
+// TODO Find a way to loop through Themes array AND be TS-compliant
+export const themeSettings: ThemeSettings = {
   default: {
-    base: templateBaseSettings.default,
+    base: themeBaseSettings.default,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Aster: {
-    base: templateBaseSettings.Aster,
+    base: themeBaseSettings.Aster,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Care: {
-    base: templateBaseSettings.Care,
+    base: themeBaseSettings.Care,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   CottonCandy: {
-    base: templateBaseSettings.CottonCandy,
+    base: themeBaseSettings.CottonCandy,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Cupcake: {
-    base: templateBaseSettings.Cupcake,
+    base: themeBaseSettings.Cupcake,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Elegant: {
-    base: templateBaseSettings.Elegant,
+    base: themeBaseSettings.Elegant,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Kendall: {
-    base: templateBaseSettings.Kendall,
+    base: themeBaseSettings.Kendall,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Macaron: {
-    base: templateBaseSettings.Macaron,
+    base: themeBaseSettings.Macaron,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Macchiato: {
-    base: templateBaseSettings.Macchiato,
+    base: themeBaseSettings.Macchiato,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   NeoBrutalism: {
-    base: templateBaseSettings.NeoBrutalism,
+    base: themeBaseSettings.NeoBrutalism,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Oilcloth: {
-    base: templateBaseSettings.Oilcloth,
+    base: themeBaseSettings.Oilcloth,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   OpenResume: {
-    base: templateBaseSettings.OpenResume,
+    base: themeBaseSettings.OpenResume,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Paper: {
-    base: templateBaseSettings.Paper,
+    base: themeBaseSettings.Paper,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Pharmacy: {
-    base: templateBaseSettings.Pharmacy,
+    base: themeBaseSettings.Pharmacy,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Red: {
-    base: templateBaseSettings.Red,
+    base: themeBaseSettings.Red,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Shelf: {
-    base: templateBaseSettings.Shelf,
+    base: themeBaseSettings.Shelf,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   StackOverflow: {
-    base: templateBaseSettings.StackOverflow,
+    base: themeBaseSettings.StackOverflow,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Stone: {
-    base: templateBaseSettings.Stone,
+    base: themeBaseSettings.Stone,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Toothpaste: {
-    base: templateBaseSettings.Toothpaste,
+    base: themeBaseSettings.Toothpaste,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
   Wiki: {
-    base: templateBaseSettings.Wiki,
+    base: themeBaseSettings.Wiki,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
   },
 };
 
-function scaffoldTemplateSettings(
-  template: Template,
+function scaffoldThemeSettings(
+  theme: Theme,
   baseSettings: BaseSettings,
   isLetterPaddingless: boolean,
 ) {
@@ -802,2050 +802,1984 @@ function scaffoldTemplateSettings(
   } else {
     settings.letter.header.margin = [0, 0, 0, 0];
   }
-  templateSettings[template] = settings;
+  themeSettings[theme] = settings;
 }
 
-Object.entries(templateBaseSettings).forEach(([key, value]) => {
-  scaffoldTemplateSettings(key as Template, value, value.isLetterPaddingless);
+Object.entries(themeBaseSettings).forEach(([key, value]) => {
+  scaffoldThemeSettings(key as Theme, value, value.isLetterPaddingless);
 });
 
 // Default
-templateSettings.default.resume.header.margin[2] = 20;
-templateSettings.default.resume.name.fontWeight = 600;
-templateSettings.default.resume.name.letterSpacing = 2;
-templateSettings.default.resume.title.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.resume.title.letterSpacing = 1;
-templateSettings.default.resume.about.isItalic = true;
-templateSettings.default.resume.about.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.resume.contactDetails.margin = [10, 0, 10, 0];
-templateSettings.default.resume.contactDetails.fontSize = 12;
-templateSettings.default.resume.category.margin[0] = 10;
-templateSettings.default.resume.categoryName.fontSize = 16;
-templateSettings.default.resume.categoryName.fontWeight = 600;
-templateSettings.default.resume.categoryName.letterSpacing = 1;
-templateSettings.default.resume.entry.layout = 2;
-templateSettings.default.resume.entry.margin[2] = 30;
-templateSettings.default.resume.entryTitle.fontSize = 15;
-templateSettings.default.resume.entryPeriod.fontSize = 12;
-templateSettings.default.resume.entryPeriod.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.resume.entryLocation.fontSize = 12;
-templateSettings.default.resume.entryLocation.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.resume.entrySummary.margin[0] = 10;
-templateSettings.default.resume.entryHighlight.margin[0] = 5;
-templateSettings.default.resume.entryHighlight.lineHeight = 1.2;
-templateSettings.default.resume.entryHighlight.fontSize = 13;
-templateSettings.default.resume.entryHighlight.isItalic = true;
-templateSettings.default.resume.entryTag.margin[0] = 15;
-templateSettings.default.letter.name.fontWeight = 600;
-templateSettings.default.letter.name.letterSpacing = 2;
-templateSettings.default.letter.title.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.letter.title.letterSpacing = 1;
-templateSettings.default.letter.about.isItalic = true;
-templateSettings.default.letter.about.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.letter.contactDetails.margin = [10, 0, 10, 0];
-templateSettings.default.letter.contactDetails.fontSize = 12;
-templateSettings.default.email.name.fontWeight = 600;
-templateSettings.default.email.name.letterSpacing = 2;
-templateSettings.default.email.title.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.email.title.letterSpacing = 1;
-templateSettings.default.email.about.isItalic = true;
-templateSettings.default.email.about.color =
-  templateBaseSettings.default.colors[1];
-templateSettings.default.email.contactDetails.margin = [10, 0, 10, 0];
-templateSettings.default.email.contactDetails.fontSize = 12;
+themeSettings.default.resume.header.margin[2] = 20;
+themeSettings.default.resume.name.fontWeight = 600;
+themeSettings.default.resume.name.letterSpacing = 2;
+themeSettings.default.resume.title.color = themeBaseSettings.default.colors[1];
+themeSettings.default.resume.title.letterSpacing = 1;
+themeSettings.default.resume.about.isItalic = true;
+themeSettings.default.resume.about.color = themeBaseSettings.default.colors[1];
+themeSettings.default.resume.contactDetails.margin = [10, 0, 10, 0];
+themeSettings.default.resume.contactDetails.fontSize = 12;
+themeSettings.default.resume.category.margin[0] = 10;
+themeSettings.default.resume.categoryName.fontSize = 16;
+themeSettings.default.resume.categoryName.fontWeight = 600;
+themeSettings.default.resume.categoryName.letterSpacing = 1;
+themeSettings.default.resume.entry.layout = 2;
+themeSettings.default.resume.entry.margin[2] = 30;
+themeSettings.default.resume.entryTitle.fontSize = 15;
+themeSettings.default.resume.entryPeriod.fontSize = 12;
+themeSettings.default.resume.entryPeriod.color =
+  themeBaseSettings.default.colors[1];
+themeSettings.default.resume.entryLocation.fontSize = 12;
+themeSettings.default.resume.entryLocation.color =
+  themeBaseSettings.default.colors[1];
+themeSettings.default.resume.entrySummary.margin[0] = 10;
+themeSettings.default.resume.entryHighlight.margin[0] = 5;
+themeSettings.default.resume.entryHighlight.lineHeight = 1.2;
+themeSettings.default.resume.entryHighlight.fontSize = 13;
+themeSettings.default.resume.entryHighlight.isItalic = true;
+themeSettings.default.resume.entryTag.margin[0] = 15;
+themeSettings.default.letter.name.fontWeight = 600;
+themeSettings.default.letter.name.letterSpacing = 2;
+themeSettings.default.letter.title.color = themeBaseSettings.default.colors[1];
+themeSettings.default.letter.title.letterSpacing = 1;
+themeSettings.default.letter.about.isItalic = true;
+themeSettings.default.letter.about.color = themeBaseSettings.default.colors[1];
+themeSettings.default.letter.contactDetails.margin = [10, 0, 10, 0];
+themeSettings.default.letter.contactDetails.fontSize = 12;
+themeSettings.default.email.name.fontWeight = 600;
+themeSettings.default.email.name.letterSpacing = 2;
+themeSettings.default.email.title.color = themeBaseSettings.default.colors[1];
+themeSettings.default.email.title.letterSpacing = 1;
+themeSettings.default.email.about.isItalic = true;
+themeSettings.default.email.about.color = themeBaseSettings.default.colors[1];
+themeSettings.default.email.contactDetails.margin = [10, 0, 10, 0];
+themeSettings.default.email.contactDetails.fontSize = 12;
 
 // Aster
-templateSettings.Aster.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Aster.resume.header.layout = 2;
-templateSettings.Aster.resume.header.margin = [32, 32, 32, 32];
-templateSettings.Aster.resume.contactDetails.alignment = "end";
-templateSettings.Aster.resume.contactDetails.iconColor =
-  templateBaseSettings.Aster.colors[0];
-templateSettings.Aster.resume.categoryName.width = 64;
-templateSettings.Aster.resume.categoryName.padding = [4, 4, 4, 32];
-templateSettings.Aster.resume.categoryName.backgroundColor =
-  templateBaseSettings.Aster.colors[0];
-templateSettings.Aster.resume.categoryName.color =
-  templateBaseSettings.Aster.colors[2];
-templateSettings.Aster.resume.categoryName.isUppercase = true;
-templateSettings.Aster.resume.categoryName.fontWeight = 600;
-templateSettings.Aster.resume.categoryNameSeparator.height = 6;
-templateSettings.Aster.resume.categoryNameSeparator.width = 65;
-templateSettings.Aster.resume.categoryNameSeparator.backgroundColor =
-  templateBaseSettings.Aster.colors[1];
-templateSettings.Aster.resume.entry.padding = [8, 8, 8, 32];
-templateSettings.Aster.resume.entryPeriod.order = 1;
-templateSettings.Aster.resume.entryTitle.order = 2;
-templateSettings.Aster.resume.entryTitle.fontWeight = 500;
-templateSettings.Aster.resume.entryOrganization.isItalic = true;
-templateSettings.Aster.resume.entrySummary.padding[3] = 16;
-templateSettings.Aster.resume.entryHighlight.padding[3] = 16;
-templateSettings.Aster.resume.entryTag.margin[3] = 16;
-templateSettings.Aster.letter.header.layout = 2;
-templateSettings.Aster.letter.contactDetails.alignment = "end";
-templateSettings.Aster.letter.contactDetails.iconColor =
-  templateBaseSettings.Aster.colors[0];
-templateSettings.Aster.letter.senderDetails.fontWeight = 300;
-templateSettings.Aster.letter.recipientDetails.fontWeight = 300;
-templateSettings.Aster.letter.subject.fontSize = 18;
-templateSettings.Aster.letter.subject.fontWeight = 300;
-templateSettings.Aster.letter.reference.fontSize = 15;
-templateSettings.Aster.letter.reference.fontWeight = 300;
-templateSettings.Aster.letter.reference.color =
-  templateBaseSettings.Aster.colors[0];
-templateSettings.Aster.letter.body.fontWeight = 300;
-templateSettings.Aster.letter.body.lineHeight = 1.6;
-templateSettings.Aster.email.name.color = templateBaseSettings.Aster.colors[0];
-templateSettings.Aster.email.name.fontWeight = 600;
-templateSettings.Aster.email.title.color = templateBaseSettings.Aster.colors[1];
-templateSettings.Aster.email.contactDetails.iconColor =
-  templateBaseSettings.Aster.colors[0];
+themeSettings.Aster.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Aster.resume.header.layout = 2;
+themeSettings.Aster.resume.header.margin = [32, 32, 32, 32];
+themeSettings.Aster.resume.contactDetails.alignment = "end";
+themeSettings.Aster.resume.contactDetails.iconColor =
+  themeBaseSettings.Aster.colors[0];
+themeSettings.Aster.resume.categoryName.width = 64;
+themeSettings.Aster.resume.categoryName.padding = [4, 4, 4, 32];
+themeSettings.Aster.resume.categoryName.backgroundColor =
+  themeBaseSettings.Aster.colors[0];
+themeSettings.Aster.resume.categoryName.color =
+  themeBaseSettings.Aster.colors[2];
+themeSettings.Aster.resume.categoryName.isUppercase = true;
+themeSettings.Aster.resume.categoryName.fontWeight = 600;
+themeSettings.Aster.resume.categoryNameSeparator.height = 6;
+themeSettings.Aster.resume.categoryNameSeparator.width = 65;
+themeSettings.Aster.resume.categoryNameSeparator.backgroundColor =
+  themeBaseSettings.Aster.colors[1];
+themeSettings.Aster.resume.entry.padding = [8, 8, 8, 32];
+themeSettings.Aster.resume.entryPeriod.order = 1;
+themeSettings.Aster.resume.entryTitle.order = 2;
+themeSettings.Aster.resume.entryTitle.fontWeight = 500;
+themeSettings.Aster.resume.entryOrganization.isItalic = true;
+themeSettings.Aster.resume.entrySummary.padding[3] = 16;
+themeSettings.Aster.resume.entryHighlight.padding[3] = 16;
+themeSettings.Aster.resume.entryTag.margin[3] = 16;
+themeSettings.Aster.letter.header.layout = 2;
+themeSettings.Aster.letter.contactDetails.alignment = "end";
+themeSettings.Aster.letter.contactDetails.iconColor =
+  themeBaseSettings.Aster.colors[0];
+themeSettings.Aster.letter.senderDetails.fontWeight = 300;
+themeSettings.Aster.letter.recipientDetails.fontWeight = 300;
+themeSettings.Aster.letter.subject.fontSize = 18;
+themeSettings.Aster.letter.subject.fontWeight = 300;
+themeSettings.Aster.letter.reference.fontSize = 15;
+themeSettings.Aster.letter.reference.fontWeight = 300;
+themeSettings.Aster.letter.reference.color = themeBaseSettings.Aster.colors[0];
+themeSettings.Aster.letter.body.fontWeight = 300;
+themeSettings.Aster.letter.body.lineHeight = 1.6;
+themeSettings.Aster.email.name.color = themeBaseSettings.Aster.colors[0];
+themeSettings.Aster.email.name.fontWeight = 600;
+themeSettings.Aster.email.title.color = themeBaseSettings.Aster.colors[1];
+themeSettings.Aster.email.contactDetails.iconColor =
+  themeBaseSettings.Aster.colors[0];
 
 // Care
-templateSettings.Care.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Care.resume.document.backgroundColor =
-  templateSettings.Care.base.colors[0];
-templateSettings.Care.resume.document.color =
-  templateSettings.Care.base.colors[5];
-templateSettings.Care.resume.header.margin = [60, 60, 0, 60];
-templateSettings.Care.resume.header.layout = 5;
-templateSettings.Care.resume.name.font = templateSettings.Care.base.displayFont;
-templateSettings.Care.resume.name.isUppercase = true;
-templateSettings.Care.resume.name.letterSpacing = 4;
-templateSettings.Care.resume.name.color = templateSettings.Care.base.colors[1];
-templateSettings.Care.resume.title.font =
-  templateSettings.Care.base.displayFont;
-templateSettings.Care.resume.title.color = templateSettings.Care.base.colors[3];
-templateSettings.Care.resume.title.margin = [12, 0, 0, 114];
-templateSettings.Care.resume.about.margin[3] = 218;
-templateSettings.Care.resume.contactDetails.margin = [44, 0, 0, 20];
-templateSettings.Care.resume.contactDetails.iconColor =
-  templateSettings.Care.base.colors[3];
-templateSettings.Care.resume.contactDetails.color =
-  templateSettings.Care.base.colors[5];
-templateSettings.Care.resume.body.margin = [60, 60, 60, 60];
-templateSettings.Care.resume.category.gap = 40;
-templateSettings.Care.resume.categoryName.isAside = true;
-templateSettings.Care.resume.categoryName.width = "fit";
-templateSettings.Care.resume.categoryName.font =
-  templateSettings.Care.base.displayFont;
-templateSettings.Care.resume.categoryName.isUppercase = true;
-templateSettings.Care.resume.categoryName.letterSpacing = 2;
-templateSettings.Care.resume.categoryName.fontWeight = 500;
-templateSettings.Care.resume.categoryName.padding[2] = 12;
-templateSettings.Care.resume.categoryName.border[2] = 1;
-templateSettings.Care.resume.categoryName.margin[1] = 30;
-templateSettings.Care.resume.categoryName.margin[2] = 15;
-templateSettings.Care.resume.categoryName.color =
-  templateSettings.Care.base.colors[1];
-templateSettings.Care.resume.entry.layout = 9;
-templateSettings.Care.resume.entryTitle.color =
-  templateSettings.Care.base.colors[2];
-templateSettings.Care.resume.entryOrganization.order = 2;
-templateSettings.Care.resume.entryOrganization.color =
-  templateSettings.Care.base.colors[4];
-templateSettings.Care.resume.entryOrganization.beforeSeparator = "|";
-templateSettings.Care.resume.entryLocation.order = 3;
-templateSettings.Care.resume.entryLocation.color =
-  templateSettings.Care.base.colors[1];
-templateSettings.Care.resume.entryLocation.beforeSeparator = ",";
-templateSettings.Care.resume.entryPeriod.order = 4;
-templateSettings.Care.resume.entryPeriod.color =
-  templateSettings.Care.base.colors[2];
-templateSettings.Care.resume.entryHighlight.listMarker = "disc";
-templateSettings.Care.resume.entryHighlight.color =
-  templateSettings.Care.base.colors[1];
-templateSettings.Care.resume.entryTag.gap = 20;
-templateSettings.Care.resume.entryTag.backgroundColor = "transparent";
-templateSettings.Care.resume.entryTag.borderColor =
-  templateSettings.Care.base.colors[3];
-templateSettings.Care.resume.entryTag.border = [2, 2, 2, 2];
-templateSettings.Care.resume.entryTag.borderRadius = 50;
-templateSettings.Care.letter.header.margin = [60, 60, 0, 60];
-templateSettings.Care.letter.document.backgroundColor =
-  templateSettings.Care.base.colors[0];
-templateSettings.Care.letter.document.color =
-  templateSettings.Care.base.colors[5];
-templateSettings.Care.letter.header.layout = 5;
-templateSettings.Care.letter.name.font = templateSettings.Care.base.displayFont;
-templateSettings.Care.letter.name.isUppercase = true;
-templateSettings.Care.letter.name.letterSpacing = 4;
-templateSettings.Care.letter.name.color = templateSettings.Care.base.colors[1];
-templateSettings.Care.letter.title.font =
-  templateSettings.Care.base.displayFont;
-templateSettings.Care.letter.title.color = templateSettings.Care.base.colors[3];
-templateSettings.Care.letter.title.margin = [12, 0, 0, 114];
-templateSettings.Care.letter.about.margin[3] = 218;
-templateSettings.Care.letter.contactDetails.margin = [44, 0, 0, 20];
-templateSettings.Care.letter.contactDetails.iconColor =
-  templateSettings.Care.base.colors[3];
-templateSettings.Care.letter.contactDetails.color =
-  templateSettings.Care.base.colors[5];
-templateSettings.Care.letter.senderDetails.color =
-  templateSettings.Care.base.colors[1];
-templateSettings.Care.letter.recipientDetails.color =
-  templateSettings.Care.base.colors[1];
-templateSettings.Care.letter.subject.fontSize = 20;
-templateSettings.Care.letter.subject.font =
-  templateSettings.Care.base.displayFont;
-templateSettings.Care.letter.subject.color =
-  templateSettings.Care.base.colors[3];
-templateSettings.Care.letter.reference.color =
-  templateSettings.Care.base.colors[1];
-templateSettings.Care.letter.reference.isItalic = true;
-templateSettings.Care.letter.reference.fontSize = 14;
-templateSettings.Care.letter.body.margin[0] = 10;
-templateSettings.Care.letter.body.isJustified = false;
-templateSettings.Care.letter.body.fontSize = 15;
-templateSettings.Care.email.document.layout = 5;
-templateSettings.Care.email.document.backgroundColor =
-  templateSettings.Care.base.colors[0];
-templateSettings.Care.email.document.color =
-  templateSettings.Care.base.colors[5];
-templateSettings.Care.email.name.font = templateSettings.Care.base.displayFont;
-templateSettings.Care.email.name.isUppercase = true;
-templateSettings.Care.email.name.letterSpacing = 4;
-templateSettings.Care.email.name.color = templateSettings.Care.base.colors[1];
-templateSettings.Care.email.title.font = templateSettings.Care.base.displayFont;
-templateSettings.Care.email.title.color = templateSettings.Care.base.colors[3];
-templateSettings.Care.email.title.margin = [12, 0, 0, 114];
-templateSettings.Care.email.about.margin[3] = 218;
-templateSettings.Care.email.contactDetails.margin = [44, 0, 0, 20];
-templateSettings.Care.email.contactDetails.iconColor =
-  templateSettings.Care.base.colors[3];
-templateSettings.Care.email.contactDetails.color =
-  templateSettings.Care.base.colors[5];
+themeSettings.Care.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Care.resume.document.backgroundColor =
+  themeSettings.Care.base.colors[0];
+themeSettings.Care.resume.document.color = themeSettings.Care.base.colors[5];
+themeSettings.Care.resume.header.margin = [60, 60, 0, 60];
+themeSettings.Care.resume.header.layout = 5;
+themeSettings.Care.resume.name.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.resume.name.isUppercase = true;
+themeSettings.Care.resume.name.letterSpacing = 4;
+themeSettings.Care.resume.name.color = themeSettings.Care.base.colors[1];
+themeSettings.Care.resume.title.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.resume.title.color = themeSettings.Care.base.colors[3];
+themeSettings.Care.resume.title.margin = [12, 0, 0, 114];
+themeSettings.Care.resume.about.margin[3] = 218;
+themeSettings.Care.resume.contactDetails.margin = [44, 0, 0, 20];
+themeSettings.Care.resume.contactDetails.iconColor =
+  themeSettings.Care.base.colors[3];
+themeSettings.Care.resume.contactDetails.color =
+  themeSettings.Care.base.colors[5];
+themeSettings.Care.resume.body.margin = [60, 60, 60, 60];
+themeSettings.Care.resume.category.gap = 40;
+themeSettings.Care.resume.categoryName.isAside = true;
+themeSettings.Care.resume.categoryName.width = "fit";
+themeSettings.Care.resume.categoryName.font =
+  themeSettings.Care.base.displayFont;
+themeSettings.Care.resume.categoryName.isUppercase = true;
+themeSettings.Care.resume.categoryName.letterSpacing = 2;
+themeSettings.Care.resume.categoryName.fontWeight = 500;
+themeSettings.Care.resume.categoryName.padding[2] = 12;
+themeSettings.Care.resume.categoryName.border[2] = 1;
+themeSettings.Care.resume.categoryName.margin[1] = 30;
+themeSettings.Care.resume.categoryName.margin[2] = 15;
+themeSettings.Care.resume.categoryName.color =
+  themeSettings.Care.base.colors[1];
+themeSettings.Care.resume.entry.layout = 9;
+themeSettings.Care.resume.entryTitle.color = themeSettings.Care.base.colors[2];
+themeSettings.Care.resume.entryOrganization.order = 2;
+themeSettings.Care.resume.entryOrganization.color =
+  themeSettings.Care.base.colors[4];
+themeSettings.Care.resume.entryOrganization.beforeSeparator = "|";
+themeSettings.Care.resume.entryLocation.order = 3;
+themeSettings.Care.resume.entryLocation.color =
+  themeSettings.Care.base.colors[1];
+themeSettings.Care.resume.entryLocation.beforeSeparator = ",";
+themeSettings.Care.resume.entryPeriod.order = 4;
+themeSettings.Care.resume.entryPeriod.color = themeSettings.Care.base.colors[2];
+themeSettings.Care.resume.entryHighlight.listMarker = "disc";
+themeSettings.Care.resume.entryHighlight.color =
+  themeSettings.Care.base.colors[1];
+themeSettings.Care.resume.entryTag.gap = 20;
+themeSettings.Care.resume.entryTag.backgroundColor = "transparent";
+themeSettings.Care.resume.entryTag.borderColor =
+  themeSettings.Care.base.colors[3];
+themeSettings.Care.resume.entryTag.border = [2, 2, 2, 2];
+themeSettings.Care.resume.entryTag.borderRadius = 50;
+themeSettings.Care.letter.header.margin = [60, 60, 0, 60];
+themeSettings.Care.letter.document.backgroundColor =
+  themeSettings.Care.base.colors[0];
+themeSettings.Care.letter.document.color = themeSettings.Care.base.colors[5];
+themeSettings.Care.letter.header.layout = 5;
+themeSettings.Care.letter.name.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.letter.name.isUppercase = true;
+themeSettings.Care.letter.name.letterSpacing = 4;
+themeSettings.Care.letter.name.color = themeSettings.Care.base.colors[1];
+themeSettings.Care.letter.title.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.letter.title.color = themeSettings.Care.base.colors[3];
+themeSettings.Care.letter.title.margin = [12, 0, 0, 114];
+themeSettings.Care.letter.about.margin[3] = 218;
+themeSettings.Care.letter.contactDetails.margin = [44, 0, 0, 20];
+themeSettings.Care.letter.contactDetails.iconColor =
+  themeSettings.Care.base.colors[3];
+themeSettings.Care.letter.contactDetails.color =
+  themeSettings.Care.base.colors[5];
+themeSettings.Care.letter.senderDetails.color =
+  themeSettings.Care.base.colors[1];
+themeSettings.Care.letter.recipientDetails.color =
+  themeSettings.Care.base.colors[1];
+themeSettings.Care.letter.subject.fontSize = 20;
+themeSettings.Care.letter.subject.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.letter.subject.color = themeSettings.Care.base.colors[3];
+themeSettings.Care.letter.reference.color = themeSettings.Care.base.colors[1];
+themeSettings.Care.letter.reference.isItalic = true;
+themeSettings.Care.letter.reference.fontSize = 14;
+themeSettings.Care.letter.body.margin[0] = 10;
+themeSettings.Care.letter.body.isJustified = false;
+themeSettings.Care.letter.body.fontSize = 15;
+themeSettings.Care.email.document.layout = 5;
+themeSettings.Care.email.document.backgroundColor =
+  themeSettings.Care.base.colors[0];
+themeSettings.Care.email.document.color = themeSettings.Care.base.colors[5];
+themeSettings.Care.email.name.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.email.name.isUppercase = true;
+themeSettings.Care.email.name.letterSpacing = 4;
+themeSettings.Care.email.name.color = themeSettings.Care.base.colors[1];
+themeSettings.Care.email.title.font = themeSettings.Care.base.displayFont;
+themeSettings.Care.email.title.color = themeSettings.Care.base.colors[3];
+themeSettings.Care.email.title.margin = [12, 0, 0, 114];
+themeSettings.Care.email.about.margin[3] = 218;
+themeSettings.Care.email.contactDetails.margin = [44, 0, 0, 20];
+themeSettings.Care.email.contactDetails.iconColor =
+  themeSettings.Care.base.colors[3];
+themeSettings.Care.email.contactDetails.color =
+  themeSettings.Care.base.colors[5];
 
 // CottonCandy
-templateSettings.CottonCandy.resume.document.padding = [0, 0, 0, 0];
-templateSettings.CottonCandy.resume.header.layout = 1;
-templateSettings.CottonCandy.resume.header.padding = [24, 40, 24, 40];
-templateSettings.CottonCandy.resume.name.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.resume.name.fontSize = 36;
-templateSettings.CottonCandy.resume.name.isUppercase = true;
-templateSettings.CottonCandy.resume.name.textAlign = "center";
-templateSettings.CottonCandy.resume.name.padding = [0, 16, 0, 16];
-templateSettings.CottonCandy.resume.name.border[0] = 4;
-templateSettings.CottonCandy.resume.name.borderColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.resume.title.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.resume.title.fontSize = 24;
-templateSettings.CottonCandy.resume.title.isUppercase = true;
-templateSettings.CottonCandy.resume.title.textAlign = "center";
-templateSettings.CottonCandy.resume.title.padding = [0, 16, 0, 16];
-templateSettings.CottonCandy.resume.title.border[2] = 4;
-templateSettings.CottonCandy.resume.title.borderColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.resume.contactDetails.margin[3] = 22;
-templateSettings.CottonCandy.resume.contactDetails.color =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.resume.contactDetails.iconColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.resume.aboutQuote.isShown = true;
-templateSettings.CottonCandy.resume.aboutQuote.color =
-  templateBaseSettings.CottonCandy.colors[1];
-templateSettings.CottonCandy.resume.aside.backgroundColor =
-  templateBaseSettings.CottonCandy.colors[1];
-templateSettings.CottonCandy.resume.body.backgroundColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.resume.category.gap = 0;
-templateSettings.CottonCandy.resume.category.padding = [24, 40, 24, 40];
-templateSettings.CottonCandy.resume.categoryName.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.resume.categoryName.fontSize = 24;
-templateSettings.CottonCandy.resume.categoryName.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.categoryName.isUppercase = true;
-templateSettings.CottonCandy.resume.entry.layout = 1;
-templateSettings.CottonCandy.resume.entryTitle.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.resume.entryTitle.fontSize = 20;
-templateSettings.CottonCandy.resume.entryTitle.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryPeriod.order = 3;
-templateSettings.CottonCandy.resume.entryPeriod.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryPeriod.beforeSeparator = "·";
-templateSettings.CottonCandy.resume.entryOrganization.order = 2;
-templateSettings.CottonCandy.resume.entryOrganization.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryLocation.order = 4;
-templateSettings.CottonCandy.resume.entryLocation.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryLocation.beforeSeparator = "·";
-templateSettings.CottonCandy.resume.entrySummary.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryHighlight.color =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryHighlight.listMarkerColor =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.resume.entryHighlight.isItalic = true;
-templateSettings.CottonCandy.resume.entryTag.backgroundColor =
-  templateBaseSettings.CottonCandy.colors[3];
-templateSettings.CottonCandy.letter.header.layout = 1;
-templateSettings.CottonCandy.letter.header.padding = [24, 40, 24, 40];
-templateSettings.CottonCandy.letter.name.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.letter.name.fontSize = 36;
-templateSettings.CottonCandy.letter.name.isUppercase = true;
-templateSettings.CottonCandy.letter.name.textAlign = "center";
-templateSettings.CottonCandy.letter.name.padding = [0, 16, 0, 16];
-templateSettings.CottonCandy.letter.name.border[0] = 4;
-templateSettings.CottonCandy.letter.name.borderColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.letter.title.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.letter.title.fontSize = 24;
-templateSettings.CottonCandy.letter.title.isUppercase = true;
-templateSettings.CottonCandy.letter.title.textAlign = "center";
-templateSettings.CottonCandy.letter.title.padding = [0, 16, 0, 16];
-templateSettings.CottonCandy.letter.title.border[2] = 4;
-templateSettings.CottonCandy.letter.title.borderColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.letter.contactDetails.margin[3] = 22;
-templateSettings.CottonCandy.letter.contactDetails.color =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.letter.contactDetails.iconColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.letter.senderDetails.color =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.letter.senderDetails.margin[0] = 40;
-templateSettings.CottonCandy.letter.senderDetails.margin[1] = 40;
-templateSettings.CottonCandy.letter.senderDetails.margin[3] = 40;
-templateSettings.CottonCandy.letter.senderDetails.isItalic = true;
-templateSettings.CottonCandy.letter.recipientDetails.color =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.letter.recipientDetails.margin[0] = 0;
-templateSettings.CottonCandy.letter.recipientDetails.margin[1] = 40;
-templateSettings.CottonCandy.letter.recipientDetails.margin[3] = 40;
-templateSettings.CottonCandy.letter.recipientDetails.isItalic = true;
-templateSettings.CottonCandy.letter.subject.fontWeight = 700;
-templateSettings.CottonCandy.letter.subject.margin[1] = 40;
-templateSettings.CottonCandy.letter.subject.margin[3] = 40;
-templateSettings.CottonCandy.letter.reference.fontSize = 11;
-templateSettings.CottonCandy.letter.reference.margin[1] = 40;
-templateSettings.CottonCandy.letter.reference.margin[3] = 40;
-templateSettings.CottonCandy.letter.body.margin[1] = 40;
-templateSettings.CottonCandy.letter.body.margin[3] = 40;
-templateSettings.CottonCandy.email.document.layout = 1;
-templateSettings.CottonCandy.email.name.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.email.name.fontSize = 36;
-templateSettings.CottonCandy.email.name.isUppercase = true;
-templateSettings.CottonCandy.email.name.textAlign = "center";
-templateSettings.CottonCandy.email.name.padding = [0, 16, 0, 16];
-templateSettings.CottonCandy.email.name.border[0] = 4;
-templateSettings.CottonCandy.email.name.borderColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.email.title.font =
-  templateBaseSettings.CottonCandy.displayFont;
-templateSettings.CottonCandy.email.title.fontSize = 24;
-templateSettings.CottonCandy.email.title.isUppercase = true;
-templateSettings.CottonCandy.email.title.textAlign = "center";
-templateSettings.CottonCandy.email.title.padding = [0, 16, 0, 16];
-templateSettings.CottonCandy.email.title.border[2] = 4;
-templateSettings.CottonCandy.email.title.borderColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.email.contactDetails.margin[3] = 22;
-templateSettings.CottonCandy.email.contactDetails.color =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.email.contactDetails.iconColor =
-  templateBaseSettings.CottonCandy.colors[0];
-templateSettings.CottonCandy.email.aboutQuote.isShown = true;
-templateSettings.CottonCandy.email.aboutQuote.color =
-  templateBaseSettings.CottonCandy.colors[1];
+themeSettings.CottonCandy.resume.document.padding = [0, 0, 0, 0];
+themeSettings.CottonCandy.resume.header.layout = 1;
+themeSettings.CottonCandy.resume.header.padding = [24, 40, 24, 40];
+themeSettings.CottonCandy.resume.name.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.resume.name.fontSize = 36;
+themeSettings.CottonCandy.resume.name.isUppercase = true;
+themeSettings.CottonCandy.resume.name.textAlign = "center";
+themeSettings.CottonCandy.resume.name.padding = [0, 16, 0, 16];
+themeSettings.CottonCandy.resume.name.border[0] = 4;
+themeSettings.CottonCandy.resume.name.borderColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.resume.title.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.resume.title.fontSize = 24;
+themeSettings.CottonCandy.resume.title.isUppercase = true;
+themeSettings.CottonCandy.resume.title.textAlign = "center";
+themeSettings.CottonCandy.resume.title.padding = [0, 16, 0, 16];
+themeSettings.CottonCandy.resume.title.border[2] = 4;
+themeSettings.CottonCandy.resume.title.borderColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.resume.contactDetails.margin[3] = 22;
+themeSettings.CottonCandy.resume.contactDetails.color =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.resume.contactDetails.iconColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.resume.aboutQuote.isShown = true;
+themeSettings.CottonCandy.resume.aboutQuote.color =
+  themeBaseSettings.CottonCandy.colors[1];
+themeSettings.CottonCandy.resume.aside.backgroundColor =
+  themeBaseSettings.CottonCandy.colors[1];
+themeSettings.CottonCandy.resume.body.backgroundColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.resume.category.gap = 0;
+themeSettings.CottonCandy.resume.category.padding = [24, 40, 24, 40];
+themeSettings.CottonCandy.resume.categoryName.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.resume.categoryName.fontSize = 24;
+themeSettings.CottonCandy.resume.categoryName.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.categoryName.isUppercase = true;
+themeSettings.CottonCandy.resume.entry.layout = 1;
+themeSettings.CottonCandy.resume.entryTitle.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.resume.entryTitle.fontSize = 20;
+themeSettings.CottonCandy.resume.entryTitle.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryPeriod.order = 3;
+themeSettings.CottonCandy.resume.entryPeriod.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryPeriod.beforeSeparator = "·";
+themeSettings.CottonCandy.resume.entryOrganization.order = 2;
+themeSettings.CottonCandy.resume.entryOrganization.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryLocation.order = 4;
+themeSettings.CottonCandy.resume.entryLocation.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryLocation.beforeSeparator = "·";
+themeSettings.CottonCandy.resume.entrySummary.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryHighlight.color =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryHighlight.listMarkerColor =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.resume.entryHighlight.isItalic = true;
+themeSettings.CottonCandy.resume.entryTag.backgroundColor =
+  themeBaseSettings.CottonCandy.colors[3];
+themeSettings.CottonCandy.letter.header.layout = 1;
+themeSettings.CottonCandy.letter.header.padding = [24, 40, 24, 40];
+themeSettings.CottonCandy.letter.name.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.letter.name.fontSize = 36;
+themeSettings.CottonCandy.letter.name.isUppercase = true;
+themeSettings.CottonCandy.letter.name.textAlign = "center";
+themeSettings.CottonCandy.letter.name.padding = [0, 16, 0, 16];
+themeSettings.CottonCandy.letter.name.border[0] = 4;
+themeSettings.CottonCandy.letter.name.borderColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.letter.title.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.letter.title.fontSize = 24;
+themeSettings.CottonCandy.letter.title.isUppercase = true;
+themeSettings.CottonCandy.letter.title.textAlign = "center";
+themeSettings.CottonCandy.letter.title.padding = [0, 16, 0, 16];
+themeSettings.CottonCandy.letter.title.border[2] = 4;
+themeSettings.CottonCandy.letter.title.borderColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.letter.contactDetails.margin[3] = 22;
+themeSettings.CottonCandy.letter.contactDetails.color =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.letter.contactDetails.iconColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.letter.senderDetails.color =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.letter.senderDetails.margin[0] = 40;
+themeSettings.CottonCandy.letter.senderDetails.margin[1] = 40;
+themeSettings.CottonCandy.letter.senderDetails.margin[3] = 40;
+themeSettings.CottonCandy.letter.senderDetails.isItalic = true;
+themeSettings.CottonCandy.letter.recipientDetails.color =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.letter.recipientDetails.margin[0] = 0;
+themeSettings.CottonCandy.letter.recipientDetails.margin[1] = 40;
+themeSettings.CottonCandy.letter.recipientDetails.margin[3] = 40;
+themeSettings.CottonCandy.letter.recipientDetails.isItalic = true;
+themeSettings.CottonCandy.letter.subject.fontWeight = 700;
+themeSettings.CottonCandy.letter.subject.margin[1] = 40;
+themeSettings.CottonCandy.letter.subject.margin[3] = 40;
+themeSettings.CottonCandy.letter.reference.fontSize = 11;
+themeSettings.CottonCandy.letter.reference.margin[1] = 40;
+themeSettings.CottonCandy.letter.reference.margin[3] = 40;
+themeSettings.CottonCandy.letter.body.margin[1] = 40;
+themeSettings.CottonCandy.letter.body.margin[3] = 40;
+themeSettings.CottonCandy.email.document.layout = 1;
+themeSettings.CottonCandy.email.name.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.email.name.fontSize = 36;
+themeSettings.CottonCandy.email.name.isUppercase = true;
+themeSettings.CottonCandy.email.name.textAlign = "center";
+themeSettings.CottonCandy.email.name.padding = [0, 16, 0, 16];
+themeSettings.CottonCandy.email.name.border[0] = 4;
+themeSettings.CottonCandy.email.name.borderColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.email.title.font =
+  themeBaseSettings.CottonCandy.displayFont;
+themeSettings.CottonCandy.email.title.fontSize = 24;
+themeSettings.CottonCandy.email.title.isUppercase = true;
+themeSettings.CottonCandy.email.title.textAlign = "center";
+themeSettings.CottonCandy.email.title.padding = [0, 16, 0, 16];
+themeSettings.CottonCandy.email.title.border[2] = 4;
+themeSettings.CottonCandy.email.title.borderColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.email.contactDetails.margin[3] = 22;
+themeSettings.CottonCandy.email.contactDetails.color =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.email.contactDetails.iconColor =
+  themeBaseSettings.CottonCandy.colors[0];
+themeSettings.CottonCandy.email.aboutQuote.isShown = true;
+themeSettings.CottonCandy.email.aboutQuote.color =
+  themeBaseSettings.CottonCandy.colors[1];
 
 // Cupcake
-templateSettings.Cupcake.resume.header.layout = 2;
-templateSettings.Cupcake.resume.contactDetails.alignment = "end";
-templateSettings.Cupcake.resume.contactDetails.color =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.resume.contactDetails.iconColor =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.resume.category.gap = 32;
-templateSettings.Cupcake.resume.categoryName.font =
-  templateBaseSettings.Cupcake.displayFont;
-templateSettings.Cupcake.resume.categoryName.fontSize = 30;
-templateSettings.Cupcake.resume.categoryName.fontWeight = 700;
-templateSettings.Cupcake.resume.categoryName.lineHeight = 1.2;
-templateSettings.Cupcake.resume.categoryName.letterSpacing = 3;
-templateSettings.Cupcake.resume.categoryName.width = "fit";
-templateSettings.Cupcake.resume.categoryName.isUppercase = true;
-templateSettings.Cupcake.resume.categoryName.margin[2] = 16;
-templateSettings.Cupcake.resume.categoryName.margin[3] = 80;
-templateSettings.Cupcake.resume.categoryName.border[2] = 2;
-templateSettings.Cupcake.resume.categoryName.borderColor =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.resume.entry.layout = 3;
-templateSettings.Cupcake.resume.entryPeriod.order = 1;
-templateSettings.Cupcake.resume.entryPeriod.color =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.resume.entryTitle.order = 2;
-templateSettings.Cupcake.resume.entryTitle.isItalic = true;
-templateSettings.Cupcake.resume.entryHighlight.listMarker = "disc";
-templateSettings.Cupcake.resume.entryHighlight.listMarkerColor =
-  templateBaseSettings.Cupcake.colors[0];
-templateSettings.Cupcake.resume.entryHighlight.color =
-  templateBaseSettings.Cupcake.colors[3];
-templateSettings.Cupcake.resume.entryTag.backgroundColor =
-  templateBaseSettings.Cupcake.colors[2];
-templateSettings.Cupcake.resume.entryTag.gap = 8;
-templateSettings.Cupcake.letter.header.layout = 2;
-templateSettings.Cupcake.letter.contactDetails.alignment = "end";
-templateSettings.Cupcake.letter.contactDetails.color =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.letter.contactDetails.iconColor =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.letter.senderDetails.fontSize = 16;
-templateSettings.Cupcake.letter.senderDetails.lineHeight = 1;
-templateSettings.Cupcake.letter.recipientDetails.fontSize = 16;
-templateSettings.Cupcake.letter.recipientDetails.lineHeight = 1;
-templateSettings.Cupcake.letter.subject.fontWeight = 600;
-templateSettings.Cupcake.letter.subject.fontSize = 20;
-templateSettings.Cupcake.letter.reference.fontSize = 15;
-templateSettings.Cupcake.letter.body.fontSize = 16;
-templateSettings.Cupcake.email.contactDetails.alignment = "end";
-templateSettings.Cupcake.email.contactDetails.color =
-  templateBaseSettings.Cupcake.colors[1];
-templateSettings.Cupcake.email.contactDetails.iconColor =
-  templateBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.resume.header.layout = 2;
+themeSettings.Cupcake.resume.contactDetails.alignment = "end";
+themeSettings.Cupcake.resume.contactDetails.color =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.resume.contactDetails.iconColor =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.resume.category.gap = 32;
+themeSettings.Cupcake.resume.categoryName.font =
+  themeBaseSettings.Cupcake.displayFont;
+themeSettings.Cupcake.resume.categoryName.fontSize = 30;
+themeSettings.Cupcake.resume.categoryName.fontWeight = 700;
+themeSettings.Cupcake.resume.categoryName.lineHeight = 1.2;
+themeSettings.Cupcake.resume.categoryName.letterSpacing = 3;
+themeSettings.Cupcake.resume.categoryName.width = "fit";
+themeSettings.Cupcake.resume.categoryName.isUppercase = true;
+themeSettings.Cupcake.resume.categoryName.margin[2] = 16;
+themeSettings.Cupcake.resume.categoryName.margin[3] = 80;
+themeSettings.Cupcake.resume.categoryName.border[2] = 2;
+themeSettings.Cupcake.resume.categoryName.borderColor =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.resume.entry.layout = 3;
+themeSettings.Cupcake.resume.entryPeriod.order = 1;
+themeSettings.Cupcake.resume.entryPeriod.color =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.resume.entryTitle.order = 2;
+themeSettings.Cupcake.resume.entryTitle.isItalic = true;
+themeSettings.Cupcake.resume.entryHighlight.listMarker = "disc";
+themeSettings.Cupcake.resume.entryHighlight.listMarkerColor =
+  themeBaseSettings.Cupcake.colors[0];
+themeSettings.Cupcake.resume.entryHighlight.color =
+  themeBaseSettings.Cupcake.colors[3];
+themeSettings.Cupcake.resume.entryTag.backgroundColor =
+  themeBaseSettings.Cupcake.colors[2];
+themeSettings.Cupcake.resume.entryTag.gap = 8;
+themeSettings.Cupcake.letter.header.layout = 2;
+themeSettings.Cupcake.letter.contactDetails.alignment = "end";
+themeSettings.Cupcake.letter.contactDetails.color =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.letter.contactDetails.iconColor =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.letter.senderDetails.fontSize = 16;
+themeSettings.Cupcake.letter.senderDetails.lineHeight = 1;
+themeSettings.Cupcake.letter.recipientDetails.fontSize = 16;
+themeSettings.Cupcake.letter.recipientDetails.lineHeight = 1;
+themeSettings.Cupcake.letter.subject.fontWeight = 600;
+themeSettings.Cupcake.letter.subject.fontSize = 20;
+themeSettings.Cupcake.letter.reference.fontSize = 15;
+themeSettings.Cupcake.letter.body.fontSize = 16;
+themeSettings.Cupcake.email.contactDetails.alignment = "end";
+themeSettings.Cupcake.email.contactDetails.color =
+  themeBaseSettings.Cupcake.colors[1];
+themeSettings.Cupcake.email.contactDetails.iconColor =
+  themeBaseSettings.Cupcake.colors[1];
 
 // Elegant
-templateSettings.Elegant.resume.document.padding = [50, 50, 50, 50];
-templateSettings.Elegant.resume.header.layout = 0;
-templateSettings.Elegant.resume.name.textAlign = "center";
-templateSettings.Elegant.resume.name.fontSize = 24;
-templateSettings.Elegant.resume.name.fontWeight = 700;
-templateSettings.Elegant.resume.title.margin[0] = 10;
-templateSettings.Elegant.resume.title.textAlign = "center";
-templateSettings.Elegant.resume.title.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.resume.contactDetails.margin[0] = 10;
-templateSettings.Elegant.resume.contactDetails.gap = 20;
-templateSettings.Elegant.resume.contactDetails.fontSize = 12;
-templateSettings.Elegant.resume.contactDetails.iconGap = 25;
-templateSettings.Elegant.resume.contactDetails.iconColor =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.resume.contactDetails.color =
-  templateSettings.Elegant.base.colors[6];
-templateSettings.Elegant.resume.aside.margin[0] = 20;
-templateSettings.Elegant.resume.aside.margin[1] = 40;
-templateSettings.Elegant.resume.body.margin[0] = 20;
-templateSettings.Elegant.resume.category.gap = 20;
-templateSettings.Elegant.resume.categoryName.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.resume.categoryName.isUppercase = true;
-templateSettings.Elegant.resume.categoryName.fontSize = 18;
-templateSettings.Elegant.resume.categoryName.padding[2] = 10;
-templateSettings.Elegant.resume.categoryName.border[2] = 1;
-templateSettings.Elegant.resume.categoryName.borderColor =
-  templateSettings.Elegant.base.colors[2];
-templateSettings.Elegant.resume.categoryName.margin[2] = 10;
-templateSettings.Elegant.resume.entry.layout = 8;
-templateSettings.Elegant.resume.entryTitle.fontWeight = 700;
-templateSettings.Elegant.resume.entryOrganization.order = 2;
-templateSettings.Elegant.resume.entryOrganization.beforeSeparator = "-";
-templateSettings.Elegant.resume.entryPeriod.order = 3;
-templateSettings.Elegant.resume.entryPeriod.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.resume.entryPeriod.fontSize = 11;
-templateSettings.Elegant.resume.entryPeriod.fontWeight = 500;
-templateSettings.Elegant.resume.entryLocation.order = 4;
-templateSettings.Elegant.resume.entryLocation.beforeSeparator = ",";
-templateSettings.Elegant.resume.entryLocation.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.resume.entryLocation.fontSize = 11;
-templateSettings.Elegant.resume.entryLocation.fontWeight = 500;
-templateSettings.Elegant.resume.entrySummary.margin[0] = 10;
-templateSettings.Elegant.resume.entryHighlight.margin[0] = 10;
-templateSettings.Elegant.resume.entryHighlight.margin[3] = 40;
-templateSettings.Elegant.resume.entryHighlight.listMarker = "circle";
-templateSettings.Elegant.resume.entryTag.margin[0] = 10;
-templateSettings.Elegant.resume.entryTag.gap = 5;
-templateSettings.Elegant.resume.entryTag.padding = [5, 5, 5, 5];
-templateSettings.Elegant.resume.entryTag.border = [1, 1, 1, 1];
-templateSettings.Elegant.resume.entryTag.borderColor =
-  templateSettings.Elegant.base.colors[3];
-templateSettings.Elegant.resume.entryTag.backgroundColor =
-  templateSettings.Elegant.base.colors[4];
-templateSettings.Elegant.resume.entryTag.color =
-  templateSettings.Elegant.base.colors[5];
-templateSettings.Elegant.resume.entryTag.fontWeight = 700;
-templateSettings.Elegant.resume.entryTag.fontSize = 14;
-templateSettings.Elegant.resume.entryTag.lineHeight = 1;
-templateSettings.Elegant.letter.document.padding = [50, 50, 50, 50];
-templateSettings.Elegant.letter.header.layout = 0;
-templateSettings.Elegant.letter.name.textAlign = "center";
-templateSettings.Elegant.letter.name.fontSize = 24;
-templateSettings.Elegant.letter.name.fontWeight = 700;
-templateSettings.Elegant.letter.title.margin[0] = 10;
-templateSettings.Elegant.letter.title.textAlign = "center";
-templateSettings.Elegant.letter.title.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.letter.contactDetails.margin[0] = 10;
-templateSettings.Elegant.letter.contactDetails.gap = 20;
-templateSettings.Elegant.letter.contactDetails.fontSize = 12;
-templateSettings.Elegant.letter.contactDetails.iconGap = 25;
-templateSettings.Elegant.letter.contactDetails.iconColor =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.letter.contactDetails.color =
-  templateSettings.Elegant.base.colors[6];
-templateSettings.Elegant.letter.subject.fontSize = 18;
-templateSettings.Elegant.letter.subject.fontWeight = 700;
-templateSettings.Elegant.letter.reference.margin[0] = 10;
-templateSettings.Elegant.letter.reference.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.letter.reference.fontSize = 11;
-templateSettings.Elegant.letter.reference.fontWeight = 500;
-templateSettings.Elegant.letter.body.margin[0] = 20;
-templateSettings.Elegant.email.name.fontSize = 24;
-templateSettings.Elegant.email.name.fontWeight = 700;
-templateSettings.Elegant.email.title.margin[0] = 10;
-templateSettings.Elegant.email.title.color =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.email.contactDetails.margin[0] = 10;
-templateSettings.Elegant.email.contactDetails.gap = 20;
-templateSettings.Elegant.email.contactDetails.fontSize = 12;
-templateSettings.Elegant.email.contactDetails.iconGap = 25;
-templateSettings.Elegant.email.contactDetails.iconColor =
-  templateSettings.Elegant.base.colors[1];
-templateSettings.Elegant.email.contactDetails.color =
-  templateSettings.Elegant.base.colors[6];
+themeSettings.Elegant.resume.document.padding = [50, 50, 50, 50];
+themeSettings.Elegant.resume.header.layout = 0;
+themeSettings.Elegant.resume.name.textAlign = "center";
+themeSettings.Elegant.resume.name.fontSize = 24;
+themeSettings.Elegant.resume.name.fontWeight = 700;
+themeSettings.Elegant.resume.title.margin[0] = 10;
+themeSettings.Elegant.resume.title.textAlign = "center";
+themeSettings.Elegant.resume.title.color = themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.resume.contactDetails.margin[0] = 10;
+themeSettings.Elegant.resume.contactDetails.gap = 20;
+themeSettings.Elegant.resume.contactDetails.fontSize = 12;
+themeSettings.Elegant.resume.contactDetails.iconGap = 25;
+themeSettings.Elegant.resume.contactDetails.iconColor =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.resume.contactDetails.color =
+  themeSettings.Elegant.base.colors[6];
+themeSettings.Elegant.resume.aside.margin[0] = 20;
+themeSettings.Elegant.resume.aside.margin[1] = 40;
+themeSettings.Elegant.resume.body.margin[0] = 20;
+themeSettings.Elegant.resume.category.gap = 20;
+themeSettings.Elegant.resume.categoryName.color =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.resume.categoryName.isUppercase = true;
+themeSettings.Elegant.resume.categoryName.fontSize = 18;
+themeSettings.Elegant.resume.categoryName.padding[2] = 10;
+themeSettings.Elegant.resume.categoryName.border[2] = 1;
+themeSettings.Elegant.resume.categoryName.borderColor =
+  themeSettings.Elegant.base.colors[2];
+themeSettings.Elegant.resume.categoryName.margin[2] = 10;
+themeSettings.Elegant.resume.entry.layout = 8;
+themeSettings.Elegant.resume.entryTitle.fontWeight = 700;
+themeSettings.Elegant.resume.entryOrganization.order = 2;
+themeSettings.Elegant.resume.entryOrganization.beforeSeparator = "-";
+themeSettings.Elegant.resume.entryPeriod.order = 3;
+themeSettings.Elegant.resume.entryPeriod.color =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.resume.entryPeriod.fontSize = 11;
+themeSettings.Elegant.resume.entryPeriod.fontWeight = 500;
+themeSettings.Elegant.resume.entryLocation.order = 4;
+themeSettings.Elegant.resume.entryLocation.beforeSeparator = ",";
+themeSettings.Elegant.resume.entryLocation.color =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.resume.entryLocation.fontSize = 11;
+themeSettings.Elegant.resume.entryLocation.fontWeight = 500;
+themeSettings.Elegant.resume.entrySummary.margin[0] = 10;
+themeSettings.Elegant.resume.entryHighlight.margin[0] = 10;
+themeSettings.Elegant.resume.entryHighlight.margin[3] = 40;
+themeSettings.Elegant.resume.entryHighlight.listMarker = "circle";
+themeSettings.Elegant.resume.entryTag.margin[0] = 10;
+themeSettings.Elegant.resume.entryTag.gap = 5;
+themeSettings.Elegant.resume.entryTag.padding = [5, 5, 5, 5];
+themeSettings.Elegant.resume.entryTag.border = [1, 1, 1, 1];
+themeSettings.Elegant.resume.entryTag.borderColor =
+  themeSettings.Elegant.base.colors[3];
+themeSettings.Elegant.resume.entryTag.backgroundColor =
+  themeSettings.Elegant.base.colors[4];
+themeSettings.Elegant.resume.entryTag.color =
+  themeSettings.Elegant.base.colors[5];
+themeSettings.Elegant.resume.entryTag.fontWeight = 700;
+themeSettings.Elegant.resume.entryTag.fontSize = 14;
+themeSettings.Elegant.resume.entryTag.lineHeight = 1;
+themeSettings.Elegant.letter.document.padding = [50, 50, 50, 50];
+themeSettings.Elegant.letter.header.layout = 0;
+themeSettings.Elegant.letter.name.textAlign = "center";
+themeSettings.Elegant.letter.name.fontSize = 24;
+themeSettings.Elegant.letter.name.fontWeight = 700;
+themeSettings.Elegant.letter.title.margin[0] = 10;
+themeSettings.Elegant.letter.title.textAlign = "center";
+themeSettings.Elegant.letter.title.color = themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.letter.contactDetails.margin[0] = 10;
+themeSettings.Elegant.letter.contactDetails.gap = 20;
+themeSettings.Elegant.letter.contactDetails.fontSize = 12;
+themeSettings.Elegant.letter.contactDetails.iconGap = 25;
+themeSettings.Elegant.letter.contactDetails.iconColor =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.letter.contactDetails.color =
+  themeSettings.Elegant.base.colors[6];
+themeSettings.Elegant.letter.subject.fontSize = 18;
+themeSettings.Elegant.letter.subject.fontWeight = 700;
+themeSettings.Elegant.letter.reference.margin[0] = 10;
+themeSettings.Elegant.letter.reference.color =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.letter.reference.fontSize = 11;
+themeSettings.Elegant.letter.reference.fontWeight = 500;
+themeSettings.Elegant.letter.body.margin[0] = 20;
+themeSettings.Elegant.email.name.fontSize = 24;
+themeSettings.Elegant.email.name.fontWeight = 700;
+themeSettings.Elegant.email.title.margin[0] = 10;
+themeSettings.Elegant.email.title.color = themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.email.contactDetails.margin[0] = 10;
+themeSettings.Elegant.email.contactDetails.gap = 20;
+themeSettings.Elegant.email.contactDetails.fontSize = 12;
+themeSettings.Elegant.email.contactDetails.iconGap = 25;
+themeSettings.Elegant.email.contactDetails.iconColor =
+  themeSettings.Elegant.base.colors[1];
+themeSettings.Elegant.email.contactDetails.color =
+  themeSettings.Elegant.base.colors[6];
 
 // Kendall
-templateSettings.Kendall.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Kendall.resume.document.border = [10, 10, 10, 10];
-templateSettings.Kendall.resume.document.borderColor =
-  templateSettings.Kendall.base.colors[0];
-templateSettings.Kendall.resume.header.padding = [15, 15, 15, 15];
-templateSettings.Kendall.resume.name.textAlign = "center";
-templateSettings.Kendall.resume.name.isUppercase = true;
-templateSettings.Kendall.resume.name.fontWeight = 800;
-templateSettings.Kendall.resume.name.letterSpacing = -1;
-templateSettings.Kendall.resume.name.fontSize = 26;
-templateSettings.Kendall.resume.title.textAlign = "center";
-templateSettings.Kendall.resume.title.isUppercase = true;
-templateSettings.Kendall.resume.title.fontWeight = 700;
-templateSettings.Kendall.resume.title.letterSpacing = -1;
-templateSettings.Kendall.resume.title.fontSize = 21;
-templateSettings.Kendall.resume.title.lineHeight = 1;
-templateSettings.Kendall.resume.title.color =
-  templateSettings.Kendall.base.colors[3];
-templateSettings.Kendall.resume.contactDetails.margin[0] = 15;
-templateSettings.Kendall.resume.contactDetails.border[0] = 1;
-templateSettings.Kendall.resume.contactDetails.borderColor =
-  templateSettings.Kendall.base.colors[4];
-templateSettings.Kendall.resume.contactDetails.padding[0] = 15;
-templateSettings.Kendall.resume.contactDetails.gap = 15;
-templateSettings.Kendall.resume.contactDetails.iconColor =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.resume.aside.width = 33;
-templateSettings.Kendall.resume.aside.padding = [15, 15, 15, 15];
-templateSettings.Kendall.resume.body.padding = [15, 15, 15, 15];
-templateSettings.Kendall.resume.category.gap = 15;
-templateSettings.Kendall.resume.categoryName.isUppercase = true;
-templateSettings.Kendall.resume.categoryName.fontWeight = 700;
-templateSettings.Kendall.resume.categoryName.fontSize = 21;
-templateSettings.Kendall.resume.categoryName.color =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.resume.entry.layout = 12;
-templateSettings.Kendall.resume.entryOrganization.order = 1;
-templateSettings.Kendall.resume.entryOrganization.fontWeight = 700;
-templateSettings.Kendall.resume.entryOrganization.fontSize = 17;
-templateSettings.Kendall.resume.entryLocation.order = 2;
-templateSettings.Kendall.resume.entryLocation.fontWeight = 700;
-templateSettings.Kendall.resume.entryLocation.fontSize = 17;
-templateSettings.Kendall.resume.entryPeriod.order = 3;
-templateSettings.Kendall.resume.entryPeriod.color =
-  templateSettings.Kendall.base.colors[3];
-templateSettings.Kendall.resume.entryTitle.order = 4;
-templateSettings.Kendall.resume.entryTitle.fontWeight = 700;
-templateSettings.Kendall.resume.entryTitle.fontSize = 17;
-templateSettings.Kendall.resume.entryHighlight.margin[0] = 10;
-templateSettings.Kendall.resume.entryHighlight.listMarker = null;
-templateSettings.Kendall.resume.entryHighlight.border = [1, 1, 1, 1];
-templateSettings.Kendall.resume.entryHighlight.borderColor =
-  templateSettings.Kendall.base.colors[4];
-templateSettings.Kendall.resume.entryHighlight.borderRadius = 4;
-templateSettings.Kendall.resume.entryHighlight.padding = [10, 15, 10, 15];
-templateSettings.Kendall.resume.entryTag.gap = 5;
-templateSettings.Kendall.resume.entryTag.margin[0] = 10;
-templateSettings.Kendall.resume.entryTag.backgroundColor =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.resume.entryTag.color =
-  templateSettings.Kendall.base.colors[7];
-templateSettings.Kendall.resume.entryTag.fontSize = 12;
-templateSettings.Kendall.resume.entryTag.padding = [1, 8, 1, 8];
-templateSettings.Kendall.resume.entryTag.borderRadius = 4;
-templateSettings.Kendall.letter.document.border = [10, 10, 10, 10];
-templateSettings.Kendall.letter.document.borderColor =
-  templateSettings.Kendall.base.colors[0];
-templateSettings.Kendall.letter.header.padding = [15, 15, 15, 15];
-templateSettings.Kendall.letter.name.textAlign = "center";
-templateSettings.Kendall.letter.name.isUppercase = true;
-templateSettings.Kendall.letter.name.fontWeight = 800;
-templateSettings.Kendall.letter.name.letterSpacing = -1;
-templateSettings.Kendall.letter.name.fontSize = 26;
-templateSettings.Kendall.letter.title.textAlign = "center";
-templateSettings.Kendall.letter.title.isUppercase = true;
-templateSettings.Kendall.letter.title.fontWeight = 700;
-templateSettings.Kendall.letter.title.letterSpacing = -1;
-templateSettings.Kendall.letter.title.fontSize = 21;
-templateSettings.Kendall.letter.title.lineHeight = 1;
-templateSettings.Kendall.letter.title.color =
-  templateSettings.Kendall.base.colors[3];
-templateSettings.Kendall.letter.contactDetails.margin[0] = 15;
-templateSettings.Kendall.letter.contactDetails.border[0] = 1;
-templateSettings.Kendall.letter.contactDetails.borderColor =
-  templateSettings.Kendall.base.colors[4];
-templateSettings.Kendall.letter.contactDetails.padding[0] = 15;
-templateSettings.Kendall.letter.contactDetails.gap = 15;
-templateSettings.Kendall.letter.contactDetails.iconColor =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.letter.senderDetails.color =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.letter.recipientDetails.color =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.letter.subject.isUppercase = true;
-templateSettings.Kendall.letter.subject.fontWeight = 800;
-templateSettings.Kendall.letter.reference.color =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.email.document.backgroundColor =
-  templateSettings.Kendall.base.colors[0];
-templateSettings.Kendall.email.name.color =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.email.name.isUppercase = true;
-templateSettings.Kendall.email.name.fontWeight = 800;
-templateSettings.Kendall.email.name.letterSpacing = -1;
-templateSettings.Kendall.email.name.fontSize = 26;
-templateSettings.Kendall.email.title.isUppercase = true;
-templateSettings.Kendall.email.title.fontWeight = 700;
-templateSettings.Kendall.email.title.letterSpacing = -1;
-templateSettings.Kendall.email.title.fontSize = 21;
-templateSettings.Kendall.email.title.lineHeight = 1;
-templateSettings.Kendall.email.title.color =
-  templateSettings.Kendall.base.colors[4];
-templateSettings.Kendall.email.about.color =
-  templateSettings.Kendall.base.colors[6];
-templateSettings.Kendall.email.contactDetails.margin[0] = 15;
-templateSettings.Kendall.email.contactDetails.border[0] = 1;
-templateSettings.Kendall.email.contactDetails.borderColor =
-  templateSettings.Kendall.base.colors[3];
-templateSettings.Kendall.email.contactDetails.padding[0] = 15;
-templateSettings.Kendall.email.contactDetails.gap = 15;
-templateSettings.Kendall.email.contactDetails.iconColor =
-  templateSettings.Kendall.base.colors[2];
-templateSettings.Kendall.email.contactDetails.color =
-  templateSettings.Kendall.base.colors[6];
+themeSettings.Kendall.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Kendall.resume.document.border = [10, 10, 10, 10];
+themeSettings.Kendall.resume.document.borderColor =
+  themeSettings.Kendall.base.colors[0];
+themeSettings.Kendall.resume.header.padding = [15, 15, 15, 15];
+themeSettings.Kendall.resume.name.textAlign = "center";
+themeSettings.Kendall.resume.name.isUppercase = true;
+themeSettings.Kendall.resume.name.fontWeight = 800;
+themeSettings.Kendall.resume.name.letterSpacing = -1;
+themeSettings.Kendall.resume.name.fontSize = 26;
+themeSettings.Kendall.resume.title.textAlign = "center";
+themeSettings.Kendall.resume.title.isUppercase = true;
+themeSettings.Kendall.resume.title.fontWeight = 700;
+themeSettings.Kendall.resume.title.letterSpacing = -1;
+themeSettings.Kendall.resume.title.fontSize = 21;
+themeSettings.Kendall.resume.title.lineHeight = 1;
+themeSettings.Kendall.resume.title.color = themeSettings.Kendall.base.colors[3];
+themeSettings.Kendall.resume.contactDetails.margin[0] = 15;
+themeSettings.Kendall.resume.contactDetails.border[0] = 1;
+themeSettings.Kendall.resume.contactDetails.borderColor =
+  themeSettings.Kendall.base.colors[4];
+themeSettings.Kendall.resume.contactDetails.padding[0] = 15;
+themeSettings.Kendall.resume.contactDetails.gap = 15;
+themeSettings.Kendall.resume.contactDetails.iconColor =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.resume.aside.width = 33;
+themeSettings.Kendall.resume.aside.padding = [15, 15, 15, 15];
+themeSettings.Kendall.resume.body.padding = [15, 15, 15, 15];
+themeSettings.Kendall.resume.category.gap = 15;
+themeSettings.Kendall.resume.categoryName.isUppercase = true;
+themeSettings.Kendall.resume.categoryName.fontWeight = 700;
+themeSettings.Kendall.resume.categoryName.fontSize = 21;
+themeSettings.Kendall.resume.categoryName.color =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.resume.entry.layout = 12;
+themeSettings.Kendall.resume.entryOrganization.order = 1;
+themeSettings.Kendall.resume.entryOrganization.fontWeight = 700;
+themeSettings.Kendall.resume.entryOrganization.fontSize = 17;
+themeSettings.Kendall.resume.entryLocation.order = 2;
+themeSettings.Kendall.resume.entryLocation.fontWeight = 700;
+themeSettings.Kendall.resume.entryLocation.fontSize = 17;
+themeSettings.Kendall.resume.entryPeriod.order = 3;
+themeSettings.Kendall.resume.entryPeriod.color =
+  themeSettings.Kendall.base.colors[3];
+themeSettings.Kendall.resume.entryTitle.order = 4;
+themeSettings.Kendall.resume.entryTitle.fontWeight = 700;
+themeSettings.Kendall.resume.entryTitle.fontSize = 17;
+themeSettings.Kendall.resume.entryHighlight.margin[0] = 10;
+themeSettings.Kendall.resume.entryHighlight.listMarker = null;
+themeSettings.Kendall.resume.entryHighlight.border = [1, 1, 1, 1];
+themeSettings.Kendall.resume.entryHighlight.borderColor =
+  themeSettings.Kendall.base.colors[4];
+themeSettings.Kendall.resume.entryHighlight.borderRadius = 4;
+themeSettings.Kendall.resume.entryHighlight.padding = [10, 15, 10, 15];
+themeSettings.Kendall.resume.entryTag.gap = 5;
+themeSettings.Kendall.resume.entryTag.margin[0] = 10;
+themeSettings.Kendall.resume.entryTag.backgroundColor =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.resume.entryTag.color =
+  themeSettings.Kendall.base.colors[7];
+themeSettings.Kendall.resume.entryTag.fontSize = 12;
+themeSettings.Kendall.resume.entryTag.padding = [1, 8, 1, 8];
+themeSettings.Kendall.resume.entryTag.borderRadius = 4;
+themeSettings.Kendall.letter.document.border = [10, 10, 10, 10];
+themeSettings.Kendall.letter.document.borderColor =
+  themeSettings.Kendall.base.colors[0];
+themeSettings.Kendall.letter.header.padding = [15, 15, 15, 15];
+themeSettings.Kendall.letter.name.textAlign = "center";
+themeSettings.Kendall.letter.name.isUppercase = true;
+themeSettings.Kendall.letter.name.fontWeight = 800;
+themeSettings.Kendall.letter.name.letterSpacing = -1;
+themeSettings.Kendall.letter.name.fontSize = 26;
+themeSettings.Kendall.letter.title.textAlign = "center";
+themeSettings.Kendall.letter.title.isUppercase = true;
+themeSettings.Kendall.letter.title.fontWeight = 700;
+themeSettings.Kendall.letter.title.letterSpacing = -1;
+themeSettings.Kendall.letter.title.fontSize = 21;
+themeSettings.Kendall.letter.title.lineHeight = 1;
+themeSettings.Kendall.letter.title.color = themeSettings.Kendall.base.colors[3];
+themeSettings.Kendall.letter.contactDetails.margin[0] = 15;
+themeSettings.Kendall.letter.contactDetails.border[0] = 1;
+themeSettings.Kendall.letter.contactDetails.borderColor =
+  themeSettings.Kendall.base.colors[4];
+themeSettings.Kendall.letter.contactDetails.padding[0] = 15;
+themeSettings.Kendall.letter.contactDetails.gap = 15;
+themeSettings.Kendall.letter.contactDetails.iconColor =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.letter.senderDetails.color =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.letter.recipientDetails.color =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.letter.subject.isUppercase = true;
+themeSettings.Kendall.letter.subject.fontWeight = 800;
+themeSettings.Kendall.letter.reference.color =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.email.document.backgroundColor =
+  themeSettings.Kendall.base.colors[0];
+themeSettings.Kendall.email.name.color = themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.email.name.isUppercase = true;
+themeSettings.Kendall.email.name.fontWeight = 800;
+themeSettings.Kendall.email.name.letterSpacing = -1;
+themeSettings.Kendall.email.name.fontSize = 26;
+themeSettings.Kendall.email.title.isUppercase = true;
+themeSettings.Kendall.email.title.fontWeight = 700;
+themeSettings.Kendall.email.title.letterSpacing = -1;
+themeSettings.Kendall.email.title.fontSize = 21;
+themeSettings.Kendall.email.title.lineHeight = 1;
+themeSettings.Kendall.email.title.color = themeSettings.Kendall.base.colors[4];
+themeSettings.Kendall.email.about.color = themeSettings.Kendall.base.colors[6];
+themeSettings.Kendall.email.contactDetails.margin[0] = 15;
+themeSettings.Kendall.email.contactDetails.border[0] = 1;
+themeSettings.Kendall.email.contactDetails.borderColor =
+  themeSettings.Kendall.base.colors[3];
+themeSettings.Kendall.email.contactDetails.padding[0] = 15;
+themeSettings.Kendall.email.contactDetails.gap = 15;
+themeSettings.Kendall.email.contactDetails.iconColor =
+  themeSettings.Kendall.base.colors[2];
+themeSettings.Kendall.email.contactDetails.color =
+  themeSettings.Kendall.base.colors[6];
 
 // Macaron
-templateSettings.Macaron.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Macaron.resume.header.layout = 0;
-templateSettings.Macaron.resume.header.margin = [68, 0, 20, 0];
-templateSettings.Macaron.resume.header.border = [1, 0, 1, 0];
-templateSettings.Macaron.resume.header.borderColor =
-  templateBaseSettings.Macaron.colors[2];
-templateSettings.Macaron.resume.header.padding = [12, 40, 12, 40];
-templateSettings.Macaron.resume.header.backgroundColor =
-  templateBaseSettings.Macaron.colors[3];
-templateSettings.Macaron.resume.name.fontSize = 36;
-templateSettings.Macaron.resume.name.fontWeight = 600;
-templateSettings.Macaron.resume.name.isUppercase = true;
-templateSettings.Macaron.resume.name.letterSpacing = 10;
-templateSettings.Macaron.resume.title.fontSize = 24;
-templateSettings.Macaron.resume.title.fontWeight = 600;
-templateSettings.Macaron.resume.title.isUppercase = true;
-templateSettings.Macaron.resume.title.letterSpacing = 5;
-templateSettings.Macaron.resume.contactDetails.listOrientation = "row";
-templateSettings.Macaron.resume.contactDetails.gap = 20;
-templateSettings.Macaron.resume.contactDetails.iconColor =
-  templateBaseSettings.Macaron.colors[1];
-templateSettings.Macaron.resume.about.font =
-  templateBaseSettings.Macaron.displayFont;
-templateSettings.Macaron.resume.about.fontSize = 16;
-templateSettings.Macaron.resume.about.fontWeight = 500;
-templateSettings.Macaron.resume.aside.width = 25;
-templateSettings.Macaron.resume.aside.margin = [40, 0, 40, 40];
-templateSettings.Macaron.resume.body.margin = [40, 40, 40, 40];
-templateSettings.Macaron.resume.category.gap = 30;
-templateSettings.Macaron.resume.categoryName.color =
-  templateBaseSettings.Macaron.colors[0];
-templateSettings.Macaron.resume.categoryName.fontSize = 24;
-templateSettings.Macaron.resume.categoryName.fontWeight = 600;
-templateSettings.Macaron.resume.entry.layout = 4;
-templateSettings.Macaron.resume.entryPeriod.order = 1;
-templateSettings.Macaron.resume.entryPeriod.color =
-  templateBaseSettings.Macaron.colors[0];
-templateSettings.Macaron.resume.entryPeriod.fontWeight = 700;
-templateSettings.Macaron.resume.entryTitle.order = 2;
-templateSettings.Macaron.resume.entryTitle.fontWeight = 700;
-templateSettings.Macaron.resume.entryOrganization.order = 3;
-templateSettings.Macaron.resume.entryOrganization.fontWeight = 300;
-templateSettings.Macaron.resume.entryLocation.order = 4;
-templateSettings.Macaron.resume.entryLocation.fontWeight = 300;
-templateSettings.Macaron.resume.entrySummary.fontWeight = 300;
-templateSettings.Macaron.resume.entryHighlight.isItalic = true;
-templateSettings.Macaron.resume.entryHighlight.listMarker = "disc";
-templateSettings.Macaron.resume.entryTag.padding[1] = 8;
-templateSettings.Macaron.resume.entryTag.padding[3] = 8;
-templateSettings.Macaron.resume.entryTag.backgroundColor =
-  templateBaseSettings.Macaron.colors[3];
-templateSettings.Macaron.resume.entryTag.borderColor =
-  templateBaseSettings.Macaron.colors[2];
-templateSettings.Macaron.resume.entryTag.border[2] = 1;
-templateSettings.Macaron.resume.entryTag.gap = 20;
-templateSettings.Macaron.letter.header.layout = 0;
-templateSettings.Macaron.letter.header.margin = [68, 0, 20, 0];
-templateSettings.Macaron.letter.header.border = [1, 0, 1, 0];
-templateSettings.Macaron.letter.header.borderColor =
-  templateBaseSettings.Macaron.colors[2];
-templateSettings.Macaron.letter.header.padding = [12, 40, 12, 40];
-templateSettings.Macaron.letter.header.backgroundColor =
-  templateBaseSettings.Macaron.colors[3];
-templateSettings.Macaron.letter.name.fontSize = 36;
-templateSettings.Macaron.letter.name.fontWeight = 600;
-templateSettings.Macaron.letter.name.isUppercase = true;
-templateSettings.Macaron.letter.name.letterSpacing = 10;
-templateSettings.Macaron.letter.title.fontSize = 24;
-templateSettings.Macaron.letter.title.fontWeight = 600;
-templateSettings.Macaron.letter.title.isUppercase = true;
-templateSettings.Macaron.letter.title.letterSpacing = 5;
-templateSettings.Macaron.letter.contactDetails.listOrientation = "row";
-templateSettings.Macaron.letter.contactDetails.gap = 20;
-templateSettings.Macaron.letter.contactDetails.iconColor =
-  templateBaseSettings.Macaron.colors[1];
-templateSettings.Macaron.letter.about.font =
-  templateBaseSettings.Macaron.displayFont;
-templateSettings.Macaron.letter.about.fontSize = 16;
-templateSettings.Macaron.letter.about.fontWeight = 500;
-templateSettings.Macaron.letter.subject.fontWeight = 600;
-templateSettings.Macaron.letter.subject.fontSize = 19;
-templateSettings.Macaron.letter.reference.color =
-  templateBaseSettings.Macaron.colors[0];
-templateSettings.Macaron.letter.reference.fontSize = 16;
-templateSettings.Macaron.email.document.padding = [68, 0, 40, 0];
+themeSettings.Macaron.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Macaron.resume.header.layout = 0;
+themeSettings.Macaron.resume.header.margin = [68, 0, 20, 0];
+themeSettings.Macaron.resume.header.border = [1, 0, 1, 0];
+themeSettings.Macaron.resume.header.borderColor =
+  themeBaseSettings.Macaron.colors[2];
+themeSettings.Macaron.resume.header.padding = [12, 40, 12, 40];
+themeSettings.Macaron.resume.header.backgroundColor =
+  themeBaseSettings.Macaron.colors[3];
+themeSettings.Macaron.resume.name.fontSize = 36;
+themeSettings.Macaron.resume.name.fontWeight = 600;
+themeSettings.Macaron.resume.name.isUppercase = true;
+themeSettings.Macaron.resume.name.letterSpacing = 10;
+themeSettings.Macaron.resume.title.fontSize = 24;
+themeSettings.Macaron.resume.title.fontWeight = 600;
+themeSettings.Macaron.resume.title.isUppercase = true;
+themeSettings.Macaron.resume.title.letterSpacing = 5;
+themeSettings.Macaron.resume.contactDetails.listOrientation = "row";
+themeSettings.Macaron.resume.contactDetails.gap = 20;
+themeSettings.Macaron.resume.contactDetails.iconColor =
+  themeBaseSettings.Macaron.colors[1];
+themeSettings.Macaron.resume.about.font = themeBaseSettings.Macaron.displayFont;
+themeSettings.Macaron.resume.about.fontSize = 16;
+themeSettings.Macaron.resume.about.fontWeight = 500;
+themeSettings.Macaron.resume.aside.width = 25;
+themeSettings.Macaron.resume.aside.margin = [40, 0, 40, 40];
+themeSettings.Macaron.resume.body.margin = [40, 40, 40, 40];
+themeSettings.Macaron.resume.category.gap = 30;
+themeSettings.Macaron.resume.categoryName.color =
+  themeBaseSettings.Macaron.colors[0];
+themeSettings.Macaron.resume.categoryName.fontSize = 24;
+themeSettings.Macaron.resume.categoryName.fontWeight = 600;
+themeSettings.Macaron.resume.entry.layout = 4;
+themeSettings.Macaron.resume.entryPeriod.order = 1;
+themeSettings.Macaron.resume.entryPeriod.color =
+  themeBaseSettings.Macaron.colors[0];
+themeSettings.Macaron.resume.entryPeriod.fontWeight = 700;
+themeSettings.Macaron.resume.entryTitle.order = 2;
+themeSettings.Macaron.resume.entryTitle.fontWeight = 700;
+themeSettings.Macaron.resume.entryOrganization.order = 3;
+themeSettings.Macaron.resume.entryOrganization.fontWeight = 300;
+themeSettings.Macaron.resume.entryLocation.order = 4;
+themeSettings.Macaron.resume.entryLocation.fontWeight = 300;
+themeSettings.Macaron.resume.entrySummary.fontWeight = 300;
+themeSettings.Macaron.resume.entryHighlight.isItalic = true;
+themeSettings.Macaron.resume.entryHighlight.listMarker = "disc";
+themeSettings.Macaron.resume.entryTag.padding[1] = 8;
+themeSettings.Macaron.resume.entryTag.padding[3] = 8;
+themeSettings.Macaron.resume.entryTag.backgroundColor =
+  themeBaseSettings.Macaron.colors[3];
+themeSettings.Macaron.resume.entryTag.borderColor =
+  themeBaseSettings.Macaron.colors[2];
+themeSettings.Macaron.resume.entryTag.border[2] = 1;
+themeSettings.Macaron.resume.entryTag.gap = 20;
+themeSettings.Macaron.letter.header.layout = 0;
+themeSettings.Macaron.letter.header.margin = [68, 0, 20, 0];
+themeSettings.Macaron.letter.header.border = [1, 0, 1, 0];
+themeSettings.Macaron.letter.header.borderColor =
+  themeBaseSettings.Macaron.colors[2];
+themeSettings.Macaron.letter.header.padding = [12, 40, 12, 40];
+themeSettings.Macaron.letter.header.backgroundColor =
+  themeBaseSettings.Macaron.colors[3];
+themeSettings.Macaron.letter.name.fontSize = 36;
+themeSettings.Macaron.letter.name.fontWeight = 600;
+themeSettings.Macaron.letter.name.isUppercase = true;
+themeSettings.Macaron.letter.name.letterSpacing = 10;
+themeSettings.Macaron.letter.title.fontSize = 24;
+themeSettings.Macaron.letter.title.fontWeight = 600;
+themeSettings.Macaron.letter.title.isUppercase = true;
+themeSettings.Macaron.letter.title.letterSpacing = 5;
+themeSettings.Macaron.letter.contactDetails.listOrientation = "row";
+themeSettings.Macaron.letter.contactDetails.gap = 20;
+themeSettings.Macaron.letter.contactDetails.iconColor =
+  themeBaseSettings.Macaron.colors[1];
+themeSettings.Macaron.letter.about.font = themeBaseSettings.Macaron.displayFont;
+themeSettings.Macaron.letter.about.fontSize = 16;
+themeSettings.Macaron.letter.about.fontWeight = 500;
+themeSettings.Macaron.letter.subject.fontWeight = 600;
+themeSettings.Macaron.letter.subject.fontSize = 19;
+themeSettings.Macaron.letter.reference.color =
+  themeBaseSettings.Macaron.colors[0];
+themeSettings.Macaron.letter.reference.fontSize = 16;
+themeSettings.Macaron.email.document.padding = [68, 0, 40, 0];
 
-templateSettings.Macaron.email.name.border[0] = 1;
-templateSettings.Macaron.email.name.borderColor =
-  templateBaseSettings.Macaron.colors[2];
-templateSettings.Macaron.email.name.backgroundColor =
-  templateBaseSettings.Macaron.colors[3];
-templateSettings.Macaron.email.name.padding = [12, 40, 12, 40];
-templateSettings.Macaron.email.name.fontSize = 36;
-templateSettings.Macaron.email.name.fontWeight = 600;
-templateSettings.Macaron.email.name.isUppercase = true;
-templateSettings.Macaron.email.name.letterSpacing = 10;
-templateSettings.Macaron.email.title.border[2] = 1;
-templateSettings.Macaron.email.title.borderColor =
-  templateBaseSettings.Macaron.colors[2];
-templateSettings.Macaron.email.title.backgroundColor =
-  templateBaseSettings.Macaron.colors[3];
-templateSettings.Macaron.email.title.padding = [12, 40, 12, 40];
-templateSettings.Macaron.email.title.fontSize = 24;
-templateSettings.Macaron.email.title.fontWeight = 600;
-templateSettings.Macaron.email.title.isUppercase = true;
-templateSettings.Macaron.email.title.letterSpacing = 5;
-templateSettings.Macaron.email.contactDetails.margin = [20, 40, 20, 40];
-templateSettings.Macaron.email.contactDetails.listOrientation = "row";
-templateSettings.Macaron.email.contactDetails.gap = 20;
-templateSettings.Macaron.email.contactDetails.iconColor =
-  templateBaseSettings.Macaron.colors[1];
-templateSettings.Macaron.email.about.margin = [20, 40, 20, 40];
-templateSettings.Macaron.email.about.font =
-  templateBaseSettings.Macaron.displayFont;
-templateSettings.Macaron.email.about.fontSize = 16;
-templateSettings.Macaron.email.about.fontWeight = 500;
+themeSettings.Macaron.email.name.border[0] = 1;
+themeSettings.Macaron.email.name.borderColor =
+  themeBaseSettings.Macaron.colors[2];
+themeSettings.Macaron.email.name.backgroundColor =
+  themeBaseSettings.Macaron.colors[3];
+themeSettings.Macaron.email.name.padding = [12, 40, 12, 40];
+themeSettings.Macaron.email.name.fontSize = 36;
+themeSettings.Macaron.email.name.fontWeight = 600;
+themeSettings.Macaron.email.name.isUppercase = true;
+themeSettings.Macaron.email.name.letterSpacing = 10;
+themeSettings.Macaron.email.title.border[2] = 1;
+themeSettings.Macaron.email.title.borderColor =
+  themeBaseSettings.Macaron.colors[2];
+themeSettings.Macaron.email.title.backgroundColor =
+  themeBaseSettings.Macaron.colors[3];
+themeSettings.Macaron.email.title.padding = [12, 40, 12, 40];
+themeSettings.Macaron.email.title.fontSize = 24;
+themeSettings.Macaron.email.title.fontWeight = 600;
+themeSettings.Macaron.email.title.isUppercase = true;
+themeSettings.Macaron.email.title.letterSpacing = 5;
+themeSettings.Macaron.email.contactDetails.margin = [20, 40, 20, 40];
+themeSettings.Macaron.email.contactDetails.listOrientation = "row";
+themeSettings.Macaron.email.contactDetails.gap = 20;
+themeSettings.Macaron.email.contactDetails.iconColor =
+  themeBaseSettings.Macaron.colors[1];
+themeSettings.Macaron.email.about.margin = [20, 40, 20, 40];
+themeSettings.Macaron.email.about.font = themeBaseSettings.Macaron.displayFont;
+themeSettings.Macaron.email.about.fontSize = 16;
+themeSettings.Macaron.email.about.fontWeight = 500;
 
 // Macchiato
-templateSettings.Macchiato.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Macchiato.resume.document.border = [10, 0, 0, 0];
-templateSettings.Macchiato.resume.document.borderColor =
-  templateBaseSettings.Macchiato.colors[0];
-templateSettings.Macchiato.resume.header.layout = 0;
-templateSettings.Macchiato.resume.header.margin = [48, 48, 20, 48];
-templateSettings.Macchiato.resume.name.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.resume.name.fontSize = 36;
-templateSettings.Macchiato.resume.name.fontWeight = 700;
-templateSettings.Macchiato.resume.name.letterSpacing = 1;
-templateSettings.Macchiato.resume.title.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.resume.title.fontSize = 20;
-templateSettings.Macchiato.resume.title.fontWeight = 300;
-templateSettings.Macchiato.resume.title.letterSpacing = 1;
-templateSettings.Macchiato.resume.contactDetails.fontSize = 11;
-templateSettings.Macchiato.resume.categoryName.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.resume.categoryName.fontWeight = 300;
-templateSettings.Macchiato.resume.categoryNameSeparator.margin[0] = 4;
-templateSettings.Macchiato.resume.categoryNameSeparator.border[0] = 1;
-templateSettings.Macchiato.resume.categoryNameSeparator.width = 7;
-templateSettings.Macchiato.resume.category.margin = [0, 48, 20, 48];
-templateSettings.Macchiato.resume.entry.layout = 5;
-templateSettings.Macchiato.resume.entryPeriod.order = 1;
-templateSettings.Macchiato.resume.entryPeriod.fontWeight = 300;
-templateSettings.Macchiato.resume.entryPeriod.isItalic = true;
-templateSettings.Macchiato.resume.entryTitle.order = 2;
-templateSettings.Macchiato.resume.entryTitle.fontWeight = 300;
-templateSettings.Macchiato.resume.entryOrganization.fontSize = 12;
-templateSettings.Macchiato.resume.entryLocation.fontSize = 12;
-templateSettings.Macchiato.resume.entrySummary.fontSize = 12;
-templateSettings.Macchiato.resume.entryHighlight.fontSize = 12;
-templateSettings.Macchiato.resume.entryHighlight.listMarker = "disc";
-templateSettings.Macchiato.resume.entryTag.padding = [2, 2, 2, 2];
-templateSettings.Macchiato.resume.entryTag.backgroundColor =
-  templateBaseSettings.Macchiato.colors[1];
-templateSettings.Macchiato.resume.entryTag.gap = 4;
-templateSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
-templateSettings.Macchiato.letter.document.borderColor =
-  templateBaseSettings.Macchiato.colors[0];
-templateSettings.Macchiato.letter.header.layout = 0;
-templateSettings.Macchiato.letter.header.margin = [48, 48, 20, 48];
-templateSettings.Macchiato.letter.name.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.letter.name.fontSize = 36;
-templateSettings.Macchiato.letter.name.fontWeight = 700;
-templateSettings.Macchiato.letter.name.letterSpacing = 1;
-templateSettings.Macchiato.letter.title.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.letter.title.fontSize = 20;
-templateSettings.Macchiato.letter.title.fontWeight = 300;
-templateSettings.Macchiato.letter.title.letterSpacing = 1;
-templateSettings.Macchiato.letter.contactDetails.fontSize = 11;
-templateSettings.Macchiato.letter.senderDetails.margin = [48, 48, 48, 48];
-templateSettings.Macchiato.letter.senderDetails.fontSize = 12;
-templateSettings.Macchiato.letter.recipientDetails.margin = [0, 48, 48, 48];
-templateSettings.Macchiato.letter.recipientDetails.fontSize = 12;
-templateSettings.Macchiato.letter.subject.margin[1] = 48;
-templateSettings.Macchiato.letter.subject.margin[3] = 48;
-templateSettings.Macchiato.letter.subject.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.letter.subject.fontSize = 17;
-templateSettings.Macchiato.letter.reference.margin[1] = 48;
-templateSettings.Macchiato.letter.reference.margin[3] = 48;
-templateSettings.Macchiato.letter.reference.color =
-  templateBaseSettings.Macchiato.colors[0];
-templateSettings.Macchiato.letter.body.margin = [24, 48, 48, 48];
-templateSettings.Macchiato.email.document.padding = [48, 48, 48, 48];
-templateSettings.Macchiato.email.document.border = [10, 0, 0, 0];
-templateSettings.Macchiato.email.document.borderColor =
-  templateBaseSettings.Macchiato.colors[0];
-templateSettings.Macchiato.email.name.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.email.name.fontSize = 36;
-templateSettings.Macchiato.email.name.fontWeight = 700;
-templateSettings.Macchiato.email.name.letterSpacing = 1;
-templateSettings.Macchiato.email.title.font =
-  templateBaseSettings.Macchiato.displayFont;
-templateSettings.Macchiato.email.title.fontSize = 20;
-templateSettings.Macchiato.email.title.fontWeight = 300;
-templateSettings.Macchiato.email.title.letterSpacing = 1;
-templateSettings.Macchiato.email.contactDetails.fontSize = 11;
+themeSettings.Macchiato.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Macchiato.resume.document.border = [10, 0, 0, 0];
+themeSettings.Macchiato.resume.document.borderColor =
+  themeBaseSettings.Macchiato.colors[0];
+themeSettings.Macchiato.resume.header.layout = 0;
+themeSettings.Macchiato.resume.header.margin = [48, 48, 20, 48];
+themeSettings.Macchiato.resume.name.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.resume.name.fontSize = 36;
+themeSettings.Macchiato.resume.name.fontWeight = 700;
+themeSettings.Macchiato.resume.name.letterSpacing = 1;
+themeSettings.Macchiato.resume.title.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.resume.title.fontSize = 20;
+themeSettings.Macchiato.resume.title.fontWeight = 300;
+themeSettings.Macchiato.resume.title.letterSpacing = 1;
+themeSettings.Macchiato.resume.contactDetails.fontSize = 11;
+themeSettings.Macchiato.resume.categoryName.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.resume.categoryName.fontWeight = 300;
+themeSettings.Macchiato.resume.categoryNameSeparator.margin[0] = 4;
+themeSettings.Macchiato.resume.categoryNameSeparator.border[0] = 1;
+themeSettings.Macchiato.resume.categoryNameSeparator.width = 7;
+themeSettings.Macchiato.resume.category.margin = [0, 48, 20, 48];
+themeSettings.Macchiato.resume.entry.layout = 5;
+themeSettings.Macchiato.resume.entryPeriod.order = 1;
+themeSettings.Macchiato.resume.entryPeriod.fontWeight = 300;
+themeSettings.Macchiato.resume.entryPeriod.isItalic = true;
+themeSettings.Macchiato.resume.entryTitle.order = 2;
+themeSettings.Macchiato.resume.entryTitle.fontWeight = 300;
+themeSettings.Macchiato.resume.entryOrganization.fontSize = 12;
+themeSettings.Macchiato.resume.entryLocation.fontSize = 12;
+themeSettings.Macchiato.resume.entrySummary.fontSize = 12;
+themeSettings.Macchiato.resume.entryHighlight.fontSize = 12;
+themeSettings.Macchiato.resume.entryHighlight.listMarker = "disc";
+themeSettings.Macchiato.resume.entryTag.padding = [2, 2, 2, 2];
+themeSettings.Macchiato.resume.entryTag.backgroundColor =
+  themeBaseSettings.Macchiato.colors[1];
+themeSettings.Macchiato.resume.entryTag.gap = 4;
+themeSettings.Macchiato.letter.document.border = [10, 0, 0, 0];
+themeSettings.Macchiato.letter.document.borderColor =
+  themeBaseSettings.Macchiato.colors[0];
+themeSettings.Macchiato.letter.header.layout = 0;
+themeSettings.Macchiato.letter.header.margin = [48, 48, 20, 48];
+themeSettings.Macchiato.letter.name.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.letter.name.fontSize = 36;
+themeSettings.Macchiato.letter.name.fontWeight = 700;
+themeSettings.Macchiato.letter.name.letterSpacing = 1;
+themeSettings.Macchiato.letter.title.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.letter.title.fontSize = 20;
+themeSettings.Macchiato.letter.title.fontWeight = 300;
+themeSettings.Macchiato.letter.title.letterSpacing = 1;
+themeSettings.Macchiato.letter.contactDetails.fontSize = 11;
+themeSettings.Macchiato.letter.senderDetails.margin = [48, 48, 48, 48];
+themeSettings.Macchiato.letter.senderDetails.fontSize = 12;
+themeSettings.Macchiato.letter.recipientDetails.margin = [0, 48, 48, 48];
+themeSettings.Macchiato.letter.recipientDetails.fontSize = 12;
+themeSettings.Macchiato.letter.subject.margin[1] = 48;
+themeSettings.Macchiato.letter.subject.margin[3] = 48;
+themeSettings.Macchiato.letter.subject.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.letter.subject.fontSize = 17;
+themeSettings.Macchiato.letter.reference.margin[1] = 48;
+themeSettings.Macchiato.letter.reference.margin[3] = 48;
+themeSettings.Macchiato.letter.reference.color =
+  themeBaseSettings.Macchiato.colors[0];
+themeSettings.Macchiato.letter.body.margin = [24, 48, 48, 48];
+themeSettings.Macchiato.email.document.padding = [48, 48, 48, 48];
+themeSettings.Macchiato.email.document.border = [10, 0, 0, 0];
+themeSettings.Macchiato.email.document.borderColor =
+  themeBaseSettings.Macchiato.colors[0];
+themeSettings.Macchiato.email.name.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.email.name.fontSize = 36;
+themeSettings.Macchiato.email.name.fontWeight = 700;
+themeSettings.Macchiato.email.name.letterSpacing = 1;
+themeSettings.Macchiato.email.title.font =
+  themeBaseSettings.Macchiato.displayFont;
+themeSettings.Macchiato.email.title.fontSize = 20;
+themeSettings.Macchiato.email.title.fontWeight = 300;
+themeSettings.Macchiato.email.title.letterSpacing = 1;
+themeSettings.Macchiato.email.contactDetails.fontSize = 11;
 
 // NeoBrutalism
-templateSettings.NeoBrutalism.resume.document.padding = [0, 0, 0, 0];
-templateSettings.NeoBrutalism.resume.document.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.document.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[2];
-templateSettings.NeoBrutalism.resume.header.layout = 2;
-templateSettings.NeoBrutalism.resume.header.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[3];
-templateSettings.NeoBrutalism.resume.header.border[2] = 4;
-templateSettings.NeoBrutalism.resume.header.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.name.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.name.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[5];
-templateSettings.NeoBrutalism.resume.name.isUppercase = true;
-templateSettings.NeoBrutalism.resume.name.font =
-  templateSettings.NeoBrutalism.base.displayFont;
-templateSettings.NeoBrutalism.resume.name.fontSize = 36;
-templateSettings.NeoBrutalism.resume.name.fontWeight = 900;
-templateSettings.NeoBrutalism.resume.name.letterSpacing = 1;
-templateSettings.NeoBrutalism.resume.name.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.resume.name.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.resume.name.borderRadius = 8;
-templateSettings.NeoBrutalism.resume.name.margin = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.resume.title.color =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.resume.title.isItalic = true;
-templateSettings.NeoBrutalism.resume.title.fontWeight = 700;
-templateSettings.NeoBrutalism.resume.title.borderColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.resume.title.border[2] = 2;
-templateSettings.NeoBrutalism.resume.title.borderStyle = "dashed";
-templateSettings.NeoBrutalism.resume.title.padding = [0, 22, 0, 22];
-templateSettings.NeoBrutalism.resume.about.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.about.margin = [0, 22, 0, 22];
-templateSettings.NeoBrutalism.resume.about.textAlign = "right";
-templateSettings.NeoBrutalism.resume.contactDetails.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[4];
-templateSettings.NeoBrutalism.resume.contactDetails.color =
-  templateSettings.NeoBrutalism.base.colors[1];
-templateSettings.NeoBrutalism.resume.contactDetails.iconColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.resume.contactDetails.border[3] = 4;
-templateSettings.NeoBrutalism.resume.contactDetails.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.contactDetails.padding = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.resume.aside.padding = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.resume.aside.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.resume.aside.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.aside.border[1] = 4;
-templateSettings.NeoBrutalism.resume.body.margin = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.resume.categoryName.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[7];
-templateSettings.NeoBrutalism.resume.categoryName.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.categoryName.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.resume.categoryName.borderRadius = 8;
-templateSettings.NeoBrutalism.resume.categoryName.padding = [4, 4, 4, 4];
-templateSettings.NeoBrutalism.resume.categoryName.isUppercase = true;
-templateSettings.NeoBrutalism.resume.categoryName.fontWeight = 900;
-templateSettings.NeoBrutalism.resume.categoryName.fontSize = 22;
-templateSettings.NeoBrutalism.resume.categoryName.letterSpacing = 8;
-templateSettings.NeoBrutalism.resume.categoryName.margin[2] = 8;
-templateSettings.NeoBrutalism.resume.entry.layout = 1;
-templateSettings.NeoBrutalism.resume.entryTitle.color =
-  templateSettings.NeoBrutalism.base.colors[1];
-templateSettings.NeoBrutalism.resume.entryTitle.isUppercase = true;
-templateSettings.NeoBrutalism.resume.entryTitle.letterSpacing = 2;
-templateSettings.NeoBrutalism.resume.entryTitle.fontWeight = 700;
-templateSettings.NeoBrutalism.resume.entryOrganization.order = 2;
-templateSettings.NeoBrutalism.resume.entryOrganization.fontWeight = 700;
-templateSettings.NeoBrutalism.resume.entryOrganization.color =
-  templateSettings.NeoBrutalism.base.colors[8];
-templateSettings.NeoBrutalism.resume.entryLocation.order = 3;
-templateSettings.NeoBrutalism.resume.entryLocation.beforeSeparator = "·";
-templateSettings.NeoBrutalism.resume.entryLocation.fontWeight = 700;
-templateSettings.NeoBrutalism.resume.entryLocation.color =
-  templateSettings.NeoBrutalism.base.colors[8];
-templateSettings.NeoBrutalism.resume.entryPeriod.order = 4;
-templateSettings.NeoBrutalism.resume.entryPeriod.beforeSeparator = "·";
-templateSettings.NeoBrutalism.resume.entryPeriod.fontWeight = 700;
-templateSettings.NeoBrutalism.resume.entryPeriod.color =
-  templateSettings.NeoBrutalism.base.colors[8];
-templateSettings.NeoBrutalism.resume.entryHighlight.listMarker = "disc";
-templateSettings.NeoBrutalism.resume.entryHighlight.listMarkerColor =
-  templateSettings.NeoBrutalism.base.colors[7];
-templateSettings.NeoBrutalism.resume.entryHighlight.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.resume.entryTag.border = [2, 4, 4, 2];
-templateSettings.NeoBrutalism.resume.entryTag.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.resume.entryTag.backgroundColor =
-  templateBaseSettings.NeoBrutalism.colors[6];
-templateSettings.NeoBrutalism.resume.entryTag.fontWeight = 900;
-templateSettings.NeoBrutalism.resume.entryTag.isUppercase = true;
-templateSettings.NeoBrutalism.resume.entryTag.gap = 20;
-templateSettings.NeoBrutalism.letter.header.layout = 2;
-templateSettings.NeoBrutalism.letter.document.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.document.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[2];
-templateSettings.NeoBrutalism.letter.header.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[3];
-templateSettings.NeoBrutalism.letter.header.border[2] = 4;
-templateSettings.NeoBrutalism.letter.header.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.name.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.name.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[5];
-templateSettings.NeoBrutalism.letter.name.isUppercase = true;
-templateSettings.NeoBrutalism.letter.name.font =
-  templateSettings.NeoBrutalism.base.displayFont;
-templateSettings.NeoBrutalism.letter.name.fontSize = 36;
-templateSettings.NeoBrutalism.letter.name.fontWeight = 900;
-templateSettings.NeoBrutalism.letter.name.letterSpacing = 1;
-templateSettings.NeoBrutalism.letter.name.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.letter.name.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.letter.name.borderRadius = 8;
-templateSettings.NeoBrutalism.letter.name.margin = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.letter.title.color =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.letter.title.isItalic = true;
-templateSettings.NeoBrutalism.letter.title.fontWeight = 700;
-templateSettings.NeoBrutalism.letter.title.borderColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.letter.title.border[2] = 2;
-templateSettings.NeoBrutalism.letter.title.borderStyle = "dashed";
-templateSettings.NeoBrutalism.letter.title.padding = [0, 22, 0, 22];
-templateSettings.NeoBrutalism.letter.about.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.about.margin = [0, 22, 0, 22];
-templateSettings.NeoBrutalism.letter.about.textAlign = "right";
-templateSettings.NeoBrutalism.letter.contactDetails.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[4];
-templateSettings.NeoBrutalism.letter.contactDetails.color =
-  templateSettings.NeoBrutalism.base.colors[1];
-templateSettings.NeoBrutalism.letter.contactDetails.iconColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.letter.contactDetails.border[3] = 4;
-templateSettings.NeoBrutalism.letter.contactDetails.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.contactDetails.padding = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.letter.senderDetails.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[4];
-templateSettings.NeoBrutalism.letter.senderDetails.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.senderDetails.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.letter.senderDetails.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.letter.senderDetails.borderRadius = 8;
-templateSettings.NeoBrutalism.letter.senderDetails.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.recipientDetails.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[5];
-templateSettings.NeoBrutalism.letter.recipientDetails.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.recipientDetails.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.letter.recipientDetails.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.letter.recipientDetails.borderRadius = 8;
-templateSettings.NeoBrutalism.letter.recipientDetails.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.subject.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.letter.subject.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.subject.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.letter.subject.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.letter.subject.borderRadius = 8;
-templateSettings.NeoBrutalism.letter.subject.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.letter.reference.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[2];
-templateSettings.NeoBrutalism.letter.reference.color =
-  templateSettings.NeoBrutalism.base.colors[8];
-templateSettings.NeoBrutalism.letter.reference.fontWeight = 700;
-templateSettings.NeoBrutalism.email.document.padding = [0, 0, 0, 0];
-templateSettings.NeoBrutalism.email.document.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.email.document.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[2];
-templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.email.name.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.email.name.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[5];
-templateSettings.NeoBrutalism.email.name.isUppercase = true;
-templateSettings.NeoBrutalism.email.name.font =
-  templateSettings.NeoBrutalism.base.displayFont;
-templateSettings.NeoBrutalism.email.name.fontSize = 36;
-templateSettings.NeoBrutalism.email.name.fontWeight = 900;
-templateSettings.NeoBrutalism.email.name.letterSpacing = 1;
-templateSettings.NeoBrutalism.email.name.padding = [8, 8, 8, 8];
-templateSettings.NeoBrutalism.email.name.border = [4, 8, 8, 4];
-templateSettings.NeoBrutalism.email.name.borderRadius = 8;
-templateSettings.NeoBrutalism.email.name.margin = [22, 22, 22, 22];
-templateSettings.NeoBrutalism.email.title.color =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.email.title.isItalic = true;
-templateSettings.NeoBrutalism.email.title.fontWeight = 700;
-templateSettings.NeoBrutalism.email.title.borderColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.email.title.border[2] = 2;
-templateSettings.NeoBrutalism.email.title.borderStyle = "dashed";
-templateSettings.NeoBrutalism.email.title.padding = [0, 22, 0, 22];
-templateSettings.NeoBrutalism.email.about.color =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.email.about.margin = [0, 22, 0, 22];
-templateSettings.NeoBrutalism.email.about.textAlign = "right";
-templateSettings.NeoBrutalism.email.contactDetails.backgroundColor =
-  templateSettings.NeoBrutalism.base.colors[4];
-templateSettings.NeoBrutalism.email.contactDetails.color =
-  templateSettings.NeoBrutalism.base.colors[1];
-templateSettings.NeoBrutalism.email.contactDetails.iconColor =
-  templateSettings.NeoBrutalism.base.colors[6];
-templateSettings.NeoBrutalism.email.contactDetails.border[0] = 4;
-templateSettings.NeoBrutalism.email.contactDetails.borderColor =
-  templateSettings.NeoBrutalism.base.colors[0];
-templateSettings.NeoBrutalism.email.contactDetails.padding = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.resume.document.padding = [0, 0, 0, 0];
+themeSettings.NeoBrutalism.resume.document.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.document.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[2];
+themeSettings.NeoBrutalism.resume.header.layout = 2;
+themeSettings.NeoBrutalism.resume.header.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[3];
+themeSettings.NeoBrutalism.resume.header.border[2] = 4;
+themeSettings.NeoBrutalism.resume.header.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.name.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.name.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[5];
+themeSettings.NeoBrutalism.resume.name.isUppercase = true;
+themeSettings.NeoBrutalism.resume.name.font =
+  themeSettings.NeoBrutalism.base.displayFont;
+themeSettings.NeoBrutalism.resume.name.fontSize = 36;
+themeSettings.NeoBrutalism.resume.name.fontWeight = 900;
+themeSettings.NeoBrutalism.resume.name.letterSpacing = 1;
+themeSettings.NeoBrutalism.resume.name.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.resume.name.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.resume.name.borderRadius = 8;
+themeSettings.NeoBrutalism.resume.name.margin = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.resume.title.color =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.resume.title.isItalic = true;
+themeSettings.NeoBrutalism.resume.title.fontWeight = 700;
+themeSettings.NeoBrutalism.resume.title.borderColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.resume.title.border[2] = 2;
+themeSettings.NeoBrutalism.resume.title.borderStyle = "dashed";
+themeSettings.NeoBrutalism.resume.title.padding = [0, 22, 0, 22];
+themeSettings.NeoBrutalism.resume.about.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.about.margin = [0, 22, 0, 22];
+themeSettings.NeoBrutalism.resume.about.textAlign = "right";
+themeSettings.NeoBrutalism.resume.contactDetails.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[4];
+themeSettings.NeoBrutalism.resume.contactDetails.color =
+  themeSettings.NeoBrutalism.base.colors[1];
+themeSettings.NeoBrutalism.resume.contactDetails.iconColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.resume.contactDetails.border[3] = 4;
+themeSettings.NeoBrutalism.resume.contactDetails.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.contactDetails.padding = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.resume.aside.padding = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.resume.aside.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.resume.aside.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.aside.border[1] = 4;
+themeSettings.NeoBrutalism.resume.body.margin = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.resume.categoryName.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[7];
+themeSettings.NeoBrutalism.resume.categoryName.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.categoryName.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.resume.categoryName.borderRadius = 8;
+themeSettings.NeoBrutalism.resume.categoryName.padding = [4, 4, 4, 4];
+themeSettings.NeoBrutalism.resume.categoryName.isUppercase = true;
+themeSettings.NeoBrutalism.resume.categoryName.fontWeight = 900;
+themeSettings.NeoBrutalism.resume.categoryName.fontSize = 22;
+themeSettings.NeoBrutalism.resume.categoryName.letterSpacing = 8;
+themeSettings.NeoBrutalism.resume.categoryName.margin[2] = 8;
+themeSettings.NeoBrutalism.resume.entry.layout = 1;
+themeSettings.NeoBrutalism.resume.entryTitle.color =
+  themeSettings.NeoBrutalism.base.colors[1];
+themeSettings.NeoBrutalism.resume.entryTitle.isUppercase = true;
+themeSettings.NeoBrutalism.resume.entryTitle.letterSpacing = 2;
+themeSettings.NeoBrutalism.resume.entryTitle.fontWeight = 700;
+themeSettings.NeoBrutalism.resume.entryOrganization.order = 2;
+themeSettings.NeoBrutalism.resume.entryOrganization.fontWeight = 700;
+themeSettings.NeoBrutalism.resume.entryOrganization.color =
+  themeSettings.NeoBrutalism.base.colors[8];
+themeSettings.NeoBrutalism.resume.entryLocation.order = 3;
+themeSettings.NeoBrutalism.resume.entryLocation.beforeSeparator = "·";
+themeSettings.NeoBrutalism.resume.entryLocation.fontWeight = 700;
+themeSettings.NeoBrutalism.resume.entryLocation.color =
+  themeSettings.NeoBrutalism.base.colors[8];
+themeSettings.NeoBrutalism.resume.entryPeriod.order = 4;
+themeSettings.NeoBrutalism.resume.entryPeriod.beforeSeparator = "·";
+themeSettings.NeoBrutalism.resume.entryPeriod.fontWeight = 700;
+themeSettings.NeoBrutalism.resume.entryPeriod.color =
+  themeSettings.NeoBrutalism.base.colors[8];
+themeSettings.NeoBrutalism.resume.entryHighlight.listMarker = "disc";
+themeSettings.NeoBrutalism.resume.entryHighlight.listMarkerColor =
+  themeSettings.NeoBrutalism.base.colors[7];
+themeSettings.NeoBrutalism.resume.entryHighlight.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.resume.entryTag.border = [2, 4, 4, 2];
+themeSettings.NeoBrutalism.resume.entryTag.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.resume.entryTag.backgroundColor =
+  themeBaseSettings.NeoBrutalism.colors[6];
+themeSettings.NeoBrutalism.resume.entryTag.fontWeight = 900;
+themeSettings.NeoBrutalism.resume.entryTag.isUppercase = true;
+themeSettings.NeoBrutalism.resume.entryTag.gap = 20;
+themeSettings.NeoBrutalism.letter.header.layout = 2;
+themeSettings.NeoBrutalism.letter.document.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.document.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[2];
+themeSettings.NeoBrutalism.letter.header.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[3];
+themeSettings.NeoBrutalism.letter.header.border[2] = 4;
+themeSettings.NeoBrutalism.letter.header.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.name.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.name.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[5];
+themeSettings.NeoBrutalism.letter.name.isUppercase = true;
+themeSettings.NeoBrutalism.letter.name.font =
+  themeSettings.NeoBrutalism.base.displayFont;
+themeSettings.NeoBrutalism.letter.name.fontSize = 36;
+themeSettings.NeoBrutalism.letter.name.fontWeight = 900;
+themeSettings.NeoBrutalism.letter.name.letterSpacing = 1;
+themeSettings.NeoBrutalism.letter.name.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.letter.name.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.letter.name.borderRadius = 8;
+themeSettings.NeoBrutalism.letter.name.margin = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.letter.title.color =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.letter.title.isItalic = true;
+themeSettings.NeoBrutalism.letter.title.fontWeight = 700;
+themeSettings.NeoBrutalism.letter.title.borderColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.letter.title.border[2] = 2;
+themeSettings.NeoBrutalism.letter.title.borderStyle = "dashed";
+themeSettings.NeoBrutalism.letter.title.padding = [0, 22, 0, 22];
+themeSettings.NeoBrutalism.letter.about.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.about.margin = [0, 22, 0, 22];
+themeSettings.NeoBrutalism.letter.about.textAlign = "right";
+themeSettings.NeoBrutalism.letter.contactDetails.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[4];
+themeSettings.NeoBrutalism.letter.contactDetails.color =
+  themeSettings.NeoBrutalism.base.colors[1];
+themeSettings.NeoBrutalism.letter.contactDetails.iconColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.letter.contactDetails.border[3] = 4;
+themeSettings.NeoBrutalism.letter.contactDetails.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.contactDetails.padding = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.letter.senderDetails.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[4];
+themeSettings.NeoBrutalism.letter.senderDetails.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.senderDetails.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.letter.senderDetails.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.letter.senderDetails.borderRadius = 8;
+themeSettings.NeoBrutalism.letter.senderDetails.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.recipientDetails.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[5];
+themeSettings.NeoBrutalism.letter.recipientDetails.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.recipientDetails.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.letter.recipientDetails.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.letter.recipientDetails.borderRadius = 8;
+themeSettings.NeoBrutalism.letter.recipientDetails.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.subject.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.letter.subject.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.subject.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.letter.subject.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.letter.subject.borderRadius = 8;
+themeSettings.NeoBrutalism.letter.subject.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.letter.reference.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[2];
+themeSettings.NeoBrutalism.letter.reference.color =
+  themeSettings.NeoBrutalism.base.colors[8];
+themeSettings.NeoBrutalism.letter.reference.fontWeight = 700;
+themeSettings.NeoBrutalism.email.document.padding = [0, 0, 0, 0];
+themeSettings.NeoBrutalism.email.document.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.email.document.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[2];
+themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.email.name.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.email.name.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[5];
+themeSettings.NeoBrutalism.email.name.isUppercase = true;
+themeSettings.NeoBrutalism.email.name.font =
+  themeSettings.NeoBrutalism.base.displayFont;
+themeSettings.NeoBrutalism.email.name.fontSize = 36;
+themeSettings.NeoBrutalism.email.name.fontWeight = 900;
+themeSettings.NeoBrutalism.email.name.letterSpacing = 1;
+themeSettings.NeoBrutalism.email.name.padding = [8, 8, 8, 8];
+themeSettings.NeoBrutalism.email.name.border = [4, 8, 8, 4];
+themeSettings.NeoBrutalism.email.name.borderRadius = 8;
+themeSettings.NeoBrutalism.email.name.margin = [22, 22, 22, 22];
+themeSettings.NeoBrutalism.email.title.color =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.email.title.isItalic = true;
+themeSettings.NeoBrutalism.email.title.fontWeight = 700;
+themeSettings.NeoBrutalism.email.title.borderColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.email.title.border[2] = 2;
+themeSettings.NeoBrutalism.email.title.borderStyle = "dashed";
+themeSettings.NeoBrutalism.email.title.padding = [0, 22, 0, 22];
+themeSettings.NeoBrutalism.email.about.color =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.email.about.margin = [0, 22, 0, 22];
+themeSettings.NeoBrutalism.email.about.textAlign = "right";
+themeSettings.NeoBrutalism.email.contactDetails.backgroundColor =
+  themeSettings.NeoBrutalism.base.colors[4];
+themeSettings.NeoBrutalism.email.contactDetails.color =
+  themeSettings.NeoBrutalism.base.colors[1];
+themeSettings.NeoBrutalism.email.contactDetails.iconColor =
+  themeSettings.NeoBrutalism.base.colors[6];
+themeSettings.NeoBrutalism.email.contactDetails.border[0] = 4;
+themeSettings.NeoBrutalism.email.contactDetails.borderColor =
+  themeSettings.NeoBrutalism.base.colors[0];
+themeSettings.NeoBrutalism.email.contactDetails.padding = [22, 22, 22, 22];
 
 // Oilcloth
-templateSettings.Oilcloth.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Oilcloth.resume.document.border = [15, 0, 20, 0];
-templateSettings.Oilcloth.resume.document.borderColor =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.resume.header.layout = 2;
-templateSettings.Oilcloth.resume.header.backgroundColor =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.resume.header.padding = [30, 40, 30, 40];
-templateSettings.Oilcloth.resume.name.color =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.resume.name.fontSize = 40;
-templateSettings.Oilcloth.resume.name.fontWeight = 900;
-templateSettings.Oilcloth.resume.name.letterSpacing = 2;
-templateSettings.Oilcloth.resume.title.color =
-  templateBaseSettings.Oilcloth.colors[3];
-templateSettings.Oilcloth.resume.title.fontWeight = 600;
-templateSettings.Oilcloth.resume.title.isUppercase = true;
-templateSettings.Oilcloth.resume.title.letterSpacing = 4;
-templateSettings.Oilcloth.resume.about.color =
-  templateBaseSettings.Oilcloth.colors[3];
-templateBaseSettings.Oilcloth.colors[3];
-templateSettings.Oilcloth.resume.contactDetails.fontWeight = 600;
-templateSettings.Oilcloth.resume.contactDetails.color =
-  templateBaseSettings.Oilcloth.colors[3];
-templateSettings.Oilcloth.resume.contactDetails.iconColor =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.resume.aside.margin = [40, 0, 40, 40];
-templateSettings.Oilcloth.resume.body.margin = [40, 40, 40, 40];
-templateSettings.Oilcloth.resume.category.gap = 40;
-templateSettings.Oilcloth.resume.categoryName.isUppercase = true;
-templateSettings.Oilcloth.resume.categoryName.textAlign = "center";
-templateSettings.Oilcloth.resume.categoryName.fontSize = 25;
-templateSettings.Oilcloth.resume.categoryName.letterSpacing = 2;
-templateSettings.Oilcloth.resume.categoryName.fontWeight = 300;
-templateSettings.Oilcloth.resume.categoryName.margin[2] = 5;
-templateSettings.Oilcloth.resume.entry.layout = 6;
-templateSettings.Oilcloth.resume.entryPeriod.order = 1;
-templateSettings.Oilcloth.resume.entryPeriod.color =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.resume.entryPeriod.fontSize = 16;
-templateSettings.Oilcloth.resume.entryPeriod.fontWeight = 700;
-templateSettings.Oilcloth.resume.entryTitle.order = 2;
-templateSettings.Oilcloth.resume.entryTitle.fontSize = 16;
-templateSettings.Oilcloth.resume.entryTitle.fontWeight = 900;
-templateSettings.Oilcloth.resume.entryOrganization.fontWeight = 300;
-templateSettings.Oilcloth.resume.entryOrganization.lineHeight = 1;
-templateSettings.Oilcloth.resume.entryLocation.beforeSeparator = "-";
-templateSettings.Oilcloth.resume.entryLocation.fontWeight = 300;
-templateSettings.Oilcloth.resume.entryLocation.lineHeight = 1;
-templateSettings.Oilcloth.resume.entrySummary.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.resume.entrySummary.margin = [10, 0, 10, 0];
-templateSettings.Oilcloth.resume.entrySummary.lineHeight = 1;
-templateSettings.Oilcloth.resume.entryHighlight.fontWeight = 300;
-templateSettings.Oilcloth.resume.entryHighlight.lineHeight = 1;
-templateSettings.Oilcloth.resume.entryTag.margin[0] = 10;
-templateSettings.Oilcloth.resume.entryTag.padding = [4, 12, 4, 12];
-templateSettings.Oilcloth.resume.entryTag.backgroundColor =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.resume.entryTag.color =
-  templateBaseSettings.Oilcloth.colors[3];
-templateSettings.Oilcloth.resume.entryTag.isUppercase = true;
-templateSettings.Oilcloth.resume.entryTag.fontSize = 11;
-templateSettings.Oilcloth.resume.entryTag.lineHeight = 1;
-templateSettings.Oilcloth.resume.entryTag.gap = 10;
-templateSettings.Oilcloth.letter.document.border = [15, 0, 20, 0];
-templateSettings.Oilcloth.letter.document.borderColor =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.letter.header.layout = 2;
-templateSettings.Oilcloth.letter.header.padding = [30, 40, 30, 40];
-templateSettings.Oilcloth.letter.name.color =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.letter.name.fontSize = 40;
-templateSettings.Oilcloth.letter.name.fontWeight = 900;
-templateSettings.Oilcloth.letter.name.letterSpacing = 2;
-templateSettings.Oilcloth.letter.title.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.letter.title.fontWeight = 600;
-templateSettings.Oilcloth.letter.title.isUppercase = true;
-templateSettings.Oilcloth.letter.title.letterSpacing = 4;
-templateSettings.Oilcloth.letter.about.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.letter.contactDetails.fontWeight = 600;
-templateSettings.Oilcloth.letter.contactDetails.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.letter.contactDetails.iconColor =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.letter.senderDetails.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.letter.recipientDetails.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.email.document.padding = [30, 40, 50, 40];
-templateSettings.Oilcloth.email.document.border[0] = 15;
-templateSettings.Oilcloth.email.document.borderColor =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.email.name.color =
-  templateBaseSettings.Oilcloth.colors[1];
-templateSettings.Oilcloth.email.name.fontSize = 40;
-templateSettings.Oilcloth.email.name.fontWeight = 900;
-templateSettings.Oilcloth.email.name.letterSpacing = 2;
-templateSettings.Oilcloth.email.title.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.email.title.fontWeight = 600;
-templateSettings.Oilcloth.email.title.isUppercase = true;
-templateSettings.Oilcloth.email.title.letterSpacing = 4;
-templateSettings.Oilcloth.email.contactDetails.margin[0] = 20;
-templateSettings.Oilcloth.email.contactDetails.fontWeight = 600;
-templateSettings.Oilcloth.email.contactDetails.color =
-  templateBaseSettings.Oilcloth.colors[0];
-templateSettings.Oilcloth.email.contactDetails.iconColor =
-  templateBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Oilcloth.resume.document.border = [15, 0, 20, 0];
+themeSettings.Oilcloth.resume.document.borderColor =
+  themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.resume.header.layout = 2;
+themeSettings.Oilcloth.resume.header.backgroundColor =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.resume.header.padding = [30, 40, 30, 40];
+themeSettings.Oilcloth.resume.name.color = themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.resume.name.fontSize = 40;
+themeSettings.Oilcloth.resume.name.fontWeight = 900;
+themeSettings.Oilcloth.resume.name.letterSpacing = 2;
+themeSettings.Oilcloth.resume.title.color =
+  themeBaseSettings.Oilcloth.colors[3];
+themeSettings.Oilcloth.resume.title.fontWeight = 600;
+themeSettings.Oilcloth.resume.title.isUppercase = true;
+themeSettings.Oilcloth.resume.title.letterSpacing = 4;
+themeSettings.Oilcloth.resume.about.color =
+  themeBaseSettings.Oilcloth.colors[3];
+themeBaseSettings.Oilcloth.colors[3];
+themeSettings.Oilcloth.resume.contactDetails.fontWeight = 600;
+themeSettings.Oilcloth.resume.contactDetails.color =
+  themeBaseSettings.Oilcloth.colors[3];
+themeSettings.Oilcloth.resume.contactDetails.iconColor =
+  themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.resume.aside.margin = [40, 0, 40, 40];
+themeSettings.Oilcloth.resume.body.margin = [40, 40, 40, 40];
+themeSettings.Oilcloth.resume.category.gap = 40;
+themeSettings.Oilcloth.resume.categoryName.isUppercase = true;
+themeSettings.Oilcloth.resume.categoryName.textAlign = "center";
+themeSettings.Oilcloth.resume.categoryName.fontSize = 25;
+themeSettings.Oilcloth.resume.categoryName.letterSpacing = 2;
+themeSettings.Oilcloth.resume.categoryName.fontWeight = 300;
+themeSettings.Oilcloth.resume.categoryName.margin[2] = 5;
+themeSettings.Oilcloth.resume.entry.layout = 6;
+themeSettings.Oilcloth.resume.entryPeriod.order = 1;
+themeSettings.Oilcloth.resume.entryPeriod.color =
+  themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.resume.entryPeriod.fontSize = 16;
+themeSettings.Oilcloth.resume.entryPeriod.fontWeight = 700;
+themeSettings.Oilcloth.resume.entryTitle.order = 2;
+themeSettings.Oilcloth.resume.entryTitle.fontSize = 16;
+themeSettings.Oilcloth.resume.entryTitle.fontWeight = 900;
+themeSettings.Oilcloth.resume.entryOrganization.fontWeight = 300;
+themeSettings.Oilcloth.resume.entryOrganization.lineHeight = 1;
+themeSettings.Oilcloth.resume.entryLocation.beforeSeparator = "-";
+themeSettings.Oilcloth.resume.entryLocation.fontWeight = 300;
+themeSettings.Oilcloth.resume.entryLocation.lineHeight = 1;
+themeSettings.Oilcloth.resume.entrySummary.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.resume.entrySummary.margin = [10, 0, 10, 0];
+themeSettings.Oilcloth.resume.entrySummary.lineHeight = 1;
+themeSettings.Oilcloth.resume.entryHighlight.fontWeight = 300;
+themeSettings.Oilcloth.resume.entryHighlight.lineHeight = 1;
+themeSettings.Oilcloth.resume.entryTag.margin[0] = 10;
+themeSettings.Oilcloth.resume.entryTag.padding = [4, 12, 4, 12];
+themeSettings.Oilcloth.resume.entryTag.backgroundColor =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.resume.entryTag.color =
+  themeBaseSettings.Oilcloth.colors[3];
+themeSettings.Oilcloth.resume.entryTag.isUppercase = true;
+themeSettings.Oilcloth.resume.entryTag.fontSize = 11;
+themeSettings.Oilcloth.resume.entryTag.lineHeight = 1;
+themeSettings.Oilcloth.resume.entryTag.gap = 10;
+themeSettings.Oilcloth.letter.document.border = [15, 0, 20, 0];
+themeSettings.Oilcloth.letter.document.borderColor =
+  themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.letter.header.layout = 2;
+themeSettings.Oilcloth.letter.header.padding = [30, 40, 30, 40];
+themeSettings.Oilcloth.letter.name.color = themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.letter.name.fontSize = 40;
+themeSettings.Oilcloth.letter.name.fontWeight = 900;
+themeSettings.Oilcloth.letter.name.letterSpacing = 2;
+themeSettings.Oilcloth.letter.title.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.letter.title.fontWeight = 600;
+themeSettings.Oilcloth.letter.title.isUppercase = true;
+themeSettings.Oilcloth.letter.title.letterSpacing = 4;
+themeSettings.Oilcloth.letter.about.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.letter.contactDetails.fontWeight = 600;
+themeSettings.Oilcloth.letter.contactDetails.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.letter.contactDetails.iconColor =
+  themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.letter.senderDetails.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.letter.recipientDetails.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.email.document.padding = [30, 40, 50, 40];
+themeSettings.Oilcloth.email.document.border[0] = 15;
+themeSettings.Oilcloth.email.document.borderColor =
+  themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.email.name.color = themeBaseSettings.Oilcloth.colors[1];
+themeSettings.Oilcloth.email.name.fontSize = 40;
+themeSettings.Oilcloth.email.name.fontWeight = 900;
+themeSettings.Oilcloth.email.name.letterSpacing = 2;
+themeSettings.Oilcloth.email.title.color = themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.email.title.fontWeight = 600;
+themeSettings.Oilcloth.email.title.isUppercase = true;
+themeSettings.Oilcloth.email.title.letterSpacing = 4;
+themeSettings.Oilcloth.email.contactDetails.margin[0] = 20;
+themeSettings.Oilcloth.email.contactDetails.fontWeight = 600;
+themeSettings.Oilcloth.email.contactDetails.color =
+  themeBaseSettings.Oilcloth.colors[0];
+themeSettings.Oilcloth.email.contactDetails.iconColor =
+  themeBaseSettings.Oilcloth.colors[1];
 
 // OpenResume
-templateSettings.OpenResume.resume.document.padding = [0, 0, 0, 0];
-templateSettings.OpenResume.resume.document.border = [8, 0, 0, 0];
-templateSettings.OpenResume.resume.document.borderColor =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.resume.header.layout = 0;
-templateSettings.OpenResume.resume.header.margin = [24, 48, 24, 48];
-templateSettings.OpenResume.resume.name.color =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.resume.name.fontSize = 30;
-templateSettings.OpenResume.resume.name.fontWeight = 700;
-templateSettings.OpenResume.resume.name.lineHeight = 1.2;
-templateSettings.OpenResume.resume.name.margin[2] = 10;
-templateSettings.OpenResume.resume.title.fontSize = 20;
-templateSettings.OpenResume.resume.title.fontWeight = 700;
-templateSettings.OpenResume.resume.title.lineHeight = 1.2;
-templateSettings.OpenResume.resume.title.margin[2] = 10;
-templateSettings.OpenResume.resume.contactDetails.listOrientation = "row";
-templateSettings.OpenResume.resume.contactDetails.gap = 40;
-templateSettings.OpenResume.resume.about.isItalic = true;
-templateSettings.OpenResume.resume.about.textAlign = "center";
-templateSettings.OpenResume.resume.aside.margin = [24, 0, 24, 48];
-templateSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
-templateSettings.OpenResume.resume.categoryName.fontWeight = 700;
-templateSettings.OpenResume.resume.categoryName.fontSize = 12;
-templateSettings.OpenResume.resume.categoryNameSeparator.position = "left";
-templateSettings.OpenResume.resume.categoryNameSeparator.height = 4;
-templateSettings.OpenResume.resume.categoryNameSeparator.width = 8;
-templateSettings.OpenResume.resume.categoryNameSeparator.margin[1] = 10;
-templateSettings.OpenResume.resume.categoryNameSeparator.backgroundColor =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.resume.entry.layout = 7;
-templateSettings.OpenResume.resume.entryTitle.fontWeight = 600;
-templateSettings.OpenResume.resume.entryOrganization.order = 2;
-templateSettings.OpenResume.resume.entryLocation.order = 3;
-templateSettings.OpenResume.resume.entryLocation.beforeSeparator = ",";
-templateSettings.OpenResume.resume.entryPeriod.order = 4;
-templateSettings.OpenResume.resume.entrySummary.isItalic = true;
-templateSettings.OpenResume.resume.entryHighlight.listMarker = "disc";
-templateSettings.OpenResume.resume.entryHighlight.fontSize = 12;
-templateSettings.OpenResume.resume.entryTag.margin[0] = 10;
-templateSettings.OpenResume.resume.entryTag.gap = 10;
-templateSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
-templateSettings.OpenResume.letter.document.borderColor =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.letter.header.layout = 0;
-templateSettings.OpenResume.letter.header.margin = [24, 48, 24, 48];
-templateSettings.OpenResume.letter.name.color =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.letter.name.fontSize = 30;
-templateSettings.OpenResume.letter.name.fontWeight = 700;
-templateSettings.OpenResume.letter.name.lineHeight = 1.2;
-templateSettings.OpenResume.letter.name.margin[2] = 10;
-templateSettings.OpenResume.letter.title.fontSize = 20;
-templateSettings.OpenResume.letter.title.fontWeight = 700;
-templateSettings.OpenResume.letter.title.lineHeight = 1.2;
-templateSettings.OpenResume.letter.title.margin[2] = 10;
-templateSettings.OpenResume.letter.contactDetails.listOrientation = "row";
-templateSettings.OpenResume.letter.contactDetails.gap = 40;
-templateSettings.OpenResume.letter.about.isItalic = true;
-templateSettings.OpenResume.letter.about.textAlign = "center";
-templateSettings.OpenResume.letter.senderDetails.isItalic = true;
-templateSettings.OpenResume.letter.senderDetails.margin[0] = 48;
-templateSettings.OpenResume.letter.senderDetails.margin[1] = 48;
-templateSettings.OpenResume.letter.senderDetails.margin[3] = 48 * 2 + 4;
-templateSettings.OpenResume.letter.recipientDetails.isItalic = true;
-templateSettings.OpenResume.letter.recipientDetails.margin[0] = 24;
-templateSettings.OpenResume.letter.recipientDetails.margin[1] = 48;
-templateSettings.OpenResume.letter.reference.isBeforeSubject = true;
-templateSettings.OpenResume.letter.reference.margin[1] = 48;
-templateSettings.OpenResume.letter.reference.margin[3] = 48 * 2 + 4;
-templateSettings.OpenResume.letter.reference.fontWeight = 700;
-templateSettings.OpenResume.letter.reference.textAlign = "left";
-templateSettings.OpenResume.letter.reference.color =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.letter.subject.margin[1] = 48;
-templateSettings.OpenResume.letter.subject.margin[3] = 48 * 2 + 4;
-templateSettings.OpenResume.letter.subject.fontWeight = 700;
-templateSettings.OpenResume.letter.subject.textAlign = "left";
-templateSettings.OpenResume.letter.body.margin = [24, 48, 0, 48];
-templateSettings.OpenResume.letter.body.indentation = 48;
-templateSettings.OpenResume.email.document.padding = [24, 48, 24, 48];
-templateSettings.OpenResume.email.document.border = [8, 0, 0, 0];
-templateSettings.OpenResume.email.document.borderColor =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.email.name.color =
-  templateBaseSettings.OpenResume.colors[0];
-templateSettings.OpenResume.email.name.fontSize = 30;
-templateSettings.OpenResume.email.name.fontWeight = 700;
-templateSettings.OpenResume.email.name.lineHeight = 1.2;
-templateSettings.OpenResume.email.name.margin[2] = 10;
-templateSettings.OpenResume.email.title.fontSize = 20;
-templateSettings.OpenResume.email.title.fontWeight = 700;
-templateSettings.OpenResume.email.title.lineHeight = 1.2;
-templateSettings.OpenResume.email.title.margin[2] = 10;
-templateSettings.OpenResume.email.contactDetails.listOrientation = "row";
-templateSettings.OpenResume.email.contactDetails.gap = 40;
-templateSettings.OpenResume.email.about.isItalic = true;
-templateSettings.OpenResume.email.about.textAlign = "center";
+themeSettings.OpenResume.resume.document.padding = [0, 0, 0, 0];
+themeSettings.OpenResume.resume.document.border = [8, 0, 0, 0];
+themeSettings.OpenResume.resume.document.borderColor =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.resume.header.layout = 0;
+themeSettings.OpenResume.resume.header.margin = [24, 48, 24, 48];
+themeSettings.OpenResume.resume.name.color =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.resume.name.fontSize = 30;
+themeSettings.OpenResume.resume.name.fontWeight = 700;
+themeSettings.OpenResume.resume.name.lineHeight = 1.2;
+themeSettings.OpenResume.resume.name.margin[2] = 10;
+themeSettings.OpenResume.resume.title.fontSize = 20;
+themeSettings.OpenResume.resume.title.fontWeight = 700;
+themeSettings.OpenResume.resume.title.lineHeight = 1.2;
+themeSettings.OpenResume.resume.title.margin[2] = 10;
+themeSettings.OpenResume.resume.contactDetails.listOrientation = "row";
+themeSettings.OpenResume.resume.contactDetails.gap = 40;
+themeSettings.OpenResume.resume.about.isItalic = true;
+themeSettings.OpenResume.resume.about.textAlign = "center";
+themeSettings.OpenResume.resume.aside.margin = [24, 0, 24, 48];
+themeSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
+themeSettings.OpenResume.resume.categoryName.fontWeight = 700;
+themeSettings.OpenResume.resume.categoryName.fontSize = 12;
+themeSettings.OpenResume.resume.categoryNameSeparator.position = "left";
+themeSettings.OpenResume.resume.categoryNameSeparator.height = 4;
+themeSettings.OpenResume.resume.categoryNameSeparator.width = 8;
+themeSettings.OpenResume.resume.categoryNameSeparator.margin[1] = 10;
+themeSettings.OpenResume.resume.categoryNameSeparator.backgroundColor =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.resume.entry.layout = 7;
+themeSettings.OpenResume.resume.entryTitle.fontWeight = 600;
+themeSettings.OpenResume.resume.entryOrganization.order = 2;
+themeSettings.OpenResume.resume.entryLocation.order = 3;
+themeSettings.OpenResume.resume.entryLocation.beforeSeparator = ",";
+themeSettings.OpenResume.resume.entryPeriod.order = 4;
+themeSettings.OpenResume.resume.entrySummary.isItalic = true;
+themeSettings.OpenResume.resume.entryHighlight.listMarker = "disc";
+themeSettings.OpenResume.resume.entryHighlight.fontSize = 12;
+themeSettings.OpenResume.resume.entryTag.margin[0] = 10;
+themeSettings.OpenResume.resume.entryTag.gap = 10;
+themeSettings.OpenResume.letter.document.border = [8, 0, 0, 0];
+themeSettings.OpenResume.letter.document.borderColor =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.letter.header.layout = 0;
+themeSettings.OpenResume.letter.header.margin = [24, 48, 24, 48];
+themeSettings.OpenResume.letter.name.color =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.letter.name.fontSize = 30;
+themeSettings.OpenResume.letter.name.fontWeight = 700;
+themeSettings.OpenResume.letter.name.lineHeight = 1.2;
+themeSettings.OpenResume.letter.name.margin[2] = 10;
+themeSettings.OpenResume.letter.title.fontSize = 20;
+themeSettings.OpenResume.letter.title.fontWeight = 700;
+themeSettings.OpenResume.letter.title.lineHeight = 1.2;
+themeSettings.OpenResume.letter.title.margin[2] = 10;
+themeSettings.OpenResume.letter.contactDetails.listOrientation = "row";
+themeSettings.OpenResume.letter.contactDetails.gap = 40;
+themeSettings.OpenResume.letter.about.isItalic = true;
+themeSettings.OpenResume.letter.about.textAlign = "center";
+themeSettings.OpenResume.letter.senderDetails.isItalic = true;
+themeSettings.OpenResume.letter.senderDetails.margin[0] = 48;
+themeSettings.OpenResume.letter.senderDetails.margin[1] = 48;
+themeSettings.OpenResume.letter.senderDetails.margin[3] = 48 * 2 + 4;
+themeSettings.OpenResume.letter.recipientDetails.isItalic = true;
+themeSettings.OpenResume.letter.recipientDetails.margin[0] = 24;
+themeSettings.OpenResume.letter.recipientDetails.margin[1] = 48;
+themeSettings.OpenResume.letter.reference.isBeforeSubject = true;
+themeSettings.OpenResume.letter.reference.margin[1] = 48;
+themeSettings.OpenResume.letter.reference.margin[3] = 48 * 2 + 4;
+themeSettings.OpenResume.letter.reference.fontWeight = 700;
+themeSettings.OpenResume.letter.reference.textAlign = "left";
+themeSettings.OpenResume.letter.reference.color =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.letter.subject.margin[1] = 48;
+themeSettings.OpenResume.letter.subject.margin[3] = 48 * 2 + 4;
+themeSettings.OpenResume.letter.subject.fontWeight = 700;
+themeSettings.OpenResume.letter.subject.textAlign = "left";
+themeSettings.OpenResume.letter.body.margin = [24, 48, 0, 48];
+themeSettings.OpenResume.letter.body.indentation = 48;
+themeSettings.OpenResume.email.document.padding = [24, 48, 24, 48];
+themeSettings.OpenResume.email.document.border = [8, 0, 0, 0];
+themeSettings.OpenResume.email.document.borderColor =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.email.name.color =
+  themeBaseSettings.OpenResume.colors[0];
+themeSettings.OpenResume.email.name.fontSize = 30;
+themeSettings.OpenResume.email.name.fontWeight = 700;
+themeSettings.OpenResume.email.name.lineHeight = 1.2;
+themeSettings.OpenResume.email.name.margin[2] = 10;
+themeSettings.OpenResume.email.title.fontSize = 20;
+themeSettings.OpenResume.email.title.fontWeight = 700;
+themeSettings.OpenResume.email.title.lineHeight = 1.2;
+themeSettings.OpenResume.email.title.margin[2] = 10;
+themeSettings.OpenResume.email.contactDetails.listOrientation = "row";
+themeSettings.OpenResume.email.contactDetails.gap = 40;
+themeSettings.OpenResume.email.about.isItalic = true;
+themeSettings.OpenResume.email.about.textAlign = "center";
 
 // Paper
-templateSettings.Paper.resume.document.padding = [80, 80, 80, 80];
-templateSettings.Paper.resume.header.layout = 3;
-templateSettings.Paper.resume.name.fontSize = 20;
-templateSettings.Paper.resume.title.fontSize = 20;
-templateSettings.Paper.resume.contactDetails.listOrientation = "row";
-templateSettings.Paper.resume.contactDetails.gap = 12;
-templateSettings.Paper.resume.contactDetails.fontSize = 12;
-templateSettings.Paper.resume.about.fontSize = 12;
-templateSettings.Paper.resume.about.padding = [16, 16, 16, 0];
-templateSettings.Paper.resume.about.border[0] = 2;
-templateSettings.Paper.resume.about.borderStyle = "dotted";
-templateSettings.Paper.resume.about.borderColor =
-  templateBaseSettings.Paper.colors[0];
-templateSettings.Paper.resume.category.padding = [16, 16, 16, 0];
-templateSettings.Paper.resume.category.border[0] = 2;
-templateSettings.Paper.resume.category.borderStyle = "dotted";
-templateSettings.Paper.resume.category.borderColor =
-  templateBaseSettings.Paper.colors[0];
-templateSettings.Paper.resume.categoryName.isAside = true;
-templateSettings.Paper.resume.categoryName.width = 20;
-templateSettings.Paper.resume.categoryName.isUppercase = true;
-templateSettings.Paper.resume.categoryName.fontSize = 12;
-templateSettings.Paper.resume.entry.layout = 9;
-templateSettings.Paper.resume.entryTitle.fontWeight = 700;
-templateSettings.Paper.resume.entryTitle.fontSize = 13;
-templateSettings.Paper.resume.entryOrganization.order = 2;
-templateSettings.Paper.resume.entryOrganization.beforeSeparator = "|";
-templateSettings.Paper.resume.entryOrganization.fontSize = 13;
-templateSettings.Paper.resume.entryLocation.order = 3;
-templateSettings.Paper.resume.entryLocation.beforeSeparator = ",";
-templateSettings.Paper.resume.entryLocation.fontSize = 13;
-templateSettings.Paper.resume.entryPeriod.order = 4;
-templateSettings.Paper.resume.entryPeriod.fontSize = 13;
-templateSettings.Paper.resume.entrySummary.fontSize = 13;
-templateSettings.Paper.resume.entryHighlight.fontSize = 13;
-templateSettings.Paper.resume.entryHighlight.listMarker = "circle";
-templateSettings.Paper.resume.entryTag.border = [1, 1, 1, 1];
-templateSettings.Paper.resume.entryTag.borderColor =
-  templateBaseSettings.Paper.colors[0];
-templateSettings.Paper.resume.entryTag.color =
-  templateBaseSettings.Paper.colors[0];
-templateSettings.Paper.resume.entryTag.backgroundColor = "transparent";
-templateSettings.Paper.letter.document.padding = [80, 80, 80, 80];
-templateSettings.Paper.letter.header.layout = 3;
-templateSettings.Paper.letter.name.fontSize = 20;
-templateSettings.Paper.letter.title.fontSize = 20;
-templateSettings.Paper.letter.contactDetails.listOrientation = "row";
-templateSettings.Paper.letter.contactDetails.gap = 12;
-templateSettings.Paper.letter.contactDetails.fontSize = 12;
-templateSettings.Paper.letter.about.fontSize = 12;
-templateSettings.Paper.letter.about.padding = [16, 16, 16, 0];
-templateSettings.Paper.letter.about.border[0] = 2;
-templateSettings.Paper.letter.about.borderStyle = "dotted";
-templateSettings.Paper.letter.about.borderColor =
-  templateBaseSettings.Paper.colors[0];
-templateSettings.Paper.letter.subject.textAlign = "left";
-templateSettings.Paper.letter.reference.isItalic = true;
-templateSettings.Paper.letter.reference.textAlign = "left";
-templateSettings.Paper.letter.body.indentation = 0;
-templateSettings.Paper.letter.body.isSignatureRightAligned = false;
-templateSettings.Paper.email.document.layout = 3;
-templateSettings.Paper.email.document.padding = [80, 80, 80, 80];
-templateSettings.Paper.email.name.padding[0] = 16;
-templateSettings.Paper.email.name.border[0] = 2;
-templateSettings.Paper.email.name.borderStyle = "dotted";
-templateSettings.Paper.email.name.borderColor =
-  templateBaseSettings.Paper.colors[0];
-templateSettings.Paper.email.name.fontSize = 20;
-templateSettings.Paper.email.title.fontSize = 20;
-templateSettings.Paper.email.contactDetails.listOrientation = "row";
-templateSettings.Paper.email.contactDetails.gap = 12;
-templateSettings.Paper.email.contactDetails.fontSize = 12;
-templateSettings.Paper.email.about.fontSize = 12;
-templateSettings.Paper.email.about.padding = [16, 16, 16, 0];
+themeSettings.Paper.resume.document.padding = [80, 80, 80, 80];
+themeSettings.Paper.resume.header.layout = 3;
+themeSettings.Paper.resume.name.fontSize = 20;
+themeSettings.Paper.resume.title.fontSize = 20;
+themeSettings.Paper.resume.contactDetails.listOrientation = "row";
+themeSettings.Paper.resume.contactDetails.gap = 12;
+themeSettings.Paper.resume.contactDetails.fontSize = 12;
+themeSettings.Paper.resume.about.fontSize = 12;
+themeSettings.Paper.resume.about.padding = [16, 16, 16, 0];
+themeSettings.Paper.resume.about.border[0] = 2;
+themeSettings.Paper.resume.about.borderStyle = "dotted";
+themeSettings.Paper.resume.about.borderColor =
+  themeBaseSettings.Paper.colors[0];
+themeSettings.Paper.resume.category.padding = [16, 16, 16, 0];
+themeSettings.Paper.resume.category.border[0] = 2;
+themeSettings.Paper.resume.category.borderStyle = "dotted";
+themeSettings.Paper.resume.category.borderColor =
+  themeBaseSettings.Paper.colors[0];
+themeSettings.Paper.resume.categoryName.isAside = true;
+themeSettings.Paper.resume.categoryName.width = 20;
+themeSettings.Paper.resume.categoryName.isUppercase = true;
+themeSettings.Paper.resume.categoryName.fontSize = 12;
+themeSettings.Paper.resume.entry.layout = 9;
+themeSettings.Paper.resume.entryTitle.fontWeight = 700;
+themeSettings.Paper.resume.entryTitle.fontSize = 13;
+themeSettings.Paper.resume.entryOrganization.order = 2;
+themeSettings.Paper.resume.entryOrganization.beforeSeparator = "|";
+themeSettings.Paper.resume.entryOrganization.fontSize = 13;
+themeSettings.Paper.resume.entryLocation.order = 3;
+themeSettings.Paper.resume.entryLocation.beforeSeparator = ",";
+themeSettings.Paper.resume.entryLocation.fontSize = 13;
+themeSettings.Paper.resume.entryPeriod.order = 4;
+themeSettings.Paper.resume.entryPeriod.fontSize = 13;
+themeSettings.Paper.resume.entrySummary.fontSize = 13;
+themeSettings.Paper.resume.entryHighlight.fontSize = 13;
+themeSettings.Paper.resume.entryHighlight.listMarker = "circle";
+themeSettings.Paper.resume.entryTag.border = [1, 1, 1, 1];
+themeSettings.Paper.resume.entryTag.borderColor =
+  themeBaseSettings.Paper.colors[0];
+themeSettings.Paper.resume.entryTag.color = themeBaseSettings.Paper.colors[0];
+themeSettings.Paper.resume.entryTag.backgroundColor = "transparent";
+themeSettings.Paper.letter.document.padding = [80, 80, 80, 80];
+themeSettings.Paper.letter.header.layout = 3;
+themeSettings.Paper.letter.name.fontSize = 20;
+themeSettings.Paper.letter.title.fontSize = 20;
+themeSettings.Paper.letter.contactDetails.listOrientation = "row";
+themeSettings.Paper.letter.contactDetails.gap = 12;
+themeSettings.Paper.letter.contactDetails.fontSize = 12;
+themeSettings.Paper.letter.about.fontSize = 12;
+themeSettings.Paper.letter.about.padding = [16, 16, 16, 0];
+themeSettings.Paper.letter.about.border[0] = 2;
+themeSettings.Paper.letter.about.borderStyle = "dotted";
+themeSettings.Paper.letter.about.borderColor =
+  themeBaseSettings.Paper.colors[0];
+themeSettings.Paper.letter.subject.textAlign = "left";
+themeSettings.Paper.letter.reference.isItalic = true;
+themeSettings.Paper.letter.reference.textAlign = "left";
+themeSettings.Paper.letter.body.indentation = 0;
+themeSettings.Paper.letter.body.isSignatureRightAligned = false;
+themeSettings.Paper.email.document.layout = 3;
+themeSettings.Paper.email.document.padding = [80, 80, 80, 80];
+themeSettings.Paper.email.name.padding[0] = 16;
+themeSettings.Paper.email.name.border[0] = 2;
+themeSettings.Paper.email.name.borderStyle = "dotted";
+themeSettings.Paper.email.name.borderColor = themeBaseSettings.Paper.colors[0];
+themeSettings.Paper.email.name.fontSize = 20;
+themeSettings.Paper.email.title.fontSize = 20;
+themeSettings.Paper.email.contactDetails.listOrientation = "row";
+themeSettings.Paper.email.contactDetails.gap = 12;
+themeSettings.Paper.email.contactDetails.fontSize = 12;
+themeSettings.Paper.email.about.fontSize = 12;
+themeSettings.Paper.email.about.padding = [16, 16, 16, 0];
 
 // Pharmacy
-templateSettings.Pharmacy.resume.document.padding = [48, 48, 48, 48];
-templateSettings.Pharmacy.resume.header.layout = 4;
-templateSettings.Pharmacy.resume.name.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.name.isUppercase = true;
-templateSettings.Pharmacy.resume.name.fontSize = 30;
-templateSettings.Pharmacy.resume.name.letterSpacing = 2;
-templateSettings.Pharmacy.resume.contactDetails.margin = [10, 0, 30, 0];
-templateSettings.Pharmacy.resume.contactDetails.alignment = "end";
-templateSettings.Pharmacy.resume.contactDetails.border[1] = 2;
-templateSettings.Pharmacy.resume.contactDetails.borderColor =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.contactDetails.padding[1] = 20;
-templateSettings.Pharmacy.resume.contactDetails.fontSize = 12;
-templateSettings.Pharmacy.resume.contactDetails.isIconFirst = false;
-templateSettings.Pharmacy.resume.title.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.title.fontSize = 36;
-templateSettings.Pharmacy.resume.title.letterSpacing = 3;
-templateSettings.Pharmacy.resume.title.textAlign = "center";
-templateSettings.Pharmacy.resume.about.fontSize = 16;
-templateSettings.Pharmacy.resume.about.color =
-  templateBaseSettings.Pharmacy.colors[2];
-templateSettings.Pharmacy.resume.about.textAlign = "center";
-templateSettings.Pharmacy.resume.aside.margin[0] = 25;
-templateSettings.Pharmacy.resume.aside.margin[1] = 25;
-templateSettings.Pharmacy.resume.body.margin[0] = 25;
-templateSettings.Pharmacy.resume.category.gap = 34;
-templateSettings.Pharmacy.resume.categoryName.margin[2] = 6;
-templateSettings.Pharmacy.resume.categoryName.isUppercase = true;
-templateSettings.Pharmacy.resume.categoryName.fontSize = 16;
-templateSettings.Pharmacy.resume.categoryName.fontWeight = 700;
-templateSettings.Pharmacy.resume.categoryName.letterSpacing = 1;
-templateSettings.Pharmacy.resume.entry.layout = 4;
-templateSettings.Pharmacy.resume.entry.border[3] = 2;
-templateSettings.Pharmacy.resume.entry.borderColor =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.entry.padding[3] = 20;
-templateSettings.Pharmacy.resume.entryPeriod.order = 1;
-templateSettings.Pharmacy.resume.entryPeriod.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.entryTitle.order = 2;
-templateSettings.Pharmacy.resume.entryOrganization.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.entryLocation.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.resume.entrySummary.color =
-  templateBaseSettings.Pharmacy.colors[2];
-templateSettings.Pharmacy.resume.entryHighlight.listMarker = "disc";
-templateSettings.Pharmacy.resume.entryHighlight.color =
-  templateBaseSettings.Pharmacy.colors[1];
-templateSettings.Pharmacy.resume.entryTag.color =
-  templateBaseSettings.Pharmacy.colors[2];
-templateSettings.Pharmacy.resume.entryTag.backgroundColor = "transparent";
-templateSettings.Pharmacy.resume.entryTag.borderRadius = 0;
-templateSettings.Pharmacy.resume.entryTag.border[3] = 1;
-templateSettings.Pharmacy.resume.entryTag.padding[0] = 0;
-templateSettings.Pharmacy.resume.entryTag.padding[2] = 0;
-templateSettings.Pharmacy.resume.entryTag.borderColor =
-  templateBaseSettings.Pharmacy.colors[2];
-templateSettings.Pharmacy.resume.entryTag.gap = 20;
-templateSettings.Pharmacy.letter.document.padding = [48, 48, 48, 48];
-templateSettings.Pharmacy.letter.header.layout = 0;
-templateSettings.Pharmacy.letter.name.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.letter.name.isUppercase = true;
-templateSettings.Pharmacy.letter.name.fontSize = 30;
-templateSettings.Pharmacy.letter.name.letterSpacing = 2;
-templateSettings.Pharmacy.letter.contactDetails.margin = [10, 0, 30, 0];
-templateSettings.Pharmacy.letter.contactDetails.alignment = "start";
-templateSettings.Pharmacy.letter.contactDetails.border[3] = 2;
-templateSettings.Pharmacy.letter.contactDetails.borderColor =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.letter.contactDetails.padding[3] = 20;
-templateSettings.Pharmacy.letter.contactDetails.fontSize = 12;
-templateSettings.Pharmacy.letter.title.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.letter.title.fontSize = 36;
-templateSettings.Pharmacy.letter.title.letterSpacing = 3;
-templateSettings.Pharmacy.letter.about.fontSize = 16;
-templateSettings.Pharmacy.letter.about.color =
-  templateBaseSettings.Pharmacy.colors[2];
-templateSettings.Pharmacy.letter.senderDetails.borderColor =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.letter.senderDetails.border[3] = 2;
-templateSettings.Pharmacy.letter.senderDetails.padding[3] = 20;
-templateSettings.Pharmacy.letter.recipientDetails.borderColor =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.letter.recipientDetails.border[1] = 2;
-templateSettings.Pharmacy.letter.recipientDetails.padding[1] = 20;
-templateSettings.Pharmacy.letter.subject.fontSize = 18;
-templateSettings.Pharmacy.letter.subject.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.letter.reference.fontSize = 15;
-templateSettings.Pharmacy.letter.reference.color =
-  templateBaseSettings.Pharmacy.colors[2];
-templateSettings.Pharmacy.email.document.padding = [48, 48, 48, 48];
-templateSettings.Pharmacy.email.document.layout = 0;
-templateSettings.Pharmacy.email.name.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.email.name.isUppercase = true;
-templateSettings.Pharmacy.email.name.fontSize = 30;
-templateSettings.Pharmacy.email.name.letterSpacing = 2;
-templateSettings.Pharmacy.email.contactDetails.margin = [10, 0, 30, 0];
-templateSettings.Pharmacy.email.contactDetails.alignment = "start";
-templateSettings.Pharmacy.email.contactDetails.border[3] = 2;
-templateSettings.Pharmacy.email.contactDetails.borderColor =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.email.contactDetails.padding[3] = 20;
-templateSettings.Pharmacy.email.contactDetails.fontSize = 12;
-templateSettings.Pharmacy.email.title.color =
-  templateBaseSettings.Pharmacy.colors[0];
-templateSettings.Pharmacy.email.title.letterSpacing = 3;
-templateSettings.Pharmacy.email.about.fontSize = 16;
-templateSettings.Pharmacy.email.about.color =
-  templateBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.resume.document.padding = [48, 48, 48, 48];
+themeSettings.Pharmacy.resume.header.layout = 4;
+themeSettings.Pharmacy.resume.name.color = themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.name.isUppercase = true;
+themeSettings.Pharmacy.resume.name.fontSize = 30;
+themeSettings.Pharmacy.resume.name.letterSpacing = 2;
+themeSettings.Pharmacy.resume.contactDetails.margin = [10, 0, 30, 0];
+themeSettings.Pharmacy.resume.contactDetails.alignment = "end";
+themeSettings.Pharmacy.resume.contactDetails.border[1] = 2;
+themeSettings.Pharmacy.resume.contactDetails.borderColor =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.contactDetails.padding[1] = 20;
+themeSettings.Pharmacy.resume.contactDetails.fontSize = 12;
+themeSettings.Pharmacy.resume.contactDetails.isIconFirst = false;
+themeSettings.Pharmacy.resume.title.color =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.title.fontSize = 36;
+themeSettings.Pharmacy.resume.title.letterSpacing = 3;
+themeSettings.Pharmacy.resume.title.textAlign = "center";
+themeSettings.Pharmacy.resume.about.fontSize = 16;
+themeSettings.Pharmacy.resume.about.color =
+  themeBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.resume.about.textAlign = "center";
+themeSettings.Pharmacy.resume.aside.margin[0] = 25;
+themeSettings.Pharmacy.resume.aside.margin[1] = 25;
+themeSettings.Pharmacy.resume.body.margin[0] = 25;
+themeSettings.Pharmacy.resume.category.gap = 34;
+themeSettings.Pharmacy.resume.categoryName.margin[2] = 6;
+themeSettings.Pharmacy.resume.categoryName.isUppercase = true;
+themeSettings.Pharmacy.resume.categoryName.fontSize = 16;
+themeSettings.Pharmacy.resume.categoryName.fontWeight = 700;
+themeSettings.Pharmacy.resume.categoryName.letterSpacing = 1;
+themeSettings.Pharmacy.resume.entry.layout = 4;
+themeSettings.Pharmacy.resume.entry.border[3] = 2;
+themeSettings.Pharmacy.resume.entry.borderColor =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.entry.padding[3] = 20;
+themeSettings.Pharmacy.resume.entryPeriod.order = 1;
+themeSettings.Pharmacy.resume.entryPeriod.color =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.entryTitle.order = 2;
+themeSettings.Pharmacy.resume.entryOrganization.color =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.entryLocation.color =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.resume.entrySummary.color =
+  themeBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.resume.entryHighlight.listMarker = "disc";
+themeSettings.Pharmacy.resume.entryHighlight.color =
+  themeBaseSettings.Pharmacy.colors[1];
+themeSettings.Pharmacy.resume.entryTag.color =
+  themeBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.resume.entryTag.backgroundColor = "transparent";
+themeSettings.Pharmacy.resume.entryTag.borderRadius = 0;
+themeSettings.Pharmacy.resume.entryTag.border[3] = 1;
+themeSettings.Pharmacy.resume.entryTag.padding[0] = 0;
+themeSettings.Pharmacy.resume.entryTag.padding[2] = 0;
+themeSettings.Pharmacy.resume.entryTag.borderColor =
+  themeBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.resume.entryTag.gap = 20;
+themeSettings.Pharmacy.letter.document.padding = [48, 48, 48, 48];
+themeSettings.Pharmacy.letter.header.layout = 0;
+themeSettings.Pharmacy.letter.name.color = themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.letter.name.isUppercase = true;
+themeSettings.Pharmacy.letter.name.fontSize = 30;
+themeSettings.Pharmacy.letter.name.letterSpacing = 2;
+themeSettings.Pharmacy.letter.contactDetails.margin = [10, 0, 30, 0];
+themeSettings.Pharmacy.letter.contactDetails.alignment = "start";
+themeSettings.Pharmacy.letter.contactDetails.border[3] = 2;
+themeSettings.Pharmacy.letter.contactDetails.borderColor =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.letter.contactDetails.padding[3] = 20;
+themeSettings.Pharmacy.letter.contactDetails.fontSize = 12;
+themeSettings.Pharmacy.letter.title.color =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.letter.title.fontSize = 36;
+themeSettings.Pharmacy.letter.title.letterSpacing = 3;
+themeSettings.Pharmacy.letter.about.fontSize = 16;
+themeSettings.Pharmacy.letter.about.color =
+  themeBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.letter.senderDetails.borderColor =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.letter.senderDetails.border[3] = 2;
+themeSettings.Pharmacy.letter.senderDetails.padding[3] = 20;
+themeSettings.Pharmacy.letter.recipientDetails.borderColor =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.letter.recipientDetails.border[1] = 2;
+themeSettings.Pharmacy.letter.recipientDetails.padding[1] = 20;
+themeSettings.Pharmacy.letter.subject.fontSize = 18;
+themeSettings.Pharmacy.letter.subject.color =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.letter.reference.fontSize = 15;
+themeSettings.Pharmacy.letter.reference.color =
+  themeBaseSettings.Pharmacy.colors[2];
+themeSettings.Pharmacy.email.document.padding = [48, 48, 48, 48];
+themeSettings.Pharmacy.email.document.layout = 0;
+themeSettings.Pharmacy.email.name.color = themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.email.name.isUppercase = true;
+themeSettings.Pharmacy.email.name.fontSize = 30;
+themeSettings.Pharmacy.email.name.letterSpacing = 2;
+themeSettings.Pharmacy.email.contactDetails.margin = [10, 0, 30, 0];
+themeSettings.Pharmacy.email.contactDetails.alignment = "start";
+themeSettings.Pharmacy.email.contactDetails.border[3] = 2;
+themeSettings.Pharmacy.email.contactDetails.borderColor =
+  themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.email.contactDetails.padding[3] = 20;
+themeSettings.Pharmacy.email.contactDetails.fontSize = 12;
+themeSettings.Pharmacy.email.title.color = themeBaseSettings.Pharmacy.colors[0];
+themeSettings.Pharmacy.email.title.letterSpacing = 3;
+themeSettings.Pharmacy.email.about.fontSize = 16;
+themeSettings.Pharmacy.email.about.color = themeBaseSettings.Pharmacy.colors[2];
 
 // Red
-templateSettings.Red.resume.document.padding = [48, 56, 48, 56];
-templateSettings.Red.resume.header.layout = 1;
-templateSettings.Red.resume.header.padding = [24, 40, 24, 40];
-templateSettings.Red.resume.name.font = templateBaseSettings.Red.displayFont;
-templateSettings.Red.resume.name.fontSize = 36;
-templateSettings.Red.resume.name.isUppercase = true;
-templateSettings.Red.resume.name.textAlign = "center";
-templateSettings.Red.resume.name.lineHeight = 1;
-templateSettings.Red.resume.name.padding = [10, 16, 0, 16];
-templateSettings.Red.resume.name.border[0] = 4;
-templateSettings.Red.resume.name.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.title.font = templateBaseSettings.Red.displayFont;
-templateSettings.Red.resume.title.fontSize = 24;
-templateSettings.Red.resume.title.textAlign = "center";
-templateSettings.Red.resume.title.padding = [0, 16, 10, 16];
-templateSettings.Red.resume.title.border[2] = 4;
-templateSettings.Red.resume.title.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.contactDetails.margin[3] = 30;
-templateSettings.Red.resume.contactDetails.border[3] = 1;
-templateSettings.Red.resume.contactDetails.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.contactDetails.padding[3] = 10;
-templateSettings.Red.resume.contactDetails.fontSize = 11;
-templateSettings.Red.resume.contactDetails.isItalic = true;
-templateSettings.Red.resume.contactDetails.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.contactDetails.iconColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.aside.margin[0] = 22;
-templateSettings.Red.resume.aside.margin[1] = 22;
-templateSettings.Red.resume.body.margin[0] = 22;
-templateSettings.Red.resume.categoryName.isUppercase = true;
-templateSettings.Red.resume.categoryName.font =
-  templateBaseSettings.Red.displayFont;
-templateSettings.Red.resume.categoryName.fontSize = 28;
-templateSettings.Red.resume.categoryName.textAlign = "center";
-templateSettings.Red.resume.entry.layout = 8;
-templateSettings.Red.resume.entryOrganization.order = 2;
-templateSettings.Red.resume.entryOrganization.beforeSeparator = "-";
-templateSettings.Red.resume.entryOrganization.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.entryPeriod.order = 3;
-templateSettings.Red.resume.entryLocation.order = 4;
-templateSettings.Red.resume.entryLocation.beforeSeparator = ",";
-templateSettings.Red.resume.entrySummary.fontSize = 12;
-templateSettings.Red.resume.entryHighlight.fontSize = 12;
-templateSettings.Red.resume.entryHighlight.isItalic = true;
-templateSettings.Red.resume.entryHighlight.margin[3] = 20;
-templateSettings.Red.resume.entryHighlight.listMarker = "square";
-templateSettings.Red.resume.entryHighlight.listMarkerColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.resume.entryHighlight.color =
-  templateBaseSettings.Red.colors[1];
-templateSettings.Red.resume.entryTag.isUppercase = true;
-templateSettings.Red.letter.document.padding = [48, 56, 48, 56];
-templateSettings.Red.letter.header.layout = 1;
-templateSettings.Red.letter.header.padding = [24, 40, 24, 40];
-templateSettings.Red.letter.name.font = templateBaseSettings.Red.displayFont;
-templateSettings.Red.letter.name.fontSize = 36;
-templateSettings.Red.letter.name.isUppercase = true;
-templateSettings.Red.letter.name.textAlign = "center";
-templateSettings.Red.letter.name.lineHeight = 1;
-templateSettings.Red.letter.name.padding = [10, 16, 0, 16];
-templateSettings.Red.letter.name.border[0] = 4;
-templateSettings.Red.letter.name.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.title.font = templateBaseSettings.Red.displayFont;
-templateSettings.Red.letter.title.fontSize = 24;
-templateSettings.Red.letter.title.textAlign = "center";
-templateSettings.Red.letter.title.padding = [0, 16, 10, 16];
-templateSettings.Red.letter.title.border[2] = 4;
-templateSettings.Red.letter.title.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.contactDetails.margin[3] = 30;
-templateSettings.Red.letter.contactDetails.border[3] = 1;
-templateSettings.Red.letter.contactDetails.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.contactDetails.padding[3] = 10;
-templateSettings.Red.letter.contactDetails.fontSize = 11;
-templateSettings.Red.letter.contactDetails.isItalic = true;
-templateSettings.Red.letter.contactDetails.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.contactDetails.iconColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.senderDetails.margin[0] = 0;
-templateSettings.Red.letter.senderDetails.isItalic = true;
-templateSettings.Red.letter.senderDetails.fontSize = 12;
-templateSettings.Red.letter.senderDetails.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.recipientDetails.margin[0] = 0;
-templateSettings.Red.letter.recipientDetails.isItalic = true;
-templateSettings.Red.letter.recipientDetails.fontSize = 12;
-templateSettings.Red.letter.recipientDetails.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.letter.subject.fontWeight = 600;
-templateSettings.Red.letter.reference.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.email.document.layout = 1;
-templateSettings.Red.email.document.padding = [48, 56, 48, 56];
-templateSettings.Red.email.name.font = templateBaseSettings.Red.displayFont;
-templateSettings.Red.email.name.fontSize = 36;
-templateSettings.Red.email.name.isUppercase = true;
-templateSettings.Red.email.name.textAlign = "center";
-templateSettings.Red.email.name.lineHeight = 1;
-templateSettings.Red.email.name.padding = [10, 16, 0, 16];
-templateSettings.Red.email.name.border[0] = 4;
-templateSettings.Red.email.name.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.email.title.font = templateBaseSettings.Red.displayFont;
-templateSettings.Red.email.title.fontSize = 24;
-templateSettings.Red.email.title.textAlign = "center";
-templateSettings.Red.email.title.padding = [0, 16, 10, 16];
-templateSettings.Red.email.title.border[2] = 4;
-templateSettings.Red.email.title.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.email.contactDetails.margin[3] = 30;
-templateSettings.Red.email.contactDetails.border[3] = 1;
-templateSettings.Red.email.contactDetails.borderColor =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.email.contactDetails.padding[3] = 10;
-templateSettings.Red.email.contactDetails.fontSize = 11;
-templateSettings.Red.email.contactDetails.isItalic = true;
-templateSettings.Red.email.contactDetails.color =
-  templateBaseSettings.Red.colors[0];
-templateSettings.Red.email.contactDetails.iconColor =
-  templateBaseSettings.Red.colors[0];
+themeSettings.Red.resume.document.padding = [48, 56, 48, 56];
+themeSettings.Red.resume.header.layout = 1;
+themeSettings.Red.resume.header.padding = [24, 40, 24, 40];
+themeSettings.Red.resume.name.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.resume.name.fontSize = 36;
+themeSettings.Red.resume.name.isUppercase = true;
+themeSettings.Red.resume.name.textAlign = "center";
+themeSettings.Red.resume.name.lineHeight = 1;
+themeSettings.Red.resume.name.padding = [10, 16, 0, 16];
+themeSettings.Red.resume.name.border[0] = 4;
+themeSettings.Red.resume.name.borderColor = themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.title.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.resume.title.fontSize = 24;
+themeSettings.Red.resume.title.textAlign = "center";
+themeSettings.Red.resume.title.padding = [0, 16, 10, 16];
+themeSettings.Red.resume.title.border[2] = 4;
+themeSettings.Red.resume.title.borderColor = themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.contactDetails.margin[3] = 30;
+themeSettings.Red.resume.contactDetails.border[3] = 1;
+themeSettings.Red.resume.contactDetails.borderColor =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.contactDetails.padding[3] = 10;
+themeSettings.Red.resume.contactDetails.fontSize = 11;
+themeSettings.Red.resume.contactDetails.isItalic = true;
+themeSettings.Red.resume.contactDetails.color = themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.contactDetails.iconColor =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.aside.margin[0] = 22;
+themeSettings.Red.resume.aside.margin[1] = 22;
+themeSettings.Red.resume.body.margin[0] = 22;
+themeSettings.Red.resume.categoryName.isUppercase = true;
+themeSettings.Red.resume.categoryName.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.resume.categoryName.fontSize = 28;
+themeSettings.Red.resume.categoryName.textAlign = "center";
+themeSettings.Red.resume.entry.layout = 8;
+themeSettings.Red.resume.entryOrganization.order = 2;
+themeSettings.Red.resume.entryOrganization.beforeSeparator = "-";
+themeSettings.Red.resume.entryOrganization.color =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.entryPeriod.order = 3;
+themeSettings.Red.resume.entryLocation.order = 4;
+themeSettings.Red.resume.entryLocation.beforeSeparator = ",";
+themeSettings.Red.resume.entrySummary.fontSize = 12;
+themeSettings.Red.resume.entryHighlight.fontSize = 12;
+themeSettings.Red.resume.entryHighlight.isItalic = true;
+themeSettings.Red.resume.entryHighlight.margin[3] = 20;
+themeSettings.Red.resume.entryHighlight.listMarker = "square";
+themeSettings.Red.resume.entryHighlight.listMarkerColor =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.resume.entryHighlight.color = themeBaseSettings.Red.colors[1];
+themeSettings.Red.resume.entryTag.isUppercase = true;
+themeSettings.Red.letter.document.padding = [48, 56, 48, 56];
+themeSettings.Red.letter.header.layout = 1;
+themeSettings.Red.letter.header.padding = [24, 40, 24, 40];
+themeSettings.Red.letter.name.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.letter.name.fontSize = 36;
+themeSettings.Red.letter.name.isUppercase = true;
+themeSettings.Red.letter.name.textAlign = "center";
+themeSettings.Red.letter.name.lineHeight = 1;
+themeSettings.Red.letter.name.padding = [10, 16, 0, 16];
+themeSettings.Red.letter.name.border[0] = 4;
+themeSettings.Red.letter.name.borderColor = themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.title.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.letter.title.fontSize = 24;
+themeSettings.Red.letter.title.textAlign = "center";
+themeSettings.Red.letter.title.padding = [0, 16, 10, 16];
+themeSettings.Red.letter.title.border[2] = 4;
+themeSettings.Red.letter.title.borderColor = themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.contactDetails.margin[3] = 30;
+themeSettings.Red.letter.contactDetails.border[3] = 1;
+themeSettings.Red.letter.contactDetails.borderColor =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.contactDetails.padding[3] = 10;
+themeSettings.Red.letter.contactDetails.fontSize = 11;
+themeSettings.Red.letter.contactDetails.isItalic = true;
+themeSettings.Red.letter.contactDetails.color = themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.contactDetails.iconColor =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.senderDetails.margin[0] = 0;
+themeSettings.Red.letter.senderDetails.isItalic = true;
+themeSettings.Red.letter.senderDetails.fontSize = 12;
+themeSettings.Red.letter.senderDetails.color = themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.recipientDetails.margin[0] = 0;
+themeSettings.Red.letter.recipientDetails.isItalic = true;
+themeSettings.Red.letter.recipientDetails.fontSize = 12;
+themeSettings.Red.letter.recipientDetails.color =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.letter.subject.fontWeight = 600;
+themeSettings.Red.letter.reference.color = themeBaseSettings.Red.colors[0];
+themeSettings.Red.email.document.layout = 1;
+themeSettings.Red.email.document.padding = [48, 56, 48, 56];
+themeSettings.Red.email.name.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.email.name.fontSize = 36;
+themeSettings.Red.email.name.isUppercase = true;
+themeSettings.Red.email.name.textAlign = "center";
+themeSettings.Red.email.name.lineHeight = 1;
+themeSettings.Red.email.name.padding = [10, 16, 0, 16];
+themeSettings.Red.email.name.border[0] = 4;
+themeSettings.Red.email.name.borderColor = themeBaseSettings.Red.colors[0];
+themeSettings.Red.email.title.font = themeBaseSettings.Red.displayFont;
+themeSettings.Red.email.title.fontSize = 24;
+themeSettings.Red.email.title.textAlign = "center";
+themeSettings.Red.email.title.padding = [0, 16, 10, 16];
+themeSettings.Red.email.title.border[2] = 4;
+themeSettings.Red.email.title.borderColor = themeBaseSettings.Red.colors[0];
+themeSettings.Red.email.contactDetails.margin[3] = 30;
+themeSettings.Red.email.contactDetails.border[3] = 1;
+themeSettings.Red.email.contactDetails.borderColor =
+  themeBaseSettings.Red.colors[0];
+themeSettings.Red.email.contactDetails.padding[3] = 10;
+themeSettings.Red.email.contactDetails.fontSize = 11;
+themeSettings.Red.email.contactDetails.isItalic = true;
+themeSettings.Red.email.contactDetails.color = themeBaseSettings.Red.colors[0];
+themeSettings.Red.email.contactDetails.iconColor =
+  themeBaseSettings.Red.colors[0];
 
 // Shelf
-templateSettings.Shelf.resume.header.layout = 2;
-templateSettings.Shelf.resume.name.font =
-  templateSettings.Shelf.base.displayFont;
-templateSettings.Shelf.resume.name.fontSize = 40;
-templateSettings.Shelf.resume.name.fontWeight = 900;
-templateSettings.Shelf.resume.name.lineHeight = 1.1;
-templateSettings.Shelf.resume.title.fontSize = 22;
-templateSettings.Shelf.resume.title.fontWeight = 300;
-templateSettings.Shelf.resume.title.letterSpacing = 2;
-templateSettings.Shelf.resume.about.fontSize = 12;
-templateSettings.Shelf.resume.contactDetails.fontSize = 12;
-templateSettings.Shelf.resume.category.margin[0] = 16;
-templateSettings.Shelf.resume.categoryName.fontWeight = 300;
-templateSettings.Shelf.resume.categoryName.letterSpacing = 2;
-templateSettings.Shelf.resume.categoryName.margin[2] = 22;
-templateSettings.Shelf.resume.entry.layout = 13;
+themeSettings.Shelf.resume.header.layout = 2;
+themeSettings.Shelf.resume.name.font = themeSettings.Shelf.base.displayFont;
+themeSettings.Shelf.resume.name.fontSize = 40;
+themeSettings.Shelf.resume.name.fontWeight = 900;
+themeSettings.Shelf.resume.name.lineHeight = 1.1;
+themeSettings.Shelf.resume.title.fontSize = 22;
+themeSettings.Shelf.resume.title.fontWeight = 300;
+themeSettings.Shelf.resume.title.letterSpacing = 2;
+themeSettings.Shelf.resume.about.fontSize = 12;
+themeSettings.Shelf.resume.contactDetails.fontSize = 12;
+themeSettings.Shelf.resume.category.margin[0] = 16;
+themeSettings.Shelf.resume.categoryName.fontWeight = 300;
+themeSettings.Shelf.resume.categoryName.letterSpacing = 2;
+themeSettings.Shelf.resume.categoryName.margin[2] = 22;
+themeSettings.Shelf.resume.entry.layout = 13;
 // TODO align title, period, location center or right when the concept of "entryHeader" exists? It could improuve legibility
-templateSettings.Shelf.resume.entryPeriod.order = 1;
-templateSettings.Shelf.resume.entryPeriod.fontSize = 12;
-templateSettings.Shelf.resume.entryTitle.order = 2;
-templateSettings.Shelf.resume.entryTitle.fontWeight = 700;
-templateSettings.Shelf.resume.entryOrganization.fontSize = 12;
-templateSettings.Shelf.resume.entryLocation.fontSize = 12;
-templateSettings.Shelf.resume.entrySummary.lineHeight = 1.1;
-templateSettings.Shelf.resume.entryHighlight.margin[0] = 8;
-templateSettings.Shelf.resume.entryHighlight.fontSize = 12;
-templateSettings.Shelf.resume.entryTag.margin[0] = 8;
-templateSettings.Shelf.letter.header.layout = 2;
-templateSettings.Shelf.letter.name.font =
-  templateSettings.Shelf.base.displayFont;
-templateSettings.Shelf.letter.name.fontSize = 40;
-templateSettings.Shelf.letter.name.fontWeight = 900;
-templateSettings.Shelf.letter.name.lineHeight = 1.1;
-templateSettings.Shelf.letter.title.fontSize = 22;
-templateSettings.Shelf.letter.title.fontWeight = 300;
-templateSettings.Shelf.letter.title.letterSpacing = 2;
-templateSettings.Shelf.letter.about.fontSize = 12;
-templateSettings.Shelf.letter.contactDetails.fontSize = 12;
-templateSettings.Shelf.email.document.layout = 2;
-templateSettings.Shelf.email.name.font =
-  templateSettings.Shelf.base.displayFont;
-templateSettings.Shelf.email.name.fontSize = 40;
-templateSettings.Shelf.email.name.fontWeight = 900;
-templateSettings.Shelf.email.name.lineHeight = 1.1;
-templateSettings.Shelf.email.title.fontSize = 22;
-templateSettings.Shelf.email.title.fontWeight = 300;
-templateSettings.Shelf.email.title.letterSpacing = 2;
-templateSettings.Shelf.email.about.fontSize = 12;
-templateSettings.Shelf.email.contactDetails.fontSize = 12;
+themeSettings.Shelf.resume.entryPeriod.order = 1;
+themeSettings.Shelf.resume.entryPeriod.fontSize = 12;
+themeSettings.Shelf.resume.entryTitle.order = 2;
+themeSettings.Shelf.resume.entryTitle.fontWeight = 700;
+themeSettings.Shelf.resume.entryOrganization.fontSize = 12;
+themeSettings.Shelf.resume.entryLocation.fontSize = 12;
+themeSettings.Shelf.resume.entrySummary.lineHeight = 1.1;
+themeSettings.Shelf.resume.entryHighlight.margin[0] = 8;
+themeSettings.Shelf.resume.entryHighlight.fontSize = 12;
+themeSettings.Shelf.resume.entryTag.margin[0] = 8;
+themeSettings.Shelf.letter.header.layout = 2;
+themeSettings.Shelf.letter.name.font = themeSettings.Shelf.base.displayFont;
+themeSettings.Shelf.letter.name.fontSize = 40;
+themeSettings.Shelf.letter.name.fontWeight = 900;
+themeSettings.Shelf.letter.name.lineHeight = 1.1;
+themeSettings.Shelf.letter.title.fontSize = 22;
+themeSettings.Shelf.letter.title.fontWeight = 300;
+themeSettings.Shelf.letter.title.letterSpacing = 2;
+themeSettings.Shelf.letter.about.fontSize = 12;
+themeSettings.Shelf.letter.contactDetails.fontSize = 12;
+themeSettings.Shelf.email.document.layout = 2;
+themeSettings.Shelf.email.name.font = themeSettings.Shelf.base.displayFont;
+themeSettings.Shelf.email.name.fontSize = 40;
+themeSettings.Shelf.email.name.fontWeight = 900;
+themeSettings.Shelf.email.name.lineHeight = 1.1;
+themeSettings.Shelf.email.title.fontSize = 22;
+themeSettings.Shelf.email.title.fontWeight = 300;
+themeSettings.Shelf.email.title.letterSpacing = 2;
+themeSettings.Shelf.email.about.fontSize = 12;
+themeSettings.Shelf.email.contactDetails.fontSize = 12;
 
 // StackOverflow
-templateSettings.StackOverflow.resume.name.fontSize = 36;
-templateSettings.StackOverflow.resume.name.fontWeight = 100;
-templateSettings.StackOverflow.resume.name.lineHeight = 1.2;
-templateSettings.StackOverflow.resume.title.fontSize = 22;
-templateSettings.StackOverflow.resume.title.fontWeight = 300;
-templateSettings.StackOverflow.resume.title.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.resume.contactDetails.listOrientation = "row";
-templateSettings.StackOverflow.resume.contactDetails.gap = 18;
-templateSettings.StackOverflow.resume.contactDetails.color =
-  templateSettings.StackOverflow.base.colors[5];
-templateSettings.StackOverflow.resume.contactDetails.iconColor =
-  templateSettings.StackOverflow.base.colors[6];
-templateSettings.StackOverflow.resume.about.margin[0] = 20;
-templateSettings.StackOverflow.resume.aside.margin[0] = 10;
-templateSettings.StackOverflow.resume.aside.margin[1] = 10;
-templateSettings.StackOverflow.resume.body.margin[0] = 10;
-templateSettings.StackOverflow.resume.category.margin[0] = 10;
-templateSettings.StackOverflow.resume.categoryName.isUppercase = true;
-templateSettings.StackOverflow.resume.categoryName.fontSize = 12;
-templateSettings.StackOverflow.resume.categoryName.fontWeight = 600;
-templateSettings.StackOverflow.resume.categoryName.color =
-  templateSettings.StackOverflow.base.colors[1];
-templateSettings.StackOverflow.resume.categoryName.width = "fit";
-templateSettings.StackOverflow.resume.categoryName.padding = [0, 12, 6, 0];
-templateSettings.StackOverflow.resume.categoryNameSeparator.position = "right";
-templateSettings.StackOverflow.resume.categoryNameSeparator.margin[2] = 8;
-templateSettings.StackOverflow.resume.categoryNameSeparator.width = 100;
-templateSettings.StackOverflow.resume.categoryNameSeparator.height = 1;
-templateSettings.StackOverflow.resume.categoryNameSeparator.backgroundColor =
-  templateSettings.StackOverflow.base.colors[6];
-templateSettings.StackOverflow.resume.entry.layout = 9;
-templateSettings.StackOverflow.resume.entryTitle.fontWeight = 600;
-templateSettings.StackOverflow.resume.entryOrganization.order = 2;
-templateSettings.StackOverflow.resume.entryOrganization.beforeSeparator = "|";
-templateSettings.StackOverflow.resume.entryOrganization.fontSize = 12;
-templateSettings.StackOverflow.resume.entryOrganization.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.resume.entryLocation.order = 3;
-templateSettings.StackOverflow.resume.entryLocation.beforeSeparator = ",";
-templateSettings.StackOverflow.resume.entryLocation.fontSize = 12;
-templateSettings.StackOverflow.resume.entryLocation.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.resume.entryPeriod.order = 4;
-templateSettings.StackOverflow.resume.entryPeriod.fontWeight = 600;
-templateSettings.StackOverflow.resume.entrySummary.fontSize = 12;
-templateSettings.StackOverflow.resume.entryHighlight.fontSize = 12;
-templateSettings.StackOverflow.resume.entryTag.gap = 2;
-templateSettings.StackOverflow.resume.entryTag.padding = [4, 5, 4, 5];
-templateSettings.StackOverflow.resume.entryTag.backgroundColor =
-  templateSettings.StackOverflow.base.colors[6];
-templateSettings.StackOverflow.resume.entryTag.color =
-  templateSettings.StackOverflow.base.colors[5];
-templateSettings.StackOverflow.resume.entryTag.fontSize = 12;
-templateSettings.StackOverflow.resume.entryTag.borderRadius = 0;
-templateSettings.StackOverflow.letter.name.fontSize = 36;
-templateSettings.StackOverflow.letter.name.fontWeight = 100;
-templateSettings.StackOverflow.letter.name.lineHeight = 1.2;
-templateSettings.StackOverflow.letter.title.fontSize = 22;
-templateSettings.StackOverflow.letter.title.fontWeight = 300;
-templateSettings.StackOverflow.letter.title.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.letter.contactDetails.listOrientation = "row";
-templateSettings.StackOverflow.letter.contactDetails.gap = 18;
-templateSettings.StackOverflow.letter.contactDetails.color =
-  templateSettings.StackOverflow.base.colors[5];
-templateSettings.StackOverflow.letter.contactDetails.iconColor =
-  templateSettings.StackOverflow.base.colors[6];
-templateSettings.StackOverflow.letter.senderDetails.fontSize = 12;
-templateSettings.StackOverflow.letter.senderDetails.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.letter.recipientDetails.fontSize = 12;
-templateSettings.StackOverflow.letter.recipientDetails.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.letter.subject.fontWeight = 600;
-templateSettings.StackOverflow.letter.reference.padding = [4, 5, 4, 5];
-templateSettings.StackOverflow.letter.reference.backgroundColor =
-  templateSettings.StackOverflow.base.colors[6];
-templateSettings.StackOverflow.letter.reference.color =
-  templateSettings.StackOverflow.base.colors[5];
-templateSettings.StackOverflow.letter.reference.fontSize = 12;
-templateSettings.StackOverflow.letter.body.isJustified = false;
-templateSettings.StackOverflow.email.name.fontSize = 36;
-templateSettings.StackOverflow.email.name.fontWeight = 100;
-templateSettings.StackOverflow.email.name.lineHeight = 1.2;
-templateSettings.StackOverflow.email.title.fontSize = 22;
-templateSettings.StackOverflow.email.title.fontWeight = 300;
-templateSettings.StackOverflow.email.title.color =
-  templateSettings.StackOverflow.base.colors[3];
-templateSettings.StackOverflow.email.contactDetails.listOrientation = "row";
-templateSettings.StackOverflow.email.contactDetails.gap = 18;
-templateSettings.StackOverflow.email.contactDetails.color =
-  templateSettings.StackOverflow.base.colors[5];
-templateSettings.StackOverflow.email.contactDetails.iconColor =
-  templateSettings.StackOverflow.base.colors[6];
-templateSettings.StackOverflow.email.about.margin[0] = 20;
+themeSettings.StackOverflow.resume.name.fontSize = 36;
+themeSettings.StackOverflow.resume.name.fontWeight = 100;
+themeSettings.StackOverflow.resume.name.lineHeight = 1.2;
+themeSettings.StackOverflow.resume.title.fontSize = 22;
+themeSettings.StackOverflow.resume.title.fontWeight = 300;
+themeSettings.StackOverflow.resume.title.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.resume.contactDetails.listOrientation = "row";
+themeSettings.StackOverflow.resume.contactDetails.gap = 18;
+themeSettings.StackOverflow.resume.contactDetails.color =
+  themeSettings.StackOverflow.base.colors[5];
+themeSettings.StackOverflow.resume.contactDetails.iconColor =
+  themeSettings.StackOverflow.base.colors[6];
+themeSettings.StackOverflow.resume.about.margin[0] = 20;
+themeSettings.StackOverflow.resume.aside.margin[0] = 10;
+themeSettings.StackOverflow.resume.aside.margin[1] = 10;
+themeSettings.StackOverflow.resume.body.margin[0] = 10;
+themeSettings.StackOverflow.resume.category.margin[0] = 10;
+themeSettings.StackOverflow.resume.categoryName.isUppercase = true;
+themeSettings.StackOverflow.resume.categoryName.fontSize = 12;
+themeSettings.StackOverflow.resume.categoryName.fontWeight = 600;
+themeSettings.StackOverflow.resume.categoryName.color =
+  themeSettings.StackOverflow.base.colors[1];
+themeSettings.StackOverflow.resume.categoryName.width = "fit";
+themeSettings.StackOverflow.resume.categoryName.padding = [0, 12, 6, 0];
+themeSettings.StackOverflow.resume.categoryNameSeparator.position = "right";
+themeSettings.StackOverflow.resume.categoryNameSeparator.margin[2] = 8;
+themeSettings.StackOverflow.resume.categoryNameSeparator.width = 100;
+themeSettings.StackOverflow.resume.categoryNameSeparator.height = 1;
+themeSettings.StackOverflow.resume.categoryNameSeparator.backgroundColor =
+  themeSettings.StackOverflow.base.colors[6];
+themeSettings.StackOverflow.resume.entry.layout = 9;
+themeSettings.StackOverflow.resume.entryTitle.fontWeight = 600;
+themeSettings.StackOverflow.resume.entryOrganization.order = 2;
+themeSettings.StackOverflow.resume.entryOrganization.beforeSeparator = "|";
+themeSettings.StackOverflow.resume.entryOrganization.fontSize = 12;
+themeSettings.StackOverflow.resume.entryOrganization.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.resume.entryLocation.order = 3;
+themeSettings.StackOverflow.resume.entryLocation.beforeSeparator = ",";
+themeSettings.StackOverflow.resume.entryLocation.fontSize = 12;
+themeSettings.StackOverflow.resume.entryLocation.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.resume.entryPeriod.order = 4;
+themeSettings.StackOverflow.resume.entryPeriod.fontWeight = 600;
+themeSettings.StackOverflow.resume.entrySummary.fontSize = 12;
+themeSettings.StackOverflow.resume.entryHighlight.fontSize = 12;
+themeSettings.StackOverflow.resume.entryTag.gap = 2;
+themeSettings.StackOverflow.resume.entryTag.padding = [4, 5, 4, 5];
+themeSettings.StackOverflow.resume.entryTag.backgroundColor =
+  themeSettings.StackOverflow.base.colors[6];
+themeSettings.StackOverflow.resume.entryTag.color =
+  themeSettings.StackOverflow.base.colors[5];
+themeSettings.StackOverflow.resume.entryTag.fontSize = 12;
+themeSettings.StackOverflow.resume.entryTag.borderRadius = 0;
+themeSettings.StackOverflow.letter.name.fontSize = 36;
+themeSettings.StackOverflow.letter.name.fontWeight = 100;
+themeSettings.StackOverflow.letter.name.lineHeight = 1.2;
+themeSettings.StackOverflow.letter.title.fontSize = 22;
+themeSettings.StackOverflow.letter.title.fontWeight = 300;
+themeSettings.StackOverflow.letter.title.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.letter.contactDetails.listOrientation = "row";
+themeSettings.StackOverflow.letter.contactDetails.gap = 18;
+themeSettings.StackOverflow.letter.contactDetails.color =
+  themeSettings.StackOverflow.base.colors[5];
+themeSettings.StackOverflow.letter.contactDetails.iconColor =
+  themeSettings.StackOverflow.base.colors[6];
+themeSettings.StackOverflow.letter.senderDetails.fontSize = 12;
+themeSettings.StackOverflow.letter.senderDetails.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.letter.recipientDetails.fontSize = 12;
+themeSettings.StackOverflow.letter.recipientDetails.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.letter.subject.fontWeight = 600;
+themeSettings.StackOverflow.letter.reference.padding = [4, 5, 4, 5];
+themeSettings.StackOverflow.letter.reference.backgroundColor =
+  themeSettings.StackOverflow.base.colors[6];
+themeSettings.StackOverflow.letter.reference.color =
+  themeSettings.StackOverflow.base.colors[5];
+themeSettings.StackOverflow.letter.reference.fontSize = 12;
+themeSettings.StackOverflow.letter.body.isJustified = false;
+themeSettings.StackOverflow.email.name.fontSize = 36;
+themeSettings.StackOverflow.email.name.fontWeight = 100;
+themeSettings.StackOverflow.email.name.lineHeight = 1.2;
+themeSettings.StackOverflow.email.title.fontSize = 22;
+themeSettings.StackOverflow.email.title.fontWeight = 300;
+themeSettings.StackOverflow.email.title.color =
+  themeSettings.StackOverflow.base.colors[3];
+themeSettings.StackOverflow.email.contactDetails.listOrientation = "row";
+themeSettings.StackOverflow.email.contactDetails.gap = 18;
+themeSettings.StackOverflow.email.contactDetails.color =
+  themeSettings.StackOverflow.base.colors[5];
+themeSettings.StackOverflow.email.contactDetails.iconColor =
+  themeSettings.StackOverflow.base.colors[6];
+themeSettings.StackOverflow.email.about.margin[0] = 20;
 
 // Stone
-templateSettings.Stone.resume.header.layout = 0;
-templateSettings.Stone.resume.name.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.resume.name.textAlign = "center";
-templateSettings.Stone.resume.name.fontSize = 36;
-templateSettings.Stone.resume.name.margin[2] = 2;
-templateSettings.Stone.resume.title.textAlign = "center";
-templateSettings.Stone.resume.title.fontSize = 20;
-templateSettings.Stone.resume.title.margin[2] = 2;
-templateSettings.Stone.resume.contactDetails.fontSize = 12;
-templateSettings.Stone.resume.contactDetails.listOrientation = "row";
-templateSettings.Stone.resume.contactDetails.alignment = "center";
-templateSettings.Stone.resume.contactDetails.gap = 30;
-templateSettings.Stone.resume.contactDetails.padding = [2, 20, 20, 20];
-templateSettings.Stone.resume.about.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.resume.about.textAlign = "center";
-templateSettings.Stone.resume.about.fontSize = 12;
-templateSettings.Stone.resume.about.padding = [25, 0, 25, 0];
-templateSettings.Stone.resume.about.border[0] = 1;
-templateSettings.Stone.resume.about.borderColor =
-  templateBaseSettings.Stone.colors[2];
-templateSettings.Stone.resume.aside.width = 25;
-templateSettings.Stone.resume.aside.margin[1] = 25;
-templateSettings.Stone.resume.category.padding = [25, 0, 25, 0];
-templateSettings.Stone.resume.category.border[0] = 1;
-templateSettings.Stone.resume.category.borderColor =
-  templateBaseSettings.Stone.colors[2];
-templateSettings.Stone.resume.categoryName.isUppercase = true;
-templateSettings.Stone.resume.categoryName.color =
-  templateBaseSettings.Stone.colors[0];
-templateSettings.Stone.resume.categoryName.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.resume.categoryName.fontSize = 20;
-templateSettings.Stone.resume.categoryName.fontWeight = 700;
-templateSettings.Stone.resume.categoryName.margin[2] = 20;
-templateSettings.Stone.resume.entry.layout = 10;
-templateSettings.Stone.resume.entryTitle.isUppercase = true;
-templateSettings.Stone.resume.entryTitle.lineHeight = 1;
-templateSettings.Stone.resume.entryTitle.fontSize = 13;
-templateSettings.Stone.resume.entryOrganization.order = 2;
-templateSettings.Stone.resume.entryOrganization.fontSize = 12;
-templateSettings.Stone.resume.entryOrganization.color =
-  templateBaseSettings.Stone.colors[1];
-templateSettings.Stone.resume.entryLocation.order = 3;
-templateSettings.Stone.resume.entryLocation.beforeSeparator = "|";
-templateSettings.Stone.resume.entryLocation.fontSize = 12;
-templateSettings.Stone.resume.entryLocation.color =
-  templateBaseSettings.Stone.colors[1];
-templateSettings.Stone.resume.entryPeriod.order = 4;
-templateSettings.Stone.resume.entryPeriod.beforeSeparator = "|";
-templateSettings.Stone.resume.entryPeriod.fontSize = 12;
-templateSettings.Stone.resume.entryPeriod.color =
-  templateBaseSettings.Stone.colors[1];
-templateSettings.Stone.resume.entryTag.backgroundColor =
-  templateBaseSettings.Stone.colors[2];
-templateSettings.Stone.resume.entryTag.padding = [2, 10, 2, 10];
-templateSettings.Stone.resume.entryTag.borderRadius = 0;
-templateSettings.Stone.resume.entryTag.fontSize = 12;
-templateSettings.Stone.letter.document.padding = [48, 48, 48, 48];
-templateSettings.Stone.letter.header.layout = 0;
-templateSettings.Stone.letter.name.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.letter.name.fontSize = 24;
-templateSettings.Stone.letter.title.fontSize = 16;
-templateSettings.Stone.letter.contactDetails.fontSize = 12;
-templateSettings.Stone.letter.contactDetails.listOrientation = "row";
-templateSettings.Stone.letter.contactDetails.alignment = "center";
-templateSettings.Stone.letter.contactDetails.gap = 24;
-templateSettings.Stone.letter.contactDetails.padding = [10, 0, 10, 0];
-templateSettings.Stone.letter.about.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.letter.about.fontSize = 12;
-templateSettings.Stone.letter.senderDetails.color =
-  templateBaseSettings.Stone.colors[1];
-templateSettings.Stone.letter.recipientDetails.color =
-  templateBaseSettings.Stone.colors[1];
-templateSettings.Stone.letter.recipientDetails.borderColor =
-  templateBaseSettings.Stone.colors[2];
-templateSettings.Stone.letter.recipientDetails.border = [1, 1, 1, 1];
-templateSettings.Stone.letter.recipientDetails.padding = [6, 10, 6, 10];
-templateSettings.Stone.letter.subject.textAlign = "left";
-templateSettings.Stone.letter.subject.isUppercase = true;
-templateSettings.Stone.letter.subject.fontSize = 20;
-templateSettings.Stone.letter.subject.fontWeight = 600;
-templateSettings.Stone.letter.subject.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.letter.reference.margin[0] = 10;
-templateSettings.Stone.letter.reference.textAlign = "left";
-templateSettings.Stone.letter.reference.color =
-  templateBaseSettings.Stone.colors[1];
-templateSettings.Stone.letter.body.margin[0] = 40;
-templateSettings.Stone.letter.body.indentation = 0;
-templateSettings.Stone.letter.body.isSignatureRightAligned = false;
-templateSettings.Stone.email.name.font = templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.email.name.fontSize = 36;
-templateSettings.Stone.email.name.margin[2] = 2;
-templateSettings.Stone.email.title.fontSize = 20;
-templateSettings.Stone.email.title.margin[2] = 2;
-templateSettings.Stone.email.contactDetails.fontSize = 12;
-templateSettings.Stone.email.contactDetails.listOrientation = "row";
-templateSettings.Stone.email.contactDetails.alignment = "center";
-templateSettings.Stone.email.contactDetails.gap = 30;
-templateSettings.Stone.email.contactDetails.padding = [2, 20, 20, 20];
-templateSettings.Stone.email.about.font =
-  templateBaseSettings.Stone.displayFont;
-templateSettings.Stone.email.about.textAlign = "center";
-templateSettings.Stone.email.about.fontSize = 12;
-templateSettings.Stone.email.about.padding = [25, 0, 25, 0];
-templateSettings.Stone.email.about.border[0] = 1;
-templateSettings.Stone.email.about.borderColor =
-  templateBaseSettings.Stone.colors[2];
+themeSettings.Stone.resume.header.layout = 0;
+themeSettings.Stone.resume.name.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.resume.name.textAlign = "center";
+themeSettings.Stone.resume.name.fontSize = 36;
+themeSettings.Stone.resume.name.margin[2] = 2;
+themeSettings.Stone.resume.title.textAlign = "center";
+themeSettings.Stone.resume.title.fontSize = 20;
+themeSettings.Stone.resume.title.margin[2] = 2;
+themeSettings.Stone.resume.contactDetails.fontSize = 12;
+themeSettings.Stone.resume.contactDetails.listOrientation = "row";
+themeSettings.Stone.resume.contactDetails.alignment = "center";
+themeSettings.Stone.resume.contactDetails.gap = 30;
+themeSettings.Stone.resume.contactDetails.padding = [2, 20, 20, 20];
+themeSettings.Stone.resume.about.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.resume.about.textAlign = "center";
+themeSettings.Stone.resume.about.fontSize = 12;
+themeSettings.Stone.resume.about.padding = [25, 0, 25, 0];
+themeSettings.Stone.resume.about.border[0] = 1;
+themeSettings.Stone.resume.about.borderColor =
+  themeBaseSettings.Stone.colors[2];
+themeSettings.Stone.resume.aside.width = 25;
+themeSettings.Stone.resume.aside.margin[1] = 25;
+themeSettings.Stone.resume.category.padding = [25, 0, 25, 0];
+themeSettings.Stone.resume.category.border[0] = 1;
+themeSettings.Stone.resume.category.borderColor =
+  themeBaseSettings.Stone.colors[2];
+themeSettings.Stone.resume.categoryName.isUppercase = true;
+themeSettings.Stone.resume.categoryName.color =
+  themeBaseSettings.Stone.colors[0];
+themeSettings.Stone.resume.categoryName.font =
+  themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.resume.categoryName.fontSize = 20;
+themeSettings.Stone.resume.categoryName.fontWeight = 700;
+themeSettings.Stone.resume.categoryName.margin[2] = 20;
+themeSettings.Stone.resume.entry.layout = 10;
+themeSettings.Stone.resume.entryTitle.isUppercase = true;
+themeSettings.Stone.resume.entryTitle.lineHeight = 1;
+themeSettings.Stone.resume.entryTitle.fontSize = 13;
+themeSettings.Stone.resume.entryOrganization.order = 2;
+themeSettings.Stone.resume.entryOrganization.fontSize = 12;
+themeSettings.Stone.resume.entryOrganization.color =
+  themeBaseSettings.Stone.colors[1];
+themeSettings.Stone.resume.entryLocation.order = 3;
+themeSettings.Stone.resume.entryLocation.beforeSeparator = "|";
+themeSettings.Stone.resume.entryLocation.fontSize = 12;
+themeSettings.Stone.resume.entryLocation.color =
+  themeBaseSettings.Stone.colors[1];
+themeSettings.Stone.resume.entryPeriod.order = 4;
+themeSettings.Stone.resume.entryPeriod.beforeSeparator = "|";
+themeSettings.Stone.resume.entryPeriod.fontSize = 12;
+themeSettings.Stone.resume.entryPeriod.color =
+  themeBaseSettings.Stone.colors[1];
+themeSettings.Stone.resume.entryTag.backgroundColor =
+  themeBaseSettings.Stone.colors[2];
+themeSettings.Stone.resume.entryTag.padding = [2, 10, 2, 10];
+themeSettings.Stone.resume.entryTag.borderRadius = 0;
+themeSettings.Stone.resume.entryTag.fontSize = 12;
+themeSettings.Stone.letter.document.padding = [48, 48, 48, 48];
+themeSettings.Stone.letter.header.layout = 0;
+themeSettings.Stone.letter.name.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.letter.name.fontSize = 24;
+themeSettings.Stone.letter.title.fontSize = 16;
+themeSettings.Stone.letter.contactDetails.fontSize = 12;
+themeSettings.Stone.letter.contactDetails.listOrientation = "row";
+themeSettings.Stone.letter.contactDetails.alignment = "center";
+themeSettings.Stone.letter.contactDetails.gap = 24;
+themeSettings.Stone.letter.contactDetails.padding = [10, 0, 10, 0];
+themeSettings.Stone.letter.about.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.letter.about.fontSize = 12;
+themeSettings.Stone.letter.senderDetails.color =
+  themeBaseSettings.Stone.colors[1];
+themeSettings.Stone.letter.recipientDetails.color =
+  themeBaseSettings.Stone.colors[1];
+themeSettings.Stone.letter.recipientDetails.borderColor =
+  themeBaseSettings.Stone.colors[2];
+themeSettings.Stone.letter.recipientDetails.border = [1, 1, 1, 1];
+themeSettings.Stone.letter.recipientDetails.padding = [6, 10, 6, 10];
+themeSettings.Stone.letter.subject.textAlign = "left";
+themeSettings.Stone.letter.subject.isUppercase = true;
+themeSettings.Stone.letter.subject.fontSize = 20;
+themeSettings.Stone.letter.subject.fontWeight = 600;
+themeSettings.Stone.letter.subject.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.letter.reference.margin[0] = 10;
+themeSettings.Stone.letter.reference.textAlign = "left";
+themeSettings.Stone.letter.reference.color = themeBaseSettings.Stone.colors[1];
+themeSettings.Stone.letter.body.margin[0] = 40;
+themeSettings.Stone.letter.body.indentation = 0;
+themeSettings.Stone.letter.body.isSignatureRightAligned = false;
+themeSettings.Stone.email.name.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.email.name.fontSize = 36;
+themeSettings.Stone.email.name.margin[2] = 2;
+themeSettings.Stone.email.title.fontSize = 20;
+themeSettings.Stone.email.title.margin[2] = 2;
+themeSettings.Stone.email.contactDetails.fontSize = 12;
+themeSettings.Stone.email.contactDetails.listOrientation = "row";
+themeSettings.Stone.email.contactDetails.alignment = "center";
+themeSettings.Stone.email.contactDetails.gap = 30;
+themeSettings.Stone.email.contactDetails.padding = [2, 20, 20, 20];
+themeSettings.Stone.email.about.font = themeBaseSettings.Stone.displayFont;
+themeSettings.Stone.email.about.textAlign = "center";
+themeSettings.Stone.email.about.fontSize = 12;
+themeSettings.Stone.email.about.padding = [25, 0, 25, 0];
+themeSettings.Stone.email.about.border[0] = 1;
+themeSettings.Stone.email.about.borderColor = themeBaseSettings.Stone.colors[2];
 
 // Toothpaste
-templateSettings.Toothpaste.resume.document.padding = [0, 0, 0, 0];
-templateSettings.Toothpaste.resume.header.layout = 1;
-templateSettings.Toothpaste.resume.header.padding = [24, 40, 24, 40];
-templateSettings.Toothpaste.resume.name.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.resume.name.fontSize = 36;
-templateSettings.Toothpaste.resume.name.isUppercase = true;
-templateSettings.Toothpaste.resume.name.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.resume.title.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.resume.title.fontSize = 24;
-templateSettings.Toothpaste.resume.title.isUppercase = true;
-templateSettings.Toothpaste.resume.title.color =
-  templateBaseSettings.Toothpaste.colors[1];
-templateSettings.Toothpaste.resume.contactDetails.margin[1] = 80;
-templateSettings.Toothpaste.resume.contactDetails.margin[3] = 60;
-templateSettings.Toothpaste.resume.contactDetails.fontSize = 12;
-templateSettings.Toothpaste.resume.about.textAlign = "center";
-templateSettings.Toothpaste.resume.about.fontSize = 12;
-templateSettings.Toothpaste.resume.aside.border[1] = 2;
-templateSettings.Toothpaste.resume.aside.borderColor =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.resume.category.gap = 0;
-templateSettings.Toothpaste.resume.category.padding = [24, 40, 24, 40];
-templateSettings.Toothpaste.resume.category.border[0] = 2;
-templateSettings.Toothpaste.resume.category.borderColor =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.resume.categoryName.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.resume.categoryName.fontSize = 24;
-templateSettings.Toothpaste.resume.categoryName.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.resume.categoryName.isUppercase = true;
-templateSettings.Toothpaste.resume.entry.layout = 1;
-templateSettings.Toothpaste.resume.entryTitle.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.resume.entryTitle.fontSize = 21;
-templateSettings.Toothpaste.resume.entryTitle.color =
-  templateBaseSettings.Toothpaste.colors[1];
-templateSettings.Toothpaste.resume.entryOrganization.order = 2;
-templateSettings.Toothpaste.resume.entryPeriod.order = 3;
-templateSettings.Toothpaste.resume.entryPeriod.beforeSeparator = "·";
-templateSettings.Toothpaste.resume.entryLocation.order = 4;
-templateSettings.Toothpaste.resume.entryLocation.beforeSeparator = "·";
-templateSettings.Toothpaste.resume.entryHighlight.isItalic = true;
-templateSettings.Toothpaste.resume.entryTag.backgroundColor = "transparent";
-templateSettings.Toothpaste.resume.entryTag.border = [1, 1, 1, 1];
-templateSettings.Toothpaste.resume.entryTag.borderColor =
-  templateBaseSettings.Toothpaste.colors[1];
-templateSettings.Toothpaste.resume.entryTag.gap = 8;
-templateSettings.Toothpaste.letter.header.layout = 1;
-templateSettings.Toothpaste.letter.name.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.letter.name.fontSize = 36;
-templateSettings.Toothpaste.letter.name.isUppercase = true;
-templateSettings.Toothpaste.letter.name.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.letter.title.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.letter.title.fontSize = 24;
-templateSettings.Toothpaste.letter.title.isUppercase = true;
-templateSettings.Toothpaste.letter.title.color =
-  templateBaseSettings.Toothpaste.colors[1];
-templateSettings.Toothpaste.letter.contactDetails.margin[1] = 80;
-templateSettings.Toothpaste.letter.contactDetails.margin[3] = 60;
-templateSettings.Toothpaste.letter.contactDetails.fontSize = 12;
-templateSettings.Toothpaste.letter.about.textAlign = "center";
-templateSettings.Toothpaste.letter.about.fontSize = 12;
-templateSettings.Toothpaste.letter.senderDetails.fontSize = 12;
-templateSettings.Toothpaste.letter.senderDetails.isItalic = true;
-templateSettings.Toothpaste.letter.senderDetails.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.letter.recipientDetails.fontSize = 12;
-templateSettings.Toothpaste.letter.recipientDetails.isItalic = true;
-templateSettings.Toothpaste.letter.recipientDetails.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.letter.subject.fontWeight = 600;
-templateSettings.Toothpaste.letter.reference.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.email.name.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.email.name.fontSize = 36;
-templateSettings.Toothpaste.email.name.isUppercase = true;
-templateSettings.Toothpaste.email.name.color =
-  templateBaseSettings.Toothpaste.colors[0];
-templateSettings.Toothpaste.email.title.font =
-  templateBaseSettings.Toothpaste.displayFont;
-templateSettings.Toothpaste.email.title.fontSize = 24;
-templateSettings.Toothpaste.email.title.isUppercase = true;
-templateSettings.Toothpaste.email.title.color =
-  templateBaseSettings.Toothpaste.colors[1];
-templateSettings.Toothpaste.email.contactDetails.margin[0] = 40;
-templateSettings.Toothpaste.email.contactDetails.fontSize = 12;
+themeSettings.Toothpaste.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Toothpaste.resume.header.layout = 1;
+themeSettings.Toothpaste.resume.header.padding = [24, 40, 24, 40];
+themeSettings.Toothpaste.resume.name.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.resume.name.fontSize = 36;
+themeSettings.Toothpaste.resume.name.isUppercase = true;
+themeSettings.Toothpaste.resume.name.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.resume.title.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.resume.title.fontSize = 24;
+themeSettings.Toothpaste.resume.title.isUppercase = true;
+themeSettings.Toothpaste.resume.title.color =
+  themeBaseSettings.Toothpaste.colors[1];
+themeSettings.Toothpaste.resume.contactDetails.margin[1] = 80;
+themeSettings.Toothpaste.resume.contactDetails.margin[3] = 60;
+themeSettings.Toothpaste.resume.contactDetails.fontSize = 12;
+themeSettings.Toothpaste.resume.about.textAlign = "center";
+themeSettings.Toothpaste.resume.about.fontSize = 12;
+themeSettings.Toothpaste.resume.aside.border[1] = 2;
+themeSettings.Toothpaste.resume.aside.borderColor =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.resume.category.gap = 0;
+themeSettings.Toothpaste.resume.category.padding = [24, 40, 24, 40];
+themeSettings.Toothpaste.resume.category.border[0] = 2;
+themeSettings.Toothpaste.resume.category.borderColor =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.resume.categoryName.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.resume.categoryName.fontSize = 24;
+themeSettings.Toothpaste.resume.categoryName.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.resume.categoryName.isUppercase = true;
+themeSettings.Toothpaste.resume.entry.layout = 1;
+themeSettings.Toothpaste.resume.entryTitle.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.resume.entryTitle.fontSize = 21;
+themeSettings.Toothpaste.resume.entryTitle.color =
+  themeBaseSettings.Toothpaste.colors[1];
+themeSettings.Toothpaste.resume.entryOrganization.order = 2;
+themeSettings.Toothpaste.resume.entryPeriod.order = 3;
+themeSettings.Toothpaste.resume.entryPeriod.beforeSeparator = "·";
+themeSettings.Toothpaste.resume.entryLocation.order = 4;
+themeSettings.Toothpaste.resume.entryLocation.beforeSeparator = "·";
+themeSettings.Toothpaste.resume.entryHighlight.isItalic = true;
+themeSettings.Toothpaste.resume.entryTag.backgroundColor = "transparent";
+themeSettings.Toothpaste.resume.entryTag.border = [1, 1, 1, 1];
+themeSettings.Toothpaste.resume.entryTag.borderColor =
+  themeBaseSettings.Toothpaste.colors[1];
+themeSettings.Toothpaste.resume.entryTag.gap = 8;
+themeSettings.Toothpaste.letter.header.layout = 1;
+themeSettings.Toothpaste.letter.name.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.letter.name.fontSize = 36;
+themeSettings.Toothpaste.letter.name.isUppercase = true;
+themeSettings.Toothpaste.letter.name.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.letter.title.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.letter.title.fontSize = 24;
+themeSettings.Toothpaste.letter.title.isUppercase = true;
+themeSettings.Toothpaste.letter.title.color =
+  themeBaseSettings.Toothpaste.colors[1];
+themeSettings.Toothpaste.letter.contactDetails.margin[1] = 80;
+themeSettings.Toothpaste.letter.contactDetails.margin[3] = 60;
+themeSettings.Toothpaste.letter.contactDetails.fontSize = 12;
+themeSettings.Toothpaste.letter.about.textAlign = "center";
+themeSettings.Toothpaste.letter.about.fontSize = 12;
+themeSettings.Toothpaste.letter.senderDetails.fontSize = 12;
+themeSettings.Toothpaste.letter.senderDetails.isItalic = true;
+themeSettings.Toothpaste.letter.senderDetails.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.letter.recipientDetails.fontSize = 12;
+themeSettings.Toothpaste.letter.recipientDetails.isItalic = true;
+themeSettings.Toothpaste.letter.recipientDetails.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.letter.subject.fontWeight = 600;
+themeSettings.Toothpaste.letter.reference.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.email.name.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.email.name.fontSize = 36;
+themeSettings.Toothpaste.email.name.isUppercase = true;
+themeSettings.Toothpaste.email.name.color =
+  themeBaseSettings.Toothpaste.colors[0];
+themeSettings.Toothpaste.email.title.font =
+  themeBaseSettings.Toothpaste.displayFont;
+themeSettings.Toothpaste.email.title.fontSize = 24;
+themeSettings.Toothpaste.email.title.isUppercase = true;
+themeSettings.Toothpaste.email.title.color =
+  themeBaseSettings.Toothpaste.colors[1];
+themeSettings.Toothpaste.email.contactDetails.margin[0] = 40;
+themeSettings.Toothpaste.email.contactDetails.fontSize = 12;
 
 // Wiki
-templateSettings.Wiki.resume.document.padding = [24, 30, 24, 30];
-templateSettings.Wiki.resume.header.layout = 2;
-templateSettings.Wiki.resume.name.textAlign = "center";
-templateSettings.Wiki.resume.name.fontSize = 30;
-templateSettings.Wiki.resume.name.fontWeight = 700;
-templateSettings.Wiki.resume.title.textAlign = "center";
-templateSettings.Wiki.resume.title.fontSize = 20;
-templateSettings.Wiki.resume.about.textAlign = "center";
-templateSettings.Wiki.resume.about.fontSize = 12;
-templateSettings.Wiki.resume.contactDetails.alignment = "end";
-templateSettings.Wiki.resume.contactDetails.fontSize = 12;
-templateSettings.Wiki.resume.aside.margin[1] = 20;
-templateSettings.Wiki.resume.category.gap = 20;
-templateSettings.Wiki.resume.categoryName.isUppercase = true;
-templateSettings.Wiki.resume.categoryName.color =
-  templateBaseSettings.Wiki.colors[0];
-templateSettings.Wiki.resume.categoryName.margin[2] = 10;
-templateSettings.Wiki.resume.categoryName.border[2] = 1;
-templateSettings.Wiki.resume.categoryName.borderColor =
-  templateBaseSettings.Wiki.colors[1];
-templateSettings.Wiki.resume.entry.layout = 11;
-templateSettings.Wiki.resume.entryTitle.fontWeight = 700;
-templateSettings.Wiki.resume.entryTitle.fontSize = 11;
-templateSettings.Wiki.resume.entryTitle.lineHeight = 1.5;
-templateSettings.Wiki.resume.entryPeriod.fontSize = 11;
-templateSettings.Wiki.resume.entryPeriod.lineHeight = 1.5;
-templateSettings.Wiki.resume.entryOrganization.isItalic = true;
-templateSettings.Wiki.resume.entryOrganization.fontSize = 11;
-templateSettings.Wiki.resume.entryOrganization.lineHeight = 1.5;
-templateSettings.Wiki.resume.entryLocation.isItalic = true;
-templateSettings.Wiki.resume.entryLocation.fontSize = 11;
-templateSettings.Wiki.resume.entryLocation.lineHeight = 1.5;
-templateSettings.Wiki.resume.entrySummary.margin[0] = 4;
-templateSettings.Wiki.resume.entrySummary.fontSize = 11;
-templateSettings.Wiki.resume.entryHighlight.fontSize = 11;
-templateSettings.Wiki.resume.entryTag.color =
-  templateBaseSettings.Wiki.colors[0];
-templateSettings.Wiki.resume.entryTag.borderRadius = 0;
-templateSettings.Wiki.letter.document.padding = [24, 30, 24, 30];
-templateSettings.Wiki.letter.header.layout = 2;
-templateSettings.Wiki.letter.name.textAlign = "center";
-templateSettings.Wiki.letter.name.fontSize = 30;
-templateSettings.Wiki.letter.name.fontWeight = 700;
-templateSettings.Wiki.letter.title.textAlign = "center";
-templateSettings.Wiki.letter.title.fontSize = 20;
-templateSettings.Wiki.letter.about.textAlign = "center";
-templateSettings.Wiki.letter.about.fontSize = 12;
-templateSettings.Wiki.letter.contactDetails.alignment = "end";
-templateSettings.Wiki.letter.contactDetails.fontSize = 12;
-templateSettings.Wiki.letter.senderDetails.fontSize = 12;
-templateSettings.Wiki.letter.senderDetails.lineHeight = 1.2;
-templateSettings.Wiki.letter.recipientDetails.fontSize = 12;
-templateSettings.Wiki.letter.recipientDetails.lineHeight = 1.2;
-templateSettings.Wiki.letter.subject.textAlign = "left";
-templateSettings.Wiki.letter.subject.fontWeight = 700;
-templateSettings.Wiki.letter.subject.fontSize = 16;
-templateSettings.Wiki.letter.subject.lineHeight = 1.5;
-templateSettings.Wiki.letter.reference.textAlign = "left";
-templateSettings.Wiki.letter.reference.isUppercase = true;
-templateSettings.Wiki.letter.reference.color =
-  templateBaseSettings.Wiki.colors[0];
-templateSettings.Wiki.letter.reference.margin[2] = 10;
-templateSettings.Wiki.letter.reference.border[2] = 1;
-templateSettings.Wiki.letter.reference.borderColor =
-  templateBaseSettings.Wiki.colors[1];
-templateSettings.Wiki.letter.body.margin[1] = 20;
-templateSettings.Wiki.letter.body.margin[3] = 20;
-templateSettings.Wiki.letter.body.fontSize = 12;
-templateSettings.Wiki.email.document.padding = [24, 30, 24, 30];
-templateSettings.Wiki.email.name.fontSize = 30;
-templateSettings.Wiki.email.name.fontWeight = 700;
-templateSettings.Wiki.email.title.fontSize = 20;
-templateSettings.Wiki.email.about.fontSize = 12;
-templateSettings.Wiki.email.contactDetails.fontSize = 12;
+themeSettings.Wiki.resume.document.padding = [24, 30, 24, 30];
+themeSettings.Wiki.resume.header.layout = 2;
+themeSettings.Wiki.resume.name.textAlign = "center";
+themeSettings.Wiki.resume.name.fontSize = 30;
+themeSettings.Wiki.resume.name.fontWeight = 700;
+themeSettings.Wiki.resume.title.textAlign = "center";
+themeSettings.Wiki.resume.title.fontSize = 20;
+themeSettings.Wiki.resume.about.textAlign = "center";
+themeSettings.Wiki.resume.about.fontSize = 12;
+themeSettings.Wiki.resume.contactDetails.alignment = "end";
+themeSettings.Wiki.resume.contactDetails.fontSize = 12;
+themeSettings.Wiki.resume.aside.margin[1] = 20;
+themeSettings.Wiki.resume.category.gap = 20;
+themeSettings.Wiki.resume.categoryName.isUppercase = true;
+themeSettings.Wiki.resume.categoryName.color = themeBaseSettings.Wiki.colors[0];
+themeSettings.Wiki.resume.categoryName.margin[2] = 10;
+themeSettings.Wiki.resume.categoryName.border[2] = 1;
+themeSettings.Wiki.resume.categoryName.borderColor =
+  themeBaseSettings.Wiki.colors[1];
+themeSettings.Wiki.resume.entry.layout = 11;
+themeSettings.Wiki.resume.entryTitle.fontWeight = 700;
+themeSettings.Wiki.resume.entryTitle.fontSize = 11;
+themeSettings.Wiki.resume.entryTitle.lineHeight = 1.5;
+themeSettings.Wiki.resume.entryPeriod.fontSize = 11;
+themeSettings.Wiki.resume.entryPeriod.lineHeight = 1.5;
+themeSettings.Wiki.resume.entryOrganization.isItalic = true;
+themeSettings.Wiki.resume.entryOrganization.fontSize = 11;
+themeSettings.Wiki.resume.entryOrganization.lineHeight = 1.5;
+themeSettings.Wiki.resume.entryLocation.isItalic = true;
+themeSettings.Wiki.resume.entryLocation.fontSize = 11;
+themeSettings.Wiki.resume.entryLocation.lineHeight = 1.5;
+themeSettings.Wiki.resume.entrySummary.margin[0] = 4;
+themeSettings.Wiki.resume.entrySummary.fontSize = 11;
+themeSettings.Wiki.resume.entryHighlight.fontSize = 11;
+themeSettings.Wiki.resume.entryTag.color = themeBaseSettings.Wiki.colors[0];
+themeSettings.Wiki.resume.entryTag.borderRadius = 0;
+themeSettings.Wiki.letter.document.padding = [24, 30, 24, 30];
+themeSettings.Wiki.letter.header.layout = 2;
+themeSettings.Wiki.letter.name.textAlign = "center";
+themeSettings.Wiki.letter.name.fontSize = 30;
+themeSettings.Wiki.letter.name.fontWeight = 700;
+themeSettings.Wiki.letter.title.textAlign = "center";
+themeSettings.Wiki.letter.title.fontSize = 20;
+themeSettings.Wiki.letter.about.textAlign = "center";
+themeSettings.Wiki.letter.about.fontSize = 12;
+themeSettings.Wiki.letter.contactDetails.alignment = "end";
+themeSettings.Wiki.letter.contactDetails.fontSize = 12;
+themeSettings.Wiki.letter.senderDetails.fontSize = 12;
+themeSettings.Wiki.letter.senderDetails.lineHeight = 1.2;
+themeSettings.Wiki.letter.recipientDetails.fontSize = 12;
+themeSettings.Wiki.letter.recipientDetails.lineHeight = 1.2;
+themeSettings.Wiki.letter.subject.textAlign = "left";
+themeSettings.Wiki.letter.subject.fontWeight = 700;
+themeSettings.Wiki.letter.subject.fontSize = 16;
+themeSettings.Wiki.letter.subject.lineHeight = 1.5;
+themeSettings.Wiki.letter.reference.textAlign = "left";
+themeSettings.Wiki.letter.reference.isUppercase = true;
+themeSettings.Wiki.letter.reference.color = themeBaseSettings.Wiki.colors[0];
+themeSettings.Wiki.letter.reference.margin[2] = 10;
+themeSettings.Wiki.letter.reference.border[2] = 1;
+themeSettings.Wiki.letter.reference.borderColor =
+  themeBaseSettings.Wiki.colors[1];
+themeSettings.Wiki.letter.body.margin[1] = 20;
+themeSettings.Wiki.letter.body.margin[3] = 20;
+themeSettings.Wiki.letter.body.fontSize = 12;
+themeSettings.Wiki.email.document.padding = [24, 30, 24, 30];
+themeSettings.Wiki.email.name.fontSize = 30;
+themeSettings.Wiki.email.name.fontWeight = 700;
+themeSettings.Wiki.email.title.fontSize = 20;
+themeSettings.Wiki.email.about.fontSize = 12;
+themeSettings.Wiki.email.contactDetails.fontSize = 12;
 
 export const contactIcons: Array<ContactDetail["icon"]> = [
   "address",
