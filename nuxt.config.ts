@@ -63,7 +63,7 @@ export default defineNuxtConfig({
   site: {
     url: "https://nice-resume.piksail.com/",
     name: "Nice Resume",
-    description: "CV/Resume template for developers",
+    description: "Resume builder for job applications",
     indexable: false,
   },
   seo: {
