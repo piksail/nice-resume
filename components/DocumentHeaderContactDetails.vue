@@ -17,8 +17,6 @@ const { contactDetails } = defineProps<{
 }>();
 
 const settings = useDocumentSettings();
-
-// TODO should we filter out type === 'email' if documentType === 'email'? As well as other details like driving license... maybe we should filter in, but we need a rework of contact details to accept a type
 </script>
 
 <template>

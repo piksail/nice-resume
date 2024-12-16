@@ -378,7 +378,6 @@ function exportResumeToJsonResume() {
               <Button
                 icon="pi pi-plus"
                 :label="capitalize(`${$t('toAdd')} ${$t('reference')}`)"
-                severity="secondary"
                 variant="outlined"
                 size="small"
                 @click="addReference(index)"

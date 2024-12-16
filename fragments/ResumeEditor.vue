@@ -373,11 +373,7 @@ function toggleCategoryVisibility(category: Category) {
             </label>
             <label class="flex flex-col gap-1" for="tags">
               <span class="label">{{ capitalize($t("tags")) }}</span>
-              <ul
-                v-if="entry.tags.length"
-                :id="`tagList${entryIndex}`"
-                class="inputList"
-              >
+              <ul v-if="entry.tags.length" :id="`tagList${entryIndex}`">
                 <li
                   v-for="(_tag, tagIndex) in entry.tags"
                   :key="tagIndex"
@@ -398,13 +394,8 @@ function toggleCategoryVisibility(category: Category) {
                   />
                 </li>
               </ul>
-              <button
-                class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-                @click="addTag(entry, entryIndex)"
-              >
-                {{ capitalize(`${$t("toAdd")} ${$t("tag")}`) }}
-              </button>
               <Button
+                class="w-[70%] mt-2"
                 icon="pi pi-plus"
                 :label="capitalize(`${$t('toAdd')} ${$t('tag')}`)"
                 variant="outlined"

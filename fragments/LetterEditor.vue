@@ -42,21 +42,19 @@ function addSenderDetail() {
   <EditorCategory id="Header">
     <template v-slot:header>{{ capitalize($t("header")) }}</template>
     <div class="formBlock">
-      <label class="flex flex-col" for="senderDetails">
+      <FormBlockRow>
         <Field
           type="checkbox"
-          label="Use sender layout"
+          label="Use sender layout TODO localize"
           v-model="isHeaderSimple"
         />
+      </FormBlockRow>
+      <label class="flex flex-col" for="senderDetails">
         <template v-if="isHeaderSimple">
           <span class="label">
             {{ capitalize($t("senderDetails")) }}
           </span>
-          <ul
-            v-if="senderDetails.length"
-            id="recipientDetailList"
-            class="inputList"
-          >
+          <ul v-if="senderDetails.length" id="senderDetailList">
             <li
               v-for="(_detail, index) in senderDetails"
               :key="index"
@@ -69,7 +67,6 @@ function addSenderDetail() {
                 @keydown.enter.prevent="addSenderDetail"
               />
               <ListActions
-                class="mb-2"
                 :index="index"
                 :list-length="senderDetails.length"
                 @moveUp="moveUp(senderDetails, index)"
@@ -78,10 +75,11 @@ function addSenderDetail() {
               />
             </li>
             <Button
+              class="w-[70%] mt-2"
               icon="pi pi-plus"
               :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
-              severity="secondary"
               variant="outlined"
+              size="small"
               @click="addSenderDetail"
             />
           </ul>
@@ -91,11 +89,7 @@ function addSenderDetail() {
         <span class="label">
           {{ capitalize($t("recipientDetails")) }}
         </span>
-        <ul
-          v-if="recipientDetails.length"
-          id="recipientDetailList"
-          class="inputList"
-        >
+        <ul v-if="recipientDetails.length" id="recipientDetailList">
           <li
             v-for="(_detail, index) in recipientDetails"
             :key="index"
@@ -108,7 +102,6 @@ function addSenderDetail() {
               @keydown.enter.prevent="addRecipientDetail"
             />
             <ListActions
-              class="mb-2"
               :index="index"
               :list-length="recipientDetails.length"
               @moveUp="moveUp(recipientDetails, index)"
@@ -117,10 +110,11 @@ function addSenderDetail() {
             />
           </li>
           <Button
+            class="w-[70%] mt-2"
             icon="pi pi-plus"
             :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
-            severity="secondary"
             variant="outlined"
+            size="small"
             @click="addRecipientDetail"
           />
         </ul>
@@ -165,10 +159,11 @@ function addSenderDetail() {
             />
           </li>
           <Button
+            class="w-[70%]"
             icon="pi pi-plus"
             :label="capitalize(`${$t('toAdd')} ${$t('paragraph')}`)"
-            severity="secondary"
             variant="outlined"
+            size="small"
             @click="addParagraph"
           />
         </ul>
