@@ -25,21 +25,10 @@ const settings = useDocumentSettings();
   <ul
     class="flex"
     :style="{
-      flexDirection: settings.contactDetails.listOrientation,
-      flexWrap:
-        settings.contactDetails.listOrientation === 'row' ? 'wrap' : 'initial',
-      alignItems: settings.contactDetails.alignment,
-      columnGap:
-        settings.contactDetails.listOrientation === 'column'
-          ? 0
-          : `${settings.contactDetails.gap}px`,
-      rowGap:
-        settings.contactDetails.listOrientation === 'row'
-          ? 0
-          : `${settings.contactDetails.gap}px`,
       listStylePosition: settings.contactDetails.listMarkerPosition,
       listStyleType: getListMarker(settings.contactDetails.listMarker),
       color: `${settings.contactDetails.listMarkerColor}`,
+      ...getNodeStyle(settings.contactDetails, 'flex'),
       ...getNodeStyle(settings.contactDetails, 'block'),
     }"
   >

@@ -6,6 +6,7 @@ const title = ref("Nice resume");
 const description = ref(
   "Pick a design, build your resume, write your cover letter, adapt the design to your need with Nice Resume.",
 );
+
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 

@@ -358,7 +358,7 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    listOrientation: "column",
+    listOrientation: "column", // For now, this settings cannot be set to row for legible purpose
     listMarker: "hyphen",
     listMarkerPosition: "inside",
     listMarkerColor: "currentColor",
@@ -2573,8 +2573,8 @@ templateSettings.Stone.resume.title.fontSize = 20;
 templateSettings.Stone.resume.title.margin[2] = 2;
 templateSettings.Stone.resume.contactDetails.fontSize = 12;
 templateSettings.Stone.resume.contactDetails.listOrientation = "row";
+templateSettings.Stone.resume.contactDetails.alignment = "center";
 templateSettings.Stone.resume.contactDetails.gap = 30;
-// TODO handle justify-center of details
 templateSettings.Stone.resume.contactDetails.padding = [2, 20, 20, 20];
 templateSettings.Stone.resume.about.font =
   templateBaseSettings.Stone.displayFont;
@@ -2629,6 +2629,7 @@ templateSettings.Stone.letter.name.fontSize = 24;
 templateSettings.Stone.letter.title.fontSize = 16;
 templateSettings.Stone.letter.contactDetails.fontSize = 12;
 templateSettings.Stone.letter.contactDetails.listOrientation = "row";
+templateSettings.Stone.letter.contactDetails.alignment = "center";
 templateSettings.Stone.letter.contactDetails.gap = 24;
 templateSettings.Stone.letter.contactDetails.padding = [10, 0, 10, 0];
 templateSettings.Stone.letter.about.font =
@@ -2662,8 +2663,8 @@ templateSettings.Stone.email.title.fontSize = 20;
 templateSettings.Stone.email.title.margin[2] = 2;
 templateSettings.Stone.email.contactDetails.fontSize = 12;
 templateSettings.Stone.email.contactDetails.listOrientation = "row";
+templateSettings.Stone.email.contactDetails.alignment = "center";
 templateSettings.Stone.email.contactDetails.gap = 30;
-// TODO handle justify-center of details
 templateSettings.Stone.email.contactDetails.padding = [2, 20, 20, 20];
 templateSettings.Stone.email.about.font =
   templateBaseSettings.Stone.displayFont;
