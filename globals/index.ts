@@ -2429,7 +2429,7 @@ templateSettings.Shelf.resume.categoryName.fontWeight = 300;
 templateSettings.Shelf.resume.categoryName.letterSpacing = 2;
 templateSettings.Shelf.resume.categoryName.margin[2] = 22;
 templateSettings.Shelf.resume.entry.layout = 13;
-// TODO align center or right when entryHeader exists
+// TODO align title, period, location center or right when the concept of "entryHeader" exists? It could improuve legibility
 templateSettings.Shelf.resume.entryPeriod.order = 1;
 templateSettings.Shelf.resume.entryPeriod.fontSize = 12;
 templateSettings.Shelf.resume.entryTitle.order = 2;
