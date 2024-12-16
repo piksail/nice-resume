@@ -111,10 +111,24 @@ function changeContactDetaiType(
                 optionValue="value"
                 :options="
                   detail.type === 'social'
-                    ? [undefined, 'default', ...socialIcons].map((icon) => ({
-                        label: !icon ? '' : capitalize($t(icon)),
-                        value: icon,
-                      }))
+                    ? [undefined, 'default', ...socialIcons].map((icon) => {
+                        if (!icon) {
+                          return {
+                            label: '',
+                            value: icon,
+                          };
+                        }
+                        if (icon === 'default') {
+                          return {
+                            label: capitalize($t(icon)),
+                            value: icon,
+                          };
+                        }
+                        return {
+                          label: capitalize(icon),
+                          value: icon,
+                        };
+                      })
                     : [undefined, 'default', ...contactIcons].map((icon) => ({
                         label: !icon ? '' : capitalize($t(icon)),
                         value: icon,
