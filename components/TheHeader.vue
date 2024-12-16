@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
+// import Button from "primevue/button";
 import Toolbar from "primevue/toolbar";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
@@ -23,14 +23,6 @@ const localePath = useLocalePath();
 const { documentType } = storeToRefs(useEditorStore());
 const { template } = storeToRefs(useProfileStore());
 
-// TODO enable below code and change moon/sun icon accordingly
-// const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-// if (darkThemeMq.matches) {
-//   // Theme set to dark.
-// } else {
-//   // Theme set to light.
-// }
-
 const localeLabel: { [key in LocaleCode]: string } = {
   br: "Brezhoneg",
   de: "Deutsch",
@@ -40,9 +32,17 @@ const localeLabel: { [key in LocaleCode]: string } = {
   it: "Italiano",
 };
 
-function toggleDarkMode() {
-  document.documentElement.classList.toggle("dark-mode");
-}
+// TODO enable below code and change moon/sun icon accordingly
+// const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+// if (darkThemeMq.matches) {
+//   // Theme set to dark.
+// } else {
+//   // Theme set to light.
+// }
+
+// function toggleDarkMode() {
+//   document.documentElement.classList.toggle("dark-mode");
+// }
 </script>
 
 <template>
@@ -101,7 +101,7 @@ function toggleDarkMode() {
           <ImportDialog />
           <ExportDialog />
 
-          <Button
+          <!-- <Button
             :icon="// document.documentElement.classList.includes('dark-mode')
             //   ? 'pi pi-sun'
             //   : 'pi pi-moon'
@@ -109,7 +109,7 @@ function toggleDarkMode() {
             size="small"
             :aria-label="'TODO phrase'"
             @click="toggleDarkMode"
-          />
+          /> -->
           <Field
             type="select"
             :aria-label="$t('toSwitchLanguage')"
