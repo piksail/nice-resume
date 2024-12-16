@@ -16,7 +16,10 @@ export function getPeriodBounds(period: string) {
  * Format a JSON Resume in accordance to the Nice Resume interface.
  * See: https://jsonresume.org/schema
  */
-export function formatJsonResumeAsResume(jsonResume: JsonResume) {
+export function formatJsonResumeAsResume(
+  jsonResume: JsonResume,
+  t: (message: string) => string, // TODO correct type
+) {
   const toImport: Resume = {
     template: "default",
     name: "",
@@ -80,7 +83,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "work",
-        name: "Work", // TODO detect locale and adapt
+        name: capitalize(t("work")),
         entries: work.map((work) => {
           return {
             nature: "experience",
@@ -104,7 +107,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "voluntary",
-        name: "Voluntary", // TODO detect locale and adapt
+        name: capitalize(t("voluntary")),
         entries: volunteer.map((voluntary) => {
           return {
             nature: "experience",
@@ -128,7 +131,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "education",
-        name: "Education", // TODO detect locale and adapt
+        name: capitalize(t("education")),
         entries: education.map((education) => {
           return {
             nature: "experience",
@@ -152,7 +155,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "award",
-        name: "Award", // TODO detect locale and adapt
+        name: capitalize(t("awards")),
         entries: awards.map((award) => {
           return {
             nature: "experience",
@@ -176,7 +179,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "certificate",
-        name: "Certificate", // TODO detect locale and adapt
+        name: capitalize(t("certificates")),
         entries: certificates.map((certificate) => {
           return {
             nature: "experience",
@@ -200,7 +203,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "publication",
-        name: "Publication", // TODO detect locale and adapt
+        name: capitalize(t("publications")),
         entries: publications.map((publication) => {
           return {
             nature: "experience",
@@ -224,7 +227,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "asset",
         type: "skill",
-        name: "Skill", // TODO detect locale and adapt
+        name: capitalize(t("skills")),
         entries: skills.map((skill) => {
           return {
             nature: "asset",
@@ -244,7 +247,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "asset",
         type: "language",
-        name: "Language", // TODO detect locale and adapt
+        name: capitalize(t("languages")),
         entries: languages.map((language) => {
           return {
             nature: "asset",
@@ -264,7 +267,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "asset",
         type: "interest",
-        name: "Interest", // TODO detect locale and adapt
+        name: capitalize(t("interests")),
         entries: interests.map((interest) => {
           return {
             nature: "asset",
@@ -285,7 +288,7 @@ export function formatJsonResumeAsResume(jsonResume: JsonResume) {
       toImport.categories.push({
         nature: "experience",
         type: "project",
-        name: "Project", // TODO detect locale and adapt
+        name: capitalize(t("projects")),
         entries: projects.map((project) => {
           return {
             nature: "experience",
