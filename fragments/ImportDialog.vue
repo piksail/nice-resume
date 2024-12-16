@@ -13,6 +13,9 @@ import { formatJsonResumeAsResume } from "@/utils/json-resume";
 import { generateStores } from "~/utils/editor";
 
 // eslint-disable-next-line no-undef
+const { t: localizer } = useI18n();
+
+// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -31,7 +34,7 @@ const isImportError = ref(false);
  * Generate random data to edit.
  */
 function generateRandomData() {
-  generateStores(profileStore, resumeStore, letterStore);
+  generateStores(profileStore, resumeStore, letterStore, localizer);
   isImportDialogOpen.value = false;
 }
 
@@ -109,7 +112,7 @@ function importFromJsonResume(event: FileUploadSelectEvent) {
         fileReaderEvent.target.result.toString(),
       );
 
-      const toImport = formatJsonResumeAsResume(jsonResume);
+      const toImport = formatJsonResumeAsResume(jsonResume, localizer);
       Object.entries(toImport).forEach(([key, value]) => {
         // @ts-expect-error Build object on the fly
         if (profile[key]) {

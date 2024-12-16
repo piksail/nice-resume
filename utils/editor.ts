@@ -21,17 +21,27 @@ export function generateStores(
   profile: ReturnType<typeof useProfileStore>,
   resume: ReturnType<typeof useResumeStore>,
   letter: ReturnType<typeof useLetterStore>,
+  t: (message: string) => string, // TODO correct type
 ) {
+  const name = `${capitalize(t("givenName"))} ${t("name").toUpperCase()}`;
+  const street = `X ${capitalize(t("street"))} ${capitalize(t("name"))}`;
+  const address = `${t("postalCode").toUpperCase()} ${capitalize(t("city"))} ${capitalize(t("region"))}`;
+
   // Profile
-  profile.name = "Firstname Lastname";
-  profile.title = "Title";
-  profile.about = "About";
+  profile.name = name;
+  profile.title = t("title");
+  profile.about =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
   profile.contactDetails = [
-    { type: "personal", icon: "drivingLicense", value: "Driving license" },
+    {
+      type: "personal",
+      icon: "drivingLicense",
+      value: capitalize(t("drivingLicense")),
+    },
     {
       type: "personal",
       icon: "address",
-      value: "Streetnumber street Streetname, ZIPCODE City Country",
+      value: `${street}, ${address}`,
     },
     { type: "personal", icon: "email", value: "email@email.com" },
     { type: "personal", icon: "phone", value: "061122334455" },
@@ -45,11 +55,11 @@ export function generateStores(
     {
       nature: "experience",
       type: "work",
-      name: "Work experience",
+      name: capitalize(t("workExperience")),
       entries: [
-        getRandomExperience("work" as Experience["type"]),
-        getRandomExperience("work" as Experience["type"]),
-        getRandomExperience("work" as Experience["type"]),
+        getRandomExperience("work" as Experience["type"], t),
+        getRandomExperience("work" as Experience["type"], t),
+        getRandomExperience("work" as Experience["type"], t),
       ],
       layout: "full",
       isLocked: false,
@@ -58,10 +68,10 @@ export function generateStores(
     {
       nature: "experience",
       type: "education",
-      name: "Education",
+      name: capitalize(t("education")),
       entries: [
-        getRandomExperience("education" as Experience["type"]),
-        getRandomExperience("education" as Experience["type"]),
+        getRandomExperience("education" as Experience["type"], t),
+        getRandomExperience("education" as Experience["type"], t),
       ],
       layout: "full",
       isLocked: false,
@@ -70,8 +80,8 @@ export function generateStores(
     {
       nature: "experience",
       type: "certificate",
-      name: "Certificates",
-      entries: [getRandomExperience("certificate" as Experience["type"])],
+      name: capitalize(t("certificates")),
+      entries: [getRandomExperience("certificate" as Experience["type"], t)],
       layout: "half",
       isLocked: false,
       isVisible: true,
@@ -79,10 +89,10 @@ export function generateStores(
     {
       nature: "experience",
       type: "publication",
-      name: "Publications",
+      name: capitalize(t("publications")),
       entries: [
-        getRandomExperience("publication" as Experience["type"]),
-        getRandomExperience("publication" as Experience["type"]),
+        getRandomExperience("publication" as Experience["type"], t),
+        getRandomExperience("publication" as Experience["type"], t),
       ],
       layout: "half",
       isLocked: false,
@@ -91,8 +101,8 @@ export function generateStores(
     {
       nature: "experience",
       type: "award",
-      name: "Awards",
-      entries: [getRandomExperience("award" as Experience["type"])],
+      name: capitalize(t("awards")),
+      entries: [getRandomExperience("award" as Experience["type"], t)],
       layout: "half",
       isLocked: false,
       isVisible: true,
@@ -100,11 +110,11 @@ export function generateStores(
     {
       nature: "asset",
       type: "skill",
-      name: "Skills",
+      name: capitalize(t("skills")),
       entries: [
-        getRandomAsset("skill" as Asset["type"]),
-        getRandomAsset("skill" as Asset["type"]),
-        getRandomAsset("skill" as Asset["type"]),
+        getRandomAsset("skill" as Asset["type"], t),
+        getRandomAsset("skill" as Asset["type"], t),
+        getRandomAsset("skill" as Asset["type"], t),
       ],
       layout: "half",
       isLocked: false,
@@ -113,11 +123,11 @@ export function generateStores(
     {
       nature: "asset",
       type: "language",
-      name: "Languages",
+      name: capitalize(t("languages")),
       entries: [
-        getRandomAsset("language" as Asset["type"]),
-        getRandomAsset("language" as Asset["type"]),
-        getRandomAsset("language" as Asset["type"]),
+        getRandomAsset("language" as Asset["type"], t),
+        getRandomAsset("language" as Asset["type"], t),
+        getRandomAsset("language" as Asset["type"], t),
       ],
       layout: "half",
       isLocked: false,
@@ -126,25 +136,17 @@ export function generateStores(
   ];
 
   // Letter
-  letter.senderDetails = [
-    "Firstname Lastname",
-    "Streetnumber street Streetname",
-    "ZIPCODE City Country",
-  ];
-  letter.recipientDetails = [
-    "Firstname Lastname",
-    "Streetnumber street Streetname",
-    "ZIPCODE City Country",
-  ];
-  letter.subject = "Cover letter subject";
-  letter.reference = "Ref.: Advertisement reference";
+  letter.senderDetails = [name, street, address];
+  letter.recipientDetails = [name, street, address];
+  letter.subject = `${t("coverLetter")} ${t("subject")}`;
+  letter.reference = "Ref.: Advertisement reference"; // TODO localize
   letter.paragraphs = [
-    "Salutation,",
+    "Salutation,", // TODO localize
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
     "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
-    "Outroduction.",
-    "Regards.",
+    "Outroduction.", // TODO localize
+    "Regards.", // TODO localize
   ];
 
   // Email has no specific content
