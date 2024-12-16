@@ -18,7 +18,7 @@ export function getPeriodBounds(period: string) {
  */
 export function formatJsonResumeAsResume(
   jsonResume: JsonResume,
-  t: (message: string) => string, // TODO correct type
+  t: (message: string) => string,
 ) {
   const toImport: Resume = {
     theme: "default",
