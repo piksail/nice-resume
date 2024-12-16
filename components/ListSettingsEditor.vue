@@ -2,7 +2,7 @@
 import { storeToRefs } from "pinia";
 import type { ListSettings } from "@/types";
 import { useProfileStore } from "@/stores/profile";
-import { listMarkers } from "@/globals";
+import { listMarkerPositions, listMarkers } from "@/globals";
 import Field from "@/components/Field.vue";
 
 const { propertyName, settings } = defineProps<{
@@ -26,6 +26,21 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         v-model="settings.gap"
       />
       <Field
+        :id="`${propertyName}ListMarkerPosition`"
+        :label="$t('markerPosition')"
+        type="selectbutton"
+        :disabled="!isThemeCustomized"
+        optionLabel="label"
+        optionValue="value"
+        :options="
+          listMarkerPositions.map((position) => ({
+            label: capitalize($t(position)),
+            value: position,
+          }))
+        "
+        v-model="settings.listMarkerPosition"
+      />
+      <Field
         :id="`${propertyName}ListMarker`"
         :label="$t('marker')"
         type="select"
@@ -41,6 +56,5 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         v-model="settings.listMarkerColor"
       />
     </FormBlockRow>
-    >
   </div>
 </template>

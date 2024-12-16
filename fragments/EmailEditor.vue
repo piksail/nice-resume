@@ -29,7 +29,7 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
 <i18n lang="json">
 {
   "br": {
-    "makeLinksClickable": "TODO"
+    "makeLinksClickable": "Liammoù a c'haller klikañaat"
   },
   "de": {
     "makeLinksClickable": "Links klickbar machen"

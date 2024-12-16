@@ -57,7 +57,7 @@ function changeContactDetaiType(
         <Message size="small">
           {{ t("howToStyleAboutAndDetailsCategory") }}
         </Message>
-        <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
+        <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 1 "about" and 1 "details") -->
         <Field
           id="detailsCategoryName"
           :label="$t('categoryName')"

@@ -87,10 +87,13 @@ export type ListMarker =
   | "square"
   | "triangle";
 
+export type ListMarkerPosition = "inside" | "outside";
+
 export type ListSettings = {
   listOrientation: "row" | "column";
   listMarker: ListMarker;
   listMarkerColor: string;
+  listMarkerPosition: ListMarkerPosition;
 };
 
 export type BlockSettings = {
