@@ -29,7 +29,7 @@ export function generateStores(
 
   // Profile
   profile.name = name;
-  profile.title = t("title");
+  profile.title = capitalize(t("title"));
   profile.about =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
   profile.contactDetails = [

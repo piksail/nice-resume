@@ -8,7 +8,7 @@ export function getRandomAsset(
   return {
     nature: "asset" as Asset["nature"],
     type,
-    title: t(getEntryTitleLabel(type)),
+    title: capitalize(t(getEntryTitleLabel(type))),
     highlights: [
       "Lorem ipsum dolor sit amet",
       "Consectetur adipiscing elit",
@@ -25,9 +25,9 @@ export function getRandomExperience(
   return {
     nature: "experience" as Experience["nature"],
     type,
-    title: t(getEntryTitleLabel(type)),
-    organization: t(getExperienceOrganizationLabel(type)),
-    location: "Location",
+    title: capitalize(t(getEntryTitleLabel(type))),
+    organization: capitalize(t(getExperienceOrganizationLabel(type))),
+    location: capitalize(t("Location")),
     period:
       type === "certificate"
         ? "Delivered in X (valid 2 years)"
