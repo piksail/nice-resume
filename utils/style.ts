@@ -12,7 +12,7 @@ import type { StyleValue } from "vue";
 export function getNodeStyle(
   // settingsItem: Values,
   settingsItem: object, // TODO make it type-compliant
-  settingsType: "text" | "title" | "block",
+  settingsType: "text" | "title" | "block" | "flex",
 ) {
   const style: StyleValue = {};
   if (settingsType === "text" || settingsType === "title") {
@@ -43,6 +43,18 @@ export function getNodeStyle(
   }
   if (settingsType === "title") {
     style.textAlign = settingsItem.textAlign;
+  }
+  if (settingsType === "flex") {
+    style.flexDirection = settingsItem.listOrientation;
+    if (settingsItem.listOrientation === "row") {
+      style.flexWrap = "wrap";
+      style.justifyContent = settingsItem.alignment;
+      style.columnGap = `${settingsItem.gap}px`;
+    }
+    if (settingsItem.listOrientation === "column") {
+      style.alignItems = settingsItem.alignment;
+      style.rowGap = `${settingsItem.gap}px`;
+    }
   }
   return style;
 }

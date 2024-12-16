@@ -418,6 +418,23 @@ function askBeforeResetStyle() {
           />
           <FormBlockRow>
             <Field
+              id="contactDetailsListOrientation"
+              type="selectbutton"
+              :label="$t('orientation')"
+              v-model="documentTypeSettings.contactDetails.listOrientation"
+              optionLabel="label"
+              optionValue="value"
+              :options="
+                ['column', 'row'].map((orientation) => ({
+                  label: capitalize(
+                    $t(orientation === 'row' ? 'horizontal' : 'vertical'),
+                  ),
+                  value: orientation,
+                }))
+              "
+              :disabled="!isThemeCustomized"
+            />
+            <Field
               id="contactDetailsAlignment"
               type="select"
               :label="$t('alignment')"

@@ -157,7 +157,7 @@ export type CommonDocumentSettings = {
   contactDetails: BlockSettings &
     TextSettings &
     ListSettings & {
-      alignment: "start" | "center" | "end";
+      alignment: "start" | "center" | "end"; // Handles justify-content on column flex-direction and align-items on  row flex-direction
       iconSize: number;
       iconColor: string;
       iconGap: number;
