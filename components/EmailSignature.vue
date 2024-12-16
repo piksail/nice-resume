@@ -9,6 +9,8 @@ import DocumentHeaderContactDetails from "./DocumentHeaderContactDetails.vue";
 import DocumentHeaderName from "./DocumentHeaderName.vue";
 import DocumentHeaderTitle from "./DocumentHeaderTitle.vue";
 
+// TODO we may want to merge this component with DocumentHeader with a :is component header/footer accordingly
+
 const { about, contactDetails, isThemeCustomized, name, template, title } =
   storeToRefs(useProfileStore());
 
@@ -22,7 +24,7 @@ const settings = computed(() => {
 </script>
 
 <template>
-  <footer>
+  <footer class="flex">
     <template v-if="settings.document.layout === 1">
       <div class="flex flex-col">
         <DocumentHeaderName :name="name" />

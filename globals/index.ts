@@ -81,8 +81,6 @@ export const templates: Array<Template> = [
   "Wiki",
 ];
 
-// TODO settings réduire espace entrelistmarker et text
-
 export const textSeparators: TextSeparator[] = [
   "|",
   "-",
@@ -2151,7 +2149,7 @@ templateSettings.Paper.letter.reference.isItalic = true;
 templateSettings.Paper.letter.reference.textAlign = "left";
 templateSettings.Paper.letter.body.indentation = 0;
 templateSettings.Paper.letter.body.isSignatureRightAligned = false;
-// TODO récupérer le layout ou pas ?
+templateSettings.Paper.email.document.layout = 3;
 templateSettings.Paper.email.document.padding = [80, 80, 80, 80];
 templateSettings.Paper.email.name.padding[0] = 16;
 templateSettings.Paper.email.name.border[0] = 2;
@@ -2453,7 +2451,7 @@ templateSettings.Shelf.letter.title.fontWeight = 300;
 templateSettings.Shelf.letter.title.letterSpacing = 2;
 templateSettings.Shelf.letter.about.fontSize = 12;
 templateSettings.Shelf.letter.contactDetails.fontSize = 12;
-// TODO récup layout ou pas ?
+templateSettings.Shelf.email.document.layout = 2;
 templateSettings.Shelf.email.name.font =
   templateSettings.Shelf.base.displayFont;
 templateSettings.Shelf.email.name.fontSize = 40;

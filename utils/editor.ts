@@ -147,8 +147,7 @@ export function generateStores(
     "Regards.",
   ];
 
-  // Email TODO
-  // TODO refactor les overrides de primevue en passthrough : https://primevue.org/passthrough/
+  // Email has no specific content
 }
 
 export function getCategoryIconClass(categoryType: Category["type"]) {
@@ -173,7 +172,7 @@ export function getCategoryIconClass(categoryType: Category["type"]) {
 export function getEntryHeading(entry: Asset | Experience, entryIndex: number) {
   if (entry.nature === "experience" && entry.title) {
     return entry.organization
-      ? `${entry.title} x ${entry.organization}`
+      ? `${entry.title} | ${entry.organization}`
       : entry.title;
   }
   if (entry.nature === "asset") {
