@@ -86,8 +86,8 @@ function askBeforeResetStyle() {
   <Drawer
     v-model:visible="isStyleEditorOpen"
     :header="capitalize($t('toCustomizeTheme'))"
-    class="!w-[calc(100vw-210mm)]"
-    pt:mask:class="!bg-transparent"
+    class="!w-full"
+    pt:mask:class="!bg-transparent !w-[calc(100vw-210mm)]"
   >
     <section class="flex flex-col gap-6">
       <Fieldset :legend="capitalize($t('document'))" toggleable>
