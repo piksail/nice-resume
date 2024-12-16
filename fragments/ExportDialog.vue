@@ -226,7 +226,7 @@ function exportResumeToJsonResume() {
               <FormBlockRow
                 v-for="(item, index) in jsonResume.work"
                 :key="item.position"
-                :header="`${item.position} x ${item.name}`"
+                :header="`${item.position} | ${item.name}`"
               >
                 <Field label="URL" v-model="jsonResume.work[index].url" />
               </FormBlockRow>

@@ -469,7 +469,7 @@ export function formatResumeAsJsonResume(
         keywords: entry.tags,
       };
     }),
-    references: [], // TODO prompt definition
+    references: [],
     projects: (
       resume.categories
         .filter((category) => category.type === "project")
@@ -487,8 +487,4 @@ export function formatResumeAsJsonResume(
     }),
   };
   return toExport;
-}
-
-export function importResumeFromJsonResume() {
-  // TODO
 }
