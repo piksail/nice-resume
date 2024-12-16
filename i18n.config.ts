@@ -3,6 +3,7 @@ import de from "./locales/de";
 import en from "./locales/en";
 import es from "./locales/es";
 import fr from "./locales/fr";
+import it from "./locales/it";
 
 export default {
   messages: {
@@ -11,5 +12,6 @@ export default {
     en,
     es,
     fr,
+    it,
   },
 };
