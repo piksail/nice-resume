@@ -21,7 +21,7 @@ export function formatJsonResumeAsResume(
   t: (message: string) => string, // TODO correct type
 ) {
   const toImport: Resume = {
-    template: "default",
+    theme: "default",
     name: "",
     title: "",
     about: "",
@@ -316,7 +316,7 @@ export function formatJsonResumeAsResume(
  * See: https://jsonresume.org/schema
  */
 export function formatResumeAsJsonResume(
-  resume: Omit<Resume, "settings" | "template">,
+  resume: Omit<Resume, "settings" | "theme">,
 ) {
   const toExport: JsonResume = {
     basics: {

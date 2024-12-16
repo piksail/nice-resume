@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { ContactDetail } from "@/types";
-import { templateBaseSettings, templates } from "@/globals";
+import { themeBaseSettings, themes } from "@/globals";
 
 // Use option API to take advantage of automatic persistence
 export const useProfileStore = defineStore("profile", {
@@ -13,8 +13,8 @@ export const useProfileStore = defineStore("profile", {
 
     // Design
     isThemeCustomized: false,
-    template: templates[0],
-    customColors: structuredClone(templateBaseSettings[templates[0]].colors),
+    theme: themes[0],
+    customColors: structuredClone(themeBaseSettings[themes[0]].colors),
   }),
   persist: true,
 });

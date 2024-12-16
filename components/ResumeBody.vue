@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import ResumeCategoryName from "./ResumeCategoryName.vue";
 import ResumeEntry from "./ResumeEntry.vue";
@@ -15,7 +15,7 @@ import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
 import ResumeEntryTags from "./ResumeEntryTags.vue";
 
-const { about, contactDetails, isThemeCustomized, template } =
+const { about, contactDetails, isThemeCustomized, theme } =
   storeToRefs(useProfileStore());
 
 const {
@@ -28,7 +28,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const asideCategories = computed(() =>
