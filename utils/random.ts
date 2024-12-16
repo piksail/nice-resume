@@ -3,7 +3,7 @@ import { getEntryTitleLabel, getExperienceOrganizationLabel } from "./editor";
 
 export function getRandomAsset(
   type: Asset["type"],
-  t: (message: string) => string, // TODO correct type
+  t: (message: string) => string,
 ): Asset {
   return {
     nature: "asset" as Asset["nature"],
@@ -20,7 +20,7 @@ export function getRandomAsset(
 
 export function getRandomExperience(
   type: Experience["type"],
-  t: (message: string) => string, // TODO correct type
+  t: (message: string) => string,
 ): Experience {
   return {
     nature: "experience" as Experience["nature"],

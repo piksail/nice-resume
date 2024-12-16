@@ -21,7 +21,7 @@ export function generateStores(
   profile: ReturnType<typeof useProfileStore>,
   resume: ReturnType<typeof useResumeStore>,
   letter: ReturnType<typeof useLetterStore>,
-  t: (message: string) => string, // TODO correct type
+  t: (message: string) => string,
 ) {
   const name = `${capitalize(t("givenName"))} ${t("name").toUpperCase()}`;
   const street = `X ${capitalize(t("street"))} ${capitalize(t("name"))}`;
