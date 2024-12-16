@@ -298,7 +298,13 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
     order: 1,
   },
   entryPeriod: {
@@ -309,7 +315,13 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
     order: 2,
   },
   entryOrganization: {
@@ -320,7 +332,13 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
     order: 3,
   },
   entryLocation: {
@@ -331,7 +349,13 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
-    // TODO allow bg color, padding, radius, etc. to make it like a badge?
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "currentColor",
+    borderRadius: 0,
+    margin: [0, 0, 0, 0],
+    border: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
     order: 4,
   },
   entrySummary: {
@@ -876,8 +900,11 @@ themeSettings.Aster.resume.categoryNameSeparator.backgroundColor =
   themeBaseSettings.Aster.colors[1];
 themeSettings.Aster.resume.entry.padding = [8, 8, 8, 32];
 themeSettings.Aster.resume.entryPeriod.order = 1;
+themeSettings.Aster.resume.entryPeriod.margin[1] = 20;
 themeSettings.Aster.resume.entryTitle.order = 2;
+themeSettings.Aster.resume.entryTitle.margin[1] = 14;
 themeSettings.Aster.resume.entryTitle.fontWeight = 500;
+themeSettings.Aster.resume.entryOrganization.margin[1] = 14;
 themeSettings.Aster.resume.entryOrganization.isItalic = true;
 themeSettings.Aster.resume.entrySummary.padding[3] = 16;
 themeSettings.Aster.resume.entryHighlight.padding[3] = 16;
@@ -1170,10 +1197,12 @@ themeSettings.Cupcake.resume.categoryName.borderColor =
   themeBaseSettings.Cupcake.colors[1];
 themeSettings.Cupcake.resume.entry.layout = 3;
 themeSettings.Cupcake.resume.entryPeriod.order = 1;
+themeSettings.Cupcake.resume.entryPeriod.margin[1] = 10;
 themeSettings.Cupcake.resume.entryPeriod.color =
   themeBaseSettings.Cupcake.colors[1];
 themeSettings.Cupcake.resume.entryTitle.order = 2;
 themeSettings.Cupcake.resume.entryTitle.isItalic = true;
+themeSettings.Cupcake.resume.entryOrganization.margin[1] = 10;
 themeSettings.Cupcake.resume.entryHighlight.listMarker = "disc";
 themeSettings.Cupcake.resume.entryHighlight.listMarkerColor =
   themeBaseSettings.Cupcake.colors[0];
@@ -1457,12 +1486,14 @@ themeSettings.Macaron.resume.categoryName.fontSize = 24;
 themeSettings.Macaron.resume.categoryName.fontWeight = 600;
 themeSettings.Macaron.resume.entry.layout = 4;
 themeSettings.Macaron.resume.entryPeriod.order = 1;
+themeSettings.Macaron.resume.entryPeriod.margin[1] = 8;
 themeSettings.Macaron.resume.entryPeriod.color =
   themeBaseSettings.Macaron.colors[0];
 themeSettings.Macaron.resume.entryPeriod.fontWeight = 700;
 themeSettings.Macaron.resume.entryTitle.order = 2;
 themeSettings.Macaron.resume.entryTitle.fontWeight = 700;
 themeSettings.Macaron.resume.entryOrganization.order = 3;
+themeSettings.Macaron.resume.entryOrganization.margin[1] = 8;
 themeSettings.Macaron.resume.entryOrganization.fontWeight = 300;
 themeSettings.Macaron.resume.entryLocation.order = 4;
 themeSettings.Macaron.resume.entryLocation.fontWeight = 300;
@@ -1883,6 +1914,7 @@ themeSettings.Oilcloth.resume.categoryName.fontWeight = 300;
 themeSettings.Oilcloth.resume.categoryName.margin[2] = 5;
 themeSettings.Oilcloth.resume.entry.layout = 6;
 themeSettings.Oilcloth.resume.entryPeriod.order = 1;
+themeSettings.Oilcloth.resume.entryPeriod.margin[1] = 8;
 themeSettings.Oilcloth.resume.entryPeriod.color =
   themeBaseSettings.Oilcloth.colors[1];
 themeSettings.Oilcloth.resume.entryPeriod.fontSize = 16;
@@ -2169,9 +2201,11 @@ themeSettings.Pharmacy.resume.entry.borderColor =
   themeBaseSettings.Pharmacy.colors[0];
 themeSettings.Pharmacy.resume.entry.padding[3] = 20;
 themeSettings.Pharmacy.resume.entryPeriod.order = 1;
+themeSettings.Pharmacy.resume.entryPeriod.margin[1] = 13;
 themeSettings.Pharmacy.resume.entryPeriod.color =
   themeBaseSettings.Pharmacy.colors[0];
 themeSettings.Pharmacy.resume.entryTitle.order = 2;
+themeSettings.Pharmacy.resume.entryOrganization.margin[1] = 13;
 themeSettings.Pharmacy.resume.entryOrganization.color =
   themeBaseSettings.Pharmacy.colors[0];
 themeSettings.Pharmacy.resume.entryLocation.color =

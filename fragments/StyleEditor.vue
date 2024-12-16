@@ -618,55 +618,31 @@ function askBeforeResetStyle() {
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryTitle'))" toggleable>
-          <div class="formBlock">
-            <TextSettingsEditor
-              property-name="entryTitle"
-              :settings="resumeSettings.entryTitle"
-            />
-            <EntryHeaderItemSettingsEditor
-              property-name="entryTitle"
-              :settings="resumeSettings.entryTitle"
-            />
-          </div>
+          <EntryHeaderItemSettingsEditor
+            property-name="entryTitle"
+            :settings="resumeSettings.entryTitle"
+          />
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryPeriod'))" toggleable>
-          <div class="formBlock">
-            <TextSettingsEditor
-              property-name="entryPeriod"
-              :settings="resumeSettings.entryPeriod"
-            />
-            <EntryHeaderItemSettingsEditor
-              property-name="entryPeriod"
-              :settings="resumeSettings.entryPeriod"
-            />
-          </div>
+          <EntryHeaderItemSettingsEditor
+            property-name="entryPeriod"
+            :settings="resumeSettings.entryPeriod"
+          />
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryOrganization'))" toggleable>
-          <div class="formBlock">
-            <TextSettingsEditor
-              property-name="entryOrganization"
-              :settings="resumeSettings.entryOrganization"
-            />
-            <EntryHeaderItemSettingsEditor
-              property-name="entryOrganization"
-              :settings="resumeSettings.entryOrganization"
-            />
-          </div>
+          <EntryHeaderItemSettingsEditor
+            property-name="entryOrganization"
+            :settings="resumeSettings.entryOrganization"
+          />
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entryLocation'))" toggleable>
-          <div class="formBlock">
-            <TextSettingsEditor
-              property-name="entryLocation"
-              :settings="resumeSettings.entryLocation"
-            />
-            <EntryHeaderItemSettingsEditor
-              property-name="entryLocation"
-              :settings="resumeSettings.entryLocation"
-            />
-          </div>
+          <EntryHeaderItemSettingsEditor
+            property-name="entryLocation"
+            :settings="resumeSettings.entryLocation"
+          />
         </Fieldset>
 
         <Fieldset :legend="capitalize($t('entrySummary'))" toggleable>

@@ -196,22 +196,26 @@ export type ResumeSettings = PaperDocumentSettings & {
     layout: EntryLayout;
     gap: number; // Flex gap between entries
   };
-  entryTitle: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
-  entryPeriod: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
-  entryOrganization: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
-  entryLocation: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
+  entryTitle: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
+  entryPeriod: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
+  entryOrganization: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
+  entryLocation: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
   entrySummary: BlockSettings & TextSettings;
   entryHighlight: BlockSettings &
     TextSettings &

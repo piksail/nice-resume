@@ -26,8 +26,8 @@ const settings = computed(() => {
   <span
     v-if="entryOrganization"
     :style="{
+      ...getNodeStyle(settings.entryOrganization, 'block'),
       ...getNodeStyle(settings.entryOrganization, 'text'),
-      // order: settings.entryOrganization.order,
     }"
   >
     <span v-if="settings.entryOrganization.beforeSeparator">
