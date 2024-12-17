@@ -379,9 +379,9 @@ function toggleCategoryVisibility(category: Category) {
                   :key="tagIndex"
                   class="inputListItem"
                 >
-                  <InputText
-                    class="!text-sm w-[70%]"
-                    size="small"
+                  <Field
+                    id="entryLocation"
+                    class="w-[70%]"
                     v-model="entry.tags[tagIndex]"
                     @keydown.enter.prevent="addTag(entry, entryIndex)"
                   />

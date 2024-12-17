@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import Button from "primevue/button";
-import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -60,9 +59,8 @@ function addSenderDetail() {
               :key="index"
               class="inputListItem"
             >
-              <InputText
-                class="!text-sm w-[70%]"
-                size="small"
+              <Field
+                class="w-[70%]"
                 v-model="senderDetails[index]"
                 @keydown.enter.prevent="addSenderDetail"
               />
@@ -95,9 +93,8 @@ function addSenderDetail() {
             :key="index"
             class="inputListItem"
           >
-            <InputText
-              class="!text-sm w-[70%]"
-              size="small"
+            <Field
+              class="w-[70%]"
               v-model="recipientDetails[index]"
               @keydown.enter.prevent="addRecipientDetail"
             />
