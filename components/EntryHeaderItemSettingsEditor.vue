@@ -4,6 +4,7 @@ import type { BlockSettings, TextSettings, TextSeparator } from "@/types";
 import { useProfileStore } from "@/stores/profile";
 import { textSeparators } from "@/globals";
 import BlockSettingsEditor from "./BlockSettingsEditor.vue";
+import TextSettingsEditor from "./TextSettingsEditor.vue";
 import FormBlockRow from "./FormBlockRow.vue";
 
 const { propertyName, settings } = defineProps<{

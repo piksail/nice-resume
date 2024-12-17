@@ -53,8 +53,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :disabled="!isThemeCustomized"
         v-model="settings.letterSpacing"
       />
-    </FormBlockRow>
-    <FormBlockRow>
       <Field
         :id="`${propertyName}FontWeight`"
         type="select"
