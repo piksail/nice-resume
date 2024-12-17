@@ -242,7 +242,7 @@ onMounted(() => {
     "importJsonResume": "Emporzhiañ JSON Resume fichennaoueg"
   },
   "de": {
-    "resumeTitle": "TODO",
+    "resumeTitle": "Wie möchten Sie wieder arbeiten?",
     "resumeContinue": "Machen Sie dort weiter, wo Sie aufgehört haben",
     "resumeFromScratch": "TODO",
     "resumeFromFakeData": "TODO",
@@ -258,12 +258,12 @@ onMounted(() => {
     "importJsonResume": "Import a JSON Resume file"
   },
   "es": {
-    "resumeTitle": "TODO",
-    "resumeContinue": "TODO",
-    "resumeFromScratch": "TODO",
+    "resumeTitle": "¿Cómo quieres empezar?",
+    "resumeContinue": "Continúa donde lo dejaste",
+    "resumeFromScratch": "Empezar desde el principio",
     "resumeFromFakeData": "TODO",
-    "importSaveFile": "TODO",
-    "importJsonResume": "TODO"
+    "importSaveFile": "Importar un archivo de una sesión anterior",
+    "importJsonResume": "Importar un archivo de JSON Resume"
   },
   "fr": {
     "resumeTitle": "Comment souhaitez-vous commencer ?",
@@ -272,6 +272,14 @@ onMounted(() => {
     "resumeFromFakeData": "Reprendre à partir d'un exemple",
     "importSaveFile": "Importer une sauvegarde d'une session précédente",
     "importJsonResume": "Importer un fichier JSON Resume"
+  },
+  "it": {
+    "resumeTitle": "TODO?",
+    "resumeContinue": "TODO",
+    "resumeFromScratch": "TODO",
+    "resumeFromFakeData": "TODO",
+    "importSaveFile": "TODO",
+    "importJsonResume": "TODO"
   }
 }
 </i18n>
