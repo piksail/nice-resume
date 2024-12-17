@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import ResumeCategoryName from "./ResumeCategoryName.vue";
 import ResumeEntry from "./ResumeEntry.vue";
@@ -15,7 +15,7 @@ import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
 import ResumeEntryTags from "./ResumeEntryTags.vue";
 
-const { about, contactDetails, isThemeCustomized, template } =
+const { about, contactDetails, isThemeCustomized, theme } =
   storeToRefs(useProfileStore());
 
 const {
@@ -28,7 +28,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const asideCategories = computed(() =>
@@ -64,7 +64,7 @@ const bodyCategories = computed(() =>
       <div
         v-if="isHeaderSimple"
         :style="{
-          backgroundColor: settings.category.backgroundColor,
+          backgroundColor: `${settings.category.backgroundColor}`,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
           marginBottom: `${settings.category.margin[2]}px`,
@@ -84,7 +84,7 @@ const bodyCategories = computed(() =>
         <div
           class="flex flex-col"
           :style="{
-            backgroundColor: settings.entry.backgroundColor,
+            backgroundColor: `${settings.entry.backgroundColor}`,
             marginTop: `${settings.entry.margin[0]}px`,
             marginRight: `${settings.entry.margin[1]}px`,
             marginBottom: `${settings.entry.margin[2]}px`,
@@ -111,7 +111,7 @@ const bodyCategories = computed(() =>
         v-for="(category, categoryIndex) in asideCategories"
         :key="categoryIndex"
         :style="{
-          backgroundColor: settings.category.backgroundColor,
+          backgroundColor: `${settings.category.backgroundColor}`,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
           marginBottom: `${settings.category.margin[2]}px`,
@@ -131,7 +131,7 @@ const bodyCategories = computed(() =>
         <ul
           class="flex flex-col"
           :style="{
-            backgroundColor: settings.entry.backgroundColor,
+            backgroundColor: `${settings.entry.backgroundColor}`,
             marginTop: `${settings.entry.margin[0]}px`,
             marginRight: `${settings.entry.margin[1]}px`,
             marginBottom: `${settings.entry.margin[2]}px`,

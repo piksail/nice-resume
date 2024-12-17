@@ -8,7 +8,7 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "plugin:vuejs-accessibility/recommended",
+    // "plugin:vuejs-accessibility/recommended", // TODO Does not detect PrimeVue associated controls
   ],
   overrides: [],
   parser: "vue-eslint-parser",

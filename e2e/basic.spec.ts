@@ -4,7 +4,5 @@ const NAVIGATION_TIMEOUT = 5 * 60 * 1000;
 
 test("test", async ({ page }) => {
   await page.goto("/", { timeout: NAVIGATION_TIMEOUT });
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Nice Resume",
-  );
+  await expect(page.getByTestId("headerTitle")).toHaveText("Nice Resume");
 });

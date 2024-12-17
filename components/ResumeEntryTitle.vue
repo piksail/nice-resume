@@ -3,11 +3,11 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getStringFromSeparator } from "@/utils/string";
 import { getNodeStyle } from "@/utils/style";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
@@ -18,7 +18,7 @@ const { entryTitle } = defineProps<{
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 </script>
 
@@ -26,8 +26,8 @@ const settings = computed(() => {
   <span
     v-if="entryTitle"
     :style="{
+      ...getNodeStyle(settings.entryTitle, 'block'),
       ...getNodeStyle(settings.entryTitle, 'text'),
-      // order: settings.entryTitle.order,
     }"
   >
     <span v-if="settings.entryTitle.beforeSeparator">

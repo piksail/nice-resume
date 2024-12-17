@@ -3,13 +3,15 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useEmailStore } from "@/stores/email";
 import { useProfileStore } from "@/stores/profile";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import DocumentHeaderAbout from "./DocumentHeaderAbout.vue";
 import DocumentHeaderContactDetails from "./DocumentHeaderContactDetails.vue";
 import DocumentHeaderName from "./DocumentHeaderName.vue";
 import DocumentHeaderTitle from "./DocumentHeaderTitle.vue";
 
-const { about, contactDetails, isThemeCustomized, name, template, title } =
+// TODO we may want to merge this component with DocumentHeader with a :is component header/footer accordingly
+
+const { about, contactDetails, isThemeCustomized, name, theme, title } =
   storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useEmailStore());
@@ -17,12 +19,12 @@ const { settings: storeSettings } = storeToRefs(useEmailStore());
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].email;
+    : themeSettings[theme.value].email;
 });
 </script>
 
 <template>
-  <footer>
+  <footer class="flex">
     <template v-if="settings.document.layout === 1">
       <div class="flex flex-col">
         <DocumentHeaderName :name="name" />
@@ -44,7 +46,7 @@ const settings = computed(() => {
         <div class="flex items-baseline">
           <DocumentHeaderName :name="name" />
           <!-- prettier-ignore -->
-          <span v-if="name && title" :style="{ fontSize: `${settings.name.fontSize}px`, color: settings.name.color }">,&nbsp;</span>
+          <span v-if="name && title" :style="{ fontSize: `${settings.name.fontSize}px`, color: `${settings.name.color}` }">,&nbsp;</span>
           <DocumentHeaderTitle :title="title" />
         </div>
         <DocumentHeaderContactDetails :contact-details="contactDetails" />

@@ -3,10 +3,10 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
@@ -17,7 +17,7 @@ const { categoryName } = defineProps<{
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const getSeparatorFlexDirection = () => {
@@ -32,6 +32,12 @@ const getSeparatorFlexDirection = () => {
       return "flex-col-reverse";
   }
 };
+
+const getWidth = () => {
+  if (settings.value.categoryName.widthType !== "custom")
+    return settings.value.categoryName.widthType;
+  return `${settings.value.categoryName.width}%`;
+};
 </script>
 
 <template>
@@ -39,21 +45,14 @@ const getSeparatorFlexDirection = () => {
     class="flex"
     :class="getSeparatorFlexDirection()"
     :style="{
-      width:
-        settings.categoryName.width === 'fit' && settings.categoryName.isAside
-          ? 'fit-content'
-          : `${settings.categoryName.width}%`,
+      width: getWidth(),
     }"
   >
     <h3
       v-if="categoryName"
       :style="{
         ...getNodeStyle(settings.categoryName, 'title'),
-        width:
-          settings.categoryName.width === 'fit' &&
-          !settings.categoryName.isAside
-            ? 'fit-content'
-            : `${settings.categoryName.width}%`,
+        width: settings.categoryName.widthType === 'custom' ? '100%' : 'auto',
       }"
     >
       {{ categoryName }}
@@ -66,10 +65,6 @@ const getSeparatorFlexDirection = () => {
       :style="{
         ...getNodeStyle(settings.categoryNameSeparator, 'title'),
         height: `${settings.categoryNameSeparator.height}px`,
-        width:
-          settings.categoryNameSeparator.width === 'fit'
-            ? 'fit-content'
-            : `${settings.categoryNameSeparator.width}%`,
       }"
     />
   </div>

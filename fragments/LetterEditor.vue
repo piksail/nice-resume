@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
+import Button from "primevue/button";
+import Textarea from "primevue/textarea";
 import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
@@ -37,33 +39,32 @@ function addSenderDetail() {
 
 <template>
   <EditorCategory id="Header">
-    <template v-slot:header>Header</template>
-    <div class="flex flex-col gap-5">
-      <label class="flex flex-col" for="senderDetails">
+    <template v-slot:header>{{ capitalize($t("header")) }}</template>
+    <div class="formBlock">
+      <FormBlockRow>
         <Field
-          type="toggle"
-          label="Use sender layout"
+          type="checkbox"
+          label="Use sender layout TODO localize"
           v-model="isHeaderSimple"
         />
+      </FormBlockRow>
+      <label class="flex flex-col" for="senderDetails">
         <template v-if="isHeaderSimple">
-          <span class="label opacity-60">Sender details</span>
-          <ul
-            v-if="senderDetails.length"
-            id="recipientDetailList"
-            class="inputList"
-          >
+          <span class="label">
+            {{ capitalize($t("senderDetails")) }}
+          </span>
+          <ul v-if="senderDetails.length" id="senderDetailList">
             <li
               v-for="(_detail, index) in senderDetails"
               :key="index"
               class="inputListItem"
             >
-              <input
-                class="input w-[70%]"
+              <Field
+                class="w-[70%]"
                 v-model="senderDetails[index]"
                 @keydown.enter.prevent="addSenderDetail"
               />
               <ListActions
-                class="mb-2"
                 :index="index"
                 :list-length="senderDetails.length"
                 @moveUp="moveUp(senderDetails, index)"
@@ -71,34 +72,33 @@ function addSenderDetail() {
                 @remove="remove(senderDetails, index)"
               />
             </li>
-            <button
-              class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+            <Button
+              class="w-[70%] mt-2"
+              icon="pi pi-plus"
+              :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
+              variant="outlined"
+              size="small"
               @click="addSenderDetail"
-            >
-              Add detail
-            </button>
+            />
           </ul>
         </template>
       </label>
       <label class="flex flex-col" for="recipientDetails">
-        <span class="label opacity-60">Recipient details</span>
-        <ul
-          v-if="recipientDetails.length"
-          id="recipientDetailList"
-          class="inputList"
-        >
+        <span class="label">
+          {{ capitalize($t("recipientDetails")) }}
+        </span>
+        <ul v-if="recipientDetails.length" id="recipientDetailList">
           <li
             v-for="(_detail, index) in recipientDetails"
             :key="index"
             class="inputListItem"
           >
-            <input
-              class="input w-[70%]"
+            <Field
+              class="w-[70%]"
               v-model="recipientDetails[index]"
               @keydown.enter.prevent="addRecipientDetail"
             />
             <ListActions
-              class="mb-2"
               :index="index"
               :list-length="recipientDetails.length"
               @moveUp="moveUp(recipientDetails, index)"
@@ -106,42 +106,43 @@ function addSenderDetail() {
               @remove="remove(recipientDetails, index)"
             />
           </li>
-          <button
-            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+          <Button
+            class="w-[70%] mt-2"
+            icon="pi pi-plus"
+            :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
+            variant="outlined"
+            size="small"
             @click="addRecipientDetail"
-          >
-            Add detail
-          </button>
+          />
         </ul>
       </label>
       <Field
         id="letterSubject"
-        label="Subject"
-        transparent
+        :label="$t('subject')"
         type="textarea"
         v-model="subject"
       />
       <Field
         id="letterReference"
-        label="Advertisement reference"
-        transparent
+        :label="$t('reference')"
         v-model="reference"
       />
     </div>
   </EditorCategory>
   <EditorCategory id="Body">
-    <template v-slot:header>Body</template>
-    <div class="flex flex-col gap-5">
+    <template v-slot:header>{{ capitalize($t("body")) }}</template>
+    <div class="formBlock">
       <label class="flex flex-col" for="paragraphList">
-        <span class="label opacity-60">Paragraphs</span>
+        <span class="label">{{ capitalize($t("paragraphs")) }}</span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">
           <li
             v-for="(_paragraph, index) in paragraphs"
             :key="index"
             class="inputListItem"
           >
-            <textarea
-              class="input w-[70%]"
+            <Textarea
+              class="!text-sm w-[70%]"
+              size="small"
               v-model="paragraphs[index]"
               @keydown.enter.prevent="addParagraph"
             />
@@ -154,12 +155,14 @@ function addSenderDetail() {
               @remove="remove(paragraphs, index)"
             />
           </li>
-          <button
-            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
+          <Button
+            class="w-[70%]"
+            icon="pi pi-plus"
+            :label="capitalize(`${$t('toAdd')} ${$t('paragraph')}`)"
+            variant="outlined"
+            size="small"
             @click="addParagraph"
-          >
-            Add paragraph
-          </button>
+          />
         </ul>
       </label>
     </div>

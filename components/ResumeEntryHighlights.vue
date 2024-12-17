@@ -3,11 +3,11 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getListMarker } from "@/utils/editor";
 import { getNodeStyle } from "@/utils/style";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
@@ -18,7 +18,7 @@ const { entryHighlights } = defineProps<{
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 </script>
 
@@ -29,8 +29,9 @@ const settings = computed(() => {
     :style="{
       flexDirection: settings.entryHighlight.listOrientation,
       gap: `${settings.entryHighlight.gap}px`,
+      listStylePosition: settings.entryHighlight.listMarkerPosition,
       listStyleType: getListMarker(settings.entryHighlight.listMarker),
-      color: settings.entryHighlight.listMarkerColor,
+      color: `${settings.entryHighlight.listMarkerColor}`,
       ...getNodeStyle(settings.entryHighlight, 'block'),
     }"
   >
@@ -48,7 +49,7 @@ const settings = computed(() => {
           : 'initial',
       }"
     >
-      <span :style="{ color: settings.entryHighlight.color }">
+      <span :style="{ color: `${settings.entryHighlight.color}` }">
         {{ highlight }}
       </span>
     </li>

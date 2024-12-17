@@ -2,17 +2,17 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 
-const { template } = storeToRefs(useProfileStore());
+const { theme } = storeToRefs(useProfileStore());
 
 const { reference } = defineProps<{
   reference: string;
 }>();
 
 const settings = computed(() => {
-  return templateSettings[template.value].letter;
+  return themeSettings[theme.value].letter;
 });
 </script>
 

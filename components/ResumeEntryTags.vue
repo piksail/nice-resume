@@ -3,10 +3,10 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
@@ -17,7 +17,7 @@ const { entryTags } = defineProps<{
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 </script>
 
@@ -38,7 +38,7 @@ const settings = computed(() => {
       :key="tagIndex"
       :style="{
         ...getNodeStyle(settings.entryTag, 'text'),
-        backgroundColor: settings.entryTag.backgroundColor,
+        backgroundColor: `${settings.entryTag.backgroundColor}`,
         borderTop: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[0]}px`,
         borderRight: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[1]}px`,
         borderBottom: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[2]}px`,

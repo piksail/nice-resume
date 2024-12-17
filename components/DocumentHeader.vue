@@ -6,7 +6,7 @@ import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { getNodeStyle } from "@/utils/style";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import DocumentHeaderAbout from "@/components/DocumentHeaderAbout.vue";
 import DocumentHeaderName from "@/components/DocumentHeaderName.vue";
 import DocumentHeaderTitle from "@/components/DocumentHeaderTitle.vue";
@@ -14,7 +14,7 @@ import DocumentHeaderContactDetails from "@/components/DocumentHeaderContactDeta
 
 const { documentType } = storeToRefs(useEditorStore());
 
-const { isThemeCustomized, template, about, contactDetails, name, title } =
+const { isThemeCustomized, theme, about, contactDetails, name, title } =
   storeToRefs(useProfileStore());
 
 const { isHeaderSimple, settings: resumeStoreSettings } =
@@ -28,8 +28,8 @@ const settings = computed(() => {
       : resumeStoreSettings.value;
   }
   return documentType.value === "letter"
-    ? templateSettings[template.value].letter
-    : templateSettings[template.value].resume;
+    ? themeSettings[theme.value].letter
+    : themeSettings[theme.value].resume;
 });
 </script>
 

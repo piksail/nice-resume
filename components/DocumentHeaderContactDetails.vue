@@ -17,28 +17,16 @@ const { contactDetails } = defineProps<{
 }>();
 
 const settings = useDocumentSettings();
-
-// TODO should we filter out type === 'email' if documentType === 'email'? As well as other details like driving license... maybe we should filter in, but we need a rework of contact details to accept a type
 </script>
 
 <template>
   <ul
     class="flex"
     :style="{
-      flexDirection: settings.contactDetails.listOrientation,
-      flexWrap:
-        settings.contactDetails.listOrientation === 'row' ? 'wrap' : 'initial',
-      alignItems: settings.contactDetails.alignment,
-      columnGap:
-        settings.contactDetails.listOrientation === 'column'
-          ? 0
-          : `${settings.contactDetails.gap}px`,
-      rowGap:
-        settings.contactDetails.listOrientation === 'row'
-          ? 0
-          : `${settings.contactDetails.gap}px`,
+      listStylePosition: settings.contactDetails.listMarkerPosition,
       listStyleType: getListMarker(settings.contactDetails.listMarker),
-      color: settings.contactDetails.listMarkerColor,
+      color: `${settings.contactDetails.listMarkerColor}`,
+      ...getNodeStyle(settings.contactDetails, 'flex'),
       ...getNodeStyle(settings.contactDetails, 'block'),
     }"
   >

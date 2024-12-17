@@ -1,14 +1,17 @@
+import br from "./locales/br";
+import de from "./locales/de";
+import en from "./locales/en";
+import es from "./locales/es";
+import fr from "./locales/fr";
+import it from "./locales/it";
+
 export default {
   messages: {
-    en: {
-      welcome: "Welcome",
-      nice: "Nice",
-      resume: "Resume",
-    },
-    fr: {
-      welcome: "Bienvenue",
-      nice: "Joli",
-      resume: "CV",
-    },
+    br,
+    de,
+    en,
+    es,
+    fr,
+    it,
   },
 };

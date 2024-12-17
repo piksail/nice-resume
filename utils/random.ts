@@ -1,11 +1,14 @@
 import type { Asset, Experience } from "@/types";
 import { getEntryTitleLabel, getExperienceOrganizationLabel } from "./editor";
 
-export function getRandomAsset(type: Asset["type"]): Asset {
+export function getRandomAsset(
+  type: Asset["type"],
+  t: (message: string) => string,
+): Asset {
   return {
     nature: "asset" as Asset["nature"],
     type,
-    title: getEntryTitleLabel(type),
+    title: capitalize(t(getEntryTitleLabel(type))),
     highlights: [
       "Lorem ipsum dolor sit amet",
       "Consectetur adipiscing elit",
@@ -15,13 +18,16 @@ export function getRandomAsset(type: Asset["type"]): Asset {
   };
 }
 
-export function getRandomExperience(type: Experience["type"]): Experience {
+export function getRandomExperience(
+  type: Experience["type"],
+  t: (message: string) => string,
+): Experience {
   return {
     nature: "experience" as Experience["nature"],
     type,
-    title: getEntryTitleLabel(type),
-    organization: getExperienceOrganizationLabel(type),
-    location: "Location",
+    title: capitalize(t(getEntryTitleLabel(type))),
+    organization: capitalize(t(getExperienceOrganizationLabel(type))),
+    location: capitalize(t("Location")),
     period:
       type === "certificate"
         ? "Delivered in X (valid 2 years)"

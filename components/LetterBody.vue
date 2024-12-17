@@ -3,12 +3,12 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import LetterReference from "./LetterReference.vue";
 import LetterSubject from "./LetterSubject.vue";
 
-const { isThemeCustomized, name, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, name, theme } = storeToRefs(useProfileStore());
 
 const {
   settings: storeSettings,
@@ -23,7 +23,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].letter;
+    : themeSettings[theme.value].letter;
 });
 </script>
 
@@ -69,7 +69,7 @@ const settings = computed(() => {
       lineHeight: settings.body.lineHeight ?? 'normal',
       fontWeight: settings.body.fontWeight,
       textAlign: settings.body.isJustified ? 'justify' : 'left',
-      color: settings.body.color,
+      color: `${settings.body.color}`,
       marginTop: `${settings.body.margin[0]}px`,
       marginRight: `${settings.body.margin[1]}px`,
       marginBottom: `${settings.body.margin[2]}px`,
