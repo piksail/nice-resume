@@ -31,5 +31,9 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :disabled="!isThemeCustomized"
       />
     </FormBlockRow>
+    <SizeableSettingsEditor
+      :property-name="propertyName"
+      :settings="settings"
+    />
   </div>
 </template>

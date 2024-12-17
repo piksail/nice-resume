@@ -96,6 +96,11 @@ export type ListSettings = {
   listMarkerPosition: ListMarkerPosition;
 };
 
+export type SizeableSettings = {
+  width: number; // Percent
+  widthType: "auto" | "fit-content" | "custom";
+};
+
 export type BlockSettings = {
   backgroundColor: string;
   padding: SideSetting;
@@ -104,7 +109,6 @@ export type BlockSettings = {
   borderColor: string;
   borderRadius: number;
   margin: SideSetting;
-  // TODO allow width -> This allow some themes to have the same width even though their text is different
 };
 
 export type TextSettings = {
@@ -118,10 +122,10 @@ export type TextSettings = {
   color: string;
 };
 
-export type TitleSettings = TextSettings & {
-  textAlign: "left" | "center" | "right";
-  // TODO move the width? from categoryName property here? This could allow nice design where lastname has a line break
-};
+export type TitleSettings = SizeableSettings &
+  TextSettings & {
+    textAlign: "left" | "center" | "right";
+  };
 
 export type BaseSettings = {
   isLetterPaddingless: boolean;
@@ -174,24 +178,23 @@ export type PaperDocumentSettings = CommonDocumentSettings & {
 };
 
 export type ResumeSettings = PaperDocumentSettings & {
-  aside: BlockSettings & {
-    width: number; // Percentage
-    isRightPositioned: boolean;
-  };
+  aside: BlockSettings &
+    SizeableSettings & {
+      isRightPositioned: boolean;
+    };
   body: BlockSettings;
   category: BlockSettings & {
     gap: number; // Flex gap between categories
   };
   categoryName: BlockSettings &
     TitleSettings & {
-      width?: number | "fit"; // Percentage
       isAside: boolean;
     };
-  categoryNameSeparator: BlockSettings & {
-    position: "bottom" | "left" | "right" | "top";
-    height?: number;
-    width?: number | "fit";
-  };
+  categoryNameSeparator: BlockSettings &
+    SizeableSettings & {
+      position: "bottom" | "left" | "right" | "top";
+      height?: number;
+    };
   entry: BlockSettings & {
     layout: EntryLayout;
     gap: number; // Flex gap between entries

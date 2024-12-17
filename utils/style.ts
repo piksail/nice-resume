@@ -43,6 +43,10 @@ export function getNodeStyle(
   }
   if (settingsType === "title") {
     style.textAlign = settingsItem.textAlign;
+    style.width =
+      settingsItem.widthType === "custom"
+        ? `${settingsItem.width}%`
+        : settingsItem.widthType;
   }
   if (settingsType === "flex") {
     style.flexDirection = settingsItem.listOrientation;

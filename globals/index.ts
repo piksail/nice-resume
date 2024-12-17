@@ -124,6 +124,8 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
   },
   title: {
     font: "inherit",
@@ -141,6 +143,8 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
   },
   about: {
     font: "inherit",
@@ -158,6 +162,8 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
   },
   aboutQuote: {
     font: "inherit",
@@ -229,6 +235,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     width: 25,
+    widthType: "auto",
     isRightPositioned: false,
   },
   body: {
@@ -267,6 +274,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     width: 100,
+    widthType: "auto",
     isAside: false,
   },
   categoryNameSeparator: {
@@ -278,6 +286,8 @@ export const resumeSettings: ResumeSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
   },
   entry: {
     layout: 0,
@@ -432,6 +442,8 @@ export const letterSettings: LetterSettings = {
     margin: [0, 0, 0, 0], // If sender details is used, it is the first element on the document (no need for margins)
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
     gap: 0,
   },
   recipientDetails: {
@@ -450,6 +462,8 @@ export const letterSettings: LetterSettings = {
     margin: [40, 0, 40, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
     gap: 0,
   },
   subject: {
@@ -468,6 +482,8 @@ export const letterSettings: LetterSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
   },
   reference: {
     font: "inherit",
@@ -485,6 +501,8 @@ export const letterSettings: LetterSettings = {
     margin: [0, 0, 0, 0],
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
+    width: 100,
+    widthType: "auto",
     isBeforeSubject: false,
   },
   body: {
@@ -886,6 +904,7 @@ themeSettings.Aster.resume.header.margin = [32, 32, 32, 32];
 themeSettings.Aster.resume.contactDetails.alignment = "end";
 themeSettings.Aster.resume.contactDetails.iconColor =
   themeBaseSettings.Aster.colors[0];
+themeSettings.Aster.resume.categoryName.widthType = "custom";
 themeSettings.Aster.resume.categoryName.width = 64;
 themeSettings.Aster.resume.categoryName.padding = [4, 4, 4, 32];
 themeSettings.Aster.resume.categoryName.backgroundColor =
@@ -894,8 +913,10 @@ themeSettings.Aster.resume.categoryName.color =
   themeBaseSettings.Aster.colors[2];
 themeSettings.Aster.resume.categoryName.isUppercase = true;
 themeSettings.Aster.resume.categoryName.fontWeight = 600;
+themeSettings.Aster.resume.categoryName.border[1] = 10;
+themeSettings.Aster.resume.categoryName.borderColor =
+  themeBaseSettings.Aster.colors[2];
 themeSettings.Aster.resume.categoryNameSeparator.height = 6;
-themeSettings.Aster.resume.categoryNameSeparator.width = 65;
 themeSettings.Aster.resume.categoryNameSeparator.backgroundColor =
   themeBaseSettings.Aster.colors[1];
 themeSettings.Aster.resume.entry.padding = [8, 8, 8, 32];
@@ -951,7 +972,6 @@ themeSettings.Care.resume.contactDetails.color =
 themeSettings.Care.resume.body.margin = [60, 60, 60, 60];
 themeSettings.Care.resume.category.gap = 40;
 themeSettings.Care.resume.categoryName.isAside = true;
-themeSettings.Care.resume.categoryName.width = "fit";
 themeSettings.Care.resume.categoryName.font =
   themeSettings.Care.base.displayFont;
 themeSettings.Care.resume.categoryName.isUppercase = true;
@@ -1188,8 +1208,8 @@ themeSettings.Cupcake.resume.categoryName.fontSize = 30;
 themeSettings.Cupcake.resume.categoryName.fontWeight = 700;
 themeSettings.Cupcake.resume.categoryName.lineHeight = 1.2;
 themeSettings.Cupcake.resume.categoryName.letterSpacing = 3;
-themeSettings.Cupcake.resume.categoryName.width = "fit";
 themeSettings.Cupcake.resume.categoryName.isUppercase = true;
+themeSettings.Cupcake.resume.categoryName.widthType = "fit-content";
 themeSettings.Cupcake.resume.categoryName.margin[2] = 16;
 themeSettings.Cupcake.resume.categoryName.margin[3] = 80;
 themeSettings.Cupcake.resume.categoryName.border[2] = 2;
@@ -1591,6 +1611,7 @@ themeSettings.Macchiato.resume.categoryName.font =
 themeSettings.Macchiato.resume.categoryName.fontWeight = 300;
 themeSettings.Macchiato.resume.categoryNameSeparator.margin[0] = 4;
 themeSettings.Macchiato.resume.categoryNameSeparator.border[0] = 1;
+themeSettings.Macchiato.resume.categoryNameSeparator.widthType = "custom";
 themeSettings.Macchiato.resume.categoryNameSeparator.width = 7;
 themeSettings.Macchiato.resume.category.margin = [0, 48, 20, 48];
 themeSettings.Macchiato.resume.entry.layout = 5;
@@ -2015,6 +2036,7 @@ themeSettings.OpenResume.resume.categoryName.fontWeight = 700;
 themeSettings.OpenResume.resume.categoryName.fontSize = 12;
 themeSettings.OpenResume.resume.categoryNameSeparator.position = "left";
 themeSettings.OpenResume.resume.categoryNameSeparator.height = 4;
+themeSettings.OpenResume.resume.categoryNameSeparator.widthType = "custom";
 themeSettings.OpenResume.resume.categoryNameSeparator.width = 8;
 themeSettings.OpenResume.resume.categoryNameSeparator.margin[1] = 10;
 themeSettings.OpenResume.resume.categoryNameSeparator.backgroundColor =
@@ -2108,6 +2130,7 @@ themeSettings.Paper.resume.category.borderStyle = "dotted";
 themeSettings.Paper.resume.category.borderColor =
   themeBaseSettings.Paper.colors[0];
 themeSettings.Paper.resume.categoryName.isAside = true;
+themeSettings.Paper.resume.categoryName.widthType = "custom";
 themeSettings.Paper.resume.categoryName.width = 20;
 themeSettings.Paper.resume.categoryName.isUppercase = true;
 themeSettings.Paper.resume.categoryName.fontSize = 12;
@@ -2466,11 +2489,9 @@ themeSettings.StackOverflow.resume.categoryName.fontSize = 12;
 themeSettings.StackOverflow.resume.categoryName.fontWeight = 600;
 themeSettings.StackOverflow.resume.categoryName.color =
   themeSettings.StackOverflow.base.colors[1];
-themeSettings.StackOverflow.resume.categoryName.width = "fit";
 themeSettings.StackOverflow.resume.categoryName.padding = [0, 12, 6, 0];
 themeSettings.StackOverflow.resume.categoryNameSeparator.position = "right";
 themeSettings.StackOverflow.resume.categoryNameSeparator.margin[2] = 8;
-themeSettings.StackOverflow.resume.categoryNameSeparator.width = 100;
 themeSettings.StackOverflow.resume.categoryNameSeparator.height = 1;
 themeSettings.StackOverflow.resume.categoryNameSeparator.backgroundColor =
   themeSettings.StackOverflow.base.colors[6];

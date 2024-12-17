@@ -21,6 +21,7 @@ import BlockSettingsEditor from "@/components/BlockSettingsEditor.vue";
 import EntryHeaderItemSettingsEditor from "@/components/EntryHeaderItemSettingsEditor.vue";
 import Field from "@/components/Field.vue";
 import ListSettingsEditor from "@/components/ListSettingsEditor.vue";
+import SizeableSettingsEditor from "@/components/SizeableSettingsEditor.vue";
 import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
 import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 import FormBlockRow from "~/components/FormBlockRow.vue";
@@ -593,6 +594,18 @@ function askBeforeResetStyle() {
             <TitleSettingsEditor
               property-name="categoryName"
               :settings="resumeSettings.categoryName"
+            />
+          </div>
+        </Fieldset>
+        <Fieldset :legend="capitalize($t('categoryNameSeparator'))" toggleable>
+          <div class="formBlock">
+            <BlockSettingsEditor
+              property-name="categoryNameSeparator"
+              :settings="resumeSettings.categoryNameSeparator"
+            />
+            <SizeableSettingsEditor
+              property-name="categoryNameSeparator"
+              :settings="resumeSettings.categoryNameSeparator"
             />
           </div>
         </Fieldset>

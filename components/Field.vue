@@ -63,15 +63,18 @@ function updateColor(hashlessHex: string) {
 <template>
   <label v-if="type === 'range'" :for="id">
     <span class="label">{{ capitalize(label) }}</span>
-    <div class="flex gap-2 items-center">
+    <div class="flex gap-3 items-center">
       <Slider
         :input-id="id"
+        :disabled="disabled"
         class="w-36"
         :min="min"
         :max="max"
         v-model="model as number"
       />
-      <output class="w-[3rem]">{{ model }}%</output>
+      <output :class="`${disabled ? 'opacity-40' : 'opacity-100'}`">
+        {{ model }}%
+      </output>
     </div>
   </label>
   <div v-else-if="type === 'toggle'" class="flex items-center">
@@ -80,17 +83,21 @@ function updateColor(hashlessHex: string) {
       {{ capitalize(label) }}
     </span>
   </div>
-  <div v-else-if="type === 'togglebutton'" class="flex items-center">
+  <label
+    v-else-if="type === 'togglebutton'"
+    :for="id"
+    class="flex flex-col gap-1"
+  >
+    <span class="label">{{ capitalize(label) }}</span>
     <ToggleButton
       v-model="model as boolean"
+      :input-id="id"
+      :disabled="disabled"
       :onLabel="onLabel"
       :offLabel="offLabel"
       size="small"
     />
-    <span class="label cursor-pointer ml-2">
-      {{ capitalize(label) }}
-    </span>
-  </div>
+  </label>
   <label v-else-if="type === 'checkbutton'" class="" :for="id">
     <ToggleButton
       v-model="model as boolean"
