@@ -93,6 +93,7 @@ export default {
   profile: "profil",
   profiles: "profiloù",
   project: "raktres",
+  projects: "raktresoù",
   publication: "embann",
   publications: "embannoù",
   publisher: "embanner",

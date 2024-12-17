@@ -93,6 +93,7 @@ export default {
   profile: "TODO",
   profiles: "TODO",
   project: "TODO",
+  projects: "TODO",
   publication: "TODO",
   publications: "TODO",
   publisher: "TODO",
