@@ -468,6 +468,9 @@ function exportResumeToJsonResume() {
   },
   "fr": {
     "referToSchema": "Consulter le format"
+  },
+  "it": {
+    "referToSchema": "TODO"
   }
 }
 </i18n>
