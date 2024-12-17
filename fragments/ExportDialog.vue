@@ -192,21 +192,15 @@ function exportResumeToJsonResume() {
                     :key="profileIndex"
                     class="inputListItem"
                   >
-                    <InputText
-                      class="!text-sm"
-                      size="small"
+                    <Field
                       v-model="jsonResume.basics.profiles[profileIndex].network"
                     />
-                    <InputText
-                      class="!text-sm"
-                      size="small"
+                    <Field
                       v-model="
                         jsonResume.basics.profiles[profileIndex].username
                       "
                     />
-                    <InputText
-                      class="!text-sm"
-                      size="small"
+                    <Field
                       v-model="jsonResume.basics.profiles[profileIndex].url"
                     />
                     <ListActions
