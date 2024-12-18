@@ -101,15 +101,15 @@ function addTag(entry: Entry, entryIndex: number) {
 function askBeforeRemoveCategory(categoryIndex: number) {
   indexToRemove.value = categoryIndex;
   confirm.require({
-    message: `Confirm category ${categories.value[indexToRemove.value]?.name} deletion?`,
-    header: "Confirmation",
+    message: `Confirm category ${categories.value[indexToRemove.value]?.name} deletion? TODO localize`,
+    header: "Confirmation TODO localize",
     rejectProps: {
-      label: "No",
+      label: "No TODO localize",
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, delete",
+      label: "Yes, delete TODO localize",
       severity: "danger",
     },
     accept: () => {
@@ -122,15 +122,15 @@ function askBeforeRemoveCategory(categoryIndex: number) {
 function askBeforeRemoveCategoryEntry(category: Category, entryIndex: number) {
   indexToRemove.value = entryIndex;
   confirm.require({
-    message: `Confirm entry ${category.entries[indexToRemove.value]?.title} deletion?`,
-    header: "Confirmation",
+    message: `Confirm entry ${category.entries[indexToRemove.value]?.title} deletion? TODO localize`,
+    header: "Confirmation TODO localize",
     rejectProps: {
-      label: "No",
+      label: "No TODO localize",
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, delete",
+      label: "Yes, delete TODO localize",
       severity: "danger",
     },
     accept: () => {

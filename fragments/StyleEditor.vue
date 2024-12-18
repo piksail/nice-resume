@@ -58,15 +58,15 @@ watch(theme, () => {
 
 function askBeforeResetStyle() {
   confirm.require({
-    message: `Confirm style reset`,
-    header: "Confirmation",
+    message: `Confirm style reset TODO localize`,
+    header: "Confirmation TODO localize",
     rejectProps: {
-      label: "No",
+      label: "No TODO localize",
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, reset",
+      label: "Yes, reset TODO localize",
       severity: "danger",
     },
     accept: () => {
