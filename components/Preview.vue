@@ -7,7 +7,7 @@ import { getA4Height } from "@/utils/file";
 import Document from "./Document.vue";
 import PreviewZoom from "./PreviewZoom.vue";
 
-const { zoomLevel } = storeToRefs(useEditorStore());
+const { documentType, zoomLevel } = storeToRefs(useEditorStore());
 
 const preview = ref<HTMLDivElement>();
 const previewHeight = ref(0);
@@ -17,6 +17,8 @@ useResizeObserver(preview, (nodes) => {
   const { width } = node.contentRect;
   previewHeight.value = getA4Height(width);
 });
+
+// TODO a4 height computation is wrong: when we export document as PDF, there is a small gap in the bottom part. Or this is another problem based on too many items for a4 height.
 </script>
 
 <template>
@@ -28,6 +30,7 @@ useResizeObserver(preview, (nodes) => {
     <Document
       id="preview"
       class="print:!transform-none"
+      :class="documentType === 'email' ? '' : 'h-full'"
       :style="`transform: scale(${zoomLevel / 100}); transform-origin: top left;`"
     />
     <PreviewZoom
