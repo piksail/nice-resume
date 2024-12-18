@@ -12,6 +12,7 @@ const { documentType } = storeToRefs(useEditorStore());
 const { isHeaderSimple } = storeToRefs(useLetterStore());
 
 const settings = useDocumentSettings();
+// TODO seems like there is an error of nextTick because ctrl+s on Document.vue fixes the refresh pb
 </script>
 
 <template>
