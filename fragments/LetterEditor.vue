@@ -44,13 +44,14 @@ function addSenderDetail() {
       <FormBlockRow>
         <Field
           type="checkbox"
+          transparent
           label="Use sender layout TODO localize"
           v-model="isHeaderSimple"
         />
       </FormBlockRow>
       <label class="flex flex-col" for="senderDetails">
         <template v-if="isHeaderSimple">
-          <span class="label">
+          <span class="label labelTransparent">
             {{ capitalize($t("senderDetails")) }}
           </span>
           <ul v-if="senderDetails.length" id="senderDetailList">
@@ -61,6 +62,7 @@ function addSenderDetail() {
             >
               <Field
                 class="w-[70%]"
+                transparent
                 v-model="senderDetails[index]"
                 @keydown.enter.prevent="addSenderDetail"
               />
@@ -72,19 +74,19 @@ function addSenderDetail() {
                 @remove="remove(senderDetails, index)"
               />
             </li>
-            <Button
-              class="w-[70%] mt-2"
-              icon="pi pi-plus"
-              :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
-              variant="outlined"
-              size="small"
-              @click="addSenderDetail"
-            />
+            <Button asChild>
+              <button
+                class="button slotButton slotButtonSmall"
+                @click="addSenderDetail"
+              >
+                {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+              </button>
+            </Button>
           </ul>
         </template>
       </label>
       <label class="flex flex-col" for="recipientDetails">
-        <span class="label">
+        <span class="label labelTransparent">
           {{ capitalize($t("recipientDetails")) }}
         </span>
         <ul v-if="recipientDetails.length" id="recipientDetailList">
@@ -95,6 +97,7 @@ function addSenderDetail() {
           >
             <Field
               class="w-[70%]"
+              transparent
               v-model="recipientDetails[index]"
               @keydown.enter.prevent="addRecipientDetail"
             />
@@ -106,24 +109,26 @@ function addSenderDetail() {
               @remove="remove(recipientDetails, index)"
             />
           </li>
-          <Button
-            class="w-[70%] mt-2"
-            icon="pi pi-plus"
-            :label="capitalize(`${$t('toAdd')} ${$t('detail')}`)"
-            variant="outlined"
-            size="small"
-            @click="addRecipientDetail"
-          />
+          <Button asChild>
+            <button
+              class="button slotButton slotButtonSmall"
+              @click="addRecipientDetail"
+            >
+              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+            </button>
+          </Button>
         </ul>
       </label>
       <Field
         id="letterSubject"
+        transparent
         :label="$t('subject')"
         type="textarea"
         v-model="subject"
       />
       <Field
         id="letterReference"
+        transparent
         :label="$t('reference')"
         v-model="reference"
       />
@@ -133,7 +138,9 @@ function addSenderDetail() {
     <template v-slot:header>{{ capitalize($t("body")) }}</template>
     <div class="formBlock">
       <label class="flex flex-col" for="paragraphList">
-        <span class="label">{{ capitalize($t("paragraphs")) }}</span>
+        <span class="label labelTransparent">
+          {{ capitalize($t("paragraphs")) }}
+        </span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">
           <li
             v-for="(_paragraph, index) in paragraphs"
@@ -155,14 +162,14 @@ function addSenderDetail() {
               @remove="remove(paragraphs, index)"
             />
           </li>
-          <Button
-            class="w-[70%]"
-            icon="pi pi-plus"
-            :label="capitalize(`${$t('toAdd')} ${$t('paragraph')}`)"
-            variant="outlined"
-            size="small"
-            @click="addParagraph"
-          />
+          <Button asChild>
+            <button
+              class="button slotButton slotButtonSmall"
+              @click="addParagraph"
+            >
+              {{ capitalize(`${$t("toAdd")} ${$t("paragraph")}`) }}
+            </button>
+          </Button>
         </ul>
       </label>
     </div>

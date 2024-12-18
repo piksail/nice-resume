@@ -2,9 +2,6 @@
 import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import Button from "primevue/button";
-import InputGroup from "primevue/inputgroup";
-import InputGroupAddon from "primevue/inputgroupaddon";
-import InputText from "primevue/inputtext";
 import { useConfirm } from "primevue/useconfirm";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -212,7 +209,14 @@ function toggleCategoryVisibility(category: Category) {
             type="select"
             :label="$t('layout')"
             :id="`${categoryIndex}layout`"
-            :options="layouts"
+            optionLabel="label"
+            optionValue="value"
+            :options="
+              layouts.map((layout) => ({
+                label: capitalize($t(layout)),
+                value: layout,
+              }))
+            "
             v-model="category.layout"
           />
         </div>
@@ -256,11 +260,18 @@ function toggleCategoryVisibility(category: Category) {
     </template>
     <ul v-if="category.entries.length" class="flex flex-col gap-10 mb-4">
       <li v-for="(entry, entryIndex) in category.entries" :key="entryIndex">
-        <Fieldset :legend="getEntryHeading(entry, entryIndex)" toggleable>
+        <Fieldset
+          :legend="getEntryHeading(entry, entryIndex)"
+          toggleable
+          class="!border-white/10"
+          pt:legend:class="!border-none !bg-transparent group"
+          pt:toggleicon:class="!text-white/50 !font-normal group-hover:!text-white"
+          pt:legendlabel:class="label labelTransparent !font-normal group-hover:!text-white"
+        >
           <header class="flex items-center justify-between">
             <div
               :id="getEntryHeading(entry, entryIndex)"
-              class="uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10"
+              class="uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10 text-white"
             >
               {{ getEntryHeading(entry, entryIndex) }}
             </div>
@@ -276,39 +287,41 @@ function toggleCategoryVisibility(category: Category) {
           <div class="formBlock">
             <Field
               id="entryTitle"
-              :label="$t(getEntryTitleLabel(entry.type))"
               transparent
+              :label="$t(getEntryTitleLabel(entry.type))"
               v-model="entry.title"
             />
             <template v-if="entry.nature === 'experience'">
               <Field
                 id="entryOrganization"
-                :label="$t(getExperienceOrganizationLabel(entry.type))"
                 transparent
+                :label="$t(getExperienceOrganizationLabel(entry.type))"
                 v-model="entry.organization"
               />
               <Field
                 id="entryLocation"
-                :label="$t('location')"
                 transparent
+                :label="$t('location')"
                 v-model="entry.location"
               />
               <Field
                 id="entryPeriod"
-                :label="$t('period')"
                 transparent
+                :label="$t('period')"
                 v-model="entry.period"
               />
               <Field
                 id="entrySummary"
-                :label="$t('summary')"
                 transparent
+                :label="$t('summary')"
                 type="textarea"
                 v-model="entry.summary"
               />
             </template>
             <label class="flex flex-col gap-1" for="highlights">
-              <span class="label">{{ capitalize($t("highlights")) }}</span>
+              <span class="label labelTransparent">
+                {{ capitalize($t("highlights")) }}
+              </span>
               <ul
                 v-if="entry.highlights.length"
                 :id="`highlightList${entryIndex}`"
@@ -319,60 +332,37 @@ function toggleCategoryVisibility(category: Category) {
                   :key="highlightIndex"
                   class="inputListItem"
                 >
-                  <InputGroup>
-                    <InputText
-                      class="!text-sm"
-                      size="small"
-                      v-model="entry.highlights[highlightIndex]"
-                      @keydown.enter.prevent="addHighlight(entry, entryIndex)"
-                    />
-                    <InputGroupAddon
-                      v-if="
-                        entry.highlights.length > 1 &&
-                        highlightIndex < entry.highlights.length - 1
-                      "
-                    >
-                      <Button
-                        icon="pi pi-arrow-down"
-                        severity="secondary"
-                        size="small"
-                        pt:icon:class="text-xs"
-                        @click="moveDown(entry.highlights, highlightIndex)"
-                      />
-                    </InputGroupAddon>
-                    <InputGroupAddon
-                      v-if="entry.highlights.length > 1 && highlightIndex > 0"
-                    >
-                      <Button
-                        icon="pi pi-arrow-up"
-                        severity="secondary"
-                        size="small"
-                        pt:icon:class="text-xs"
-                        @click="moveUp(entry.highlights, highlightIndex)"
-                      />
-                    </InputGroupAddon>
-                    <InputGroupAddon>
-                      <Button
-                        icon="pi pi-times"
-                        severity="danger"
-                        size="small"
-                        pt:icon:class="text-xs"
-                        @click="remove(entry.highlights, highlightIndex)"
-                      />
-                    </InputGroupAddon>
-                  </InputGroup>
+                  <Field
+                    :id="`tagList${entryIndex}`"
+                    transparent
+                    class="w-[70%]"
+                    v-model="entry.highlights[highlightIndex]"
+                    @keydown.enter.prevent="addHighlight(entry, entryIndex)"
+                  />
+                  <ListActions
+                    :index="highlightIndex"
+                    :list-length="entry.highlights.length"
+                    @moveUp="moveUp(entry.highlights, highlightIndex)"
+                    @moveDown="moveDown(entry.highlights, highlightIndex)"
+                    @remove="remove(entry.highlights, highlightIndex)"
+                  />
                 </li>
               </ul>
-              <Button
-                icon="pi pi-plus"
-                :label="capitalize(`${$t('toAdd')} ${$t('highlight')}`)"
-                variant="outlined"
-                size="small"
-                @click="addHighlight(entry, entryIndex)"
-              />
+              <Button asChild>
+                <button
+                  class="button slotButton slotButtonSmall"
+                  @click="addHighlight(entry, entryIndex)"
+                >
+                  <span class="uppercase text-sm">
+                    {{ capitalize(`${$t("toAdd")} ${$t("highlight")}`) }}
+                  </span>
+                </button>
+              </Button>
             </label>
             <label class="flex flex-col gap-1" for="tags">
-              <span class="label">{{ capitalize($t("tags")) }}</span>
+              <span class="label labelTransparent">
+                {{ capitalize($t("tags")) }}
+              </span>
               <ul v-if="entry.tags.length" :id="`tagList${entryIndex}`">
                 <li
                   v-for="(_tag, tagIndex) in entry.tags"
@@ -380,7 +370,8 @@ function toggleCategoryVisibility(category: Category) {
                   class="inputListItem"
                 >
                   <Field
-                    id="entryLocation"
+                    :id="`tagList${entryIndex}`"
+                    transparent
                     class="w-[70%]"
                     v-model="entry.tags[tagIndex]"
                     @keydown.enter.prevent="addTag(entry, entryIndex)"
@@ -394,14 +385,16 @@ function toggleCategoryVisibility(category: Category) {
                   />
                 </li>
               </ul>
-              <Button
-                class="w-[70%] mt-2"
-                icon="pi pi-plus"
-                :label="capitalize(`${$t('toAdd')} ${$t('tag')}`)"
-                variant="outlined"
-                size="small"
-                @click="addTag(entry, entryIndex)"
-              />
+              <Button asChild>
+                <button
+                  class="button slotButton slotButtonSmall"
+                  @click="addTag(entry, entryIndex)"
+                >
+                  <span class="uppercase text-sm">
+                    {{ capitalize(`${$t("toAdd")} ${$t("tag")}`) }}
+                  </span>
+                </button>
+              </Button>
             </label>
           </div>
         </Fieldset>
@@ -409,21 +402,25 @@ function toggleCategoryVisibility(category: Category) {
     </ul>
     <template v-slot:footer>
       <footer class="flex justify-center">
-        <Button
-          icon="pi pi-plus"
-          :label="capitalize(`${$t('toAdd')} ${$t('entry')}`)"
-          @click="addEntry(category)"
-        />
+        <Button asChild>
+          <button class="button bg-white mx-auto" @click="addEntry(category)">
+            <span class="textGradient">
+              {{ capitalize(`${$t("toAdd")} ${$t("entry")}`) }}
+            </span>
+          </button>
+        </Button>
       </footer>
     </template>
   </EditorCategory>
 
   <footer class="flex justify-center">
-    <button class="button slotButton w-full shadow-none" @click="addCategory">
-      <span class="font-black tracking-widest uppercase">
-        {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}
-      </span>
-    </button>
+    <Button asChild>
+      <button class="button slotButton w-full shadow-none" @click="addCategory">
+        <span class="font-black tracking-widest uppercase">
+          {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}
+        </span>
+      </button>
+    </Button>
   </footer>
 </template>
 

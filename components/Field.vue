@@ -24,6 +24,7 @@ const {
   optionValue,
   onLabel = "On",
   offLabel = "Off",
+  transparent = false,
   type,
 } = defineProps<{
   defaultValue?: string | null | undefined;
@@ -39,6 +40,7 @@ const {
   step?: number;
   min?: number;
   max?: number;
+  transparent?: boolean;
   type?:
     | "checkbox"
     | "checkbutton"
@@ -62,7 +64,9 @@ function updateColor(hashlessHex: string) {
 
 <template>
   <label v-if="type === 'range'" :for="id">
-    <span class="label">{{ capitalize(label) }}</span>
+    <span class="label" :class="transparent ? '!text-white/80' : ''">
+      {{ capitalize(label) }}
+    </span>
     <div class="flex gap-3 items-center">
       <Slider
         :input-id="id"
@@ -88,13 +92,21 @@ function updateColor(hashlessHex: string) {
     :for="id"
     class="flex flex-col gap-1"
   >
-    <span class="label">{{ capitalize(label) }}</span>
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
+      {{ capitalize(label) }}
+    </span>
     <ToggleButton
       v-model="model as boolean"
       :input-id="id"
       :disabled="disabled"
       :onLabel="onLabel"
       :offLabel="offLabel"
+      class="!bg-transparent"
+      :class="
+        transparent
+          ? '!text-white/50 !border-white/20 [&[aria-pressed=true]]:!text-white [&[aria-pressed=true]]:!border-white hover:!text-white hover:!border-white hover:!shadow-lg'
+          : ''
+      "
       size="small"
     />
   </label>
@@ -128,7 +140,7 @@ function updateColor(hashlessHex: string) {
   <label
     v-else-if="type === 'checkbox'"
     :for="id"
-    class="flex gap-1 items-center w-fit"
+    class="flex gap-2 items-center w-fit"
   >
     <Checkbox
       v-model="model"
@@ -136,10 +148,15 @@ function updateColor(hashlessHex: string) {
       binary
       :disabled="disabled"
       size="small"
+      :pt:box:class="transparent ? '!bg-black/10 !border-transparent' : ''"
+      :pt:icon:class="transparent ? '!text-white' : ''"
     />
     <span
       class="label text-sm text-primary"
-      :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
+      :class="[
+        !disabled ? 'cursor-pointer' : 'cursor-auto',
+        transparent ? '!text-white' : '',
+      ]"
     >
       {{ capitalize(label) }}
     </span>
@@ -149,17 +166,24 @@ function updateColor(hashlessHex: string) {
     :for="id"
     class="flex flex-col gap-1"
   >
-    <span class="label">{{ capitalize(label) }}</span>
+    <span class="label" :class="transparent ? '!text-white/80' : ''">
+      {{ capitalize(label) }}
+    </span>
     <SelectButton
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
       :optionValue="optionValue"
+      :class="
+        transparent
+          ? '[&>*]:!bg-black/10 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-white/10'
+          : ''
+      "
       size="small"
     />
   </label>
   <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
-    <span class="label">
+    <span class="label" :class="transparent ? '!text-white/80' : ''">
       {{ capitalize(label) }}
     </span>
     <Select
@@ -168,11 +192,16 @@ function updateColor(hashlessHex: string) {
       :optionLabel="optionLabel"
       :optionValue="optionValue"
       :input-id="id"
+      class="!border-none"
+      :class="transparent ? '!bg-black/10 !text-white [&>*]:!text-white' : ''"
+      :pt:label:class="transparent ? '' : '!text-primary'"
+      :pt:dropdown:class="transparent ? '' : '!text-primary'"
+      :pt:optionlabel:class="['text-sm', transparent ? '' : '!text-primary']"
       size="small"
     />
   </label>
   <label v-else :for="id" class="flex flex-col gap-1">
-    <span class="label">
+    <span class="label" :class="transparent ? '!text-white/80' : ''">
       {{ capitalize(label) }}
     </span>
     <ColorPicker
@@ -185,6 +214,8 @@ function updateColor(hashlessHex: string) {
     <Textarea
       v-else-if="type === 'textarea'"
       :id="id"
+      class="!border-t-0 !border-l-0 !border-r-0 !p-2"
+      :class="transparent ? '!bg-black/10 !text-white !border-none' : ''"
       :disabled="disabled"
       v-model="model as string"
       size="small"
@@ -210,6 +241,12 @@ function updateColor(hashlessHex: string) {
     <InputText
       v-else
       :id="id"
+      class="!p-2"
+      :class="
+        transparent
+          ? '!bg-black/10 !text-white !border-none'
+          : '!border-primary-200 !border-t-0 !border-r-0 !border-l-0 !rounded-none'
+      "
       :type="type || 'text'"
       :disabled="disabled"
       v-model="model as string"

@@ -18,6 +18,7 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
     <div class="formBlock">
       <Field
         id="isDetailClickable"
+        transparent
         :label="t('makeLinksClickable')"
         type="checkbox"
         v-model="isDetailClickable"
