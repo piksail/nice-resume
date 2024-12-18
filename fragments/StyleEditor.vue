@@ -204,7 +204,7 @@ function askBeforeResetStyle() {
               />
               <Field
                 id="asideIsRightPositioned"
-                label="Right side"
+                label="Right side TODO localize"
                 type="checkbox"
                 :disabled="!isThemeCustomized"
                 v-model="resumeSettings.aside.isRightPositioned"
@@ -240,7 +240,7 @@ function askBeforeResetStyle() {
             />
             <Field
               id="senderDetailsGap"
-              label="Gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="letterSettings.senderDetails.gap"
@@ -260,7 +260,7 @@ function askBeforeResetStyle() {
             />
             <Field
               id="recipientDetailsGap"
-              label="Gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="letterSettings.recipientDetails.gap"
@@ -351,19 +351,14 @@ function askBeforeResetStyle() {
             property-name="about"
             :settings="documentTypeSettings.about"
           />
-        </div>
-      </Fieldset>
-
-      <Fieldset legend="About quote" toggleable>
-        <div class="formBlock">
           <Field
             id="aboutQuoteIsShown"
-            label="Show quote"
+            :label="`${$t('toShow')} ${$t('quoteMark')}`"
             type="checkbox"
             :disabled="!isThemeCustomized"
             v-model="documentTypeSettings.aboutQuote.isShown"
           />
-          <FormBlockRow>
+          <FormBlockRow :header="$t('quoteMark')">
             <Field
               id="aboutQuoteFont"
               type="select"
@@ -457,35 +452,37 @@ function askBeforeResetStyle() {
             />
             <Field
               id="contactDetailsGap"
-              label="Gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.gap"
             />
+          </FormBlockRow>
+          <FormBlockRow :header="$t('icon')">
             <Field
               id="contactDetailsIsIconFirst"
-              label="Icon first"
+              label="Icon first TODO localize"
               type="checkbox"
               :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.isIconFirst"
             />
             <Field
               id="contactDetailsIconGap"
-              label="Icon gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.iconGap"
             />
             <Field
               id="contactDetailsIconSize"
-              label="Icon size"
+              :label="$t('size')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.iconSize"
             />
             <Field
               id="contactDetailsIconColor"
-              label="Icon color"
+              :label="$t('color')"
               type="color"
               :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.iconColor"
@@ -514,7 +511,7 @@ function askBeforeResetStyle() {
               />
               <Field
                 id="bodyLineHeight"
-                label="Line height"
+                :label="$t('lineHeight')"
                 type="number"
                 :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.lineHeight"
@@ -536,7 +533,7 @@ function askBeforeResetStyle() {
               />
               <Field
                 id="bodyIsSignatureRightAligned"
-                label="Signature on the right"
+                label="Signature on the right TODO localize"
                 type="checkbox"
                 :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.isSignatureRightAligned"
@@ -556,7 +553,7 @@ function askBeforeResetStyle() {
           </div>
           <Field
             id="bodyGap"
-            label="Gap"
+            :label="$t('gap')"
             type="number"
             :disabled="!isThemeCustomized"
             v-model="letterSettings.body.gap"
@@ -569,7 +566,7 @@ function askBeforeResetStyle() {
           <div class="formBlock">
             <Field
               id="categoryGap"
-              label="Gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="resumeSettings.category.gap"
@@ -622,7 +619,7 @@ function askBeforeResetStyle() {
             />
             <Field
               id="entryGap"
-              label="Gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="resumeSettings.entry.gap"
@@ -700,7 +697,7 @@ function askBeforeResetStyle() {
             />
             <Field
               id="entryTagGap"
-              label="Gap"
+              :label="$t('gap')"
               type="number"
               :disabled="!isThemeCustomized"
               v-model="resumeSettings.entryTag.gap"

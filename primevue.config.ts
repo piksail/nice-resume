@@ -84,6 +84,25 @@ export default definePreset(Lara, {
     },
   },
   components: {
+    fieldset: {
+      colorScheme: {
+        light: {
+          background: "transparent",
+          legend: {
+            background: "transparent",
+          },
+        },
+        dark: {
+          background: "transparent",
+          legend: {
+            background: "transparent",
+          },
+        },
+      },
+      border: {
+        padding: 0,
+      },
+    },
     inputnumber: {
       button: {
         width: "1.5rem",
@@ -114,13 +133,13 @@ export default definePreset(Lara, {
     panel: {
       colorScheme: {
         light: {
-          background: "{surface.0}",
+          background: "transparent",
           header: {
             background: "{surface.0}",
           },
         },
         dark: {
-          background: "{surface.900}",
+          background: "transparent",
           header: {
             background: "{surface.900}",
           },
@@ -130,6 +149,9 @@ export default definePreset(Lara, {
         header: {
           padding: "1.125rem",
         },
+      },
+      border: {
+        width: 0,
       },
     },
     scrollpanel: {
@@ -150,16 +172,11 @@ export default definePreset(Lara, {
       },
     },
     togglebutton: {
-      // padding: "0.25rem",
-      // paddingX: "0.5rem",
-      // paddingY: "0.25rem",
       sm: {
         padding: "0.2rem",
       },
     },
     toggleswitch: {
-      // witdh: "1.75rem",
-      // height: "1.5rem",
       sm: {
         witdh: "1rem",
         height: "0.75rem",
