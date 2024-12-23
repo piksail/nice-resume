@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { LocaleCode, RegionCode } from "~/types";
-import RegionFlag from "~/components/RegionFlag.vue";
+import type { LocaleCode } from "~/types";
 
 // eslint-disable-next-line no-undef
 const { availableLocales, locale, setLocale } = useI18n();
@@ -8,13 +7,13 @@ const { availableLocales, locale, setLocale } = useI18n();
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
-const regionCodeFromLocale: { [key in LocaleCode]: RegionCode } = {
-  br: "br",
-  de: "de",
-  en: "uk",
-  es: "es",
-  fr: "fr",
-  it: "it",
+const localeLabel: { [key in LocaleCode]: string } = {
+  br: "Brezhoneg",
+  de: "Deutsch",
+  en: "English",
+  es: "Español",
+  fr: "Français",
+  it: "Italiano",
 };
 </script>
 
@@ -35,15 +34,22 @@ const regionCodeFromLocale: { [key in LocaleCode]: RegionCode } = {
           Resume
         </p>
       </NuxtLink>
-      <div class="flex items-center gap-3 h-1/4">
-        <RegionFlag
-          v-for="availableLocale in availableLocales"
-          :key="availableLocale"
-          :code="regionCodeFromLocale[availableLocale as LocaleCode]"
-          :class="`rounded-sm ${availableLocale === locale ? 'h-full ' : 'grayscale h-2/3'}  cursor-pointer hover:shadow-xl hover:grayscale-0 transition duration-75`"
-          @click="setLocale(availableLocale)"
-        />
-      </div>
+      <Field
+        class="[&_.p-select]:!bg-transparent"
+        transparent
+        type="select"
+        :aria-label="$t('toSwitchLanguage')"
+        :model-value="locale"
+        optionLabel="label"
+        optionValue="value"
+        :options="
+          availableLocales.map((locale) => ({
+            label: capitalize(localeLabel[locale as LocaleCode]),
+            value: locale,
+          }))
+        "
+        @update:model-value="setLocale"
+      />
     </header>
     <slot />
   </div>

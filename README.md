@@ -49,7 +49,6 @@ So far, tools we believe are best out there are :
 - [Simple Icons](https://simpleicons.org/) (for brand icons) through [Vue3 Simple Icons](https://vue3-simple-icons.wyatt-herkamp.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vue](https://vuejs.org/)
-- [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) (for region flags)
 
 ### Prerequisites
 

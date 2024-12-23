@@ -13,12 +13,7 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "@primevue/nuxt-module",
     "@vueuse/nuxt",
-    [
-      "nuxt-svgo",
-      {
-        defaultImport: "component",
-      },
-    ],
+    "nuxt-svgo",
   ],
   alias: {
     "~/*": "../*",
