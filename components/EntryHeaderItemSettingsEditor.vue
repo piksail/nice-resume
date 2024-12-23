@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import type { BlockSettings, TextSettings, TextSeparator } from "@/types";
-import { useProfileStore } from "@/stores/profile";
 import { textSeparators } from "@/globals";
 import BlockSettingsEditor from "./BlockSettingsEditor.vue";
 import TextSettingsEditor from "./TextSettingsEditor.vue";
@@ -15,8 +13,6 @@ const { propertyName, settings } = defineProps<{
       beforeSeparator?: TextSeparator;
     };
 }>();
-
-const { isThemeCustomized } = storeToRefs(useProfileStore());
 </script>
 
 <template>
@@ -31,7 +27,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           :label="$t('order')"
           v-model="settings.order"
           :options="[1, 2, 3, 4]"
-          :disabled="!isThemeCustomized"
         />
         <Field
           :id="`${propertyName}TextSeparator`"
@@ -39,7 +34,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
           :label="$t('separator')"
           v-model="settings.beforeSeparator"
           :options="['', ...textSeparators]"
-          :disabled="!isThemeCustomized"
         />
       </FormBlockRow>
     </div>

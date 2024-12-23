@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import type { ListSettings } from "@/types";
-import { useProfileStore } from "@/stores/profile";
 import { listMarkerPositions, listMarkers } from "@/globals";
 import Field from "@/components/Field.vue";
 
@@ -11,8 +9,6 @@ const { propertyName, settings } = defineProps<{
     gap: number;
   };
 }>();
-
-const { isThemeCustomized } = storeToRefs(useProfileStore());
 </script>
 
 <template>
@@ -22,14 +18,12 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :id="`${propertyName}Gap`"
         :label="$t('gap')"
         type="number"
-        :disabled="!isThemeCustomized"
         v-model="settings.gap"
       />
       <Field
         :id="`${propertyName}ListMarkerPosition`"
         :label="$t('markerPosition')"
         type="selectbutton"
-        :disabled="!isThemeCustomized"
         optionLabel="label"
         optionValue="value"
         :options="
@@ -44,7 +38,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :id="`${propertyName}ListMarker`"
         :label="$t('marker')"
         type="select"
-        :disabled="!isThemeCustomized"
         :options="['', ...listMarkers]"
         v-model="settings.listMarker"
       />
@@ -52,7 +45,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
         :id="`${propertyName}ListMarkerColor`"
         :label="$t('color')"
         type="color"
-        :disabled="!isThemeCustomized"
         v-model="settings.listMarkerColor"
       />
     </FormBlockRow>

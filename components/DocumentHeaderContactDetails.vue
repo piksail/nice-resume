@@ -8,7 +8,7 @@ import { getNodeStyle } from "@/utils/style";
 import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
 import useDocumentSettings from "~/composables/use-document-settings";
 
-const { documentType } = storeToRefs(useEditorStore());
+const { documentType, focusedInput } = storeToRefs(useEditorStore());
 
 const { isDetailClickable } = storeToRefs(useEmailStore());
 
@@ -30,7 +30,11 @@ const settings = useDocumentSettings();
       ...getNodeStyle(settings.contactDetails, 'block'),
     }"
   >
-    <li v-for="detail in contactDetails" :key="`${detail.value}${detail.icon}`">
+    <li
+      v-for="(detail, index) in contactDetails"
+      :key="`${detail.value}${detail.icon}`"
+      :class="getNodeClass(`detailList${index}`, focusedInput)"
+    >
       <a
         v-if="
           documentType === 'email' &&

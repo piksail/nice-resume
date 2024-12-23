@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import Button from "primevue/button";
 import Message from "primevue/message";
@@ -19,8 +20,14 @@ const { t } = useI18n({
 
 const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
 
-const { isHeaderSimple, simpleHeaderCategoryName } =
+const { categories, isHeaderSimple, simpleHeaderCategoryName } =
   storeToRefs(useResumeStore());
+
+const bodyCategories = computed(() =>
+  categories.value.filter(
+    (category) => category.isVisible && category.layout !== "aside",
+  ),
+);
 
 function addContactDetail() {
   const contactDetail: ContactDetail = {
@@ -47,9 +54,16 @@ function changeContactDetaiType(
   <EditorCategory id="Profile">
     <template v-slot:header>{{ capitalize($t("profile")) }}</template>
     <div class="formBlock">
-      <Field id="profileName" transparent :label="$t('name')" v-model="name" />
+      <Field
+        id="profileName"
+        target
+        transparent
+        :label="$t('name')"
+        v-model="name"
+      />
       <Field
         id="profileTitle"
+        target
         transparent
         :label="$t('title')"
         v-model="title"
@@ -65,15 +79,22 @@ function changeContactDetaiType(
           {{ t("howToStyleAboutAndDetailsCategory") }}
         </Message>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 1 "about" and 1 "details") -->
+        <!-- TODO we should actually add two more Category types : Details and About, so that the customization is way easier... (there is no -1 index) and user is more free to cuztomize -->
         <Field
-          id="detailsCategoryName"
+          :id="`categoryList${-1}Name_${bodyCategories[0]?.layout === 'half' ? 'half' : 'full'}`"
+          target
           transparent
           :label="$t('categoryName')"
           v-model="simpleHeaderCategoryName"
         />
       </template>
       <Field
-        id="detailsAbout"
+        :id="
+          isHeaderSimple
+            ? `categoryList${-1}EntryList${-1}Summary`
+            : `detailsAbout`
+        "
+        target
         transparent
         :label="$t('about')"
         type="textarea"
@@ -103,7 +124,13 @@ function changeContactDetaiType(
           >
             <div class="w-[70%] grid grid-cols-4 gap-x-3">
               <Field
+                :id="
+                  isHeaderSimple
+                    ? `categoryList${-1}EntryList${-1}HighlightList${detailIndex}`
+                    : `detailList${detailIndex}`
+                "
                 class="col-span-2"
+                target
                 transparent
                 v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"

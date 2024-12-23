@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import Button from "primevue/button";
-import Textarea from "primevue/textarea";
 import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
@@ -61,8 +60,10 @@ function addSenderDetail() {
               class="inputListItem"
             >
               <Field
-                class="w-[70%]"
+                :id="`senderDetailList${index}`"
+                target
                 transparent
+                class="w-[70%]"
                 v-model="senderDetails[index]"
                 @keydown.enter.prevent="addSenderDetail"
               />
@@ -96,8 +97,10 @@ function addSenderDetail() {
             class="inputListItem"
           >
             <Field
-              class="w-[70%]"
+              :id="`recipientDetailList${index}`"
+              target
               transparent
+              class="w-[70%]"
               v-model="recipientDetails[index]"
               @keydown.enter.prevent="addRecipientDetail"
             />
@@ -121,6 +124,7 @@ function addSenderDetail() {
       </label>
       <Field
         id="letterSubject"
+        target
         transparent
         :label="$t('subject')"
         type="textarea"
@@ -128,6 +132,7 @@ function addSenderDetail() {
       />
       <Field
         id="letterReference"
+        target
         transparent
         :label="$t('reference')"
         v-model="reference"
@@ -147,9 +152,12 @@ function addSenderDetail() {
             :key="index"
             class="inputListItem"
           >
-            <Textarea
-              class="!text-sm w-[70%]"
-              size="small"
+            <Field
+              :id="`paragraphList${index}`"
+              target
+              transparent
+              type="textarea"
+              class="w-[70%]"
               v-model="paragraphs[index]"
               @keydown.enter.prevent="addParagraph"
             />

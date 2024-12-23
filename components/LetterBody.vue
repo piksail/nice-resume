@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { themeSettings } from "@/globals";
@@ -9,6 +10,8 @@ import LetterReference from "./LetterReference.vue";
 import LetterSubject from "./LetterSubject.vue";
 
 const { isThemeCustomized, name, theme } = storeToRefs(useProfileStore());
+
+const { focusedInput } = storeToRefs(useEditorStore());
 
 const {
   settings: storeSettings,
@@ -37,7 +40,11 @@ const settings = computed(() => {
       gap: `${settings.senderDetails.gap}px`,
     }"
   >
-    <li v-for="detail in senderDetails" :key="detail">
+    <li
+      v-for="(detail, index) in senderDetails"
+      :key="detail"
+      :class="getNodeClass(`senderDetailList${index}`, focusedInput)"
+    >
       {{ detail }}
     </li>
   </ul>
@@ -50,7 +57,11 @@ const settings = computed(() => {
       gap: `${settings.recipientDetails.gap}px`,
     }"
   >
-    <li v-for="detail in recipientDetails" :key="detail">
+    <li
+      v-for="(detail, index) in recipientDetails"
+      :key="detail"
+      :class="getNodeClass(`recipientDetailList${index}`, focusedInput)"
+    >
       {{ detail }}
     </li>
   </ul>
@@ -79,6 +90,7 @@ const settings = computed(() => {
     <p
       v-for="(paragraph, index) in paragraphs"
       :key="index"
+      :class="getNodeClass(`paragraphList${index}`, focusedInput)"
       :style="{
         marginBottom: `${settings.body.gap}px`,
       }"

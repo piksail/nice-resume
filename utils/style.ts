@@ -62,3 +62,10 @@ export function getNodeStyle(
   }
   return style;
 }
+
+/**
+ * Highlight the preview area controlled by the editor input.
+ */
+export function getNodeClass(id: string, focusedInput: string | undefined) {
+  return focusedInput === id ? "!border-4 !border-double !border-primary" : "";
+}

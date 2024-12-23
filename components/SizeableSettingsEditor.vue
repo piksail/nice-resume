@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import type { SizeableSettings } from "@/types";
-import { useProfileStore } from "@/stores/profile";
 import FormBlockRow from "./FormBlockRow.vue";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;
   settings: SizeableSettings;
 }>();
-
-const { isThemeCustomized } = storeToRefs(useProfileStore());
 </script>
 
 <template>
@@ -41,7 +37,6 @@ const { isThemeCustomized } = storeToRefs(useProfileStore());
             };
           })
         "
-        :disabled="!isThemeCustomized"
       />
       <Field
         :id="`${propertyName}Width`"
