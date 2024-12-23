@@ -13,8 +13,11 @@ import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
 import ResumeEntryTags from "./ResumeEntryTags.vue";
 
-const { entry } = defineProps<{
+const { categoryIndex, categoryLayout, entry, entryIndex } = defineProps<{
+  categoryIndex: number;
+  categoryLayout: Category["layout"];
   entry: Category["entries"][0];
+  entryIndex: number;
 }>();
 
 const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
@@ -32,25 +35,45 @@ const experienceHeaderItems = computed(() => {
     {
       order: settings.value.entryTitle.order,
       component: ResumeEntryTitle,
-      props: { entryTitle: entry.title },
+      props: {
+        entryTitle: entry.title,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
     {
       order: settings.value.entryPeriod.order,
       component: ResumeEntryPeriod,
-      // @ts-expect-error This item is only reached when category nature is experience
-      props: { entryPeriod: entry.period },
+      props: {
+        // @ts-expect-error This item is only reached when category nature is experience
+        entryPeriod: entry.period,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
     {
       order: settings.value.entryOrganization.order,
       component: ResumeEntryOrganization,
-      // @ts-expect-error This item is only reached when category nature is experience
-      props: { entryOrganization: entry.organization },
+      props: {
+        // @ts-expect-error This item is only reached when category nature is experience
+        entryOrganization: entry.organization,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
     {
       order: settings.value.entryLocation.order,
       component: ResumeEntryLocation,
-      // @ts-expect-error This item is only reached when category nature is experience
-      props: { entryLocation: entry.location },
+      props: {
+        // @ts-expect-error This item is only reached when category nature is experience
+        entryLocation: entry.location,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
   ];
 });
@@ -101,9 +124,22 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 2">
     <div class="flex justify-between items-center">
@@ -136,9 +172,22 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 3">
     <div class="flex">
@@ -173,9 +222,22 @@ const fourthItem = computed(() => {
         <ResumeEntrySummary
           v-if="entry.nature === 'experience'"
           :entry-summary="entry.summary"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
         />
-        <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-        <ResumeEntryTags :entry-tags="entry.tags" />
+        <ResumeEntryHighlights
+          :entry-highlights="entry.highlights"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
+        <ResumeEntryTags
+          :entry-tags="entry.tags"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
       </div>
     </div>
   </template>
@@ -209,9 +271,22 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 5">
@@ -241,9 +316,22 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 6">
@@ -277,9 +365,22 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 7">
@@ -311,9 +412,22 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 8">
@@ -345,9 +459,22 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 9">
@@ -378,9 +505,22 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 10">
     <component
@@ -408,9 +548,22 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 11">
     <div class="flex justify-between">
@@ -440,9 +593,22 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 12">
     <div class="flex justify-between">
@@ -470,9 +636,22 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 13">
     <div class="flex">
@@ -502,9 +681,22 @@ const fourthItem = computed(() => {
         <ResumeEntrySummary
           v-if="entry.nature === 'experience'"
           :entry-summary="entry.summary"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
         />
-        <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-        <ResumeEntryTags :entry-tags="entry.tags" />
+        <ResumeEntryHighlights
+          :entry-highlights="entry.highlights"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
+        <ResumeEntryTags
+          :entry-tags="entry.tags"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
       </div>
     </div>
   </template>
@@ -534,8 +726,21 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
 </template>

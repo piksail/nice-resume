@@ -101,7 +101,6 @@ function askBeforeResetStyle() {
                 :id="`documentMargin${i}`"
                 type="number"
                 :label="$t(getSideIndexLabel(i))"
-                :disabled="!isThemeCustomized"
                 v-model="documentTypeSettings.document.padding[i - 1]"
               />
             </div>
@@ -112,7 +111,6 @@ function askBeforeResetStyle() {
             :label="$t('font')"
             v-model="documentTypeSettings.document.bodyFont"
             :options="fonts"
-            :disabled="!isThemeCustomized"
           />
         </div>
       </Fieldset>
@@ -126,7 +124,6 @@ function askBeforeResetStyle() {
               :label="$t('layout')"
               v-model="emailSettings.document.layout"
               :options="headerLayouts"
-              :disabled="!isThemeCustomized"
             />
             <FormBlockRow :header="$t('border')">
               <Field
@@ -135,14 +132,12 @@ function askBeforeResetStyle() {
                 id="signatureBorder"
                 :label="$t(getSideIndexLabel(i))"
                 type="number"
-                :disabled="!isThemeCustomized"
                 v-model="emailSettings.document.border[i - 1]"
               />
               <Field
                 id="signatureBorderColor"
                 :label="$t('color')"
                 type="color"
-                :disabled="!isThemeCustomized"
                 v-model="emailSettings.document.borderColor"
               />
             </FormBlockRow>
@@ -153,14 +148,12 @@ function askBeforeResetStyle() {
                 id="signaturePadding"
                 :label="$t(getSideIndexLabel(i))"
                 type="number"
-                :disabled="!isThemeCustomized"
                 v-model="emailSettings.document.padding[i - 1]"
               />
               <Field
                 id="signatureBackgroundColor"
                 :label="$t('color')"
                 type="color"
-                :disabled="!isThemeCustomized"
                 v-model="emailSettings.document.backgroundColor"
               />
             </FormBlockRow>
@@ -176,7 +169,6 @@ function askBeforeResetStyle() {
               :label="$t('layout')"
               v-model="(documentTypeSettings as LetterSettings).header.layout"
               :options="headerLayouts"
-              :disabled="!isThemeCustomized"
             />
             <BlockSettingsEditor
               property-name="header"
@@ -206,7 +198,6 @@ function askBeforeResetStyle() {
                 id="asideIsRightPositioned"
                 label="Right side TODO localize"
                 type="checkbox"
-                :disabled="!isThemeCustomized"
                 v-model="resumeSettings.aside.isRightPositioned"
               />
             </FormBlockRow>
@@ -242,7 +233,6 @@ function askBeforeResetStyle() {
               id="senderDetailsGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="letterSettings.senderDetails.gap"
             />
           </div>
@@ -262,7 +252,6 @@ function askBeforeResetStyle() {
               id="recipientDetailsGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="letterSettings.recipientDetails.gap"
             />
           </div>
@@ -355,14 +344,12 @@ function askBeforeResetStyle() {
             id="aboutQuoteIsShown"
             :label="`${$t('toShow')} ${$t('quoteMark')}`"
             type="checkbox"
-            :disabled="!isThemeCustomized"
             v-model="documentTypeSettings.aboutQuote.isShown"
           />
           <FormBlockRow :header="$t('quoteMark')">
             <Field
               id="aboutQuoteFont"
               type="select"
-              :disabled="!isThemeCustomized"
               :label="$t('font')"
               v-model="documentTypeSettings.aboutQuote.font"
               optionLabel="label"
@@ -378,7 +365,6 @@ function askBeforeResetStyle() {
               id="aboutQuoteFontSize"
               :label="$t('size')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.aboutQuote.fontSize"
             />
             <Field
@@ -387,20 +373,17 @@ function askBeforeResetStyle() {
               :label="$t('fontWeight')"
               v-model="documentTypeSettings.aboutQuote.fontWeight"
               :options="fontWeights"
-              :disabled="!isThemeCustomized"
             />
             <Field
               id="aboutQuoteIsItalic"
               :label="$t('italic')"
               type="checkbox"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.aboutQuote.isItalic"
             />
             <Field
               id="aboutQuoteColor"
               :label="$t('color')"
               type="color"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.aboutQuote.color"
             />
           </FormBlockRow>
@@ -433,7 +416,6 @@ function askBeforeResetStyle() {
                   value: orientation,
                 }))
               "
-              :disabled="!isThemeCustomized"
             />
             <Field
               id="contactDetailsAlignment"
@@ -448,13 +430,11 @@ function askBeforeResetStyle() {
                   value: alignment,
                 }))
               "
-              :disabled="!isThemeCustomized"
             />
             <Field
               id="contactDetailsGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.gap"
             />
           </FormBlockRow>
@@ -463,28 +443,24 @@ function askBeforeResetStyle() {
               id="contactDetailsIsIconFirst"
               label="Icon first TODO localize"
               type="checkbox"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.isIconFirst"
             />
             <Field
               id="contactDetailsIconGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.iconGap"
             />
             <Field
               id="contactDetailsIconSize"
               :label="$t('size')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.iconSize"
             />
             <Field
               id="contactDetailsIconColor"
               :label="$t('color')"
               type="color"
-              :disabled="!isThemeCustomized"
               v-model="documentTypeSettings.contactDetails.iconColor"
             />
           </FormBlockRow>
@@ -499,21 +475,18 @@ function askBeforeResetStyle() {
                 id="bodyColor"
                 type="color"
                 :label="$t('color')"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.color"
               />
               <Field
                 id="bodyFontSize"
                 :label="$t('size')"
                 type="number"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.fontSize"
               />
               <Field
                 id="bodyLineHeight"
                 :label="$t('lineHeight')"
                 type="number"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.lineHeight"
                 :step="0.1"
               />
@@ -521,21 +494,18 @@ function askBeforeResetStyle() {
                 id="bodyIndentation"
                 :label="$t('indentation')"
                 type="number"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.indentation"
               />
               <Field
                 id="bodyIsJustified"
                 :label="$t('justified')"
                 type="checkbox"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.isJustified"
               />
               <Field
                 id="bodyIsSignatureRightAligned"
                 label="Signature on the right TODO localize"
                 type="checkbox"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.isSignatureRightAligned"
               />
             </FormBlockRow>
@@ -546,7 +516,6 @@ function askBeforeResetStyle() {
                 :id="`bodyMargin${i}`"
                 :label="$t(getSideIndexLabel(i))"
                 type="number"
-                :disabled="!isThemeCustomized"
                 v-model="letterSettings.body.margin[i - 1]"
               />
             </FormBlockRow>
@@ -555,7 +524,6 @@ function askBeforeResetStyle() {
             id="bodyGap"
             :label="$t('gap')"
             type="number"
-            :disabled="!isThemeCustomized"
             v-model="letterSettings.body.gap"
           />
         </Fieldset>
@@ -568,7 +536,6 @@ function askBeforeResetStyle() {
               id="categoryGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="resumeSettings.category.gap"
             />
             <BlockSettingsEditor
@@ -615,13 +582,11 @@ function askBeforeResetStyle() {
               :label="$t('layout')"
               v-model="resumeSettings.entry.layout"
               :options="entryLayouts"
-              :disabled="!isThemeCustomized"
             />
             <Field
               id="entryGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="resumeSettings.entry.gap"
             />
           </div>
@@ -699,7 +664,6 @@ function askBeforeResetStyle() {
               id="entryTagGap"
               :label="$t('gap')"
               type="number"
-              :disabled="!isThemeCustomized"
               v-model="resumeSettings.entryTag.gap"
             />
           </div>

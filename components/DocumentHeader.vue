@@ -19,6 +19,7 @@ const { isThemeCustomized, theme, about, contactDetails, name, title } =
 
 const { isHeaderSimple, settings: resumeStoreSettings } =
   storeToRefs(useResumeStore());
+
 const { settings: letterStoreSettings } = storeToRefs(useLetterStore());
 
 const settings = computed(() => {

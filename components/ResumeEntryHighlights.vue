@@ -1,18 +1,25 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { themeSettings } from "@/globals";
 import { getListMarker } from "@/utils/editor";
 import { getNodeStyle } from "@/utils/style";
+import type { Category } from "~/types";
 
 const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
-const { entryHighlights } = defineProps<{
+const { focusedInput } = storeToRefs(useEditorStore());
+
+const { categoryIndex, entryHighlights, entryIndex } = defineProps<{
+  categoryIndex: number;
+  categoryLayout: Category["layout"];
   entryHighlights: string[];
+  entryIndex: number;
 }>();
 
 const settings = computed(() => {
@@ -38,6 +45,12 @@ const settings = computed(() => {
     <li
       v-for="(highlight, highlightIndex) in entryHighlights"
       :key="highlightIndex"
+      :class="
+        getNodeClass(
+          `categoryList${categoryIndex}EntryList${entryIndex}HighlightList${highlightIndex}_${categoryLayout}`,
+          focusedInput,
+        )
+      "
       :style="{
         fontFamily: settings.entryHighlight.font,
         fontSize: `${settings.entryHighlight.fontSize}px`,

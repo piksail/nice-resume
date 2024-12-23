@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import Checkbox from "primevue/checkbox";
 import ColorPicker from "primevue/colorpicker";
 import InputNumber from "primevue/inputnumber";
@@ -10,6 +11,7 @@ import Textarea from "primevue/textarea";
 import ToggleButton from "primevue/togglebutton";
 import ToggleSwitch from "primevue/toggleswitch";
 import { capitalize } from "@/utils/string";
+import { useEditorStore } from "@/stores/editor";
 
 const {
   disabled,
@@ -24,12 +26,14 @@ const {
   optionValue,
   onLabel = "On",
   offLabel = "Off",
+  target = false,
   transparent = false,
   type,
 } = defineProps<{
   defaultValue?: string | null | undefined;
   disabled?: boolean;
   id?: string;
+  target?: boolean;
   label?: string;
   helpText?: string;
   options?: (string | number | null | undefined | unknown)[];
@@ -55,6 +59,8 @@ const {
 }>();
 
 const model = defineModel();
+
+const { focusedInput } = storeToRefs(useEditorStore());
 
 function updateColor(hashlessHex: string) {
   // Primevue does not embed hash to the hex color value but it is needed for CSS
@@ -219,6 +225,8 @@ function updateColor(hashlessHex: string) {
       :disabled="disabled"
       v-model="model as string"
       size="small"
+      @focus.stop="focusedInput = target ? id : ''"
+      @blur.stop="focusedInput = ''"
     />
     <InputNumber
       v-else-if="type === 'number'"
@@ -251,6 +259,8 @@ function updateColor(hashlessHex: string) {
       :disabled="disabled"
       v-model="model as string"
       size="small"
+      @focus.stop="focusedInput = target ? id : ''"
+      @blur.stop="focusedInput = ''"
     />
     <Message v-if="helpText" size="small" severity="secondary" variant="simple">
       {{ helpText }}
