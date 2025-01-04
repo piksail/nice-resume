@@ -3,6 +3,7 @@ import { storeToRefs } from "pinia";
 import { useEmailStore } from "@/stores/email";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
+import { capitalize } from "@/utils/string";
 
 // eslint-disable-next-line no-undef
 const { t } = useI18n({

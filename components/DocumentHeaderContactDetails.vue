@@ -4,7 +4,7 @@ import type { Profile } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useEmailStore } from "@/stores/email";
 import { getListMarker } from "@/utils/editor";
-import { getNodeStyle } from "@/utils/style";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
 import ContactDetailIcon from "@/components/ContactDetailIcon.vue";
 import useDocumentSettings from "~/composables/use-document-settings";
 

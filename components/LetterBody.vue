@@ -5,7 +5,7 @@ import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
 import { themeSettings } from "@/globals";
-import { getNodeStyle } from "@/utils/style";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
 import LetterReference from "./LetterReference.vue";
 import LetterSubject from "./LetterSubject.vue";
 

@@ -12,6 +12,7 @@ import TheHeader from "@/components/TheHeader.vue";
 import Preview from "./Preview.vue";
 import EditorCategory from "./EditorCategory.vue";
 import PreviewZoom from "./PreviewZoom.vue";
+import { capitalize } from "@/utils/string";
 
 const { documentType } = storeToRefs(useEditorStore());
 

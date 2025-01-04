@@ -6,7 +6,7 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { themeSettings } from "@/globals";
 import { getListMarker } from "@/utils/editor";
-import { getNodeStyle } from "@/utils/style";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
 import type { Category } from "~/types";
 
 const { isThemeCustomized, theme } = storeToRefs(useProfileStore());

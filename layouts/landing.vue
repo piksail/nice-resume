@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { LocaleCode } from "~/types";
+import { capitalize } from "@/utils/string";
 
 // eslint-disable-next-line no-undef
 const { availableLocales, locale, setLocale } = useI18n();

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { capitalize } from "@/utils/string";
+
 const { header } = defineProps<{
   header?: string;
 }>();

@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { themeSettings } from "@/globals";
-import { getNodeStyle } from "@/utils/style";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
 
 const { theme } = storeToRefs(useProfileStore());
 
