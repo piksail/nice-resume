@@ -12,7 +12,7 @@ import type { StyleValue } from "vue";
 export function getNodeStyle(
   // settingsItem: Values,
   settingsItem: object, // TODO make it type-compliant
-  settingsType: "text" | "title" | "block",
+  settingsType: "text" | "title" | "block" | "flex",
 ) {
   const style: StyleValue = {};
   if (settingsType === "text" || settingsType === "title") {
@@ -26,7 +26,7 @@ export function getNodeStyle(
     style.color = settingsItem.color;
   }
   if (settingsType === "block" || settingsType === "title") {
-    style.backgroundColor = settingsItem.backgroundColor;
+    style.backgroundColor = `${settingsItem.backgroundColor}`;
     style.marginTop = `${settingsItem.margin[0]}px`;
     style.marginRight = `${settingsItem.margin[1]}px`;
     style.marginBottom = `${settingsItem.margin[2]}px`;
@@ -43,6 +43,29 @@ export function getNodeStyle(
   }
   if (settingsType === "title") {
     style.textAlign = settingsItem.textAlign;
+    style.width =
+      settingsItem.widthType === "custom"
+        ? `${settingsItem.width}%`
+        : settingsItem.widthType;
+  }
+  if (settingsType === "flex") {
+    style.flexDirection = settingsItem.listOrientation;
+    if (settingsItem.listOrientation === "row") {
+      style.flexWrap = "wrap";
+      style.justifyContent = settingsItem.alignment;
+      style.columnGap = `${settingsItem.gap}px`;
+    }
+    if (settingsItem.listOrientation === "column") {
+      style.alignItems = settingsItem.alignment;
+      style.rowGap = `${settingsItem.gap}px`;
+    }
   }
   return style;
+}
+
+/**
+ * Highlight the preview area controlled by the editor input.
+ */
+export function getNodeClass(id: string, focusedInput: string | undefined) {
+  return focusedInput === id ? "!border-4 !border-double !border-primary" : "";
 }

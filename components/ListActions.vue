@@ -1,45 +1,57 @@
 <script setup lang="ts">
-import {
-  ArrowDownCircleIcon,
-  ArrowUpCircleIcon,
-  XCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { capitalize } from "@/utils/string";
 
 const { index, isHeader, listLength } = defineProps<{
   index: number;
   isHeader?: boolean;
   listLength: number;
 }>();
+
 defineEmits(["moveDown", "moveUp", "remove"]);
 </script>
 
 <template>
   <div class="flex justify-end gap-2">
-    <button
-      title="Move up"
+    <Button
       v-if="listLength > 1 && index > 0"
-      class="size-7 rounded-full"
-      :class="isHeader ? 'text-blue-500' : 'text-white'"
+      :icon="isHeader ? 'pi pi-arrow-up' : 'pi pi-arrow-circle-up'"
+      :aria-label="capitalize($t('toMoveUp'))"
+      :variant="isHeader ? 'text' : 'text'"
+      rounded
+      :severity="isHeader ? 'primary' : undefined"
+      size="small"
+      :class="isHeader ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
+      :pt:icon:class="
+        isHeader ? '' : '!text-white/50 !text-xl hover:!text-white transition'
+      "
       @click="$emit('moveUp')"
-    >
-      <ArrowUpCircleIcon class="size-full" />
-    </button>
-    <button
-      title="Move down"
+    />
+    <Button
       v-if="listLength > 1 && index < listLength - 1"
-      class="size-7 rounded-full"
-      :class="isHeader ? 'text-blue-500' : 'text-white'"
+      :icon="isHeader ? 'pi pi-arrow-down' : 'pi pi-arrow-circle-down'"
+      :aria-label="capitalize($t('toMoveDown'))"
+      :variant="isHeader ? 'text' : 'text'"
+      rounded
+      :severity="isHeader ? 'primary' : undefined"
+      size="small"
+      :class="isHeader ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
+      :pt:icon:class="
+        isHeader ? '' : '!text-white/50 !text-xl hover:!text-white transition'
+      "
       @click="$emit('moveDown')"
-    >
-      <ArrowDownCircleIcon class="size-full" />
-    </button>
-    <button
-      title="Remove"
-      class="size-7 rounded-full"
-      :class="isHeader ? 'text-pink-500' : 'bg-red-500 text-white'"
+    />
+    <Button
+      :icon="isHeader ? 'pi pi-times' : 'pi pi-times-circle'"
+      :aria-label="capitalize($t('toRemove'))"
+      :variant="isHeader ? 'text' : 'text'"
+      rounded
+      severity="danger"
+      size="small"
+      :class="isHeader ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
+      :pt:icon:class="
+        isHeader ? '' : '!text-white/50 !text-xl hover:!text-red-500 transition'
+      "
       @click="$emit('remove')"
-    >
-      <XCircleIcon class="size-full" />
-    </button>
+    />
   </div>
 </template>

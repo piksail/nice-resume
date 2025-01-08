@@ -4,7 +4,7 @@
 
 ![GitHub Pages badge](https://img.shields.io/badge/GitHub_Pages-222222?logo=github&logoColor=white) ![Nuxt badge](https://img.shields.io/badge/Nuxt-00DC82?logo=nuxtdotjs&logoColor=white) ![Tailwind CSS badge](https://img.shields.io/badge/Tailwind_CSS_-0ea5e9?logo=tailwindcss&logoColor=white) ![Conventional commits badge](https://img.shields.io/badge/Conventional_commits-fa6673?logo=conventionalcommits&logoColor=white) ![ESLint badge](https://img.shields.io/badge/ESLint-4b32c3?logo=eslint&logoColor=white)
 
-Edit your resume and your cover letter, choose a nice template and save your work for the next time.
+Edit your resume and your cover letter, choose a nice theme and save your work for the next time.
 
 This is a [Nuxt](https://nuxt.com/) project bootstrapped with Nuxi.
 
@@ -33,7 +33,7 @@ So far, tools we believe are best out there are :
 - [FlowCV](flowcv.com)
 - [Open Resume](www.open-resume.com)
 
-...but they all fall into one of the points above. With Nice Resume, we try to provide a fast and easy, direct-preview, fully-customizable, template-helped, free and registrationless experience that will serve all kinds of applications.
+...but they all fall into one of the points above. With Nice Resume, we try to provide a fast and easy, direct-preview, fully-customizable, theme-helped, free and registrationless experience that will serve all kinds of applications.
 
 [Here is a more comprehensive list of tools](/SIMILAR-TOOLS.md)
 
@@ -41,12 +41,14 @@ So far, tools we believe are best out there are :
 
 ### Resources
 
-- [Nuxt](https://nuxt.com/)
-- [Vue](https://vuejs.org/)
-- [Headless UI](https://headlessui.com/v1/vue)
-- [Tailwind CSS](https://tailwindcss.com/)
 - [Heroicons](https://heroicons.com/)
+- [i18n](https://www.i18next.com/)
+- [JSON Resume](https://jsonresume.org/)
+- [Nuxt](https://nuxt.com/)
+- [PrimeVue](https://primevue.org/)
 - [Simple Icons](https://simpleicons.org/) (for brand icons) through [Vue3 Simple Icons](https://vue3-simple-icons.wyatt-herkamp.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vue](https://vuejs.org/)
 
 ### Prerequisites
 
@@ -91,17 +93,17 @@ pnpm run test:playwright
 
 [Test recording generation with Playwright](https://playwright.dev/docs/codegen)
 
-### Add a template
+### Add a theme
 
-1. Add the name in the template union type in `/types`
-2. Add the name in the templates array in `/globals`
-3. Add the base settings in the templateBaseSettings object in `/globals` and override them in the templateSettings object
+1. Add the name in the theme union type in `/types`
+2. Add the name in the themes array in `/globals`
+3. Add the base settings in the themeBaseSettings object in `/globals` and override them in the themeSettings object
 
-Make sure the above steps rely on the same template name.
+Make sure the above steps rely on the same theme name.
 
-### Use a template
+### Use a theme
 
-Templates offer an aside section on the left and a main section on the right that can be split into two columns. Select _Aside_, _Full_ or _Half_ to place content accordingly.
+Themes offer an aside section on the left and a main section on the right that can be split into two columns. Select _Aside_, _Full_ or _Half_ to place content accordingly.
 
 Some themes come from other tools:
 

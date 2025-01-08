@@ -1,4 +1,8 @@
-export type Template =
+export type LocaleCode = "br" | "de" | "en" | "es" | "fr" | "it";
+
+export type RegionCode = "br" | "de" | "es" | "fr" | "it" | "uk";
+
+export type Theme =
   | "default"
   | "Aster"
   | "Care"
@@ -83,10 +87,18 @@ export type ListMarker =
   | "square"
   | "triangle";
 
+export type ListMarkerPosition = "inside" | "outside";
+
 export type ListSettings = {
   listOrientation: "row" | "column";
   listMarker: ListMarker;
   listMarkerColor: string;
+  listMarkerPosition: ListMarkerPosition;
+};
+
+export type SizeableSettings = {
+  width: number; // Percent
+  widthType: "auto" | "fit-content" | "custom";
 };
 
 export type BlockSettings = {
@@ -97,7 +109,6 @@ export type BlockSettings = {
   borderColor: string;
   borderRadius: number;
   margin: SideSetting;
-  // TODO allow width -> This allow some templates to have the same width even though their text is different
 };
 
 export type TextSettings = {
@@ -111,10 +122,10 @@ export type TextSettings = {
   color: string;
 };
 
-export type TitleSettings = TextSettings & {
-  textAlign: "left" | "center" | "right";
-  // TODO move the width? property here?
-};
+export type TitleSettings = SizeableSettings &
+  TextSettings & {
+    textAlign: "left" | "center" | "right";
+  };
 
 export type BaseSettings = {
   isLetterPaddingless: boolean;
@@ -123,8 +134,8 @@ export type BaseSettings = {
   displayFont?: Font;
 };
 
-export type TemplateBaseSettings = {
-  [T in Template]: BaseSettings;
+export type ThemeBaseSettings = {
+  [T in Theme]: BaseSettings;
 };
 
 export type DocumentSettings = {
@@ -150,7 +161,7 @@ export type CommonDocumentSettings = {
   contactDetails: BlockSettings &
     TextSettings &
     ListSettings & {
-      alignment: "start" | "center" | "end";
+      alignment: "start" | "center" | "end"; // Handles justify-content on column flex-direction and align-items on  row flex-direction
       iconSize: number;
       iconColor: string;
       iconGap: number;
@@ -167,44 +178,47 @@ export type PaperDocumentSettings = CommonDocumentSettings & {
 };
 
 export type ResumeSettings = PaperDocumentSettings & {
-  aside: BlockSettings & {
-    width: number; // Percentage
-    isRightPositioned: boolean;
-  };
+  aside: BlockSettings &
+    SizeableSettings & {
+      isRightPositioned: boolean;
+    };
   body: BlockSettings;
   category: BlockSettings & {
     gap: number; // Flex gap between categories
   };
   categoryName: BlockSettings &
     TitleSettings & {
-      width?: number | "fit"; // Percentage
       isAside: boolean;
     };
-  categoryNameSeparator: BlockSettings & {
-    position: "bottom" | "left" | "right" | "top";
-    height?: number;
-    width?: number | "fit";
-  };
+  categoryNameSeparator: BlockSettings &
+    SizeableSettings & {
+      position: "bottom" | "left" | "right" | "top";
+      height?: number;
+    };
   entry: BlockSettings & {
     layout: EntryLayout;
     gap: number; // Flex gap between entries
   };
-  entryTitle: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
-  entryPeriod: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
-  entryOrganization: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
-  entryLocation: TextSettings & {
-    order: 1 | 2 | 3 | 4;
-    beforeSeparator?: TextSeparator;
-  };
+  entryTitle: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
+  entryPeriod: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
+  entryOrganization: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
+  entryLocation: BlockSettings &
+    TextSettings & {
+      order: 1 | 2 | 3 | 4;
+      beforeSeparator?: TextSeparator;
+    };
   entrySummary: BlockSettings & TextSettings;
   entryHighlight: BlockSettings &
     TextSettings &
@@ -239,31 +253,14 @@ export type EmailSettings = CommonDocumentSettings & {
   document: DocumentSettings & { layout: HeaderLayout };
 };
 
-export type TemplateSettings = {
-  [T in Template]: {
+export type ThemeSettings = {
+  [T in Theme]: {
     base: BaseSettings;
     resume: ResumeSettings;
     letter: LetterSettings;
     email: EmailSettings;
   };
 };
-
-export type CommonStyleEditorTab = "Document" | "Profile" | "About" | "Contact";
-
-export type ResumeStyleEditorTab =
-  | CommonStyleEditorTab
-  | "Sections"
-  | "Category"
-  | "Entry";
-
-export type LetterStyleEditorTab =
-  | CommonStyleEditorTab
-  | "Header"
-  | "Address details"
-  | "Subject"
-  | "Body";
-
-export type EmailStyleEditorTab = CommonStyleEditorTab | "Signature";
 
 export type DetailIcon =
   | null
@@ -298,8 +295,8 @@ export interface Entry {
   nature: "asset" | "experience";
   type: string;
   title: string; // Position, Diploma, ...
-  highlights: Array<string>;
-  tags: Array<string>;
+  highlights: string[];
+  tags: string[];
 }
 
 export interface Experience extends Entry {
@@ -327,22 +324,22 @@ export interface Category {
   nature: Entry["nature"];
   type: Asset["type"] | Experience["type"];
   name: string;
-  entries: Array<Experience | Asset>;
+  entries: (Experience | Asset)[];
   layout: "aside" | "full" | "half";
+  isLocked: boolean; // Disable data edition
   isVisible: boolean; // Preserve data but exclude it from the resume
 }
 
 export interface Profile {
-  isNiceResumeExport: boolean;
-  template: Template;
+  theme: Theme;
   name: string;
   title: string;
-  contactDetails: Array<ContactDetail>;
+  contactDetails: ContactDetail[];
 }
 
 export interface Resume extends Profile {
   about: string;
-  categories: Array<Category>;
+  categories: Category[];
 }
 
 export interface Letter extends Profile {

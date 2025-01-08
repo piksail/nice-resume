@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import { getNodeStyle } from "@/utils/style";
 import ResumeCategoryName from "./ResumeCategoryName.vue";
 import ResumeEntry from "./ResumeEntry.vue";
@@ -15,7 +15,7 @@ import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
 import ResumeEntryTags from "./ResumeEntryTags.vue";
 
-const { about, contactDetails, isThemeCustomized, template } =
+const { about, contactDetails, isThemeCustomized, theme } =
   storeToRefs(useProfileStore());
 
 const {
@@ -28,7 +28,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const asideCategories = computed(() =>
@@ -64,7 +64,7 @@ const bodyCategories = computed(() =>
       <div
         v-if="isHeaderSimple"
         :style="{
-          backgroundColor: settings.category.backgroundColor,
+          backgroundColor: `${settings.category.backgroundColor}`,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
           marginBottom: `${settings.category.margin[2]}px`,
@@ -80,11 +80,15 @@ const bodyCategories = computed(() =>
           paddingLeft: `${settings.category.padding[3]}px`,
         }"
       >
-        <ResumeCategoryName :category-name="simpleHeaderCategoryName" />
+        <ResumeCategoryName
+          :category-name="simpleHeaderCategoryName"
+          :index="-1"
+          layout="aside"
+        />
         <div
           class="flex flex-col"
           :style="{
-            backgroundColor: settings.entry.backgroundColor,
+            backgroundColor: `${settings.entry.backgroundColor}`,
             marginTop: `${settings.entry.margin[0]}px`,
             marginRight: `${settings.entry.margin[1]}px`,
             marginBottom: `${settings.entry.margin[2]}px`,
@@ -101,9 +105,17 @@ const bodyCategories = computed(() =>
             gap: `${settings.entry.gap}px`,
           }"
         >
-          <ResumeEntrySummary :entry-summary="about" />
+          <ResumeEntrySummary
+            :entry-summary="about"
+            :entry-index="-1"
+            :category-index="-1"
+            category-layout="aside"
+          />
           <ResumeEntryHighlights
             :entry-highlights="contactDetails.map((detail) => detail.value)"
+            :entry-index="-1"
+            :category-index="-1"
+            category-layout="aside"
           />
         </div>
       </div>
@@ -111,7 +123,7 @@ const bodyCategories = computed(() =>
         v-for="(category, categoryIndex) in asideCategories"
         :key="categoryIndex"
         :style="{
-          backgroundColor: settings.category.backgroundColor,
+          backgroundColor: `${settings.category.backgroundColor}`,
           marginTop: `${settings.category.margin[0]}px`,
           marginRight: `${settings.category.margin[1]}px`,
           marginBottom: `${settings.category.margin[2]}px`,
@@ -127,11 +139,15 @@ const bodyCategories = computed(() =>
           paddingLeft: `${settings.category.padding[3]}px`,
         }"
       >
-        <ResumeCategoryName :category-name="category.name" />
+        <ResumeCategoryName
+          :category-name="category.name"
+          :index="categoryIndex"
+          :layout="category.layout"
+        />
         <ul
           class="flex flex-col"
           :style="{
-            backgroundColor: settings.entry.backgroundColor,
+            backgroundColor: `${settings.entry.backgroundColor}`,
             marginTop: `${settings.entry.margin[0]}px`,
             marginRight: `${settings.entry.margin[1]}px`,
             marginBottom: `${settings.entry.margin[2]}px`,
@@ -156,22 +172,49 @@ const bodyCategories = computed(() =>
             <ResumeEntryPeriod
               v-if="entry.nature === 'experience'"
               :entry-period="entry.period"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
             />
-            <ResumeEntryTitle :entry-title="entry.title" />
+            <ResumeEntryTitle
+              :entry-title="entry.title"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
+            />
             <ResumeEntryOrganization
               v-if="entry.nature === 'experience'"
               :entry-organization="entry.organization"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
             />
             <ResumeEntryLocation
               v-if="entry.nature === 'experience'"
               :entry-location="entry.location"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
             />
             <ResumeEntrySummary
               v-if="entry.nature === 'experience'"
               :entry-summary="entry.summary"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
             />
-            <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-            <ResumeEntryTags :entry-tags="entry.tags" />
+            <ResumeEntryHighlights
+              :entry-highlights="entry.highlights"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
+            />
+            <ResumeEntryTags
+              :entry-tags="entry.tags"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
+            />
           </li>
         </ul>
       </div>
@@ -193,7 +236,11 @@ const bodyCategories = computed(() =>
           ...getNodeStyle(settings.category, 'block'),
         }"
       >
-        <ResumeCategoryName :category-name="simpleHeaderCategoryName" />
+        <ResumeCategoryName
+          :category-name="simpleHeaderCategoryName"
+          :index="-1"
+          :layout="bodyCategories[0]?.layout"
+        />
         <div
           class="flex flex-col flex-1"
           :style="{
@@ -201,9 +248,17 @@ const bodyCategories = computed(() =>
             gap: `${settings.entry.gap}px`,
           }"
         >
-          <ResumeEntrySummary :entry-summary="about" />
+          <ResumeEntrySummary
+            :entry-summary="about"
+            :entry-index="-1"
+            :category-index="-1"
+            :category-layout="bodyCategories[0]?.layout"
+          />
           <ResumeEntryHighlights
             :entry-highlights="contactDetails.map((detail) => detail.value)"
+            :entry-index="-1"
+            :category-index="-1"
+            :category-layout="bodyCategories[0]?.layout"
           />
         </div>
       </section>
@@ -216,7 +271,11 @@ const bodyCategories = computed(() =>
           ...getNodeStyle(settings.category, 'block'),
         }"
       >
-        <ResumeCategoryName :category-name="category.name" />
+        <ResumeCategoryName
+          :category-name="category.name"
+          :index="categoryIndex"
+          :layout="category.layout"
+        />
         <ul
           class="flex flex-col flex-1"
           :style="{
@@ -229,7 +288,12 @@ const bodyCategories = computed(() =>
             :key="entryIndex"
             class="flex flex-col"
           >
-            <ResumeEntry :entry="entry" />
+            <ResumeEntry
+              :entry="entry"
+              :entry-index="entryIndex"
+              :category-index="categoryIndex"
+              :category-layout="category.layout"
+            />
           </li>
         </ul>
       </section>

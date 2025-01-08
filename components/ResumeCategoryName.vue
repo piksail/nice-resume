@@ -1,23 +1,29 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
-import { getNodeStyle } from "@/utils/style";
+import { themeSettings } from "@/globals";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
+import type { Category } from "~/types";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
-const { categoryName } = defineProps<{
+const { focusedInput } = storeToRefs(useEditorStore());
+
+const { categoryName, index, layout } = defineProps<{
   categoryName: string;
+  index: number;
+  layout: Category["layout"]; // Layout must be used to focus the correct category element between aside and non-aside categories
 }>();
 
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const getSeparatorFlexDirection = () => {
@@ -32,28 +38,28 @@ const getSeparatorFlexDirection = () => {
       return "flex-col-reverse";
   }
 };
+
+const getWidth = () => {
+  if (settings.value.categoryName.widthType !== "custom")
+    return settings.value.categoryName.widthType;
+  return `${settings.value.categoryName.width}%`;
+};
 </script>
 
 <template>
   <div
     class="flex"
-    :class="getSeparatorFlexDirection()"
+    :class="[getSeparatorFlexDirection()]"
     :style="{
-      width:
-        settings.categoryName.width === 'fit' && settings.categoryName.isAside
-          ? 'fit-content'
-          : `${settings.categoryName.width}%`,
+      width: getWidth(),
     }"
   >
     <h3
       v-if="categoryName"
+      :class="getNodeClass(`categoryList${index}Name_${layout}`, focusedInput)"
       :style="{
         ...getNodeStyle(settings.categoryName, 'title'),
-        width:
-          settings.categoryName.width === 'fit' &&
-          !settings.categoryName.isAside
-            ? 'fit-content'
-            : `${settings.categoryName.width}%`,
+        width: settings.categoryName.widthType === 'custom' ? '100%' : 'auto',
       }"
     >
       {{ categoryName }}
@@ -66,10 +72,6 @@ const getSeparatorFlexDirection = () => {
       :style="{
         ...getNodeStyle(settings.categoryNameSeparator, 'title'),
         height: `${settings.categoryNameSeparator.height}px`,
-        width:
-          settings.categoryNameSeparator.width === 'fit'
-            ? 'fit-content'
-            : `${settings.categoryNameSeparator.width}%`,
       }"
     />
   </div>

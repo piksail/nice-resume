@@ -1,3 +1,3 @@
 NODE_OPTIONS=--max_old_space_size=3072
-strict-peer-dependencies=true
+strict-peer-dependencies=false
 auto-install-peers=false

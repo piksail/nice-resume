@@ -1,39 +1,27 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
-import { useProfileStore } from "@/stores/profile";
-import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import useDocumentSettings from "~/composables/use-document-settings";
 import DocumentHeader from "./DocumentHeader.vue";
 import EmailSignature from "./EmailSignature.vue";
 import LetterBody from "./LetterBody.vue";
 import ResumeBody from "./ResumeBody.vue";
 
 const { documentType } = storeToRefs(useEditorStore());
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
-const { settings: resumeStoreSettings } = storeToRefs(useResumeStore());
-const { isHeaderSimple, settings: letterStoreSettings } =
-  storeToRefs(useLetterStore());
+const { isHeaderSimple } = storeToRefs(useLetterStore());
 
-const settings = computed(() => {
-  if (isThemeCustomized.value) {
-    return documentType.value === "letter"
-      ? letterStoreSettings.value
-      : resumeStoreSettings.value;
-  }
-  return templateSettings[template.value][documentType.value];
-});
+const settings = useDocumentSettings();
+// TODO seems like there is an error of nextTick because ctrl+s on Document.vue fixes the refresh pb
 </script>
 
 <template>
   <div
     class="relative w-full flex flex-col"
     :style="{
-      color: settings.document.color,
+      color: `${settings.document.color}`,
       fontFamily: settings.document.bodyFont,
-      backgroundColor: settings.document.backgroundColor,
+      backgroundColor: `${settings.document.backgroundColor}`,
       borderTop: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[0]}px`,
       borderRight: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[1]}px`,
       borderBottom: `${settings.document.borderStyle} ${settings.document.borderColor} ${settings.document.border[2]}px`,

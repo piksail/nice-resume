@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
+import { themeSettings } from "@/globals";
 import type { Category } from "@/types";
 import ResumeEntryLocation from "./ResumeEntryLocation.vue";
 import ResumeEntryOrganization from "./ResumeEntryOrganization.vue";
@@ -13,18 +13,21 @@ import ResumeEntryTitle from "./ResumeEntryTitle.vue";
 import ResumeEntryHighlights from "./ResumeEntryHighlights.vue";
 import ResumeEntryTags from "./ResumeEntryTags.vue";
 
-const { entry } = defineProps<{
+const { categoryIndex, categoryLayout, entry, entryIndex } = defineProps<{
+  categoryIndex: number;
+  categoryLayout: Category["layout"];
   entry: Category["entries"][0];
+  entryIndex: number;
 }>();
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 
 const experienceHeaderItems = computed(() => {
@@ -32,25 +35,45 @@ const experienceHeaderItems = computed(() => {
     {
       order: settings.value.entryTitle.order,
       component: ResumeEntryTitle,
-      props: { entryTitle: entry.title },
+      props: {
+        entryTitle: entry.title,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
     {
       order: settings.value.entryPeriod.order,
       component: ResumeEntryPeriod,
-      // @ts-expect-error This item is only reached when category nature is experience
-      props: { entryPeriod: entry.period },
+      props: {
+        // @ts-expect-error This item is only reached when category nature is experience
+        entryPeriod: entry.period,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
     {
       order: settings.value.entryOrganization.order,
       component: ResumeEntryOrganization,
-      // @ts-expect-error This item is only reached when category nature is experience
-      props: { entryOrganization: entry.organization },
+      props: {
+        // @ts-expect-error This item is only reached when category nature is experience
+        entryOrganization: entry.organization,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
     {
       order: settings.value.entryLocation.order,
       component: ResumeEntryLocation,
-      // @ts-expect-error This item is only reached when category nature is experience
-      props: { entryLocation: entry.location },
+      props: {
+        // @ts-expect-error This item is only reached when category nature is experience
+        entryLocation: entry.location,
+        entryIndex,
+        categoryIndex,
+        categoryLayout,
+      },
     },
   ];
 });
@@ -72,27 +95,27 @@ const fourthItem = computed(() => {
 </script>
 
 <template>
-  <!-- TODO remove all flex gaps -->
   <template v-if="settings.entry.layout === 1">
-    <div class="flex gap-4 items-center">
+    <div class="flex items-center">
       <component
+        v-if="firstItem"
         :is="firstItem?.component"
         v-bind="firstItem?.props"
         class="flex-1"
       />
       <div>
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
           v-bind="secondItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
           v-bind="fourthItem?.props"
         />
@@ -101,32 +124,46 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 2">
-    <div class="flex justify-between gap-4 items-center">
+    <div class="flex justify-between items-center">
       <div class="flex flex-col">
         <component
+          v-if="firstItem"
           :is="firstItem?.component"
           v-bind="firstItem?.props"
           class="flex-1"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
           v-bind="secondItem?.props"
         />
       </div>
       <div class="flex flex-col text-right">
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
           v-bind="fourthItem?.props"
         />
@@ -135,30 +172,47 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 3">
     <div class="flex">
       <div class="flex flex-col w-[40%]">
-        <div class="flex gap-2">
-          <component :is="firstItem?.component" v-bind="firstItem?.props" />
+        <div class="flex">
           <component
-            v-if="entry.nature === 'experience'"
+            v-if="firstItem"
+            :is="firstItem?.component"
+            v-bind="firstItem?.props"
+          />
+          <component
+            v-if="secondItem && entry.nature === 'experience'"
             :is="secondItem?.component"
             v-bind="secondItem?.props"
             class="flex-1"
           />
         </div>
-        <div class="flex gap-2">
+        <div class="flex">
           <component
-            v-if="entry.nature === 'experience'"
+            v-if="thirdItem && entry.nature === 'experience'"
             :is="thirdItem?.component"
             v-bind="thirdItem?.props"
           />
           <component
-            v-if="entry.nature === 'experience'"
+            v-if="fourthItem && entry.nature === 'experience'"
             :is="fourthItem?.component"
             v-bind="fourthItem?.props"
           />
@@ -168,31 +222,48 @@ const fourthItem = computed(() => {
         <ResumeEntrySummary
           v-if="entry.nature === 'experience'"
           :entry-summary="entry.summary"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
         />
-        <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-        <ResumeEntryTags :entry-tags="entry.tags" />
+        <ResumeEntryHighlights
+          :entry-highlights="entry.highlights"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
+        <ResumeEntryTags
+          :entry-tags="entry.tags"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
       </div>
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 4">
     <div class="flex flex-col">
-      <div class="flex gap-2">
-        <component :is="firstItem?.component" v-bind="firstItem?.props" />
+      <div class="flex">
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="firstItem"
+          :is="firstItem?.component"
+          v-bind="firstItem?.props"
+        />
+        <component
+          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
           v-bind="secondItem?.props"
           class="flex-1"
         />
       </div>
-      <div class="flex gap-2">
+      <div class="flex">
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
           v-bind="fourthItem?.props"
         />
@@ -200,60 +271,91 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 5">
     <div class="flex flex-col">
       <component
+        v-if="firstItem"
         :is="firstItem?.component"
         v-bind="firstItem?.props"
         class="self-end"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
         v-bind="secondItem?.props"
         class="flex-1"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
         v-bind="fourthItem?.props"
       />
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 6">
     <div class="flex flex-col">
-      <div class="flex gap-2 items-baseline">
-        <component :is="firstItem?.component" v-bind="firstItem?.props" />
+      <div class="flex items-baseline">
+        <component
+          v-if="firstItem"
+          :is="firstItem?.component"
+          v-bind="firstItem?.props"
+        />
         <div class="flex flex-col flex-1">
           <component
-            v-if="entry.nature === 'experience'"
+            v-if="secondItem && entry.nature === 'experience'"
             :is="secondItem?.component"
             v-bind="secondItem?.props"
           />
           <div>
             <component
-              v-if="entry.nature === 'experience'"
+              v-if="thirdItem && entry.nature === 'experience'"
               :is="thirdItem?.component"
               v-bind="thirdItem?.props"
             />
             <component
-              v-if="entry.nature === 'experience'"
+              v-if="fourthItem && entry.nature === 'experience'"
               :is="fourthItem?.component"
               v-bind="fourthItem?.props"
             />
@@ -263,29 +365,46 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 7">
     <div class="flex flex-col">
-      <component :is="firstItem?.component" v-bind="firstItem?.props" />
+      <component
+        v-if="firstItem"
+        :is="firstItem?.component"
+        v-bind="firstItem?.props"
+      />
       <div class="flex justify-between">
         <div>
           <component
-            v-if="entry.nature === 'experience'"
+            v-if="secondItem && entry.nature === 'experience'"
             :is="secondItem?.component"
             v-bind="secondItem?.props"
           />
           <component
-            v-if="entry.nature === 'experience'"
+            v-if="thirdItem && entry.nature === 'experience'"
             :is="thirdItem?.component"
             v-bind="thirdItem?.props"
           />
         </div>
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
           v-bind="fourthItem?.props"
         />
@@ -293,29 +412,46 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 8">
     <div class="flex flex-col">
       <div>
-        <component :is="firstItem?.component" v-bind="firstItem?.props" />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="firstItem"
+          :is="firstItem?.component"
+          v-bind="firstItem?.props"
+        />
+        <component
+          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
           v-bind="secondItem?.props"
         />
       </div>
       <div>
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
           v-bind="fourthItem?.props"
         />
@@ -323,28 +459,45 @@ const fourthItem = computed(() => {
       <ResumeEntrySummary
         v-if="entry.nature === 'experience'"
         :entry-summary="entry.summary"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
       />
-      <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-      <ResumeEntryTags :entry-tags="entry.tags" />
+      <ResumeEntryHighlights
+        :entry-highlights="entry.highlights"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
+      <ResumeEntryTags
+        :entry-tags="entry.tags"
+        :entry-index="entryIndex"
+        :category-index="categoryIndex"
+        :category-layout="categoryLayout"
+      />
     </div>
   </template>
   <template v-else-if="settings.entry.layout === 9">
     <div class="flex justify-between">
       <div>
-        <component :is="firstItem?.component" v-bind="firstItem?.props" />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="firstItem"
+          :is="firstItem?.component"
+          v-bind="firstItem?.props"
+        />
+        <component
+          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
           v-bind="secondItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
           v-bind="thirdItem?.props"
         />
       </div>
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
         v-bind="fourthItem?.props"
       />
@@ -352,25 +505,42 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 10">
-    <component :is="firstItem?.component" v-bind="firstItem?.props" />
+    <component
+      v-if="firstItem"
+      :is="firstItem?.component"
+      v-bind="firstItem?.props"
+    />
     <div>
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
         v-bind="secondItem?.props"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
         v-bind="fourthItem?.props"
       />
@@ -378,27 +548,44 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 11">
     <div class="flex justify-between">
-      <component :is="firstItem?.component" v-bind="firstItem?.props" />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="firstItem"
+        :is="firstItem?.component"
+        v-bind="firstItem?.props"
+      />
+      <component
+        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
         v-bind="secondItem?.props"
       />
     </div>
     <div class="flex justify-between">
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
         v-bind="fourthItem?.props"
       />
@@ -406,52 +593,86 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 12">
     <div class="flex justify-between">
-      <component :is="firstItem?.component" v-bind="firstItem?.props" />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="firstItem"
+        :is="firstItem?.component"
+        v-bind="firstItem?.props"
+      />
+      <component
+        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
         v-bind="secondItem?.props"
       />
     </div>
     <component
-      v-if="entry.nature === 'experience'"
+      v-if="thirdItem && entry.nature === 'experience'"
       :is="thirdItem?.component"
       v-bind="thirdItem?.props"
     />
     <component
-      v-if="entry.nature === 'experience'"
+      v-if="fourthItem && entry.nature === 'experience'"
       :is="fourthItem?.component"
       v-bind="fourthItem?.props"
     />
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
   <template v-else-if="settings.entry.layout === 13">
     <div class="flex">
       <div class="flex flex-col w-[25%]">
-        <component :is="firstItem?.component" v-bind="firstItem?.props" />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="firstItem"
+          :is="firstItem?.component"
+          v-bind="firstItem?.props"
+        />
+        <component
+          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
           v-bind="secondItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="entry.nature === 'experience'"
+          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
           v-bind="fourthItem?.props"
         />
@@ -460,27 +681,44 @@ const fourthItem = computed(() => {
         <ResumeEntrySummary
           v-if="entry.nature === 'experience'"
           :entry-summary="entry.summary"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
         />
-        <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-        <ResumeEntryTags :entry-tags="entry.tags" />
+        <ResumeEntryHighlights
+          :entry-highlights="entry.highlights"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
+        <ResumeEntryTags
+          :entry-tags="entry.tags"
+          :entry-index="entryIndex"
+          :category-index="categoryIndex"
+          :category-layout="categoryLayout"
+        />
       </div>
     </div>
   </template>
   <template v-else>
     <div class="flex items-center">
-      <component :is="firstItem?.component" v-bind="firstItem?.props" />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="firstItem"
+        :is="firstItem?.component"
+        v-bind="firstItem?.props"
+      />
+      <component
+        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
         v-bind="secondItem?.props"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="entry.nature === 'experience'"
+        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
         v-bind="fourthItem?.props"
       />
@@ -488,8 +726,21 @@ const fourthItem = computed(() => {
     <ResumeEntrySummary
       v-if="entry.nature === 'experience'"
       :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
     />
-    <ResumeEntryHighlights :entry-highlights="entry.highlights" />
-    <ResumeEntryTags :entry-tags="entry.tags" />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
   </template>
 </template>

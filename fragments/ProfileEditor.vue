@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import Button from "primevue/button";
+import Message from "primevue/message";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -9,11 +12,23 @@ import { contactIcons, socialIcons } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
+import { capitalize } from "@/utils/string";
+
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
 
 const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
 
-const { isHeaderSimple, simpleHeaderCategoryName } =
+const { categories, isHeaderSimple, simpleHeaderCategoryName } =
   storeToRefs(useResumeStore());
+
+const bodyCategories = computed(() =>
+  categories.value.filter(
+    (category) => category.isVisible && category.layout !== "aside",
+  ),
+);
 
 function addContactDetail() {
   const contactDetail: ContactDetail = {
@@ -27,54 +42,77 @@ function addContactDetail() {
   focusNextInput("#contactDetailList input");
 }
 
-function changeContactDetailIcon(
-  contactDetail: ContactDetail,
-  value: ContactDetail["icon"],
-) {
-  contactDetail.icon = value;
-}
-
 function changeContactDetaiType(
   contactDetail: ContactDetail,
   value: ContactDetail["type"],
 ) {
   contactDetail.icon = null; // Reset as icon sets are based on type
-  contactDetail.type = value;
+  contactDetail.type = value ? "social" : "personal";
 }
 </script>
 
 <template>
   <EditorCategory id="Profile">
-    <template v-slot:header>Profile</template>
-    <div class="flex flex-col gap-5">
-      <Field id="profileName" label="Name" transparent v-model="name" />
-      <Field id="profileTitle" label="Title" transparent v-model="title" />
+    <template v-slot:header>{{ capitalize($t("profile")) }}</template>
+    <div class="formBlock">
       <Field
-        type="toggle"
-        label="Consider about and details a dedicated category*"
+        id="profileName"
+        target
+        transparent
+        :label="$t('name')"
+        v-model="name"
+      />
+      <Field
+        id="profileTitle"
+        target
+        transparent
+        :label="$t('title')"
+        v-model="title"
+      />
+      <Field
+        type="checkbox"
+        transparent
+        :label="t('considerAboutAndDetailsACategory')"
         v-model="isHeaderSimple"
       />
       <template v-if="isHeaderSimple">
-        <p>
-          *When on, about and details are styled through the Entry style editor.
-        </p>
-        <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 2) -->
+        <Message size="small" class="!bg-white/10 !text-white">
+          {{ t("howToStyleAboutAndDetailsCategory") }}
+        </Message>
+        <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 1 "about" and 1 "details") -->
+        <!-- TODO we should actually add two more Category types : Details and About, so that the customization is way easier... (there is no -1 index) and user is more free to cuztomize -->
         <Field
-          id="detailsCategoryName"
-          label="Category name"
+          :id="`categoryList${-1}Name_${bodyCategories[0]?.layout === 'half' ? 'half' : 'full'}`"
+          target
           transparent
+          :label="$t('categoryName')"
           v-model="simpleHeaderCategoryName"
         />
       </template>
       <Field
-        id="detailsAbout"
-        label="About"
-        type="textarea"
+        :id="
+          isHeaderSimple
+            ? `categoryList${-1}EntryList${-1}Summary`
+            : `detailsAbout`
+        "
+        target
         transparent
+        :label="$t('about')"
+        type="textarea"
         v-model="about"
       />
       <label class="flex flex-col" for="contactDetails">
-        <span class="label opacity-60">Contact details</span>
+        <div class="w-[70%] grid grid-cols-4 gap-x-3">
+          <span class="label labelTransparent col-span-2">
+            {{ capitalize($t("contactDetails")) }}
+          </span>
+          <span class="label labelTransparent">
+            {{ capitalize($t("socialNetwork")) }}
+          </span>
+          <span class="label labelTransparent">
+            {{ capitalize($t("icon")) }}
+          </span>
+        </div>
         <ul
           v-if="contactDetails.length"
           id="contactDetailList"
@@ -85,69 +123,65 @@ function changeContactDetaiType(
             :key="detailIndex"
             class="inputListItem"
           >
-            <div class="flex flex-col md:flex-row w-[70%] gap-3 md:items-end">
-              <input
-                class="input flex-1"
+            <div class="w-[70%] grid grid-cols-4 gap-x-3">
+              <Field
+                :id="
+                  isHeaderSimple
+                    ? `categoryList${-1}EntryList${-1}HighlightList${detailIndex}`
+                    : `detailList${detailIndex}`
+                "
+                class="col-span-2"
+                target
+                transparent
                 v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"
               />
-              <label for="documentType">
-                <span class="label opacity-60">Type</span>
-                <select
-                  id="detailType"
-                  :value="detail.type"
-                  @change="
-                    changeContactDetaiType(
-                      detail,
-                      ($event.target as HTMLInputElement)
-                        .value as ContactDetail['type'],
-                    )
-                  "
-                  class="select block capitalize text-white"
-                >
-                  <option class="option">personal</option>
-                  <option class="option">social</option>
-                </select>
-              </label>
-              <label for="detailIcon">
-                <span class="label opacity-60">Icon</span>
-                <select
-                  id="detailIcon"
-                  :value="detail.icon"
-                  @change="
-                    changeContactDetailIcon(
-                      detail,
-                      ($event.target as HTMLInputElement)
-                        .value as ContactDetail['icon'],
-                    )
-                  "
-                  class="select block capitalize bg-transparent text-white"
-                >
-                  <option class="option" value="">None</option>
-                  <option class="option">default</option>
-                  <template v-if="detail.type === 'social'">
-                    <option
-                      v-for="icon in socialIcons"
-                      :key="`${icon}`"
-                      class="option"
-                    >
-                      {{ icon }}
-                    </option>
-                  </template>
-                  <template v-else>
-                    <option
-                      v-for="icon in contactIcons"
-                      :key="`${icon}`"
-                      class="option"
-                    >
-                      {{ icon }}
-                    </option>
-                  </template>
-                </select>
-              </label>
+              <Field
+                id="detailType"
+                transparent
+                type="togglebutton"
+                :model-value="detail.type === 'social'"
+                :onLabel="capitalize($t('yes'))"
+                :offLabel="capitalize($t('no'))"
+                @update:model-value="changeContactDetaiType(detail, $event)"
+              />
+              <Field
+                id="detailIcon"
+                transparent
+                type="select"
+                v-model="detail.icon"
+                optionLabel="label"
+                optionValue="value"
+                :options="
+                  detail.type === 'social'
+                    ? [undefined, 'default', ...socialIcons].map((icon) => {
+                        if (!icon) {
+                          return {
+                            label: '',
+                            value: icon,
+                          };
+                        }
+                        if (icon === 'default') {
+                          return {
+                            label: capitalize($t(icon)),
+                            value: icon,
+                          };
+                        }
+                        return {
+                          label: capitalize(icon),
+                          value: icon,
+                        };
+                      })
+                    : [undefined, 'default', ...contactIcons].map((icon) => ({
+                        label: !icon ? '' : capitalize($t(icon)),
+                        value: icon,
+                      }))
+                "
+              />
             </div>
             <ListActions
               class="mb-2"
+              transparent
               :index="detailIndex"
               :list-length="contactDetails.length"
               @moveUp="moveUp(contactDetails, detailIndex)"
@@ -155,14 +189,45 @@ function changeContactDetaiType(
               @remove="remove(contactDetails, detailIndex)"
             />
           </li>
-          <button
-            class="button slotButton w-[70%] shadow-none px-2 py-1 text-sm"
-            @click="addContactDetail"
-          >
-            Add detail
-          </button>
+          <Button asChild>
+            <button
+              class="button slotButton slotButtonSmall"
+              @click="addContactDetail"
+            >
+              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+            </button>
+          </Button>
         </ul>
       </label>
     </div>
   </EditorCategory>
 </template>
+
+<i18n lang="json">
+{
+  "br": {
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
+  },
+  "de": {
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
+  },
+  "en": {
+    "considerAboutAndDetailsACategory": "Consider About and Details a decidated category",
+    "howToStyleAboutAndDetailsCategory": "About and Details are styled through the Entry style editor."
+  },
+  "es": {
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
+  },
+  "fr": {
+    "considerAboutAndDetailsACategory": "Séparer À propos et Coordonnées dans une catégorie dédiée",
+    "howToStyleAboutAndDetailsCategory": "À propos et Coordonnées sont personnalisables dans l'éditeur de thème"
+  },
+  "it": {
+    "considerAboutAndDetailsACategory": "TODO",
+    "howToStyleAboutAndDetailsCategory": "TODO"
+  }
+}
+</i18n>

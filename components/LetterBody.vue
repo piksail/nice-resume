@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useEditorStore } from "@/stores/editor";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
-import { templateSettings } from "@/globals";
-import { getNodeStyle } from "@/utils/style";
+import { themeSettings } from "@/globals";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
 import LetterReference from "./LetterReference.vue";
 import LetterSubject from "./LetterSubject.vue";
 
-const { isThemeCustomized, name, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, name, theme } = storeToRefs(useProfileStore());
+
+const { focusedInput } = storeToRefs(useEditorStore());
 
 const {
   settings: storeSettings,
@@ -23,7 +26,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].letter;
+    : themeSettings[theme.value].letter;
 });
 </script>
 
@@ -37,7 +40,11 @@ const settings = computed(() => {
       gap: `${settings.senderDetails.gap}px`,
     }"
   >
-    <li v-for="detail in senderDetails" :key="detail">
+    <li
+      v-for="(detail, index) in senderDetails"
+      :key="detail"
+      :class="getNodeClass(`senderDetailList${index}`, focusedInput)"
+    >
       {{ detail }}
     </li>
   </ul>
@@ -50,7 +57,11 @@ const settings = computed(() => {
       gap: `${settings.recipientDetails.gap}px`,
     }"
   >
-    <li v-for="detail in recipientDetails" :key="detail">
+    <li
+      v-for="(detail, index) in recipientDetails"
+      :key="detail"
+      :class="getNodeClass(`recipientDetailList${index}`, focusedInput)"
+    >
       {{ detail }}
     </li>
   </ul>
@@ -69,7 +80,7 @@ const settings = computed(() => {
       lineHeight: settings.body.lineHeight ?? 'normal',
       fontWeight: settings.body.fontWeight,
       textAlign: settings.body.isJustified ? 'justify' : 'left',
-      color: settings.body.color,
+      color: `${settings.body.color}`,
       marginTop: `${settings.body.margin[0]}px`,
       marginRight: `${settings.body.margin[1]}px`,
       marginBottom: `${settings.body.margin[2]}px`,
@@ -79,6 +90,7 @@ const settings = computed(() => {
     <p
       v-for="(paragraph, index) in paragraphs"
       :key="index"
+      :class="getNodeClass(`paragraphList${index}`, focusedInput)"
       :style="{
         marginBottom: `${settings.body.gap}px`,
       }"

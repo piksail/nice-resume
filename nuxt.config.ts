@@ -1,16 +1,19 @@
+import preset from "./primevue.config";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ["@/assets/styles/index.css"],
   devtools: { enabled: true },
   modules: [
     "@nuxt/test-utils/module",
+    "@nuxtjs/i18n",
     "@nuxtjs/seo",
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
+    "@primevue/nuxt-module",
     "@vueuse/nuxt",
     "nuxt-svgo",
-    "@nuxtjs/i18n",
   ],
   alias: {
     "~/*": "../*",
@@ -32,7 +35,7 @@ export default defineNuxtConfig({
     storage: "localStorage",
   },
   i18n: {
-    locales: ["en", "fr"],
+    locales: ["br", "de", "en", "es", "fr", "it"],
     defaultLocale: "en",
     strategy: "prefix_and_default",
     detectBrowserLanguage: {
@@ -42,10 +45,20 @@ export default defineNuxtConfig({
     },
     vueI18n: "./i18n.config.ts",
   },
+  primevue: {
+    options: {
+      theme: {
+        preset,
+        options: {
+          darkModeSelector: ".dark-mode",
+        },
+      },
+    },
+  },
   site: {
     url: "https://nice-resume.piksail.com/",
     name: "Nice Resume",
-    description: "CV/Resume template for developers",
+    description: "Resume builder for job applications",
     indexable: false,
   },
   seo: {

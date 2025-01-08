@@ -1,23 +1,30 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
-import { templateSettings } from "@/globals";
-import { getNodeStyle } from "@/utils/style";
+import { themeSettings } from "@/globals";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
+import type { Category } from "~/types";
 
-const { isThemeCustomized, template } = storeToRefs(useProfileStore());
+const { isThemeCustomized, theme } = storeToRefs(useProfileStore());
 
 const { settings: storeSettings } = storeToRefs(useResumeStore());
 
-const { entryTags } = defineProps<{
+const { focusedInput } = storeToRefs(useEditorStore());
+
+const { categoryIndex, entryTags, entryIndex } = defineProps<{
+  categoryIndex: number;
+  categoryLayout: Category["layout"];
   entryTags: string[];
+  entryIndex: number;
 }>();
 
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : templateSettings[template.value].resume;
+    : themeSettings[theme.value].resume;
 });
 </script>
 
@@ -36,9 +43,15 @@ const settings = computed(() => {
     <li
       v-for="(tag, tagIndex) in entryTags"
       :key="tagIndex"
+      :class="
+        getNodeClass(
+          `categoryList${categoryIndex}EntryList${entryIndex}TagList${tagIndex}_${categoryLayout}`,
+          focusedInput,
+        )
+      "
       :style="{
         ...getNodeStyle(settings.entryTag, 'text'),
-        backgroundColor: settings.entryTag.backgroundColor,
+        backgroundColor: `${settings.entryTag.backgroundColor}`,
         borderTop: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[0]}px`,
         borderRight: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[1]}px`,
         borderBottom: `${settings.entryTag.borderStyle} ${settings.entryTag.borderColor} ${settings.entryTag.border[2]}px`,

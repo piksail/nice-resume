@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import type { ListSettings } from "@/types";
-import { useProfileStore } from "@/stores/profile";
-import { listMarkers } from "@/globals";
+import { listMarkerPositions, listMarkers } from "@/globals";
 import Field from "@/components/Field.vue";
+import { capitalize } from "@/utils/string";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;
@@ -11,46 +10,44 @@ const { propertyName, settings } = defineProps<{
     gap: number;
   };
 }>();
-
-const { isThemeCustomized } = storeToRefs(useProfileStore());
 </script>
 
 <template>
-  <div class="flex flex-col gap-5">
-    <div class="flex gap-5 flex-wrap">
+  <div class="formBlock">
+    <FormBlockRow :header="$t('list')">
       <Field
         :id="`${propertyName}Gap`"
-        label="Gap"
+        :label="$t('gap')"
         type="number"
-        :disabled="!isThemeCustomized"
         v-model="settings.gap"
       />
-      <label :for="`${propertyName}ListMarker`">
-        <span class="label">List marker</span>
-        <select
-          :id="`${propertyName}ListMarker`"
-          class="select block"
-          :disabled="!isThemeCustomized"
-          v-model="settings.listMarker"
-        >
-          <option class="option" value="">none</option>
-          <option
-            class="option"
-            v-for="(item, index) in listMarkers"
-            :key="index"
-            :value="item"
-          >
-            {{ item }}
-          </option>
-        </select>
-      </label>
+      <Field
+        :id="`${propertyName}ListMarkerPosition`"
+        :label="$t('markerPosition')"
+        type="selectbutton"
+        optionLabel="label"
+        optionValue="value"
+        :options="
+          listMarkerPositions.map((position) => ({
+            label: capitalize($t(position)),
+            value: position,
+          }))
+        "
+        v-model="settings.listMarkerPosition"
+      />
+      <Field
+        :id="`${propertyName}ListMarker`"
+        :label="$t('marker')"
+        type="select"
+        :options="['', ...listMarkers]"
+        v-model="settings.listMarker"
+      />
       <Field
         :id="`${propertyName}ListMarkerColor`"
-        label="List marker color"
+        :label="$t('color')"
         type="color"
-        :disabled="!isThemeCustomized"
         v-model="settings.listMarkerColor"
       />
-    </div>
+    </FormBlockRow>
   </div>
 </template>

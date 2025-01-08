@@ -1,43 +1,37 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/vue/24/outline";
+import Panel from "primevue/panel";
 
-const { id, isHidden } = defineProps<{
+const { id, hidden, locked } = defineProps<{
   id: string;
-  isHidden?: boolean;
+  hidden?: boolean;
+  locked?: boolean;
 }>();
-
-const isOpen = ref(true);
-
-function toggleDisplay() {
-  isOpen.value = !isOpen.value;
-}
 </script>
 
 <template>
-  <div
+  <Panel
     :id="id"
-    class="flex flex-col bg-white bg-opacity-10 rounded w-full scroll-mt-8"
+    :collapsed="hidden || locked"
+    :toggleable="!locked"
+    class="!border-none"
+    :class="
+      hidden
+        ? '!bg-transparent [&_.p-panel-header]:!bg-transparent [&_.p-panel-header]:!line-through [&_.p-panel-header]:!text-white'
+        : ''
+    "
+    pt:header:class="!border-none !rounded"
+    pt:content:class="!bg-white/10 !border-none !p-10"
+    pt:footer:class="!bg-white/10 !border-none !pt-0 !pb-10"
   >
-    <header
-      class="flex justify-between items-center rounded bg-white text-pink-500 p-4 md:p-6 shadow-lg"
-      :class="
-        isHidden ? 'bg-opacity-0 border border-white/10' : 'bg-opacity-100'
-      "
-    >
+    <template #header>
       <slot name="header" />
-      <button
-        v-if="!isHidden"
-        title="Toggle display"
-        class="text-pink-500 size-7 rounded-full p-1 hover:bg-blue-700 hover:bg-opacity-5"
-        @click="toggleDisplay"
-      >
-        <ChevronUpIcon v-if="isOpen" class="size-full" />
-        <ChevronDownIcon v-else class="size-full" />
-      </button>
-    </header>
-    <div class="p-6 md:p-10" v-if="isOpen && !isHidden">
-      <slot />
-    </div>
-  </div>
+    </template>
+    <slot v-if="!locked" />
+    <template #icons>
+      <slot name="icons" />
+    </template>
+    <template #footer>
+      <slot name="footer" />
+    </template>
+  </Panel>
 </template>
