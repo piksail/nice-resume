@@ -16,6 +16,8 @@ dotenv.config({ path: envPath });
 console.log(`Using env file: ${envPath}`);
 console.log(`Base URL: ${process.env.BASE_URL}`);
 
+const TIMEOUT = 10 * 1000;
+
 export default defineConfig<ConfigOptions>({
   fullyParallel: true,
   testDir: "e2e",
@@ -49,4 +51,5 @@ export default defineConfig<ConfigOptions>({
       use: { ...devices["iPhone 12"] },
     },
   ],
+  timeout: TIMEOUT,
 });
