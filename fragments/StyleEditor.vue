@@ -26,6 +26,7 @@ import TextSettingsEditor from "@/components/TextSettingsEditor.vue";
 import TitleSettingsEditor from "@/components/TitleSettingsEditor.vue";
 import FormBlockRow from "~/components/FormBlockRow.vue";
 import type { LetterSettings } from "~/types";
+import { capitalize } from "@/utils/string";
 
 // eslint-disable-next-line no-undef
 const { t } = useI18n({

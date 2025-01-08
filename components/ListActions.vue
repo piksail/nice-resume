@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { capitalize } from "@/utils/string";
+
 const { index, isHeader, listLength } = defineProps<{
   index: number;
   isHeader?: boolean;

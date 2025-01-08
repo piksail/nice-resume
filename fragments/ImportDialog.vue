@@ -11,6 +11,7 @@ import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { formatJsonResumeAsResume } from "@/utils/json-resume";
 import { generateStores } from "~/utils/editor";
+import { capitalize } from "@/utils/string";
 
 // eslint-disable-next-line no-undef
 const { t: localizer } = useI18n();

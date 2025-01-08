@@ -11,6 +11,7 @@ import ExportDialog from "~/fragments/ExportDialog.vue";
 import ImportDialog from "~/fragments/ImportDialog.vue";
 import StyleEditor from "~/fragments/StyleEditor.vue";
 import type { LocaleCode } from "~/types";
+import { capitalize } from "@/utils/string";
 
 console.info("Version: ", packageJson.version);
 

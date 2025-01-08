@@ -2,6 +2,7 @@
 import type { TextSettings } from "@/types";
 import { fonts, fontWeights } from "@/globals";
 import Field from "@/components/Field.vue";
+import { capitalize } from "@/utils/string";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;

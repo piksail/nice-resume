@@ -12,6 +12,7 @@ import { contactIcons, socialIcons } from "@/globals";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
+import { capitalize } from "@/utils/string";
 
 // eslint-disable-next-line no-undef
 const { t } = useI18n({

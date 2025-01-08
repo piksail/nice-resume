@@ -7,6 +7,7 @@ import { focusNextInput } from "@/utils/editor";
 import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
+import { capitalize } from "@/utils/string";
 
 const {
   isHeaderSimple,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
-import { getNodeStyle } from "@/utils/style";
+import { getNodeStyle, getNodeClass } from "@/utils/style";
 import useDocumentSettings from "~/composables/use-document-settings";
 
 const { about } = defineProps<{

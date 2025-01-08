@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TitleSettings } from "@/types";
 import FormBlockRow from "./FormBlockRow.vue";
+import { capitalize } from "@/utils/string";
 
 const { propertyName, settings } = defineProps<{
   propertyName: string;
