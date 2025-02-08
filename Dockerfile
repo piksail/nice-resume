@@ -4,7 +4,8 @@ ARG NUXT_PORT=3000
 
 FROM node:${NODE_VERSION}-alpine AS base
 WORKDIR /app
-RUN corepack enable pnpm
+RUN corepack enable && corepack prepare pnpm --activate
+
 # Install packages first to benefit from layer caching
 COPY package.json ./
 COPY pnpm-lock.yaml ./
