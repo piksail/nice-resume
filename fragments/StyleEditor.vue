@@ -534,6 +534,15 @@ function askBeforeResetStyle() {
         <Fieldset :legend="capitalize($t('category'))" toggleable>
           <div class="formBlock">
             <Field
+              id="categoryIsMansonry"
+              :label="$t('mansonry')"
+              type="checkbox"
+              v-model="resumeSettings.category.isMansonry"
+            />
+            <Message v-if="resumeSettings.category.isMansonry" size="small">
+              {{ t("howToGapMansonry") }}
+            </Message>
+            <Field
               id="categoryGap"
               :label="$t('gap')"
               type="number"
@@ -701,23 +710,28 @@ function askBeforeResetStyle() {
 {
   "br": {
     "onLabel": "TODO",
-    "offLabel": "TODO"
+    "offLabel": "TODO",
+    "howToGapMansonry": "TODO"
   },
   "de": {
     "onLabel": "angepasst",
-    "offLabel": "nicht angepasst"
+    "offLabel": "nicht angepasst",
+    "howToGapMansonry": "TODO"
   },
   "en": {
     "onLabel": "customized",
-    "offLabel": "not customized"
+    "offLabel": "not customized",
+    "howToGapMansonry": "Vertical gap is handled with category top and bottom margins."
   },
   "es": {
     "onLabel": "TODO",
-    "offLabel": "TODO"
+    "offLabel": "TODO",
+    "howToGapMansonry": "TODO"
   },
   "fr": {
     "onLabel": "modifié",
-    "offLabel": "non modifié"
+    "offLabel": "non modifié",
+    "howToGapMansonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie."
   }
 }
 </i18n>

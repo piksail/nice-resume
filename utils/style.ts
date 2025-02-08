@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import type { StyleValue } from "vue";
+import type { Category } from "~/types";
 // import type { ResumeSettings } from "@/types";
 
 // type Keys = keyof ResumeSettings;
@@ -68,4 +69,17 @@ export function getNodeStyle(
  */
 export function getNodeClass(id: string, focusedInput: string | undefined) {
   return focusedInput === id ? "!border-4 !border-double !border-primary" : "";
+}
+
+/**
+ * Use the correct column properties whether layout is mansonry (native columns) or not (grid columns).
+ */
+export function getCategoryLayoutClass(
+  category?: Category,
+  isMansonry: boolean,
+) {
+  if (category?.layout === "half") {
+    return isMansonry ? "[column-span:none]" : "col-span-1";
+  }
+  return isMansonry ? "[column-span:all]" : "col-span-2";
 }

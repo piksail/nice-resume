@@ -256,6 +256,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     gap: 12,
+    isMansonry: false,
   },
   categoryName: {
     font: "inherit",
