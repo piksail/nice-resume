@@ -14,6 +14,7 @@ import { capitalize } from "@/utils/string";
 import { useEditorStore } from "@/stores/editor";
 
 const {
+  ariaLabel,
   disabled,
   label,
   helpText,
@@ -30,6 +31,7 @@ const {
   transparent = false,
   type,
 } = defineProps<{
+  ariaLabel?: string;
   defaultValue?: string | null | undefined;
   disabled?: boolean;
   id?: string;
@@ -176,6 +178,7 @@ function updateColor(hashlessHex: string) {
       {{ capitalize(label) }}
     </span>
     <SelectButton
+      :ariaLabel="ariaLabel"
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
@@ -193,6 +196,7 @@ function updateColor(hashlessHex: string) {
       {{ capitalize(label) }}
     </span>
     <Select
+      :ariaLabel="ariaLabel"
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
