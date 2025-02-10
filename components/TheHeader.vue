@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import Toolbar from "primevue/toolbar";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
-import { documentTypes, themes } from "@/globals";
+import { documentTypes, localeLabels, themes } from "@/globals";
 import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
 import ExportDialog from "~/fragments/ExportDialog.vue";
@@ -23,15 +23,6 @@ const localePath = useLocalePath();
 
 const { documentType } = storeToRefs(useEditorStore());
 const { theme, isThemeCustomized } = storeToRefs(useProfileStore());
-
-const localeLabel: { [key in LocaleCode]: string } = {
-  br: "Brezhoneg",
-  de: "Deutsch",
-  en: "English",
-  es: "Español",
-  fr: "Français",
-  it: "Italiano",
-};
 
 // TODO enable below code and change moon/sun icon accordingly
 // const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -142,7 +133,7 @@ function uncustomizeTheme() {
             optionValue="value"
             :options="
               availableLocales.map((locale) => ({
-                label: capitalize(localeLabel[locale as LocaleCode]),
+                label: capitalize(localeLabels[locale as LocaleCode]),
                 value: locale,
               }))
             "
