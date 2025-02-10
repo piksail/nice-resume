@@ -116,13 +116,23 @@ const { t } = useI18n({
         <i class="font-serif">{{ $t("resume") }}</i>
       </h2>
       <div class="relative mx-auto group">
-        <Card class="relative -left-80 top-16" />
+        <img
+          src="/macchiato-example.png"
+          alt="Second example of a resume built with Nice Resume"
+          class="absolute -z-[1] -top-24 -left-56 w-[400px] group-hover:-translate-x-10 transition-all"
+        />
         <img
           src="/resume-editor-screenshot.png"
           alt="Screenshot of the resume editor"
           class="w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg transition-all"
         />
-        <Card class="relative left-44 bottom-56" />
+        <Card class="relative left-44 bottom-56 backdrop-blur backdrop-filter">
+          <p
+            class="text-3xl relative after:content-[''] after:relative after:-left-2 after:top-1 after:h-9 after:w-[2px] after:bg-white after:inline-block after:animate-cursor-blink"
+          >
+            Helped the team achieved its goal
+          </p>
+        </Card>
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
             <span class="textGradient">{{ t("getStarted") }}</span>
@@ -135,17 +145,26 @@ const { t } = useI18n({
         {{ t("stepLetter") }}
         <i class="font-serif">{{ $t("coverLetter") }}</i>
       </h2>
-      <div class="flex gap-10">
+      <div class="flex gap-10 relative">
         <img
-          src="/macchiato-cover-letter-example.png"
+          src="/macchiato-letter-example.png"
           alt="Example of a cover letter written and styled with Nice Resume"
           class="w-[400px] h-[calc(400px*1.414)] bg-white shadow hover:scale-105 transition-all"
         />
         <img
-          src="/macchiato-cover-letter-example.png"
-          alt="Example of a cover letter written and styled with Nice Resume"
-          class="w-[400px] h-[calc(400px*1.414)] bg-white shadow hover:scale-105 transition-all"
+          src="/letter-editor.png"
+          alt="Screenshot of the cover letter editor"
+          class="h-[calc(400px*1.414)] bg-white shadow hover:scale-105 transition-all"
         />
+        <Card class="absolute right-32 bottom-6 backdrop-blur backdrop-filter">
+          <p
+            class="text-3xl relative after:content-[''] after:relative after:-left-2 after:top-1 after:h-9 after:w-[2px] after:bg-white after:inline-block after:animate-cursor-blink"
+          >
+            Regards,
+            <br />
+            Firstname Lastname
+          </p>
+        </Card>
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
             <span class="textGradient">{{ t("getStarted") }}</span>
@@ -158,11 +177,16 @@ const { t } = useI18n({
         {{ t("stepEmail") }}
         <i class="font-serif">{{ $t("email") }}</i>
       </h2>
-      <div class="relative mx-auto group">
+      <div class="relative mx-auto flex group">
         <img
-          src="/style-editor.png"
-          alt="Screenshot of the style editor"
+          src="/email-editor.png"
+          alt="Screenshot of the email editor"
           class="w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/macchiato-email-example.png"
+          alt="Example of an email signed with Nice Resume"
+          class="absolute left-14 top-14 w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg group-hover:translate-x-3/4 transition-all"
         />
         <NuxtLink :to="localePath('/editor')">
           <button class="button bg-white mx-auto mt-8">
@@ -230,8 +254,8 @@ const { t } = useI18n({
     "stepTheme": "Pick a",
     "stepResume": "Build your",
     "stepLetter": "Write your",
-    "stepEmail": "Sign your email",
-    "stepCustomize": "Adapt the design",
+    "stepEmail": "Sign your",
+    "stepCustomize": "Adapt the",
     "getStarted": "Get started!"
   },
   "es": {

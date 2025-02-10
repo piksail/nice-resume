@@ -15,6 +15,16 @@ export default {
         print: { raw: "print" },
         screen: { raw: "screen" },
       },
+      animation: {
+        "cursor-blink": "blink 1.5s steps(2) infinite",
+      },
+      keyframes: {
+        blink: {
+          "0%": {
+            opacity: 0,
+          },
+        },
+      },
     },
   },
   plugins: [primevue],
