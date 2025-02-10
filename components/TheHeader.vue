@@ -22,7 +22,7 @@ const { availableLocales, locale, setLocale } = useI18n();
 const localePath = useLocalePath();
 
 const { documentType } = storeToRefs(useEditorStore());
-const { theme } = storeToRefs(useProfileStore());
+const { theme, isThemeCustomized } = storeToRefs(useProfileStore());
 
 const localeLabel: { [key in LocaleCode]: string } = {
   br: "Brezhoneg",
@@ -44,6 +44,12 @@ const localeLabel: { [key in LocaleCode]: string } = {
 // function toggleDarkMode() {
 //   document.documentElement.classList.toggle("dark-mode");
 // }
+
+function uncustomizeTheme() {
+  // When user switches themes, it is expected to see the result
+  // Hence the off state of the customization toggler
+  isThemeCustomized.value = false;
+}
 </script>
 
 <template>
@@ -98,6 +104,7 @@ const localeLabel: { [key in LocaleCode]: string } = {
                 value: theme,
               }))
             "
+            @update:model-value="uncustomizeTheme"
           >
             <template #dropdownicon>
               <i class="pi pi-palette" />
