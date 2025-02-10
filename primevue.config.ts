@@ -183,6 +183,22 @@ export default definePreset(Lara, {
         },
       },
     },
+    table: {
+      colorScheme: {
+        light: {
+          background: "transparent",
+          header: {
+            background: "{surface.0}",
+          },
+        },
+        dark: {
+          background: "transparent",
+          header: {
+            background: "{surface.900}",
+          },
+        },
+      },
+    },
     togglebutton: {
       sm: {
         padding: "0.2rem",

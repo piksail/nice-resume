@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Card from "@/components/Card.vue";
+import { capitalize } from "@/utils/string";
 
 const title = ref("Nice resume");
 const description = ref(
@@ -15,9 +15,9 @@ const { t } = useI18n({
   useScope: "local",
 });
 
-const firstInput = ref("First Name");
-const secondInput = ref("Phone Number");
-const thirdInput = ref("Address");
+const firstInput = ref(capitalize(t("name").toUpperCase()));
+const secondInput = ref(capitalize(t("phone")));
+const thirdInput = ref(capitalize(t("address")));
 const firstStyleInput = ref("#e11d48");
 const secondStyleInput = ref(false);
 const thirdStyleInput = ref(400);
@@ -34,7 +34,7 @@ const thirdStyleInput = ref(400);
   </Head>
 
   <NuxtLayout name="landing">
-    <section class="p-20 flex justify-center h-screen">
+    <section class="p-20 pb-0 flex justify-center">
       <div>
         <h1 class="mx-auto text-justify drop-shadow-lg">
           <span class="text-9xl font-bold tracking-wide">
@@ -55,7 +55,7 @@ const thirdStyleInput = ref(400);
             </i>
           </span>
         </h1>
-        <div
+        <!-- <div
           class="mt-12 grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
         >
           <Field
@@ -85,28 +85,73 @@ const thirdStyleInput = ref(400);
             type="select"
             :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
           />
+        </div> -->
+        <div class="flex gap-7">
+          <NuxtLink :to="localePath('/editor')">
+            <Button
+              class="uppercase font-black tracking-widest mt-24 shadow-xl"
+              size="large"
+            >
+              {{ t("getStarted") }}
+            </Button>
+          </NuxtLink>
+          <NuxtLink :to="localePath('/editor')">
+            <Button
+              class="uppercase font-black tracking-widest mt-24 shadow-xl"
+              size="large"
+              variant="outlined"
+              severity="contrast"
+              pt:root:class="!text-white hover:!text-surface-900"
+            >
+              {{ t("learnMore") }}
+            </Button>
+          </NuxtLink>
         </div>
       </div>
       <div class="skew-y-12 mx-auto mt-14 group">
         <div
-          class="w-[400px] h-[calc(400px*1.414)] shadow bg-primary absolute -z-50 left-7 -top-7 transition-all group-hover:left-14 group-hover:-top-14"
+          class="w-[400px] h-[calc(400px*1.414)] shadow bg-primary absolute -z-50 left-7 -top-7 transition-all group-hover:left-14 group-hover:-top-14 animate-float"
         />
         <div
-          class="w-[400px] h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-4"
+          class="w-[400px] h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-4 animate-float [animation-delay:0.7s]"
         >
           <span :style="{ color: firstStyleInput }">{{ firstInput }}</span>
           <span :style="{ fontStyle: secondStyleInput ? 'italic' : 'normal' }">
             {{ secondInput }}
           </span>
           <span :style="{ fontWeight: thirdStyleInput }">{{ thirdInput }}</span>
-          <NuxtLink :to="localePath('/editor')">
-            <Button
-              class="-skew-y-12 !flex uppercase font-black tracking-widest mx-auto mt-24"
-            >
-              {{ t("getStarted") }}
-            </Button>
-          </NuxtLink>
         </div>
+      </div>
+      <div
+        class="skew-y-12 transition-all hover:shadow-xl absolute top-1/2 left-1/2 mt-12 grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
+      >
+        <Field
+          :label="$t('name')"
+          transparent
+          v-model="firstInput"
+          class="[&_input]!bg-white"
+        />
+        <Field :label="$t('phone')" transparent v-model="secondInput" />
+        <Field :label="$t('address')" transparent v-model="thirdInput" />
+        <Field
+          :label="$t('color')"
+          transparent
+          v-model="firstStyleInput"
+          type="color"
+        />
+        <Field
+          :label="$t('italic')"
+          transparent
+          v-model="secondStyleInput"
+          type="checkbox"
+        />
+        <Field
+          :label="$t('fontWeight')"
+          transparent
+          v-model="thirdStyleInput"
+          type="select"
+          :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+        />
       </div>
     </section>
     <!-- <section class="p-20">
@@ -137,7 +182,7 @@ const thirdStyleInput = ref(400);
         </p>
       </div>
     </section> -->
-    <section class="p-20 max-w-screen-xl mx-auto">
+    <!-- <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
         {{ t("stepTheme") }}
         <i class="font-serif text-primary">{{ $t("theme") }}</i>
@@ -159,8 +204,8 @@ const thirdStyleInput = ref(400);
           class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] rotate-3 translate-x-32 bg-white shadow group-hover:translate-x-60 group-hover:rotate-6 group-hover:scale-105 group-hover:shadow-lg transition-all"
         />
       </div>
-    </section>
-    <section class="p-20 max-w-screen-xl mx-auto">
+    </section> -->
+    <!-- <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32 text-right">
         {{ t("stepResume") }}
         <i class="font-serif text-primary">{{ $t("resume") }}</i>
@@ -189,8 +234,8 @@ const thirdStyleInput = ref(400);
           </Button>
         </NuxtLink>
       </div>
-    </section>
-    <section class="p-20 max-w-screen-xl mx-auto">
+    </section> -->
+    <!-- <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
         {{ t("stepLetter") }}
         <i class="font-serif text-primary">{{ $t("coverLetter") }}</i>
@@ -221,8 +266,8 @@ const thirdStyleInput = ref(400);
           </Button>
         </NuxtLink>
       </div>
-    </section>
-    <section class="p-20 max-w-screen-xl mx-auto">
+    </section> -->
+    <!-- <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32 text-right">
         {{ t("stepEmail") }}
         <i class="font-serif text-primary">{{ $t("email") }}</i>
@@ -244,8 +289,8 @@ const thirdStyleInput = ref(400);
           </Button>
         </NuxtLink>
       </div>
-    </section>
-    <section class="p-20 max-w-screen-xl mx-auto">
+    </section> -->
+    <!-- <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
         {{ t("stepCustomize") }}
         <i class="font-serif text-primary">{{ $t("design") }}</i>
@@ -262,7 +307,14 @@ const thirdStyleInput = ref(400);
           </Button>
         </NuxtLink>
       </div>
-    </section>
+    </section> -->
+    <!-- <section class="p-20 max-w-screen-2xl mx-auto">
+      <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
+        {{ t("todo") }}
+        <i class="font-serif text-primary">{{ $t("todo") }}</i>
+      </h2>
+      <ToolComparator />
+    </section> -->
     <NuxtPage />
   </NuxtLayout>
 </template>
