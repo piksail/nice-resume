@@ -14,6 +14,13 @@ const localePath = useLocalePath();
 const { t } = useI18n({
   useScope: "local",
 });
+
+const firstInput = ref("First Name");
+const secondInput = ref("Phone Number");
+const thirdInput = ref("Address");
+const firstStyleInput = ref("First Name");
+const secondStyleInput = ref(false);
+const thirdStyleInput = ref(400);
 </script>
 
 <template>
@@ -27,37 +34,69 @@ const { t } = useI18n({
   </Head>
 
   <NuxtLayout name="landing">
-    <section class="p-20 flex justify-center">
-      <h1 class="mx-auto text-justify drop-shadow-lg">
-        <span class="text-9xl font-bold tracking-wide">
-          {{ t("introVerb") }}
-          <i class="font-serif">{{ t("introPossessiveAdjective") }}</i>
-        </span>
-        <br />
-        <span class="text-8xl font-bold tracking-wide">
-          {{ t("introJobApplication") }}
-        </span>
-        <br />
-        <span class="flex justify-between items-end">
-          <span class="text-7xl font-black mr-2">
-            {{ t("introIndefiniteArticle") }}
+    <section class="p-20 flex justify-center h-screen">
+      <div>
+        <h1 class="mx-auto text-justify drop-shadow-lg">
+          <span class="text-9xl font-bold tracking-wide">
+            {{ t("introVerb") }}
+            <i class="font-serif">{{ t("introPossessiveAdjective") }}</i>
           </span>
-          <NuxtLink :to="localePath('/editor')">
-            <button
-              class="bg-white px-6 py-3 pt-1 rounded mt-10 shadow-lg transition-all hover:bg-transparent hover:shadow-none group"
-            >
-              <span
-                class="relative text-9xl uppercase font-black tracking-widest bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text inline-block transition-all duration-400 group-hover:text-white group-hover:translate-y-4"
-              >
-                <span>{{ t("introPowerWord") }}</span>
-                <span
-                  class="pi pi-file-import text-8xl transition-all duration-400 group-hover:text-9xl"
-                />
-              </span>
-            </button>
-          </NuxtLink>
+          <br />
+          <span class="text-8xl font-bold tracking-wide">
+            {{ t("introJobApplication") }}
+          </span>
+          <br />
+          <span class="text-7xl font-black">
+            {{ t("introIndefiniteArticle") }}
+            <i class="font-serif tracking-widest text-8xl">
+              {{ t("introPowerWord") }}
+            </i>
+          </span>
+        </h1>
+        <div class="mt-12 grid grid-cols-3 gap-4 items-end">
+          <Field transparent v-model="firstInput" />
+          <Field transparent v-model="secondInput" />
+          <Field transparent v-model="thirdInput" />
+          <Field
+            transparent
+            v-model="firstStyleInput"
+            :label="$t('color')"
+            type="color"
+          />
+          <Field
+            transparent
+            v-model="secondStyleInput"
+            :label="$t('italic')"
+            type="checkbox"
+          />
+          <Field
+            transparent
+            v-model="thirdStyleInput"
+            :label="$t('fontWeight')"
+            type="select"
+            :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+          />
+        </div>
+      </div>
+      <!-- <img
+        src="/macchiato-example.png"
+        alt="Second example of a resume built with Nice Resume"
+        class="z-[1] mx-auto left-0 right-0 skew-y-12 -translate-y-6 w-[400px] h-[calc(400px*1.414)] bg-white shadow group-hover:-translate-y-10 group-hover:-rotate-1 group-hover:scale-105 group-hover:shadow-lg transition-all"
+      /> -->
+      <div
+        class="skew-y-12 mx-auto w-[400px] h-[calc(400px*1.414)] bg-white text-black shadow p-4 flex flex-col"
+      >
+        <span :style="{ color: firstStyleInput }">{{ firstInput }}</span>
+        <span :style="{ fontStyle: secondStyleInput ? 'italic' : 'normal' }">
+          {{ secondInput }}
         </span>
-      </h1>
+        <span :style="{ fontWeight: thirdStyleInput }">{{ thirdInput }}</span>
+        <NuxtLink :to="localePath('/editor')">
+          <button class="-skew-y-12 button bgGradient mx-auto mt-24">
+            <span class="text-white">{{ t("getStarted") }}</span>
+          </button>
+        </NuxtLink>
+      </div>
     </section>
     <!-- <section class="p-20">
       <Card>
