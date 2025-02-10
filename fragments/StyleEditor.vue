@@ -701,6 +701,8 @@ function askBeforeResetStyle() {
   <Field
     type="togglebutton"
     v-model="isThemeCustomized"
+    onIcon="pi pi-check"
+    offIcon="pi pi-eye-slash"
     :onLabel="`${capitalize($t('theme'))} ${t('onLabel')}`"
     :offLabel="`${capitalize($t('theme'))} ${t('offLabel')}`"
   />

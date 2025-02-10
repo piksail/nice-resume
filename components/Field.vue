@@ -25,6 +25,8 @@ const {
   options,
   optionLabel,
   optionValue,
+  onIcon,
+  offIcon,
   onLabel = "On",
   offLabel = "Off",
   target = false,
@@ -41,6 +43,8 @@ const {
   options?: (string | number | null | undefined | unknown)[];
   optionLabel?: string;
   optionValue?: string;
+  onIcon?: string;
+  offIcon?: string;
   onLabel?: string;
   offLabel?: string;
   step?: number;
@@ -107,13 +111,15 @@ function updateColor(hashlessHex: string) {
       v-model="model as boolean"
       :input-id="id"
       :disabled="disabled"
+      :onIcon="onIcon"
+      :offIcon="offIcon"
       :onLabel="onLabel"
       :offLabel="offLabel"
       class="!bg-transparent"
       :class="
         transparent
           ? '!text-white/50 !border-white/20 [&[aria-pressed=true]]:!text-white [&[aria-pressed=true]]:!border-white hover:!text-white hover:!border-white hover:!shadow-lg'
-          : ''
+          : '!px-2 hover:!bg-primary/10'
       "
       size="small"
     />
