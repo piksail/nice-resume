@@ -282,7 +282,7 @@ const { t } = useI18n({
     "stepLetter": "Rédigez votre",
     "stepEmail": "Signez votre",
     "stepCustomize": "Adaptez le",
-    "getStarted": "C'est parti !"
+    "getStarted": "C'est parti\xa0!"
   }
 }
 </i18n>
