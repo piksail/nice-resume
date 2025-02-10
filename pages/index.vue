@@ -18,7 +18,7 @@ const { t } = useI18n({
 const firstInput = ref("First Name");
 const secondInput = ref("Phone Number");
 const thirdInput = ref("Address");
-const firstStyleInput = ref("First Name");
+const firstStyleInput = ref("#e11d48");
 const secondStyleInput = ref(false);
 const thirdStyleInput = ref(400);
 </script>
@@ -39,7 +39,9 @@ const thirdStyleInput = ref(400);
         <h1 class="mx-auto text-justify drop-shadow-lg">
           <span class="text-9xl font-bold tracking-wide">
             {{ t("introVerb") }}
-            <i class="font-serif">{{ t("introPossessiveAdjective") }}</i>
+            <i class="font-serif text-primary">
+              {{ t("introPossessiveAdjective") }}
+            </i>
           </span>
           <br />
           <span class="text-8xl font-bold tracking-wide">
@@ -48,54 +50,63 @@ const thirdStyleInput = ref(400);
           <br />
           <span class="text-7xl font-black">
             {{ t("introIndefiniteArticle") }}
-            <i class="font-serif tracking-widest text-8xl">
+            <i class="font-serif tracking-widest text-8xl text-primary">
               {{ t("introPowerWord") }}
             </i>
           </span>
         </h1>
-        <div class="mt-12 grid grid-cols-3 gap-4 items-end">
-          <Field transparent v-model="firstInput" />
-          <Field transparent v-model="secondInput" />
-          <Field transparent v-model="thirdInput" />
+        <div
+          class="mt-12 grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
+        >
           <Field
+            :label="$t('name')"
+            transparent
+            v-model="firstInput"
+            class="[&_input]!bg-white"
+          />
+          <Field :label="$t('phone')" transparent v-model="secondInput" />
+          <Field :label="$t('address')" transparent v-model="thirdInput" />
+          <Field
+            :label="$t('color')"
             transparent
             v-model="firstStyleInput"
-            :label="$t('color')"
             type="color"
           />
           <Field
+            :label="$t('italic')"
             transparent
             v-model="secondStyleInput"
-            :label="$t('italic')"
             type="checkbox"
           />
           <Field
+            :label="$t('fontWeight')"
             transparent
             v-model="thirdStyleInput"
-            :label="$t('fontWeight')"
             type="select"
             :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
           />
         </div>
       </div>
-      <!-- <img
-        src="/macchiato-example.png"
-        alt="Second example of a resume built with Nice Resume"
-        class="z-[1] mx-auto left-0 right-0 skew-y-12 -translate-y-6 w-[400px] h-[calc(400px*1.414)] bg-white shadow group-hover:-translate-y-10 group-hover:-rotate-1 group-hover:scale-105 group-hover:shadow-lg transition-all"
-      /> -->
-      <div
-        class="skew-y-12 mx-auto w-[400px] h-[calc(400px*1.414)] bg-white text-black shadow p-4 flex flex-col"
-      >
-        <span :style="{ color: firstStyleInput }">{{ firstInput }}</span>
-        <span :style="{ fontStyle: secondStyleInput ? 'italic' : 'normal' }">
-          {{ secondInput }}
-        </span>
-        <span :style="{ fontWeight: thirdStyleInput }">{{ thirdInput }}</span>
-        <NuxtLink :to="localePath('/editor')">
-          <button class="-skew-y-12 button bgGradient mx-auto mt-24">
-            <span class="text-white">{{ t("getStarted") }}</span>
-          </button>
-        </NuxtLink>
+      <div class="skew-y-12 mx-auto mt-14 group">
+        <div
+          class="w-[400px] h-[calc(400px*1.414)] shadow bg-primary absolute -z-50 left-7 -top-7 transition-all group-hover:left-14 group-hover:-top-14"
+        />
+        <div
+          class="w-[400px] h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-4"
+        >
+          <span :style="{ color: firstStyleInput }">{{ firstInput }}</span>
+          <span :style="{ fontStyle: secondStyleInput ? 'italic' : 'normal' }">
+            {{ secondInput }}
+          </span>
+          <span :style="{ fontWeight: thirdStyleInput }">{{ thirdInput }}</span>
+          <NuxtLink :to="localePath('/editor')">
+            <Button
+              class="-skew-y-12 !flex uppercase font-black tracking-widest mx-auto mt-24"
+            >
+              {{ t("getStarted") }}
+            </Button>
+          </NuxtLink>
+        </div>
       </div>
     </section>
     <!-- <section class="p-20">
@@ -115,9 +126,9 @@ const thirdStyleInput = ref(400);
           simple
         </p>
         <NuxtLink :to="localePath('/editor')">
-          <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ t("getStarted") }}</span>
-          </button>
+          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            {{ t("getStarted") }}
+          </Button>
         </NuxtLink>
       </Card>
       <div class="max-w-screen-md mx-auto">
@@ -129,7 +140,7 @@ const thirdStyleInput = ref(400);
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
         {{ t("stepTheme") }}
-        <i class="font-serif">{{ $t("theme") }}</i>
+        <i class="font-serif text-primary">{{ $t("theme") }}</i>
       </h2>
       <div class="relative h-[calc((400px*1.414)+50px)] mx-auto group">
         <img
@@ -152,7 +163,7 @@ const thirdStyleInput = ref(400);
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32 text-right">
         {{ t("stepResume") }}
-        <i class="font-serif">{{ $t("resume") }}</i>
+        <i class="font-serif text-primary">{{ $t("resume") }}</i>
       </h2>
       <div class="relative mx-auto group">
         <img
@@ -173,16 +184,16 @@ const thirdStyleInput = ref(400);
           </p>
         </Card>
         <NuxtLink :to="localePath('/editor')">
-          <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ t("getStarted") }}</span>
-          </button>
+          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            {{ t("getStarted") }}
+          </Button>
         </NuxtLink>
       </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
         {{ t("stepLetter") }}
-        <i class="font-serif">{{ $t("coverLetter") }}</i>
+        <i class="font-serif text-primary">{{ $t("coverLetter") }}</i>
       </h2>
       <div class="flex gap-10 relative">
         <img
@@ -205,16 +216,16 @@ const thirdStyleInput = ref(400);
           </p>
         </Card>
         <NuxtLink :to="localePath('/editor')">
-          <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ t("getStarted") }}</span>
-          </button>
+          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            {{ t("getStarted") }}
+          </Button>
         </NuxtLink>
       </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32 text-right">
         {{ t("stepEmail") }}
-        <i class="font-serif">{{ $t("email") }}</i>
+        <i class="font-serif text-primary">{{ $t("email") }}</i>
       </h2>
       <div class="relative mx-auto flex group">
         <img
@@ -228,16 +239,16 @@ const thirdStyleInput = ref(400);
           class="absolute left-14 top-14 w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg group-hover:translate-x-3/4 transition-all"
         />
         <NuxtLink :to="localePath('/editor')">
-          <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ t("getStarted") }}</span>
-          </button>
+          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            {{ t("getStarted") }}
+          </Button>
         </NuxtLink>
       </div>
     </section>
     <section class="p-20 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
         {{ t("stepCustomize") }}
-        <i class="font-serif">{{ $t("design") }}</i>
+        <i class="font-serif text-primary">{{ $t("design") }}</i>
       </h2>
       <div class="relative mx-auto group">
         <img
@@ -246,9 +257,9 @@ const thirdStyleInput = ref(400);
           class="w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg transition-all"
         />
         <NuxtLink :to="localePath('/editor')">
-          <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ t("getStarted") }}</span>
-          </button>
+          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            {{ t("getStarted") }}
+          </Button>
         </NuxtLink>
       </div>
     </section>

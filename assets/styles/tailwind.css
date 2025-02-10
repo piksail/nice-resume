@@ -12,9 +12,6 @@
 }
 
 @layer components {
-  .bgGradient {
-    @apply bg-gradient-to-br from-blue-700 to-pink-500;
-  }
   .button {
     @apply flex gap-1 items-center justify-center px-3 py-2 rounded shadow hover:shadow-lg;
   }
@@ -28,24 +25,15 @@
     @apply flex items-center justify-between gap-4;
   }
   .label {
-    @apply text-pink-500 text-sm;
+    @apply text-primary text-sm;
   }
   .labelTransparent {
-    @apply text-white/80;
-  }
-  .option {
-    @apply bg-white text-blue-500 capitalize m-0;
-  }
-  .select {
-    @apply text-blue-500 cursor-pointer bg-transparent text-sm;
+    @apply text-primary-200/100;
   }
   .slotButton {
     @apply border-dashed border-white/20 border-2 text-white/60 uppercase tracking-widest hover:border-white/80 hover:text-white transition-all;
   }
   .slotButtonSmall {
     @apply w-[70%] !shadow-none px-2 py-1 text-sm mt-2;
-  }
-  .textGradient {
-    @apply bg-gradient-to-br from-blue-700 to-pink-500 text-transparent bg-clip-text uppercase tracking-widest font-black;
   }
 }

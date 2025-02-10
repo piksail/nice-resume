@@ -20,8 +20,8 @@ const { id, hidden, locked } = defineProps<{
         : ''
     "
     pt:header:class="!border-none !rounded"
-    pt:content:class="!bg-white/10 !border-none !p-10"
-    pt:footer:class="!bg-white/10 !border-none !pt-0 !pb-10"
+    pt:content:class="!bg-white/5 !border-none !p-10"
+    pt:footer:class="!bg-white/5 !border-none !pt-0 !pb-10"
   >
     <template #header>
       <slot name="header" />

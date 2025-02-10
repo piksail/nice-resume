@@ -24,9 +24,9 @@ const error = useError();
         </p>
         <p v-if="error">{{ error.message }}</p>
         <NuxtLink :to="localePath('/')">
-          <button class="button bg-white mx-auto mt-8">
-            <span class="textGradient">{{ t("goToHome") }}</span>
-          </button>
+          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            {{ t("goToHome") }}
+          </Button>
         </NuxtLink>
       </Card>
     </section>

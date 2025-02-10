@@ -12,7 +12,7 @@ const localePath = useLocalePath();
 
 <template>
   <div
-    class="bgGradient backdrop-contrast-200 text-white min-h-[100vh] scroll-smooth"
+    class="bg-surface-900 backdrop-contrast-200 text-white min-h-[100vh] scroll-smooth"
   >
     <header
       class="sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 text-white border-white border-b-2 border-opacity-5 backdrop-blur backdrop-filter"

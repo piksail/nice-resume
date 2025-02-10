@@ -76,7 +76,7 @@ function updateColor(hashlessHex: string) {
 
 <template>
   <label v-if="type === 'range'" :for="id">
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <div class="flex gap-3 items-center">
@@ -162,7 +162,7 @@ function updateColor(hashlessHex: string) {
       binary
       :disabled="disabled"
       size="small"
-      :pt:box:class="transparent ? '!bg-black/10 !border-transparent' : ''"
+      :pt:box:class="transparent ? '!bg-surface-950 !border-transparent' : ''"
       :pt:icon:class="transparent ? '!text-white' : ''"
     />
     <span
@@ -180,7 +180,7 @@ function updateColor(hashlessHex: string) {
     :for="id"
     class="flex flex-col gap-1"
   >
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <SelectButton
@@ -191,14 +191,14 @@ function updateColor(hashlessHex: string) {
       :optionValue="optionValue"
       :class="
         transparent
-          ? '[&>*]:!bg-black/10 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-white/10'
+          ? '[&>*]:!bg-surface-950 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-surface-950'
           : ''
       "
       size="small"
     />
   </label>
   <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <Select
@@ -209,10 +209,12 @@ function updateColor(hashlessHex: string) {
       :optionValue="optionValue"
       :input-id="id"
       class="!border-none"
-      :class="transparent ? '!bg-black/10 !text-white [&>*]:!text-white' : ''"
-      :pt:label:class="transparent ? '' : '!text-primary'"
-      :pt:dropdown:class="transparent ? '' : '!text-primary'"
-      :pt:optionlabel:class="['text-sm', transparent ? '' : '!text-primary']"
+      :class="
+        transparent ? '!bg-surface-950 !text-white [&>*]:!text-white' : ''
+      "
+      :pt:label:class="transparent ? '' : ''"
+      :pt:dropdown:class="transparent ? '' : ''"
+      :pt:optionlabel:class="['text-sm', transparent ? '' : '']"
       size="small"
     >
       <template #dropdownicon>
@@ -224,7 +226,7 @@ function updateColor(hashlessHex: string) {
     </Select>
   </label>
   <label v-else :for="id" class="flex flex-col gap-1">
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <ColorPicker
@@ -238,7 +240,7 @@ function updateColor(hashlessHex: string) {
       v-else-if="type === 'textarea'"
       :id="id"
       class="!border-t-0 !border-l-0 !border-r-0 !p-2"
-      :class="transparent ? '!bg-black/10 !text-white !border-none' : ''"
+      :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
       :disabled="disabled"
       v-model="model as string"
       size="small"
@@ -269,7 +271,7 @@ function updateColor(hashlessHex: string) {
       class="!p-2"
       :class="
         transparent
-          ? '!bg-black/10 !text-white !border-none'
+          ? '!bg-surface-950 !text-white !border-none'
           : '!border-primary-200 !border-t-0 !border-r-0 !border-l-0 !rounded-none'
       "
       :type="type || 'text'"

@@ -49,7 +49,7 @@ function uncustomizeTheme() {
       <template #start>
         <NuxtLink :to="localePath('/')">
           <h1
-            class="bgGradient textGradient text-center text-2xl leading-none"
+            class="text-primary uppercase tracking-widest font-black text-center text-2xl leading-none"
             :data-version="packageJson.version"
           >
             Nice
