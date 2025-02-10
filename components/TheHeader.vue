@@ -63,10 +63,9 @@ const localeLabel: { [key in LocaleCode]: string } = {
       </template>
 
       <template #center>
-        <div class="flex gap-2 items-end h-[60%]">
+        <div class="flex gap-5 items-end h-[60%]">
           <Field
-            type="selectbutton"
-            :label="$t('document')"
+            type="select"
             v-model="documentType"
             optionLabel="label"
             optionValue="value"
@@ -76,12 +75,20 @@ const localeLabel: { [key in LocaleCode]: string } = {
                 value: document,
               }))
             "
-          />
+          >
+            <template #dropdownicon>
+              <i class="pi pi-file" />
+            </template>
+            <template #header>
+              <div class="label text-xs font-medium px-3 pt-2 pb-0">
+                {{ capitalize($t("document")) }}
+              </div>
+            </template>
+          </Field>
 
           <Field
             id="theme"
             type="select"
-            :label="$t('theme')"
             v-model="theme"
             optionLabel="label"
             optionValue="value"
@@ -91,7 +98,16 @@ const localeLabel: { [key in LocaleCode]: string } = {
                 value: theme,
               }))
             "
-          />
+          >
+            <template #dropdownicon>
+              <i class="pi pi-palette" />
+            </template>
+            <template #header>
+              <div class="label text-xs font-medium px-3 pt-2 pb-0">
+                {{ capitalize($t("theme")) }}
+              </div>
+            </template>
+          </Field>
 
           <StyleEditor />
         </div>

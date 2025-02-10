@@ -208,7 +208,14 @@ function updateColor(hashlessHex: string) {
       :pt:dropdown:class="transparent ? '' : '!text-primary'"
       :pt:optionlabel:class="['text-sm', transparent ? '' : '!text-primary']"
       size="small"
-    />
+    >
+      <template #dropdownicon>
+        <slot name="dropdownicon" />
+      </template>
+      <template #header>
+        <slot name="header" />
+      </template>
+    </Select>
   </label>
   <label v-else :for="id" class="flex flex-col gap-1">
     <span class="label" :class="transparent ? '!text-white/80' : ''">
