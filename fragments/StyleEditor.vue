@@ -534,13 +534,13 @@ function askBeforeResetStyle() {
         <Fieldset :legend="capitalize($t('category'))" toggleable>
           <div class="formBlock">
             <Field
-              id="categoryIsMansonry"
-              :label="$t('mansonry')"
+              id="categoryisMasonry"
+              :label="$t('masonry')"
               type="checkbox"
-              v-model="resumeSettings.category.isMansonry"
+              v-model="resumeSettings.category.isMasonry"
             />
-            <Message v-if="resumeSettings.category.isMansonry" size="small">
-              {{ t("howToGapMansonry") }}
+            <Message v-if="resumeSettings.category.isMasonry" size="small">
+              {{ t("howToGapMasonry") }}
             </Message>
             <Field
               id="categoryGap"
@@ -711,27 +711,27 @@ function askBeforeResetStyle() {
   "br": {
     "onLabel": "TODO",
     "offLabel": "TODO",
-    "howToGapMansonry": "TODO"
+    "howToGapMasonry": "TODO"
   },
   "de": {
     "onLabel": "angepasst",
     "offLabel": "nicht angepasst",
-    "howToGapMansonry": "TODO"
+    "howToGapMasonry": "TODO"
   },
   "en": {
     "onLabel": "customized",
     "offLabel": "not customized",
-    "howToGapMansonry": "Vertical gap is handled with category top and bottom margins."
+    "howToGapMasonry": "Vertical gap is handled with category top and bottom margins."
   },
   "es": {
     "onLabel": "TODO",
     "offLabel": "TODO",
-    "howToGapMansonry": "TODO"
+    "howToGapMasonry": "TODO"
   },
   "fr": {
     "onLabel": "modifié",
     "offLabel": "non modifié",
-    "howToGapMansonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie."
+    "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie."
   }
 }
 </i18n>

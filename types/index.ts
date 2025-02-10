@@ -184,7 +184,7 @@ export type ResumeSettings = PaperDocumentSettings & {
     };
   body: BlockSettings;
   category: BlockSettings & {
-    isMansonry: false;
+    isMasonry: false;
     gap: number; // Flex gap between categories
   };
   categoryName: BlockSettings &
