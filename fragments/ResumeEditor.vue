@@ -448,12 +448,11 @@ function toggleCategoryVisibility(category: Category) {
     </ul>
     <template v-slot:footer>
       <footer class="flex justify-center">
-        <Button asChild>
-          <button class="button bg-white mx-auto" @click="addEntry(category)">
-            <span class="textGradient">
-              {{ capitalize(`${$t("toAdd")} ${$t("entry")}`) }}
-            </span>
-          </button>
+        <Button
+          class="uppercase font-black tracking-widest mx-auto mt-8"
+          @click="addEntry(category)"
+        >
+          {{ capitalize(`${$t("toAdd")} ${$t("entry")}`) }}
         </Button>
       </footer>
     </template>

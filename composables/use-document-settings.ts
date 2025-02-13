@@ -17,20 +17,21 @@ export default function useDocumentSettings() {
   const { settings: emailStoreSettings } = storeToRefs(useEmailStore());
 
   const settings = computed(() => {
+    const defaultSettings = themeSettings[theme.value][documentType.value];
     if (documentType.value === "email") {
       return isThemeCustomized.value
-        ? emailStoreSettings
-        : themeSettings[theme.value][documentType.value];
+        ? emailStoreSettings.value
+        : defaultSettings;
     }
     if (documentType.value === "letter") {
       return isThemeCustomized.value
-        ? letterStoreSettings
-        : themeSettings[theme.value][documentType.value];
+        ? letterStoreSettings.value
+        : defaultSettings;
     }
     return isThemeCustomized.value
-      ? resumeStoreSettings
-      : themeSettings[theme.value][documentType.value];
+      ? resumeStoreSettings.value
+      : defaultSettings;
   });
 
-  return settings.value;
+  return settings;
 }

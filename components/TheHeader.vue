@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import Toolbar from "primevue/toolbar";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
-import { documentTypes, themes } from "@/globals";
+import { documentTypes, localeLabels, themes } from "@/globals";
 import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
 import ExportDialog from "~/fragments/ExportDialog.vue";
@@ -22,16 +22,7 @@ const { availableLocales, locale, setLocale } = useI18n();
 const localePath = useLocalePath();
 
 const { documentType } = storeToRefs(useEditorStore());
-const { theme } = storeToRefs(useProfileStore());
-
-const localeLabel: { [key in LocaleCode]: string } = {
-  br: "Brezhoneg",
-  de: "Deutsch",
-  en: "English",
-  es: "Español",
-  fr: "Français",
-  it: "Italiano",
-};
+const { theme, isThemeCustomized } = storeToRefs(useProfileStore());
 
 // TODO enable below code and change moon/sun icon accordingly
 // const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -44,6 +35,12 @@ const localeLabel: { [key in LocaleCode]: string } = {
 // function toggleDarkMode() {
 //   document.documentElement.classList.toggle("dark-mode");
 // }
+
+function uncustomizeTheme() {
+  // When user switches themes, it is expected to see the result
+  // Hence the off state of the customization toggler
+  isThemeCustomized.value = false;
+}
 </script>
 
 <template>
@@ -52,7 +49,7 @@ const localeLabel: { [key in LocaleCode]: string } = {
       <template #start>
         <NuxtLink :to="localePath('/')">
           <h1
-            class="bgGradient textGradient text-center text-2xl leading-none"
+            class="text-primary uppercase tracking-widest font-black text-center text-2xl leading-none"
             :data-version="packageJson.version"
           >
             Nice
@@ -63,10 +60,9 @@ const localeLabel: { [key in LocaleCode]: string } = {
       </template>
 
       <template #center>
-        <div class="flex gap-2 items-end h-[60%]">
+        <div class="flex gap-5 items-end h-[60%]">
           <Field
-            type="selectbutton"
-            :label="$t('document')"
+            type="select"
             v-model="documentType"
             optionLabel="label"
             optionValue="value"
@@ -76,12 +72,20 @@ const localeLabel: { [key in LocaleCode]: string } = {
                 value: document,
               }))
             "
-          />
+          >
+            <template #dropdownicon>
+              <i class="pi pi-file" />
+            </template>
+            <template #header>
+              <div class="label text-xs font-medium px-3 pt-2 pb-0">
+                {{ capitalize($t("document")) }}
+              </div>
+            </template>
+          </Field>
 
           <Field
             id="theme"
             type="select"
-            :label="$t('theme')"
             v-model="theme"
             optionLabel="label"
             optionValue="value"
@@ -91,7 +95,17 @@ const localeLabel: { [key in LocaleCode]: string } = {
                 value: theme,
               }))
             "
-          />
+            @update:model-value="uncustomizeTheme"
+          >
+            <template #dropdownicon>
+              <i class="pi pi-palette" />
+            </template>
+            <template #header>
+              <div class="label text-xs font-medium px-3 pt-2 pb-0">
+                {{ capitalize($t("theme")) }}
+              </div>
+            </template>
+          </Field>
 
           <StyleEditor />
         </div>
@@ -119,7 +133,7 @@ const localeLabel: { [key in LocaleCode]: string } = {
             optionValue="value"
             :options="
               availableLocales.map((locale) => ({
-                label: capitalize(localeLabel[locale as LocaleCode]),
+                label: capitalize(localeLabels[locale as LocaleCode]),
                 value: locale,
               }))
             "

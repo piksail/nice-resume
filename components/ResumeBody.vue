@@ -221,7 +221,7 @@ const bodyCategories = computed(() =>
     </aside>
     <div
       class="flex-1"
-      :class="settings.category.isMansonry ? 'columns-2' : 'grid grid-cols-2'"
+      :class="settings.category.isMasonry ? 'columns-2' : 'grid grid-cols-2'"
       :style="{
         ...getNodeStyle(settings.body, 'block'),
         gap: `${settings.category.gap}px`,
@@ -231,10 +231,7 @@ const bodyCategories = computed(() =>
         v-if="isHeaderSimple && !asideCategories.length"
         class="break-inside-avoid"
         :class="
-          getCategoryLayoutClass(
-            bodyCategories[0],
-            settings.category.isMansonry,
-          )
+          getCategoryLayoutClass(bodyCategories[0], settings.category.isMasonry)
         "
         :style="{
           display: settings.categoryName.isAside ? 'flex' : 'block',
@@ -271,7 +268,7 @@ const bodyCategories = computed(() =>
         v-for="(category, categoryIndex) in bodyCategories"
         :key="categoryIndex"
         class="break-inside-avoid"
-        :class="getCategoryLayoutClass(category, settings.category.isMansonry)"
+        :class="getCategoryLayoutClass(category, settings.category.isMasonry)"
         :style="{
           display: settings.categoryName.isAside ? 'flex' : 'block',
           ...getNodeStyle(settings.category, 'block'),

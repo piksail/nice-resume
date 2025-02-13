@@ -13,6 +13,7 @@ import type {
   LetterSettings,
   ListMarker,
   ListMarkerPosition,
+  LocaleCode,
   PaperDocumentSettings,
   ResumeSettings,
   Theme,
@@ -28,6 +29,15 @@ export const A4_RATIO = A4_HEIGHT / A4_WIDTH;
 export const jsonResumeSchemaUrl = "https://jsonresume.org/schema";
 
 export const fontWeights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+
+export const localeLabels: { [key in LocaleCode]: string } = {
+  br: "Brezhoneg",
+  de: "Deutsch",
+  en: "English",
+  es: "Español",
+  fr: "Français",
+  it: "Italiano",
+};
 
 export const documentTypes: DocumentType[] = ["resume", "letter", "email"];
 
@@ -256,7 +266,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     gap: 12,
-    isMansonry: false,
+    isMasonry: false,
   },
   categoryName: {
     font: "inherit",

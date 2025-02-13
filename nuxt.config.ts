@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     storage: "localStorage",
   },
   i18n: {
-    locales: ["br", "de", "en", "es", "fr", "it"],
+    // locales: ["br", "de", "en", "es", "fr", "it"], // Available locales are also computed from the keys off the i18n.config.ts "messages" object
+    locales: ["en", "fr"],
     defaultLocale: "en",
     strategy: "prefix_and_default",
     detectBrowserLanguage: {

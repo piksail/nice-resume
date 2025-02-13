@@ -25,6 +25,8 @@ const {
   options,
   optionLabel,
   optionValue,
+  onIcon,
+  offIcon,
   onLabel = "On",
   offLabel = "Off",
   target = false,
@@ -41,6 +43,8 @@ const {
   options?: (string | number | null | undefined | unknown)[];
   optionLabel?: string;
   optionValue?: string;
+  onIcon?: string;
+  offIcon?: string;
   onLabel?: string;
   offLabel?: string;
   step?: number;
@@ -72,7 +76,7 @@ function updateColor(hashlessHex: string) {
 
 <template>
   <label v-if="type === 'range'" :for="id">
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <div class="flex gap-3 items-center">
@@ -107,13 +111,15 @@ function updateColor(hashlessHex: string) {
       v-model="model as boolean"
       :input-id="id"
       :disabled="disabled"
+      :onIcon="onIcon"
+      :offIcon="offIcon"
       :onLabel="onLabel"
       :offLabel="offLabel"
       class="!bg-transparent"
       :class="
         transparent
           ? '!text-white/50 !border-white/20 [&[aria-pressed=true]]:!text-white [&[aria-pressed=true]]:!border-white hover:!text-white hover:!border-white hover:!shadow-lg'
-          : ''
+          : '!px-2 hover:!bg-primary/10'
       "
       size="small"
     />
@@ -156,7 +162,7 @@ function updateColor(hashlessHex: string) {
       binary
       :disabled="disabled"
       size="small"
-      :pt:box:class="transparent ? '!bg-black/10 !border-transparent' : ''"
+      :pt:box:class="transparent ? '!bg-surface-950 !border-transparent' : ''"
       :pt:icon:class="transparent ? '!text-white' : ''"
     />
     <span
@@ -174,44 +180,53 @@ function updateColor(hashlessHex: string) {
     :for="id"
     class="flex flex-col gap-1"
   >
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <SelectButton
-      :ariaLabel="ariaLabel"
+      :ariaLabel="label ?? ariaLabel"
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
       :optionValue="optionValue"
       :class="
         transparent
-          ? '[&>*]:!bg-black/10 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-white/10'
+          ? '[&>*]:!bg-surface-950 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-surface-950'
           : ''
       "
       size="small"
     />
   </label>
-  <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+  <div v-else-if="type === 'select'" class="flex flex-col gap-1">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <Select
-      :ariaLabel="ariaLabel"
+      :ariaLabel="label ?? ariaLabel"
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
       :optionValue="optionValue"
       :input-id="id"
       class="!border-none"
-      :class="transparent ? '!bg-black/10 !text-white [&>*]:!text-white' : ''"
-      :pt:label:class="transparent ? '' : '!text-primary'"
-      :pt:dropdown:class="transparent ? '' : '!text-primary'"
-      :pt:optionlabel:class="['text-sm', transparent ? '' : '!text-primary']"
+      :class="
+        transparent ? '!bg-surface-950 !text-white [&>*]:!text-white' : ''
+      "
+      :pt:label:class="transparent ? '' : ''"
+      :pt:dropdown:class="transparent ? '' : ''"
+      :pt:optionlabel:class="['text-sm', transparent ? '' : '']"
       size="small"
-    />
-  </label>
+    >
+      <template #dropdownicon>
+        <slot name="dropdownicon" />
+      </template>
+      <template #header>
+        <slot name="header" />
+      </template>
+    </Select>
+  </div>
   <label v-else :for="id" class="flex flex-col gap-1">
-    <span class="label" :class="transparent ? '!text-white/80' : ''">
+    <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
     <ColorPicker
@@ -225,7 +240,7 @@ function updateColor(hashlessHex: string) {
       v-else-if="type === 'textarea'"
       :id="id"
       class="!border-t-0 !border-l-0 !border-r-0 !p-2"
-      :class="transparent ? '!bg-black/10 !text-white !border-none' : ''"
+      :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
       :disabled="disabled"
       v-model="model as string"
       size="small"
@@ -256,7 +271,7 @@ function updateColor(hashlessHex: string) {
       class="!p-2"
       :class="
         transparent
-          ? '!bg-black/10 !text-white !border-none'
+          ? '!bg-surface-950 !text-white !border-none'
           : '!border-primary-200 !border-t-0 !border-r-0 !border-l-0 !rounded-none'
       "
       :type="type || 'text'"

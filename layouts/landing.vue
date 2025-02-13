@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { LocaleCode } from "~/types";
+import { localeLabels } from "@/globals";
 import { capitalize } from "@/utils/string";
 
 // eslint-disable-next-line no-undef
@@ -7,20 +8,11 @@ const { availableLocales, locale, setLocale } = useI18n();
 
 // eslint-disable-next-line no-undef
 const localePath = useLocalePath();
-
-const localeLabel: { [key in LocaleCode]: string } = {
-  br: "Brezhoneg",
-  de: "Deutsch",
-  en: "English",
-  es: "Español",
-  fr: "Français",
-  it: "Italiano",
-};
 </script>
 
 <template>
   <div
-    class="bgGradient backdrop-contrast-200 text-white min-h-[100vh] scroll-smooth"
+    class="bg-surface-900 backdrop-contrast-200 text-white min-h-[100vh] scroll-smooth"
   >
     <header
       class="sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 text-white border-white border-b-2 border-opacity-5 backdrop-blur backdrop-filter"
@@ -45,7 +37,7 @@ const localeLabel: { [key in LocaleCode]: string } = {
         optionValue="value"
         :options="
           availableLocales.map((locale) => ({
-            label: capitalize(localeLabel[locale as LocaleCode]),
+            label: capitalize(localeLabels[locale as LocaleCode]),
             value: locale,
           }))
         "

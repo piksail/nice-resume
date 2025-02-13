@@ -28,13 +28,15 @@ const { categories } = storeToRefs(useResumeStore());
           <nav
             class="flex flex-col gap-3 text-white p-4 pr-0 lg:p-8 text-sm md:text-base"
           >
-            <div class="xl:hidden flex gap-2 items-center w-fit">
+            <div
+              class="xl:hidden flex gap-2 items-center w-fit text-primary-400"
+            >
               <i class="pi pi-file-check" />
               <a href="#Preview" class="underline-offset-4 hover:underline">
                 {{ capitalize($t("preview")) }}
               </a>
             </div>
-            <div class="flex gap-2 items-center w-fit">
+            <div class="flex gap-2 items-center w-fit text-primary-400">
               <i class="pi pi-user" />
               <a href="#Profile" class="underline-offset-4 hover:underline">
                 {{ capitalize($t("profile")) }}
@@ -42,7 +44,7 @@ const { categories } = storeToRefs(useResumeStore());
             </div>
             <div
               v-if="documentType === 'email'"
-              class="flex gap-2 items-center w-fit"
+              class="flex gap-2 items-center w-fit text-primary-400"
             >
               <i class="pi pi-inbox" />
               <a href="#Signature" class="underline-offset-4 hover:underline">
@@ -50,13 +52,13 @@ const { categories } = storeToRefs(useResumeStore());
               </a>
             </div>
             <template v-else-if="documentType === 'letter'">
-              <div class="flex gap-2 items-center w-fit">
+              <div class="flex gap-2 items-center w-fit text-primary-400">
                 <i class="pi pi-envelope" />
                 <a href="#Header" class="underline-offset-4 hover:underline">
                   {{ capitalize($t("header")) }}
                 </a>
               </div>
-              <div class="flex gap-2 items-center w-fit">
+              <div class="flex gap-2 items-center w-fit text-primary-400">
                 <i class="pi pi-align-left" />
                 <a href="#Body" class="underline-offset-4 hover:underline">
                   {{ capitalize($t("body")) }}
@@ -68,7 +70,7 @@ const { categories } = storeToRefs(useResumeStore());
                 v-for="(category, categoryIndex) in categories"
                 :key="categoryIndex"
               >
-                <div class="flex gap-2 items-center w-fit">
+                <div class="flex gap-2 items-center w-fit text-primary-400">
                   <i class="pi" :class="getCategoryIconClass(category.type)" />
                   <a
                     :href="`#${category.name}`"
