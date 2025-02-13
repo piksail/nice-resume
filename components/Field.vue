@@ -184,7 +184,7 @@ function updateColor(hashlessHex: string) {
       {{ capitalize(label) }}
     </span>
     <SelectButton
-      :ariaLabel="ariaLabel"
+      :ariaLabel="label ?? ariaLabel"
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
@@ -202,7 +202,7 @@ function updateColor(hashlessHex: string) {
       {{ capitalize(label) }}
     </span>
     <Select
-      :ariaLabel="ariaLabel"
+      :ariaLabel="label ?? ariaLabel"
       v-model="model"
       :options="options"
       :optionLabel="optionLabel"
