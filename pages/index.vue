@@ -92,7 +92,7 @@ const thirdStyleInput = ref(400);
               class="uppercase font-black tracking-widest mt-24 shadow-xl"
               size="large"
             >
-              {{ t("getStarted") }}
+              {{ t("startEditing") }}
             </Button>
           </NuxtLink>
           <NuxtLink :to="localePath('/about')">
@@ -180,7 +180,7 @@ const thirdStyleInput = ref(400);
     "introJobApplication": "TODO",
     "introIndefiniteArticle": "TODO",
     "introPowerWord": "TODO",
-    "getStarted": "TODO!",
+    "startEditing": "TODO",
     "learnMore": "TODO"
   },
   "de": {
@@ -189,7 +189,7 @@ const thirdStyleInput = ref(400);
     "introJobApplication": "Kandidatur",
     "introIndefiniteArticle": "zu einem",
     "introPowerWord": "Kunstwerk",
-    "getStarted": "Anfangen",
+    "startEditing": "Anfangen",
     "learnMore": "TODO"
   },
   "en": {
@@ -198,7 +198,7 @@ const thirdStyleInput = ref(400);
     "introJobApplication": "job application",
     "introIndefiniteArticle": "a",
     "introPowerWord": "brand",
-    "getStarted": "Get started!",
+    "startEditing": "Start editing",
     "learnMore": "Learn more"
   },
   "es": {
@@ -207,7 +207,7 @@ const thirdStyleInput = ref(400);
     "introJobApplication": "TODO",
     "introIndefiniteArticle": "TODO",
     "introPowerWord": "TODO",
-    "getStarted": "TODO",
+    "startEditing": "TODO",
     "learnMore": "TODO"
   },
   "fr": {
@@ -216,7 +216,7 @@ const thirdStyleInput = ref(400);
     "introJobApplication": "candidature",
     "introIndefiniteArticle": "une",
     "introPowerWord": "œuvre",
-    "getStarted": "C'est parti\xa0!",
+    "startEditing": "Commencer à éditer",
     "learnMore": "En savoir plus"
   }
 }
