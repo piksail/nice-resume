@@ -126,26 +126,40 @@ const thirdStyleInput = ref(400);
         class="skew-y-12 transition-all hover:shadow-xl absolute top-1/2 left-1/2 mt-12 grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
       >
         <Field
+          id="introFirstInput"
           :label="$t('name')"
           transparent
           v-model="firstInput"
           class="[&_input]!bg-white"
         />
-        <Field :label="$t('phone')" transparent v-model="secondInput" />
-        <Field :label="$t('address')" transparent v-model="thirdInput" />
         <Field
+          id="introSecondInput"
+          :label="$t('phone')"
+          transparent
+          v-model="secondInput"
+        />
+        <Field
+          id="introThirdInput"
+          :label="$t('address')"
+          transparent
+          v-model="thirdInput"
+        />
+        <Field
+          id="introFirstStyleInput"
           :label="$t('color')"
           transparent
           v-model="firstStyleInput"
           type="color"
         />
         <Field
+          id="introSecondStyleInput"
           :label="$t('italic')"
           transparent
           v-model="secondStyleInput"
           type="checkbox"
         />
         <Field
+          id="introThirdStyleInput"
           :label="$t('fontWeight')"
           transparent
           v-model="thirdStyleInput"
