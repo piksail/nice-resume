@@ -1,12 +1,12 @@
 <script setup lang="ts">
 type Tool = {
   name: string;
-  free: boolean;
+  free: "true" | "freemium";
   registerless: boolean;
   preview: "direct" | "formFirst";
   easyEdit: boolean;
   dataExport: boolean;
-  customization: "sm" | "md" | "full";
+  customization: "none" | "sm" | "md" | "full";
   themes: number;
   coverLetter: boolean;
 };
@@ -15,7 +15,7 @@ const tools: Tool[] = [
   // TODO provide all tools
   {
     name: "Nice Resume",
-    free: true,
+    free: "true",
     registerless: true,
     preview: "direct",
     easyEdit: true,
@@ -26,7 +26,7 @@ const tools: Tool[] = [
   },
   {
     name: "Adecco CV",
-    free: true,
+    free: "true",
     registerless: true,
     preview: "direct",
     easyEdit: true,
@@ -37,13 +37,46 @@ const tools: Tool[] = [
   },
   {
     name: "Aide CV",
-    free: true,
+    free: "true",
     registerless: false,
     preview: "formFirst",
     easyEdit: true,
     dataExport: false,
     customization: "md",
     themes: 1,
+    coverLetter: false,
+  },
+  {
+    name: "Canva",
+    free: "freemium",
+    registerless: false,
+    preview: "direct",
+    easyEdit: false,
+    dataExport: false,
+    customization: "full",
+    themes: 50,
+    coverLetter: true,
+  },
+  {
+    name: "Career.io",
+    free: "true",
+    registerless: true,
+    preview: "direct",
+    easyEdit: true,
+    dataExport: true,
+    customization: "none",
+    themes: 32,
+    coverLetter: true,
+  },
+  {
+    name: "CV.fr",
+    free: "freemium",
+    registerless: false,
+    preview: "direct",
+    easyEdit: true,
+    dataExport: false,
+    customization: "md",
+    themes: 12,
     coverLetter: false,
   },
 ];
