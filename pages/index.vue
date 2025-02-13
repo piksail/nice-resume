@@ -35,8 +35,8 @@ const thirdStyleInput = ref(400);
 
   <NuxtLayout name="landing">
     <section class="p-20 pb-0 flex justify-center">
-      <div>
-        <h1 class="mx-auto text-justify drop-shadow-lg">
+      <div class="mx-auto">
+        <h1 class="text-justify drop-shadow-lg">
           <span class="text-9xl font-bold tracking-wide">
             {{ t("introVerb") }}
             <i class="font-serif text-primary">
@@ -55,41 +55,13 @@ const thirdStyleInput = ref(400);
             </i>
           </span>
         </h1>
-        <!-- <div
-          class="mt-12 grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
-        >
-          <Field
-            :label="$t('name')"
-            transparent
-            v-model="firstInput"
-            class="[&_input]!bg-white"
-          />
-          <Field :label="$t('phone')" transparent v-model="secondInput" />
-          <Field :label="$t('address')" transparent v-model="thirdInput" />
-          <Field
-            :label="$t('color')"
-            transparent
-            v-model="firstStyleInput"
-            type="color"
-          />
-          <Field
-            :label="$t('italic')"
-            transparent
-            v-model="secondStyleInput"
-            type="checkbox"
-          />
-          <Field
-            :label="$t('fontWeight')"
-            transparent
-            v-model="thirdStyleInput"
-            type="select"
-            :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
-          />
-        </div> -->
-        <div class="flex gap-7">
+        <p class="text-2xl font-light mt-12">
+          No cookies. No signup. No payment. Privacy-friendly.
+        </p>
+        <div class="flex items-center gap-7 mt-24">
           <NuxtLink :to="localePath('/editor')">
             <Button
-              class="uppercase font-black tracking-widest mt-24 shadow-xl"
+              class="uppercase font-black tracking-widest shadow-xl"
               size="large"
             >
               {{ t("startEditing") }}
@@ -97,7 +69,7 @@ const thirdStyleInput = ref(400);
           </NuxtLink>
           <NuxtLink :to="localePath('/about')">
             <Button
-              class="uppercase font-black tracking-widest mt-24 shadow-xl"
+              class="uppercase font-black tracking-widest shadow-xl"
               size="large"
               variant="outlined"
               severity="contrast"
@@ -121,51 +93,51 @@ const thirdStyleInput = ref(400);
           </span>
           <span :style="{ fontWeight: thirdStyleInput }">{{ thirdInput }}</span>
         </div>
-      </div>
-      <div
-        class="skew-y-12 transition-all hover:shadow-xl absolute top-1/2 left-1/2 mt-12 grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
-      >
-        <Field
-          id="introFirstInput"
-          :label="$t('name')"
-          transparent
-          v-model="firstInput"
-          class="[&_input]!bg-white"
-        />
-        <Field
-          id="introSecondInput"
-          :label="$t('phone')"
-          transparent
-          v-model="secondInput"
-        />
-        <Field
-          id="introThirdInput"
-          :label="$t('address')"
-          transparent
-          v-model="thirdInput"
-        />
-        <Field
-          id="introFirstStyleInput"
-          :label="$t('color')"
-          transparent
-          v-model="firstStyleInput"
-          type="color"
-        />
-        <Field
-          id="introSecondStyleInput"
-          :label="$t('italic')"
-          transparent
-          v-model="secondStyleInput"
-          type="checkbox"
-        />
-        <Field
-          id="introThirdStyleInput"
-          :label="$t('fontWeight')"
-          transparent
-          v-model="thirdStyleInput"
-          type="select"
-          :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
-        />
+        <div
+          class="transition-all hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 w-[600px] grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
+        >
+          <Field
+            id="introFirstInput"
+            :label="$t('name')"
+            transparent
+            v-model="firstInput"
+            class="[&_input]!bg-white"
+          />
+          <Field
+            id="introSecondInput"
+            :label="$t('phone')"
+            transparent
+            v-model="secondInput"
+          />
+          <Field
+            id="introThirdInput"
+            :label="$t('address')"
+            transparent
+            v-model="thirdInput"
+          />
+          <Field
+            id="introFirstStyleInput"
+            :label="$t('color')"
+            transparent
+            v-model="firstStyleInput"
+            type="color"
+          />
+          <Field
+            id="introSecondStyleInput"
+            :label="$t('italic')"
+            transparent
+            v-model="secondStyleInput"
+            type="checkbox"
+          />
+          <Field
+            id="introThirdStyleInput"
+            :label="$t('fontWeight')"
+            transparent
+            v-model="thirdStyleInput"
+            type="select"
+            :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+          />
+        </div>
       </div>
     </section>
     <NuxtPage />
