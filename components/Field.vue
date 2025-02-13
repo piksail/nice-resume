@@ -197,7 +197,7 @@ function updateColor(hashlessHex: string) {
       size="small"
     />
   </label>
-  <label v-else-if="type === 'select'" :for="id" class="flex flex-col gap-1">
+  <div v-else-if="type === 'select'" class="flex flex-col gap-1">
     <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
@@ -224,7 +224,7 @@ function updateColor(hashlessHex: string) {
         <slot name="header" />
       </template>
     </Select>
-  </label>
+  </div>
   <label v-else :for="id" class="flex flex-col gap-1">
     <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
