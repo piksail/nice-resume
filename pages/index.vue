@@ -161,10 +161,14 @@ const thirdStyleInput = ref(400);
         class="grid grid-cols-1 lg:grid-cols-2 grid-rows-3 lg:grid-flow-col gap-3"
       >
         <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
-          <h2 class="text-2xl lg:text-4xl font-bold mb-12">
+          <h2
+            class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
+          >
             <Badge size="xlarge" value="1" />
-            {{ t("stepTheme") }}
-            <i class="font-serif text-primary">{{ $t("theme") }}</i>
+            <span>
+              {{ t("stepTheme") }}
+              <i class="font-serif text-primary">{{ $t("theme") }}</i>
+            </span>
           </h2>
           <Field
             id="theme"
@@ -187,19 +191,23 @@ const thirdStyleInput = ref(400);
           </Field>
         </li>
         <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
-          <h2 class="text-2xl lg:text-4xl font-bold mb-12">
+          <h2
+            class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
+          >
             <Badge size="xlarge" value="2" />
-            {{ t("stepEdit") }}
-            <span class="inline-flex overflow-hidden h-[41px]">
-              <i
-                class="font-serif text-primary inline-block animate-scroll h-[41px]"
-              >
-                <span>{{ $t("resume") }}</span>
-                <br />
-                <span>{{ $t("coverLetter") }}</span>
-                <br />
-                <span>{{ $t("emailSignature") }}</span>
-              </i>
+            <span>
+              {{ t("stepEdit") }}
+              <span class="inline-flex overflow-hidden">
+                <i
+                  class="font-serif text-primary inline-block animate-scroll h-[27px] lg:h-[40px] leading-none"
+                >
+                  <span>{{ $t("resume") }}</span>
+                  <br />
+                  <span>{{ $t("coverLetter") }}</span>
+                  <br />
+                  <span>{{ $t("emailSignature") }}</span>
+                </i>
+              </span>
             </span>
           </h2>
           <div class="grid grid-cols-3 gap-4 items-end">
@@ -225,10 +233,14 @@ const thirdStyleInput = ref(400);
           </div>
         </li>
         <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
-          <h2 class="text-2xl lg:text-4xl font-bold mb-12">
+          <h2
+            class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
+          >
             <Badge size="xlarge" value="3" />
-            {{ t("stepCustomize") }}
-            <i class="font-serif text-primary">{{ $t("design") }}</i>
+            <span>
+              {{ t("stepCustomize") }}
+              <i class="font-serif text-primary">{{ $t("design") }}</i>
+            </span>
           </h2>
           <div class="grid grid-cols-3 gap-4 items-end">
             <Field
@@ -258,10 +270,14 @@ const thirdStyleInput = ref(400);
         <li
           class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-3"
         >
-          <h2 class="text-2xl lg:text-4xl font-bold mb-12">
+          <h2
+            class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
+          >
             <Badge size="xlarge" value="4" />
-            {{ t("stepPreview") }}
-            <i class="font-serif text-primary">{{ $t("preview") }}</i>
+            <span>
+              {{ t("stepPreview") }}
+              <i class="font-serif text-primary">{{ $t("preview") }}</i>
+            </span>
           </h2>
           <div
             class="w-[200px] h-[calc(200px*1.414)] md:w-[400px] md:h-[calc(400px*1.414)] bg-white text-black shadow mx-auto relative"

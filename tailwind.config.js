@@ -36,8 +36,8 @@ export default {
         },
         scroll: {
           "0%,30%,100%": { transform: "translateY(0)" },
-          "33%,63%": { transform: "translateY(-41px)" },
-          "66%,98%": { transform: "translateY(-82px)" },
+          "33%,63%": { transform: "translateY(-1em)" },
+          "66%,98%": { transform: "translateY(-2em)" },
         },
       },
     },
