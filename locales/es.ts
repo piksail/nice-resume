@@ -33,6 +33,7 @@ export default {
   drivingLicense: "carné de conducir",
   education: "educación",
   email: "email",
+  emailSignature: "TODO",
   end: "fin",
   endDate: "fecha de fin",
   entry: "elemento",

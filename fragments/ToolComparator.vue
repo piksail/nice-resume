@@ -1,13 +1,13 @@
 <script setup lang="ts">
 type Tool = {
   name: string;
-  free: "true" | "freemium";
+  free: boolean | "freemium" | "?";
   registerless: boolean;
-  preview: "direct" | "formFirst";
+  preview: "direct" | "formFirst" | "?";
   easyEdit: boolean;
   dataExport: boolean;
-  customization: "none" | "sm" | "md" | "full";
-  themes: number;
+  customization: "none" | "sm" | "md" | "full" | "?";
+  themes: number | "?";
   coverLetter: boolean;
 };
 
@@ -15,7 +15,7 @@ const tools: Tool[] = [
   // TODO provide all tools
   {
     name: "Nice Resume",
-    free: "true",
+    free: true,
     registerless: true,
     preview: "direct",
     easyEdit: true,
@@ -26,7 +26,7 @@ const tools: Tool[] = [
   },
   {
     name: "Adecco CV",
-    free: "true",
+    free: true,
     registerless: true,
     preview: "direct",
     easyEdit: true,
@@ -37,7 +37,7 @@ const tools: Tool[] = [
   },
   {
     name: "Aide CV",
-    free: "true",
+    free: true,
     registerless: false,
     preview: "formFirst",
     easyEdit: true,
@@ -59,7 +59,7 @@ const tools: Tool[] = [
   },
   {
     name: "Career.io",
-    free: "true",
+    free: true,
     registerless: true,
     preview: "direct",
     easyEdit: true,
@@ -77,6 +77,50 @@ const tools: Tool[] = [
     dataExport: false,
     customization: "md",
     themes: 12,
+    coverLetter: false,
+  },
+  {
+    name: "CV Builder",
+    free: "?",
+    registerless: false,
+    preview: "?",
+    easyEdit: false,
+    dataExport: false,
+    customization: "?",
+    themes: "?",
+    coverLetter: false,
+  },
+  {
+    name: "CV Designr",
+    free: true,
+    registerless: false,
+    preview: "?",
+    easyEdit: false,
+    dataExport: false,
+    customization: "?",
+    themes: "?",
+    coverLetter: false,
+  },
+  {
+    name: "CV Maker",
+    free: false,
+    registerless: false,
+    preview: "?",
+    easyEdit: true,
+    dataExport: false,
+    customization: "?",
+    themes: 9,
+    coverLetter: false,
+  },
+  {
+    name: "CV-Template",
+    free: "freemium",
+    registerless: false,
+    preview: "direct",
+    easyEdit: true,
+    dataExport: false,
+    customization: "sm",
+    themes: 17,
     coverLetter: false,
   },
 ];
