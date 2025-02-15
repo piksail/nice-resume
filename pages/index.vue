@@ -288,7 +288,7 @@ const thirdStyleInput = ref(400);
             <Badge size="xlarge" value="4" />
             <span>
               {{ t("stepPreview") }}
-              <i class="font-serif text-primary">{{ $t("preview") }}</i>
+              <i class="font-serif text-primary">{{ t("download") }}</i>
             </span>
           </h2>
           <div
@@ -386,7 +386,8 @@ const thirdStyleInput = ref(400);
     "stepTheme": "TODO",
     "stepEdit": "TODO",
     "stepCustomize": "TODO",
-    "stepPreview": "TODO"
+    "stepPreview": "TODO",
+    "preview": "TODO"
   },
   "de": {
     "introVerb": "Machen sie",
@@ -400,7 +401,8 @@ const thirdStyleInput = ref(400);
     "stepTheme": "Wählen Sie ein",
     "stepEdit": "Erstellen Irhe",
     "stepCustomize": "Anpassen die",
-    "stepPreview": "TODO"
+    "stepPreview": "TODO",
+    "preview": "TODO"
   },
   "en": {
     "introVerb": "Make",
@@ -414,7 +416,8 @@ const thirdStyleInput = ref(400);
     "stepTheme": "Pick a",
     "stepEdit": "Edit your",
     "stepCustomize": "Adapt the",
-    "stepPreview": "TODO"
+    "stepPreview": "Preview and",
+    "preview": "download"
   },
   "es": {
     "introVerb": "TODO",
@@ -428,7 +431,8 @@ const thirdStyleInput = ref(400);
     "stepTheme": "TODO",
     "stepEdit": "TODO",
     "stepCustomize": "TODO",
-    "stepPreview": "TODO"
+    "stepPreview": "TODO",
+    "preview": "TODO"
   },
   "fr": {
     "introVerb": "De",
@@ -442,7 +446,8 @@ const thirdStyleInput = ref(400);
     "stepTheme": "Choisissez un",
     "stepEdit": "Editez votre",
     "stepCustomize": "Adaptez le",
-    "stepPreview": "TODO"
+    "stepPreview": "Prévisualisez et",
+    "preview": "téléchargez"
   }
 }
 </i18n>
