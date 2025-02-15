@@ -101,58 +101,70 @@ const thirdStyleInput = ref(400);
           class="w-[100px] h-[calc(100px*1.414)] lg:w-[300px] lg:h-[calc(300px*1.414)] xl:w-[400px] xl:h-[calc(400px*1.414)] shadow bg-primary absolute -z-50 left-7 -top-7 transition-all group-hover:left-14 group-hover:-top-14 animate-float"
         />
         <div
-          class="w-[100px] h-[calc(100px*1.414)] lg:w-[300px] lg:h-[calc(300px*1.414)] xl:w-[400px] xl:h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-4 animate-float [animation-delay:0.7s]"
+          class="w-[100px] h-[calc(100px*1.414)] lg:w-[300px] lg:h-[calc(300px*1.414)] xl:w-[400px] xl:h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-8 animate-float [animation-delay:0.7s]"
         >
-          <span :style="{ color: firstStyleInput }">{{ firstInput }}</span>
-          <span :style="{ fontStyle: secondStyleInput ? 'italic' : 'normal' }">
-            {{ secondInput }}
-          </span>
-          <span :style="{ fontWeight: thirdStyleInput }">{{ thirdInput }}</span>
+          <div
+            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-8 w-32 mb-3"
+          />
+          <div
+            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-6 w-64 mb-6"
+          />
+          <div
+            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-12 mb-2"
+          />
+          <div
+            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-14 mb-2"
+          />
+          <div
+            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-10 mb-2"
+          />
+          <div
+            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-14 mb-8"
+          />
+          <div class="grid grid-cols-2 gap-6">
+            <div class="w-full">
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-2/3"
+              />
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+              />
+            </div>
+            <div class="w-full">
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-full"
+              />
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+              />
+            </div>
+            <div class="w-full">
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-full"
+              />
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+              />
+            </div>
+            <div class="w-full">
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-1/3"
+              />
+              <div
+                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+              />
+            </div>
+          </div>
         </div>
         <div
-          class="hidden transition-all hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
+          class="hidden transition-all group-hover:bg-opacity-90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
         >
-          <Field
-            id="introFirstInput"
-            :label="$t('name')"
-            transparent
-            v-model="firstInput"
-            class="[&_input]!bg-white"
-          />
-          <Field
-            id="introSecondInput"
-            :label="$t('title')"
-            transparent
-            v-model="secondInput"
-          />
-          <Field
-            id="introThirdInput"
-            :label="$t('address')"
-            transparent
-            v-model="thirdInput"
-          />
-          <Field
-            id="introFirstStyleInput"
-            :label="$t('color')"
-            transparent
-            v-model="firstStyleInput"
-            type="color"
-          />
-          <Field
-            id="introSecondStyleInput"
-            :label="$t('italic')"
-            transparent
-            v-model="secondStyleInput"
-            type="checkbox"
-          />
-          <Field
-            id="introThirdStyleInput"
-            :label="$t('fontWeight')"
-            transparent
-            v-model="thirdStyleInput"
-            type="select"
-            :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
-          />
+          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-surface-950 h-9 rounded" />
         </div>
       </div>
     </section>
