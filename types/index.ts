@@ -13,6 +13,7 @@ export type Theme =
   | "Macaron"
   | "Macchiato"
   | "NeoBrutalism"
+  | "NiceResume"
   | "OpenResume"
   | "Oilcloth"
   | "Paper"
@@ -50,6 +51,7 @@ export type Font =
   | "PT Serif"
   | "Roboto"
   | "Roboto Condensed"
+  | "Sarabun" // Also used in this webapp
   | "Times New Roman"
   | "Yanone Kaffeesatz";
 
