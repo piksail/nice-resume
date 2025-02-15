@@ -54,10 +54,6 @@ const settings = useDocumentSettings();
           v-if="detail.icon"
           :icon="detail.icon"
           :type="detail.type"
-          :style="{
-            color: settings.contactDetails.iconColor,
-            width: `${settings.contactDetails.iconSize}px`,
-          }"
         />
         <span :style="getNodeStyle(settings.contactDetails, 'text')">
           {{ detail.value }}

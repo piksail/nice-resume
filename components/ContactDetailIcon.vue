@@ -22,11 +22,14 @@ import {
   XIcon,
 } from "vue3-simple-icons";
 import type { ContactDetail } from "@/types";
+import useDocumentSettings from "~/composables/use-document-settings";
 
 const { icon, type } = defineProps<{
   icon: ContactDetail["icon"];
   type: ContactDetail["type"];
 }>();
+
+const settings = useDocumentSettings();
 
 type IconMapper = {
   [K in ContactDetail["icon"] as string]: Component;
@@ -57,5 +60,13 @@ const component: Component = computed(() => (icon ? iconMapper[icon] : null));
 </script>
 
 <template>
-  <component :is="component" style="fill: currentColor" />
+  <component
+    :is="component"
+    :style="{
+      fill: 'currentColor',
+      color: settings.contactDetails.iconColor,
+      height: `${settings.contactDetails.iconSize}px`,
+      width: `${settings.contactDetails.iconSize}px`,
+    }"
+  />
 </template>
