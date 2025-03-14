@@ -23,9 +23,18 @@ const { t } = useI18n({
 const firstInput = ref(capitalize(t("name").toUpperCase()));
 const secondInput = ref(capitalize(t("title")));
 const thirdInput = ref(capitalize(t("address")));
-const firstStyleInput = ref("#e11d48");
-const secondStyleInput = ref(false);
-const thirdStyleInput = ref(400);
+
+const firstInputColor = ref("#e11d48");
+const firstInputIsItalic = ref(false);
+const firstInputFontWeight = ref(800);
+
+const secondInputColor = ref("#000000");
+const secondInputIsItalic = ref(true);
+const secondInputFontWeight = ref(600);
+
+const thirdInputColor = ref("#3e3e3e");
+const thirdInputIsItalic = ref(false);
+const thirdInputFontWeight = ref(400);
 </script>
 
 <template>
@@ -170,7 +179,7 @@ const thirdStyleInput = ref(400);
     </section>
     <section class="py-20 px-10 max-w-screen-2xl mx-auto">
       <ol
-        class="grid grid-cols-1 lg:grid-cols-2 grid-rows-3 lg:grid-flow-col gap-3"
+        class="grid grid-cols-1 lg:grid-cols-2 grid-rows-4 lg:grid-flow-col gap-3"
       >
         <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
           <h2
@@ -222,29 +231,31 @@ const thirdStyleInput = ref(400);
               </span>
             </span>
           </h2>
-          <div class="grid grid-cols-3 gap-4 items-end">
+          <div class="flex gap-4 items-end lg:justify-between">
             <Field
-              id="introFirstInput"
+              id="firstInput"
               :label="$t('name')"
               transparent
               v-model="firstInput"
               class="[&_input]!bg-white"
             />
             <Field
-              id="introSecondInput"
+              id="secondInput"
               :label="$t('title')"
               transparent
               v-model="secondInput"
             />
             <Field
-              id="introThirdInput"
+              id="thirdInput"
               :label="$t('address')"
               transparent
               v-model="thirdInput"
             />
           </div>
         </li>
-        <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
+        <li
+          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-2"
+        >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
@@ -254,33 +265,88 @@ const thirdStyleInput = ref(400);
               <i class="font-serif text-primary">{{ $t("design") }}</i>
             </span>
           </h2>
-          <div class="grid grid-cols-3 gap-4 items-end">
+          <div class="font-bold text-xl">{{ capitalize($t("name")) }}</div>
+          <div class="flex gap-4 items-end lg:justify-between">
             <Field
-              id="introFirstStyleInput"
+              id="firstInputColor"
               :label="$t('color')"
               transparent
-              v-model="firstStyleInput"
+              v-model="firstInputColor"
               type="color"
             />
             <Field
-              id="introSecondStyleInput"
+              id="firstInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="secondStyleInput"
+              v-model="firstInputIsItalic"
               type="checkbox"
             />
             <Field
-              id="introThirdStyleInput"
+              id="firstInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="thirdStyleInput"
+              v-model="firstInputFontWeight"
+              type="select"
+              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+            />
+          </div>
+          <div class="font-bold text-xl mt-6">
+            {{ capitalize($t("title")) }}
+          </div>
+          <div class="flex gap-4 items-end lg:justify-between">
+            <Field
+              id="secondInputColor"
+              :label="$t('color')"
+              transparent
+              v-model="secondInputColor"
+              type="color"
+            />
+            <Field
+              id="secondInputIsItalic"
+              :label="$t('italic')"
+              transparent
+              v-model="secondInputIsItalic"
+              type="checkbox"
+            />
+            <Field
+              id="secondInputFontWeight"
+              :label="$t('fontWeight')"
+              transparent
+              v-model="secondInputFontWeight"
+              type="select"
+              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+            />
+          </div>
+          <div class="font-bold text-xl mt-6">
+            {{ capitalize($t("address")) }}
+          </div>
+          <div class="flex gap-4 items-end lg:justify-between">
+            <Field
+              id="thirdInputColor"
+              :label="$t('color')"
+              transparent
+              v-model="thirdInputColor"
+              type="color"
+            />
+            <Field
+              id="thirdInputIsItalic"
+              :label="$t('italic')"
+              transparent
+              v-model="thirdInputIsItalic"
+              type="checkbox"
+            />
+            <Field
+              id="thirdInputFontWeight"
+              :label="$t('fontWeight')"
+              transparent
+              v-model="thirdInputFontWeight"
               type="select"
               :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
             />
           </div>
         </li>
         <li
-          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-3"
+          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-4"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
@@ -295,62 +361,90 @@ const thirdStyleInput = ref(400);
             class="w-[200px] h-[calc(200px*1.414)] md:w-[400px] md:h-[calc(400px*1.414)] bg-white text-black shadow mx-auto relative"
           >
             <div class="flex flex-col scale-50 md:scale-75 size-full">
-              <span :style="{ color: firstStyleInput }">{{ firstInput }}</span>
               <span
-                :style="{ fontStyle: secondStyleInput ? 'italic' : 'normal' }"
+                :style="{
+                  color: firstInputColor,
+                  fontStyle: firstInputIsItalic ? 'italic' : 'normal',
+                  fontWeight: firstInputFontWeight,
+                }"
+              >
+                {{ firstInput }}
+              </span>
+              <span
+                :style="{
+                  color: secondInputColor,
+                  fontStyle: secondInputIsItalic ? 'italic' : 'normal',
+                  fontWeight: secondInputFontWeight,
+                }"
               >
                 {{ secondInput }}
               </span>
-              <span :style="{ fontWeight: thirdStyleInput }">
+              <span
+                :style="{
+                  color: thirdInputColor,
+                  fontStyle: thirdInputIsItalic ? 'italic' : 'normal',
+                  fontWeight: thirdInputFontWeight,
+                }"
+              >
                 {{ thirdInput }}
               </span>
-              <div>Work experience</div>
-              <ol>
+              <div
+                class="mt-6 mb-2 text-lg uppercase font-black tracking-wider"
+              >
+                Work experience
+              </div>
+              <ol class="flex flex-col gap-2">
                 <li>
                   <div>
-                    <div>
-                      Since {{ new Date().getFullYear() }} - Web developer at
-                      Piksail
+                    <div class="text-sm">
+                      Since {{ new Date().getFullYear() }} - Position at Company
                     </div>
-                    <p>About</p>
-                    <ul>
-                      <li>Tag list</li>
-                      <li>Tag list</li>
-                      <li>Tag list</li>
+                    <p class="text-xs italic text-slate-600">
+                      During this experience I...
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600">
+                      <li class="text-xs leading-none">Cool thing</li>
+                      <li class="text-xs leading-none">Nice stuff</li>
+                      <li class="text-xs leading-none">Fine task</li>
                     </ul>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <div>
+                    <div class="text-sm">
                       {{ new Date().getFullYear() - 3 }} -
                       {{ new Date().getFullYear() }} - Web developer at Piksail
                     </div>
-                    <p>About</p>
-                    <ul>
-                      <li>Tag list</li>
-                      <li>Tag list</li>
-                      <li>Tag list</li>
+                    <p class="text-xs italic text-slate-600">
+                      During this experience I...
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600">
+                      <li class="text-xs leading-none">Good mission</li>
                     </ul>
                   </div>
                 </li>
               </ol>
-              <div>Education</div>
-              <ol>
-                <li>
+              <div
+                class="mt-6 mb-2 text-lg uppercase font-black tracking-wider"
+              >
+                Education
+              </div>
+              <ol class="flex flex-col gap-0">
+                <li class="text-sm">
                   {{ new Date().getFullYear() - 3 }} - Engineering Diploma
                 </li>
-                <li>Since {{ new Date().getFullYear() - 3 }} - A Levels</li>
+                <li class="text-sm">
+                  {{ new Date().getFullYear() - 6 }} - A Levels
+                </li>
               </ol>
-              <div>Skills</div>
+              <div
+                class="mt-6 mb-2 text-lg uppercase font-black tracking-wider"
+              >
+                Skills
+              </div>
               <ol>
-                <li>A</li>
-                <li>B</li>
-              </ol>
-              <div>Languages</div>
-              <ol>
-                <li>EN (mother tongue)</li>
-                <li>FR</li>
+                <li class="text-xs">I know how to make stuff.</li>
+                <li class="text-xs">I also master the art of things.</li>
               </ol>
               <NuxtLink
                 :to="localePath('/editor')"
@@ -367,6 +461,34 @@ const thirdStyleInput = ref(400);
           </div>
         </li>
       </ol>
+    </section>
+    <section class="py-20 px-10 max-w-screen-md mx-auto">
+      <p class="text-center text-4xl lg:text-6xl font-bold mb-12">
+        Everything is
+        <i class="font-serif text-primary">saved locally</i>
+      </p>
+      <p class="text-center text-2xl mb-12">
+        Don't worry about losing your progress
+        <br />
+        You can even export/import your progress from another device
+      </p>
+      <p class="text-center text-2xl mb-12">
+        Don't feel compelled to finish all at once:
+      </p>
+      <p class="text-center text-4xl lg:text-6xl font-bold mb-12">
+        Edit
+        <i class="font-serif text-primary">whenever you want</i>
+      </p>
+      <div class="flex justify-center">
+        <NuxtLink :to="localePath('/editor')">
+          <Button
+            class="uppercase font-black tracking-widest shadow-xl animate-pulse"
+            size="large"
+          >
+            {{ t("startEditing") }}
+          </Button>
+        </NuxtLink>
+      </div>
     </section>
     <NuxtPage />
   </NuxtLayout>
