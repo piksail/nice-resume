@@ -177,6 +177,11 @@ onMounted(() => {
       <Divider class="col-span-2 uppercase text-sm">
         {{ $t("or") }}
       </Divider>
+      <p
+        class="col-span-2 text-center text-3xl font-bold text-primary-700 mb-6"
+      >
+        I want to start anew
+      </p>
       <Button
         icon="pi pi-file"
         :label="t('resumeFromScratch')"
@@ -192,6 +197,9 @@ onMounted(() => {
       <Divider class="col-span-2 uppercase text-sm">
         {{ $t("or") }}
       </Divider>
+      <p class="col-span-2 text-center text-3xl font-bold text-secondary mb-6">
+        I want to re-use a save file
+      </p>
       <FileUpload
         class="size-full"
         mode="basic"
