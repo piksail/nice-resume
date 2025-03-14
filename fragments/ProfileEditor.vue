@@ -189,15 +189,17 @@ function changeContactDetaiType(
               @remove="remove(contactDetails, detailIndex)"
             />
           </li>
-          <Button asChild>
-            <button
-              class="button slotButton slotButtonSmall"
-              @click="addContactDetail"
-            >
-              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-            </button>
-          </Button>
         </ul>
+        <Button asChild>
+          <button
+            class="button slotButton slotButtonSmall"
+            @click="addContactDetail"
+          >
+            <span class="uppercase text-sm">
+              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+            </span>
+          </button>
+        </Button>
       </label>
     </div>
   </EditorCategory>

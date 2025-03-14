@@ -64,6 +64,7 @@ export const fonts: Font[] = [
   "PT Serif",
   "Roboto",
   "Roboto Condensed",
+  "Sarabun",
   "Times New Roman",
   "Yanone Kaffeesatz",
 ];
@@ -79,6 +80,7 @@ export const themes: Theme[] = [
   "Macaron",
   "Macchiato",
   "NeoBrutalism",
+  "NiceResume",
   "Oilcloth",
   "OpenResume",
   "Paper",
@@ -627,6 +629,18 @@ export const themeBaseSettings: ThemeBaseSettings = {
     bodyFont: "Roboto",
     displayFont: "Archivo",
   },
+  NiceResume: {
+    isLetterPaddingless: false,
+    colors: [
+      "#000000",
+      "#ffffff",
+      "#372aac", // Tailwind's indigo-800
+      "#1447e6", // Tailwind's blue-700
+      "#f6339a", // Tailwind's pink-500
+    ],
+    bodyFont: "Sarabun",
+    displayFont: "Sarabun",
+  },
   Oilcloth: {
     isLetterPaddingless: true,
     colors: ["#0f9ef8", "#ff9b08", "#43a385", "#ffffff", "#231f20"],
@@ -752,6 +766,12 @@ export const themeSettings: ThemeSettings = {
   },
   NeoBrutalism: {
     base: themeBaseSettings.NeoBrutalism,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+    email: structuredClone(emailSettings),
+  },
+  NiceResume: {
+    base: themeBaseSettings.NiceResume,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
@@ -1908,6 +1928,98 @@ themeSettings.NeoBrutalism.email.contactDetails.border[0] = 4;
 themeSettings.NeoBrutalism.email.contactDetails.borderColor =
   themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.contactDetails.padding = [22, 22, 22, 22];
+
+// NiceResume
+themeSettings.NiceResume.resume.document.color =
+  themeSettings.NiceResume.base.colors[0];
+themeSettings.NiceResume.resume.header.margin[2] = 20;
+themeSettings.NiceResume.resume.name.color =
+  themeSettings.NiceResume.base.colors[0];
+themeSettings.NiceResume.resume.name.isUppercase = true;
+themeSettings.NiceResume.resume.name.fontSize = 34;
+themeSettings.NiceResume.resume.name.fontWeight = 900;
+themeSettings.NiceResume.resume.name.letterSpacing = 2;
+themeSettings.NiceResume.resume.title.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.title.isUppercase = true;
+themeSettings.NiceResume.resume.title.fontSize = 20;
+themeSettings.NiceResume.resume.title.fontWeight = 900;
+themeSettings.NiceResume.resume.title.letterSpacing = 2;
+themeSettings.NiceResume.resume.contactDetails.margin[0] = 12;
+themeSettings.NiceResume.resume.contactDetails.margin[2] = 12;
+themeSettings.NiceResume.resume.contactDetails.iconSize = 12;
+themeSettings.NiceResume.resume.contactDetails.iconGap = 12;
+themeSettings.NiceResume.resume.contactDetails.iconColor =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.contactDetails.fontSize = 12;
+themeSettings.NiceResume.resume.about.isItalic = true;
+themeSettings.NiceResume.resume.about.padding = [24, 12, 24, 12];
+themeSettings.NiceResume.resume.about.fontSize = 15;
+themeSettings.NiceResume.resume.aboutQuote.isShown = true;
+themeSettings.NiceResume.resume.aboutQuote.fontSize = 19;
+themeSettings.NiceResume.resume.aboutQuote.color =
+  themeSettings.NiceResume.base.colors[4];
+themeSettings.NiceResume.resume.categoryName.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.categoryName.isUppercase = true;
+themeSettings.NiceResume.resume.categoryName.fontSize = 20;
+themeSettings.NiceResume.resume.categoryName.fontWeight = 900;
+themeSettings.NiceResume.resume.categoryName.letterSpacing = 2;
+themeSettings.NiceResume.resume.entry.layout = 1;
+themeSettings.NiceResume.resume.entryTitle.isUppercase = true;
+themeSettings.NiceResume.resume.entryTitle.fontWeight = 900;
+themeSettings.NiceResume.resume.entryTitle.letterSpacing = 1;
+themeSettings.NiceResume.resume.entryPeriod.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.entryOrganization.beforeSeparator = ">";
+themeSettings.NiceResume.resume.entryOrganization.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.entryLocation.beforeSeparator = ",";
+themeSettings.NiceResume.resume.entryLocation.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.entryHighlight.isItalic = true;
+themeSettings.NiceResume.resume.entryHighlight.fontSize = 13;
+themeSettings.NiceResume.resume.entryTag.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.resume.entryTag.backgroundColor =
+  themeSettings.NiceResume.base.colors[1];
+themeSettings.NiceResume.resume.entryTag.margin[0] = 12;
+themeSettings.NiceResume.resume.entryTag.gap = 12;
+themeSettings.NiceResume.letter.document.color =
+  themeBaseSettings.NiceResume.colors[0];
+themeSettings.NiceResume.letter.subject.isUppercase = true;
+themeSettings.NiceResume.letter.subject.fontWeight = 900;
+themeSettings.NiceResume.letter.subject.letterSpacing = 1;
+themeSettings.NiceResume.letter.reference.color =
+  themeBaseSettings.NiceResume.colors[2];
+themeSettings.NiceResume.email.document.color =
+  themeSettings.NiceResume.base.colors[0];
+themeSettings.NiceResume.email.name.color =
+  themeSettings.NiceResume.base.colors[0];
+themeSettings.NiceResume.email.name.isUppercase = true;
+themeSettings.NiceResume.email.name.fontSize = 34;
+themeSettings.NiceResume.email.name.fontWeight = 900;
+themeSettings.NiceResume.email.name.letterSpacing = 2;
+themeSettings.NiceResume.email.title.color =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.email.title.isUppercase = true;
+themeSettings.NiceResume.email.title.fontSize = 20;
+themeSettings.NiceResume.email.title.fontWeight = 900;
+themeSettings.NiceResume.email.title.letterSpacing = 2;
+themeSettings.NiceResume.email.contactDetails.margin[0] = 12;
+themeSettings.NiceResume.email.contactDetails.margin[2] = 12;
+themeSettings.NiceResume.email.contactDetails.iconSize = 12;
+themeSettings.NiceResume.email.contactDetails.iconGap = 12;
+themeSettings.NiceResume.email.contactDetails.iconColor =
+  themeSettings.NiceResume.base.colors[2];
+themeSettings.NiceResume.email.contactDetails.fontSize = 12;
+themeSettings.NiceResume.email.about.isItalic = true;
+themeSettings.NiceResume.email.about.padding = [24, 12, 24, 12];
+themeSettings.NiceResume.email.about.fontSize = 15;
+themeSettings.NiceResume.email.aboutQuote.isShown = true;
+themeSettings.NiceResume.email.aboutQuote.fontSize = 19;
+themeSettings.NiceResume.email.aboutQuote.color =
+  themeSettings.NiceResume.base.colors[4];
 
 // Oilcloth
 themeSettings.Oilcloth.resume.document.padding = [0, 0, 0, 0];

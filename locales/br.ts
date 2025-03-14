@@ -33,6 +33,7 @@ export default {
   drivingLicense: "aotre-bleinañ",
   education: "skoliadur",
   email: "postel",
+  emailSignature: "TODO",
   end: "fin",
   endDate: "deiziad fin",
   entry: "elfenn",
