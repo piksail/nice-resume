@@ -165,7 +165,9 @@ const bodyCategories = computed(() =>
           }"
         >
           <li
-            v-for="(entry, entryIndex) in category.entries"
+            v-for="(entry, entryIndex) in category.entries.filter(
+              (entry) => entry.isVisible,
+            )"
             :key="entryIndex"
             class="flex flex-col"
           >
@@ -287,7 +289,9 @@ const bodyCategories = computed(() =>
           }"
         >
           <li
-            v-for="(entry, entryIndex) in category.entries"
+            v-for="(entry, entryIndex) in category.entries.filter(
+              (entry) => entry.isVisible,
+            )"
             :key="entryIndex"
             class="flex flex-col"
           >
