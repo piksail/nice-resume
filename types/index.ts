@@ -300,6 +300,7 @@ export interface Entry {
   title: string; // Position, Diploma, ...
   highlights: string[];
   tags: string[];
+  isVisible: boolean; // Preserve data but exclude it from the resume
 }
 
 export interface Experience extends Entry {

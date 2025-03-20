@@ -67,6 +67,7 @@ function addEntry(category: Category) {
       title: "",
       highlights: [],
       tags: [],
+      isVisible: true,
     };
 
     category.entries.push(asset);
@@ -81,6 +82,7 @@ function addEntry(category: Category) {
       summary: "",
       highlights: [],
       tags: [],
+      isVisible: true,
     };
 
     category.entries.push(experience);
@@ -182,6 +184,10 @@ function toggleCategoryLock(category: Category) {
 
 function toggleCategoryVisibility(category: Category) {
   category.isVisible = !category.isVisible;
+}
+
+function toggleEntryVisibility(entry: Entry) {
+  entry.isVisible = !entry.isVisible;
 }
 </script>
 
@@ -289,9 +295,25 @@ function toggleCategoryVisibility(category: Category) {
           <header class="flex items-center justify-between">
             <div
               :id="getEntryHeading(entry, entryIndex)"
-              class="uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10 text-white"
+              class="flex items-center gap-5 uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10 text-white"
             >
-              {{ getEntryHeading(entry, entryIndex) }}
+              <span :class="!entry.isVisible ? 'line-through' : ''">
+                {{ getEntryHeading(entry, entryIndex) }}
+              </span>
+              <Button
+                :icon="entry.isVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                :aria-label="entry.isVisible ? t('hideEntry') : t('showEntry')"
+                variant="text"
+                rounded
+                size="small"
+                :class="false ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
+                :pt:icon:class="
+                  false
+                    ? ''
+                    : '!text-white/50 !text-xl hover:!text-white bg-transparent transition'
+                "
+                @click="toggleEntryVisibility(entry)"
+              />
             </div>
             <ListActions
               class="mb-2"
@@ -302,7 +324,7 @@ function toggleCategoryVisibility(category: Category) {
               @remove="askBeforeRemoveCategoryEntry(category, entryIndex)"
             />
           </header>
-          <div class="formBlock">
+          <div class="formBlock" v-if="entry.isVisible">
             <Field
               :id="`categoryList${categoryIndex}EntryList${entryIndex}Title_${category.layout}`"
               target

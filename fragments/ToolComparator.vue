@@ -123,6 +123,28 @@ const tools: Tool[] = [
     themes: 17,
     coverLetter: false,
   },
+  // {
+  //   name: "Do You Buzz",
+  //   free: "?",
+  //   registerless: false,
+  //   preview: "?",
+  //   easyEdit: false,
+  //   dataExport: false,
+  //   customization: "sm",
+  //   themes: ?,
+  //   coverLetter: false,
+  // },
+  {
+    name: "Enhancv",
+    free: "?",
+    registerless: false,
+    preview: "direct",
+    easyEdit: true,
+    dataExport: false,
+    customization: "full",
+    themes: 14,
+    coverLetter: false,
+  },
 ];
 </script>
 

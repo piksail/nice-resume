@@ -96,6 +96,28 @@ export default definePreset(Lara, {
     },
   },
   components: {
+    dataTable: {
+      colorScheme: {
+        light: {
+          background: "transparent",
+          header: {
+            background: "{surface.0}",
+          },
+          bodyRow: {
+            background: "{surface.0}",
+          },
+        },
+        dark: {
+          background: "transparent",
+          header: {
+            background: "{surface.900}",
+          },
+          bodyRow: {
+            background: "{surface.900}",
+          },
+        },
+      },
+    },
     fieldset: {
       colorScheme: {
         light: {
@@ -178,22 +200,6 @@ export default definePreset(Lara, {
         },
         dark: {
           bar: {
-            background: "{surface.900}",
-          },
-        },
-      },
-    },
-    table: {
-      colorScheme: {
-        light: {
-          background: "transparent",
-          header: {
-            background: "{surface.0}",
-          },
-        },
-        dark: {
-          background: "transparent",
-          header: {
             background: "{surface.900}",
           },
         },

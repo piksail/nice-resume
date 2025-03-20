@@ -68,9 +68,14 @@ const model = defineModel();
 
 const { focusedInput } = storeToRefs(useEditorStore());
 
-function updateColor(hashlessHex: string) {
+function updateColor(hexCode: string | undefined) {
+  if (!hexCode) return;
+  if (hexCode.startsWith("#")) {
+    model.value = hexCode;
+    return;
+  }
   // Primevue does not embed hash to the hex color value but it is needed for CSS
-  model.value = `#${hashlessHex}`;
+  model.value = `#${hexCode}`;
 }
 </script>
 
@@ -229,13 +234,28 @@ function updateColor(hashlessHex: string) {
     <span class="label" :class="transparent ? 'labelTransparent' : ''">
       {{ capitalize(label) }}
     </span>
-    <ColorPicker
-      v-if="type === 'color'"
-      :input-id="id"
-      :model-value="`${(model as string).replace('#', '')}`"
-      size="small"
-      @update:model-value="updateColor"
-    />
+    <div v-if="type === 'color'">
+      <ColorPicker
+        :input-id="id"
+        :model-value="`${(model as string).replace('#', '')}`"
+        size="small"
+        @update:model-value="updateColor"
+      />
+      <InputText
+        class="!p-2 ml-2"
+        :class="
+          transparent
+            ? '!bg-surface-950 !text-white !border-none'
+            : '!border-primary-200 !border-t-0 !border-r-0 !border-l-0 !rounded-none'
+        "
+        :disabled="disabled"
+        :model-value="model as string"
+        size="small"
+        @focus.stop="focusedInput = target ? id : ''"
+        @blur.stop="focusedInput = ''"
+        @update:model-value="updateColor"
+      />
+    </div>
     <Textarea
       v-else-if="type === 'textarea'"
       :id="id"
