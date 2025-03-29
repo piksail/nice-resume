@@ -95,6 +95,7 @@ export function formatJsonResumeAsResume(
             summary: work.summary,
             highlights: [...work.highlights],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -119,6 +120,7 @@ export function formatJsonResumeAsResume(
             summary: voluntary.summary,
             highlights: [...voluntary.highlights],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -143,6 +145,7 @@ export function formatJsonResumeAsResume(
             summary: "",
             highlights: [...education.courses],
             tags: [`${education.score}`],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -167,6 +170,7 @@ export function formatJsonResumeAsResume(
             summary: award.summary,
             highlights: [],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -191,6 +195,7 @@ export function formatJsonResumeAsResume(
             summary: "",
             highlights: [],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -215,6 +220,7 @@ export function formatJsonResumeAsResume(
             summary: "",
             highlights: [],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -235,6 +241,7 @@ export function formatJsonResumeAsResume(
             title: skill.name,
             highlights: [skill.level],
             tags: [...skill.keywords],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -255,6 +262,7 @@ export function formatJsonResumeAsResume(
             title: language.language,
             highlights: [language.fluency],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -275,6 +283,7 @@ export function formatJsonResumeAsResume(
             title: interest.name,
             highlights: [],
             tags: [...interest.keywords],
+            isVisible: true,
           };
         }),
         layout: "full",
@@ -300,6 +309,7 @@ export function formatJsonResumeAsResume(
             summary: project.description,
             highlights: [...project.highlights],
             tags: [],
+            isVisible: true,
           };
         }),
         layout: "full",

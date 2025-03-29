@@ -15,6 +15,7 @@ export function getRandomAsset(
       "Sed do eiusmod tempor incididunt ut labore",
     ],
     tags: ["Lorem ipsum", "Dolor", "Sit amet"],
+    isVisible: true,
   };
 }
 
@@ -45,5 +46,6 @@ export function getRandomExperience(
             "Sed do eiusmod tempor incididunt ut labore",
           ],
     tags: type === "certificate" ? [] : ["Lorem ipsum", "Dolor", "Sit amet"],
+    isVisible: true,
   };
 }

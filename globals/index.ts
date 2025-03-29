@@ -2154,7 +2154,7 @@ themeSettings.OpenResume.resume.contactDetails.gap = 40;
 themeSettings.OpenResume.resume.about.isItalic = true;
 themeSettings.OpenResume.resume.about.textAlign = "center";
 themeSettings.OpenResume.resume.aside.margin = [24, 0, 24, 48];
-themeSettings.OpenResume.resume.body.margin = [24, 48, 24, 48];
+themeSettings.OpenResume.resume.body.margin = [0, 48, 24, 48];
 themeSettings.OpenResume.resume.categoryName.fontWeight = 700;
 themeSettings.OpenResume.resume.categoryName.fontSize = 12;
 themeSettings.OpenResume.resume.categoryNameSeparator.position = "left";
@@ -2162,6 +2162,7 @@ themeSettings.OpenResume.resume.categoryNameSeparator.height = 4;
 themeSettings.OpenResume.resume.categoryNameSeparator.widthType = "custom";
 themeSettings.OpenResume.resume.categoryNameSeparator.width = 8;
 themeSettings.OpenResume.resume.categoryNameSeparator.margin[1] = 10;
+themeSettings.OpenResume.resume.categoryNameSeparator.margin[2] = 12;
 themeSettings.OpenResume.resume.categoryNameSeparator.backgroundColor =
   themeBaseSettings.OpenResume.colors[0];
 themeSettings.OpenResume.resume.entry.layout = 7;

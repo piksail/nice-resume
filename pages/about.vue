@@ -57,7 +57,7 @@ const { t } = useI18n({
             class="absolute -z-[1] -top-24 -left-56 w-[400px] group-hover:-translate-x-10 transition-all"
           />
           <img
-            src="/resume-editor-screenshot.png"
+            src="/profile-editor.png"
             alt="Screenshot of the resume editor"
             class="w-[600px] bg-white shadow group-hover:scale-110 group-hover:shadow-lg transition-all"
           />
