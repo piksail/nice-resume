@@ -620,7 +620,7 @@ export const themeBaseSettings: ThemeBaseSettings = {
     bodyFont: "Lato",
   },
   Glaze: {
-    isLetterPaddingless: false,
+    isLetterPaddingless: true,
     colors: ["#ed3660", "#5662e8", "#e5e7eb", "#ffffff", "#1e1e1e"],
     bodyFont: "Mulish",
     displayFont: "League Gothic",
@@ -1501,39 +1501,62 @@ themeSettings.Glaze.resume.entryTag.fontSize = 11;
 themeSettings.Glaze.resume.entryTag.margin[0] = 10;
 themeSettings.Glaze.resume.entryTag.padding = [0, 0, 0, 0];
 themeSettings.Glaze.resume.entryTag.gap = 20;
-themeSettings.Glaze.letter.header.layout = 1;
+themeSettings.Glaze.letter.header.layout = 6;
+themeSettings.Glaze.letter.name.padding = [20, 40, 0, 40];
 themeSettings.Glaze.letter.name.font = themeBaseSettings.Glaze.displayFont;
 themeSettings.Glaze.letter.name.fontSize = 36;
 themeSettings.Glaze.letter.name.isUppercase = true;
-themeSettings.Glaze.letter.name.color = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.letter.title.padding = [0, 40, 20, 40];
 themeSettings.Glaze.letter.title.font = themeBaseSettings.Glaze.displayFont;
-themeSettings.Glaze.letter.title.fontSize = 24;
+themeSettings.Glaze.letter.title.fontSize = 30;
 themeSettings.Glaze.letter.title.isUppercase = true;
-themeSettings.Glaze.letter.title.color = themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.letter.title.isGradient = true;
+themeSettings.Glaze.letter.title.widthType = "fit-content";
+themeSettings.Glaze.letter.title.fromColor = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.letter.title.toColor = themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.letter.contactDetails.padding = [20, 40, 20, 40];
+themeSettings.Glaze.letter.contactDetails.font = "monospace";
 themeSettings.Glaze.letter.contactDetails.fontSize = 12;
-themeSettings.Glaze.letter.about.margin[0] = 20;
-themeSettings.Glaze.letter.about.textAlign = "center";
-themeSettings.Glaze.letter.about.fontSize = 12;
-themeSettings.Glaze.letter.senderDetails.fontSize = 12;
-themeSettings.Glaze.letter.senderDetails.isItalic = true;
-themeSettings.Glaze.letter.senderDetails.color =
-  themeBaseSettings.Glaze.colors[0];
-themeSettings.Glaze.letter.recipientDetails.fontSize = 12;
-themeSettings.Glaze.letter.recipientDetails.isItalic = true;
-themeSettings.Glaze.letter.recipientDetails.color =
-  themeBaseSettings.Glaze.colors[0];
-themeSettings.Glaze.letter.subject.fontWeight = 600;
-themeSettings.Glaze.letter.reference.color = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.letter.contactDetails.alignment = "end";
+themeSettings.Glaze.letter.contactDetails.border[3] = 1;
+themeSettings.Glaze.letter.contactDetails.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.letter.about.border[0] = 1;
+themeSettings.Glaze.letter.about.border[2] = 1;
+themeSettings.Glaze.letter.about.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.letter.about.padding = [20, 40, 20, 40];
+themeSettings.Glaze.letter.senderDetails.margin = [40, 80, 0, 80];
+themeSettings.Glaze.letter.senderDetails.fontWeight = 600;
+themeSettings.Glaze.letter.recipientDetails.margin = [40, 80, 40, 80];
+themeSettings.Glaze.letter.recipientDetails.fontWeight = 600;
+themeSettings.Glaze.letter.subject.margin = [0, 80, 0, 80];
+themeSettings.Glaze.letter.subject.textAlign = "left";
+themeSettings.Glaze.letter.subject.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.letter.subject.fontSize = 24;
+themeSettings.Glaze.letter.subject.textAlign = "left";
+themeSettings.Glaze.letter.reference.margin = [6, 80, 0, 80];
+themeSettings.Glaze.letter.reference.textAlign = "left";
+themeSettings.Glaze.letter.reference.font = "monospace";
+themeSettings.Glaze.letter.reference.fontSize = 14;
+themeSettings.Glaze.letter.body.margin = [20, 80, 20, 80];
 themeSettings.Glaze.email.name.font = themeBaseSettings.Glaze.displayFont;
 themeSettings.Glaze.email.name.fontSize = 36;
 themeSettings.Glaze.email.name.isUppercase = true;
-themeSettings.Glaze.email.name.color = themeBaseSettings.Glaze.colors[0];
 themeSettings.Glaze.email.title.font = themeBaseSettings.Glaze.displayFont;
-themeSettings.Glaze.email.title.fontSize = 24;
+themeSettings.Glaze.email.title.fontSize = 30;
 themeSettings.Glaze.email.title.isUppercase = true;
-themeSettings.Glaze.email.title.color = themeBaseSettings.Glaze.colors[1];
-themeSettings.Glaze.email.contactDetails.margin[0] = 40;
+themeSettings.Glaze.email.title.isGradient = true;
+themeSettings.Glaze.email.title.widthType = "fit-content";
+themeSettings.Glaze.email.title.fromColor = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.email.title.toColor = themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.email.contactDetails.margin[0] = 20;
+themeSettings.Glaze.email.contactDetails.font = "monospace";
 themeSettings.Glaze.email.contactDetails.fontSize = 12;
+themeSettings.Glaze.email.about.border[0] = 1;
+themeSettings.Glaze.email.about.borderColor = themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.email.about.padding = [20, 0, 20, 0];
+themeSettings.Glaze.email.about.margin[0] = 20;
 
 // Kendall
 themeSettings.Kendall.resume.document.padding = [0, 0, 0, 0];
