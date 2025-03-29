@@ -76,6 +76,7 @@ export const themes: Theme[] = [
   "CottonCandy",
   "Cupcake",
   "Elegant",
+  "Glaze",
   "Kendall",
   "Macaron",
   "Macchiato",
@@ -128,6 +129,10 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "left",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -147,6 +152,10 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "left",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -166,6 +175,10 @@ export const commonDocumentSettings: CommonDocumentSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "left",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -278,6 +291,10 @@ export const resumeSettings: ResumeSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "left",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -447,6 +464,10 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "center",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -467,6 +488,10 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "center",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -487,6 +512,10 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "center",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -506,6 +535,10 @@ export const letterSettings: LetterSettings = {
     isItalic: false,
     isUppercase: false,
     color: "currentColor",
+    isGradient: false,
+    fromColor: "currentColor",
+    toColor: "currentColor",
+    gradientAngle: 25,
     textAlign: "center",
     backgroundColor: "transparent",
     borderStyle: "solid",
@@ -585,6 +618,12 @@ export const themeBaseSettings: ThemeBaseSettings = {
       "#333333",
     ],
     bodyFont: "Lato",
+  },
+  Glaze: {
+    isLetterPaddingless: false,
+    colors: ["#ed3660", "#5662e8", "#e5e7eb", "#ffffff", "#1e1e1e"],
+    bodyFont: "Mulish",
+    displayFont: "League Gothic",
   },
   Kendall: {
     isLetterPaddingless: true,
@@ -742,6 +781,12 @@ export const themeSettings: ThemeSettings = {
   },
   Elegant: {
     base: themeBaseSettings.Elegant,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+    email: structuredClone(emailSettings),
+  },
+  Glaze: {
+    base: themeBaseSettings.Glaze,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
@@ -1380,6 +1425,115 @@ themeSettings.Elegant.email.contactDetails.iconColor =
   themeSettings.Elegant.base.colors[1];
 themeSettings.Elegant.email.contactDetails.color =
   themeSettings.Elegant.base.colors[6];
+
+// Glaze
+themeSettings.Glaze.resume.document.padding = [0, 0, 0, 0];
+themeSettings.Glaze.resume.header.layout = 6;
+themeSettings.Glaze.resume.name.padding = [20, 40, 0, 40];
+themeSettings.Glaze.resume.name.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.resume.name.fontSize = 36;
+themeSettings.Glaze.resume.name.isUppercase = true;
+themeSettings.Glaze.resume.title.padding = [0, 40, 20, 40];
+themeSettings.Glaze.resume.title.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.resume.title.fontSize = 64;
+themeSettings.Glaze.resume.title.lineHeight = 1;
+themeSettings.Glaze.resume.title.isUppercase = true;
+themeSettings.Glaze.resume.title.isGradient = true;
+themeSettings.Glaze.resume.title.widthType = "fit-content";
+themeSettings.Glaze.resume.title.fromColor = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.resume.title.toColor = themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.resume.contactDetails.border[3] = 1;
+themeSettings.Glaze.resume.contactDetails.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.resume.contactDetails.padding = [20, 40, 20, 40];
+themeSettings.Glaze.resume.contactDetails.font = "monospace";
+themeSettings.Glaze.resume.contactDetails.fontSize = 12;
+themeSettings.Glaze.resume.contactDetails.alignment = "end";
+themeSettings.Glaze.resume.about.border[0] = 1;
+themeSettings.Glaze.resume.about.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.resume.about.padding = [20, 40, 20, 40];
+themeSettings.Glaze.resume.aside.border[1] = 1;
+themeSettings.Glaze.resume.aside.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.resume.category.gap = 0;
+themeSettings.Glaze.resume.category.padding = [20, 40, 20, 40];
+themeSettings.Glaze.resume.category.border[0] = 1;
+themeSettings.Glaze.resume.category.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.resume.categoryName.margin[2] = 10;
+themeSettings.Glaze.resume.categoryName.font =
+  themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.resume.categoryName.fontSize = 36;
+themeSettings.Glaze.resume.categoryName.color =
+  themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.resume.categoryName.isUppercase = true;
+themeSettings.Glaze.resume.categoryName.isGradient = true;
+themeSettings.Glaze.resume.categoryName.widthType = "fit-content";
+themeSettings.Glaze.resume.categoryName.fromColor =
+  themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.resume.categoryName.toColor =
+  themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.resume.entry.gap = 10;
+themeSettings.Glaze.resume.entry.layout = 7;
+themeSettings.Glaze.resume.entryOrganization.font =
+  themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.resume.entryOrganization.order = 1;
+themeSettings.Glaze.resume.entryOrganization.fontSize = 30;
+themeSettings.Glaze.resume.entryOrganization.color =
+  themeBaseSettings.Glaze.colors[4];
+themeSettings.Glaze.resume.entryTitle.order = 2;
+themeSettings.Glaze.resume.entryTitle.fontWeight = 600;
+themeSettings.Glaze.resume.entryPeriod.order = 3;
+themeSettings.Glaze.resume.entryPeriod.beforeSeparator = ">";
+themeSettings.Glaze.resume.entryPeriod.fontWeight = 600;
+themeSettings.Glaze.resume.entryLocation.order = 4;
+themeSettings.Glaze.resume.entrySummary.margin[0] = 5;
+themeSettings.Glaze.resume.entryHighlight.margin[0] = 10;
+themeSettings.Glaze.resume.entryHighlight.fontSize = 12;
+themeSettings.Glaze.resume.entryTag.backgroundColor = "transparent";
+themeSettings.Glaze.resume.entryTag.border = [0, 0, 0, 0];
+themeSettings.Glaze.resume.entryTag.borderColor =
+  themeBaseSettings.Glaze.colors[2];
+themeSettings.Glaze.resume.entryTag.borderRadius = 0;
+themeSettings.Glaze.resume.entryTag.font = "monospace";
+themeSettings.Glaze.resume.entryTag.fontSize = 11;
+themeSettings.Glaze.resume.entryTag.margin[0] = 10;
+themeSettings.Glaze.resume.entryTag.padding = [0, 0, 0, 0];
+themeSettings.Glaze.resume.entryTag.gap = 20;
+themeSettings.Glaze.letter.header.layout = 1;
+themeSettings.Glaze.letter.name.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.letter.name.fontSize = 36;
+themeSettings.Glaze.letter.name.isUppercase = true;
+themeSettings.Glaze.letter.name.color = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.letter.title.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.letter.title.fontSize = 24;
+themeSettings.Glaze.letter.title.isUppercase = true;
+themeSettings.Glaze.letter.title.color = themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.letter.contactDetails.fontSize = 12;
+themeSettings.Glaze.letter.about.margin[0] = 20;
+themeSettings.Glaze.letter.about.textAlign = "center";
+themeSettings.Glaze.letter.about.fontSize = 12;
+themeSettings.Glaze.letter.senderDetails.fontSize = 12;
+themeSettings.Glaze.letter.senderDetails.isItalic = true;
+themeSettings.Glaze.letter.senderDetails.color =
+  themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.letter.recipientDetails.fontSize = 12;
+themeSettings.Glaze.letter.recipientDetails.isItalic = true;
+themeSettings.Glaze.letter.recipientDetails.color =
+  themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.letter.subject.fontWeight = 600;
+themeSettings.Glaze.letter.reference.color = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.email.name.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.email.name.fontSize = 36;
+themeSettings.Glaze.email.name.isUppercase = true;
+themeSettings.Glaze.email.name.color = themeBaseSettings.Glaze.colors[0];
+themeSettings.Glaze.email.title.font = themeBaseSettings.Glaze.displayFont;
+themeSettings.Glaze.email.title.fontSize = 24;
+themeSettings.Glaze.email.title.isUppercase = true;
+themeSettings.Glaze.email.title.color = themeBaseSettings.Glaze.colors[1];
+themeSettings.Glaze.email.contactDetails.margin[0] = 40;
+themeSettings.Glaze.email.contactDetails.fontSize = 12;
 
 // Kendall
 themeSettings.Kendall.resume.document.padding = [0, 0, 0, 0];
