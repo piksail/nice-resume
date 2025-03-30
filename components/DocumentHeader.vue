@@ -95,6 +95,21 @@ const settings = computed(() => {
         />
       </div>
     </template>
+    <template v-else-if="settings.header.layout === 6">
+      <div class="flex-1">
+        <div class="flex">
+          <div class="flex-1">
+            <DocumentHeaderName :name="name" />
+            <DocumentHeaderTitle :title="title" />
+          </div>
+          <DocumentHeaderContactDetails
+            v-if="!isHeaderSimple"
+            :contact-details="contactDetails"
+          />
+        </div>
+        <DocumentHeaderAbout v-if="!isHeaderSimple" :about="about" />
+      </div>
+    </template>
     <template v-else>
       <div class="flex-1">
         <DocumentHeaderName :name="name" />

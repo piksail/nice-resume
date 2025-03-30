@@ -43,6 +43,11 @@ export function getNodeStyle(
     style.paddingLeft = `${settingsItem.padding[3]}px`;
   }
   if (settingsType === "title") {
+    style.backgroundClip = "text";
+    style.color = settingsItem.isGradient ? "transparent" : settingsItem.color;
+    style.backgroundImage = settingsItem.isGradient
+      ? `linear-gradient(${settingsItem.gradientAngle / 100}turn, ${settingsItem.fromColor}, ${settingsItem.toColor})`
+      : settingsItem.color;
     style.textAlign = settingsItem.textAlign;
     style.width =
       settingsItem.widthType === "custom"

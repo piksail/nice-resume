@@ -9,11 +9,12 @@ export type Theme =
   | "CottonCandy"
   | "Cupcake"
   | "Elegant"
+  | "Glaze"
   | "Kendall"
   | "Macaron"
   | "Macchiato"
   | "NeoBrutalism"
-  | "NiceResume"
+  | "NiceResume" // TODO renommer avec un nom parmi ceux éventuels OU créer un thème qui portera le futur nom de Nice Resume (nom pas encore trouvé) et les couleurs actuelles (noir, rouge)
   | "OpenResume"
   | "Oilcloth"
   | "Paper"
@@ -31,6 +32,7 @@ export type Font =
   | "inherit"
   | "sans-serif"
   | "serif"
+  | "monospace"
   | "Archivo"
   | "Caveat"
   | "Crimson Text"
@@ -63,7 +65,7 @@ export type BorderStyle = "dashed" | "dotted" | "solid";
 
 export type TextSeparator = "|" | "-" | "·" | "*" | ">" | "," | " ";
 
-export type HeaderLayout = 0 | 1 | 2 | 3 | 4 | 5;
+export type HeaderLayout = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export type EntryLayout =
   | 0
@@ -127,6 +129,10 @@ export type TextSettings = {
 export type TitleSettings = SizeableSettings &
   TextSettings & {
     textAlign: "left" | "center" | "right";
+    isGradient?: boolean;
+    fromColor: string;
+    toColor: string;
+    gradientAngle: number;
   };
 
 export type BaseSettings = {
