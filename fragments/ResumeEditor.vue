@@ -120,15 +120,17 @@ function addTag(
 function askBeforeRemoveCategory(categoryIndex: number) {
   indexToRemove.value = categoryIndex;
   confirm.require({
-    message: `Confirm category ${categories.value[indexToRemove.value]?.name} deletion? TODO localize`,
-    header: "Confirmation TODO localize",
+    header: capitalize(t("removalConfirmation")),
+    message: t("confirmCategoryDeletion", {
+      categoryName: categories.value[indexToRemove.value]?.name,
+    }),
     rejectProps: {
-      label: "No TODO localize",
+      label: capitalize(t("toCancel")),
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, delete TODO localize",
+      label: capitalize(t("toRemove")),
       severity: "danger",
     },
     accept: () => {
@@ -141,15 +143,20 @@ function askBeforeRemoveCategory(categoryIndex: number) {
 function askBeforeRemoveCategoryEntry(category: Category, entryIndex: number) {
   indexToRemove.value = entryIndex;
   confirm.require({
-    message: `Confirm entry ${category.entries[indexToRemove.value]?.title} deletion? TODO localize`,
-    header: "Confirmation TODO localize",
+    header: capitalize(t("removalConfirmation")),
+    message: t("confirmCategoryEntryDeletion", {
+      entryTitle: getEntryHeading(
+        category.entries[indexToRemove.value],
+        indexToRemove.value,
+      ),
+    }),
     rejectProps: {
-      label: "No TODO localize",
+      label: capitalize(t("toCancel")),
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, delete TODO localize",
+      label: capitalize(t("toRemove")),
       severity: "danger",
     },
     accept: () => {
@@ -497,31 +504,41 @@ function toggleEntryVisibility(entry: Entry) {
     "lockCategory": "Prennañ rummad",
     "unlockCategory": "Dibrennañ  rummad",
     "showCategory": "Diskouez rummad",
-    "hideCategory": "Kuzhat rummad"
+    "hideCategory": "Kuzhat rummad",
+    "confirmCategoryDeletion": "TODO {categoryName}",
+    "confirmCategoryEntryDeletion": "TODO {entryTitle}"
   },
   "de": {
     "lockCategory": "Kategorie sperren",
     "unlockCategory": "Kategorie entsperren",
     "showCategory": "Kategorie zeigen",
-    "hideCategory": "Kategorie verstecken"
+    "hideCategory": "Kategorie verstecken",
+    "confirmCategoryDeletion": "TODO {categoryName}",
+    "confirmCategoryEntryDeletion": "TODO {entryTitle}"
   },
   "en": {
     "lockCategory": "Lock category",
     "unlockCategory": "Unlock category",
     "showCategory": "Show category",
-    "hideCategory": "Hide category"
+    "hideCategory": "Hide category",
+    "confirmCategoryDeletion": "Remove {categoryName} category?",
+    "confirmCategoryEntryDeletion": "Remove {entryTitle} entry?"
   },
   "es": {
     "lockCategory": "Bloquear la categoría",
     "unlockCategory": "Desbloquear la categoría",
     "showCategory": "Mostrar la categoría",
-    "hideCategory": "Ocultar la categoría"
+    "hideCategory": "Ocultar la categoría",
+    "confirmCategoryDeletion": "TODO {categoryName}",
+    "confirmCategoryEntryDeletion": "TODO {entryTitle}"
   },
   "fr": {
     "lockCategory": "Verrouiller la catégorie",
     "unlockCategory": "Déverrouiller la catégorie",
     "showCategory": "Afficher la catégorie",
-    "hideCategory": "Cacher la catégorie"
+    "hideCategory": "Cacher la catégorie",
+    "confirmCategoryDeletion": "Supprimer la catégorie {categoryName} ?",
+    "confirmCategoryEntryDeletion": "Supprimer l'entrée {entryTitle} ?"
   }
 }
 </i18n>

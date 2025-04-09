@@ -59,15 +59,15 @@ watch(theme, () => {
 
 function askBeforeResetStyle() {
   confirm.require({
-    message: `Confirm style reset TODO localize`,
-    header: "Confirmation TODO localize",
+    header: capitalize(t("removalConfirmation")),
+    message: t("confirmStyleReset"),
     rejectProps: {
-      label: "No TODO localize",
+      label: capitalize(t("toCancel")),
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, reset TODO localize",
+      label: capitalize(t("toReset")),
       severity: "danger",
     },
     accept: () => {
@@ -735,27 +735,32 @@ function askBeforeResetStyle() {
   "br": {
     "onLabel": "TODO",
     "offLabel": "TODO",
-    "howToGapMasonry": "TODO"
+    "howToGapMasonry": "TODO",
+    "confirmStyleReset": "TODO"
   },
   "de": {
     "onLabel": "angepasst",
     "offLabel": "nicht angepasst",
-    "howToGapMasonry": "TODO"
+    "howToGapMasonry": "TODO",
+    "confirmStyleReset": "TODO"
   },
   "en": {
     "onLabel": "customized",
     "offLabel": "not customized",
-    "howToGapMasonry": "Vertical gap is handled with category top and bottom margins."
+    "howToGapMasonry": "Vertical gap is handled with category top and bottom margins.",
+    "confirmStyleReset": "Reset style to defaults?"
   },
   "es": {
     "onLabel": "TODO",
     "offLabel": "TODO",
-    "howToGapMasonry": "TODO"
+    "howToGapMasonry": "TODO",
+    "confirmStyleReset": "TODO"
   },
   "fr": {
     "onLabel": "modifié",
     "offLabel": "non modifié",
-    "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie."
+    "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie.",
+    "confirmStyleReset": "Réinitialiser le style ?"
   }
 }
 </i18n>
