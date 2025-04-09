@@ -91,6 +91,7 @@ function updateColor(hexCode: string | undefined) {
         class="w-36"
         :min="min"
         :max="max"
+        :step="step"
         v-model="model as number"
       />
       <output :class="`${disabled ? 'opacity-40' : 'opacity-100'}`">

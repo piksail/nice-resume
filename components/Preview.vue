@@ -1,28 +1,26 @@
 <script setup lang="ts">
-// import { ref } from "vue";
 import { storeToRefs } from "pinia";
-// import { useResizeObserver } from "@vueuse/core";
 import { useEditorStore } from "@/stores/editor";
-// import { getA4Height } from "@/utils/file";
+import useDocumentSettings from "~/composables/use-document-settings";
 import Document from "./Document.vue";
 import PreviewZoom from "./PreviewZoom.vue";
+import type { PaperDocumentSettings } from "~/types";
 
 const { documentType, zoomLevel } = storeToRefs(useEditorStore());
-
-// const preview = ref<HTMLDivElement>();
-// const previewHeight = ref(0);
-
-// useResizeObserver(preview, (nodes) => {
-//   const node = nodes[0];
-//   const { width } = node.contentRect;
-//   previewHeight.value = getA4Height(width);
-// });
+const settings = useDocumentSettings();
 </script>
 
 <template>
   <aside
     ref="preview"
     class="print:!block mx-auto relative xl:w-[210mm] xl:!h-screen overflow-y-auto group"
+    :style="{
+      backgroundColor:
+        documentType === 'email'
+          ? ''
+          : (settings as unknown as PaperDocumentSettings).document
+              .backgroundColor,
+    }"
   >
     <Document
       id="preview"
