@@ -94,17 +94,39 @@ function askBeforeResetStyle() {
     <section class="flex flex-col gap-6">
       <Fieldset :legend="capitalize($t('document'))" toggleable>
         <div class="formBlock">
-          <FormBlockRow :header="$t('margin')">
+          <FormBlockRow :header="$t('border')">
+            <Field
+              v-for="i in 4"
+              :key="i"
+              id="documentBorder"
+              :label="$t(getSideIndexLabel(i))"
+              type="number"
+              v-model="documentTypeSettings.document.border[i - 1]"
+            />
+            <Field
+              id="documentBorderColor"
+              :label="$t('color')"
+              type="color"
+              v-model="documentTypeSettings.document.borderColor"
+            />
+          </FormBlockRow>
+          <FormBlockRow :header="$t('padding')">
             <div class="grid grid-cols-4 gap-5">
               <Field
                 v-for="i in 4"
                 :key="i"
-                :id="`documentMargin${i}`"
+                :id="`documentPadding${i}`"
                 type="number"
                 :label="$t(getSideIndexLabel(i))"
                 v-model="documentTypeSettings.document.padding[i - 1]"
               />
             </div>
+            <Field
+              id="documentBackgroundColor"
+              :label="$t('color')"
+              type="color"
+              v-model="documentTypeSettings.document.backgroundColor"
+            />
           </FormBlockRow>
           <Field
             id="documentBodyFont"
