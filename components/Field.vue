@@ -236,19 +236,40 @@ function updateColor(hexCode: string | undefined) {
       {{ capitalize(label) }}
     </span>
     <div v-if="type === 'color'">
+      <!-- <InputGroup size="small">
+        <InputGroupAddon size="small">
+          <ColorPicker
+            :input-id="id"
+            :model-value="`${(model as string).replace('#', '')}`"
+            size="small"
+            @update:model-value="updateColor"
+          />
+        </InputGroupAddon>
+        <InputText
+          class="!p-2"
+          :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
+          :disabled="disabled"
+          :model-value="model as string"
+          size="small"
+          @focus.stop="focusedInput = target ? id : ''"
+          @blur.stop="focusedInput = ''"
+          @update:model-value="updateColor"
+        />
+      </InputGroup> -->
       <ColorPicker
         :input-id="id"
         :model-value="`${(model as string).replace('#', '')}`"
         size="small"
         @update:model-value="updateColor"
+        :pt:preview:class="
+          transparent
+            ? ' !rounded-r-none'
+            : '!rounded-l !rounded-r-none !border !border-r-0 !border-surface-300 !border-solid !p-2'
+        "
       />
       <InputText
-        class="!p-2 ml-2"
-        :class="
-          transparent
-            ? '!bg-surface-950 !text-white !border-none'
-            : '!border-primary-200 !border-t-0 !border-r-0 !border-l-0 !rounded-none'
-        "
+        class="!p-1 !rounded-l-none"
+        :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
         :disabled="disabled"
         :model-value="model as string"
         size="small"
