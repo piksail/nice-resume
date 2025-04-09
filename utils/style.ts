@@ -81,10 +81,7 @@ export function getNodeClass(id: string, focusedInput: string | undefined) {
 /**
  * Use the correct column properties whether layout is masonry (native columns) or not (grid columns).
  */
-export function getCategoryLayoutClass(
-  category?: Category,
-  isMasonry: boolean,
-) {
+export function getCategoryLayoutClass(category: Category, isMasonry: boolean) {
   if (category?.layout === "half") {
     return isMasonry ? "[column-span:none]" : "col-span-1";
   }
