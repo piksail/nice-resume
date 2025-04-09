@@ -1,20 +1,12 @@
 import type { StyleValue } from "vue";
-import type {
-  BlockSettings,
-  Category,
-  ListSettings,
-  TextSettings,
-  TitleSettings,
-} from "~/types";
+import type { Category } from "~/types";
 
 /**
  * Generate the customizable style properties of an HTML node given its purpose.
  */
 export function getNodeStyle(
-  settingsItem: TextSettings &
-    BlockSettings &
-    TitleSettings &
-    ListSettings & { alignment: "start" | "center" | "end"; gap: number },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  settingsItem: any, // TODO make it TS-compliant
   settingsType: "text" | "title" | "block" | "flex",
 ) {
   const style: StyleValue = {};
