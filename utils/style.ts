@@ -1,18 +1,20 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import type { StyleValue } from "vue";
-import type { Category } from "~/types";
-// import type { ResumeSettings } from "@/types";
-
-// type Keys = keyof ResumeSettings;
-// type Values = ResumeSettings[Keys];
+import type {
+  BlockSettings,
+  Category,
+  ListSettings,
+  TextSettings,
+  TitleSettings,
+} from "~/types";
 
 /**
  * Generate the customizable style properties of an HTML node given its purpose.
  */
 export function getNodeStyle(
-  // settingsItem: Values,
-  settingsItem: object, // TODO make it type-compliant
+  settingsItem: TextSettings &
+    BlockSettings &
+    TitleSettings &
+    ListSettings & { alignment: "start" | "center" | "end"; gap: number },
   settingsType: "text" | "title" | "block" | "flex",
 ) {
   const style: StyleValue = {};
