@@ -78,10 +78,10 @@ const thirdInputFontWeight = ref(400);
         <ul
           class="text-lg lg:text-2xl font-light mt-12 leading-tight lg:leading-normal"
         >
-          <li>No cookies.</li>
-          <li>No signup.</li>
-          <li>No payment.</li>
-          <li>Privacy-friendly.</li>
+          <li>{{ t("noCookies") }}</li>
+          <li>{{ t("noSignUp") }}</li>
+          <li>{{ t("noPayment") }}</li>
+          <li>{{ t("privacyFriendly") }}</li>
         </ul>
         <div class="flex items-center gap-7 mt-24">
           <NuxtLink :to="localePath('/editor')">
@@ -502,6 +502,10 @@ const thirdInputFontWeight = ref(400);
     "introJobApplication": "TODO",
     "introIndefiniteArticle": "TODO",
     "introPowerWord": "TODO",
+    "noCookies": "TODO",
+    "noSignUp": "TODO",
+    "noPayment": "TODO",
+    "privacyFriendly": "TODO",
     "startEditing": "TODO",
     "learnMore": "TODO",
     "editMore": "TODO",
@@ -517,6 +521,10 @@ const thirdInputFontWeight = ref(400);
     "introJobApplication": "Kandidatur",
     "introIndefiniteArticle": "zu einem",
     "introPowerWord": "Kunstwerk",
+    "noCookies": "TODO",
+    "noSignUp": "TODO",
+    "noPayment": "TODO",
+    "privacyFriendly": "TODO",
     "startEditing": "Anfangen",
     "learnMore": "TODO",
     "editMore": "TODO",
@@ -532,6 +540,10 @@ const thirdInputFontWeight = ref(400);
     "introJobApplication": "job application",
     "introIndefiniteArticle": "a",
     "introPowerWord": "brand",
+    "noCookies": "No cookies.",
+    "noSignUp": "No signup.",
+    "noPayment": "No payment.",
+    "privacyFriendly": "Privacy-friendly.",
     "startEditing": "Start editing",
     "learnMore": "Learn more",
     "editMore": "Edit more",
@@ -547,6 +559,10 @@ const thirdInputFontWeight = ref(400);
     "introJobApplication": "TODO",
     "introIndefiniteArticle": "TODO",
     "introPowerWord": "TODO",
+    "noCookies": "TODO",
+    "noSignUp": "TODO",
+    "noPayment": "TODO",
+    "privacyFriendly": "TODO",
     "startEditing": "TODO",
     "learnMore": "TODO",
     "editMore": "TODO",
@@ -562,6 +578,10 @@ const thirdInputFontWeight = ref(400);
     "introJobApplication": "candidature",
     "introIndefiniteArticle": "une",
     "introPowerWord": "œuvre",
+    "noCookies": "Sans cookie.",
+    "noSignUp": "Sans inscription.",
+    "noPayment": "Gratuit.",
+    "privacyFriendly": "Confidentiel.",
     "startEditing": "Commencer à éditer",
     "learnMore": "En savoir plus",
     "editMore": "Continuer à éditer",
