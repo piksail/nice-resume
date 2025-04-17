@@ -93,6 +93,12 @@ pnpm run test:playwright
 
 [Test recording generation with Playwright](https://playwright.dev/docs/codegen)
 
+### Add a font
+
+1. Add the name in the font union type in `/types`
+2. Add the name in the fonts array in `/globals`
+3. Add the import rule in `fonts.css`
+
 ### Add a theme
 
 1. Add the name in the theme union type in `/types`
