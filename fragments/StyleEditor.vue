@@ -464,7 +464,7 @@ function askBeforeResetStyle() {
           <FormBlockRow :header="$t('icon')">
             <Field
               id="contactDetailsIsIconFirst"
-              label="Icon first TODO localize"
+              :label="t('iconFirst')"
               type="checkbox"
               v-model="documentTypeSettings.contactDetails.isIconFirst"
             />
@@ -735,30 +735,35 @@ function askBeforeResetStyle() {
   "br": {
     "onLabel": "TODO",
     "offLabel": "TODO",
+    "iconFirst": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "de": {
     "onLabel": "angepasst",
     "offLabel": "nicht angepasst",
+    "iconFirst": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "en": {
     "onLabel": "customized",
     "offLabel": "not customized",
+    "iconFirst": "Icon first",
     "howToGapMasonry": "Vertical gap is handled with category top and bottom margins.",
     "confirmStyleReset": "Reset style to defaults?"
   },
   "es": {
     "onLabel": "TODO",
     "offLabel": "TODO",
+    "iconFirst": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "fr": {
     "onLabel": "modifié",
     "offLabel": "non modifié",
+    "iconFirst": "Icône d'abord",
     "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie.",
     "confirmStyleReset": "Réinitialiser le style ?"
   }
