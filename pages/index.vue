@@ -354,7 +354,7 @@ const thirdInputFontWeight = ref(400);
             <Badge size="xlarge" value="4" />
             <span>
               {{ t("stepPreview") }}
-              <i class="font-serif text-primary">{{ t("download") }}</i>
+              <i class="font-serif text-primary">{{ t("preview") }}</i>
             </span>
           </h2>
           <div
