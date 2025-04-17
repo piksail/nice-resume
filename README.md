@@ -113,6 +113,7 @@ Themes offer an aside section on the left and a main section on the right that c
 
 Some themes come from other tools:
 
+- _Astro_ is adapted from the _Portfolio_ theme from [Astro](https://astro.build/themes/details/portfolio/)
 - _Elegant_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=elegant) by Mudassir Ali
 - _Kendall_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=kendall) by Adam Kendall
 - _Macchiato_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=macchiato) by Alessandro Biondi
