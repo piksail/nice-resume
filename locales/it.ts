@@ -139,6 +139,7 @@ export default {
   toCustomize: "TODO",
   toCustomizeTheme: "TODO",
   toDownload: "TODO",
+  toExport: "TODO",
   toHide: "TODO",
   toMoveDown: "TODO",
   toMoveUp: "TODO",

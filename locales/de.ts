@@ -139,6 +139,7 @@ export default {
   toCustomize: "gestalten",
   toCustomizeTheme: "Design gestalten",
   toDownload: "herunterladen",
+  toExport: "TODO",
   toHide: "verstecken",
   toMoveDown: "nach unten bewegen",
   toMoveUp: "nach oben bewegen",

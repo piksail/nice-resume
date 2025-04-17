@@ -126,6 +126,7 @@ function exportResumeToJsonResume() {
 
 <template>
   <SplitButton
+    :label="capitalize($t('toExport'))"
     icon="pi pi-download"
     size="small"
     :aria-label="capitalize($t('toDownload'))"

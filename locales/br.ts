@@ -139,6 +139,7 @@ export default {
   toCustomize: "personelaat",
   toCustomizeTheme: "personelaat tem",
   toDownload: "pellgargañ",
+  toExport: "TODO",
   toHide: "kuzhat",
   toMoveDown: "diskenn",
   toMoveUp: "pignat",

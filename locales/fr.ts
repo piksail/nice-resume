@@ -139,6 +139,7 @@ export default {
   toCustomize: "personnaliser",
   toCustomizeTheme: "personnaliser le thème",
   toDownload: "télécharger",
+  toExport: "exporter",
   toHide: "cacher",
   toMoveDown: "descendre",
   toMoveUp: "monter",
