@@ -9,6 +9,11 @@ import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 import { capitalize } from "@/utils/string";
 
+// eslint-disable-next-line no-undef
+const { t } = useI18n({
+  useScope: "local",
+});
+
 const {
   isHeaderSimple,
   paragraphs,
@@ -45,7 +50,7 @@ function addSenderDetail() {
         <Field
           type="checkbox"
           transparent
-          label="Use sender layout TODO localize"
+          :label="t('useSenderFormat')"
           v-model="isHeaderSimple"
         />
       </FormBlockRow>
@@ -184,3 +189,23 @@ function addSenderDetail() {
     </div>
   </EditorCategory>
 </template>
+
+<i18n lang="json">
+{
+  "br": {
+    "useSenderFormat": "TODO"
+  },
+  "de": {
+    "useSenderFormat": "TODO"
+  },
+  "en": {
+    "useSenderFormat": "Use sender format"
+  },
+  "es": {
+    "useSenderFormat": "TODO"
+  },
+  "fr": {
+    "useSenderFormat": "Appliquer le format expéditeur"
+  }
+}
+</i18n>
