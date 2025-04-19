@@ -39,7 +39,7 @@ const isExportError = ref(false);
 const exportItems = computed(() => {
   const items = [
     {
-      label: "Nice Resume data (save it for later) TODO translate",
+      label: t("saveAsJson"),
       icon: "pi pi-file-export",
       command: () => exportToJson(),
     },
@@ -47,7 +47,7 @@ const exportItems = computed(() => {
 
   if (documentType.value === "resume") {
     items.push({
-      label: "JSON Resume compatible data TODO",
+      label: t("exportToJsonResume"),
       icon: "pi pi-file",
       command: () => exportResumeToJsonResume(),
     });
@@ -126,6 +126,7 @@ function exportResumeToJsonResume() {
 
 <template>
   <SplitButton
+    :label="capitalize($t('toExport'))"
     icon="pi pi-download"
     size="small"
     :aria-label="capitalize($t('toDownload'))"
@@ -449,21 +450,33 @@ function exportResumeToJsonResume() {
 <i18n lang="json">
 {
   "br": {
+    "saveAsJson": "TODO",
+    "exportToJsonResume": "TODO",
     "referToSchema": "TODO"
   },
   "de": {
+    "saveAsJson": "TODO",
+    "exportToJsonResume": "TODO",
     "referToSchema": "Format sehen"
   },
   "en": {
+    "saveAsJson": "Save data in a file",
+    "exportToJsonResume": "Export data for JSON Resume",
     "referToSchema": "Refer to the schema"
   },
   "es": {
+    "saveAsJson": "TODO",
+    "exportToJsonResume": "TODO",
     "referToSchema": "TODO"
   },
   "fr": {
+    "saveAsJson": "Sauvegarder dans un fichier",
+    "exportToJsonResume": "Exporter au format JSON Resume",
     "referToSchema": "Consulter le format"
   },
   "it": {
+    "saveAsJson": "TODO",
+    "exportToJsonResume": "TODO",
     "referToSchema": "TODO"
   }
 }

@@ -1,18 +1,12 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import type { StyleValue } from "vue";
 import type { Category } from "~/types";
-// import type { ResumeSettings } from "@/types";
-
-// type Keys = keyof ResumeSettings;
-// type Values = ResumeSettings[Keys];
 
 /**
  * Generate the customizable style properties of an HTML node given its purpose.
  */
 export function getNodeStyle(
-  // settingsItem: Values,
-  settingsItem: object, // TODO make it type-compliant
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  settingsItem: any, // TODO make it TS-compliant
   settingsType: "text" | "title" | "block" | "flex",
 ) {
   const style: StyleValue = {};
@@ -79,10 +73,7 @@ export function getNodeClass(id: string, focusedInput: string | undefined) {
 /**
  * Use the correct column properties whether layout is masonry (native columns) or not (grid columns).
  */
-export function getCategoryLayoutClass(
-  category?: Category,
-  isMasonry: boolean,
-) {
+export function getCategoryLayoutClass(category: Category, isMasonry: boolean) {
   if (category?.layout === "half") {
     return isMasonry ? "[column-span:none]" : "col-span-1";
   }

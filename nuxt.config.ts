@@ -66,5 +66,8 @@ export default defineNuxtConfig({
     redirectToCanonicalSiteUrl: true,
   },
   ogImage: { enabled: false },
+  routeRules: {
+    "/editor": { ssr: false },
+  },
   compatibilityDate: "2024-07-23",
 });

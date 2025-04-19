@@ -59,15 +59,15 @@ watch(theme, () => {
 
 function askBeforeResetStyle() {
   confirm.require({
-    message: `Confirm style reset TODO localize`,
-    header: "Confirmation TODO localize",
+    header: capitalize(t("removalConfirmation")),
+    message: t("confirmStyleReset"),
     rejectProps: {
-      label: "No TODO localize",
+      label: capitalize(t("toCancel")),
       severity: "secondary",
       outlined: true,
     },
     acceptProps: {
-      label: "Yes, reset TODO localize",
+      label: capitalize(t("toReset")),
       severity: "danger",
     },
     accept: () => {
@@ -94,17 +94,39 @@ function askBeforeResetStyle() {
     <section class="flex flex-col gap-6">
       <Fieldset :legend="capitalize($t('document'))" toggleable>
         <div class="formBlock">
-          <FormBlockRow :header="$t('margin')">
+          <FormBlockRow :header="$t('border')">
+            <Field
+              v-for="i in 4"
+              :key="i"
+              id="documentBorder"
+              :label="$t(getSideIndexLabel(i))"
+              type="number"
+              v-model="documentTypeSettings.document.border[i - 1]"
+            />
+            <Field
+              id="documentBorderColor"
+              :label="$t('color')"
+              type="color"
+              v-model="documentTypeSettings.document.borderColor"
+            />
+          </FormBlockRow>
+          <FormBlockRow :header="$t('padding')">
             <div class="grid grid-cols-4 gap-5">
               <Field
                 v-for="i in 4"
                 :key="i"
-                :id="`documentMargin${i}`"
+                :id="`documentPadding${i}`"
                 type="number"
                 :label="$t(getSideIndexLabel(i))"
                 v-model="documentTypeSettings.document.padding[i - 1]"
               />
             </div>
+            <Field
+              id="documentBackgroundColor"
+              :label="$t('color')"
+              type="color"
+              v-model="documentTypeSettings.document.backgroundColor"
+            />
           </FormBlockRow>
           <Field
             id="documentBodyFont"
@@ -442,7 +464,7 @@ function askBeforeResetStyle() {
           <FormBlockRow :header="$t('icon')">
             <Field
               id="contactDetailsIsIconFirst"
-              label="Icon first TODO localize"
+              :label="t('iconFirst')"
               type="checkbox"
               v-model="documentTypeSettings.contactDetails.isIconFirst"
             />
@@ -713,27 +735,37 @@ function askBeforeResetStyle() {
   "br": {
     "onLabel": "TODO",
     "offLabel": "TODO",
-    "howToGapMasonry": "TODO"
+    "iconFirst": "TODO",
+    "howToGapMasonry": "TODO",
+    "confirmStyleReset": "TODO"
   },
   "de": {
     "onLabel": "angepasst",
     "offLabel": "nicht angepasst",
-    "howToGapMasonry": "TODO"
+    "iconFirst": "TODO",
+    "howToGapMasonry": "TODO",
+    "confirmStyleReset": "TODO"
   },
   "en": {
     "onLabel": "customized",
     "offLabel": "not customized",
-    "howToGapMasonry": "Vertical gap is handled with category top and bottom margins."
+    "iconFirst": "Icon first",
+    "howToGapMasonry": "Vertical gap is handled with category top and bottom margins.",
+    "confirmStyleReset": "Reset style to defaults?"
   },
   "es": {
     "onLabel": "TODO",
     "offLabel": "TODO",
-    "howToGapMasonry": "TODO"
+    "iconFirst": "TODO",
+    "howToGapMasonry": "TODO",
+    "confirmStyleReset": "TODO"
   },
   "fr": {
     "onLabel": "modifié",
     "offLabel": "non modifié",
-    "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie."
+    "iconFirst": "Icône d'abord",
+    "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie.",
+    "confirmStyleReset": "Réinitialiser le style ?"
   }
 }
 </i18n>

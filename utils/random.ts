@@ -28,7 +28,7 @@ export function getRandomExperience(
     type,
     title: capitalize(t(getEntryTitleLabel(type))),
     organization: capitalize(t(getExperienceOrganizationLabel(type))),
-    location: capitalize(t("Location")),
+    location: capitalize(t("location")),
     period:
       type === "certificate"
         ? "Delivered in X (valid 2 years)"

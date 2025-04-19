@@ -5,6 +5,7 @@ export type RegionCode = "br" | "de" | "es" | "fr" | "it" | "uk";
 export type Theme =
   | "default"
   | "Aster"
+  | "Astro"
   | "Care"
   | "CottonCandy"
   | "Cupcake"
@@ -53,6 +54,7 @@ export type Font =
   | "PT Serif"
   | "Roboto"
   | "Roboto Condensed"
+  | "Rubik"
   | "Sarabun" // Also used in this webapp
   | "Times New Roman"
   | "Yanone Kaffeesatz";

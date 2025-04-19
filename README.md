@@ -93,6 +93,12 @@ pnpm run test:playwright
 
 [Test recording generation with Playwright](https://playwright.dev/docs/codegen)
 
+### Add a font
+
+1. Add the name in the font union type in `/types`
+2. Add the name in the fonts array in `/globals`
+3. Add the import rule in `fonts.css`
+
 ### Add a theme
 
 1. Add the name in the theme union type in `/types`
@@ -107,6 +113,7 @@ Themes offer an aside section on the left and a main section on the right that c
 
 Some themes come from other tools:
 
+- _Astro_ is adapted from the _Portfolio_ theme from [Astro](https://astro.build/themes/details/portfolio/)
 - _Elegant_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=elegant) by Mudassir Ali
 - _Kendall_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=kendall) by Adam Kendall
 - _Macchiato_ is the theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=macchiato) by Alessandro Biondi

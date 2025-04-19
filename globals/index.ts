@@ -64,6 +64,7 @@ export const fonts: Font[] = [
   "PT Serif",
   "Roboto",
   "Roboto Condensed",
+  "Rubik",
   "Sarabun",
   "Times New Roman",
   "Yanone Kaffeesatz",
@@ -72,6 +73,7 @@ export const fonts: Font[] = [
 export const themes: Theme[] = [
   "default",
   "Aster",
+  "Astro",
   "Care",
   "CottonCandy",
   "Cupcake",
@@ -588,6 +590,21 @@ export const themeBaseSettings: ThemeBaseSettings = {
     colors: ["#713c97", "#f6881f", "#ffffff", "#000000"],
     bodyFont: "Fira Sans",
   },
+  Astro: {
+    isLetterPaddingless: false,
+    colors: [
+      "#7611a6",
+      "#ca7879",
+      "#1c0056",
+      "#090b11",
+      "#6474a2",
+      "#e3e6ee",
+      "#f3f4f7",
+      "#ffffff",
+      "#3d4663",
+    ],
+    bodyFont: "Rubik",
+  },
   Care: {
     isLetterPaddingless: true,
     colors: ["#7cbaa4", "#ffe7c9", "#ffe6e9", "#ffbec9", "#ffeca6", "#ffffff"],
@@ -757,6 +774,12 @@ export const themeSettings: ThemeSettings = {
   },
   Aster: {
     base: themeBaseSettings.Aster,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+    email: structuredClone(emailSettings),
+  },
+  Astro: {
+    base: themeBaseSettings.Astro,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
@@ -1024,6 +1047,63 @@ themeSettings.Aster.email.name.fontWeight = 600;
 themeSettings.Aster.email.title.color = themeBaseSettings.Aster.colors[1];
 themeSettings.Aster.email.contactDetails.iconColor =
   themeBaseSettings.Aster.colors[0];
+
+// Astro
+themeSettings.Astro.resume.header.layout = 2;
+themeSettings.Astro.resume.name.fontSize = 30;
+themeSettings.Astro.resume.name.fontWeight = 600;
+themeSettings.Astro.resume.name.color = themeBaseSettings.Astro.colors[3];
+themeSettings.Astro.resume.title.fontSize = 20;
+themeSettings.Astro.resume.title.fontWeight = 500;
+themeSettings.Astro.resume.title.color = themeBaseSettings.Astro.colors[0];
+themeSettings.Astro.resume.contactDetails.fontSize = 12;
+themeSettings.Astro.resume.contactDetails.alignment = "end";
+themeSettings.Astro.resume.about.margin[0] = 7;
+themeSettings.Astro.resume.categoryName.fontSize = 23;
+themeSettings.Astro.resume.categoryName.fontWeight = 600;
+themeSettings.Astro.resume.categoryName.margin[0] = 13;
+themeSettings.Astro.resume.categoryName.margin[2] = 13;
+themeSettings.Astro.resume.entry.layout = 13;
+themeSettings.Astro.resume.entryTitle.color = themeBaseSettings.Astro.colors[0];
+themeSettings.Astro.resume.entryTitle.isUppercase = true;
+themeSettings.Astro.resume.entryTitle.fontWeight = 600;
+themeSettings.Astro.resume.entryPeriod.fontWeight = 600;
+themeSettings.Astro.resume.entryLocation.fontSize = 12;
+themeSettings.Astro.resume.entryLocation.color =
+  themeBaseSettings.Astro.colors[4];
+themeSettings.Astro.resume.entryOrganization.fontSize = 12;
+themeSettings.Astro.resume.entryOrganization.color =
+  themeBaseSettings.Astro.colors[4];
+themeSettings.Astro.resume.entrySummary.margin[2] = 5;
+themeSettings.Astro.resume.entryHighlight.listMarker = "disc";
+themeSettings.Astro.resume.entryHighlight.fontSize = 13;
+themeSettings.Astro.resume.entryHighlight.color =
+  themeBaseSettings.Astro.colors[4];
+themeSettings.Astro.resume.entryHighlight.margin[2] = 3;
+themeSettings.Astro.resume.entryTag.fontSize = 11;
+themeSettings.Astro.resume.entryTag.backgroundColor =
+  themeBaseSettings.Astro.colors[6];
+themeSettings.Astro.resume.entryTag.borderRadius = 24;
+themeSettings.Astro.resume.entryTag.border = [1, 1, 1, 1];
+themeSettings.Astro.resume.entryTag.borderColor =
+  themeBaseSettings.Astro.colors[5];
+themeSettings.Astro.resume.entryTag.padding = [4, 8, 4, 8];
+themeSettings.Astro.letter.subject.color = themeBaseSettings.Astro.colors[3];
+themeSettings.Astro.letter.subject.fontSize = 18;
+themeSettings.Astro.letter.subject.fontWeight = 500;
+themeSettings.Astro.letter.reference.color = themeBaseSettings.Astro.colors[0];
+themeSettings.Astro.letter.reference.isUppercase = true;
+themeSettings.Astro.letter.reference.fontWeight = 600;
+themeSettings.Astro.email.document.layout = 2;
+themeSettings.Astro.email.name.fontSize = 30;
+themeSettings.Astro.email.name.fontWeight = 600;
+themeSettings.Astro.email.name.color = themeBaseSettings.Astro.colors[3];
+themeSettings.Astro.email.title.fontSize = 20;
+themeSettings.Astro.email.title.fontWeight = 500;
+themeSettings.Astro.email.title.color = themeBaseSettings.Astro.colors[0];
+themeSettings.Astro.email.contactDetails.fontSize = 12;
+themeSettings.Astro.email.contactDetails.alignment = "end";
+themeSettings.Astro.email.about.margin[0] = 7;
 
 // Care
 themeSettings.Care.resume.document.padding = [0, 0, 0, 0];

@@ -145,6 +145,28 @@ const tools: Tool[] = [
     themes: 14,
     coverLetter: false,
   },
+  {
+    name: "Europass",
+    free: true,
+    registerless: true,
+    preview: "formFirst",
+    easyEdit: true,
+    dataExport: false,
+    customization: "sm",
+    themes: 4,
+    coverLetter: false,
+  },
+  {
+    name: "FlowCV",
+    free: "freemium",
+    registerless: true,
+    preview: "direct",
+    easyEdit: true,
+    dataExport: false,
+    customization: "md",
+    themes: 62,
+    coverLetter: true,
+  },
 ];
 </script>
 
