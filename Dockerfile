@@ -1,6 +1,4 @@
 ARG NODE_VERSION=22.11
-ARG NUXT_HOST=0.0.0.0
-ARG NUXT_PORT=3000
 
 FROM node:${NODE_VERSION}-alpine AS base
 WORKDIR /app
@@ -17,14 +15,23 @@ COPY . .
 RUN pnpm run build && pnpm store prune
 
 FROM base AS runner
+
+ARG NUXT_HOST=0.0.0.0
+ARG NUXT_PORT=3000
+ARG SENTRY_AUTH_TOKEN=""
+ENV NUXT_HOST=$NUXT_HOST
+ENV NUXT_PORT=$NUXT_PORT
+ENV SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
+ENV NODE_ENV=PRODUCTION
+
 WORKDIR /app
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nitro
 
 COPY --from=builder /app/.output ./.output
 EXPOSE ${NUXT_PORT}
-ENV NUXT_HOST=${NUXT_HOST} \
-    NUXT_PORT=${NUXT_PORT} \
-    NODE_ENV=PRODUCTION
+
 USER nitro
-CMD ["node", ".output/server/index.mjs"]
+
+CMD ["pnpm", "run", "production:sentry"]
