@@ -13,7 +13,7 @@ const settings = useDocumentSettings();
 <template>
   <aside
     ref="preview"
-    class="print:!block print:!w-full mx-auto relative xl:w-[210mm] xl:!h-screen overflow-y-auto group"
+    class="print:!block print:!w-full print:!overflow-y-visible mx-auto relative xl:w-[210mm] xl:!h-screen overflow-y-auto group"
     :style="{
       backgroundColor:
         documentType === 'email'
