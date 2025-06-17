@@ -91,10 +91,10 @@ function exportToJson() {
   const rawEmail = localStorage.getItem("email");
   const toExport = {
     isNiceResumeExport: true,
-    profile: JSON.parse(rawProfile ?? ""),
-    resume: JSON.parse(rawResume ?? ""),
-    letter: JSON.parse(rawLetter ?? ""),
-    email: JSON.parse(rawEmail ?? ""),
+    profile: JSON.parse(rawProfile ?? "{}"),
+    resume: JSON.parse(rawResume ?? "{}"),
+    letter: JSON.parse(rawLetter ?? "{}"),
+    email: JSON.parse(rawEmail ?? "{}"),
   };
   download(toExport, "nice-resume");
 }
