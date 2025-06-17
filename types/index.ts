@@ -349,20 +349,26 @@ export interface Profile {
   contactDetails: ContactDetail[];
 }
 
-export interface Resume extends Profile {
+export interface Resume {
   about: string;
   categories: Category[];
 }
 
-export interface Letter extends Profile {
+export interface Letter {
   recipientDetails: string[];
   subject: string;
   reference: string;
   paragraphs: string[];
 }
 
-export interface Export extends Resume, Letter {
+export interface Email extends Profile {} // TODO have own type
+
+export interface Export {
   isNiceResumeExport: boolean;
+  profile: Profile;
+  resume: Resume;
+  letter: Letter;
+  email: Email;
 }
 
 export interface JsonResume {
