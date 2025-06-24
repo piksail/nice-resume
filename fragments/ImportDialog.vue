@@ -64,21 +64,32 @@ function importSaveFile(event: FileUploadSelectEvent) {
         return;
       }
 
-      Object.entries(toImport).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (letter[key]) {
-          // @ts-expect-error Build object on the fly
-          letter[key].value = value;
-        }
+      Object.entries(toImport.profile).forEach(([key, value]) => {
         // @ts-expect-error Build object on the fly
         if (profile[key]) {
           // @ts-expect-error Build object on the fly
           profile[key].value = value;
         }
+      });
+      Object.entries(toImport.resume).forEach(([key, value]) => {
         // @ts-expect-error Build object on the fly
         if (resume[key]) {
           // @ts-expect-error Build object on the fly
           resume[key].value = value;
+        }
+      });
+      Object.entries(toImport.letter).forEach(([key, value]) => {
+        // @ts-expect-error Build object on the fly
+        if (letter[key]) {
+          // @ts-expect-error Build object on the fly
+          letter[key].value = value;
+        }
+      });
+      Object.entries(toImport.email).forEach(([key, value]) => {
+        // @ts-expect-error Build object on the fly
+        if (letter[key]) {
+          // @ts-expect-error Build object on the fly
+          letter[key].value = value;
         }
       });
 

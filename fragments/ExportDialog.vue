@@ -91,10 +91,10 @@ function exportToJson() {
   const rawEmail = localStorage.getItem("email");
   const toExport = {
     isNiceResumeExport: true,
-    profile: JSON.parse(rawProfile ?? ""),
-    resume: JSON.parse(rawResume ?? ""),
-    letter: JSON.parse(rawLetter ?? ""),
-    email: JSON.parse(rawEmail ?? ""),
+    profile: JSON.parse(rawProfile ?? "{}"),
+    resume: JSON.parse(rawResume ?? "{}"),
+    letter: JSON.parse(rawLetter ?? "{}"),
+    email: JSON.parse(rawEmail ?? "{}"),
   };
   download(toExport, "nice-resume");
 }
@@ -103,14 +103,16 @@ function exportToJson() {
  * Create and export a JSON-Resume-compliant resume as a JSON.
  */
 function exportResumeToJsonResume() {
-  const resume = {
+  const profile = {
     name: name.value,
     title: title.value,
-    about: about.value,
     contactDetails: contactDetails.value,
+  };
+  const resume = {
+    about: about.value,
     categories: categories.value,
   };
-  jsonResume.value = formatResumeAsJsonResume(resume);
+  jsonResume.value = formatResumeAsJsonResume(profile, resume);
   jsonResumeExportSteps.value.push("profile");
   Object.entries(jsonResume.value).forEach(([key, value]) => {
     if (value.length) {

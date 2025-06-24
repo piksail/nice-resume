@@ -1,4 +1,4 @@
-import type { Asset, Experience, JsonResume, Resume } from "@/types";
+import type { Asset, Experience, JsonResume, Profile, Resume } from "@/types";
 
 /**
  * Convert a time period to two dates.
@@ -20,30 +20,32 @@ export function formatJsonResumeAsResume(
   jsonResume: JsonResume,
   t: (message: string) => string,
 ) {
-  const toImport: Resume = {
+  const profileToImport: Profile = {
     theme: "default",
     name: "",
     title: "",
-    about: "",
     contactDetails: [],
+  };
+  const resumeToImport: Resume = {
+    about: "",
     categories: [],
   };
   Object.entries(jsonResume).forEach(([key, value]) => {
     if (key === "basics") {
       const basics: JsonResume["basics"] = value;
-      toImport.name = basics.name;
-      toImport.title = basics.label;
-      toImport.about = basics.summary ?? "";
-      toImport.contactDetails = [];
+      profileToImport.name = basics.name;
+      profileToImport.title = basics.label;
+      resumeToImport.about = basics.summary ?? "";
+      profileToImport.contactDetails = [];
       if (basics.email) {
-        toImport.contactDetails.push({
+        profileToImport.contactDetails.push({
           type: "personal",
           icon: null,
           value: basics.email,
         });
       }
       if (basics.phone) {
-        toImport.contactDetails.push({
+        profileToImport.contactDetails.push({
           type: "personal",
           icon: null,
           value: basics.phone,
@@ -56,21 +58,21 @@ export function formatJsonResumeAsResume(
         basics.location.countryCode ||
         basics.location.region
       ) {
-        toImport.contactDetails.push({
+        profileToImport.contactDetails.push({
           type: "personal",
           icon: null,
           value: `${basics.location.address ? `${basics.location.address}, ` : ""}${basics.location.postalCode ? `${basics.location.postalCode}, ` : ""}${basics.location.city ? `${basics.location.city}, ` : ""}${basics.location.countryCode ? `${basics.location.countryCode}, ` : ""}${basics.location.region ?? ""}`,
         });
       }
       if (basics.url) {
-        toImport.contactDetails.push({
+        profileToImport.contactDetails.push({
           type: "personal",
           icon: null,
           value: basics.url,
         });
       }
       basics.profiles?.forEach((profile) => {
-        toImport.contactDetails.push({
+        profileToImport.contactDetails.push({
           type: "social",
           icon: null,
           value: profile.url,
@@ -80,7 +82,7 @@ export function formatJsonResumeAsResume(
 
     if (key === "work" && value?.length) {
       const work: JsonResume["work"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "work",
         name: capitalize(t("work")),
@@ -105,7 +107,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "volunteer" && value?.length) {
       const volunteer: JsonResume["volunteer"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "voluntary",
         name: capitalize(t("voluntary")),
@@ -130,7 +132,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "education" && value?.length) {
       const education: JsonResume["education"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "education",
         name: capitalize(t("education")),
@@ -155,7 +157,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "awards" && value?.length) {
       const awards: JsonResume["awards"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "award",
         name: capitalize(t("awards")),
@@ -180,7 +182,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "certificates" && value?.length) {
       const certificates: JsonResume["certificates"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "certificate",
         name: capitalize(t("certificates")),
@@ -205,7 +207,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "publications" && value?.length) {
       const publications: JsonResume["publications"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "publication",
         name: capitalize(t("publications")),
@@ -230,7 +232,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "skills" && value?.length) {
       const skills: JsonResume["skills"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "asset",
         type: "skill",
         name: capitalize(t("skills")),
@@ -251,7 +253,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "languages" && value?.length) {
       const languages: JsonResume["languages"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "asset",
         type: "language",
         name: capitalize(t("languages")),
@@ -272,7 +274,7 @@ export function formatJsonResumeAsResume(
     }
     if (key === "interests" && value?.length) {
       const interests: JsonResume["interests"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "asset",
         type: "interest",
         name: capitalize(t("interests")),
@@ -294,7 +296,7 @@ export function formatJsonResumeAsResume(
     // Ignore references
     if (key === "projects" && value?.length) {
       const projects: JsonResume["projects"] = value;
-      toImport.categories.push({
+      resumeToImport.categories.push({
         nature: "experience",
         type: "project",
         name: capitalize(t("projects")),
@@ -318,7 +320,7 @@ export function formatJsonResumeAsResume(
       });
     }
   });
-  return toImport as Resume;
+  return { profile: profileToImport, resume: resumeToImport };
 }
 
 /**
@@ -326,17 +328,21 @@ export function formatJsonResumeAsResume(
  * See: https://jsonresume.org/schema
  */
 export function formatResumeAsJsonResume(
-  resume: Omit<Resume, "settings" | "theme">,
+  profile: Omit<Profile, "isThemeCustomized" | "theme" | "customColors">,
+  resume: Omit<
+    Resume,
+    "isHeaderSimple" | "simpleHeaderCategoryName" | "settings"
+  >,
 ) {
   const toExport: JsonResume = {
     basics: {
-      name: resume.name,
-      label: resume.title,
+      name: profile.name,
+      label: profile.title,
       image: "", // TODO
-      email: resume.contactDetails.find(
+      email: profile.contactDetails.find(
         (detail) => detail.type === "personal" && detail.value.includes("@"),
       )?.value,
-      phone: resume.contactDetails.find(
+      phone: profile.contactDetails.find(
         (detail) =>
           detail.type === "personal" &&
           (detail.value.startsWith("0") || detail.value.startsWith("+")),
@@ -350,12 +356,12 @@ export function formatResumeAsJsonResume(
         countryCode: "",
         region: "",
       },
-      profiles: resume.contactDetails
+      profiles: profile.contactDetails
         .filter((detail) => detail.type === "social")
         .map((detail) => {
           return {
             network: detail.icon as string,
-            username: resume.name,
+            username: profile.name,
             url: detail.value,
           };
         }),
