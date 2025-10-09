@@ -86,13 +86,13 @@ function updateColor(hexCode: string | undefined) {
     </span>
     <div class="flex gap-3 items-center">
       <Slider
+        v-model="model as number"
         :input-id="id"
         :disabled="disabled"
         class="w-36"
         :min="min"
         :max="max"
         :step="step"
-        v-model="model as number"
       />
       <output :class="`${disabled ? 'opacity-40' : 'opacity-100'}`">
         {{ model }}%
@@ -117,10 +117,10 @@ function updateColor(hexCode: string | undefined) {
       v-model="model as boolean"
       :input-id="id"
       :disabled="disabled"
-      :onIcon="onIcon"
-      :offIcon="offIcon"
-      :onLabel="onLabel"
-      :offLabel="offLabel"
+      :on-icon="onIcon"
+      :off-icon="offIcon"
+      :on-label="onLabel"
+      :off-label="offLabel"
       class="!bg-transparent"
       :class="
         transparent
@@ -190,11 +190,11 @@ function updateColor(hexCode: string | undefined) {
       {{ capitalize(label) }}
     </span>
     <SelectButton
-      :ariaLabel="label ?? ariaLabel"
       v-model="model"
+      :aria-label="label ?? ariaLabel"
       :options="options"
-      :optionLabel="optionLabel"
-      :optionValue="optionValue"
+      :option-label="optionLabel"
+      :option-value="optionValue"
       :class="
         transparent
           ? '[&>*]:!bg-surface-950 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-surface-950'
@@ -208,11 +208,11 @@ function updateColor(hexCode: string | undefined) {
       {{ capitalize(label) }}
     </span>
     <Select
-      :ariaLabel="label ?? ariaLabel"
       v-model="model"
+      :aria-label="label ?? ariaLabel"
       :options="options"
-      :optionLabel="optionLabel"
-      :optionValue="optionValue"
+      :option-label="optionLabel"
+      :option-value="optionValue"
       :input-id="id"
       class="!border-none"
       :class="
@@ -260,12 +260,12 @@ function updateColor(hexCode: string | undefined) {
         :input-id="id"
         :model-value="`${(model as string).replace('#', '')}`"
         size="small"
-        @update:model-value="updateColor"
         :pt:preview:class="
           transparent
             ? ' !rounded-r-none'
             : '!rounded-l !rounded-r-none !border !border-r-0 !border-surface-300 !border-solid !p-2'
         "
+        @update:model-value="updateColor"
       />
       <InputText
         class="!p-1 !rounded-l-none"
@@ -281,10 +281,10 @@ function updateColor(hexCode: string | undefined) {
     <Textarea
       v-else-if="type === 'textarea'"
       :id="id"
+      v-model="model as string"
       class="!border-t-0 !border-l-0 !border-r-0 !p-2"
       :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
       :disabled="disabled"
-      v-model="model as string"
       size="small"
       @focus.stop="focusedInput = target ? id : ''"
       @blur.stop="focusedInput = ''"
@@ -294,11 +294,11 @@ function updateColor(hexCode: string | undefined) {
       v-model="model as number"
       :input-id="id"
       :disabled="disabled"
-      showButtons
-      buttonLayout="horizontal"
+      show-buttons
+      button-layout="horizontal"
       :step="step"
       size="small"
-      inputClass="!w-12"
+      input-class="!w-12"
     >
       <template #incrementicon>
         <span class="pi pi-plus" />
@@ -310,6 +310,7 @@ function updateColor(hexCode: string | undefined) {
     <InputText
       v-else
       :id="id"
+      v-model="model as string"
       class="!p-2"
       :class="
         transparent
@@ -318,7 +319,6 @@ function updateColor(hexCode: string | undefined) {
       "
       :type="type || 'text'"
       :disabled="disabled"
-      v-model="model as string"
       size="small"
       @focus.stop="focusedInput = target ? id : ''"
       @blur.stop="focusedInput = ''"

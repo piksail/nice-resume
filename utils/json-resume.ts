@@ -7,8 +7,8 @@ export function getPeriodBounds(period: string) {
   // TODO handle several formats (YYYY-MM currently breaks)
   const bounds = period.split("-");
   return {
-    startDate: bounds[0]?.trim(),
-    endDate: bounds[1]?.trim(),
+    startDate: bounds[0]?.trim() ?? "",
+    endDate: bounds[1]?.trim() ?? "",
   };
 }
 

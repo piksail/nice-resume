@@ -12,10 +12,8 @@ const description = ref(
   "Pick a design, build your resume, write your cover letter, adapt the design to your need with Nice Resume.",
 );
 
-// eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -38,16 +36,15 @@ const thirdInputFontWeight = ref(400);
 </script>
 
 <template>
-  <Head>
-    <Title>{{ title }}</Title>
-    <Meta name="description" :content="description" />
-    <Meta name="og:title" :content="title" />
-    <Meta name="og:description" :content="description" />
-    <!-- TODO og:url -->
-    <!-- TODO og:image -->
-  </Head>
-
   <NuxtLayout name="landing">
+    <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="description" />
+      <Meta name="og:title" :content="title" />
+      <Meta name="og:description" :content="description" />
+      <!-- TODO og:url -->
+      <!-- TODO og:image -->
+    </Head>
     <section class="p-20 flex justify-center">
       <div class="mx-auto">
         <h1 class="text-justify drop-shadow-lg">
@@ -193,12 +190,12 @@ const thirdInputFontWeight = ref(400);
           </h2>
           <Field
             id="theme"
+            v-model="theme"
             :label="$t('theme')"
             transparent
             type="select"
-            v-model="theme"
-            optionLabel="label"
-            optionValue="value"
+            option-label="label"
+            option-value="value"
             :options="
               themes.map((theme) => ({
                 label: theme === 'default' ? capitalize($t('default')) : theme,
@@ -234,22 +231,22 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="firstInput"
+              v-model="firstInput"
               :label="$t('name')"
               transparent
-              v-model="firstInput"
               class="[&_input]!bg-white"
             />
             <Field
               id="secondInput"
+              v-model="secondInput"
               :label="$t('title')"
               transparent
-              v-model="secondInput"
             />
             <Field
               id="thirdInput"
+              v-model="thirdInput"
               :label="$t('address')"
               transparent
-              v-model="thirdInput"
             />
           </div>
         </li>
@@ -269,23 +266,23 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="firstInputColor"
+              v-model="firstInputColor"
               :label="$t('color')"
               transparent
-              v-model="firstInputColor"
               type="color"
             />
             <Field
               id="firstInputIsItalic"
+              v-model="firstInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="firstInputIsItalic"
               type="checkbox"
             />
             <Field
               id="firstInputFontWeight"
+              v-model="firstInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="firstInputFontWeight"
               type="select"
               :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
             />
@@ -296,23 +293,23 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="secondInputColor"
+              v-model="secondInputColor"
               :label="$t('color')"
               transparent
-              v-model="secondInputColor"
               type="color"
             />
             <Field
               id="secondInputIsItalic"
+              v-model="secondInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="secondInputIsItalic"
               type="checkbox"
             />
             <Field
               id="secondInputFontWeight"
+              v-model="secondInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="secondInputFontWeight"
               type="select"
               :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
             />
@@ -323,23 +320,23 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="thirdInputColor"
+              v-model="thirdInputColor"
               :label="$t('color')"
               transparent
-              v-model="thirdInputColor"
               type="color"
             />
             <Field
               id="thirdInputIsItalic"
+              v-model="thirdInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="thirdInputIsItalic"
               type="checkbox"
             />
             <Field
               id="thirdInputFontWeight"
+              v-model="thirdInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="thirdInputFontWeight"
               type="select"
               :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
             />

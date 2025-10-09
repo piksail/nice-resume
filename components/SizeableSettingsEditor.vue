@@ -14,10 +14,10 @@ const { propertyName, settings } = defineProps<{
     <FormBlockRow :header="$t('size')">
       <Field
         :id="`${propertyName}WidthType`"
-        type="selectbutton"
         v-model="settings.widthType"
-        optionLabel="label"
-        optionValue="value"
+        type="selectbutton"
+        option-label="label"
+        option-value="value"
         :options="
           ['auto', 'fit-content', 'custom'].map((type) => {
             if (type === 'fit-content') {
@@ -41,9 +41,9 @@ const { propertyName, settings } = defineProps<{
       />
       <Field
         :id="`${propertyName}Width`"
+        v-model="settings.width"
         type="range"
         :label="$t('width')"
-        v-model="settings.width"
         :disabled="settings.widthType !== 'custom'"
       />
     </FormBlockRow>

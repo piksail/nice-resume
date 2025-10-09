@@ -19,7 +19,7 @@ const { settings: storeSettings } = storeToRefs(useEmailStore());
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : themeSettings[theme.value].email;
+    : themeSettings[theme.value!].email;
 });
 </script>
 

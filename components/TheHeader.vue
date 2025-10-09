@@ -15,10 +15,8 @@ import { capitalize } from "@/utils/string";
 
 console.info("Version: ", packageJson.version);
 
-// eslint-disable-next-line no-undef
 const { availableLocales, locale, setLocale } = useI18n();
 
-// eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
 const { documentType } = storeToRefs(useEditorStore());
@@ -62,10 +60,10 @@ function uncustomizeTheme() {
       <template #center>
         <div class="flex gap-5 items-end h-[60%]">
           <Field
-            type="select"
             v-model="documentType"
-            optionLabel="label"
-            optionValue="value"
+            type="select"
+            option-label="label"
+            option-value="value"
             :options="
               documentTypes.map((document) => ({
                 label: capitalize($t(document)),
@@ -85,10 +83,10 @@ function uncustomizeTheme() {
 
           <Field
             id="theme"
-            type="select"
             v-model="theme"
-            optionLabel="label"
-            optionValue="value"
+            type="select"
+            option-label="label"
+            option-value="value"
             :options="
               themes.map((theme) => ({
                 label: theme === 'default' ? capitalize($t('default')) : theme,
@@ -129,8 +127,8 @@ function uncustomizeTheme() {
             type="select"
             :aria-label="$t('toSwitchLanguage')"
             :model-value="locale"
-            optionLabel="label"
-            optionValue="value"
+            option-label="label"
+            option-value="value"
             :options="
               availableLocales.map((locale) => ({
                 label: capitalize(localeLabels[locale as LocaleCode]),

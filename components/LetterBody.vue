@@ -26,7 +26,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : themeSettings[theme.value].letter;
+    : themeSettings[theme.value!].letter;
 });
 </script>
 

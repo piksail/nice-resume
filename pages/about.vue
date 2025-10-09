@@ -5,21 +5,19 @@ import ToolComparator from "~/fragments/ToolComparator.vue";
 
 const title = ref("Nice resume");
 
-// eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
 </script>
 
 <template>
-  <Head>
-    <Title>{{ title }}</Title>
-    <Meta name="description" :content="title" />
-  </Head>
   <NuxtLayout name="landing">
+    <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="title" />
+    </Head>
     <section class="p-20">
       <section class="p-20 max-w-screen-xl mx-auto">
         <h2 class="drop-shadow-lg text-5xl font-bold mb-32">

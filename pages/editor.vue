@@ -8,14 +8,14 @@ const title = ref("Nice resume");
 </script>
 
 <template>
-  <Head>
-    <Title>{{ title }}</Title>
-    <Meta name="description" :content="title" />
-  </Head>
   <NuxtLayout name="editor">
+    <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="title" />
+    </Head>
     <ConfirmDialog />
     <Editor />
-    <template v-slot:preview>
+    <template #preview>
       <Preview class="hidden xl:block" />
     </template>
   </NuxtLayout>

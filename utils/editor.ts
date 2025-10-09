@@ -1,8 +1,8 @@
 import { nextTick } from "vue";
 import type { Asset, Category, Experience, ListMarker } from "@/types";
-import { useLetterStore } from "@/stores/letter";
-import { useProfileStore } from "@/stores/profile";
-import { useResumeStore } from "@/stores/resume";
+import type { useLetterStore } from "@/stores/letter";
+import type { useProfileStore } from "@/stores/profile";
+import type { useResumeStore } from "@/stores/resume";
 import { getRandomAsset, getRandomExperience } from "./random";
 
 /**
@@ -242,5 +242,5 @@ export function getListMarker(value: ListMarker) {
 export function getSideIndexLabel(index: number) {
   // Vue.js for loop is one-indexed
   if (index < 1 || index > 4) return "";
-  return ["top", "right", "bottom", "left"][index - 1];
+  return ["top", "right", "bottom", "left"][index - 1] ?? "";
 }

@@ -105,7 +105,7 @@ const { categories } = storeToRefs(useResumeStore());
             class="flex flex-col gap-4 lg:gap-8 p-4 lg:p-8 max-w-[860px] mx-auto"
           >
             <EditorCategory id="Preview" class="block xl:hidden">
-              <template v-slot:header>
+              <template #header>
                 <div class="flex items-center gap-8">
                   <div>{{ capitalize($t("preview")) }}</div>
                   <PreviewZoom />

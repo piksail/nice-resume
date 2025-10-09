@@ -19,7 +19,6 @@ import { formatResumeAsJsonResume } from "@/utils/json-resume";
 import { capitalize } from "@/utils/string";
 import { jsonResumeSchemaUrl } from "~/globals";
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -146,7 +145,7 @@ function exportResumeToJsonResume() {
         {{ t("referToSchema") }}
       </a>
     </Message>
-    <div class="card flex justify-center" v-if="jsonResume">
+    <div v-if="jsonResume" class="card flex justify-center">
       <Stepper :value="jsonResumeExportSteps[0]" linear>
         <StepItem
           v-for="(step, index) in jsonResumeExportSteps"
@@ -159,28 +158,28 @@ function exportResumeToJsonResume() {
             :value="jsonResumeExportSteps[index]"
           >
             <div v-if="step === 'profile'" class="formBlock">
-              <Field :label="$t('email')" v-model="jsonResume.basics.email" />
-              <Field :label="$t('phone')" v-model="jsonResume.basics.phone" />
-              <Field label="URL" v-model="jsonResume.basics.url" />
+              <Field v-model="jsonResume.basics.email" :label="$t('email')" />
+              <Field v-model="jsonResume.basics.phone" :label="$t('phone')" />
+              <Field v-model="jsonResume.basics.url" label="URL" />
               <Field
-                :label="$t('address')"
                 v-model="jsonResume.basics.location.address"
+                :label="$t('address')"
               />
               <Field
-                :label="$t('postalCode')"
                 v-model="jsonResume.basics.location.postalCode"
+                :label="$t('postalCode')"
               />
               <Field
-                :label="$t('city')"
                 v-model="jsonResume.basics.location.city"
+                :label="$t('city')"
               />
               <Field
-                :label="$t('countryCode')"
                 v-model="jsonResume.basics.location.countryCode"
+                :label="$t('countryCode')"
               />
               <Field
-                :label="$t('region')"
                 v-model="jsonResume.basics.location.region"
+                :label="$t('region')"
               />
               <label class="flex flex-col gap-1" for="profiles">
                 <span class="label">{{ capitalize($t("profiles")) }}</span>
@@ -196,21 +195,25 @@ function exportResumeToJsonResume() {
                     class="inputListItem"
                   >
                     <Field
-                      v-model="jsonResume.basics.profiles[profileIndex].network"
-                    />
-                    <Field
                       v-model="
-                        jsonResume.basics.profiles[profileIndex].username
+                        jsonResume.basics.profiles[profileIndex]!.network
                       "
                     />
                     <Field
-                      v-model="jsonResume.basics.profiles[profileIndex].url"
+                      v-model="
+                        jsonResume.basics.profiles[profileIndex]!.username
+                      "
+                    />
+                    <Field
+                      v-model="jsonResume.basics.profiles[profileIndex]!.url"
                     />
                     <ListActions
                       :index="profileIndex"
                       :list-length="jsonResume.basics.profiles.length"
-                      @moveUp="moveUp(jsonResume.basics.profiles, profileIndex)"
-                      @moveDown="
+                      @move-up="
+                        moveUp(jsonResume.basics.profiles, profileIndex)
+                      "
+                      @move-down="
                         moveDown(jsonResume.basics.profiles, profileIndex)
                       "
                       @remove="remove(jsonResume.basics.profiles, profileIndex)"
@@ -225,7 +228,7 @@ function exportResumeToJsonResume() {
                 :key="item.position"
                 :header="`${item.position} | ${item.name}`"
               >
-                <Field label="URL" v-model="jsonResume.work[index].url" />
+                <Field v-model="jsonResume.work[index]!.url" label="URL" />
               </FormBlockRow>
             </div>
             <div v-if="step === 'volunteer'" class="formBlock">
@@ -234,7 +237,7 @@ function exportResumeToJsonResume() {
                 :key="item.position"
                 :header="item.position"
               >
-                <Field label="URL" v-model="jsonResume.volunteer[index].url" />
+                <Field v-model="jsonResume.volunteer[index]!.url" label="URL" />
               </FormBlockRow>
             </div>
             <div v-if="step === 'education'" class="formBlock">
@@ -244,25 +247,25 @@ function exportResumeToJsonResume() {
                 :header="item.area"
               >
                 <Field
+                  v-model="jsonResume.education[index]!.startDate"
                   :label="$t('startDate')"
-                  v-model="jsonResume.education[index].startDate"
                 />
                 <Field
+                  v-model="jsonResume.education[index]!.endDate"
                   :label="$t('endDate')"
-                  v-model="jsonResume.education[index].endDate"
                 />
-                <Field label="URL" v-model="jsonResume.education[index].url" />
+                <Field v-model="jsonResume.education[index]!.url" label="URL" />
                 <Field
+                  v-model="jsonResume.education[index]!.area"
                   :label="$t('area')"
-                  v-model="jsonResume.education[index].area"
                 />
                 <Field
+                  v-model="jsonResume.education[index]!.studyType"
                   :label="$t('studyType')"
-                  v-model="jsonResume.education[index].studyType"
                 />
                 <Field
+                  v-model="jsonResume.education[index]!.score"
                   :label="$t('score')"
-                  v-model="jsonResume.education[index].score"
                 />
               </FormBlockRow>
             </div>
@@ -273,9 +276,9 @@ function exportResumeToJsonResume() {
                 :header="award.title"
               >
                 <Field
+                  v-model="jsonResume.awards[index]!.date"
                   :label="$t('date')"
-                  v-model="jsonResume.awards[index].date"
-                  helpText="Please type the date in the YYYY-MM-DD format"
+                  help-text="Please type the date in the YYYY-MM-DD format"
                 />
               </FormBlockRow>
             </div>
@@ -286,13 +289,13 @@ function exportResumeToJsonResume() {
                 :header="certificate.name"
               >
                 <Field
+                  v-model="jsonResume.certificates[index]!.date"
                   :label="$t('date')"
-                  v-model="jsonResume.certificates[index].date"
-                  helpText="Please type the date in the YYYY-MM-DD format"
+                  help-text="Please type the date in the YYYY-MM-DD format"
                 />
                 <Field
+                  v-model="jsonResume.certificates[index]!.url"
                   label="URL"
-                  v-model="jsonResume.certificates[index].url"
                 />
               </FormBlockRow>
             </div>
@@ -303,13 +306,13 @@ function exportResumeToJsonResume() {
                 :header="publication.name"
               >
                 <Field
+                  v-model="jsonResume.publications[index]!.releaseDate"
                   :label="$t('releaseDate')"
-                  v-model="jsonResume.publications[index].releaseDate"
-                  helpText="Please type the date in the YYYY-MM-DD format"
+                  help-text="Please type the date in the YYYY-MM-DD format"
                 />
                 <Field
+                  v-model="jsonResume.publications[index]!.url"
                   label="URL"
-                  v-model="jsonResume.publications[index].url"
                 />
               </FormBlockRow>
             </div>
@@ -320,8 +323,8 @@ function exportResumeToJsonResume() {
                 :header="skill.name"
               >
                 <Field
+                  v-model="jsonResume.skills[index]!.level"
                   :label="$t('level')"
-                  v-model="jsonResume.skills[index].level"
                 />
               </FormBlockRow>
             </div>
@@ -332,8 +335,8 @@ function exportResumeToJsonResume() {
                 :header="language.language"
               >
                 <Field
+                  v-model="jsonResume.languages[index]!.fluency"
                   :label="$t('fluency')"
-                  v-model="jsonResume.languages[index].fluency"
                 />
               </FormBlockRow>
             </div>
@@ -344,31 +347,31 @@ function exportResumeToJsonResume() {
                 :header="interest.name"
               >
                 <Field
+                  v-model="jsonResume.interests[index]!.keywords"
                   :label="$t('keywords')"
-                  v-model="jsonResume.interests[index].keywords"
                 />
               </FormBlockRow>
             </div>
             <div v-if="step === 'references'" class="formBlock">
               <FormBlockRow
                 v-for="(reference, index) in jsonResume.references"
+                :id="`referenceList${index}`"
                 :key="reference.name"
                 :header="reference.name"
-                :id="`referenceList${index}`"
               >
                 <Field
+                  v-model="jsonResume.references[index]!.name"
                   :label="$t('name')"
-                  v-model="jsonResume.references[index].name"
                 />
                 <Field
+                  v-model="jsonResume.references[index]!.reference"
                   :label="$t('reference')"
-                  v-model="jsonResume.references[index].reference"
                 />
                 <ListActions
                   :index="index"
                   :list-length="jsonResume.references.length"
-                  @moveUp="moveUp(jsonResume.references, index)"
-                  @moveDown="moveDown(jsonResume.references, index)"
+                  @move-up="moveUp(jsonResume.references, index)"
+                  @move-down="moveDown(jsonResume.references, index)"
                   @remove="remove(jsonResume.references, index)"
                 />
               </FormBlockRow>
@@ -387,19 +390,19 @@ function exportResumeToJsonResume() {
                 :header="project.name"
               >
                 <Field
+                  v-model="jsonResume.projects[index]!.startDate"
                   :label="$t('startDate')"
-                  v-model="jsonResume.projects[index].startDate"
-                  helpText="Please type the date in the YYYY-MM-DD format"
+                  help-text="Please type the date in the YYYY-MM-DD format"
                 />
                 <Field
+                  v-model="jsonResume.projects[index]!.endDate"
                   :label="$t('endDate')"
-                  v-model="jsonResume.projects[index].endDate"
-                  helpText="Please type the date in the YYYY-MM-DD format"
+                  help-text="Please type the date in the YYYY-MM-DD format"
                 />
-                <Field label="URL" v-model="jsonResume.projects[index].url" />
+                <Field v-model="jsonResume.projects[index]!.url" label="URL" />
                 <Field
+                  v-model="jsonResume.projects[index]!.highlights"
                   :label="$t('highlights')"
-                  v-model="jsonResume.projects[index].highlights"
                 />
               </FormBlockRow>
             </div>
@@ -407,8 +410,8 @@ function exportResumeToJsonResume() {
               <Button
                 :label="$t('toSubmit')"
                 icon="pi pi-arrow-right"
-                iconPos="right"
-                @click="activateCallback(jsonResumeExportSteps[index + 1])"
+                icon-pos="right"
+                @click="activateCallback(jsonResumeExportSteps[index + 1]!)"
               />
             </div>
             <div
@@ -419,12 +422,12 @@ function exportResumeToJsonResume() {
                 :label="$t('previous')"
                 severity="secondary"
                 icon="pi pi-arrow-left"
-                @click="activateCallback(jsonResumeExportSteps[index - 1])"
+                @click="activateCallback(jsonResumeExportSteps[index - 1]!)"
               />
               <Button
                 :label="$t('toSubmit')"
                 icon="pi pi-check"
-                iconPos="right"
+                icon-pos="right"
                 @click="download(jsonResume, 'nice-resume-to-json-resume')"
               />
             </div>
@@ -433,13 +436,13 @@ function exportResumeToJsonResume() {
                 :label="$t('previous')"
                 severity="secondary"
                 icon="pi pi-arrow-left"
-                @click="activateCallback(jsonResumeExportSteps[index - 1])"
+                @click="activateCallback(jsonResumeExportSteps[index - 1]!)"
               />
               <Button
                 :label="$t('next')"
                 icon="pi pi-arrow-right"
-                iconPos="right"
-                @click="activateCallback(jsonResumeExportSteps[index + 1])"
+                icon-pos="right"
+                @click="activateCallback(jsonResumeExportSteps[index + 1]!)"
               />
             </div>
           </StepPanel>

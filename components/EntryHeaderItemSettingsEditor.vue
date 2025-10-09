@@ -23,16 +23,16 @@ const { propertyName, settings } = defineProps<{
       <FormBlockRow>
         <Field
           :id="`${propertyName}Order`"
+          v-model="settings.order"
           type="select"
           :label="$t('order')"
-          v-model="settings.order"
           :options="[1, 2, 3, 4]"
         />
         <Field
           :id="`${propertyName}TextSeparator`"
+          v-model="settings.beforeSeparator"
           type="select"
           :label="$t('separator')"
-          v-model="settings.beforeSeparator"
           :options="['', ...textSeparators]"
         />
       </FormBlockRow>

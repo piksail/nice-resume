@@ -98,7 +98,7 @@ export type ListMarkerPosition = "inside" | "outside";
 export type ListSettings = {
   listOrientation: "row" | "column";
   listMarker: ListMarker;
-  listMarkerColor: string;
+  listMarkerColor?: string;
   listMarkerPosition: ListMarkerPosition;
 };
 
@@ -108,11 +108,11 @@ export type SizeableSettings = {
 };
 
 export type BlockSettings = {
-  backgroundColor: string;
+  backgroundColor?: string;
   padding: SideSetting;
   border: SideSetting;
   borderStyle: BorderStyle;
-  borderColor: string;
+  borderColor?: string;
   borderRadius: number;
   margin: SideSetting;
 };
@@ -125,15 +125,15 @@ export type TextSettings = {
   fontWeight: FontWeight;
   isItalic?: boolean;
   isUppercase?: boolean;
-  color: string;
+  color?: string;
 };
 
 export type TitleSettings = SizeableSettings &
   TextSettings & {
     textAlign: "left" | "center" | "right";
     isGradient?: boolean;
-    fromColor: string;
-    toColor: string;
+    fromColor?: string;
+    toColor?: string;
     gradientAngle: number;
   };
 
@@ -150,11 +150,11 @@ export type ThemeBaseSettings = {
 
 export type DocumentSettings = {
   bodyFont: Font;
-  color: string;
-  backgroundColor: string;
+  color?: string;
+  backgroundColor?: string;
   border: SideSetting;
-  borderStyle: BorderStyle;
-  borderColor: string;
+  borderStyle?: BorderStyle;
+  borderColor?: string;
   padding: SideSetting;
 };
 
@@ -173,7 +173,7 @@ export type CommonDocumentSettings = {
     ListSettings & {
       alignment: "start" | "center" | "end"; // Handles justify-content on column flex-direction and align-items on  row flex-direction
       iconSize: number;
-      iconColor: string;
+      iconColor?: string;
       iconGap: number;
       isIconFirst: boolean;
       gap: number; // Flex gap between details
@@ -361,6 +361,7 @@ export interface Letter {
   paragraphs: string[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface Email extends Profile {} // TODO have own type
 
 export interface Export {

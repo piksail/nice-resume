@@ -24,7 +24,6 @@ import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -97,8 +96,6 @@ function addHighlight(
 ) {
   entry.highlights.push("");
 
-  ``;
-
   focusNextInput(
     `#categoryList${categoryIndex}EntryList${entryIndex}HighlightList_${categoryLayout} input`,
   );
@@ -146,7 +143,7 @@ function askBeforeRemoveCategoryEntry(category: Category, entryIndex: number) {
     header: capitalize(t("removalConfirmation")),
     message: t("confirmCategoryEntryDeletion", {
       entryTitle: getEntryHeading(
-        category.entries[indexToRemove.value],
+        category.entries[indexToRemove.value]!,
         indexToRemove.value,
       ),
     }),
@@ -201,12 +198,12 @@ function toggleEntryVisibility(entry: Entry) {
 <template>
   <EditorCategory
     v-for="(category, categoryIndex) in categories"
-    :key="categoryIndex"
     :id="category.name"
+    :key="categoryIndex"
     :hidden="!category.isVisible"
     :locked="category.isLocked"
   >
-    <template v-slot:header>
+    <template #header>
       <template v-if="category.isLocked">
         <span>
           <i class="pi" :class="getCategoryIconClass(category.type)" />
@@ -217,17 +214,17 @@ function toggleEntryVisibility(entry: Entry) {
         <div class="flex items-baseline gap-8">
           <Field
             :id="`categoryList${categoryIndex}Name_${category.layout}`"
+            v-model="category.name"
             target
             :label="$t('categoryName')"
-            v-model="category.name"
           />
           <Field
+            :id="`categoryList${categoryIndex}Type`"
             type="select"
             :label="$t('type')"
-            :id="`categoryList${categoryIndex}Type`"
             :model-value="category.type"
-            optionLabel="label"
-            optionValue="value"
+            option-label="label"
+            option-value="value"
             :options="
               types.map((type) => ({
                 label: capitalize($t(type)),
@@ -237,28 +234,28 @@ function toggleEntryVisibility(entry: Entry) {
             @update:model-value="changeCategoryType(category, $event)"
           />
           <Field
+            :id="`categoryList${categoryIndex}Layout`"
+            v-model="category.layout"
             type="select"
             :label="$t('layout')"
-            :id="`categoryList${categoryIndex}Layout`"
-            optionLabel="label"
-            optionValue="value"
+            option-label="label"
+            option-value="value"
             :options="
               layouts.map((layout) => ({
                 label: capitalize($t(layout)),
                 value: layout,
               }))
             "
-            v-model="category.layout"
           />
         </div>
         <ListActions
           :index="categoryIndex"
           :is-header="true"
           :list-length="categories.length"
-          @moveUp="
+          @move-up="
             moveCategory(moveUp, categories, categoryIndex, category.name)
           "
-          @moveDown="
+          @move-down="
             moveCategory(moveDown, categories, categoryIndex, category.name)
           "
           @remove="askBeforeRemoveCategory(categoryIndex)"
@@ -268,7 +265,7 @@ function toggleEntryVisibility(entry: Entry) {
         <span>{{ category.name }}</span>
       </template>
     </template>
-    <template v-slot:icons>
+    <template #icons>
       <Button
         :icon="category.isLocked ? 'pi pi-lock-open' : 'pi pi-lock'"
         :aria-label="
@@ -326,48 +323,48 @@ function toggleEntryVisibility(entry: Entry) {
               class="mb-2"
               :index="entryIndex"
               :list-length="category.entries.length"
-              @moveUp="moveUp(category.entries, entryIndex)"
-              @moveDown="moveDown(category.entries, entryIndex)"
+              @move-up="moveUp(category.entries, entryIndex)"
+              @move-down="moveDown(category.entries, entryIndex)"
               @remove="askBeforeRemoveCategoryEntry(category, entryIndex)"
             />
           </header>
-          <div class="formBlock" v-if="entry.isVisible">
+          <div v-if="entry.isVisible" class="formBlock">
             <Field
               :id="`categoryList${categoryIndex}EntryList${entryIndex}Title_${category.layout}`"
+              v-model="entry.title"
               target
               transparent
               :label="$t(getEntryTitleLabel(entry.type))"
-              v-model="entry.title"
             />
             <template v-if="entry.nature === 'experience'">
               <Field
                 :id="`categoryList${categoryIndex}EntryList${entryIndex}Organization_${category.layout}`"
+                v-model="entry.organization"
                 target
                 transparent
                 :label="$t(getExperienceOrganizationLabel(entry.type))"
-                v-model="entry.organization"
               />
               <Field
                 :id="`categoryList${categoryIndex}EntryList${entryIndex}Location_${category.layout}`"
+                v-model="entry.location"
                 target
                 transparent
                 :label="$t('location')"
-                v-model="entry.location"
               />
               <Field
                 :id="`categoryList${categoryIndex}EntryList${entryIndex}Period_${category.layout}`"
+                v-model="entry.period"
                 target
                 transparent
                 :label="$t('period')"
-                v-model="entry.period"
               />
               <Field
                 :id="`categoryList${categoryIndex}EntryList${entryIndex}Summary_${category.layout}`"
+                v-model="entry.summary"
                 target
                 transparent
                 :label="$t('summary')"
                 type="textarea"
-                v-model="entry.summary"
               />
             </template>
             <label class="flex flex-col gap-1" for="highlights">
@@ -386,10 +383,10 @@ function toggleEntryVisibility(entry: Entry) {
                 >
                   <Field
                     :id="`categoryList${categoryIndex}EntryList${entryIndex}HighlightList${highlightIndex}_${category.layout}`"
+                    v-model="entry.highlights[highlightIndex]"
                     target
                     transparent
                     class="w-[70%]"
-                    v-model="entry.highlights[highlightIndex]"
                     @keydown.enter.prevent="
                       addHighlight(
                         entry,
@@ -402,13 +399,13 @@ function toggleEntryVisibility(entry: Entry) {
                   <ListActions
                     :index="highlightIndex"
                     :list-length="entry.highlights.length"
-                    @moveUp="moveUp(entry.highlights, highlightIndex)"
-                    @moveDown="moveDown(entry.highlights, highlightIndex)"
+                    @move-up="moveUp(entry.highlights, highlightIndex)"
+                    @move-down="moveDown(entry.highlights, highlightIndex)"
                     @remove="remove(entry.highlights, highlightIndex)"
                   />
                 </li>
               </ul>
-              <Button asChild>
+              <Button as-child>
                 <button
                   class="button slotButton slotButtonSmall"
                   @click="
@@ -441,10 +438,10 @@ function toggleEntryVisibility(entry: Entry) {
                 >
                   <Field
                     :id="`categoryList${categoryIndex}EntryList${entryIndex}TagList${tagIndex}_${category.layout}`"
+                    v-model="entry.tags[tagIndex]"
                     target
                     transparent
                     class="w-[70%]"
-                    v-model="entry.tags[tagIndex]"
                     @keydown.enter.prevent="
                       addTag(entry, entryIndex, categoryIndex, category.layout)
                     "
@@ -452,13 +449,13 @@ function toggleEntryVisibility(entry: Entry) {
                   <ListActions
                     :index="tagIndex"
                     :list-length="entry.tags.length"
-                    @moveUp="moveUp(entry.tags, tagIndex)"
-                    @moveDown="moveDown(entry.tags, tagIndex)"
+                    @move-up="moveUp(entry.tags, tagIndex)"
+                    @move-down="moveDown(entry.tags, tagIndex)"
                     @remove="remove(entry.tags, tagIndex)"
                   />
                 </li>
               </ul>
-              <Button asChild>
+              <Button as-child>
                 <button
                   class="button slotButton slotButtonSmall"
                   @click="
@@ -475,7 +472,7 @@ function toggleEntryVisibility(entry: Entry) {
         </Fieldset>
       </li>
     </ul>
-    <template v-slot:footer>
+    <template #footer>
       <footer class="flex justify-center">
         <Button
           class="uppercase font-black tracking-widest mx-auto mt-8"
@@ -488,7 +485,7 @@ function toggleEntryVisibility(entry: Entry) {
   </EditorCategory>
 
   <footer class="flex justify-center">
-    <Button asChild>
+    <Button as-child>
       <button class="button slotButton w-full shadow-none" @click="addCategory">
         <span class="font-black tracking-widest uppercase">
           {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}

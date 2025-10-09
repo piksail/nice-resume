@@ -171,7 +171,7 @@ const tools: Tool[] = [
 </script>
 
 <template>
-  <DataTable :value="tools" tableStyle="min-width: 50rem" class="">
+  <DataTable :value="tools" table-style="min-width: 50rem" class="">
     <Column field="name" :header="capitalize($t('name'))" />
     <Column field="free" :header="capitalize($t('free'))">
       <template #body="slotProps">

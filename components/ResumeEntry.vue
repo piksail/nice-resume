@@ -27,7 +27,7 @@ const { settings: storeSettings } = storeToRefs(useResumeStore());
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : themeSettings[theme.value].resume;
+    : themeSettings[theme.value!].resume;
 });
 
 const experienceHeaderItems = computed(() => {
@@ -98,25 +98,25 @@ const fourthItem = computed(() => {
   <template v-if="settings.entry.layout === 1">
     <div class="flex items-center">
       <component
-        v-if="firstItem"
         :is="firstItem?.component"
+        v-if="firstItem"
         v-bind="firstItem?.props"
         class="flex-1"
       />
       <div>
         <component
-          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
           v-bind="secondItem?.props"
         />
         <component
-          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
           v-bind="fourthItem?.props"
         />
       </div>
@@ -145,26 +145,26 @@ const fourthItem = computed(() => {
     <div class="flex justify-between items-center">
       <div class="flex flex-col">
         <component
-          v-if="firstItem"
           :is="firstItem?.component"
+          v-if="firstItem"
           v-bind="firstItem?.props"
           class="flex-1"
         />
         <component
-          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
           v-bind="secondItem?.props"
         />
       </div>
       <div class="flex flex-col text-right">
         <component
-          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
           v-bind="fourthItem?.props"
         />
       </div>
@@ -194,26 +194,26 @@ const fourthItem = computed(() => {
       <div class="flex flex-col w-[40%]">
         <div class="flex">
           <component
-            v-if="firstItem"
             :is="firstItem?.component"
+            v-if="firstItem"
             v-bind="firstItem?.props"
           />
           <component
-            v-if="secondItem && entry.nature === 'experience'"
             :is="secondItem?.component"
+            v-if="secondItem && entry.nature === 'experience'"
             v-bind="secondItem?.props"
             class="flex-1"
           />
         </div>
         <div class="flex">
           <component
-            v-if="thirdItem && entry.nature === 'experience'"
             :is="thirdItem?.component"
+            v-if="thirdItem && entry.nature === 'experience'"
             v-bind="thirdItem?.props"
           />
           <component
-            v-if="fourthItem && entry.nature === 'experience'"
             :is="fourthItem?.component"
+            v-if="fourthItem && entry.nature === 'experience'"
             v-bind="fourthItem?.props"
           />
         </div>
@@ -245,26 +245,26 @@ const fourthItem = computed(() => {
     <div class="flex flex-col">
       <div class="flex">
         <component
-          v-if="firstItem"
           :is="firstItem?.component"
+          v-if="firstItem"
           v-bind="firstItem?.props"
         />
         <component
-          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
           v-bind="secondItem?.props"
           class="flex-1"
         />
       </div>
       <div class="flex">
         <component
-          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
           v-bind="fourthItem?.props"
         />
       </div>
@@ -292,25 +292,25 @@ const fourthItem = computed(() => {
   <template v-else-if="settings.entry.layout === 5">
     <div class="flex flex-col">
       <component
-        v-if="firstItem"
         :is="firstItem?.component"
+        v-if="firstItem"
         v-bind="firstItem?.props"
         class="self-end"
       />
       <component
-        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
+        v-if="secondItem && entry.nature === 'experience'"
         v-bind="secondItem?.props"
         class="flex-1"
       />
       <component
-        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
+        v-if="thirdItem && entry.nature === 'experience'"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
+        v-if="fourthItem && entry.nature === 'experience'"
         v-bind="fourthItem?.props"
       />
       <ResumeEntrySummary
@@ -338,25 +338,25 @@ const fourthItem = computed(() => {
     <div class="flex flex-col">
       <div class="flex items-baseline">
         <component
-          v-if="firstItem"
           :is="firstItem?.component"
+          v-if="firstItem"
           v-bind="firstItem?.props"
         />
         <div class="flex flex-col flex-1">
           <component
-            v-if="secondItem && entry.nature === 'experience'"
             :is="secondItem?.component"
+            v-if="secondItem && entry.nature === 'experience'"
             v-bind="secondItem?.props"
           />
           <div>
             <component
-              v-if="thirdItem && entry.nature === 'experience'"
               :is="thirdItem?.component"
+              v-if="thirdItem && entry.nature === 'experience'"
               v-bind="thirdItem?.props"
             />
             <component
-              v-if="fourthItem && entry.nature === 'experience'"
               :is="fourthItem?.component"
+              v-if="fourthItem && entry.nature === 'experience'"
               v-bind="fourthItem?.props"
             />
           </div>
@@ -386,26 +386,26 @@ const fourthItem = computed(() => {
   <template v-else-if="settings.entry.layout === 7">
     <div class="flex flex-col">
       <component
-        v-if="firstItem"
         :is="firstItem?.component"
+        v-if="firstItem"
         v-bind="firstItem?.props"
       />
       <div class="flex justify-between">
         <div>
           <component
-            v-if="secondItem && entry.nature === 'experience'"
             :is="secondItem?.component"
+            v-if="secondItem && entry.nature === 'experience'"
             v-bind="secondItem?.props"
           />
           <component
-            v-if="thirdItem && entry.nature === 'experience'"
             :is="thirdItem?.component"
+            v-if="thirdItem && entry.nature === 'experience'"
             v-bind="thirdItem?.props"
           />
         </div>
         <component
-          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
           v-bind="fourthItem?.props"
         />
       </div>
@@ -434,25 +434,25 @@ const fourthItem = computed(() => {
     <div class="flex flex-col">
       <div>
         <component
-          v-if="firstItem"
           :is="firstItem?.component"
+          v-if="firstItem"
           v-bind="firstItem?.props"
         />
         <component
-          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
           v-bind="secondItem?.props"
         />
       </div>
       <div>
         <component
-          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
           v-bind="fourthItem?.props"
         />
       </div>
@@ -481,24 +481,24 @@ const fourthItem = computed(() => {
     <div class="flex justify-between">
       <div>
         <component
-          v-if="firstItem"
           :is="firstItem?.component"
+          v-if="firstItem"
           v-bind="firstItem?.props"
         />
         <component
-          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
           v-bind="secondItem?.props"
         />
         <component
-          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
           v-bind="thirdItem?.props"
         />
       </div>
       <component
-        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
+        v-if="fourthItem && entry.nature === 'experience'"
         v-bind="fourthItem?.props"
       />
     </div>
@@ -524,24 +524,24 @@ const fourthItem = computed(() => {
   </template>
   <template v-else-if="settings.entry.layout === 10">
     <component
-      v-if="firstItem"
       :is="firstItem?.component"
+      v-if="firstItem"
       v-bind="firstItem?.props"
     />
     <div>
       <component
-        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
+        v-if="secondItem && entry.nature === 'experience'"
         v-bind="secondItem?.props"
       />
       <component
-        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
+        v-if="thirdItem && entry.nature === 'experience'"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
+        v-if="fourthItem && entry.nature === 'experience'"
         v-bind="fourthItem?.props"
       />
     </div>
@@ -568,25 +568,25 @@ const fourthItem = computed(() => {
   <template v-else-if="settings.entry.layout === 11">
     <div class="flex justify-between">
       <component
-        v-if="firstItem"
         :is="firstItem?.component"
+        v-if="firstItem"
         v-bind="firstItem?.props"
       />
       <component
-        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
+        v-if="secondItem && entry.nature === 'experience'"
         v-bind="secondItem?.props"
       />
     </div>
     <div class="flex justify-between">
       <component
-        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
+        v-if="thirdItem && entry.nature === 'experience'"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
+        v-if="fourthItem && entry.nature === 'experience'"
         v-bind="fourthItem?.props"
       />
     </div>
@@ -613,24 +613,24 @@ const fourthItem = computed(() => {
   <template v-else-if="settings.entry.layout === 12">
     <div class="flex justify-between">
       <component
-        v-if="firstItem"
         :is="firstItem?.component"
+        v-if="firstItem"
         v-bind="firstItem?.props"
       />
       <component
-        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
+        v-if="secondItem && entry.nature === 'experience'"
         v-bind="secondItem?.props"
       />
     </div>
     <component
-      v-if="thirdItem && entry.nature === 'experience'"
       :is="thirdItem?.component"
+      v-if="thirdItem && entry.nature === 'experience'"
       v-bind="thirdItem?.props"
     />
     <component
-      v-if="fourthItem && entry.nature === 'experience'"
       :is="fourthItem?.component"
+      v-if="fourthItem && entry.nature === 'experience'"
       v-bind="fourthItem?.props"
     />
     <ResumeEntrySummary
@@ -657,23 +657,23 @@ const fourthItem = computed(() => {
     <div class="flex">
       <div class="flex flex-col w-[25%]">
         <component
-          v-if="firstItem"
           :is="firstItem?.component"
+          v-if="firstItem"
           v-bind="firstItem?.props"
         />
         <component
-          v-if="secondItem && entry.nature === 'experience'"
           :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
           v-bind="secondItem?.props"
         />
         <component
-          v-if="thirdItem && entry.nature === 'experience'"
           :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
           v-bind="thirdItem?.props"
         />
         <component
-          v-if="fourthItem && entry.nature === 'experience'"
           :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
           v-bind="fourthItem?.props"
         />
       </div>
@@ -703,23 +703,23 @@ const fourthItem = computed(() => {
   <template v-else>
     <div class="flex items-center">
       <component
-        v-if="firstItem"
         :is="firstItem?.component"
+        v-if="firstItem"
         v-bind="firstItem?.props"
       />
       <component
-        v-if="secondItem && entry.nature === 'experience'"
         :is="secondItem?.component"
+        v-if="secondItem && entry.nature === 'experience'"
         v-bind="secondItem?.props"
       />
       <component
-        v-if="thirdItem && entry.nature === 'experience'"
         :is="thirdItem?.component"
+        v-if="thirdItem && entry.nature === 'experience'"
         v-bind="thirdItem?.props"
       />
       <component
-        v-if="fourthItem && entry.nature === 'experience'"
         :is="fourthItem?.component"
+        v-if="fourthItem && entry.nature === 'experience'"
         v-bind="fourthItem?.props"
       />
     </div>

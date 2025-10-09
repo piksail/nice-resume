@@ -9,10 +9,10 @@ const { zoomLevel } = storeToRefs(useEditorStore());
 <template>
   <Field
     id="previewZoomLevel"
+    v-model="zoomLevel"
     :label="$t('zoom')"
     type="range"
     :min="50"
     :max="150"
-    v-model="zoomLevel"
   />
 </template>

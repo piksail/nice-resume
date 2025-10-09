@@ -4,7 +4,7 @@ import type { DocumentType } from "@/types";
 import { documentTypes } from "@/globals";
 
 export const useEditorStore = defineStore("editor", () => {
-  const documentType = ref<DocumentType>(documentTypes[0]);
+  const documentType = ref<DocumentType>(documentTypes[0]!);
   const focusedInput = ref<string | undefined>();
   const zoomLevel = ref(100);
 

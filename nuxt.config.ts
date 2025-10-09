@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "nuxt-svgo",
     "@sentry/nuxt/module",
+    "@nuxt/eslint",
   ],
 
   runtimeConfig: {
@@ -71,6 +72,9 @@ export default defineNuxtConfig({
           darkModeSelector: ".dark-mode",
         },
       },
+    },
+    components: {
+      exclude: ["Form", "FormField"], // TODO maybe just import the module even if not using it
     },
   },
 

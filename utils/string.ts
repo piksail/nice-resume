@@ -5,7 +5,7 @@ import type { TextSeparator } from "@/types";
  */
 export function capitalize(string?: string) {
   if (!string?.length) return "";
-  return `${string[0].toUpperCase()}${string.slice(1)}`;
+  return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 }
 
 /**

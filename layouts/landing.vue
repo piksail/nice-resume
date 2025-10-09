@@ -3,10 +3,8 @@ import type { LocaleCode } from "~/types";
 import { localeLabels } from "@/globals";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { availableLocales, locale, setLocale } = useI18n();
 
-// eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 </script>
 
@@ -33,8 +31,8 @@ const localePath = useLocalePath();
         type="select"
         :aria-label="$t('toSwitchLanguage')"
         :model-value="locale"
-        optionLabel="label"
-        optionValue="value"
+        option-label="label"
+        option-value="value"
         :options="
           availableLocales.map((locale) => ({
             label: capitalize(localeLabels[locale as LocaleCode]),

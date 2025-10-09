@@ -2147,7 +2147,6 @@ themeSettings.NeoBrutalism.email.document.color =
   themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.document.backgroundColor =
   themeSettings.NeoBrutalism.base.colors[2];
-themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.name.color =
   themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.name.backgroundColor =
@@ -2298,7 +2297,6 @@ themeSettings.Oilcloth.resume.title.isUppercase = true;
 themeSettings.Oilcloth.resume.title.letterSpacing = 4;
 themeSettings.Oilcloth.resume.about.color =
   themeBaseSettings.Oilcloth.colors[3];
-themeBaseSettings.Oilcloth.colors[3];
 themeSettings.Oilcloth.resume.contactDetails.fontWeight = 600;
 themeSettings.Oilcloth.resume.contactDetails.color =
   themeBaseSettings.Oilcloth.colors[3];
@@ -2360,7 +2358,6 @@ themeSettings.Oilcloth.letter.title.isUppercase = true;
 themeSettings.Oilcloth.letter.title.letterSpacing = 4;
 themeSettings.Oilcloth.letter.about.color =
   themeBaseSettings.Oilcloth.colors[0];
-themeBaseSettings.Oilcloth.colors[0];
 themeSettings.Oilcloth.letter.contactDetails.fontWeight = 600;
 themeSettings.Oilcloth.letter.contactDetails.color =
   themeBaseSettings.Oilcloth.colors[0];

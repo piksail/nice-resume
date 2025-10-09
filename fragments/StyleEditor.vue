@@ -28,7 +28,6 @@ import FormBlockRow from "~/components/FormBlockRow.vue";
 import type { LetterSettings } from "~/types";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -72,11 +71,11 @@ function askBeforeResetStyle() {
     },
     accept: () => {
       if (documentType.value === "email") {
-        emailSettings.value = themeSettings[theme.value].email;
+        emailSettings.value = themeSettings[theme.value!].email;
       } else if (documentType.value === "letter") {
-        letterSettings.value = themeSettings[theme.value].letter;
+        letterSettings.value = themeSettings[theme.value!].letter;
       } else {
-        resumeSettings.value = themeSettings[theme.value].resume;
+        resumeSettings.value = themeSettings[theme.value!].resume;
       }
     },
     reject: () => {},
@@ -97,42 +96,42 @@ function askBeforeResetStyle() {
           <FormBlockRow :header="$t('border')">
             <Field
               v-for="i in 4"
-              :key="i"
               id="documentBorder"
+              :key="i"
+              v-model="documentTypeSettings.document.border[i - 1]"
               :label="$t(getSideIndexLabel(i))"
               type="number"
-              v-model="documentTypeSettings.document.border[i - 1]"
             />
             <Field
               id="documentBorderColor"
+              v-model="documentTypeSettings.document.borderColor"
               :label="$t('color')"
               type="color"
-              v-model="documentTypeSettings.document.borderColor"
             />
           </FormBlockRow>
           <FormBlockRow :header="$t('padding')">
             <div class="grid grid-cols-4 gap-5">
               <Field
                 v-for="i in 4"
-                :key="i"
                 :id="`documentPadding${i}`"
+                :key="i"
+                v-model="documentTypeSettings.document.padding[i - 1]"
                 type="number"
                 :label="$t(getSideIndexLabel(i))"
-                v-model="documentTypeSettings.document.padding[i - 1]"
               />
             </div>
             <Field
               id="documentBackgroundColor"
+              v-model="documentTypeSettings.document.backgroundColor"
               :label="$t('color')"
               type="color"
-              v-model="documentTypeSettings.document.backgroundColor"
             />
           </FormBlockRow>
           <Field
             id="documentBodyFont"
+            v-model="documentTypeSettings.document.bodyFont"
             type="select"
             :label="$t('font')"
-            v-model="documentTypeSettings.document.bodyFont"
             :options="fonts"
           />
         </div>
@@ -143,41 +142,41 @@ function askBeforeResetStyle() {
           <div class="formBlock">
             <Field
               id="headerLayout"
+              v-model="emailSettings.document.layout"
               type="select"
               :label="$t('layout')"
-              v-model="emailSettings.document.layout"
               :options="headerLayouts"
             />
             <FormBlockRow :header="$t('border')">
               <Field
                 v-for="i in 4"
-                :key="i"
                 id="signatureBorder"
+                :key="i"
+                v-model="emailSettings.document.border[i - 1]"
                 :label="$t(getSideIndexLabel(i))"
                 type="number"
-                v-model="emailSettings.document.border[i - 1]"
               />
               <Field
                 id="signatureBorderColor"
+                v-model="emailSettings.document.borderColor"
                 :label="$t('color')"
                 type="color"
-                v-model="emailSettings.document.borderColor"
               />
             </FormBlockRow>
             <FormBlockRow :header="$t('padding')">
               <Field
                 v-for="i in 4"
-                :key="i"
                 id="signaturePadding"
+                :key="i"
+                v-model="emailSettings.document.padding[i - 1]"
                 :label="$t(getSideIndexLabel(i))"
                 type="number"
-                v-model="emailSettings.document.padding[i - 1]"
               />
               <Field
                 id="signatureBackgroundColor"
+                v-model="emailSettings.document.backgroundColor"
                 :label="$t('color')"
                 type="color"
-                v-model="emailSettings.document.backgroundColor"
               />
             </FormBlockRow>
           </div>
@@ -188,9 +187,9 @@ function askBeforeResetStyle() {
           <div class="formBlock">
             <Field
               id="headerLayout"
+              v-model="(documentTypeSettings as LetterSettings).header.layout"
               type="select"
               :label="$t('layout')"
-              v-model="(documentTypeSettings as LetterSettings).header.layout"
               :options="headerLayouts"
             />
             <BlockSettingsEditor
@@ -211,17 +210,17 @@ function askBeforeResetStyle() {
             <FormBlockRow>
               <Field
                 id="asideWidth"
+                v-model="resumeSettings.aside.width"
                 :label="$t('width')"
                 type="range"
                 :min="0"
                 :max="100"
-                v-model="resumeSettings.aside.width"
               />
               <Field
                 id="asideIsRightPositioned"
+                v-model="resumeSettings.aside.isRightPositioned"
                 label="Right side TODO localize"
                 type="checkbox"
-                v-model="resumeSettings.aside.isRightPositioned"
               />
             </FormBlockRow>
           </div>
@@ -254,9 +253,9 @@ function askBeforeResetStyle() {
             />
             <Field
               id="senderDetailsGap"
+              v-model="letterSettings.senderDetails.gap"
               :label="$t('gap')"
               type="number"
-              v-model="letterSettings.senderDetails.gap"
             />
           </div>
         </Fieldset>
@@ -273,9 +272,9 @@ function askBeforeResetStyle() {
             />
             <Field
               id="recipientDetailsGap"
+              v-model="letterSettings.recipientDetails.gap"
               :label="$t('gap')"
               type="number"
-              v-model="letterSettings.recipientDetails.gap"
             />
           </div>
         </Fieldset>
@@ -365,18 +364,18 @@ function askBeforeResetStyle() {
           />
           <Field
             id="aboutQuoteIsShown"
+            v-model="documentTypeSettings.aboutQuote.isShown"
             :label="`${$t('toShow')} ${$t('quoteMark')}`"
             type="checkbox"
-            v-model="documentTypeSettings.aboutQuote.isShown"
           />
           <FormBlockRow :header="$t('quoteMark')">
             <Field
               id="aboutQuoteFont"
+              v-model="documentTypeSettings.aboutQuote.font"
               type="select"
               :label="$t('font')"
-              v-model="documentTypeSettings.aboutQuote.font"
-              optionLabel="label"
-              optionValue="value"
+              option-label="label"
+              option-value="value"
               :options="
                 ['inherit', ...fonts].map((font) => ({
                   label: font === 'inherit' ? capitalize($t('default')) : font,
@@ -386,28 +385,28 @@ function askBeforeResetStyle() {
             />
             <Field
               id="aboutQuoteFontSize"
+              v-model="documentTypeSettings.aboutQuote.fontSize"
               :label="$t('size')"
               type="number"
-              v-model="documentTypeSettings.aboutQuote.fontSize"
             />
             <Field
               id="aboutQuoteFontWeight"
+              v-model="documentTypeSettings.aboutQuote.fontWeight"
               type="select"
               :label="$t('fontWeight')"
-              v-model="documentTypeSettings.aboutQuote.fontWeight"
               :options="fontWeights"
             />
             <Field
               id="aboutQuoteIsItalic"
+              v-model="documentTypeSettings.aboutQuote.isItalic"
               :label="$t('italic')"
               type="checkbox"
-              v-model="documentTypeSettings.aboutQuote.isItalic"
             />
             <Field
               id="aboutQuoteColor"
+              v-model="documentTypeSettings.aboutQuote.color"
               :label="$t('color')"
               type="color"
-              v-model="documentTypeSettings.aboutQuote.color"
             />
           </FormBlockRow>
         </div>
@@ -426,11 +425,11 @@ function askBeforeResetStyle() {
           <FormBlockRow>
             <Field
               id="contactDetailsListOrientation"
+              v-model="documentTypeSettings.contactDetails.listOrientation"
               type="selectbutton"
               :label="$t('orientation')"
-              v-model="documentTypeSettings.contactDetails.listOrientation"
-              optionLabel="label"
-              optionValue="value"
+              option-label="label"
+              option-value="value"
               :options="
                 ['column', 'row'].map((orientation) => ({
                   label: capitalize(
@@ -442,11 +441,11 @@ function askBeforeResetStyle() {
             />
             <Field
               id="contactDetailsAlignment"
+              v-model="documentTypeSettings.contactDetails.alignment"
               type="select"
               :label="$t('alignment')"
-              v-model="documentTypeSettings.contactDetails.alignment"
-              optionLabel="label"
-              optionValue="value"
+              option-label="label"
+              option-value="value"
               :options="
                 ['start', 'center', 'end'].map((alignment) => ({
                   label: capitalize($t(alignment)),
@@ -456,35 +455,35 @@ function askBeforeResetStyle() {
             />
             <Field
               id="contactDetailsGap"
+              v-model="documentTypeSettings.contactDetails.gap"
               :label="$t('gap')"
               type="number"
-              v-model="documentTypeSettings.contactDetails.gap"
             />
           </FormBlockRow>
           <FormBlockRow :header="$t('icon')">
             <Field
               id="contactDetailsIsIconFirst"
+              v-model="documentTypeSettings.contactDetails.isIconFirst"
               :label="t('iconFirst')"
               type="checkbox"
-              v-model="documentTypeSettings.contactDetails.isIconFirst"
             />
             <Field
               id="contactDetailsIconGap"
+              v-model="documentTypeSettings.contactDetails.iconGap"
               :label="$t('gap')"
               type="number"
-              v-model="documentTypeSettings.contactDetails.iconGap"
             />
             <Field
               id="contactDetailsIconSize"
+              v-model="documentTypeSettings.contactDetails.iconSize"
               :label="$t('size')"
               type="number"
-              v-model="documentTypeSettings.contactDetails.iconSize"
             />
             <Field
               id="contactDetailsIconColor"
+              v-model="documentTypeSettings.contactDetails.iconColor"
               :label="$t('color')"
               type="color"
-              v-model="documentTypeSettings.contactDetails.iconColor"
             />
           </FormBlockRow>
         </div>
@@ -496,58 +495,58 @@ function askBeforeResetStyle() {
             <FormBlockRow>
               <Field
                 id="bodyColor"
+                v-model="letterSettings.body.color"
                 type="color"
                 :label="$t('color')"
-                v-model="letterSettings.body.color"
               />
               <Field
                 id="bodyFontSize"
+                v-model="letterSettings.body.fontSize"
                 :label="$t('size')"
                 type="number"
-                v-model="letterSettings.body.fontSize"
               />
               <Field
                 id="bodyLineHeight"
+                v-model="letterSettings.body.lineHeight"
                 :label="$t('lineHeight')"
                 type="number"
-                v-model="letterSettings.body.lineHeight"
                 :step="0.1"
               />
               <Field
                 id="bodyIndentation"
+                v-model="letterSettings.body.indentation"
                 :label="$t('indentation')"
                 type="number"
-                v-model="letterSettings.body.indentation"
               />
               <Field
                 id="bodyIsJustified"
+                v-model="letterSettings.body.isJustified"
                 :label="$t('justified')"
                 type="checkbox"
-                v-model="letterSettings.body.isJustified"
               />
               <Field
                 id="bodyIsSignatureRightAligned"
+                v-model="letterSettings.body.isSignatureRightAligned"
                 label="Signature on the right TODO localize"
                 type="checkbox"
-                v-model="letterSettings.body.isSignatureRightAligned"
               />
             </FormBlockRow>
             <FormBlockRow :header="$t('margin')">
               <Field
                 v-for="i in 4"
-                :key="i"
                 :id="`bodyMargin${i}`"
+                :key="i"
+                v-model="letterSettings.body.margin[i - 1]"
                 :label="$t(getSideIndexLabel(i))"
                 type="number"
-                v-model="letterSettings.body.margin[i - 1]"
               />
             </FormBlockRow>
           </div>
           <Field
             id="bodyGap"
+            v-model="letterSettings.body.gap"
             :label="$t('gap')"
             type="number"
-            v-model="letterSettings.body.gap"
           />
         </Fieldset>
       </template>
@@ -557,18 +556,18 @@ function askBeforeResetStyle() {
           <div class="formBlock">
             <Field
               id="categoryisMasonry"
+              v-model="resumeSettings.category.isMasonry"
               :label="$t('masonry')"
               type="checkbox"
-              v-model="resumeSettings.category.isMasonry"
             />
             <Message v-if="resumeSettings.category.isMasonry" size="small">
               {{ t("howToGapMasonry") }}
             </Message>
             <Field
               id="categoryGap"
+              v-model="resumeSettings.category.gap"
               :label="$t('gap')"
               type="number"
-              v-model="resumeSettings.category.gap"
             />
             <BlockSettingsEditor
               property-name="category"
@@ -610,16 +609,16 @@ function askBeforeResetStyle() {
           <div class="formBlock">
             <Field
               id="entryLayout"
+              v-model="resumeSettings.entry.layout"
               type="select"
               :label="$t('layout')"
-              v-model="resumeSettings.entry.layout"
               :options="entryLayouts"
             />
             <Field
               id="entryGap"
+              v-model="resumeSettings.entry.gap"
               :label="$t('gap')"
               type="number"
-              v-model="resumeSettings.entry.gap"
             />
           </div>
         </Fieldset>
@@ -694,9 +693,9 @@ function askBeforeResetStyle() {
             />
             <Field
               id="entryTagGap"
+              v-model="resumeSettings.entryTag.gap"
               :label="$t('gap')"
               type="number"
-              v-model="resumeSettings.entryTag.gap"
             />
           </div>
         </Fieldset>
@@ -710,7 +709,7 @@ function askBeforeResetStyle() {
         outlined
         severity="danger"
         @click="askBeforeResetStyle"
-      ></Button>
+      />
     </template>
   </Drawer>
 
@@ -721,12 +720,12 @@ function askBeforeResetStyle() {
     @click="isStyleEditorOpen = true"
   />
   <Field
-    type="togglebutton"
     v-model="isThemeCustomized"
-    onIcon="pi pi-check"
-    offIcon="pi pi-eye-slash"
-    :onLabel="`${capitalize($t('theme'))} ${t('onLabel')}`"
-    :offLabel="`${capitalize($t('theme'))} ${t('offLabel')}`"
+    type="togglebutton"
+    on-icon="pi pi-check"
+    off-icon="pi pi-eye-slash"
+    :on-label="`${capitalize($t('theme'))} ${t('onLabel')}`"
+    :off-label="`${capitalize($t('theme'))} ${t('offLabel')}`"
   />
 </template>
 

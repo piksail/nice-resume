@@ -2,10 +2,8 @@
 import { useError } from "nuxt/app";
 import Card from "@/components/Card.vue";
 
-// eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });

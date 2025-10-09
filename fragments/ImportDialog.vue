@@ -13,10 +13,8 @@ import { formatJsonResumeAsResume } from "@/utils/json-resume";
 import { generateStores } from "~/utils/editor";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { t: localizer } = useI18n();
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -216,9 +214,9 @@ onMounted(() => {
         mode="basic"
         accept="application/json"
         auto
-        customUpload
-        chooseIcon="pi pi-file-import"
-        :chooseLabel="t('importSaveFile')"
+        custom-upload
+        choose-icon="pi pi-file-import"
+        :choose-label="t('importSaveFile')"
         :choose-button-props="{ severity: 'secondary', variant: 'outlined' }"
         @select="importSaveFile"
       />
@@ -227,9 +225,9 @@ onMounted(() => {
         mode="basic"
         accept="application/json"
         auto
-        customUpload
-        chooseIcon="pi pi-file-arrow-up"
-        :chooseLabel="t('importJsonResume')"
+        custom-upload
+        choose-icon="pi pi-file-arrow-up"
+        :choose-label="t('importJsonResume')"
         :choose-button-props="{ severity: 'secondary', variant: 'outlined' }"
         @select="importFromJsonResume"
       />
