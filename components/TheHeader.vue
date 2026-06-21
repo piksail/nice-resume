@@ -43,7 +43,7 @@ function uncustomizeTheme() {
 
 <template>
   <header class="sticky top-0 z-10 h-[80px]">
-    <Toolbar class="h-full !border-none shadow">
+    <Toolbar class="h-full !border-none shadow !bg-white !rounded-none">
       <template #start>
         <NuxtLink :to="localePath('/')">
           <h1
@@ -58,7 +58,7 @@ function uncustomizeTheme() {
       </template>
 
       <template #center>
-        <div class="flex gap-5 items-end h-[60%]">
+        <div class="flex gap-5 items-center h-[60%]">
           <Field
             v-model="documentType"
             type="select"
