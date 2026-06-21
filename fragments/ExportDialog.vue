@@ -148,14 +148,14 @@ function exportResumeToJsonResume() {
     <div v-if="jsonResume" class="card flex justify-center">
       <Stepper :value="jsonResumeExportSteps[0]" linear>
         <StepItem
-          v-for="(step, index) in jsonResumeExportSteps"
-          :key="`jsonResumeExportStep${index}`"
+          v-for="(step, stepIndex) in jsonResumeExportSteps"
+          :key="`jsonResumeExportStep${stepIndex}`"
           :value="step"
         >
           <Step>{{ capitalize($t(step)) }}</Step>
           <StepPanel
             v-slot="{ activateCallback }"
-            :value="jsonResumeExportSteps[index]"
+            :value="jsonResumeExportSteps[stepIndex]"
           >
             <div v-if="step === 'profile'" class="formBlock">
               <Field v-model="jsonResume.basics.email" :label="$t('email')" />
@@ -380,7 +380,7 @@ function exportResumeToJsonResume() {
                 :label="capitalize(`${$t('toAdd')} ${$t('reference')}`)"
                 variant="outlined"
                 size="small"
-                @click="addReference(index)"
+                @click="addReference(stepIndex)"
               />
             </div>
             <div v-if="step === 'projects'" class="formBlock">
@@ -406,23 +406,23 @@ function exportResumeToJsonResume() {
                 />
               </FormBlockRow>
             </div>
-            <div v-if="index === 0" class="pt-6 flex justify-end">
+            <div v-if="stepIndex === 0" class="pt-6 flex justify-end">
               <Button
                 :label="$t('toSubmit')"
                 icon="pi pi-arrow-right"
                 icon-pos="right"
-                @click="activateCallback(jsonResumeExportSteps[index + 1]!)"
+                @click="activateCallback(jsonResumeExportSteps[stepIndex + 1]!)"
               />
             </div>
             <div
-              v-else-if="index === jsonResumeExportSteps.length - 1"
+              v-else-if="stepIndex === jsonResumeExportSteps.length - 1"
               class="pt-6"
             >
               <Button
                 :label="$t('previous')"
                 severity="secondary"
                 icon="pi pi-arrow-left"
-                @click="activateCallback(jsonResumeExportSteps[index - 1]!)"
+                @click="activateCallback(jsonResumeExportSteps[stepIndex - 1]!)"
               />
               <Button
                 :label="$t('toSubmit')"
@@ -436,13 +436,13 @@ function exportResumeToJsonResume() {
                 :label="$t('previous')"
                 severity="secondary"
                 icon="pi pi-arrow-left"
-                @click="activateCallback(jsonResumeExportSteps[index - 1]!)"
+                @click="activateCallback(jsonResumeExportSteps[stepIndex - 1]!)"
               />
               <Button
                 :label="$t('next')"
                 icon="pi pi-arrow-right"
                 icon-pos="right"
-                @click="activateCallback(jsonResumeExportSteps[index + 1]!)"
+                @click="activateCallback(jsonResumeExportSteps[stepIndex + 1]!)"
               />
             </div>
           </StepPanel>
