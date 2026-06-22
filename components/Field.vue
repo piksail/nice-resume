@@ -176,7 +176,7 @@ const chip = computed(() => ({ backgroundColor: model.value as string }));
       :value-key="valueKey"
       :input-id="id"
       :icon="icon"
-      :variant="transparent ? 'subtle' : 'outline'"
+      :variant="transparent ? 'none' : 'none'"
       size="sm"
     />
   </div>

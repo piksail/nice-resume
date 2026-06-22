@@ -24,7 +24,6 @@ const localePath = useLocalePath();
 
       <template #right>
         <Field
-          transparent
           type="select"
           :aria-label="$t('toSwitchLanguage')"
           :model-value="locale"
