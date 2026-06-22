@@ -99,15 +99,7 @@ export const themes: Theme[] = [
   "Wiki",
 ];
 
-export const textSeparators: TextSeparator[] = [
-  "TODO NONE",
-  "|",
-  "-",
-  "·",
-  "*",
-  ">",
-  ",",
-];
+export const textSeparators: TextSeparator[] = ["|", "-", "·", "*", ">", ","];
 
 export const listMarkerPositions: ListMarkerPosition[] = ["inside", "outside"];
 
@@ -351,7 +343,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 1,
-    beforeSeparator: "TODO NONE",
+    beforeSeparator: null,
   },
   entryPeriod: {
     font: "inherit",
@@ -369,7 +361,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 2,
-    beforeSeparator: "TODO NONE",
+    beforeSeparator: null,
   },
   entryOrganization: {
     font: "inherit",
@@ -387,7 +379,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 3,
-    beforeSeparator: "TODO NONE",
+    beforeSeparator: null,
   },
   entryLocation: {
     font: "inherit",
@@ -405,7 +397,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 4,
-    beforeSeparator: "TODO NONE",
+    beforeSeparator: null,
   },
   entrySummary: {
     font: "inherit",

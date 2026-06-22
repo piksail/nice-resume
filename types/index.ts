@@ -65,7 +65,7 @@ export type SideSetting = number[];
 
 export type BorderStyle = "dashed" | "dotted" | "solid";
 
-export type TextSeparator = "TODO NONE" | "|" | "-" | "·" | "*" | ">" | ",";
+export type TextSeparator = null | "|" | "-" | "·" | "*" | ">" | ",";
 
 export type HeaderLayout = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
