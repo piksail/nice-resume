@@ -69,9 +69,9 @@ const { t } = useI18n({
             </p>
           </Card>
           <NuxtLink :to="localePath('/editor')">
-            <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+            <UButton class="uppercase font-black tracking-widest mx-auto mt-8">
               {{ t("getStarted") }}
-            </Button>
+            </UButton>
           </NuxtLink>
         </div>
       </section>

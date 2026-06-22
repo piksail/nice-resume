@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import ConfirmDialog from "primevue/confirmdialog";
 import Editor from "@/components/Editor.vue";
 import Preview from "@/components/Preview.vue";
 
 const title = ref("Nice resume");
+
+// const confirm = useConfirmDialog();
 </script>
 
 <template>
@@ -13,7 +14,7 @@ const title = ref("Nice resume");
       <Title>{{ title }}</Title>
       <Meta name="description" :content="title" />
     </Head>
-    <ConfirmDialog />
+    <!-- TODO there used to be a confirmdialog, no use now? -->
     <Editor />
     <template #preview>
       <Preview class="hidden xl:block" />

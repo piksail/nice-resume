@@ -18,6 +18,8 @@ const { t } = useI18n({
   useScope: "local",
 });
 
+const fontWeights = ref([100, 200, 300, 400, 500, 600, 700, 800, 900]);
+
 const firstInput = ref(capitalize(t("name").toUpperCase()));
 const secondInput = ref(capitalize(t("title")));
 const thirdInput = ref(capitalize(t("address")));
@@ -82,23 +84,23 @@ const thirdInputFontWeight = ref(400);
         </ul>
         <div class="flex items-center gap-7 mt-24">
           <NuxtLink :to="localePath('/editor')">
-            <Button
-              class="uppercase font-black tracking-widest shadow-xl"
-              size="large"
+            <UButton
+              class="uppercase font-black tracking-widest shadow-xl text-white"
+              size="xl"
             >
               {{ t("startEditing") }}
-            </Button>
+            </UButton>
           </NuxtLink>
           <NuxtLink :to="localePath('/about')">
-            <Button
+            <UButton
               class="uppercase font-black tracking-widest shadow-xl"
-              size="large"
-              variant="outlined"
-              severity="contrast"
-              pt:root:class="!text-white hover:!text-surface-900"
+              size="xl"
+              variant="outline"
+              color="neutral"
+              pt:root:class="!text-white hover:!text-neutral-900"
             >
               {{ t("learnMore") }}
-            </Button>
+            </UButton>
           </NuxtLink>
         </div>
       </div>
@@ -110,67 +112,67 @@ const thirdInputFontWeight = ref(400);
           class="w-[100px] h-[calc(100px*1.414)] lg:w-[300px] lg:h-[calc(300px*1.414)] xl:w-[400px] xl:h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-8 animate-float [animation-delay:0.7s]"
         >
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-8 w-32 mb-3"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-8 w-32 mb-3"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-6 w-64 mb-6"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-6 w-64 mb-6"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-12 mb-2"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-12 mb-2"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-14 mb-2"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-14 mb-2"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-10 mb-2"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-10 mb-2"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-14 mb-8"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-14 mb-8"
           />
           <div class="grid grid-cols-2 gap-6">
             <div class="w-full">
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-2/3"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-2/3"
               />
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
-              />
-            </div>
-            <div class="w-full">
-              <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-full"
-              />
-              <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
               />
             </div>
             <div class="w-full">
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-full"
               />
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
               />
             </div>
             <div class="w-full">
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-1/3"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-full"
               />
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
+              />
+            </div>
+            <div class="w-full">
+              <div
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-1/3"
+              />
+              <div
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
               />
             </div>
           </div>
         </div>
         <div
-          class="hidden transition-all group-hover:bg-opacity-90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
+          class="hidden transition-all group-hover:bg-neutral-800/90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-neutral-800 p-6 rounded"
         >
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-neutral-950 h-9 rounded" />
+          <div class="bg-neutral-950 h-9 rounded" />
+          <div class="bg-neutral-950 h-9 rounded" />
+          <div class="bg-neutral-950 h-9 rounded" />
+          <div class="bg-neutral-950 h-9 rounded" />
+          <div class="bg-neutral-950 h-9 rounded" />
         </div>
       </div>
     </section>
@@ -178,11 +180,17 @@ const thirdInputFontWeight = ref(400);
       <ol
         class="grid grid-cols-1 lg:grid-cols-2 grid-rows-4 lg:grid-flow-col gap-3"
       >
-        <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
+        <li
+          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8"
+        >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="1" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              1
+            </span>
             <span>
               {{ t("stepTheme") }}
               <i class="font-serif text-primary">{{ $t("theme") }}</i>
@@ -194,9 +202,9 @@ const thirdInputFontWeight = ref(400);
             :label="$t('theme')"
             transparent
             type="select"
-            option-label="label"
-            option-value="value"
-            :options="
+            label-key="label"
+            value-key="value"
+            :items="
               themes.map((theme) => ({
                 label: theme === 'default' ? capitalize($t('default')) : theme,
                 value: theme,
@@ -208,11 +216,17 @@ const thirdInputFontWeight = ref(400);
             </div>
           </Field>
         </li>
-        <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
+        <li
+          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8"
+        >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="2" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              2
+            </span>
             <span>
               {{ t("stepEdit") }}
               <span class="inline-flex overflow-hidden">
@@ -251,12 +265,16 @@ const thirdInputFontWeight = ref(400);
           </div>
         </li>
         <li
-          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-2"
+          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8 row-span-2"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="3" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              3
+            </span>
             <span>
               {{ t("stepCustomize") }}
               <i class="font-serif text-primary">{{ $t("design") }}</i>
@@ -284,7 +302,7 @@ const thirdInputFontWeight = ref(400);
               :label="$t('fontWeight')"
               transparent
               type="select"
-              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+              :items="fontWeights"
             />
           </div>
           <div class="font-bold text-xl mt-6">
@@ -311,7 +329,7 @@ const thirdInputFontWeight = ref(400);
               :label="$t('fontWeight')"
               transparent
               type="select"
-              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+              :items="fontWeights"
             />
           </div>
           <div class="font-bold text-xl mt-6">
@@ -338,17 +356,21 @@ const thirdInputFontWeight = ref(400);
               :label="$t('fontWeight')"
               transparent
               type="select"
-              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+              :items="fontWeights"
             />
           </div>
         </li>
         <li
-          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-4"
+          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8 row-span-4"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="4" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              4
+            </span>
             <span>
               {{ t("stepPreview") }}
               <i class="font-serif text-primary">{{ t("preview") }}</i>
@@ -447,12 +469,12 @@ const thirdInputFontWeight = ref(400);
                 :to="localePath('/editor')"
                 class="absolute left-1/2 -translate-x-1/2 bottom-0"
               >
-                <Button
+                <UButton
                   class="uppercase font-black tracking-widest shadow-xl"
-                  variant="outlined"
+                  variant="outline"
                 >
                   {{ t("editMore") }}
-                </Button>
+                </UButton>
               </NuxtLink>
             </div>
           </div>
@@ -478,12 +500,12 @@ const thirdInputFontWeight = ref(400);
       </p>
       <div class="flex justify-center">
         <NuxtLink :to="localePath('/editor')">
-          <Button
+          <UButton
             class="uppercase font-black tracking-widest shadow-xl animate-pulse"
-            size="large"
+            size="lg"
           >
             {{ t("startEditing") }}
-          </Button>
+          </UButton>
         </NuxtLink>
       </div>
     </section>

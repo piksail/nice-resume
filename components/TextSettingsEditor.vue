@@ -18,9 +18,9 @@ const { propertyName, settings } = defineProps<{
         v-model="settings.font"
         type="select"
         :label="$t('font')"
-        option-label="label"
-        option-value="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           ['inherit', ...fonts].map((font) => ({
             label: font === 'inherit' ? capitalize($t('default')) : font,
             value: font,
@@ -51,7 +51,7 @@ const { propertyName, settings } = defineProps<{
         v-model="settings.fontWeight"
         type="select"
         :label="$t('fontWeight')"
-        :options="fontWeights"
+        :items="fontWeights"
       />
       <Field
         :id="`${propertyName}IsItalic`"

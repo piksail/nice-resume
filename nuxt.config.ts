@@ -1,4 +1,4 @@
-import preset from "./primevue.config";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -6,18 +6,21 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
+    "@nuxt/eslint",
     "@nuxt/test-utils/module",
+    "@nuxt/ui",
     "@nuxtjs/i18n",
     "@nuxtjs/seo",
-    "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
-    "@primevue/nuxt-module",
+    "@sentry/nuxt/module",
     "@vueuse/nuxt",
     "nuxt-svgo",
-    "@sentry/nuxt/module",
-    "@nuxt/eslint",
   ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
   runtimeConfig: {
     public: {
@@ -53,7 +56,10 @@ export default defineNuxtConfig({
 
   i18n: {
     // locales: ["br", "de", "en", "es", "fr", "it"], // Available locales are also computed from the keys off the i18n.config.ts "messages" object
-    locales: ["en", "fr"],
+    locales: [
+      { code: "en", language: "en-US", file: "en.ts" },
+      { code: "fr", language: "fr-FR", file: "fr.ts" },
+    ],
     defaultLocale: "en",
     strategy: "prefix_and_default",
     detectBrowserLanguage: {
@@ -61,21 +67,7 @@ export default defineNuxtConfig({
       cookieKey: "i18n_redirected",
       redirectOn: "root",
     },
-    vueI18n: "./i18n.config.ts",
-  },
-
-  primevue: {
-    options: {
-      theme: {
-        preset,
-        options: {
-          darkModeSelector: ".dark-mode",
-        },
-      },
-    },
-    components: {
-      exclude: ["Form", "FormField"], // TODO maybe just import the module even if not using it
-    },
+    vueI18n: "./i18n/i18n.config.ts",
   },
 
   site: {

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
-import Message from "primevue/message";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -51,8 +49,11 @@ function changeContactDetaiType(
 </script>
 
 <template>
-  <EditorCategory id="Profile">
-    <template #header>{{ capitalize($t("profile")) }}</template>
+  <EditorCategory
+    id="Profile"
+    :title="capitalize(t('profile'))"
+    icon="i-lucide-user"
+  >
     <div class="formBlock">
       <Field
         id="profileName"
@@ -75,9 +76,13 @@ function changeContactDetaiType(
         :label="t('considerAboutAndDetailsACategory')"
       />
       <template v-if="isHeaderSimple">
-        <Message size="small" class="!bg-white/10 !text-white">
+        <UAlert
+          :description="t('howToStyleAboutAndDetailsCategory')"
+          color="neutral"
+          variant="outline"
+        >
           {{ t("howToStyleAboutAndDetailsCategory") }}
-        </Message>
+        </UAlert>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 1 "about" and 1 "details") -->
         <!-- TODO we should actually add two more Category types : Details and About, so that the customization is way easier... (there is no -1 index) and user is more free to cuztomize -->
         <Field
@@ -138,10 +143,8 @@ function changeContactDetaiType(
               <Field
                 id="detailType"
                 transparent
-                type="togglebutton"
+                type="checkbox"
                 :model-value="detail.type === 'social'"
-                :on-label="capitalize($t('yes'))"
-                :off-label="capitalize($t('no'))"
                 @update:model-value="changeContactDetaiType(detail, $event)"
               />
               <Field
@@ -149,9 +152,9 @@ function changeContactDetaiType(
                 v-model="detail.icon"
                 transparent
                 type="select"
-                option-label="label"
-                option-value="value"
-                :options="
+                label-key="label"
+                value-key="value"
+                :items="
                   detail.type === 'social'
                     ? [undefined, 'default', ...socialIcons].map((icon) => {
                         if (!icon) {
@@ -189,16 +192,15 @@ function changeContactDetaiType(
             />
           </li>
         </ul>
-        <Button as-child>
-          <button
-            class="button slotButton slotButtonSmall"
-            @click="addContactDetail"
-          >
-            <span class="uppercase text-sm">
-              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-            </span>
-          </button>
-        </Button>
+        <UButton
+          icon="i-lucide-contact"
+          variant="outline"
+          size="sm"
+          class="w-[70%]"
+          @click="addContactDetail"
+        >
+          {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+        </UButton>
       </label>
     </div>
   </EditorCategory>

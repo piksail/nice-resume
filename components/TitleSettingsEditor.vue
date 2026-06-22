@@ -40,15 +40,15 @@ const { propertyName, settings } = defineProps<{
         :step="5"
         :disabled="!settings.isGradient"
       />
-      <Message
+      <UAlert
         v-if="settings.isGradient"
-        size="small"
+        size="sm"
         severity="secondary"
-        variant="simple"
+        variant="soft"
       >
         Choose "fit" size to fit the gradient with the characters horizontal
         length
-      </Message>
+      </UAlert>
     </FormBlockRow>
     <FormBlockRow>
       <Field
@@ -56,9 +56,9 @@ const { propertyName, settings } = defineProps<{
         v-model="settings.textAlign"
         type="select"
         :label="$t('alignment')"
-        option-label="label"
-        option-value="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           ['left', 'center', 'right'].map((alignment) => ({
             label: capitalize($t(alignment)),
             value: alignment,

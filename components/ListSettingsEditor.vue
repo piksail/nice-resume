@@ -26,9 +26,9 @@ const { propertyName, settings } = defineProps<{
         v-model="settings.listMarkerPosition"
         :label="$t('markerPosition')"
         type="selectbutton"
-        option-label="label"
-        option-value="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           listMarkerPositions.map((position) => ({
             label: capitalize($t(position)),
             value: position,
@@ -40,7 +40,7 @@ const { propertyName, settings } = defineProps<{
         v-model="settings.listMarker"
         :label="$t('marker')"
         type="select"
-        :options="['', ...listMarkers]"
+        :items="['', ...listMarkers]"
       />
       <Field
         :id="`${propertyName}ListMarkerColor`"

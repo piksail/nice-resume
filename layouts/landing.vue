@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LocaleCode } from "~/types";
-import { localeLabels } from "@/globals";
+import { APP_NAME, localeLabels } from "@/globals";
 import { capitalize } from "@/utils/string";
 
 const { availableLocales, locale, setLocale } = useI18n();
@@ -9,39 +9,38 @@ const localePath = useLocalePath();
 </script>
 
 <template>
-  <div
-    class="bg-surface-900 backdrop-contrast-200 text-white min-h-[100vh] scroll-smooth"
-  >
-    <header
-      class="sticky top-0 z-10 h-[100px] flex justify-between items-center gap-2 px-10 text-white border-white border-b-2 border-opacity-5 backdrop-blur backdrop-filter"
-    >
-      <NuxtLink :to="localePath('/')">
-        <p
-          class="text-center text-4xl font-black tracking-widest uppercase"
-          data-testid="headerTitle"
-        >
-          Nice
-          <br />
-          Resume
-        </p>
-      </NuxtLink>
-      <Field
-        class="[&_.p-select]:!bg-transparent"
-        transparent
-        type="select"
-        :aria-label="$t('toSwitchLanguage')"
-        :model-value="locale"
-        option-label="label"
-        option-value="value"
-        :options="
-          availableLocales.map((locale) => ({
-            label: capitalize(localeLabels[locale as LocaleCode]),
-            value: locale,
-          }))
-        "
-        @update:model-value="setLocale"
-      />
-    </header>
+  <div class="min-h-screen scroll-smooth">
+    <UHeader>
+      <template #title>
+        <NuxtLink :to="localePath('/')">
+          <p
+            class="text-center text-2xl font-black tracking-tightest uppercase"
+            data-testid="headerTitle"
+          >
+            {{ APP_NAME }}
+          </p>
+        </NuxtLink>
+      </template>
+
+      <template #right>
+        <Field
+          transparent
+          type="select"
+          :aria-label="$t('toSwitchLanguage')"
+          :model-value="locale"
+          label-key="label"
+          value-key="value"
+          :items="
+            availableLocales.map((locale) => ({
+              label: capitalize(localeLabels[locale as LocaleCode]),
+              value: locale,
+            }))
+          "
+          @update:model-value="setLocale"
+        />
+        <UColorModeButton size="sm" />
+      </template>
+    </UHeader>
     <slot />
   </div>
 </template>

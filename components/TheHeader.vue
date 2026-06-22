@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-// import Button from "primevue/button";
-import Toolbar from "primevue/toolbar";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
-import { documentTypes, localeLabels, themes } from "@/globals";
+import { APP_NAME, documentTypes, localeLabels, themes } from "@/globals";
 import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
 import ExportDialog from "~/fragments/ExportDialog.vue";
@@ -42,103 +40,83 @@ function uncustomizeTheme() {
 </script>
 
 <template>
+  <!-- TODO use nuxtui header and move code into editor.vue layout -->
   <header class="sticky top-0 z-10 h-[80px]">
-    <Toolbar class="h-full !border-none shadow !bg-white !rounded-none">
-      <template #start>
-        <NuxtLink :to="localePath('/')">
-          <h1
-            class="text-primary uppercase tracking-widest font-black text-center text-2xl leading-none"
-            :data-version="packageJson.version"
-          >
-            Nice
-            <br />
-            Resume
-          </h1>
-        </NuxtLink>
+    <UDashboardToolbar class="h-full">
+      <template #left>
+        <UButton
+          variant="link"
+          :to="localePath('/')"
+          class="uppercase tracking-tightest font-black text-2xl"
+          size="xl"
+          :data-version="packageJson.version"
+        >
+          {{ APP_NAME }}
+        </UButton>
+        <Field
+          v-model="documentType"
+          type="select"
+          label-key="label"
+          value-key="value"
+          :items="
+            documentTypes.map((document) => ({
+              label: capitalize($t(document)),
+              value: document,
+            }))
+          "
+          icon="i-lucide-file"
+        >
+          <template #header>
+            <div class="label text-xs font-medium px-3 pt-2 pb-0">
+              {{ capitalize($t("document")) }}
+            </div>
+          </template>
+        </Field>
+
+        <Field
+          id="theme"
+          v-model="theme"
+          type="select"
+          label-key="label"
+          value-key="value"
+          :items="
+            themes.map((theme) => ({
+              label: theme === 'default' ? capitalize($t('default')) : theme,
+              value: theme,
+            }))
+          "
+          icon="i-lucide-swatch-book"
+          @update:model-value="uncustomizeTheme"
+        >
+          <template #header>
+            <div class="label text-xs font-medium px-3 pt-2 pb-0">
+              {{ capitalize($t("theme")) }}
+            </div>
+          </template>
+        </Field>
+
+        <StyleEditor />
       </template>
 
-      <template #center>
-        <div class="flex gap-5 items-center h-[60%]">
-          <Field
-            v-model="documentType"
-            type="select"
-            option-label="label"
-            option-value="value"
-            :options="
-              documentTypes.map((document) => ({
-                label: capitalize($t(document)),
-                value: document,
-              }))
-            "
-          >
-            <template #dropdownicon>
-              <i class="pi pi-file" />
-            </template>
-            <template #header>
-              <div class="label text-xs font-medium px-3 pt-2 pb-0">
-                {{ capitalize($t("document")) }}
-              </div>
-            </template>
-          </Field>
-
-          <Field
-            id="theme"
-            v-model="theme"
-            type="select"
-            option-label="label"
-            option-value="value"
-            :options="
-              themes.map((theme) => ({
-                label: theme === 'default' ? capitalize($t('default')) : theme,
-                value: theme,
-              }))
-            "
-            @update:model-value="uncustomizeTheme"
-          >
-            <template #dropdownicon>
-              <i class="pi pi-palette" />
-            </template>
-            <template #header>
-              <div class="label text-xs font-medium px-3 pt-2 pb-0">
-                {{ capitalize($t("theme")) }}
-              </div>
-            </template>
-          </Field>
-
-          <StyleEditor />
-        </div>
+      <template #right>
+        <ImportDialog />
+        <ExportDialog />
+        <Field
+          type="select"
+          :aria-label="$t('toSwitchLanguage')"
+          :model-value="locale"
+          label-key="label"
+          value-key="value"
+          :items="
+            availableLocales.map((locale) => ({
+              label: capitalize(localeLabels[locale as LocaleCode]),
+              value: locale,
+            }))
+          "
+          @update:model-value="setLocale"
+        />
+        <UColorModeButton size="sm" />
       </template>
-
-      <template #end>
-        <div class="flex gap-2 items-end h-[60%]">
-          <ImportDialog />
-          <ExportDialog />
-
-          <!-- <Button
-            :icon="// document.documentElement.classList.includes('dark-mode')
-            //   ? 'pi pi-sun'
-            //   : 'pi pi-moon'
-            'pi pi-sun'"
-            size="small"
-            :aria-label="'TODO phrase'"
-            @click="toggleDarkMode"
-          /> -->
-          <Field
-            type="select"
-            :aria-label="$t('toSwitchLanguage')"
-            :model-value="locale"
-            option-label="label"
-            option-value="value"
-            :options="
-              availableLocales.map((locale) => ({
-                label: capitalize(localeLabels[locale as LocaleCode]),
-                value: locale,
-              }))
-            "
-            @update:model-value="setLocale"
-          />
-        </div>
-      </template>
-    </Toolbar>
+    </UDashboardToolbar>
   </header>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
 import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
@@ -42,8 +41,11 @@ function addSenderDetail() {
 </script>
 
 <template>
-  <EditorCategory id="Header">
-    <template #header>{{ capitalize($t("header")) }}</template>
+  <EditorCategory
+    id="Header"
+    :title="capitalize(t('header'))"
+    icon="i-lucide-mail-question-mark"
+  >
     <div class="formBlock">
       <FormBlockRow>
         <Field
@@ -58,7 +60,11 @@ function addSenderDetail() {
           <span class="label labelTransparent">
             {{ capitalize($t("senderDetails")) }}
           </span>
-          <ul v-if="senderDetails.length" id="senderDetailList">
+          <ul
+            v-if="senderDetails.length"
+            id="senderDetailList"
+            class="inputList"
+          >
             <li
               v-for="(_detail, index) in senderDetails"
               :key="index"
@@ -80,14 +86,15 @@ function addSenderDetail() {
                 @remove="remove(senderDetails, index)"
               />
             </li>
-            <Button as-child>
-              <button
-                class="button slotButton slotButtonSmall"
-                @click="addSenderDetail"
-              >
-                {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-              </button>
-            </Button>
+            <UButton
+              icon="i-lucide-contact"
+              variant="outline"
+              size="sm"
+              class="w-[70%]"
+              @click="addSenderDetail"
+            >
+              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+            </UButton>
           </ul>
         </template>
       </label>
@@ -95,7 +102,11 @@ function addSenderDetail() {
         <span class="label labelTransparent">
           {{ capitalize($t("recipientDetails")) }}
         </span>
-        <ul v-if="recipientDetails.length" id="recipientDetailList">
+        <ul
+          v-if="recipientDetails.length"
+          id="recipientDetailList"
+          class="inputList"
+        >
           <li
             v-for="(_detail, index) in recipientDetails"
             :key="index"
@@ -117,14 +128,15 @@ function addSenderDetail() {
               @remove="remove(recipientDetails, index)"
             />
           </li>
-          <Button as-child>
-            <button
-              class="button slotButton slotButtonSmall"
-              @click="addRecipientDetail"
-            >
-              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-            </button>
-          </Button>
+          <UButton
+            icon="i-lucide-list-plus"
+            variant="outline"
+            size="sm"
+            class="w-[70%]"
+            @click="addRecipientDetail"
+          >
+            {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+          </UButton>
         </ul>
       </label>
       <Field
@@ -144,7 +156,11 @@ function addSenderDetail() {
       />
     </div>
   </EditorCategory>
-  <EditorCategory id="Body">
+  <EditorCategory
+    id="Body"
+    :title="capitalize(t('body'))"
+    icon="i-lucide-file-type-corner"
+  >
     <template #header>{{ capitalize($t("body")) }}</template>
     <div class="formBlock">
       <label class="flex flex-col" for="paragraphList">
@@ -175,14 +191,15 @@ function addSenderDetail() {
               @remove="remove(paragraphs, index)"
             />
           </li>
-          <Button as-child>
-            <button
-              class="button slotButton slotButtonSmall"
-              @click="addParagraph"
-            >
-              {{ capitalize(`${$t("toAdd")} ${$t("paragraph")}`) }}
-            </button>
-          </Button>
+          <UButton
+            icon="i-lucide-list-plus"
+            variant="outline"
+            size="sm"
+            class="w-[70%]"
+            @click="addParagraph"
+          >
+            {{ capitalize(`${$t("toAdd")} ${$t("paragraph")}`) }}
+          </UButton>
         </ul>
       </label>
     </div>

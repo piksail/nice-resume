@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import Checkbox from "primevue/checkbox";
-import ColorPicker from "primevue/colorpicker";
-import InputNumber from "primevue/inputnumber";
-import InputText from "primevue/inputtext";
-import Select from "primevue/select";
-import SelectButton from "primevue/selectbutton";
-import Slider from "primevue/slider";
-import Textarea from "primevue/textarea";
-import ToggleButton from "primevue/togglebutton";
-import ToggleSwitch from "primevue/toggleswitch";
 import { capitalize } from "@/utils/string";
 import { useEditorStore } from "@/stores/editor";
+import type {
+  AcceptableValue,
+  CheckboxGroupItem,
+  RadioGroupItem,
+  SelectItem,
+} from "@nuxt/ui";
+
+type FieldType =
+  | "checkbox"
+  | "checkbutton"
+  | "color"
+  | "number"
+  | "range"
+  | "select"
+  | "selectbutton"
+  | "text"
+  | "textarea"
+  | "toggle";
 
 const {
   ariaLabel,
@@ -22,16 +30,13 @@ const {
   step,
   min = 0,
   max = 100,
-  options,
-  optionLabel,
-  optionValue,
-  onIcon,
-  offIcon,
-  onLabel = "On",
-  offLabel = "Off",
+  items,
+  labelKey,
+  valueKey,
+  icon,
   target = false,
   transparent = false,
-  type,
+  type = "text",
 } = defineProps<{
   ariaLabel?: string;
   defaultValue?: string | null | undefined;
@@ -40,52 +45,31 @@ const {
   target?: boolean;
   label?: string;
   helpText?: string;
-  options?: (string | number | null | undefined | unknown)[];
-  optionLabel?: string;
-  optionValue?: string;
-  onIcon?: string;
-  offIcon?: string;
-  onLabel?: string;
-  offLabel?: string;
+  items?: (CheckboxGroupItem | RadioGroupItem | SelectItem)[];
+  labelKey?: string;
+  valueKey?: string;
+  icon?: string;
   step?: number;
   min?: number;
   max?: number;
   transparent?: boolean;
-  type?:
-    | "checkbox"
-    | "checkbutton"
-    | "color"
-    | "number"
-    | "range"
-    | "select"
-    | "selectbutton"
-    | "textarea"
-    | "toggle"
-    | "togglebutton";
+  type?: FieldType;
 }>();
 
 const model = defineModel();
 
 const { focusedInput } = storeToRefs(useEditorStore());
 
-function updateColor(hexCode: string | undefined) {
-  if (!hexCode) return;
-  if (hexCode.startsWith("#")) {
-    model.value = hexCode;
-    return;
-  }
-  // Primevue does not embed hash to the hex color value but it is needed for CSS
-  model.value = `#${hexCode}`;
-}
+const chip = computed(() => ({ backgroundColor: model.value as string }));
 </script>
 
 <template>
   <label v-if="type === 'range'" :for="id">
-    <span class="label" :class="transparent ? 'labelTransparent' : ''">
+    <span v-if="label" class="label">
       {{ capitalize(label) }}
     </span>
     <div class="flex gap-3 items-center">
-      <Slider
+      <USlider
         v-model="model as number"
         :input-id="id"
         :disabled="disabled"
@@ -100,83 +84,48 @@ function updateColor(hexCode: string | undefined) {
     </div>
   </label>
   <div v-else-if="type === 'toggle'" class="flex items-center">
-    <ToggleSwitch v-model="model as boolean" size="small" />
-    <span class="cursor-pointer ml-2">
+    <USwitch v-model="model as boolean" size="xs" :label="capitalize(label)" />
+    <!--<span class="cursor-pointer ml-2">
       {{ capitalize(label) }}
-    </span>
+    </span>-->
   </div>
-  <label
-    v-else-if="type === 'togglebutton'"
-    :for="id"
-    class="flex flex-col gap-1"
-  >
-    <span class="label" :class="transparent ? 'labelTransparent' : ''">
-      {{ capitalize(label) }}
-    </span>
-    <ToggleButton
-      v-model="model as boolean"
-      :input-id="id"
-      :disabled="disabled"
-      :on-icon="onIcon"
-      :off-icon="offIcon"
-      :on-label="onLabel"
-      :off-label="offLabel"
-      class="!bg-transparent"
-      :class="
-        transparent
-          ? '!text-white/50 !border-white/20 [&[aria-pressed=true]]:!text-white [&[aria-pressed=true]]:!border-white hover:!text-white hover:!border-white hover:!shadow-lg'
-          : '!px-2 hover:!bg-primary/10'
-      "
-      size="small"
-    />
-  </label>
   <label v-else-if="type === 'checkbutton'" class="" :for="id">
-    <ToggleButton
+    <USwitch
       v-model="model as boolean"
-      class="w-full !justify-start !text-left"
+      class="w-full justify-start! text-left!"
     >
-      <Checkbox
+      <UCheckbox
         v-model="model"
         :input-id="id"
         :disabled="disabled"
         binary
-        size="small"
+        size="sm"
       />
       <div>
         <span>
           {{ capitalize(label) }}
         </span>
-        <Message
-          v-if="helpText"
-          size="small"
-          severity="secondary"
-          variant="simple"
-        >
+        <UAlert v-if="helpText" size="sm" severity="secondary" variant="soft">
           {{ helpText }}
-        </Message>
+        </UAlert>
       </div>
-    </ToggleButton>
+    </USwitch>
   </label>
   <label
     v-else-if="type === 'checkbox'"
     :for="id"
     class="flex gap-2 items-center w-fit"
   >
-    <Checkbox
+    <UCheckbox
       v-model="model"
       :input-id="id"
       binary
       :disabled="disabled"
-      size="small"
-      :pt:box:class="transparent ? '!bg-surface-950 !border-transparent' : ''"
-      :pt:icon:class="transparent ? '!text-white' : ''"
+      size="sm"
     />
     <span
       class="label text-sm text-primary"
-      :class="[
-        !disabled ? 'cursor-pointer' : 'cursor-auto',
-        transparent ? '!text-white' : '',
-      ]"
+      :class="[!disabled ? 'cursor-pointer' : 'cursor-auto']"
     >
       {{ capitalize(label) }}
     </span>
@@ -186,110 +135,77 @@ function updateColor(hexCode: string | undefined) {
     :for="id"
     class="flex flex-col gap-1"
   >
-    <span class="label" :class="transparent ? 'labelTransparent' : ''">
+    <span v-if="label" class="label">
       {{ capitalize(label) }}
     </span>
-    <SelectButton
-      v-model="model"
+    <URadioGroup
+      v-model="model as AcceptableValue"
       :aria-label="label ?? ariaLabel"
-      :options="options"
-      :option-label="optionLabel"
-      :option-value="optionValue"
-      :class="
-        transparent
-          ? '[&>*]:!bg-surface-950 [&>*]:!text-white [&>*[aria-pressed=true]]:!bg-surface-950'
-          : ''
-      "
-      size="small"
+      :items="items"
+      :label-key="labelKey"
+      :value-key="valueKey"
+      size="sm"
     />
   </label>
   <div v-else-if="type === 'select'" class="flex flex-col gap-1">
-    <span class="label" :class="transparent ? 'labelTransparent' : ''">
+    <span v-if="label" class="label">
       {{ capitalize(label) }}
     </span>
-    <Select
-      v-model="model"
+    <USelect
+      v-model="model as AcceptableValue"
       :aria-label="label ?? ariaLabel"
-      :options="options"
-      :option-label="optionLabel"
-      :option-value="optionValue"
+      :items="items"
+      :label-key="labelKey"
+      :value-key="valueKey"
       :input-id="id"
-      class="!border-none"
-      :class="
-        transparent ? '!bg-surface-950 !text-white [&>*]:!text-white' : ''
-      "
-      :pt:label:class="transparent ? '' : ''"
-      :pt:dropdown:class="transparent ? '' : ''"
-      :pt:optionlabel:class="['text-sm', transparent ? '' : '']"
-      size="small"
-    >
-      <template #dropdownicon>
-        <slot name="dropdownicon" />
-      </template>
-      <template #header>
-        <slot name="header" />
-      </template>
-    </Select>
+      :icon="icon"
+      :variant="transparent ? 'subtle' : 'outline'"
+      size="sm"
+    />
   </div>
   <label v-else :for="id" class="flex flex-col gap-1">
-    <span class="label" :class="transparent ? 'labelTransparent' : ''">
+    <span v-if="label" class="label">
       {{ capitalize(label) }}
     </span>
     <div v-if="type === 'color'">
-      <!-- <InputGroup size="small">
-        <InputGroupAddon size="small">
-          <ColorPicker
-            :input-id="id"
-            :model-value="`${(model as string).replace('#', '')}`"
-            size="small"
-            @update:model-value="updateColor"
+      <UFieldGroup>
+        <UPopover>
+          <UButton
+            :disabled="disabled"
+            color="neutral"
+            :variant="transparent ? 'ghost' : 'outline'"
+            :style="chip"
           />
-        </InputGroupAddon>
-        <InputText
-          class="!p-2"
-          :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
+          <template #content>
+            <UColorPicker
+              v-model="model as string"
+              :disabled="disabled"
+              :input-id="id"
+              size="sm"
+            />
+          </template>
+        </UPopover>
+        <UInput
+          v-model="model as string"
+          :variant="transparent ? 'subtle' : 'outline'"
           :disabled="disabled"
-          :model-value="model as string"
-          size="small"
+          size="sm"
           @focus.stop="focusedInput = target ? id : ''"
           @blur.stop="focusedInput = ''"
-          @update:model-value="updateColor"
         />
-      </InputGroup> -->
-      <ColorPicker
-        :input-id="id"
-        :model-value="`${(model as string).replace('#', '')}`"
-        size="small"
-        :pt:preview:class="
-          transparent
-            ? ' !rounded-r-none'
-            : '!rounded-l !rounded-r-none !border !border-r-0 !border-surface-300 !border-solid !p-2'
-        "
-        @update:model-value="updateColor"
-      />
-      <InputText
-        class="!p-1 !rounded-l-none"
-        :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
-        :disabled="disabled"
-        :model-value="model as string"
-        size="small"
-        @focus.stop="focusedInput = target ? id : ''"
-        @blur.stop="focusedInput = ''"
-        @update:model-value="updateColor"
-      />
+      </UFieldGroup>
     </div>
-    <Textarea
+    <UTextarea
       v-else-if="type === 'textarea'"
       :id="id"
       v-model="model as string"
-      class="!border-t-0 !border-l-0 !border-r-0 !p-2"
-      :class="transparent ? '!bg-surface-950 !text-white !border-none' : ''"
+      :variant="transparent ? 'subtle' : 'outline'"
       :disabled="disabled"
-      size="small"
+      size="sm"
       @focus.stop="focusedInput = target ? id : ''"
       @blur.stop="focusedInput = ''"
     />
-    <InputNumber
+    <UInputNumber
       v-else-if="type === 'number'"
       v-model="model as number"
       :input-id="id"
@@ -297,34 +213,24 @@ function updateColor(hexCode: string | undefined) {
       show-buttons
       button-layout="horizontal"
       :step="step"
-      size="small"
+      increment-icon="i-lucide-arrow-right"
+      decrement-icon="i-lucide-arrow-left"
+      size="sm"
       input-class="!w-12"
-    >
-      <template #incrementicon>
-        <span class="pi pi-plus" />
-      </template>
-      <template #decrementicon>
-        <span class="pi pi-minus" />
-      </template>
-    </InputNumber>
-    <InputText
+    />
+    <UInput
       v-else
       :id="id"
       v-model="model as string"
-      class="!p-2"
-      :class="
-        transparent
-          ? '!bg-surface-950 !text-white !border-none'
-          : '!border-primary-200 !border-t-0 !border-r-0 !border-l-0 !rounded-none'
-      "
+      :variant="transparent ? 'subtle' : 'outline'"
       :type="type || 'text'"
       :disabled="disabled"
-      size="small"
+      size="sm"
       @focus.stop="focusedInput = target ? id : ''"
       @blur.stop="focusedInput = ''"
     />
-    <Message v-if="helpText" size="small" severity="secondary" variant="simple">
+    <UAlert v-if="helpText" size="sm" severity="secondary" variant="soft">
       {{ helpText }}
-    </Message>
+    </UAlert>
   </label>
 </template>

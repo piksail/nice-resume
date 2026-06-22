@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
-import Divider from "primevue/divider";
-import FileUpload, { type FileUploadSelectEvent } from "primevue/fileupload";
-import Message from "primevue/message";
 import type { Export, JsonResume } from "@/types";
 import { useLetterStore } from "@/stores/letter";
 import { useProfileStore } from "@/stores/profile";
@@ -12,6 +8,7 @@ import { useResumeStore } from "@/stores/resume";
 import { formatJsonResumeAsResume } from "@/utils/json-resume";
 import { generateStores } from "~/utils/editor";
 import { capitalize } from "@/utils/string";
+import MiniLabel from "~/components/MiniLabel.vue";
 
 const { t: localizer } = useI18n();
 
@@ -40,10 +37,11 @@ function generateRandomData() {
 /**
  * Import exported JSON data from a previous session.
  */
-function importSaveFile(event: FileUploadSelectEvent) {
+function importSaveFile(event: Event) {
   isImportError.value = false;
 
   try {
+    // @ts-expect-error TODO TODO TODO
     const file = event.files[0];
 
     const fileReader = new FileReader();
@@ -104,10 +102,11 @@ function importSaveFile(event: FileUploadSelectEvent) {
 /**
  * Import a JSON Resume schema.
  */
-function importFromJsonResume(event: FileUploadSelectEvent) {
+function importFromJsonResume(event: Event) {
   isImportError.value = false;
 
   try {
+    // @ts-expect-error TODO TODO TODO
     const file = event.files[0];
 
     const fileReader = new FileReader();
@@ -162,91 +161,91 @@ onMounted(() => {
 </script>
 
 <template>
-  <Button
-    icon="pi pi-refresh"
-    variant="outlined"
-    size="small"
-    :aria-label="capitalize($t('toRestart'))"
+  <UButton
+    :label="capitalize($t('toRestart'))"
+    icon="i-lucide-rotate-ccw"
+    variant="outline"
+    size="sm"
     @click="isImportDialogOpen = true"
   />
 
-  <Dialog
-    v-model:visible="isImportDialogOpen"
+  <UModal
+    v-model:open="isImportDialogOpen"
     modal
-    :header="t('resumeTitle')"
-    class="max-w-screen-sm"
+    :title="t('resumeTitle')"
+    class="max-w-lg"
   >
-    <div class="grid grid-cols-2 gap-x-4">
-      <Button
-        icon="pi pi-play"
-        :label="t('resumeContinue')"
-        class="col-span-2"
-        @click="isImportDialogOpen = false"
-      />
-      <Divider class="col-span-2 uppercase text-sm">
-        {{ $t("or") }}
-      </Divider>
-      <p
-        class="col-span-2 text-center text-3xl font-bold text-primary-700 mb-6"
-      >
-        I want to start anew
-      </p>
-      <Button
-        icon="pi pi-file"
-        :label="t('resumeFromScratch')"
-        variant="outlined"
-        @click="resetStores"
-      />
-      <Button
-        icon="pi pi-file-edit"
-        :label="t('resumeFromFakeData')"
-        variant="outlined"
-        @click="generateRandomData"
-      />
-      <Divider class="col-span-2 uppercase text-sm">
-        {{ $t("or") }}
-      </Divider>
-      <p class="col-span-2 text-center text-3xl font-bold text-secondary mb-6">
-        I want to re-use a save file
-      </p>
-      <FileUpload
-        class="size-full"
-        mode="basic"
-        accept="application/json"
-        auto
-        custom-upload
-        choose-icon="pi pi-file-import"
-        :choose-label="t('importSaveFile')"
-        :choose-button-props="{ severity: 'secondary', variant: 'outlined' }"
-        @select="importSaveFile"
-      />
-      <FileUpload
-        class="size-full"
-        mode="basic"
-        accept="application/json"
-        auto
-        custom-upload
-        choose-icon="pi pi-file-arrow-up"
-        :choose-label="t('importJsonResume')"
-        :choose-button-props="{ severity: 'secondary', variant: 'outlined' }"
-        @select="importFromJsonResume"
-      />
-      <div class="col-span-2 mt-4">
-        <Message size="small" variant="simple" class="text-center">
-          *Full compatibility will be soon available. In The meantime,
-          double-check dates, highlights and tags after import, and be informed
-          that profile image and references are not supported yet.
-        </Message>
-        <Message
-          v-if="isImportError"
-          severity="error"
-          class="col-span-2 text-center"
-        >
+    <template #body>
+      <div class="grid space-y-8">
+        <UButton
+          icon="i-lucide-play"
+          :label="t('resumeContinue')"
+          size="xl"
+          variant="soft"
+          @click="isImportDialogOpen = false"
+        />
+        <div class="grid gap-1">
+          <MiniLabel :label="t('startAnew')" />
+          <UButton
+            icon="i-lucide-file"
+            :label="t('resumeFromScratch')"
+            variant="outline"
+            color="neutral"
+            @click="resetStores"
+          />
+          <UButton
+            icon="i-lucide-file-edit"
+            :label="t('resumeFromFakeData')"
+            variant="outline"
+            color="neutral"
+            @click="generateRandomData"
+          />
+        </div>
+        <div class="grid gap-1">
+          <MiniLabel :label="t('useFile')" />
+          <UFileUpload
+            v-slot="{ open }"
+            accept="application/json"
+            auto
+            custom-upload
+            @select="importSaveFile"
+          >
+            <UButton
+              :label="t('importSaveFile')"
+              icon="i-lucide-upload"
+              color="neutral"
+              variant="outline"
+              @click="open()"
+            />
+          </UFileUpload>
+          <UFileUpload
+            v-slot="{ open }"
+            accept="application/json"
+            auto
+            custom-upload
+            @select="importFromJsonResume"
+          >
+            <UButton
+              :label="t('importJsonResume')"
+              icon="i-lucide-file-braces-corner"
+              color="neutral"
+              variant="outline"
+              @click="open()"
+            />
+          </UFileUpload>
+          <UAlert
+            size="sm"
+            variant="outline"
+            description="*Full compatibility will be soon available. In The meantime, double-check dates, highlights and tags after import, and be informed that profile image and references are not supported yet."
+            class="text-center"
+          />
+        </div>
+        <UAlert v-if="isImportError" color="error" class="text-center mt-4">
           Error while importing data from local file.
-        </Message>
+        </UAlert>
       </div>
-    </div>
-  </Dialog>
+    </template>
+  </UModal>
 </template>
 
 <i18n lang="json">
@@ -257,7 +256,9 @@ onMounted(() => {
     "resumeFromScratch": "TODO",
     "resumeFromFakeData": "TODO",
     "importSaveFile": "Emporzhiañ gwared fichennaoueg kent estez",
-    "importJsonResume": "Emporzhiañ JSON Resume fichennaoueg"
+    "importJsonResume": "Emporzhiañ JSON Resume fichennaoueg",
+    "startAnew": "TODO",
+    "useFile": "TODO"
   },
   "de": {
     "resumeTitle": "Wie möchten Sie wieder arbeiten?",
@@ -265,7 +266,9 @@ onMounted(() => {
     "resumeFromScratch": "TODO",
     "resumeFromFakeData": "TODO",
     "importSaveFile": "Datei aus einer früheren Sitzung importieren",
-    "importJsonResume": "JSON Resume Datei importieren"
+    "importJsonResume": "JSON Resume Datei importieren",
+    "startAnew": "TODO",
+    "useFile": "TODO"
   },
   "en": {
     "resumeTitle": "How do you want to start editing?",
@@ -273,7 +276,9 @@ onMounted(() => {
     "resumeFromScratch": "Start from scratch",
     "resumeFromFakeData": "Edit pre-filled data",
     "importSaveFile": "Import a save file from a previous session",
-    "importJsonResume": "Import a JSON Resume file"
+    "importJsonResume": "Import a JSON Resume file",
+    "startAnew": "New project",
+    "useFile": "Use save file"
   },
   "es": {
     "resumeTitle": "¿Cómo quieres empezar?",
@@ -281,7 +286,9 @@ onMounted(() => {
     "resumeFromScratch": "Empezar desde el principio",
     "resumeFromFakeData": "TODO",
     "importSaveFile": "Importar un archivo de una sesión anterior",
-    "importJsonResume": "Importar un archivo de JSON Resume"
+    "importJsonResume": "Importar un archivo de JSON Resume",
+    "startAnew": "TODO",
+    "useFile": "TODO"
   },
   "fr": {
     "resumeTitle": "Comment souhaitez-vous commencer ?",
@@ -289,7 +296,9 @@ onMounted(() => {
     "resumeFromScratch": "Commencer à partir de rien",
     "resumeFromFakeData": "Reprendre à partir d'un exemple",
     "importSaveFile": "Importer une sauvegarde d'une session précédente",
-    "importJsonResume": "Importer un fichier JSON Resume"
+    "importJsonResume": "Importer un fichier JSON Resume",
+    "startAnew": "Nouveau document",
+    "useFile": "Réutiliser une sauvegarde"
   },
   "it": {
     "resumeTitle": "TODO?",
@@ -297,7 +306,9 @@ onMounted(() => {
     "resumeFromScratch": "TODO",
     "resumeFromFakeData": "TODO",
     "importSaveFile": "TODO",
-    "importJsonResume": "TODO"
+    "importJsonResume": "TODO",
+    "startAnew": "TODO",
+    "useFile": "TODO"
   }
 }
 </i18n>

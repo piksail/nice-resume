@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
-import { useConfirm } from "primevue/useconfirm";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import {
@@ -30,7 +28,7 @@ const { t } = useI18n({
 
 const { categories } = storeToRefs(useResumeStore());
 
-const confirm = useConfirm();
+const confirm = useConfirmDialog();
 
 const types = ref<Category["type"][]>(categoryTypes);
 const layouts = ref<Category["layout"][]>(categoryLayouts);
@@ -114,53 +112,40 @@ function addTag(
   );
 }
 
-function askBeforeRemoveCategory(categoryIndex: number) {
+async function askBeforeRemoveCategory(categoryIndex: number) {
   indexToRemove.value = categoryIndex;
-  confirm.require({
-    header: capitalize(t("removalConfirmation")),
-    message: t("confirmCategoryDeletion", {
+  const confirmed = await confirm({
+    title: capitalize(t("removalConfirmation")),
+    description: t("confirmCategoryDeletion", {
       categoryName: categories.value[indexToRemove.value]?.name,
     }),
-    rejectProps: {
-      label: capitalize(t("toCancel")),
-      severity: "secondary",
-      outlined: true,
-    },
-    acceptProps: {
-      label: capitalize(t("toRemove")),
-      severity: "danger",
-    },
-    accept: () => {
-      remove(categories.value, indexToRemove.value);
-    },
-    reject: () => {},
+    cancelLabel: t("toCancel"),
+    confirmLabel: t("toRemove"),
   });
+  if (confirmed) {
+    remove(categories.value, indexToRemove.value);
+  }
 }
 
-function askBeforeRemoveCategoryEntry(category: Category, entryIndex: number) {
+async function askBeforeRemoveCategoryEntry(
+  category: Category,
+  entryIndex: number,
+) {
   indexToRemove.value = entryIndex;
-  confirm.require({
-    header: capitalize(t("removalConfirmation")),
-    message: t("confirmCategoryEntryDeletion", {
+  const confirmed = await confirm({
+    title: capitalize(t("removalConfirmation")),
+    description: t("confirmCategoryEntryDeletion", {
       entryTitle: getEntryHeading(
         category.entries[indexToRemove.value]!,
         indexToRemove.value,
       ),
     }),
-    rejectProps: {
-      label: capitalize(t("toCancel")),
-      severity: "secondary",
-      outlined: true,
-    },
-    acceptProps: {
-      label: capitalize(t("toRemove")),
-      severity: "danger",
-    },
-    accept: () => {
-      remove(category.entries, indexToRemove.value);
-    },
-    reject: () => {},
+    cancelLabel: t("toCancel"),
+    confirmLabel: t("toRemove"),
   });
+  if (confirmed) {
+    remove(category.entries, indexToRemove.value);
+  }
 }
 
 function changeCategoryType(category: Category, value: Category["type"]) {
@@ -200,13 +185,29 @@ function toggleEntryVisibility(entry: Entry) {
     v-for="(category, categoryIndex) in categories"
     :id="category.name"
     :key="categoryIndex"
+    :title="capitalize(category.name)"
+    :icon="getCategoryIconClass(category.type)"
     :hidden="!category.isVisible"
     :locked="category.isLocked"
   >
+    <template #actions>
+      <ListActions
+        :index="categoryIndex"
+        :is-header="true"
+        :list-length="categories.length"
+        @move-up="
+          moveCategory(moveUp, categories, categoryIndex, category.name)
+        "
+        @move-down="
+          moveCategory(moveDown, categories, categoryIndex, category.name)
+        "
+        @remove="askBeforeRemoveCategory(categoryIndex)"
+      />
+    </template>
     <template #header>
       <template v-if="category.isLocked">
         <span>
-          <i class="pi" :class="getCategoryIconClass(category.type)" />
+          <i :class="getCategoryIconClass(category.type)" />
           {{ category.name }}
         </span>
       </template>
@@ -223,9 +224,9 @@ function toggleEntryVisibility(entry: Entry) {
             type="select"
             :label="$t('type')"
             :model-value="category.type"
-            option-label="label"
-            option-value="value"
-            :options="
+            label-key="label"
+            value-key="value"
+            :items="
               types.map((type) => ({
                 label: capitalize($t(type)),
                 value: type,
@@ -238,9 +239,9 @@ function toggleEntryVisibility(entry: Entry) {
             v-model="category.layout"
             type="select"
             :label="$t('layout')"
-            option-label="label"
-            option-value="value"
-            :options="
+            label-key="label"
+            value-key="value"
+            :items="
               layouts.map((layout) => ({
                 label: capitalize($t(layout)),
                 value: layout,
@@ -248,74 +249,49 @@ function toggleEntryVisibility(entry: Entry) {
             "
           />
         </div>
-        <ListActions
-          :index="categoryIndex"
-          :is-header="true"
-          :list-length="categories.length"
-          @move-up="
-            moveCategory(moveUp, categories, categoryIndex, category.name)
-          "
-          @move-down="
-            moveCategory(moveDown, categories, categoryIndex, category.name)
-          "
-          @remove="askBeforeRemoveCategory(categoryIndex)"
-        />
       </template>
       <template v-else>
         <span>{{ category.name }}</span>
       </template>
     </template>
     <template #icons>
-      <Button
-        :icon="category.isLocked ? 'pi pi-lock-open' : 'pi pi-lock'"
+      <UButton
+        :icon="category.isLocked ? 'i-lucide-lock-open' : 'i-lucide-lock'"
         :aria-label="
           category.isLocked ? t('unlockCategory') : t('lockCategory')
         "
         rounded
-        variant="text"
+        variant="ghost"
         :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryLock(category)"
       />
-      <Button
+      <UButton
         v-if="!category.isLocked"
-        :icon="category.isVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
+        :icon="category.isVisible ? 'i-lucide-eye-closed' : 'i-lucide-eye'"
         :aria-label="category.isVisible ? t('hideCategory') : t('showCategory')"
         rounded
-        variant="text"
+        variant="ghost"
         :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryVisibility(category)"
       />
     </template>
     <ul v-if="category.entries.length" class="flex flex-col gap-10 mb-4">
       <li v-for="(entry, entryIndex) in category.entries" :key="entryIndex">
-        <Fieldset
-          :legend="getEntryHeading(entry, entryIndex)"
-          toggleable
-          class="!border-white/10"
-          pt:legend:class="!border-none !bg-transparent group"
-          pt:toggleicon:class="!text-white/50 !font-normal group-hover:!text-white"
-          pt:legendlabel:class="label labelTransparent !font-normal group-hover:!text-white"
-        >
+        <Fieldset :legend="getEntryHeading(entry, entryIndex)" toggleable>
           <header class="flex items-center justify-between">
             <div
               :id="getEntryHeading(entry, entryIndex)"
-              class="flex items-center gap-5 uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10 text-white"
+              class="flex items-center gap-5 uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10"
             >
-              <span :class="!entry.isVisible ? 'line-through' : ''">
+              <span :class="!entry.isVisible ? 'text-dimmed line-through' : ''">
                 {{ getEntryHeading(entry, entryIndex) }}
               </span>
-              <Button
-                :icon="entry.isVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
+              <UButton
+                :icon="entry.isVisible ? 'i-lucide-eye-closed' : 'i-lucide-eye'"
                 :aria-label="entry.isVisible ? t('hideEntry') : t('showEntry')"
-                variant="text"
+                variant="ghost"
                 rounded
-                size="small"
-                :class="false ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
-                :pt:icon:class="
-                  false
-                    ? ''
-                    : '!text-white/50 !text-xl hover:!text-white bg-transparent transition'
-                "
+                size="sm"
                 @click="toggleEntryVisibility(entry)"
               />
             </div>
@@ -405,23 +381,22 @@ function toggleEntryVisibility(entry: Entry) {
                   />
                 </li>
               </ul>
-              <Button as-child>
-                <button
-                  class="button slotButton slotButtonSmall"
-                  @click="
-                    addHighlight(
-                      entry,
-                      entryIndex,
-                      categoryIndex,
-                      category.layout,
-                    )
-                  "
-                >
-                  <span class="uppercase text-sm">
-                    {{ capitalize(`${$t("toAdd")} ${$t("highlight")}`) }}
-                  </span>
-                </button>
-              </Button>
+              <UButton
+                icon="i-lucide-list-plus"
+                variant="outline"
+                size="sm"
+                class="w-[70%]"
+                @click="
+                  addHighlight(
+                    entry,
+                    entryIndex,
+                    categoryIndex,
+                    category.layout,
+                  )
+                "
+              >
+                {{ capitalize(`${$t("toAdd")} ${$t("highlight")}`) }}
+              </UButton>
             </label>
             <label class="flex flex-col gap-1" for="tags">
               <span class="label labelTransparent">
@@ -455,43 +430,41 @@ function toggleEntryVisibility(entry: Entry) {
                   />
                 </li>
               </ul>
-              <Button as-child>
-                <button
-                  class="button slotButton slotButtonSmall"
-                  @click="
-                    addTag(entry, entryIndex, categoryIndex, category.layout)
-                  "
-                >
-                  <span class="uppercase text-sm">
-                    {{ capitalize(`${$t("toAdd")} ${$t("tag")}`) }}
-                  </span>
-                </button>
-              </Button>
+              <UButton
+                icon="i-lucide-tag"
+                variant="outline"
+                size="sm"
+                class="w-[70%]"
+                @click="
+                  addTag(entry, entryIndex, categoryIndex, category.layout)
+                "
+              >
+                {{ capitalize(`${$t("toAdd")} ${$t("tag")}`) }}
+              </UButton>
             </label>
           </div>
         </Fieldset>
       </li>
     </ul>
     <template #footer>
-      <footer class="flex justify-center">
-        <Button
-          class="uppercase font-black tracking-widest mx-auto mt-8"
+      <footer>
+        <UButton
+          icon="i-lucide-plus"
+          variant="soft"
+          class="w-full"
+          :trailing-icon="getCategoryIconClass(category.type)"
           @click="addEntry(category)"
         >
           {{ capitalize(`${$t("toAdd")} ${$t("entry")}`) }}
-        </Button>
+        </UButton>
       </footer>
     </template>
   </EditorCategory>
 
-  <footer class="flex justify-center">
-    <Button as-child>
-      <button class="button slotButton w-full shadow-none" @click="addCategory">
-        <span class="font-black tracking-widest uppercase">
-          {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}
-        </span>
-      </button>
-    </Button>
+  <footer class="">
+    <UButton icon="i-lucide-plus" variant="outline" block @click="addCategory">
+      {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}
+    </UButton>
   </footer>
 </template>
 

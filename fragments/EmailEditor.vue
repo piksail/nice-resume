@@ -13,8 +13,11 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
 </script>
 
 <template>
-  <EditorCategory id="Signature">
-    <template #header>{{ capitalize($t("signature")) }}</template>
+  <EditorCategory
+    id="Signature"
+    :title="capitalize(t('signature'))"
+    icon="i-lucide-signature"
+  >
     <div class="formBlock">
       <Field
         id="isDetailClickable"

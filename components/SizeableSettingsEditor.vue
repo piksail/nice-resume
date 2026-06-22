@@ -16,9 +16,9 @@ const { propertyName, settings } = defineProps<{
         :id="`${propertyName}WidthType`"
         v-model="settings.widthType"
         type="selectbutton"
-        option-label="label"
-        option-value="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           ['auto', 'fit-content', 'custom'].map((type) => {
             if (type === 'fit-content') {
               return {

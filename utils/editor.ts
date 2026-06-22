@@ -153,16 +153,16 @@ export function generateStores(
 
 export function getCategoryIconClass(categoryType: Category["type"]) {
   const iconMapper: { [key in Category["type"]]: string } = {
-    award: "pi-trophy",
-    certificate: "pi-verified",
-    education: "pi-graduation-cap",
-    interest: "pi-heart",
-    language: "pi-language",
-    project: "pi-box",
-    publication: "pi-book",
-    skill: "pi-wrench",
-    voluntary: "pi-face-smile",
-    work: "pi-briefcase",
+    award: "i-lucide-trophy",
+    certificate: "i-lucide-verified",
+    education: "i-lucide-graduation-cap",
+    interest: "i-lucide-heart",
+    language: "i-lucide-languages",
+    project: "i-lucide-box",
+    publication: "i-lucide-book",
+    skill: "i-lucide-wrench",
+    voluntary: "i-lucide-face-smile",
+    work: "i-lucide-briefcase-business",
   };
   return iconMapper[categoryType];
 }

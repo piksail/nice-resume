@@ -22,6 +22,9 @@ import type {
   TextSeparator,
 } from "@/types";
 
+// export const APP_NAME = "Pebroù Ruz";
+export const APP_NAME = "Pebr";
+
 export const A4_HEIGHT = 297; // In mm
 export const A4_WIDTH = 210; // In mm
 export const A4_RATIO = A4_HEIGHT / A4_WIDTH;
@@ -97,13 +100,13 @@ export const themes: Theme[] = [
 ];
 
 export const textSeparators: TextSeparator[] = [
+  "TODO NONE",
   "|",
   "-",
   "·",
   "*",
   ">",
   ",",
-  " ",
 ];
 
 export const listMarkerPositions: ListMarkerPosition[] = ["inside", "outside"];
@@ -348,6 +351,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 1,
+    beforeSeparator: "TODO NONE",
   },
   entryPeriod: {
     font: "inherit",
@@ -365,6 +369,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 2,
+    beforeSeparator: "TODO NONE",
   },
   entryOrganization: {
     font: "inherit",
@@ -382,6 +387,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 3,
+    beforeSeparator: "TODO NONE",
   },
   entryLocation: {
     font: "inherit",
@@ -399,6 +405,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 4,
+    beforeSeparator: "TODO NONE",
   },
   entrySummary: {
     font: "inherit",

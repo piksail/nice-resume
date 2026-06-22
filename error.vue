@@ -22,9 +22,9 @@ const error = useError();
         </p>
         <p v-if="error">{{ error.message }}</p>
         <NuxtLink :to="localePath('/')">
-          <Button class="uppercase font-black tracking-widest mx-auto mt-8">
+          <UButton class="uppercase font-black tracking-widest mx-auto mt-8">
             {{ t("goToHome") }}
-          </Button>
+          </UButton>
         </NuxtLink>
       </Card>
     </section>
