@@ -49,7 +49,7 @@ const thirdInputFontWeight = ref(400);
     </Head>
     <section class="p-20 flex justify-center">
       <div class="mx-auto">
-        <h1 class="text-justify drop-shadow-lg">
+        <h1 class="text-justify drop-shadow-lg light:drop-shadow-none">
           <span
             class="text-5xl lg:text-6xl xl:text-9xl font-bold tracking-wide"
           >
@@ -82,26 +82,23 @@ const thirdInputFontWeight = ref(400);
           <li>{{ t("noPayment") }}</li>
           <li>{{ t("privacyFriendly") }}</li>
         </ul>
-        <div class="flex items-center gap-7 mt-24">
-          <NuxtLink :to="localePath('/editor')">
-            <UButton
-              class="uppercase font-black tracking-widest shadow-xl text-white"
-              size="xl"
-            >
-              {{ t("startEditing") }}
-            </UButton>
-          </NuxtLink>
-          <NuxtLink :to="localePath('/about')">
-            <UButton
-              class="uppercase font-black tracking-widest shadow-xl"
-              size="xl"
-              variant="outline"
-              color="neutral"
-              pt:root:class="!text-white hover:!text-neutral-900"
-            >
-              {{ t("learnMore") }}
-            </UButton>
-          </NuxtLink>
+        <div class="flex items-center gap-5 mt-24">
+          <UButton
+            :to="localePath('/editor')"
+            class="uppercase font-bold tracking-wide shadow-xl"
+            size="xl"
+          >
+            {{ t("startEditing") }}
+          </UButton>
+          <UButton
+            :to="localePath('/about')"
+            class="uppercase font-bold tracking-wide shadow-xl"
+            size="xl"
+            variant="outline"
+            color="neutral"
+          >
+            {{ t("learnMore") }}
+          </UButton>
         </div>
       </div>
       <div class="hidden sm:block skew-y-12 mx-auto mt-14 group">
@@ -165,14 +162,14 @@ const thirdInputFontWeight = ref(400);
           </div>
         </div>
         <div
-          class="hidden transition-all group-hover:bg-neutral-800/90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-neutral-800 p-6 rounded"
+          class="hidden transition-all group-hover:bg-neutral-800/90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-neutral-800 light:bg-neutral-300 p-6 rounded"
         >
-          <div class="bg-neutral-950 h-9 rounded" />
-          <div class="bg-neutral-950 h-9 rounded" />
-          <div class="bg-neutral-950 h-9 rounded" />
-          <div class="bg-neutral-950 h-9 rounded" />
-          <div class="bg-neutral-950 h-9 rounded" />
-          <div class="bg-neutral-950 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
         </div>
       </div>
     </section>
@@ -181,7 +178,7 @@ const thirdInputFontWeight = ref(400);
         class="grid grid-cols-1 lg:grid-cols-2 grid-rows-4 lg:grid-flow-col gap-3"
       >
         <li
-          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8"
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
@@ -217,7 +214,7 @@ const thirdInputFontWeight = ref(400);
           </Field>
         </li>
         <li
-          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8"
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
@@ -265,7 +262,7 @@ const thirdInputFontWeight = ref(400);
           </div>
         </li>
         <li
-          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8 row-span-2"
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8 row-span-2"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
@@ -361,7 +358,7 @@ const thirdInputFontWeight = ref(400);
           </div>
         </li>
         <li
-          class="bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-8 row-span-4"
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8 row-span-4"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
@@ -499,14 +496,13 @@ const thirdInputFontWeight = ref(400);
         <i class="font-serif text-primary">whenever you want</i>
       </p>
       <div class="flex justify-center">
-        <NuxtLink :to="localePath('/editor')">
-          <UButton
-            class="uppercase font-black tracking-widest shadow-xl animate-pulse"
-            size="lg"
-          >
-            {{ t("startEditing") }}
-          </UButton>
-        </NuxtLink>
+        <UButton
+          :to="localePath('/editor')"
+          class="uppercase font-bold tracking-wide shadow-xl"
+          size="xl"
+        >
+          {{ t("startEditing") }}
+        </UButton>
       </div>
     </section>
     <NuxtPage />
