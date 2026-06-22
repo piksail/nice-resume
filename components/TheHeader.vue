@@ -20,18 +20,6 @@ const localePath = useLocalePath();
 const { documentType } = storeToRefs(useEditorStore());
 const { theme, isThemeCustomized } = storeToRefs(useProfileStore());
 
-// TODO enable below code and change moon/sun icon accordingly
-// const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-// if (darkThemeMq.matches) {
-//   // Theme set to dark.
-// } else {
-//   // Theme set to light.
-// }
-
-// function toggleDarkMode() {
-//   document.documentElement.classList.toggle("dark-mode");
-// }
-
 function uncustomizeTheme() {
   // When user switches themes, it is expected to see the result
   // Hence the off state of the customization toggler
