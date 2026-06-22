@@ -17,8 +17,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
       :icon="isHeader ? 'i-lucide-arrow-up' : 'i-lucide-circle-arrow-up'"
       :aria-label="capitalize($t('toMoveUp'))"
       :variant="isHeader ? 'ghost' : 'ghost'"
-      rounded
-      :severity="isHeader ? 'primary' : undefined"
+      color="neutral"
       size="sm"
       @click="$emit('moveUp')"
     />
@@ -27,8 +26,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
       :icon="isHeader ? 'i-lucide-arrow-down' : 'i-lucide-circle-arrow-down'"
       :aria-label="capitalize($t('toMoveDown'))"
       :variant="isHeader ? 'ghost' : 'ghost'"
-      rounded
-      :severity="isHeader ? 'primary' : undefined"
+      color="neutral"
       size="sm"
       @click="$emit('moveDown')"
     />
@@ -37,7 +35,7 @@ defineEmits(["moveDown", "moveUp", "remove"]);
       :aria-label="capitalize($t('toRemove'))"
       :variant="isHeader ? 'ghost' : 'ghost'"
       rounded
-      severity="danger"
+      color="error"
       size="sm"
       @click="$emit('remove')"
     />

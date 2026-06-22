@@ -236,6 +236,15 @@ export function getListMarker(value: ListMarker) {
   }
 }
 
+export function getLayoutIconClass(categoryLayout: Category["layout"]) {
+  const iconMapper: { [key in Category["layout"]]: string } = {
+    aside: "i-lucide-panel-left-close",
+    full: "i-lucide-square",
+    half: "i-lucide-columns-2",
+  };
+  return iconMapper[categoryLayout];
+}
+
 /**
  * Convert 1/2/3/4 to top/right/bottom/left.
  */

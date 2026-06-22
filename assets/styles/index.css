@@ -38,6 +38,6 @@
     @apply flex items-center justify-between gap-4;
   }
   .label {
-    @apply text-primary text-sm;
+    @apply text-primary text-xs;
   }
 }

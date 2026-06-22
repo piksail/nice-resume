@@ -3256,9 +3256,9 @@ export const categoryTypes: Array<Category["type"]> = [
 ];
 
 export const categoryLayouts: Array<Category["layout"]> = [
-  "aside",
   "full",
   "half",
+  "aside",
 ];
 
 export const assetTypes: Array<Asset["type"]> = [

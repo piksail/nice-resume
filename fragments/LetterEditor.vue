@@ -57,7 +57,7 @@ function addSenderDetail() {
       </FormBlockRow>
       <label class="flex flex-col" for="senderDetails">
         <template v-if="isHeaderSimple">
-          <span class="label labelTransparent">
+          <span class="label">
             {{ capitalize($t("senderDetails")) }}
           </span>
           <ul
@@ -99,7 +99,7 @@ function addSenderDetail() {
         </template>
       </label>
       <label class="flex flex-col" for="recipientDetails">
-        <span class="label labelTransparent">
+        <span class="label">
           {{ capitalize($t("recipientDetails")) }}
         </span>
         <ul
@@ -164,7 +164,7 @@ function addSenderDetail() {
     <template #header>{{ capitalize($t("body")) }}</template>
     <div class="formBlock">
       <label class="flex flex-col" for="paragraphList">
-        <span class="label labelTransparent">
+        <span class="label">
           {{ capitalize($t("paragraphs")) }}
         </span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">

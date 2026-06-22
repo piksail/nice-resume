@@ -25,7 +25,6 @@ const isExportDialogOpen = ref(false);
 
 const isJsonResumeExportDialogOpen = ref(false);
 const jsonResumeExportSteps = ref<string[]>([]);
-const activeStep = ref("profile");
 const jsonResume = ref<JsonResume>();
 
 const isExportError = ref(false);
@@ -148,6 +147,9 @@ function exportResumeToJsonResume() {
     <template #body>
       <UAlert
         icon="i-lucide-info"
+        title="JSON Resume"
+        description="Double-check your data and fill in missing blank to match the JSON Resume schema."
+        variant="subtle"
         :actions="[
           {
             href: jsonResumeSchemaUrl,
@@ -156,10 +158,10 @@ function exportResumeToJsonResume() {
             class: 'underline',
           },
         ]"
+        class="mb-5"
       />
       <div v-if="jsonResume" class="card flex justify-center">
         <UStepper
-          v-model="activeStep"
           :items="
             jsonResumeExportSteps.map((step) => ({
               slot: `${step}` as const,

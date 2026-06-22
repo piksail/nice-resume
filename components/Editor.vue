@@ -117,18 +117,6 @@ const items = computed(() => {
             :items="items"
             class="data-[orientation=vertical]:w-60"
           />
-          <!-- <nav
-            class="flex flex-col gap-3 text-white p-4 pr-0 lg:p-8 text-sm md:text-base"
-          >
-            <div
-              class="xl:hidden flex gap-2 items-center w-fit text-primary-400"
-            >
-              <i class="i-lucide-file-check" />
-              <a href="#Preview" class="underline-offset-4 hover:underline">
-                {{ capitalize($t("preview")) }}
-              </a>
-            </div>
-          </nav> -->
         </UScrollArea>
       </aside>
       <main class="relative h-[calc(100vh-80px)] overflow-y-auto flex flex-1">

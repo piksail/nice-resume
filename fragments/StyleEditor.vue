@@ -957,7 +957,7 @@ async function askBeforeResetStyle() {
   </USlideover>
 
   <UButton
-    icon="i-lucide-file-sliders"
+    icon="i-lucide-columns-3-cog"
     size="sm"
     color="neutral"
     variant="link"
@@ -968,7 +968,7 @@ async function askBeforeResetStyle() {
   <Field
     v-model="isThemeCustomized"
     type="toggle"
-    :label="`${capitalize($t('theme'))} ${t('onLabel')}`"
+    :label="t('onLabel')"
     :icon="isThemeCustomized ? 'i-lucide-wrench-off' : 'i-lucide-eye'"
   />
 </template>
@@ -977,7 +977,6 @@ async function askBeforeResetStyle() {
 {
   "br": {
     "onLabel": "TODO",
-    "offLabel": "TODO",
     "iconFirst": "TODO",
     "toTheRight": "TODO",
     "howToGapMasonry": "TODO",
@@ -985,15 +984,13 @@ async function askBeforeResetStyle() {
   },
   "de": {
     "onLabel": "angepasst",
-    "offLabel": "nicht angepasst",
     "iconFirst": "TODO",
     "toTheRight": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "en": {
-    "onLabel": "customized",
-    "offLabel": "not customized",
+    "onLabel": "Apply own customization",
     "iconFirst": "Icon first",
     "toTheRight": "To the right",
     "howToGapMasonry": "Vertical gap is handled with category top and bottom margins.",
@@ -1001,15 +998,13 @@ async function askBeforeResetStyle() {
   },
   "es": {
     "onLabel": "TODO",
-    "offLabel": "TODO",
     "iconFirst": "TODO",
     "toTheRight": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "fr": {
-    "onLabel": "modifié",
-    "offLabel": "non modifié",
+    "onLabel": "Appliquer mes modifications",
     "iconFirst": "Icône d'abord",
     "toTheRight": "À droite",
     "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie.",

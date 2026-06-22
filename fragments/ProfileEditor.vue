@@ -107,13 +107,13 @@ function changeContactDetaiType(
       />
       <label class="flex flex-col" for="contactDetails">
         <div class="w-[70%] grid grid-cols-4 gap-x-3">
-          <span class="label labelTransparent col-span-2">
+          <span class="label col-span-2">
             {{ capitalize($t("contactDetails")) }}
           </span>
-          <span class="label labelTransparent">
+          <span class="label">
             {{ capitalize($t("socialNetwork")) }}
           </span>
-          <span class="label labelTransparent">
+          <span class="label">
             {{ capitalize($t("icon")) }}
           </span>
         </div>

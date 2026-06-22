@@ -140,12 +140,29 @@ const chip = computed(() => ({ backgroundColor: model.value as string }));
     </span>
     <URadioGroup
       v-model="model as AcceptableValue"
+      orientation="horizontal"
       :aria-label="label ?? ariaLabel"
       :items="items"
       :label-key="labelKey"
       :value-key="valueKey"
       size="sm"
-    />
+      variant="table"
+    >
+      <template #label="{ item }">
+        <div class="flex items-center gap-1">
+          <span>{{ item.label }}</span>
+          <UIcon :name="item.icon" class="size-5" />
+        </div>
+      </template>
+    </URadioGroup>
+    <!-- <URadioGroup
+      v-model="model as AcceptableValue"
+      :aria-label="label ?? ariaLabel"
+      :items="items"
+      :label-key="labelKey"
+      :value-key="valueKey"
+      size="sm"
+    /> -->
   </label>
   <div v-else-if="type === 'select'" class="flex flex-col gap-1">
     <span v-if="label" class="label">

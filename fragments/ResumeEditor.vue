@@ -237,7 +237,7 @@ function toggleEntryVisibility(entry: Entry) {
           <Field
             :id="`categoryList${categoryIndex}Layout`"
             v-model="category.layout"
-            type="select"
+            type="selectbutton"
             :label="$t('layout')"
             label-key="label"
             value-key="value"
@@ -245,6 +245,7 @@ function toggleEntryVisibility(entry: Entry) {
               layouts.map((layout) => ({
                 label: capitalize($t(layout)),
                 value: layout,
+                icon: getLayoutIconClass(layout),
               }))
             "
           />
@@ -262,7 +263,6 @@ function toggleEntryVisibility(entry: Entry) {
         "
         rounded
         variant="ghost"
-        :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryLock(category)"
       />
       <UButton
@@ -271,7 +271,6 @@ function toggleEntryVisibility(entry: Entry) {
         :aria-label="category.isVisible ? t('hideCategory') : t('showCategory')"
         rounded
         variant="ghost"
-        :class="category.isVisible ? '' : '!text-white'"
         @click="toggleCategoryVisibility(category)"
       />
     </template>
@@ -281,7 +280,7 @@ function toggleEntryVisibility(entry: Entry) {
           <header class="flex items-center justify-between">
             <div
               :id="getEntryHeading(entry, entryIndex)"
-              class="flex items-center gap-5 uppercase tracking-widest font-semibold text-lg mb-5 scroll-mt-10"
+              class="flex items-center gap-5 uppercase tracking-widest font-semibold text-lg scroll-mt-10"
             >
               <span :class="!entry.isVisible ? 'text-dimmed line-through' : ''">
                 {{ getEntryHeading(entry, entryIndex) }}
@@ -344,7 +343,7 @@ function toggleEntryVisibility(entry: Entry) {
               />
             </template>
             <label class="flex flex-col gap-1" for="highlights">
-              <span class="label labelTransparent">
+              <span class="label">
                 {{ capitalize($t("highlights")) }}
               </span>
               <ul
@@ -399,7 +398,7 @@ function toggleEntryVisibility(entry: Entry) {
               </UButton>
             </label>
             <label class="flex flex-col gap-1" for="tags">
-              <span class="label labelTransparent">
+              <span class="label">
                 {{ capitalize($t("tags")) }}
               </span>
               <ul
