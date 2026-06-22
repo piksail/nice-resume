@@ -411,7 +411,7 @@ function exportResumeToJsonResume() {
               <UButton
                 icon="i-lucide-plus"
                 :label="capitalize(`${$t('toAdd')} ${$t('reference')}`)"
-                variant="outline"
+                variant="soft"
                 size="sm"
                 @click="
                   addReference(

@@ -88,7 +88,7 @@ function addSenderDetail() {
             </li>
             <UButton
               icon="i-lucide-contact"
-              variant="outline"
+              variant="soft"
               size="sm"
               class="w-[70%]"
               @click="addSenderDetail"
@@ -130,7 +130,7 @@ function addSenderDetail() {
           </li>
           <UButton
             icon="i-lucide-list-plus"
-            variant="outline"
+            variant="soft"
             size="sm"
             class="w-[70%]"
             @click="addRecipientDetail"
@@ -193,7 +193,7 @@ function addSenderDetail() {
           </li>
           <UButton
             icon="i-lucide-list-plus"
-            variant="outline"
+            variant="soft"
             size="sm"
             class="w-[70%]"
             @click="addParagraph"

@@ -194,7 +194,7 @@ function changeContactDetaiType(
         </ul>
         <UButton
           icon="i-lucide-contact"
-          variant="outline"
+          variant="soft"
           size="sm"
           class="w-[70%]"
           @click="addContactDetail"

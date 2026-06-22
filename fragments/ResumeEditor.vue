@@ -369,7 +369,7 @@ function toggleEntryVisibility(entry: Entry) {
               </ul>
               <UButton
                 icon="i-lucide-list-plus"
-                variant="outline"
+                variant="soft"
                 size="sm"
                 class="w-[70%]"
                 :disabled="category.isLocked"
@@ -419,7 +419,7 @@ function toggleEntryVisibility(entry: Entry) {
               </ul>
               <UButton
                 icon="i-lucide-tag"
-                variant="outline"
+                variant="soft"
                 size="sm"
                 class="w-[70%]"
                 :disabled="category.isLocked"
@@ -451,7 +451,7 @@ function toggleEntryVisibility(entry: Entry) {
   </EditorCategory>
 
   <footer class="">
-    <UButton icon="i-lucide-plus" variant="outline" block @click="addCategory">
+    <UButton icon="i-lucide-plus" variant="soft" block @click="addCategory">
       {{ capitalize(`${$t("toAdd")} ${$t("category")}`) }}
     </UButton>
   </footer>
