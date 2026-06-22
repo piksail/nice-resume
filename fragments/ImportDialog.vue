@@ -37,63 +37,54 @@ function generateRandomData() {
 /**
  * Import exported JSON data from a previous session.
  */
-function importSaveFile(event: Event) {
+async function importSaveFile(event: Event) {
   isImportError.value = false;
 
   try {
-    // @ts-expect-error TODO TODO TODO
-    const file = event.files[0];
-
-    const fileReader = new FileReader();
-    fileReader.readAsText(file, "UTF-8");
-    fileReader.onload = function (fileReaderEvent) {
-      if (!fileReaderEvent.target?.result) {
-        isImportError.value = true;
-        return;
-      }
-
-      const toImport: Export = JSON.parse(
-        fileReaderEvent.target.result.toString(),
-      );
-      if (!toImport.isNiceResumeExport) {
-        isImportError.value = true;
-        return;
-      }
-
-      Object.entries(toImport.profile).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (profile[key]) {
-          // @ts-expect-error Build object on the fly
-          profile[key].value = value;
-        }
-      });
-      Object.entries(toImport.resume).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (resume[key]) {
-          // @ts-expect-error Build object on the fly
-          resume[key].value = value;
-        }
-      });
-      Object.entries(toImport.letter).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (letter[key]) {
-          // @ts-expect-error Build object on the fly
-          letter[key].value = value;
-        }
-      });
-      Object.entries(toImport.email).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (letter[key]) {
-          // @ts-expect-error Build object on the fly
-          letter[key].value = value;
-        }
-      });
-
-      isImportDialogOpen.value = false;
-    };
-    fileReader.onerror = function () {
+    const input = event.currentTarget as HTMLInputElement;
+    if (!input || !input.files?.length || !input.files[0]) {
       isImportError.value = true;
-    };
+      return;
+    }
+
+    const file = input.files[0];
+    const text = await file.text();
+    const toImport: Export = JSON.parse(text);
+    if (!toImport.isNiceResumeExport) {
+      isImportError.value = true;
+      return;
+    }
+
+    Object.entries(toImport.profile).forEach(([key, value]) => {
+      // @ts-expect-error Build object on the fly
+      if (profile[key]) {
+        // @ts-expect-error Build object on the fly
+        profile[key].value = value;
+      }
+    });
+    Object.entries(toImport.resume).forEach(([key, value]) => {
+      // @ts-expect-error Build object on the fly
+      if (resume[key]) {
+        // @ts-expect-error Build object on the fly
+        resume[key].value = value;
+      }
+    });
+    Object.entries(toImport.letter).forEach(([key, value]) => {
+      // @ts-expect-error Build object on the fly
+      if (letter[key]) {
+        // @ts-expect-error Build object on the fly
+        letter[key].value = value;
+      }
+    });
+    Object.entries(toImport.email).forEach(([key, value]) => {
+      // @ts-expect-error Build object on the fly
+      if (letter[key]) {
+        // @ts-expect-error Build object on the fly
+        letter[key].value = value;
+      }
+    });
+
+    isImportDialogOpen.value = false;
   } catch {
     isImportError.value = true;
   }
@@ -102,44 +93,35 @@ function importSaveFile(event: Event) {
 /**
  * Import a JSON Resume schema.
  */
-function importFromJsonResume(event: Event) {
+async function importFromJsonResume(event: Event) {
   isImportError.value = false;
 
   try {
-    // @ts-expect-error TODO TODO TODO
-    const file = event.files[0];
-
-    const fileReader = new FileReader();
-    fileReader.readAsText(file, "UTF-8");
-    fileReader.onload = function (fileReaderEvent) {
-      if (!fileReaderEvent.target?.result) {
-        isImportError.value = true;
-        return;
-      }
-
-      const jsonResume: JsonResume = JSON.parse(
-        fileReaderEvent.target.result.toString(),
-      );
-
-      const toImport = formatJsonResumeAsResume(jsonResume, localizer);
-      Object.entries(toImport).forEach(([key, value]) => {
-        // @ts-expect-error Build object on the fly
-        if (profile[key]) {
-          // @ts-expect-error Build object on the fly
-          profile[key].value = value;
-        }
-        // @ts-expect-error Build object on the fly
-        if (resume[key]) {
-          // @ts-expect-error Build object on the fly
-          resume[key].value = value;
-        }
-      });
-
-      isImportDialogOpen.value = false;
-    };
-    fileReader.onerror = function () {
+    const input = event.currentTarget as HTMLInputElement;
+    if (!input || !input.files?.length || !input.files[0]) {
       isImportError.value = true;
-    };
+      return;
+    }
+
+    const file = input.files[0];
+    const text = await file.text();
+    const jsonResume: JsonResume = JSON.parse(text);
+
+    const toImport = formatJsonResumeAsResume(jsonResume, localizer);
+    Object.entries(toImport).forEach(([key, value]) => {
+      // @ts-expect-error Build object on the fly
+      if (profile[key]) {
+        // @ts-expect-error Build object on the fly
+        profile[key].value = value;
+      }
+      // @ts-expect-error Build object on the fly
+      if (resume[key]) {
+        // @ts-expect-error Build object on the fly
+        resume[key].value = value;
+      }
+    });
+
+    isImportDialogOpen.value = false;
   } catch {
     isImportError.value = true;
   }
@@ -194,7 +176,7 @@ onMounted(() => {
             @click="resetStores"
           />
           <UButton
-            icon="i-lucide-file-edit"
+            icon="i-lucide-file-text"
             :label="t('resumeFromFakeData')"
             variant="outline"
             color="neutral"
@@ -203,36 +185,36 @@ onMounted(() => {
         </div>
         <div class="grid gap-1">
           <MiniLabel :label="t('useFile')" />
-          <UFileUpload
-            v-slot="{ open }"
-            accept="application/json"
-            auto
-            custom-upload
-            @select="importSaveFile"
+          <UButton
+            as="label"
+            icon="i-lucide-upload"
+            variant="outline"
+            color="neutral"
+            class="not-disabled:cursor-pointer"
           >
-            <UButton
-              :label="t('importSaveFile')"
-              icon="i-lucide-upload"
-              color="neutral"
-              variant="outline"
-              @click="open()"
+            {{ t("importSaveFile") }}
+            <UInput
+              type="file"
+              accept="application/json"
+              class="hidden"
+              @change="importSaveFile"
             />
-          </UFileUpload>
-          <UFileUpload
-            v-slot="{ open }"
-            accept="application/json"
-            auto
-            custom-upload
-            @select="importFromJsonResume"
+          </UButton>
+          <UButton
+            as="label"
+            icon="i-lucide-file-braces-corner"
+            variant="outline"
+            color="neutral"
+            class="not-disabled:cursor-pointer"
           >
-            <UButton
-              :label="t('importJsonResume')"
-              icon="i-lucide-file-braces-corner"
-              color="neutral"
-              variant="outline"
-              @click="open()"
+            {{ t("importJsonResume") }}
+            <UInput
+              type="file"
+              accept="application/json"
+              class="hidden"
+              @change="importFromJsonResume"
             />
-          </UFileUpload>
+          </UButton>
           <UAlert
             size="sm"
             variant="outline"
@@ -240,9 +222,12 @@ onMounted(() => {
             class="text-center"
           />
         </div>
-        <UAlert v-if="isImportError" color="error" class="text-center mt-4">
-          Error while importing data from local file.
-        </UAlert>
+        <UAlert
+          v-if="isImportError"
+          color="error"
+          class="text-center"
+          description="Error while importing data from local file."
+        />
       </div>
     </template>
   </UModal>
