@@ -191,6 +191,23 @@ function toggleEntryVisibility(entry: Entry) {
     :locked="category.isLocked"
   >
     <template #actions>
+      <UButton
+        :icon="category.isLocked ? 'i-lucide-lock-open' : 'i-lucide-lock'"
+        :aria-label="
+          category.isLocked ? t('unlockCategory') : t('lockCategory')
+        "
+        size="sm"
+        variant="ghost"
+        @click="toggleCategoryLock(category)"
+      />
+      <UButton
+        v-if="!category.isLocked"
+        :icon="category.isVisible ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+        :aria-label="category.isVisible ? t('hideCategory') : t('showCategory')"
+        size="sm"
+        variant="ghost"
+        @click="toggleCategoryVisibility(category)"
+      />
       <ListActions
         :index="categoryIndex"
         :is-header="true"
@@ -204,75 +221,45 @@ function toggleEntryVisibility(entry: Entry) {
         @remove="askBeforeRemoveCategory(categoryIndex)"
       />
     </template>
-    <template #header>
-      <template v-if="category.isLocked">
-        <span>
-          <i :class="getCategoryIconClass(category.type)" />
-          {{ category.name }}
-        </span>
-      </template>
-      <template v-else-if="category.isVisible">
-        <div class="flex items-baseline gap-8">
-          <Field
-            :id="`categoryList${categoryIndex}Name_${category.layout}`"
-            v-model="category.name"
-            target
-            :label="$t('categoryName')"
-          />
-          <Field
-            :id="`categoryList${categoryIndex}Type`"
-            type="select"
-            :label="$t('type')"
-            :model-value="category.type"
-            label-key="label"
-            value-key="value"
-            :items="
-              types.map((type) => ({
-                label: capitalize($t(type)),
-                value: type,
-              }))
-            "
-            @update:model-value="changeCategoryType(category, $event)"
-          />
-          <Field
-            :id="`categoryList${categoryIndex}Layout`"
-            v-model="category.layout"
-            type="selectbutton"
-            :label="$t('layout')"
-            label-key="label"
-            value-key="value"
-            :items="
-              layouts.map((layout) => ({
-                label: capitalize($t(layout)),
-                value: layout,
-                icon: getLayoutIconClass(layout),
-              }))
-            "
-          />
-        </div>
-      </template>
-      <template v-else>
-        <span>{{ category.name }}</span>
-      </template>
-    </template>
-    <template #icons>
-      <UButton
-        :icon="category.isLocked ? 'i-lucide-lock-open' : 'i-lucide-lock'"
-        :aria-label="
-          category.isLocked ? t('unlockCategory') : t('lockCategory')
-        "
-        rounded
-        variant="ghost"
-        @click="toggleCategoryLock(category)"
-      />
-      <UButton
-        v-if="!category.isLocked"
-        :icon="category.isVisible ? 'i-lucide-eye-closed' : 'i-lucide-eye'"
-        :aria-label="category.isVisible ? t('hideCategory') : t('showCategory')"
-        rounded
-        variant="ghost"
-        @click="toggleCategoryVisibility(category)"
-      />
+    <template v-if="category.isVisible" #header>
+      <div class="flex items-baseline gap-8">
+        <Field
+          :id="`categoryList${categoryIndex}Name_${category.layout}`"
+          v-model="category.name"
+          target
+          :label="$t('categoryName')"
+        />
+        <Field
+          :id="`categoryList${categoryIndex}Type`"
+          type="select"
+          :label="$t('type')"
+          :model-value="category.type"
+          label-key="label"
+          value-key="value"
+          :items="
+            types.map((type) => ({
+              label: capitalize($t(type)),
+              value: type,
+            }))
+          "
+          @update:model-value="changeCategoryType(category, $event)"
+        />
+        <Field
+          :id="`categoryList${categoryIndex}Layout`"
+          v-model="category.layout"
+          type="selectbutton"
+          :label="$t('layout')"
+          label-key="label"
+          value-key="value"
+          :items="
+            layouts.map((layout) => ({
+              label: capitalize($t(layout)),
+              value: layout,
+              icon: getLayoutIconClass(layout),
+            }))
+          "
+        />
+      </div>
     </template>
     <ul v-if="category.entries.length" class="flex flex-col gap-10 mb-4">
       <li v-for="(entry, entryIndex) in category.entries" :key="entryIndex">
@@ -286,7 +273,7 @@ function toggleEntryVisibility(entry: Entry) {
                 {{ getEntryHeading(entry, entryIndex) }}
               </span>
               <UButton
-                :icon="entry.isVisible ? 'i-lucide-eye-closed' : 'i-lucide-eye'"
+                :icon="entry.isVisible ? 'i-lucide-eye-off' : 'i-lucide-eye'"
                 :aria-label="entry.isVisible ? t('hideEntry') : t('showEntry')"
                 variant="ghost"
                 rounded
@@ -385,6 +372,7 @@ function toggleEntryVisibility(entry: Entry) {
                 variant="outline"
                 size="sm"
                 class="w-[70%]"
+                :disabled="category.isLocked"
                 @click="
                   addHighlight(
                     entry,
@@ -434,6 +422,7 @@ function toggleEntryVisibility(entry: Entry) {
                 variant="outline"
                 size="sm"
                 class="w-[70%]"
+                :disabled="category.isLocked"
                 @click="
                   addTag(entry, entryIndex, categoryIndex, category.layout)
                 "
@@ -452,6 +441,7 @@ function toggleEntryVisibility(entry: Entry) {
           variant="soft"
           class="w-full"
           :trailing-icon="getCategoryIconClass(category.type)"
+          :disabled="category.isLocked"
           @click="addEntry(category)"
         >
           {{ capitalize(`${$t("toAdd")} ${$t("entry")}`) }}

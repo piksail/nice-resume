@@ -20,14 +20,14 @@ const { id, hidden, locked } = defineProps<{
         :label="title"
         :icon="icon"
         color="neutral"
-        variant="subtle"
+        :variant="hidden ? 'ghost' : 'subtle'"
         trailing-icon="i-lucide-chevron-down"
         block
         :ui="{
           trailingIcon:
             'group-data-[state=open]:rotate-180 transition-transform duration-200',
         }"
-        class="group"
+        :class="`group ${hidden ? 'line-through' : ''}`"
       />
       <template #content>
         <UCard variant="soft">
@@ -44,6 +44,6 @@ const { id, hidden, locked } = defineProps<{
         </UCard>
       </template>
     </UCollapsible>
-    <div><slot name="actions" /></div>
+    <div class="shrink-0 flex self-start"><slot name="actions" /></div>
   </div>
 </template>
