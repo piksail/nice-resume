@@ -956,20 +956,21 @@ async function askBeforeResetStyle() {
     </template>
   </USlideover>
 
-  <UButton
-    icon="i-lucide-columns-3-cog"
-    size="sm"
-    color="neutral"
-    variant="link"
-    :label="`${capitalize($t('toCustomize'))}`"
-    :disabled="!isThemeCustomized"
-    @click="isStyleEditorOpen = true"
-  />
   <Field
     v-model="isThemeCustomized"
     type="toggle"
     :label="t('onLabel')"
     :icon="isThemeCustomized ? 'i-lucide-wrench-off' : 'i-lucide-eye'"
+    class="ml-4"
+  />
+  <UButton
+    icon="i-lucide-wrench"
+    size="sm"
+    variant="outline"
+    color="secondary"
+    :label="`${capitalize($t('toCustomize'))}`"
+    :disabled="!isThemeCustomized"
+    @click="isStyleEditorOpen = true"
   />
 </template>
 
