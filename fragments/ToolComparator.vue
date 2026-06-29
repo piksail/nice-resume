@@ -167,6 +167,17 @@ const tools: Tool[] = [
     themes: 62,
     coverLetter: true,
   },
+  {
+    name: "Gitconnected",
+    free: true,
+    registerless: false,
+    preview: "?",
+    easyEdit: true,
+    dataExport: false,
+    customization: "none",
+    themes: 3,
+    coverLetter: false,
+  },
 ];
 </script>
 
