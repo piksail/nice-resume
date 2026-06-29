@@ -499,11 +499,6 @@ function exportResumeToJsonResume() {
     "saveAsJson": "Sauvegarder dans un fichier",
     "exportToJsonResume": "Exporter au format JSON Resume",
     "referToSchema": "Consulter le format"
-  },
-  "it": {
-    "saveAsJson": "TODO",
-    "exportToJsonResume": "TODO",
-    "referToSchema": "TODO"
   }
 }
 </i18n>

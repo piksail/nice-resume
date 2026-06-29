@@ -39,7 +39,6 @@ export const localeLabels: { [key in LocaleCode]: string } = {
   en: "English",
   es: "Español",
   fr: "Français",
-  it: "Italiano",
 };
 
 export const documentTypes: DocumentType[] = ["resume", "letter", "email"];

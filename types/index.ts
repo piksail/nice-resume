@@ -1,6 +1,6 @@
-export type LocaleCode = "br" | "de" | "en" | "es" | "fr" | "it";
+export type LocaleCode = "br" | "de" | "en" | "es" | "fr";
 
-export type RegionCode = "br" | "de" | "es" | "fr" | "it" | "uk";
+export type RegionCode = "br" | "de" | "es" | "fr" | "uk";
 
 export type Theme =
   | "default"

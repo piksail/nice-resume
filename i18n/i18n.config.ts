@@ -3,7 +3,6 @@
 import en from "./locales/en";
 // import es from "./locales/es";
 import fr from "./locales/fr";
-// import it from "./locales/it";
 
 // Make sure the locale list corresponds to the locales list off nuxt.config.ts
 export default {
@@ -13,6 +12,5 @@ export default {
     en,
     // es,
     fr,
-    // it,
   },
 };

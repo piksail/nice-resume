@@ -284,16 +284,6 @@ onMounted(() => {
     "importJsonResume": "Importer un fichier JSON Resume",
     "startAnew": "Nouveau document",
     "useFile": "Réutiliser une sauvegarde"
-  },
-  "it": {
-    "resumeTitle": "TODO?",
-    "resumeContinue": "TODO",
-    "resumeFromScratch": "TODO",
-    "resumeFromFakeData": "TODO",
-    "importSaveFile": "TODO",
-    "importJsonResume": "TODO",
-    "startAnew": "TODO",
-    "useFile": "TODO"
   }
 }
 </i18n>

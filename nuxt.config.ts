@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    // locales: ["br", "de", "en", "es", "fr", "it"], // Available locales are also computed from the keys off the i18n.config.ts "messages" object
+    // locales: ["br", "de", "en", "es", "fr"], // Available locales are also computed from the keys off the i18n.config.ts "messages" object
     locales: [
       { code: "en", language: "en-US", file: "en.ts" },
       { code: "fr", language: "fr-FR", file: "fr.ts" },

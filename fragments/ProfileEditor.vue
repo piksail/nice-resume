@@ -227,10 +227,6 @@ function changeContactDetaiType(
   "fr": {
     "considerAboutAndDetailsACategory": "Séparer À propos et Coordonnées dans une catégorie dédiée",
     "howToStyleAboutAndDetailsCategory": "À propos et Coordonnées sont personnalisables dans l'éditeur de thème"
-  },
-  "it": {
-    "considerAboutAndDetailsACategory": "TODO",
-    "howToStyleAboutAndDetailsCategory": "TODO"
   }
 }
 </i18n>
