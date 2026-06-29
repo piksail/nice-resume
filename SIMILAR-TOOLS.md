@@ -3,7 +3,6 @@
 A more comprehensive list of tools we tried (when possible) below :
 
 - All:
-
   - [Adecco CV](creation-cv.adecco.fr)
   - [Aide CV](www.aidecv.fr)
   - [Canva](www.canva.com)
@@ -32,24 +31,20 @@ A more comprehensive list of tools we tried (when possible) below :
   - [Zety](zety.com)
 
 - Dev:
-
   - [JSON Resume](jsonresume.org)
   - [Gitconnected](gitconnected.com)
 
 - Job seekers:
-
   - [HelloWork](www.hellowork.com)
   - [LiveCareer](www.livecareer.co.uk)
   - [Reed](www.reed.co.uk)
   - [Student Job](www.studentjob.fr)
 
 - Social networks:
-
   - [LinkedIn](www.linkedin.com)
   - [Viadeo](viadeo.journaldunet.com)
 
 - Institutional:
-
   - [Europass](europass.europa.eu)
   - [NI Direct](www.nidirect.gov.uk/services/cv-builder)
   - [NZ Careers](www.careers.govt.nz/tools/cv-builder)

@@ -23,7 +23,7 @@ const { categoryName, index, layout } = defineProps<{
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : themeSettings[theme.value].resume;
+    : themeSettings[theme.value!].resume;
 });
 
 const getSeparatorFlexDirection = () => {

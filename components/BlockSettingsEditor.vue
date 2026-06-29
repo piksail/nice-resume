@@ -15,49 +15,49 @@ const { propertyName, settings } = defineProps<{
     <FormBlockRow :header="$t('margin')">
       <Field
         v-for="i in 4"
-        :key="i"
         :id="`${propertyName}Margin`"
+        :key="i"
+        v-model="settings.margin[i - 1]"
         :label="$t(getSideIndexLabel(i))"
         type="number"
-        v-model="settings.margin[i - 1]"
       />
     </FormBlockRow>
     <FormBlockRow :header="$t('border')">
       <Field
         v-for="i in 4"
-        :key="i"
         :id="`${propertyName}Border`"
+        :key="i"
+        v-model="settings.border[i - 1]"
         :label="$t(getSideIndexLabel(i))"
         type="number"
-        v-model="settings.border[i - 1]"
       />
       <Field
         :id="`${propertyName}BorderColor`"
+        v-model="settings.borderColor"
         :label="$t('color')"
         type="color"
-        v-model="settings.borderColor"
       />
       <Field
         :id="`${propertyName}BorderRadius`"
+        v-model="settings.borderRadius"
         :label="$t('radius')"
         type="number"
-        v-model="settings.borderRadius"
       />
     </FormBlockRow>
     <FormBlockRow :header="$t('padding')">
       <Field
         v-for="i in 4"
-        :key="i"
         :id="`${propertyName}Padding`"
+        :key="i"
+        v-model="settings.padding[i - 1]"
         :label="$t(getSideIndexLabel(i))"
         type="number"
-        v-model="settings.padding[i - 1]"
       />
       <Field
         :id="`${propertyName}BackgroundColor`"
+        v-model="settings.backgroundColor"
         :label="$t('color')"
         type="color"
-        v-model="settings.backgroundColor"
       />
     </FormBlockRow>
   </div>

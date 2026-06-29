@@ -14,7 +14,7 @@ export const useProfileStore = defineStore("profile", {
     // Design
     isThemeCustomized: false,
     theme: themes[0],
-    customColors: structuredClone(themeBaseSettings[themes[0]].colors),
+    customColors: structuredClone(themeBaseSettings[themes[0]!].colors),
   }),
   persist: true,
 });

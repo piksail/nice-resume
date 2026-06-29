@@ -5,7 +5,6 @@ import EditorCategory from "@/components/EditorCategory.vue";
 import Field from "@/components/Field.vue";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -14,15 +13,18 @@ const { isDetailClickable } = storeToRefs(useEmailStore());
 </script>
 
 <template>
-  <EditorCategory id="Signature">
-    <template v-slot:header>{{ capitalize($t("signature")) }}</template>
+  <EditorCategory
+    id="Signature"
+    :title="capitalize(t('signature'))"
+    icon="i-lucide-signature"
+  >
     <div class="formBlock">
       <Field
         id="isDetailClickable"
+        v-model="isDetailClickable"
         transparent
         :label="t('makeLinksClickable')"
         type="checkbox"
-        v-model="isDetailClickable"
       />
     </div>
   </EditorCategory>

@@ -14,51 +14,51 @@ const { propertyName, settings } = defineProps<{
     <FormBlockRow :header="$t('gradient')">
       <Field
         :id="`${propertyName}IsGradient`"
+        v-model="settings.isGradient"
         :label="$t('gradient')"
         type="checkbox"
-        v-model="settings.isGradient"
       />
       <Field
         :id="`${propertyName}FromColor`"
+        v-model="settings.fromColor"
         :label="$t('color')"
         type="color"
-        v-model="settings.fromColor"
         :disabled="!settings.isGradient"
       />
       <Field
         :id="`${propertyName}ToColor`"
+        v-model="settings.toColor"
         :label="$t('color')"
         type="color"
-        v-model="settings.toColor"
         :disabled="!settings.isGradient"
       />
       <Field
         :id="`${propertyName}GradientAngle`"
+        v-model="settings.gradientAngle"
         :label="$t('angle')"
         type="range"
         :step="5"
-        v-model="settings.gradientAngle"
         :disabled="!settings.isGradient"
       />
-      <Message
+      <UAlert
         v-if="settings.isGradient"
-        size="small"
+        size="sm"
         severity="secondary"
-        variant="simple"
+        variant="soft"
       >
         Choose "fit" size to fit the gradient with the characters horizontal
         length
-      </Message>
+      </UAlert>
     </FormBlockRow>
     <FormBlockRow>
       <Field
         :id="`${propertyName}Align`"
+        v-model="settings.textAlign"
         type="select"
         :label="$t('alignment')"
-        v-model="settings.textAlign"
-        optionLabel="label"
-        optionValue="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           ['left', 'center', 'right'].map((alignment) => ({
             label: capitalize($t(alignment)),
             value: alignment,

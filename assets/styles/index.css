@@ -1,3 +1,39 @@
-@import "./tailwind.css";
-@import "./reset.css";
 @import "./fonts.css";
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  /* --ui-primary: var(--ui-color-primary-600);
+  --ui-bg: var(--color-slate-700);
+  --ui-bg-muted: var(--color-slate-600);
+  --ui-bg-elevated: var(--color-slate-500);
+  --ui-bg-accented: var(--color-slate-400); */
+}
+
+@layer base {
+  html {
+    font-family: "Sarabun";
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .button {
+    @apply flex gap-1 items-center justify-center px-3 py-2 rounded shadow hover:shadow-lg;
+  }
+  .formBlock {
+    @apply flex flex-col gap-5;
+  }
+  .inputList {
+    @apply flex flex-col gap-1;
+  }
+  .inputListItem {
+    @apply flex items-center justify-between gap-4;
+  }
+  .label {
+    @apply text-primary text-xs;
+  }
+}

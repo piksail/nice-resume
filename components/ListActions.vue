@@ -12,45 +12,31 @@ defineEmits(["moveDown", "moveUp", "remove"]);
 
 <template>
   <div class="flex justify-end gap-2">
-    <Button
+    <UButton
       v-if="listLength > 1 && index > 0"
-      :icon="isHeader ? 'pi pi-arrow-up' : 'pi pi-arrow-circle-up'"
+      :icon="isHeader ? 'i-lucide-arrow-up' : 'i-lucide-circle-arrow-up'"
       :aria-label="capitalize($t('toMoveUp'))"
-      :variant="isHeader ? 'text' : 'text'"
-      rounded
-      :severity="isHeader ? 'primary' : undefined"
-      size="small"
-      :class="isHeader ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
-      :pt:icon:class="
-        isHeader ? '' : '!text-white/50 !text-xl hover:!text-white transition'
-      "
+      :variant="isHeader ? 'ghost' : 'ghost'"
+      color="neutral"
+      size="sm"
       @click="$emit('moveUp')"
     />
-    <Button
+    <UButton
       v-if="listLength > 1 && index < listLength - 1"
-      :icon="isHeader ? 'pi pi-arrow-down' : 'pi pi-arrow-circle-down'"
+      :icon="isHeader ? 'i-lucide-arrow-down' : 'i-lucide-circle-arrow-down'"
       :aria-label="capitalize($t('toMoveDown'))"
-      :variant="isHeader ? 'text' : 'text'"
-      rounded
-      :severity="isHeader ? 'primary' : undefined"
-      size="small"
-      :class="isHeader ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
-      :pt:icon:class="
-        isHeader ? '' : '!text-white/50 !text-xl hover:!text-white transition'
-      "
+      :variant="isHeader ? 'ghost' : 'ghost'"
+      color="neutral"
+      size="sm"
       @click="$emit('moveDown')"
     />
-    <Button
-      :icon="isHeader ? 'pi pi-times' : 'pi pi-times-circle'"
+    <UButton
+      :icon="isHeader ? 'i-lucide-x' : 'i-lucide-circle-x'"
       :aria-label="capitalize($t('toRemove'))"
-      :variant="isHeader ? 'text' : 'text'"
+      :variant="isHeader ? 'ghost' : 'ghost'"
       rounded
-      severity="danger"
-      size="small"
-      :class="isHeader ? '' : '!h-8 !w-8 !p-0 !bg-transparent'"
-      :pt:icon:class="
-        isHeader ? '' : '!text-white/50 !text-xl hover:!text-red-500 transition'
-      "
+      color="error"
+      size="sm"
       @click="$emit('remove')"
     />
   </div>

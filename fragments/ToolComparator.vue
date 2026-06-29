@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { APP_NAME } from "~/globals";
+
 type Tool = {
   name: string;
   free: boolean | "freemium" | "?";
@@ -14,7 +16,7 @@ type Tool = {
 const tools: Tool[] = [
   // TODO provide all tools
   {
-    name: "Nice Resume",
+    name: APP_NAME,
     free: true,
     registerless: true,
     preview: "direct",
@@ -167,11 +169,22 @@ const tools: Tool[] = [
     themes: 62,
     coverLetter: true,
   },
+  {
+    name: "Gitconnected",
+    free: true,
+    registerless: false,
+    preview: "?",
+    easyEdit: true,
+    dataExport: false,
+    customization: "none",
+    themes: 3,
+    coverLetter: false,
+  },
 ];
 </script>
 
 <template>
-  <DataTable :value="tools" tableStyle="min-width: 50rem" class="">
+  <DataTable :value="tools" table-style="min-width: 50rem" class="">
     <Column field="name" :header="capitalize($t('name'))" />
     <Column field="free" :header="capitalize($t('free'))">
       <template #body="slotProps">

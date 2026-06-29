@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import ConfirmDialog from "primevue/confirmdialog";
 import Editor from "@/components/Editor.vue";
 import Preview from "@/components/Preview.vue";
+import { APP_NAME } from "~/globals";
 
-const title = ref("Nice resume");
+const title = ref(APP_NAME);
 </script>
 
 <template>
-  <Head>
-    <Title>{{ title }}</Title>
-    <Meta name="description" :content="title" />
-  </Head>
   <NuxtLayout name="editor">
-    <ConfirmDialog />
+    <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="title" />
+    </Head>
     <Editor />
-    <template v-slot:preview>
+    <template #preview>
       <Preview class="hidden xl:block" />
     </template>
   </NuxtLayout>

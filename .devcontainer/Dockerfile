@@ -1,4 +1,4 @@
-FROM node:22.11
+FROM node:22.20
 
 ENV PNPM_HOME=/workspaces/pnpm
 RUN corepack enable

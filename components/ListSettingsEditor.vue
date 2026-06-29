@@ -17,36 +17,36 @@ const { propertyName, settings } = defineProps<{
     <FormBlockRow :header="$t('list')">
       <Field
         :id="`${propertyName}Gap`"
+        v-model="settings.gap"
         :label="$t('gap')"
         type="number"
-        v-model="settings.gap"
       />
       <Field
         :id="`${propertyName}ListMarkerPosition`"
+        v-model="settings.listMarkerPosition"
         :label="$t('markerPosition')"
         type="selectbutton"
-        optionLabel="label"
-        optionValue="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           listMarkerPositions.map((position) => ({
             label: capitalize($t(position)),
             value: position,
           }))
         "
-        v-model="settings.listMarkerPosition"
       />
       <Field
         :id="`${propertyName}ListMarker`"
+        v-model="settings.listMarker"
         :label="$t('marker')"
         type="select"
-        :options="['', ...listMarkers]"
-        v-model="settings.listMarker"
+        :items="['', ...listMarkers]"
       />
       <Field
         :id="`${propertyName}ListMarkerColor`"
+        v-model="settings.listMarkerColor"
         :label="$t('color')"
         type="color"
-        v-model="settings.listMarkerColor"
       />
     </FormBlockRow>
   </div>

@@ -7,13 +7,13 @@ export function getPeriodBounds(period: string) {
   // TODO handle several formats (YYYY-MM currently breaks)
   const bounds = period.split("-");
   return {
-    startDate: bounds[0]?.trim(),
-    endDate: bounds[1]?.trim(),
+    startDate: bounds[0]?.trim() ?? "",
+    endDate: bounds[1]?.trim() ?? "",
   };
 }
 
 /**
- * Format a JSON Resume in accordance to the Nice Resume interface.
+ * Format a JSON Resume in accordance to the Pebr interface.
  * See: https://jsonresume.org/schema
  */
 export function formatJsonResumeAsResume(

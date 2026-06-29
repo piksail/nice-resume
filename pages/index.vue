@@ -3,28 +3,29 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { capitalize } from "@/utils/string";
-import { themes } from "~/globals";
+import { APP_NAME, themes } from "~/globals";
 
 const { theme } = storeToRefs(useProfileStore());
 
-const title = ref("Nice resume");
+// TODO localize meta
+const title = ref(APP_NAME);
 const description = ref(
-  "Pick a design, build your resume, write your cover letter, adapt the design to your need with Nice Resume.",
+  `Pick a design, build your resume, write your cover letter, adapt the design to your need with ${APP_NAME}.`,
 );
 
-// eslint-disable-next-line no-undef
 const localePath = useLocalePath();
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
+
+const fontWeights = ref([100, 200, 300, 400, 500, 600, 700, 800, 900]);
 
 const firstInput = ref(capitalize(t("name").toUpperCase()));
 const secondInput = ref(capitalize(t("title")));
 const thirdInput = ref(capitalize(t("address")));
 
-const firstInputColor = ref("#e11d48");
+const firstInputColor = ref("#ff8904");
 const firstInputIsItalic = ref(false);
 const firstInputFontWeight = ref(800);
 
@@ -38,19 +39,18 @@ const thirdInputFontWeight = ref(400);
 </script>
 
 <template>
-  <Head>
-    <Title>{{ title }}</Title>
-    <Meta name="description" :content="description" />
-    <Meta name="og:title" :content="title" />
-    <Meta name="og:description" :content="description" />
-    <!-- TODO og:url -->
-    <!-- TODO og:image -->
-  </Head>
-
   <NuxtLayout name="landing">
+    <Head>
+      <Title>{{ title }}</Title>
+      <Meta name="description" :content="description" />
+      <Meta name="og:title" :content="title" />
+      <Meta name="og:description" :content="description" />
+      <!-- TODO og:url -->
+      <!-- TODO og:image -->
+    </Head>
     <section class="p-20 flex justify-center">
       <div class="mx-auto">
-        <h1 class="text-justify drop-shadow-lg">
+        <h1 class="text-justify drop-shadow-lg light:drop-shadow-none">
           <span
             class="text-5xl lg:text-6xl xl:text-9xl font-bold tracking-wide"
           >
@@ -83,26 +83,23 @@ const thirdInputFontWeight = ref(400);
           <li>{{ t("noPayment") }}</li>
           <li>{{ t("privacyFriendly") }}</li>
         </ul>
-        <div class="flex items-center gap-7 mt-24">
-          <NuxtLink :to="localePath('/editor')">
-            <Button
-              class="uppercase font-black tracking-widest shadow-xl"
-              size="large"
-            >
-              {{ t("startEditing") }}
-            </Button>
-          </NuxtLink>
-          <NuxtLink :to="localePath('/about')">
-            <Button
-              class="uppercase font-black tracking-widest shadow-xl"
-              size="large"
-              variant="outlined"
-              severity="contrast"
-              pt:root:class="!text-white hover:!text-surface-900"
-            >
-              {{ t("learnMore") }}
-            </Button>
-          </NuxtLink>
+        <div class="flex items-center gap-5 mt-24">
+          <UButton
+            :to="localePath('/editor')"
+            class="uppercase font-bold tracking-wide shadow-xl"
+            size="xl"
+          >
+            {{ t("startEditing") }}
+          </UButton>
+          <!-- <UButton
+            :to="localePath('/about')"
+            class="uppercase font-bold tracking-wide shadow-xl"
+            size="xl"
+            variant="outline"
+            color="neutral"
+          >
+            {{ t("learnMore") }}
+          </UButton> -->
         </div>
       </div>
       <div class="hidden sm:block skew-y-12 mx-auto mt-14 group">
@@ -113,67 +110,67 @@ const thirdInputFontWeight = ref(400);
           class="w-[100px] h-[calc(100px*1.414)] lg:w-[300px] lg:h-[calc(300px*1.414)] xl:w-[400px] xl:h-[calc(400px*1.414)] shadow bg-white text-black flex flex-col p-8 animate-float [animation-delay:0.7s]"
         >
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-8 w-32 mb-3"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-8 w-32 mb-3"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-6 w-64 mb-6"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-6 w-64 mb-6"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-12 mb-2"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-12 mb-2"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-14 mb-2"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-14 mb-2"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-10 mb-2"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-10 mb-2"
           />
           <div
-            class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-4 w-14 mb-8"
+            class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-4 w-14 mb-8"
           />
           <div class="grid grid-cols-2 gap-6">
             <div class="w-full">
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-2/3"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-2/3"
               />
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
-              />
-            </div>
-            <div class="w-full">
-              <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-full"
-              />
-              <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
               />
             </div>
             <div class="w-full">
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-full"
               />
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
               />
             </div>
             <div class="w-full">
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 mb-4 h-6 w-1/3"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-full"
               />
               <div
-                class="bg-surface-100 transition-colors group-hover:bg-surface-200 h-20 w-full"
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
+              />
+            </div>
+            <div class="w-full">
+              <div
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 mb-4 h-6 w-1/3"
+              />
+              <div
+                class="bg-neutral-100 transition-colors group-hover:bg-neutral-200 h-20 w-full"
               />
             </div>
           </div>
         </div>
         <div
-          class="hidden transition-all group-hover:bg-opacity-90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-surface-800 p-6 rounded"
+          class="hidden transition-all group-hover:bg-neutral-800/90 hover:shadow-xl absolute top-1/2 -left-1/4 mt-12 lg:w-[400px] xl:w-[600px] lg:grid grid-cols-3 gap-4 items-end bg-neutral-800 light:bg-neutral-300 p-6 rounded"
         >
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
-          <div class="bg-surface-950 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
+          <div class="bg-neutral-950 light:bg-neutral-200 h-9 rounded" />
         </div>
       </div>
     </section>
@@ -181,11 +178,17 @@ const thirdInputFontWeight = ref(400);
       <ol
         class="grid grid-cols-1 lg:grid-cols-2 grid-rows-4 lg:grid-flow-col gap-3"
       >
-        <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
+        <li
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8"
+        >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="1" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              1
+            </span>
             <span>
               {{ t("stepTheme") }}
               <i class="font-serif text-primary">{{ $t("theme") }}</i>
@@ -193,13 +196,13 @@ const thirdInputFontWeight = ref(400);
           </h2>
           <Field
             id="theme"
+            v-model="theme"
             :label="$t('theme')"
             transparent
             type="select"
-            v-model="theme"
-            optionLabel="label"
-            optionValue="value"
-            :options="
+            label-key="label"
+            value-key="value"
+            :items="
               themes.map((theme) => ({
                 label: theme === 'default' ? capitalize($t('default')) : theme,
                 value: theme,
@@ -211,11 +214,17 @@ const thirdInputFontWeight = ref(400);
             </div>
           </Field>
         </li>
-        <li class="bg-surface-800 transition-colors hover:bg-surface-700 p-8">
+        <li
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8"
+        >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="2" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              2
+            </span>
             <span>
               {{ t("stepEdit") }}
               <span class="inline-flex overflow-hidden">
@@ -234,32 +243,36 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="firstInput"
+              v-model="firstInput"
               :label="$t('name')"
               transparent
-              v-model="firstInput"
               class="[&_input]!bg-white"
             />
             <Field
               id="secondInput"
+              v-model="secondInput"
               :label="$t('title')"
               transparent
-              v-model="secondInput"
             />
             <Field
               id="thirdInput"
+              v-model="thirdInput"
               :label="$t('address')"
               transparent
-              v-model="thirdInput"
             />
           </div>
         </li>
         <li
-          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-2"
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8 row-span-2"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="3" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              3
+            </span>
             <span>
               {{ t("stepCustomize") }}
               <i class="font-serif text-primary">{{ $t("design") }}</i>
@@ -269,25 +282,26 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="firstInputColor"
+              v-model="firstInputColor"
               :label="$t('color')"
               transparent
-              v-model="firstInputColor"
               type="color"
             />
             <Field
               id="firstInputIsItalic"
+              v-model="firstInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="firstInputIsItalic"
               type="checkbox"
             />
             <Field
               id="firstInputFontWeight"
+              v-model="firstInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="firstInputFontWeight"
               type="select"
-              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+              :items="fontWeights"
+              class="min-w-24"
             />
           </div>
           <div class="font-bold text-xl mt-6">
@@ -296,25 +310,26 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="secondInputColor"
+              v-model="secondInputColor"
               :label="$t('color')"
               transparent
-              v-model="secondInputColor"
               type="color"
             />
             <Field
               id="secondInputIsItalic"
+              v-model="secondInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="secondInputIsItalic"
               type="checkbox"
             />
             <Field
               id="secondInputFontWeight"
+              v-model="secondInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="secondInputFontWeight"
               type="select"
-              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+              :items="fontWeights"
+              class="min-w-24"
             />
           </div>
           <div class="font-bold text-xl mt-6">
@@ -323,35 +338,40 @@ const thirdInputFontWeight = ref(400);
           <div class="flex gap-4 items-end lg:justify-between">
             <Field
               id="thirdInputColor"
+              v-model="thirdInputColor"
               :label="$t('color')"
               transparent
-              v-model="thirdInputColor"
               type="color"
             />
             <Field
               id="thirdInputIsItalic"
+              v-model="thirdInputIsItalic"
               :label="$t('italic')"
               transparent
-              v-model="thirdInputIsItalic"
               type="checkbox"
             />
             <Field
               id="thirdInputFontWeight"
+              v-model="thirdInputFontWeight"
               :label="$t('fontWeight')"
               transparent
-              v-model="thirdInputFontWeight"
               type="select"
-              :options="[100, 200, 300, 400, 500, 600, 700, 800, 900]"
+              :items="fontWeights"
+              class="min-w-24"
             />
           </div>
         </li>
         <li
-          class="bg-surface-800 transition-colors hover:bg-surface-700 p-8 row-span-4"
+          class="bg-neutral-800 light:bg-neutral-100 transition-colors hover:bg-neutral-800/50 light:hover:bg-neutral-100/50 p-8 row-span-4"
         >
           <h2
             class="flex items-center gap-2 text-2xl lg:text-4xl font-bold mb-12"
           >
-            <Badge size="xlarge" value="4" />
+            <span
+              class="rounded-full inline-grid place-items-center size-8 inset-0 bg-primary text-white text-lg"
+            >
+              4
+            </span>
             <span>
               {{ t("stepPreview") }}
               <i class="font-serif text-primary">{{ t("preview") }}</i>
@@ -448,25 +468,48 @@ const thirdInputFontWeight = ref(400);
               </ol>
               <NuxtLink
                 :to="localePath('/editor')"
-                class="absolute left-1/2 -translate-x-1/2 bottom-0"
+                class="absolute left-1/2 -translate-x-1/2 bottom-0 scale-150 md:scale-150"
               >
-                <Button
-                  class="uppercase font-black tracking-widest shadow-xl"
-                  variant="outlined"
+                <UButton
+                  class="uppercase font-bold tracking-wide shadow-xl"
+                  variant="solid"
                 >
                   {{ t("editMore") }}
-                </Button>
+                </UButton>
               </NuxtLink>
             </div>
           </div>
         </li>
       </ol>
     </section>
+    <section class="py-20 px-10 max-w-screen-xl mx-auto">
+      <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
+        {{ t("featThemes") }}
+        <i class="font-serif text-primary">{{ t("featThemesSuffix") }}</i>
+      </h2>
+      <div class="relative h-[calc((400px*1.414)+50px)] mx-auto group">
+        <img
+          src="/paper-example.png"
+          :alt="`First example of a resume built with ${APP_NAME}`"
+          class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] -rotate-6 -translate-x-32 bg-white shadow group-hover:-translate-x-60 group-hover:-rotate-12 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/macchiato-example.png"
+          :alt="`Second example of a resume built with ${APP_NAME}`"
+          class="absolute z-[1] mx-auto left-0 right-0 -translate-y-6 w-[400px] h-[calc(400px*1.414)] bg-white shadow group-hover:-translate-y-10 group-hover:-rotate-1 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/stone-example.png"
+          :alt="`Third example of a resume built with ${APP_NAME}`"
+          class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] rotate-3 translate-x-32 bg-white shadow group-hover:translate-x-60 group-hover:rotate-6 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+      </div>
+    </section>
     <section class="py-20 px-10 max-w-screen-md mx-auto">
-      <p class="text-center text-4xl lg:text-6xl font-bold mb-12">
-        Everything is
-        <i class="font-serif text-primary">saved locally</i>
-      </p>
+      <h2 class="text-center text-4xl lg:text-6xl font-bold mb-12">
+        {{ t("featLocalStorage") }}
+        <i class="font-serif text-primary">{{ t("featLocalStorageSuffix") }}</i>
+      </h2>
       <p class="text-center text-2xl mb-12">
         Don't worry about losing your progress
         <br />
@@ -475,19 +518,18 @@ const thirdInputFontWeight = ref(400);
       <p class="text-center text-2xl mb-12">
         Don't feel compelled to finish all at once:
       </p>
-      <p class="text-center text-4xl lg:text-6xl font-bold mb-12">
-        Edit
-        <i class="font-serif text-primary">whenever you want</i>
-      </p>
+      <h2 class="text-center text-4xl lg:text-6xl font-bold mb-12">
+        {{ t("featWhenever") }}
+        <i class="font-serif text-primary">{{ t("featWheneverSuffix") }}</i>
+      </h2>
       <div class="flex justify-center">
-        <NuxtLink :to="localePath('/editor')">
-          <Button
-            class="uppercase font-black tracking-widest shadow-xl animate-pulse"
-            size="large"
-          >
-            {{ t("startEditing") }}
-          </Button>
-        </NuxtLink>
+        <UButton
+          :to="localePath('/editor')"
+          class="uppercase font-bold tracking-wide shadow-xl"
+          size="xl"
+        >
+          {{ t("startEditing") }}
+        </UButton>
       </div>
     </section>
     <NuxtPage />
@@ -513,6 +555,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "TODO",
     "stepCustomize": "TODO",
     "stepPreview": "TODO",
+    "featThemes": "TODO",
+    "featThemesSuffix": "TODO",
+    "featLocalStorage": "TODO",
+    "featLocalStorageSuffix": "TODO",
+    "featWhenever": "TODO",
+    "featWheneverSuffix": "TODO",
     "preview": "TODO"
   },
   "de": {
@@ -532,6 +580,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "Erstellen Irhe",
     "stepCustomize": "Anpassen die",
     "stepPreview": "TODO",
+    "featThemes": "TODO",
+    "featThemesSuffix": "TODO",
+    "featLocalStorage": "TODO",
+    "featLocalStorageSuffix": "TODO",
+    "featWhenever": "TODO",
+    "featWheneverSuffix": "TODO",
     "preview": "TODO"
   },
   "en": {
@@ -551,6 +605,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "Edit your",
     "stepCustomize": "Adapt the",
     "stepPreview": "Preview and",
+    "featThemes": "Famous themes from JSONResume.org, OpenResume... plus",
+    "featThemesSuffix": "handcrafted themes",
+    "featLocalStorage": "Everything is",
+    "featLocalStorageSuffix": "saved locally",
+    "featWhenever": "Edit",
+    "featWheneverSuffix": "whenever you want",
     "preview": "download"
   },
   "es": {
@@ -570,6 +630,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "TODO",
     "stepCustomize": "TODO",
     "stepPreview": "TODO",
+    "featThemes": "TODO",
+    "featThemesSuffix": "TODO",
+    "featLocalStorage": "TODO",
+    "featLocalStorageSuffix": "TODO",
+    "featWhenever": "TODO",
+    "featWheneverSuffix": "TODO",
     "preview": "TODO"
   },
   "fr": {
@@ -589,6 +655,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "Editez votre",
     "stepCustomize": "Adaptez le",
     "stepPreview": "Prévisualisez et",
+    "featThemes": "Retrouvez les thèmes de JSONResume.org, OpenResume... mais aussi",
+    "featThemesSuffix": "cousus main",
+    "featLocalStorage": "Tout est enregistré",
+    "featLocalStorageSuffix": "sur votre ordi",
+    "featWhenever": "Reprenez",
+    "featWheneverSuffix": "quand vous voulez",
     "preview": "téléchargez"
   }
 }

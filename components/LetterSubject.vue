@@ -15,7 +15,7 @@ const { subject } = defineProps<{
 }>();
 
 const settings = computed(() => {
-  return themeSettings[theme.value].letter;
+  return themeSettings[theme.value!].letter;
 });
 </script>
 

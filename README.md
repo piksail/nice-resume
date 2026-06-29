@@ -45,7 +45,6 @@ So far, tools we believe are best out there are :
 - [i18n](https://www.i18next.com/)
 - [JSON Resume](https://jsonresume.org/)
 - [Nuxt](https://nuxt.com/)
-- [PrimeVue](https://primevue.org/)
 - [Simple Icons](https://simpleicons.org/) (for brand icons) through [Vue3 Simple Icons](https://vue3-simple-icons.wyatt-herkamp.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vue](https://vuejs.org/)

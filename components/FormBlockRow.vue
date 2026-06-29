@@ -8,9 +8,7 @@ const { header } = defineProps<{
 
 <template>
   <div>
-    <div v-if="header" class="text-sm font-semibold">
-      {{ capitalize(header) }}
-    </div>
+    <MiniLabel v-if="header" :label="capitalize(header)" />
     <div class="flex gap-5 flex-wrap items-end">
       <slot />
     </div>

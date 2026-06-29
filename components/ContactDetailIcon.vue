@@ -14,7 +14,6 @@ import {
   FacebookIcon,
   GitHubIcon,
   InstagramIcon,
-  LinkedInIcon,
   MastodonIcon,
   SoundCloudIcon,
   StackOverflowIcon,
@@ -48,7 +47,7 @@ const iconMapper: IconMapper = {
   facebook: FacebookIcon,
   gitHub: GitHubIcon,
   instagram: InstagramIcon,
-  linkedIn: LinkedInIcon,
+  // linkedIn: LinkedInIcon, TODO
   mastodon: MastodonIcon,
   soundCloud: SoundCloudIcon,
   stackOverflow: StackOverflowIcon,

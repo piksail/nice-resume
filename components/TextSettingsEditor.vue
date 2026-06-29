@@ -15,12 +15,12 @@ const { propertyName, settings } = defineProps<{
     <FormBlockRow :header="$t('text')">
       <Field
         :id="`${propertyName}Font`"
+        v-model="settings.font"
         type="select"
         :label="$t('font')"
-        v-model="settings.font"
-        optionLabel="label"
-        optionValue="value"
-        :options="
+        label-key="label"
+        value-key="value"
+        :items="
           ['inherit', ...fonts].map((font) => ({
             label: font === 'inherit' ? capitalize($t('default')) : font,
             value: font,
@@ -29,47 +29,47 @@ const { propertyName, settings } = defineProps<{
       />
       <Field
         :id="`${propertyName}FontSize`"
+        v-model="settings.fontSize"
         :label="$t('size')"
         type="number"
-        v-model="settings.fontSize"
       />
       <Field
         :id="`${propertyName}LineHeight`"
+        v-model="settings.lineHeight"
         :label="$t('lineHeight')"
         type="number"
-        v-model="settings.lineHeight"
         :step="0.1"
       />
       <Field
         :id="`${propertyName}LetterSpacing`"
+        v-model="settings.letterSpacing"
         :label="$t('letterSpacing')"
         type="number"
-        v-model="settings.letterSpacing"
       />
       <Field
         :id="`${propertyName}FontWeight`"
+        v-model="settings.fontWeight"
         type="select"
         :label="$t('fontWeight')"
-        v-model="settings.fontWeight"
-        :options="fontWeights"
+        :items="fontWeights"
       />
       <Field
         :id="`${propertyName}IsItalic`"
+        v-model="settings.isItalic"
         :label="$t('italic')"
         type="checkbox"
-        v-model="settings.isItalic"
       />
       <Field
         :id="`${propertyName}IsUppercase`"
+        v-model="settings.isUppercase"
         :label="$t('uppercase')"
         type="checkbox"
-        v-model="settings.isUppercase"
       />
       <Field
         :id="`${propertyName}Color`"
+        v-model="settings.color"
         :label="$t('color')"
         type="color"
-        v-model="settings.color"
       />
     </FormBlockRow>
   </div>

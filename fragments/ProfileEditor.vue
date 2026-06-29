@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
-import Message from "primevue/message";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { moveDown, moveUp, remove } from "@/utils/array";
@@ -14,7 +12,6 @@ import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -52,41 +49,48 @@ function changeContactDetaiType(
 </script>
 
 <template>
-  <EditorCategory id="Profile">
-    <template v-slot:header>{{ capitalize($t("profile")) }}</template>
+  <EditorCategory
+    id="Profile"
+    :title="capitalize(t('profile'))"
+    icon="i-lucide-user"
+  >
     <div class="formBlock">
       <Field
         id="profileName"
+        v-model="name"
         target
         transparent
         :label="$t('name')"
-        v-model="name"
       />
       <Field
         id="profileTitle"
+        v-model="title"
         target
         transparent
         :label="$t('title')"
-        v-model="title"
       />
       <Field
+        v-model="isHeaderSimple"
         type="checkbox"
         transparent
         :label="t('considerAboutAndDetailsACategory')"
-        v-model="isHeaderSimple"
       />
       <template v-if="isHeaderSimple">
-        <Message size="small" class="!bg-white/10 !text-white">
+        <UAlert
+          :description="t('howToStyleAboutAndDetailsCategory')"
+          color="neutral"
+          variant="outline"
+        >
           {{ t("howToStyleAboutAndDetailsCategory") }}
-        </Message>
+        </UAlert>
         <!-- TODO Allow about contact details splitting into separate categories (not 1 "about" but 1 "about" and 1 "details") -->
         <!-- TODO we should actually add two more Category types : Details and About, so that the customization is way easier... (there is no -1 index) and user is more free to cuztomize -->
         <Field
           :id="`categoryList${-1}Name_${bodyCategories[0]?.layout === 'half' ? 'half' : 'full'}`"
+          v-model="simpleHeaderCategoryName"
           target
           transparent
           :label="$t('categoryName')"
-          v-model="simpleHeaderCategoryName"
         />
       </template>
       <Field
@@ -95,21 +99,21 @@ function changeContactDetaiType(
             ? `categoryList${-1}EntryList${-1}Summary`
             : `detailsAbout`
         "
+        v-model="about"
         target
         transparent
         :label="$t('about')"
         type="textarea"
-        v-model="about"
       />
       <label class="flex flex-col" for="contactDetails">
         <div class="w-[70%] grid grid-cols-4 gap-x-3">
-          <span class="label labelTransparent col-span-2">
+          <span class="label col-span-2">
             {{ capitalize($t("contactDetails")) }}
           </span>
-          <span class="label labelTransparent">
+          <span class="label">
             {{ capitalize($t("socialNetwork")) }}
           </span>
-          <span class="label labelTransparent">
+          <span class="label">
             {{ capitalize($t("icon")) }}
           </span>
         </div>
@@ -130,29 +134,27 @@ function changeContactDetaiType(
                     ? `categoryList${-1}EntryList${-1}HighlightList${detailIndex}`
                     : `detailList${detailIndex}`
                 "
+                v-model="contactDetails[detailIndex]!.value"
                 class="col-span-2"
                 target
                 transparent
-                v-model="contactDetails[detailIndex].value"
                 @keydown.enter.prevent="addContactDetail"
               />
               <Field
                 id="detailType"
                 transparent
-                type="togglebutton"
+                type="checkbox"
                 :model-value="detail.type === 'social'"
-                :onLabel="capitalize($t('yes'))"
-                :offLabel="capitalize($t('no'))"
                 @update:model-value="changeContactDetaiType(detail, $event)"
               />
               <Field
                 id="detailIcon"
+                v-model="detail.icon"
                 transparent
                 type="select"
-                v-model="detail.icon"
-                optionLabel="label"
-                optionValue="value"
-                :options="
+                label-key="label"
+                value-key="value"
+                :items="
                   detail.type === 'social'
                     ? [undefined, 'default', ...socialIcons].map((icon) => {
                         if (!icon) {
@@ -184,22 +186,21 @@ function changeContactDetaiType(
               transparent
               :index="detailIndex"
               :list-length="contactDetails.length"
-              @moveUp="moveUp(contactDetails, detailIndex)"
-              @moveDown="moveDown(contactDetails, detailIndex)"
+              @move-up="moveUp(contactDetails, detailIndex)"
+              @move-down="moveDown(contactDetails, detailIndex)"
               @remove="remove(contactDetails, detailIndex)"
             />
           </li>
         </ul>
-        <Button asChild>
-          <button
-            class="button slotButton slotButtonSmall"
-            @click="addContactDetail"
-          >
-            <span class="uppercase text-sm">
-              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-            </span>
-          </button>
-        </Button>
+        <UButton
+          icon="i-lucide-contact"
+          variant="soft"
+          size="sm"
+          class="w-[70%]"
+          @click="addContactDetail"
+        >
+          {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+        </UButton>
       </label>
     </div>
   </EditorCategory>
@@ -226,10 +227,6 @@ function changeContactDetaiType(
   "fr": {
     "considerAboutAndDetailsACategory": "Séparer À propos et Coordonnées dans une catégorie dédiée",
     "howToStyleAboutAndDetailsCategory": "À propos et Coordonnées sont personnalisables dans l'éditeur de thème"
-  },
-  "it": {
-    "considerAboutAndDetailsACategory": "TODO",
-    "howToStyleAboutAndDetailsCategory": "TODO"
   }
 }
 </i18n>

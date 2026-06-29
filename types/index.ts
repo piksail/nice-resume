@@ -1,6 +1,6 @@
-export type LocaleCode = "br" | "de" | "en" | "es" | "fr" | "it";
+export type LocaleCode = "br" | "de" | "en" | "es" | "fr";
 
-export type RegionCode = "br" | "de" | "es" | "fr" | "it" | "uk";
+export type RegionCode = "br" | "de" | "es" | "fr" | "uk";
 
 export type Theme =
   | "default"
@@ -15,7 +15,7 @@ export type Theme =
   | "Macaron"
   | "Macchiato"
   | "NeoBrutalism"
-  | "NiceResume" // TODO renommer avec un nom parmi ceux éventuels OU créer un thème qui portera le futur nom de Nice Resume (nom pas encore trouvé) et les couleurs actuelles (noir, rouge)
+  | "NiceResume" // TODO renommer avec un nom parmi ceux éventuels OU créer un thème qui portera le futur nom de Nice Resume (Pebr?) et les couleurs actuelles (noir, rouge/orange)
   | "OpenResume"
   | "Oilcloth"
   | "Paper"
@@ -65,7 +65,7 @@ export type SideSetting = number[];
 
 export type BorderStyle = "dashed" | "dotted" | "solid";
 
-export type TextSeparator = "|" | "-" | "·" | "*" | ">" | "," | " ";
+export type TextSeparator = null | "|" | "-" | "·" | "*" | ">" | ",";
 
 export type HeaderLayout = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -98,7 +98,7 @@ export type ListMarkerPosition = "inside" | "outside";
 export type ListSettings = {
   listOrientation: "row" | "column";
   listMarker: ListMarker;
-  listMarkerColor: string;
+  listMarkerColor?: string;
   listMarkerPosition: ListMarkerPosition;
 };
 
@@ -108,11 +108,11 @@ export type SizeableSettings = {
 };
 
 export type BlockSettings = {
-  backgroundColor: string;
+  backgroundColor?: string;
   padding: SideSetting;
   border: SideSetting;
   borderStyle: BorderStyle;
-  borderColor: string;
+  borderColor?: string;
   borderRadius: number;
   margin: SideSetting;
 };
@@ -125,15 +125,15 @@ export type TextSettings = {
   fontWeight: FontWeight;
   isItalic?: boolean;
   isUppercase?: boolean;
-  color: string;
+  color?: string;
 };
 
 export type TitleSettings = SizeableSettings &
   TextSettings & {
     textAlign: "left" | "center" | "right";
     isGradient?: boolean;
-    fromColor: string;
-    toColor: string;
+    fromColor?: string;
+    toColor?: string;
     gradientAngle: number;
   };
 
@@ -150,11 +150,11 @@ export type ThemeBaseSettings = {
 
 export type DocumentSettings = {
   bodyFont: Font;
-  color: string;
-  backgroundColor: string;
+  color?: string;
+  backgroundColor?: string;
   border: SideSetting;
-  borderStyle: BorderStyle;
-  borderColor: string;
+  borderStyle?: BorderStyle;
+  borderColor?: string;
   padding: SideSetting;
 };
 
@@ -173,7 +173,7 @@ export type CommonDocumentSettings = {
     ListSettings & {
       alignment: "start" | "center" | "end"; // Handles justify-content on column flex-direction and align-items on  row flex-direction
       iconSize: number;
-      iconColor: string;
+      iconColor?: string;
       iconGap: number;
       isIconFirst: boolean;
       gap: number; // Flex gap between details
@@ -213,22 +213,22 @@ export type ResumeSettings = PaperDocumentSettings & {
   entryTitle: BlockSettings &
     TextSettings & {
       order: 1 | 2 | 3 | 4;
-      beforeSeparator?: TextSeparator;
+      beforeSeparator: TextSeparator;
     };
   entryPeriod: BlockSettings &
     TextSettings & {
       order: 1 | 2 | 3 | 4;
-      beforeSeparator?: TextSeparator;
+      beforeSeparator: TextSeparator;
     };
   entryOrganization: BlockSettings &
     TextSettings & {
       order: 1 | 2 | 3 | 4;
-      beforeSeparator?: TextSeparator;
+      beforeSeparator: TextSeparator;
     };
   entryLocation: BlockSettings &
     TextSettings & {
       order: 1 | 2 | 3 | 4;
-      beforeSeparator?: TextSeparator;
+      beforeSeparator: TextSeparator;
     };
   entrySummary: BlockSettings & TextSettings;
   entryHighlight: BlockSettings &
@@ -361,6 +361,7 @@ export interface Letter {
   paragraphs: string[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface Email extends Profile {} // TODO have own type
 
 export interface Export {

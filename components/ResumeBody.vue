@@ -28,7 +28,7 @@ const {
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : themeSettings[theme.value].resume;
+    : themeSettings[theme.value!].resume;
 });
 
 const asideCategories = computed(() =>
@@ -230,7 +230,7 @@ const bodyCategories = computed(() =>
       }"
     >
       <section
-        v-if="isHeaderSimple && !asideCategories.length"
+        v-if="isHeaderSimple && !asideCategories.length && bodyCategories[0]"
         class="break-inside-avoid"
         :class="
           getCategoryLayoutClass(bodyCategories[0], settings.category.isMasonry)

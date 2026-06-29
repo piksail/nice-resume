@@ -29,8 +29,8 @@ const settings = computed(() => {
       : resumeStoreSettings.value;
   }
   return documentType.value === "letter"
-    ? themeSettings[theme.value].letter
-    : themeSettings[theme.value].resume;
+    ? themeSettings[theme.value!].letter
+    : themeSettings[theme.value!].resume;
 });
 </script>
 

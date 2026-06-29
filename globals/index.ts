@@ -22,6 +22,9 @@ import type {
   TextSeparator,
 } from "@/types";
 
+// export const APP_NAME = "Pebroù Ruz";
+export const APP_NAME = "Pebr";
+
 export const A4_HEIGHT = 297; // In mm
 export const A4_WIDTH = 210; // In mm
 export const A4_RATIO = A4_HEIGHT / A4_WIDTH;
@@ -36,7 +39,6 @@ export const localeLabels: { [key in LocaleCode]: string } = {
   en: "English",
   es: "Español",
   fr: "Français",
-  it: "Italiano",
 };
 
 export const documentTypes: DocumentType[] = ["resume", "letter", "email"];
@@ -96,15 +98,7 @@ export const themes: Theme[] = [
   "Wiki",
 ];
 
-export const textSeparators: TextSeparator[] = [
-  "|",
-  "-",
-  "·",
-  "*",
-  ">",
-  ",",
-  " ",
-];
+export const textSeparators: TextSeparator[] = ["|", "-", "·", "*", ">", ","];
 
 export const listMarkerPositions: ListMarkerPosition[] = ["inside", "outside"];
 
@@ -348,6 +342,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 1,
+    beforeSeparator: null,
   },
   entryPeriod: {
     font: "inherit",
@@ -365,6 +360,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 2,
+    beforeSeparator: null,
   },
   entryOrganization: {
     font: "inherit",
@@ -382,6 +378,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 3,
+    beforeSeparator: null,
   },
   entryLocation: {
     font: "inherit",
@@ -399,6 +396,7 @@ export const resumeSettings: ResumeSettings = {
     border: [0, 0, 0, 0],
     padding: [0, 0, 0, 0],
     order: 4,
+    beforeSeparator: null,
   },
   entrySummary: {
     font: "inherit",
@@ -2147,7 +2145,6 @@ themeSettings.NeoBrutalism.email.document.color =
   themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.document.backgroundColor =
   themeSettings.NeoBrutalism.base.colors[2];
-themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.name.color =
   themeSettings.NeoBrutalism.base.colors[0];
 themeSettings.NeoBrutalism.email.name.backgroundColor =
@@ -2298,7 +2295,6 @@ themeSettings.Oilcloth.resume.title.isUppercase = true;
 themeSettings.Oilcloth.resume.title.letterSpacing = 4;
 themeSettings.Oilcloth.resume.about.color =
   themeBaseSettings.Oilcloth.colors[3];
-themeBaseSettings.Oilcloth.colors[3];
 themeSettings.Oilcloth.resume.contactDetails.fontWeight = 600;
 themeSettings.Oilcloth.resume.contactDetails.color =
   themeBaseSettings.Oilcloth.colors[3];
@@ -2360,7 +2356,6 @@ themeSettings.Oilcloth.letter.title.isUppercase = true;
 themeSettings.Oilcloth.letter.title.letterSpacing = 4;
 themeSettings.Oilcloth.letter.about.color =
   themeBaseSettings.Oilcloth.colors[0];
-themeBaseSettings.Oilcloth.colors[0];
 themeSettings.Oilcloth.letter.contactDetails.fontWeight = 600;
 themeSettings.Oilcloth.letter.contactDetails.color =
   themeBaseSettings.Oilcloth.colors[0];
@@ -3252,9 +3247,9 @@ export const categoryTypes: Array<Category["type"]> = [
 ];
 
 export const categoryLayouts: Array<Category["layout"]> = [
-  "aside",
   "full",
   "half",
+  "aside",
 ];
 
 export const assetTypes: Array<Asset["type"]> = [

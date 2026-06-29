@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import ScrollPanel from "primevue/scrollpanel";
 import { useEditorStore } from "@/stores/editor";
 import { useResumeStore } from "@/stores/resume";
 import { getCategoryIconClass, getEntryHeading } from "@/utils/editor";
@@ -17,6 +16,94 @@ import { capitalize } from "@/utils/string";
 const { documentType } = storeToRefs(useEditorStore());
 
 const { categories } = storeToRefs(useResumeStore());
+
+const { t } = useI18n();
+
+const items = computed(() => {
+  const items = [
+    {
+      label: capitalize(t("profile")),
+      icon: "i-lucide-user",
+      onSelect: () => {
+        document.getElementById("Profile")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      },
+    },
+  ];
+
+  if (documentType.value === "email") {
+    return [
+      ...items,
+      {
+        label: capitalize(t("signature")),
+        icon: "i-lucide-signature",
+        onSelect: () => {
+          document.getElementById("Signature")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        },
+      },
+    ];
+  }
+
+  if (documentType.value === "letter") {
+    return [
+      ...items,
+      {
+        label: capitalize(t("header")),
+        icon: "i-lucide-mail-question-mark",
+        onSelect: () => {
+          document.getElementById("Header")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        },
+      },
+      {
+        label: capitalize(t("body")),
+        icon: "i-lucide-file-type-corner",
+        onSelect: () => {
+          document.getElementById("Body")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        },
+      },
+    ];
+  }
+
+  if (documentType.value === "resume") {
+    return [
+      ...items,
+      ...categories.value.map((category) => ({
+        label: category.name,
+        icon: getCategoryIconClass(category.type),
+        onSelect: () => {
+          document.getElementById(category.name)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        },
+        badge: category.entries.length,
+        children: category.entries.map((entry, entryIndex) => ({
+          label: getEntryHeading(entry, entryIndex),
+          onSelect: () => {
+            document
+              .getElementById(getEntryHeading(entry, entryIndex))
+              ?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+          },
+        })),
+      })),
+    ];
+  }
+  return items;
+});
 </script>
 
 <template>
@@ -24,88 +111,24 @@ const { categories } = storeToRefs(useResumeStore());
     <TheHeader />
     <div class="flex">
       <aside>
-        <ScrollPanel class="h-[calc(100vh-80px)]">
-          <nav
-            class="flex flex-col gap-3 text-white p-4 pr-0 lg:p-8 text-sm md:text-base"
-          >
-            <div
-              class="xl:hidden flex gap-2 items-center w-fit text-primary-400"
-            >
-              <i class="pi pi-file-check" />
-              <a href="#Preview" class="underline-offset-4 hover:underline">
-                {{ capitalize($t("preview")) }}
-              </a>
-            </div>
-            <div class="flex gap-2 items-center w-fit text-primary-400">
-              <i class="pi pi-user" />
-              <a href="#Profile" class="underline-offset-4 hover:underline">
-                {{ capitalize($t("profile")) }}
-              </a>
-            </div>
-            <div
-              v-if="documentType === 'email'"
-              class="flex gap-2 items-center w-fit text-primary-400"
-            >
-              <i class="pi pi-inbox" />
-              <a href="#Signature" class="underline-offset-4 hover:underline">
-                {{ capitalize($t("signature")) }}
-              </a>
-            </div>
-            <template v-else-if="documentType === 'letter'">
-              <div class="flex gap-2 items-center w-fit text-primary-400">
-                <i class="pi pi-envelope" />
-                <a href="#Header" class="underline-offset-4 hover:underline">
-                  {{ capitalize($t("header")) }}
-                </a>
-              </div>
-              <div class="flex gap-2 items-center w-fit text-primary-400">
-                <i class="pi pi-align-left" />
-                <a href="#Body" class="underline-offset-4 hover:underline">
-                  {{ capitalize($t("body")) }}
-                </a>
-              </div>
-            </template>
-            <template v-else>
-              <div
-                v-for="(category, categoryIndex) in categories"
-                :key="categoryIndex"
-              >
-                <div class="flex gap-2 items-center w-fit text-primary-400">
-                  <i class="pi" :class="getCategoryIconClass(category.type)" />
-                  <a
-                    :href="`#${category.name}`"
-                    class="underline-offset-4 hover:underline"
-                  >
-                    {{ category.name }}
-                  </a>
-                </div>
-                <ol
-                  v-for="(entry, entryIndex) in category.entries"
-                  :key="entryIndex"
-                  class="ml-6"
-                >
-                  <li>
-                    <!-- We cannot have underline effect and overflow-ellipsis effect, so the border-bottom is used to simulate underline -->
-                    <a
-                      :href="`#${getEntryHeading(entry, entryIndex)}`"
-                      class="border-transparent border-b-[1px] hover:border-white block truncate line-clamp-1 max-w-40 w-fit text-sm"
-                    >
-                      {{ getEntryHeading(entry, entryIndex) }}
-                    </a>
-                  </li>
-                </ol>
-              </div>
-            </template>
-          </nav>
-        </ScrollPanel>
+        <UScrollArea class="h-[calc(100vh-80px)]">
+          <UNavigationMenu
+            orientation="vertical"
+            :items="items"
+            class="data-[orientation=vertical]:w-60"
+          />
+        </UScrollArea>
       </aside>
       <main class="relative h-[calc(100vh-80px)] overflow-y-auto flex flex-1">
-        <section class="w-full overflow-y-auto scroll-smooth">
-          <div
-            class="flex flex-col gap-4 lg:gap-8 p-4 lg:p-8 max-w-[860px] mx-auto"
-          >
-            <EditorCategory id="Preview" class="block xl:hidden">
-              <template v-slot:header>
+        <section class="w-full overflow-y-scroll scroll-smooth">
+          <div class="flex flex-col gap-4 p-4 max-w-[860px] mx-auto">
+            <EditorCategory
+              id="Preview"
+              :title="capitalize(t('preview'))"
+              icon="i-lucide-view"
+              class="block xl:hidden"
+            >
+              <template #header>
                 <div class="flex items-center gap-8">
                   <div>{{ capitalize($t("preview")) }}</div>
                   <PreviewZoom />

@@ -17,7 +17,7 @@ export default function useDocumentSettings() {
   const { settings: emailStoreSettings } = storeToRefs(useEmailStore());
 
   const settings = computed(() => {
-    const defaultSettings = themeSettings[theme.value][documentType.value];
+    const defaultSettings = themeSettings[theme.value!][documentType.value];
     if (documentType.value === "email") {
       return isThemeCustomized.value
         ? emailStoreSettings.value

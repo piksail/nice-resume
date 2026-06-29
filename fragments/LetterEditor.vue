@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import Button from "primevue/button";
 import { useLetterStore } from "@/stores/letter";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
@@ -9,7 +8,6 @@ import Field from "@/components/Field.vue";
 import ListActions from "@/components/ListActions.vue";
 import { capitalize } from "@/utils/string";
 
-// eslint-disable-next-line no-undef
 const { t } = useI18n({
   useScope: "local",
 });
@@ -43,23 +41,30 @@ function addSenderDetail() {
 </script>
 
 <template>
-  <EditorCategory id="Header">
-    <template v-slot:header>{{ capitalize($t("header")) }}</template>
+  <EditorCategory
+    id="Header"
+    :title="capitalize(t('header'))"
+    icon="i-lucide-mail-question-mark"
+  >
     <div class="formBlock">
       <FormBlockRow>
         <Field
+          v-model="isHeaderSimple"
           type="checkbox"
           transparent
           :label="t('useSenderFormat')"
-          v-model="isHeaderSimple"
         />
       </FormBlockRow>
       <label class="flex flex-col" for="senderDetails">
         <template v-if="isHeaderSimple">
-          <span class="label labelTransparent">
+          <span class="label">
             {{ capitalize($t("senderDetails")) }}
           </span>
-          <ul v-if="senderDetails.length" id="senderDetailList">
+          <ul
+            v-if="senderDetails.length"
+            id="senderDetailList"
+            class="inputList"
+          >
             <li
               v-for="(_detail, index) in senderDetails"
               :key="index"
@@ -67,36 +72,41 @@ function addSenderDetail() {
             >
               <Field
                 :id="`senderDetailList${index}`"
+                v-model="senderDetails[index]"
                 target
                 transparent
                 class="w-[70%]"
-                v-model="senderDetails[index]"
                 @keydown.enter.prevent="addSenderDetail"
               />
               <ListActions
                 :index="index"
                 :list-length="senderDetails.length"
-                @moveUp="moveUp(senderDetails, index)"
-                @moveDown="moveDown(senderDetails, index)"
+                @move-up="moveUp(senderDetails, index)"
+                @move-down="moveDown(senderDetails, index)"
                 @remove="remove(senderDetails, index)"
               />
             </li>
-            <Button asChild>
-              <button
-                class="button slotButton slotButtonSmall"
-                @click="addSenderDetail"
-              >
-                {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-              </button>
-            </Button>
+            <UButton
+              icon="i-lucide-contact"
+              variant="soft"
+              size="sm"
+              class="w-[70%]"
+              @click="addSenderDetail"
+            >
+              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+            </UButton>
           </ul>
         </template>
       </label>
       <label class="flex flex-col" for="recipientDetails">
-        <span class="label labelTransparent">
+        <span class="label">
           {{ capitalize($t("recipientDetails")) }}
         </span>
-        <ul v-if="recipientDetails.length" id="recipientDetailList">
+        <ul
+          v-if="recipientDetails.length"
+          id="recipientDetailList"
+          class="inputList"
+        >
           <li
             v-for="(_detail, index) in recipientDetails"
             :key="index"
@@ -104,52 +114,57 @@ function addSenderDetail() {
           >
             <Field
               :id="`recipientDetailList${index}`"
+              v-model="recipientDetails[index]"
               target
               transparent
               class="w-[70%]"
-              v-model="recipientDetails[index]"
               @keydown.enter.prevent="addRecipientDetail"
             />
             <ListActions
               :index="index"
               :list-length="recipientDetails.length"
-              @moveUp="moveUp(recipientDetails, index)"
-              @moveDown="moveDown(recipientDetails, index)"
+              @move-up="moveUp(recipientDetails, index)"
+              @move-down="moveDown(recipientDetails, index)"
               @remove="remove(recipientDetails, index)"
             />
           </li>
-          <Button asChild>
-            <button
-              class="button slotButton slotButtonSmall"
-              @click="addRecipientDetail"
-            >
-              {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
-            </button>
-          </Button>
+          <UButton
+            icon="i-lucide-list-plus"
+            variant="soft"
+            size="sm"
+            class="w-[70%]"
+            @click="addRecipientDetail"
+          >
+            {{ capitalize(`${$t("toAdd")} ${$t("detail")}`) }}
+          </UButton>
         </ul>
       </label>
       <Field
         id="letterSubject"
+        v-model="subject"
         target
         transparent
         :label="$t('subject')"
         type="textarea"
-        v-model="subject"
       />
       <Field
         id="letterReference"
+        v-model="reference"
         target
         transparent
         :label="$t('reference')"
-        v-model="reference"
       />
     </div>
   </EditorCategory>
-  <EditorCategory id="Body">
-    <template v-slot:header>{{ capitalize($t("body")) }}</template>
+  <EditorCategory
+    id="Body"
+    :title="capitalize(t('body'))"
+    icon="i-lucide-file-type-corner"
+  >
+    <template #header>{{ capitalize($t("body")) }}</template>
     <div class="formBlock">
       <label class="flex flex-col" for="paragraphList">
-        <span class="label labelTransparent">
+        <span class="label">
           {{ capitalize($t("paragraphs")) }}
         </span>
         <ul v-if="paragraphs.length" id="paragraphList" class="inputList">
@@ -160,30 +175,31 @@ function addSenderDetail() {
           >
             <Field
               :id="`paragraphList${index}`"
+              v-model="paragraphs[index]"
               target
               transparent
               type="textarea"
               class="w-[70%]"
-              v-model="paragraphs[index]"
               @keydown.enter.prevent="addParagraph"
             />
             <ListActions
               class="mb-2"
               :index="index"
               :list-length="paragraphs.length"
-              @moveUp="moveUp(paragraphs, index)"
-              @moveDown="moveDown(paragraphs, index)"
+              @move-up="moveUp(paragraphs, index)"
+              @move-down="moveDown(paragraphs, index)"
               @remove="remove(paragraphs, index)"
             />
           </li>
-          <Button asChild>
-            <button
-              class="button slotButton slotButtonSmall"
-              @click="addParagraph"
-            >
-              {{ capitalize(`${$t("toAdd")} ${$t("paragraph")}`) }}
-            </button>
-          </Button>
+          <UButton
+            icon="i-lucide-list-plus"
+            variant="soft"
+            size="sm"
+            class="w-[70%]"
+            @click="addParagraph"
+          >
+            {{ capitalize(`${$t("toAdd")} ${$t("paragraph")}`) }}
+          </UButton>
         </ul>
       </label>
     </div>

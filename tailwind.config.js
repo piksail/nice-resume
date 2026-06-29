@@ -1,5 +1,3 @@
-import primevue from "tailwindcss-primeui";
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -42,5 +40,5 @@ export default {
       },
     },
   },
-  plugins: [primevue],
+  plugins: [],
 };

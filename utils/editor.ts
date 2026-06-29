@@ -1,8 +1,8 @@
 import { nextTick } from "vue";
 import type { Asset, Category, Experience, ListMarker } from "@/types";
-import { useLetterStore } from "@/stores/letter";
-import { useProfileStore } from "@/stores/profile";
-import { useResumeStore } from "@/stores/resume";
+import type { useLetterStore } from "@/stores/letter";
+import type { useProfileStore } from "@/stores/profile";
+import type { useResumeStore } from "@/stores/resume";
 import { getRandomAsset, getRandomExperience } from "./random";
 
 /**
@@ -153,16 +153,16 @@ export function generateStores(
 
 export function getCategoryIconClass(categoryType: Category["type"]) {
   const iconMapper: { [key in Category["type"]]: string } = {
-    award: "pi-trophy",
-    certificate: "pi-verified",
-    education: "pi-graduation-cap",
-    interest: "pi-heart",
-    language: "pi-language",
-    project: "pi-box",
-    publication: "pi-book",
-    skill: "pi-wrench",
-    voluntary: "pi-face-smile",
-    work: "pi-briefcase",
+    award: "i-lucide-trophy",
+    certificate: "i-lucide-verified",
+    education: "i-lucide-graduation-cap",
+    interest: "i-lucide-heart",
+    language: "i-lucide-languages",
+    project: "i-lucide-box",
+    publication: "i-lucide-book",
+    skill: "i-lucide-wrench",
+    voluntary: "i-lucide-face-smile",
+    work: "i-lucide-briefcase-business",
   };
   return iconMapper[categoryType];
 }
@@ -236,11 +236,20 @@ export function getListMarker(value: ListMarker) {
   }
 }
 
+export function getLayoutIconClass(categoryLayout: Category["layout"]) {
+  const iconMapper: { [key in Category["layout"]]: string } = {
+    aside: "i-lucide-panel-left-close",
+    full: "i-lucide-square",
+    half: "i-lucide-columns-2",
+  };
+  return iconMapper[categoryLayout];
+}
+
 /**
  * Convert 1/2/3/4 to top/right/bottom/left.
  */
 export function getSideIndexLabel(index: number) {
   // Vue.js for loop is one-indexed
   if (index < 1 || index > 4) return "";
-  return ["top", "right", "bottom", "left"][index - 1];
+  return ["top", "right", "bottom", "left"][index - 1] ?? "";
 }

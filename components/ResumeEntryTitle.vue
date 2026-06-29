@@ -25,7 +25,7 @@ const { categoryIndex, categoryLayout, entryTitle, entryIndex } = defineProps<{
 const settings = computed(() => {
   return isThemeCustomized.value
     ? storeSettings.value
-    : themeSettings[theme.value].resume;
+    : themeSettings[theme.value!].resume;
 });
 </script>
 
