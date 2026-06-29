@@ -467,65 +467,6 @@ function exportResumeToJsonResume() {
               />
             </div> -->
           </template>
-          <UStepItem
-            v-for="(step, stepIndex) in jsonResumeExportSteps"
-            :key="`jsonResumeExportStep${stepIndex}`"
-            :value="step"
-          >
-            <Step>{{ capitalize($t(step)) }}</Step>
-            <StepPanel
-              v-slot="{ activateCallback }"
-              :value="jsonResumeExportSteps[stepIndex]"
-            >
-              <div v-if="stepIndex === 0" class="pt-6 flex justify-end">
-                <UButton
-                  :label="$t('toSubmit')"
-                  icon="i-lucide-arrow-right"
-                  icon-pos="right"
-                  @click="
-                    activateCallback(jsonResumeExportSteps[stepIndex + 1]!)
-                  "
-                />
-              </div>
-              <div
-                v-else-if="stepIndex === jsonResumeExportSteps.length - 1"
-                class="pt-6"
-              >
-                <UButton
-                  :label="$t('previous')"
-                  severity="secondary"
-                  icon="i-lucide-arrow-left"
-                  @click="
-                    activateCallback(jsonResumeExportSteps[stepIndex - 1]!)
-                  "
-                />
-                <UButton
-                  :label="$t('toSubmit')"
-                  icon="i-lucide-check"
-                  icon-pos="right"
-                  @click="download(jsonResume, 'nice-resume-to-json-resume')"
-                />
-              </div>
-              <div v-else class="pt-6 flex justify-between">
-                <UButton
-                  :label="$t('previous')"
-                  severity="secondary"
-                  icon="i-lucide-arrow-left"
-                  @click="
-                    activateCallback(jsonResumeExportSteps[stepIndex - 1]!)
-                  "
-                />
-                <UButton
-                  :label="$t('next')"
-                  icon="i-lucide-arrow-right"
-                  icon-pos="right"
-                  @click="
-                    activateCallback(jsonResumeExportSteps[stepIndex + 1]!)
-                  "
-                />
-              </div>
-            </StepPanel>
-          </UStepItem>
         </UStepper>
       </div>
     </template>

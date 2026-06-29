@@ -3,7 +3,7 @@ interface Props {
   label: string;
 }
 
-defineProps<Props>();
+const { label } = defineProps<Props>();
 </script>
 
 <template>
