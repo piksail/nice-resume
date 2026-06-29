@@ -13,7 +13,7 @@ export function getPeriodBounds(period: string) {
 }
 
 /**
- * Format a JSON Resume in accordance to the Nice Resume interface.
+ * Format a JSON Resume in accordance to the Pebr interface.
  * See: https://jsonresume.org/schema
  */
 export function formatJsonResumeAsResume(

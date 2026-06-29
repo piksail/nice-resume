@@ -3,13 +3,14 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { capitalize } from "@/utils/string";
-import { themes } from "~/globals";
+import { APP_NAME, themes } from "~/globals";
 
 const { theme } = storeToRefs(useProfileStore());
 
-const title = ref("Nice resume");
+// TODO localize meta
+const title = ref(APP_NAME);
 const description = ref(
-  "Pick a design, build your resume, write your cover letter, adapt the design to your need with Nice Resume.",
+  `Pick a design, build your resume, write your cover letter, adapt the design to your need with ${APP_NAME}.`,
 );
 
 const localePath = useLocalePath();
@@ -90,7 +91,7 @@ const thirdInputFontWeight = ref(400);
           >
             {{ t("startEditing") }}
           </UButton>
-          <UButton
+          <!-- <UButton
             :to="localePath('/about')"
             class="uppercase font-bold tracking-wide shadow-xl"
             size="xl"
@@ -98,7 +99,7 @@ const thirdInputFontWeight = ref(400);
             color="neutral"
           >
             {{ t("learnMore") }}
-          </UButton>
+          </UButton> -->
         </div>
       </div>
       <div class="hidden sm:block skew-y-12 mx-auto mt-14 group">
@@ -477,6 +478,29 @@ const thirdInputFontWeight = ref(400);
           </div>
         </li>
       </ol>
+    </section>
+    <section class="py-20 px-10 max-w-screen-xl mx-auto">
+      <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
+        Famous themes from JSONResume.org, OpenResume... plus handcrafted
+        <i class="font-serif text-primary">{{ $t("theme") }}</i>
+      </h2>
+      <div class="relative h-[calc((400px*1.414)+50px)] mx-auto group">
+        <img
+          src="/paper-example.png"
+          :alt="`First example of a resume built with ${APP_NAME}`"
+          class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] -rotate-6 -translate-x-32 bg-white shadow group-hover:-translate-x-60 group-hover:-rotate-12 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/macchiato-example.png"
+          :alt="`Second example of a resume built with ${APP_NAME}`"
+          class="absolute z-[1] mx-auto left-0 right-0 -translate-y-6 w-[400px] h-[calc(400px*1.414)] bg-white shadow group-hover:-translate-y-10 group-hover:-rotate-1 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+        <img
+          src="/stone-example.png"
+          :alt="`Third example of a resume built with ${APP_NAME}`"
+          class="absolute mx-auto left-0 right-0 w-[400px] h-[calc(400px*1.414)] rotate-3 translate-x-32 bg-white shadow group-hover:translate-x-60 group-hover:rotate-6 group-hover:scale-105 group-hover:shadow-lg transition-all"
+        />
+      </div>
     </section>
     <section class="py-20 px-10 max-w-screen-md mx-auto">
       <p class="text-center text-4xl lg:text-6xl font-bold mb-12">

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { APP_NAME } from "~/globals";
+
 type Tool = {
   name: string;
   free: boolean | "freemium" | "?";
@@ -14,7 +16,7 @@ type Tool = {
 const tools: Tool[] = [
   // TODO provide all tools
   {
-    name: "Nice Resume",
+    name: APP_NAME,
     free: true,
     registerless: true,
     preview: "direct",

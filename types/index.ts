@@ -15,7 +15,7 @@ export type Theme =
   | "Macaron"
   | "Macchiato"
   | "NeoBrutalism"
-  | "NiceResume" // TODO renommer avec un nom parmi ceux éventuels OU créer un thème qui portera le futur nom de Nice Resume (nom pas encore trouvé) et les couleurs actuelles (noir, rouge)
+  | "NiceResume" // TODO renommer avec un nom parmi ceux éventuels OU créer un thème qui portera le futur nom de Nice Resume (Pebr?) et les couleurs actuelles (noir, rouge/orange)
   | "OpenResume"
   | "Oilcloth"
   | "Paper"
