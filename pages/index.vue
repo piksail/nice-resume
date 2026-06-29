@@ -25,7 +25,7 @@ const firstInput = ref(capitalize(t("name").toUpperCase()));
 const secondInput = ref(capitalize(t("title")));
 const thirdInput = ref(capitalize(t("address")));
 
-const firstInputColor = ref("#e11d48");
+const firstInputColor = ref("#ff8904");
 const firstInputIsItalic = ref(false);
 const firstInputFontWeight = ref(800);
 
@@ -301,6 +301,7 @@ const thirdInputFontWeight = ref(400);
               transparent
               type="select"
               :items="fontWeights"
+              class="min-w-24"
             />
           </div>
           <div class="font-bold text-xl mt-6">
@@ -328,6 +329,7 @@ const thirdInputFontWeight = ref(400);
               transparent
               type="select"
               :items="fontWeights"
+              class="min-w-24"
             />
           </div>
           <div class="font-bold text-xl mt-6">
@@ -355,6 +357,7 @@ const thirdInputFontWeight = ref(400);
               transparent
               type="select"
               :items="fontWeights"
+              class="min-w-24"
             />
           </div>
         </li>
@@ -465,11 +468,11 @@ const thirdInputFontWeight = ref(400);
               </ol>
               <NuxtLink
                 :to="localePath('/editor')"
-                class="absolute left-1/2 -translate-x-1/2 bottom-0"
+                class="absolute left-1/2 -translate-x-1/2 bottom-0 scale-150 md:scale-150"
               >
                 <UButton
-                  class="uppercase font-black tracking-widest shadow-xl"
-                  variant="outline"
+                  class="uppercase font-bold tracking-wide shadow-xl"
+                  variant="solid"
                 >
                   {{ t("editMore") }}
                 </UButton>
@@ -481,8 +484,8 @@ const thirdInputFontWeight = ref(400);
     </section>
     <section class="py-20 px-10 max-w-screen-xl mx-auto">
       <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
-        Famous themes from JSONResume.org, OpenResume... plus handcrafted
-        <i class="font-serif text-primary">{{ $t("theme") }}</i>
+        {{ t("featThemes") }}
+        <i class="font-serif text-primary">{{ t("featThemesSuffix") }}</i>
       </h2>
       <div class="relative h-[calc((400px*1.414)+50px)] mx-auto group">
         <img
@@ -503,10 +506,10 @@ const thirdInputFontWeight = ref(400);
       </div>
     </section>
     <section class="py-20 px-10 max-w-screen-md mx-auto">
-      <p class="text-center text-4xl lg:text-6xl font-bold mb-12">
-        Everything is
-        <i class="font-serif text-primary">saved locally</i>
-      </p>
+      <h2 class="text-center text-4xl lg:text-6xl font-bold mb-12">
+        {{ t("featLocalStorage") }}
+        <i class="font-serif text-primary">{{ t("featLocalStorageSuffix") }}</i>
+      </h2>
       <p class="text-center text-2xl mb-12">
         Don't worry about losing your progress
         <br />
@@ -515,10 +518,10 @@ const thirdInputFontWeight = ref(400);
       <p class="text-center text-2xl mb-12">
         Don't feel compelled to finish all at once:
       </p>
-      <p class="text-center text-4xl lg:text-6xl font-bold mb-12">
-        Edit
-        <i class="font-serif text-primary">whenever you want</i>
-      </p>
+      <h2 class="text-center text-4xl lg:text-6xl font-bold mb-12">
+        {{ t("featWhenever") }}
+        <i class="font-serif text-primary">{{ t("featWheneverSuffix") }}</i>
+      </h2>
       <div class="flex justify-center">
         <UButton
           :to="localePath('/editor')"
@@ -552,6 +555,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "TODO",
     "stepCustomize": "TODO",
     "stepPreview": "TODO",
+    "featThemes": "TODO",
+    "featThemesSuffix": "TODO",
+    "featLocalStorage": "TODO",
+    "featLocalStorageSuffix": "TODO",
+    "featWhenever": "TODO",
+    "featWheneverSuffix": "TODO",
     "preview": "TODO"
   },
   "de": {
@@ -571,6 +580,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "Erstellen Irhe",
     "stepCustomize": "Anpassen die",
     "stepPreview": "TODO",
+    "featThemes": "TODO",
+    "featThemesSuffix": "TODO",
+    "featLocalStorage": "TODO",
+    "featLocalStorageSuffix": "TODO",
+    "featWhenever": "TODO",
+    "featWheneverSuffix": "TODO",
     "preview": "TODO"
   },
   "en": {
@@ -590,6 +605,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "Edit your",
     "stepCustomize": "Adapt the",
     "stepPreview": "Preview and",
+    "featThemes": "Famous themes from JSONResume.org, OpenResume... plus",
+    "featThemesSuffix": "handcrafted themes",
+    "featLocalStorage": "Everything is",
+    "featLocalStorageSuffix": "saved locally",
+    "featWhenever": "Edit",
+    "featWheneverSuffix": "whenever you want",
     "preview": "download"
   },
   "es": {
@@ -609,6 +630,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "TODO",
     "stepCustomize": "TODO",
     "stepPreview": "TODO",
+    "featThemes": "TODO",
+    "featThemesSuffix": "TODO",
+    "featLocalStorage": "TODO",
+    "featLocalStorageSuffix": "TODO",
+    "featWhenever": "TODO",
+    "featWheneverSuffix": "TODO",
     "preview": "TODO"
   },
   "fr": {
@@ -628,6 +655,12 @@ const thirdInputFontWeight = ref(400);
     "stepEdit": "Editez votre",
     "stepCustomize": "Adaptez le",
     "stepPreview": "Prévisualisez et",
+    "featThemes": "Retrouvez les thèmes de JSONResume.org, OpenResume... mais aussi",
+    "featThemesSuffix": "cousus main",
+    "featLocalStorage": "Tout est enregistré",
+    "featLocalStorageSuffix": "sur votre ordi",
+    "featWhenever": "Reprenez",
+    "featWheneverSuffix": "quand vous voulez",
     "preview": "téléchargez"
   }
 }
