@@ -263,7 +263,7 @@ function toggleEntryVisibility(entry: Entry) {
     </template>
     <ul v-if="category.entries.length" class="flex flex-col gap-10 mb-4">
       <li v-for="(entry, entryIndex) in category.entries" :key="entryIndex">
-        <Fieldset :legend="getEntryHeading(entry, entryIndex)" toggleable>
+        <fieldset :legend="getEntryHeading(entry, entryIndex)" toggleable>
           <header class="flex items-center justify-between">
             <div
               :id="getEntryHeading(entry, entryIndex)"
@@ -431,7 +431,7 @@ function toggleEntryVisibility(entry: Entry) {
               </UButton>
             </label>
           </div>
-        </Fieldset>
+        </fieldset>
       </li>
     </ul>
     <template #footer>

@@ -76,7 +76,7 @@ const { t } = useI18n({
         </div>
       </section>
       <section class="p-20 max-w-screen-2xl mx-auto">
-        TODO expliquer que y avait besoin d'un enième CV builder
+        <!-- TODO expliquer que y avait besoin d'un enième CV builder -->
         <h2 class="drop-shadow-lg text-5xl font-bold mb-32">
           {{ t("todo") }}
           <i class="font-serif text-primary">{{ $t("todo") }}</i>

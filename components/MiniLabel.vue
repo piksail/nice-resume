@@ -1,9 +1,9 @@
 <script setup lang="ts">
-interface ConfirmDialogProps {
+interface Props {
   label: string;
 }
 
-defineProps<ConfirmDialogProps>();
+defineProps<Props>();
 </script>
 
 <template>

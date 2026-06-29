@@ -248,8 +248,8 @@ onMounted(() => {
   "de": {
     "resumeTitle": "Wie möchten Sie wieder arbeiten?",
     "resumeContinue": "Machen Sie dort weiter, wo Sie aufgehört haben",
-    "resumeFromScratch": "TODO",
-    "resumeFromFakeData": "TODO",
+    "resumeFromScratch": "Bei Null anfangen",
+    "resumeFromFakeData": "Mit Beispiel anfangen",
     "importSaveFile": "Datei aus einer früheren Sitzung importieren",
     "importJsonResume": "JSON Resume Datei importieren",
     "startAnew": "TODO",

@@ -659,7 +659,7 @@ async function askBeforeResetStyle() {
                   <Field
                     id="bodyIsSignatureRightAligned"
                     v-model="letterSettings.body.isSignatureRightAligned"
-                    label="Signature on the right TODO localize"
+                    :label="t('signatureToTheRight')"
                     type="checkbox"
                   />
                 </FormBlockRow>
@@ -959,7 +959,7 @@ async function askBeforeResetStyle() {
   <Field
     v-model="isThemeCustomized"
     type="toggle"
-    :label="t('onLabel')"
+    :label="t('applyCustomization')"
     :icon="isThemeCustomized ? 'i-lucide-wrench-off' : 'i-lucide-eye'"
     class="ml-4"
   />
@@ -977,37 +977,42 @@ async function askBeforeResetStyle() {
 <i18n lang="json">
 {
   "br": {
-    "onLabel": "TODO",
+    "applyCustomization": "TODO",
     "iconFirst": "TODO",
     "toTheRight": "TODO",
+    "signatureToTheRight": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "de": {
-    "onLabel": "angepasst",
+    "applyCustomization": "angepasst",
     "iconFirst": "TODO",
     "toTheRight": "TODO",
+    "signatureToTheRight": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "en": {
-    "onLabel": "Apply own customization",
+    "applyCustomization": "Apply own customization",
     "iconFirst": "Icon first",
     "toTheRight": "To the right",
+    "signatureToTheRight": "Signature to the right",
     "howToGapMasonry": "Vertical gap is handled with category top and bottom margins.",
     "confirmStyleReset": "Reset style to defaults?"
   },
   "es": {
-    "onLabel": "TODO",
+    "applyCustomization": "TODO",
     "iconFirst": "TODO",
     "toTheRight": "TODO",
+    "signatureToTheRight": "TODO",
     "howToGapMasonry": "TODO",
     "confirmStyleReset": "TODO"
   },
   "fr": {
-    "onLabel": "Appliquer mes modifications",
+    "applyCustomization": "Appliquer mes modifications",
     "iconFirst": "Icône d'abord",
     "toTheRight": "À droite",
+    "signatureToTheRight": "Signature à droite",
     "howToGapMasonry": "L'espacement vertical est géré avec les marges haute et basse de la catégorie.",
     "confirmStyleReset": "Réinitialiser le style ?"
   }
