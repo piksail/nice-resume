@@ -21,7 +21,9 @@ export function getNodeStyle(
     style.color = settingsItem.color;
   }
   if (settingsType === "block" || settingsType === "title") {
-    style.backgroundColor = `${settingsItem.backgroundColor}`;
+    style.backgroundColor = settingsItem.isGradient
+      ? "transparent"
+      : `${settingsItem.backgroundColor}`;
     style.marginTop = `${settingsItem.margin[0]}px`;
     style.marginRight = `${settingsItem.margin[1]}px`;
     style.marginBottom = `${settingsItem.margin[2]}px`;
@@ -37,7 +39,7 @@ export function getNodeStyle(
     style.paddingLeft = `${settingsItem.padding[3]}px`;
   }
   if (settingsType === "title") {
-    style.backgroundClip = settingsItem.isGradient ? "text" : "initial";
+    style.backgroundClip = settingsItem.isGradient ? "text" : "text";
     style.color = settingsItem.isGradient ? "transparent" : settingsItem.color;
     style.backgroundImage = settingsItem.isGradient
       ? `linear-gradient(${settingsItem.gradientAngle / 100}turn, ${settingsItem.fromColor}, ${settingsItem.toColor})`
