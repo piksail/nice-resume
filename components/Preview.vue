@@ -25,7 +25,7 @@ const settings = useDocumentSettings();
     <Document
       id="preview"
       class="print:!transform-none"
-      :class="documentType === 'email' ? '' : 'h-full'"
+      :class="documentType === 'email' ? '' : 'h-screen'"
       :style="`transform: scale(${zoomLevel / 100}); transform-origin: top left;`"
     />
     <PreviewZoom
