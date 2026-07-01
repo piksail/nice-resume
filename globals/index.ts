@@ -98,7 +98,15 @@ export const themes: Theme[] = [
   "Wiki",
 ];
 
-export const textSeparators: TextSeparator[] = ["|", "-", "·", "*", ">", ","];
+export const textSeparators: TextSeparator[] = [
+  null,
+  "|",
+  "-",
+  "·",
+  "*",
+  ">",
+  ",",
+];
 
 export const listMarkerPositions: ListMarkerPosition[] = ["inside", "outside"];
 
