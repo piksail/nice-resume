@@ -42,7 +42,7 @@
     "@sentry/nuxt": "^10.4.0",
     "@tailwindcss/vite": "^4.3.1",
     "import-in-the-middle": "^1.14.2",
-    "nuxt": "^4.4.8",
+    "nuxt": "^4.5.1",
     "pinia": "^3.0.3",
     "tailwindcss": "^4.3.1",
     "vue": "^3.5.18",
