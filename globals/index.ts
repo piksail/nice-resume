@@ -92,6 +92,7 @@ export const themes: Theme[] = [
   "Pharmacy",
   "Red",
   "Shelf",
+  "SpaceTime",
   "StackOverflow",
   "Stone",
   "Toothpaste",
@@ -121,7 +122,7 @@ export const listMarkers: ListMarker[] = [
 export const headerLayouts: HeaderLayout[] = [0, 1, 2, 3, 4, 5];
 
 export const entryLayouts: EntryLayout[] = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 ];
 
 export const commonDocumentSettings: CommonDocumentSettings = {
@@ -736,6 +737,20 @@ export const themeBaseSettings: ThemeBaseSettings = {
     bodyFont: "Archivo",
     displayFont: "Crimson Text",
   },
+  SpaceTime: {
+    isLetterPaddingless: false,
+    colors: [
+      "#000749",
+      "#3511b7",
+      "#faf9fd",
+      "#ffffff",
+      "#a39dba",
+      "#f5f3fb",
+      "#141510",
+    ],
+    bodyFont: "Mulish",
+    displayFont: "League Gothic",
+  },
   StackOverflow: {
     isLetterPaddingless: false,
     colors: [
@@ -882,6 +897,12 @@ export const themeSettings: ThemeSettings = {
   },
   Shelf: {
     base: themeBaseSettings.Shelf,
+    resume: structuredClone(resumeSettings),
+    letter: structuredClone(letterSettings),
+    email: structuredClone(emailSettings),
+  },
+  SpaceTime: {
+    base: themeBaseSettings.SpaceTime,
     resume: structuredClone(resumeSettings),
     letter: structuredClone(letterSettings),
     email: structuredClone(emailSettings),
@@ -2848,6 +2869,76 @@ themeSettings.Shelf.email.title.fontWeight = 300;
 themeSettings.Shelf.email.title.letterSpacing = 2;
 themeSettings.Shelf.email.about.fontSize = 12;
 themeSettings.Shelf.email.contactDetails.fontSize = 12;
+
+// SpaceTime
+themeSettings.SpaceTime.resume.document.padding = [40, 40, 40, 40];
+themeSettings.SpaceTime.resume.header.layout = 2;
+themeSettings.SpaceTime.resume.name.font =
+  themeSettings.SpaceTime.base.displayFont;
+themeSettings.SpaceTime.resume.name.fontSize = 40;
+themeSettings.SpaceTime.resume.name.isUppercase = true;
+themeSettings.SpaceTime.resume.name.color =
+  themeSettings.SpaceTime.base.colors[0];
+themeSettings.SpaceTime.resume.title.font =
+  themeSettings.SpaceTime.base.displayFont;
+themeSettings.SpaceTime.resume.title.fontSize = 24;
+themeSettings.SpaceTime.resume.title.isUppercase = true;
+themeSettings.SpaceTime.resume.title.color =
+  themeSettings.SpaceTime.base.colors[1];
+themeSettings.SpaceTime.resume.contactDetails.alignment = "end";
+themeSettings.SpaceTime.resume.contactDetails.isItalic = true;
+themeSettings.SpaceTime.resume.contactDetails.fontSize = 12;
+// themeSettings.SpaceTime.resume.contactDetails.backgroundColor =
+//   themeSettings.SpaceTime.base.colors[5];
+// themeSettings.SpaceTime.resume.contactDetails.border = [1, 1, 1, 1];
+// themeSettings.SpaceTime.resume.contactDetails.borderColor =
+//   themeSettings.SpaceTime.base.colors[4];
+// themeSettings.SpaceTime.resume.contactDetails.padding = [5, 5, 5, 5];
+themeSettings.SpaceTime.resume.category.margin[0] = 20;
+themeSettings.SpaceTime.resume.categoryName.font =
+  themeSettings.SpaceTime.base.displayFont;
+themeSettings.SpaceTime.resume.categoryName.fontSize = 30;
+themeSettings.SpaceTime.resume.categoryName.isUppercase = true;
+themeSettings.SpaceTime.resume.categoryName.color =
+  themeSettings.SpaceTime.base.colors[0];
+themeSettings.SpaceTime.resume.entry.layout = 4;
+themeSettings.SpaceTime.resume.entry.gap = 10;
+themeSettings.SpaceTime.resume.entryTitle.order = 1;
+themeSettings.SpaceTime.resume.entryTitle.font =
+  themeSettings.SpaceTime.base.displayFont;
+themeSettings.SpaceTime.resume.entryTitle.fontSize = 24;
+themeSettings.SpaceTime.resume.entryTitle.isUppercase = true;
+themeSettings.SpaceTime.resume.entryTitle.color =
+  themeSettings.SpaceTime.base.colors[1];
+themeSettings.SpaceTime.resume.entryOrganization.order = 2;
+themeSettings.SpaceTime.resume.entryOrganization.margin[3] = 5;
+themeSettings.SpaceTime.resume.entryOrganization.font =
+  themeSettings.SpaceTime.base.displayFont;
+themeSettings.SpaceTime.resume.entryOrganization.fontSize = 24;
+themeSettings.SpaceTime.resume.entryOrganization.isUppercase = true;
+themeSettings.SpaceTime.resume.entryOrganization.color =
+  themeSettings.SpaceTime.base.colors[4];
+themeSettings.SpaceTime.resume.entryPeriod.order = 3;
+themeSettings.SpaceTime.resume.entryPeriod.isItalic = true;
+themeSettings.SpaceTime.resume.entryPeriod.fontSize = 12;
+themeSettings.SpaceTime.resume.entryLocation.order = 4;
+themeSettings.SpaceTime.resume.entryLocation.beforeSeparator = ",";
+// themeSettings.SpaceTime.resume.entryLocation.margin[3] = 10;
+themeSettings.SpaceTime.resume.entryLocation.isItalic = true;
+themeSettings.SpaceTime.resume.entryLocation.fontSize = 12;
+themeSettings.SpaceTime.resume.entrySummary.margin[0] = 10;
+themeSettings.SpaceTime.resume.entrySummary.fontSize = 13;
+themeSettings.SpaceTime.resume.entrySummary.fontWeight = 600;
+themeSettings.SpaceTime.resume.entryHighlight.isItalic = true;
+themeSettings.SpaceTime.resume.entryHighlight.fontSize = 12;
+themeSettings.SpaceTime.resume.entryTag.margin[0] = 10;
+themeSettings.SpaceTime.resume.entryTag.backgroundColor =
+  themeSettings.SpaceTime.base.colors[5];
+themeSettings.SpaceTime.resume.entryTag.border = [1, 1, 1, 1];
+themeSettings.SpaceTime.resume.entryTag.borderColor =
+  themeSettings.SpaceTime.base.colors[4];
+themeSettings.SpaceTime.resume.entryTag.fontSize = 10;
+// TODO
 
 // StackOverflow
 themeSettings.StackOverflow.resume.name.fontSize = 36;
