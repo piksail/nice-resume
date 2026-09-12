@@ -700,6 +700,53 @@ const fourthItem = computed(() => {
       </div>
     </div>
   </template>
+  <template v-if="settings.entry.layout === 14">
+    <div class="flex items-baseline justify-between">
+      <div>
+        <component
+          :is="firstItem?.component"
+          v-if="firstItem"
+          v-bind="firstItem?.props"
+        />
+        <component
+          :is="secondItem?.component"
+          v-if="secondItem && entry.nature === 'experience'"
+          v-bind="secondItem?.props"
+        />
+      </div>
+      <div>
+        <component
+          :is="thirdItem?.component"
+          v-if="thirdItem && entry.nature === 'experience'"
+          v-bind="thirdItem?.props"
+        />
+        <component
+          :is="fourthItem?.component"
+          v-if="fourthItem && entry.nature === 'experience'"
+          v-bind="fourthItem?.props"
+        />
+      </div>
+    </div>
+    <ResumeEntrySummary
+      v-if="entry.nature === 'experience'"
+      :entry-summary="entry.summary"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryHighlights
+      :entry-highlights="entry.highlights"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+    <ResumeEntryTags
+      :entry-tags="entry.tags"
+      :entry-index="entryIndex"
+      :category-index="categoryIndex"
+      :category-layout="categoryLayout"
+    />
+  </template>
   <template v-else>
     <div class="flex items-center">
       <component

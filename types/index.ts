@@ -22,6 +22,7 @@ export type Theme =
   | "Pharmacy"
   | "Red"
   | "Shelf"
+  | "SpaceTime"
   | "StackOverflow"
   | "Stone"
   | "Toothpaste"
@@ -83,7 +84,8 @@ export type EntryLayout =
   | 10
   | 11
   | 12
-  | 13;
+  | 13
+  | 14;
 
 export type ListMarker =
   | null
