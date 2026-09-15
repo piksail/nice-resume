@@ -700,7 +700,7 @@ const fourthItem = computed(() => {
       </div>
     </div>
   </template>
-  <template v-if="settings.entry.layout === 14">
+  <template v-else-if="settings.entry.layout === 14">
     <div class="flex items-baseline justify-between">
       <div>
         <component
