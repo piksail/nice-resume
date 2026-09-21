@@ -41,9 +41,11 @@
     "@pinia/nuxt": "^0.11.2",
     "@sentry/nuxt": "^10.4.0",
     "@tailwindcss/vite": "^4.3.1",
+    "@vue/server-renderer": "^3.5.43",
     "import-in-the-middle": "^1.14.2",
     "nuxt": "^4.4.8",
     "pinia": "^3.0.3",
+    "puppeteer": "^25.11.0",
     "tailwindcss": "^4.3.1",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1",
@@ -65,6 +67,7 @@
     "@types/node": "^24.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
+    "@vitejs/plugin-vue": "^6.0.9",
     "@vueuse/core": "^13.6.0",
     "@vueuse/nuxt": "^13.6.0",
     "commitlint": "^19.8.1",
@@ -85,9 +88,9 @@
     "vue-tsc": "^3.0.5"
   },
   "optionalDependencies": {
-    "@oxc-parser/binding-linux-x64-gnu": "*",
     "@oxc-parser/binding-darwin-arm64": "*",
     "@oxc-parser/binding-darwin-x64": "*",
+    "@oxc-parser/binding-linux-x64-gnu": "*",
     "@oxc-parser/binding-win32-x64-msvc": "*"
   },
   "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",

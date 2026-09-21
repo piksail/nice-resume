@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
+import vue from "@vitejs/plugin-vue";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -99,5 +100,11 @@ export default defineNuxtConfig({
 
   sourcemap: {
     client: "hidden",
+  },
+
+  nitro: {
+    rollupConfig: {
+      plugins: [vue()],
+    },
   },
 });
