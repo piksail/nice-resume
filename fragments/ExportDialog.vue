@@ -124,10 +124,17 @@ async function exportServerSide() {
     responseType: "blob",
   });
 
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const locale = useI18n().locale.value.slice(0, 2).toUpperCase();
+  const sanitizedName = profileStore.name.trim().replace(/\s+/g, " ");
+  const filename = `CV ${sanitizedName} ${year}-${month} - ${locale}.pdf`;
+
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "nice-resume.pdf";
+  link.download = filename;
   link.click();
   URL.revokeObjectURL(url);
 }
