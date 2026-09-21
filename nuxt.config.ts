@@ -21,6 +21,9 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ["@heroicons/vue/16/solid", "vue3-simple-icons"],
+    },
   },
 
   runtimeConfig: {
