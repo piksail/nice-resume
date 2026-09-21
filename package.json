@@ -67,7 +67,7 @@
     "@types/node": "^24.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
-    "@vitejs/plugin-vue": "^6.0.9",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vueuse/core": "^13.6.0",
     "@vueuse/nuxt": "^13.6.0",
     "commitlint": "^19.8.1",

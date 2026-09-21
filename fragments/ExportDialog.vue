@@ -13,7 +13,7 @@ import { capitalize } from "@/utils/string";
 import { jsonResumeSchemaUrl } from "~/globals";
 import type { StepperItem } from "@nuxt/ui";
 
-const { t } = useI18n({
+const { t, locale } = useI18n({
   useScope: "local",
 });
 
@@ -127,9 +127,9 @@ async function exportServerSide() {
   const now = new Date();
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, "0");
-  const locale = useI18n().locale.value.slice(0, 2).toUpperCase();
+  const lang = locale.value.slice(0, 2).toUpperCase();
   const sanitizedName = profileStore.name.trim().replace(/\s+/g, " ");
-  const filename = `CV ${sanitizedName} ${year}-${month} - ${locale}.pdf`;
+  const filename = `CV ${sanitizedName} ${year}-${month} - ${lang}.pdf`;
 
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");

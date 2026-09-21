@@ -1,6 +1,6 @@
 import { createSSRApp } from "vue";
 import { renderToString } from "@vue/server-renderer";
-import { createPinia } from "pinia";
+import { createPinia, setActivePinia } from "pinia";
 import { readFileSync, readdirSync } from "fs";
 import { resolve } from "path";
 import puppeteer from "puppeteer";
@@ -31,9 +31,10 @@ export default defineEventHandler(async (event) => {
     template: "<Document />",
   });
   const pinia = createPinia();
+  setActivePinia(pinia);
   app.use(pinia);
 
-  const editorStore = useEditorStore(pinia);
+  const editorStore = useEditorStore();
   editorStore.documentType = "resume";
 
   const profileStore = useProfileStore(pinia);
@@ -57,7 +58,16 @@ export default defineEventHandler(async (event) => {
     resumeStore.settings = body.customSettings;
   }
 
-  const html = await renderToString(app);
+  let html: string;
+  try {
+    html = await renderToString(app);
+  } catch (e) {
+    console.error("SSR Error:", e);
+    throw createError({
+      statusCode: 500,
+      statusMessage: `SSR rendering failed: ${(e as Error).message}`,
+    });
+  }
 
   const fullHtml = wrapHtml(html, body.theme ?? "default");
 
@@ -131,7 +141,17 @@ async function generatePdf(html: string): Promise<Buffer> {
 
   try {
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: "domcontentloaded" });
+    await page.setContent(html, { waitUntil: "load" });
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) => {
+          if (document.fonts.status === "loaded") {
+            resolve();
+          } else {
+            document.fonts.ready.then(() => resolve());
+          }
+        }),
+    );
 
     const pdf = await page.pdf({
       format: "A4",
