@@ -43,6 +43,8 @@ export const localeLabels: { [key in LocaleCode]: string } = {
 
 export const documentTypes: DocumentType[] = ["resume", "letter", "email"];
 
+export const dbDocumentTypes = ["CV", "CL", "ES"] as const;
+
 export const iconTypes: ContactDetail["type"][] = ["personal", "social"];
 
 export const fonts: Font[] = [

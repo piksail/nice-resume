@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
+import { useAppwriteStore } from "@/stores/appwrite";
 import { APP_NAME, documentTypes, localeLabels, themes } from "@/globals";
 import Field from "@/components/Field.vue";
 import packageJson from "../package.json";
@@ -19,6 +20,8 @@ const localePath = useLocalePath();
 
 const { documentType } = storeToRefs(useEditorStore());
 const { theme, isThemeCustomized } = storeToRefs(useProfileStore());
+const { user } = storeToRefs(useAppwriteStore());
+const isLoggedIn = computed(() => !!user.value);
 
 function uncustomizeTheme() {
   // When user switches themes, it is expected to see the result
@@ -87,6 +90,15 @@ function uncustomizeTheme() {
       </template>
 
       <template #right>
+        <UButton
+          v-if="isLoggedIn"
+          variant="ghost"
+          to="/documents"
+          icon="i-lucide-folder"
+          size="sm"
+        >
+          {{ capitalize($t("myDocuments")) }}
+        </UButton>
         <ImportDialog />
         <ExportDialog />
         <Field
@@ -103,6 +115,15 @@ function uncustomizeTheme() {
           "
           @update:model-value="setLocale"
         />
+        <UButton
+          v-if="!isLoggedIn"
+          variant="ghost"
+          to="/auth/login"
+          icon="i-lucide-log-in"
+          size="sm"
+        >
+          {{ $t("authSignIn") }}
+        </UButton>
         <UColorModeButton size="sm" />
       </template>
     </UDashboardToolbar>

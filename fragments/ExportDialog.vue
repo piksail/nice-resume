@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
+import html2canvas from "html2canvas";
 import type { JsonResume } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import { useAppwriteStore } from "@/stores/appwrite";
+import { useDocumentPersistence } from "@/composables/use-document-persistence";
+import { toDbDocumentType } from "@/composables/use-appwrite";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
 import { download, downloadHtml } from "@/utils/file";
@@ -20,16 +24,27 @@ const { t, locale } = useI18n({
 const { documentType } = storeToRefs(useEditorStore());
 const profileStore = useProfileStore();
 const resumeStore = useResumeStore();
+const appwriteStore = useAppwriteStore();
+const { collectDocumentData } = useDocumentPersistence();
 const { about, contactDetails, name, title } = storeToRefs(profileStore);
 const { categories } = storeToRefs(resumeStore);
 
 const isExportDialogOpen = ref(false);
+const isSaveToCloudDialogOpen = ref(false);
+const saveDocumentName = ref("");
+const saveDocumentLocale = ref("");
+const isSaving = ref(false);
+const saveError = ref("");
+
+const locales = ["en", "fr"];
 
 const isJsonResumeExportDialogOpen = ref(false);
 const jsonResumeExportSteps = ref<string[]>([]);
 const jsonResume = ref<JsonResume>();
 
 const isExportError = ref(false);
+
+const isLoggedIn = computed(() => !!appwriteStore.user);
 
 const exportItems = computed(() => {
   const items = [
@@ -39,6 +54,18 @@ const exportItems = computed(() => {
       onSelect: () => exportToJson(),
     },
   ];
+
+  if (isLoggedIn.value) {
+    items.push({
+      label: t("saveToCloud"),
+      icon: "i-lucide-cloud-upload",
+      onSelect: () => {
+        saveDocumentName.value = `${name.value || "Untitled"} - ${title.value || "Untitled"} - ${locale.value}`;
+        saveDocumentLocale.value = locale.value;
+        isSaveToCloudDialogOpen.value = true;
+      },
+    });
+  }
 
   if (documentType.value === "resume") {
     items.push({
@@ -54,6 +81,80 @@ const exportItems = computed(() => {
   }
   return items;
 });
+
+async function saveToCloud() {
+  isSaving.value = true;
+  saveError.value = "";
+  try {
+    const data = collectDocumentData(documentType.value);
+    let thumbnailDataUrl: string | undefined;
+    const preview = document.getElementById("preview");
+    if (preview) {
+      const canvas = await html2canvas(preview, {
+        scale: 0.5,
+        onclone: (clonedDoc) => {
+          const stylesheets = clonedDoc.querySelectorAll(
+            'style, link[rel="stylesheet"]',
+          );
+          stylesheets.forEach((el) => {
+            if (el instanceof HTMLStyleElement && el.sheet) {
+              try {
+                const rules = Array.from(el.sheet.cssRules);
+                const newRules = rules.map((rule) => {
+                  let cssText = rule.cssText;
+                  cssText = cssText.replace(
+                    /oklch\(([^)]+)\)/g,
+                    "rgb(128, 128, 128)",
+                  );
+                  cssText = cssText.replace(
+                    /oklab\(([^)]+)\)/g,
+                    "rgb(128, 128, 128)",
+                  );
+                  cssText = cssText.replace(
+                    /color-mix\(([^)]+)\)/g,
+                    "rgb(128, 128, 128)",
+                  );
+                  return cssText;
+                });
+                el.textContent = newRules.join("\n");
+              } catch {
+                // Cross-origin stylesheet — skip
+              }
+            }
+          });
+          const allElements = clonedDoc.querySelectorAll("*");
+          allElements.forEach((el) => {
+            if (el instanceof HTMLElement) {
+              const style = el.style;
+              if (style.color.includes("oklch")) {
+                style.color = "rgb(0, 0, 0)";
+              }
+              if (style.backgroundColor.includes("oklch")) {
+                style.backgroundColor = "rgb(255, 255, 255)";
+              }
+            }
+          });
+        },
+      });
+      thumbnailDataUrl = canvas.toDataURL("image/png");
+    }
+    await appwriteStore.saveDocument(
+      {
+        userId: appwriteStore.user!.$id,
+        type: toDbDocumentType(documentType.value),
+        name: saveDocumentName.value,
+        locale: saveDocumentLocale.value,
+        data: JSON.stringify(data),
+      },
+      thumbnailDataUrl,
+    );
+    isSaveToCloudDialogOpen.value = false;
+  } catch (e) {
+    saveError.value = e instanceof Error ? e.message : "Failed to save";
+  } finally {
+    isSaving.value = false;
+  }
+}
 
 function addReference(index: number) {
   jsonResume.value?.references.push({ name: "", reference: "" });
@@ -185,6 +286,34 @@ function exportResumeToJsonResume() {
       />
     </UDropdownMenu>
   </UFieldGroup>
+
+  <UModal v-model:open="isSaveToCloudDialogOpen" modal>
+    <template #body>
+      <div class="space-y-4">
+        <h3 class="text-lg font-semibold">{{ t("saveToCloudTitle") }}</h3>
+        <Field
+          v-model="saveDocumentName"
+          :label="$t('name')"
+          icon="i-lucide-file"
+        />
+        <USelectMenu
+          v-model="saveDocumentLocale"
+          :items="locales"
+          :label="$t('language')"
+          icon="i-lucide-languages"
+        />
+        <p v-if="saveError" class="text-sm text-red-500">{{ saveError }}</p>
+        <div class="flex justify-end gap-3">
+          <UButton variant="ghost" @click="isSaveToCloudDialogOpen = false">
+            {{ $t("toCancel") }}
+          </UButton>
+          <UButton :loading="isSaving" @click="saveToCloud">
+            {{ t("saveToCloud") }}
+          </UButton>
+        </div>
+      </div>
+    </template>
+  </UModal>
 
   <UModal
     v-model:open="isJsonResumeExportDialogOpen"
@@ -538,7 +667,9 @@ function exportResumeToJsonResume() {
     "saveAsJson": "Save data in a file",
     "exportToJsonResume": "Export data for JSON Resume",
     "exportServerSide": "Export server-side",
-    "referToSchema": "Refer to the schema"
+    "referToSchema": "Refer to the schema",
+    "saveToCloud": "Save to cloud",
+    "saveToCloudTitle": "Save document to cloud"
   },
   "es": {
     "saveAsJson": "TODO",
@@ -550,7 +681,9 @@ function exportResumeToJsonResume() {
     "saveAsJson": "Sauvegarder dans un fichier",
     "exportToJsonResume": "Exporter au format JSON Resume",
     "exportServerSide": "Exporter côté serveur",
-    "referToSchema": "Consulter le format"
+    "referToSchema": "Consulter le format",
+    "saveToCloud": "Sauvegarder dans le cloud",
+    "saveToCloudTitle": "Sauvegarder le document dans le cloud"
   }
 }
 </i18n>
