@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
 import { themeSettings } from "@/globals";
-import { getNodeStyle } from "@/utils/style";
+import { getCategoryLayoutClass, getNodeStyle } from "@/utils/style";
 import ResumeCategoryName from "./ResumeCategoryName.vue";
 import ResumeEntry from "./ResumeEntry.vue";
 import ResumeEntryLocation from "./ResumeEntryLocation.vue";

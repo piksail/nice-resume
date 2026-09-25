@@ -119,6 +119,68 @@ Some themes come from other tools:
 - _OpenResume_ is the theme from [OpenResume](https://www.open-resume.com/)
 - _Paper_ is adapted from the _One Page Plus_ theme from [JSON Resume](https://registry.jsonresume.org/thomasdavis?theme=onepage-plus)
 
+### Server-side PDF generation
+
+The app exposes a server route `POST /api/pdf` that renders a resume document server-side and returns it as a downloadable PDF. This is useful for automated resume generation without relying on the browser's print dialog.
+
+Send a JSON body with the resume data:
+
+```bash
+curl -X POST http://localhost:3000/api/pdf \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Jane Doe",
+    "title": "Software Engineer",
+    "about": "Experienced full-stack developer...",
+    "contactDetails": [
+      { "type": "personal", "icon": "email", "value": "jane@example.com" },
+      { "type": "personal", "icon": "phone", "value": "+1234567890" }
+    ],
+    "categories": [
+      {
+        "nature": "experience",
+        "type": "work",
+        "name": "Work Experience",
+        "layout": "full",
+        "isLocked": false,
+        "isVisible": true,
+        "entries": [
+          {
+            "nature": "experience",
+            "type": "work",
+            "title": "Senior Developer",
+            "organization": "Acme Corp",
+            "location": "Remote",
+            "period": "2022 - Present",
+            "summary": "Led development of...",
+            "highlights": ["Shipped feature X", "Improved performance by 50%"],
+            "tags": ["Vue", "TypeScript", "Node.js"],
+            "isVisible": true
+          }
+        ]
+      }
+    ],
+    "theme": "default",
+    "isHeaderSimple": false,
+    "simpleHeaderCategoryName": ""
+  }' \
+  --output resume.pdf
+```
+
+The route accepts the following fields:
+
+| Field                      | Type              | Description                                                        |
+| -------------------------- | ----------------- | ------------------------------------------------------------------ |
+| `name`                     | `string`          | Full name displayed in the document header                         |
+| `title`                    | `string`          | Professional title or headline                                     |
+| `about`                    | `string`          | Summary or bio paragraph                                           |
+| `contactDetails`           | `ContactDetail[]` | Array of contact entries (email, phone, social links)              |
+| `categories`               | `Category[]`      | Resume sections containing entries (work, education, skills, etc.) |
+| `theme`                    | `Theme`           | Theme name (e.g. `"default"`, `"Elegant"`, `"Astro"`)              |
+| `isHeaderSimple`           | `boolean`         | Whether to use a simplified header layout                          |
+| `simpleHeaderCategoryName` | `string`          | Category name displayed in simple header mode                      |
+| `customSettings`           | `ResumeSettings`  | Optional custom theme settings that override the theme defaults    |
+
 ### Docker
 
 ```bash

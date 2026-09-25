@@ -13,13 +13,15 @@ import { capitalize } from "@/utils/string";
 import { jsonResumeSchemaUrl } from "~/globals";
 import type { StepperItem } from "@nuxt/ui";
 
-const { t } = useI18n({
+const { t, locale } = useI18n({
   useScope: "local",
 });
 
 const { documentType } = storeToRefs(useEditorStore());
-const { about, contactDetails, name, title } = storeToRefs(useProfileStore());
-const { categories } = storeToRefs(useResumeStore());
+const profileStore = useProfileStore();
+const resumeStore = useResumeStore();
+const { about, contactDetails, name, title } = storeToRefs(profileStore);
+const { categories } = storeToRefs(resumeStore);
 
 const isExportDialogOpen = ref(false);
 
@@ -43,6 +45,11 @@ const exportItems = computed(() => {
       label: t("exportToJsonResume"),
       icon: "i-lucide-file-braces-corner",
       onSelect: () => exportResumeToJsonResume(),
+    });
+    items.push({
+      label: t("exportServerSide"),
+      icon: "i-lucide-server",
+      onSelect: () => exportServerSide(),
     });
   }
   return items;
@@ -90,6 +97,46 @@ function exportToJson() {
     email: JSON.parse(rawEmail ?? "{}"),
   };
   download(toExport, "nice-resume");
+}
+
+/**
+ * Export resume as a PDF using the server-side rendering route.
+ */
+async function exportServerSide() {
+  const body: Record<string, unknown> = {
+    name: profileStore.name,
+    title: profileStore.title,
+    about: profileStore.about,
+    contactDetails: profileStore.contactDetails,
+    categories: resumeStore.categories,
+    theme: profileStore.theme,
+    isHeaderSimple: resumeStore.isHeaderSimple,
+    simpleHeaderCategoryName: resumeStore.simpleHeaderCategoryName,
+  };
+
+  if (profileStore.isThemeCustomized) {
+    body.customSettings = resumeStore.settings;
+  }
+
+  const blob = await $fetch<Blob>("/api/pdf", {
+    method: "POST",
+    body,
+    responseType: "blob",
+  });
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const lang = locale.value.slice(0, 2).toUpperCase();
+  const sanitizedName = profileStore.name.trim().replace(/\s+/g, " ");
+  const filename = `CV ${sanitizedName} ${year}-${month} - ${lang}.pdf`;
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(url);
 }
 
 /**
@@ -478,26 +525,31 @@ function exportResumeToJsonResume() {
   "br": {
     "saveAsJson": "TODO",
     "exportToJsonResume": "TODO",
+    "exportServerSide": "TODO",
     "referToSchema": "TODO"
   },
   "de": {
     "saveAsJson": "TODO",
     "exportToJsonResume": "TODO",
+    "exportServerSide": "TODO",
     "referToSchema": "Format sehen"
   },
   "en": {
     "saveAsJson": "Save data in a file",
     "exportToJsonResume": "Export data for JSON Resume",
+    "exportServerSide": "Export server-side",
     "referToSchema": "Refer to the schema"
   },
   "es": {
     "saveAsJson": "TODO",
     "exportToJsonResume": "TODO",
+    "exportServerSide": "TODO",
     "referToSchema": "TODO"
   },
   "fr": {
     "saveAsJson": "Sauvegarder dans un fichier",
     "exportToJsonResume": "Exporter au format JSON Resume",
+    "exportServerSide": "Exporter côté serveur",
     "referToSchema": "Consulter le format"
   }
 }

@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
+import vue from "@vitejs/plugin-vue";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -20,6 +21,9 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ["@heroicons/vue/16/solid", "vue3-simple-icons"],
+    },
   },
 
   runtimeConfig: {
@@ -99,5 +103,11 @@ export default defineNuxtConfig({
 
   sourcemap: {
     client: "hidden",
+  },
+
+  nitro: {
+    rollupConfig: {
+      plugins: [vue()],
+    },
   },
 });
