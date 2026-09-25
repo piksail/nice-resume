@@ -26,8 +26,12 @@ export const useAppwriteStore = defineStore("appwrite", () => {
 
   async function saveDocument(
     doc: Omit<SavedDocument, "$id" | "$permissions">,
+    thumbnailDataUrl?: string,
   ) {
     const appwrite = useAppwrite();
+    if (thumbnailDataUrl) {
+      doc.thumbnail = thumbnailDataUrl;
+    }
     const saved = await appwrite.createDocument(doc);
     documents.value.unshift(saved);
     return saved;

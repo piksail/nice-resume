@@ -123,8 +123,14 @@ async function logout() {
             <div
               v-for="doc in group.items"
               :key="doc.$id"
-              class="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              class="flex items-center gap-4 p-4 rounded-lg border border-border hover:bg-muted/50 transition-colors"
             >
+              <img
+                v-if="doc.thumbnail"
+                :src="doc.thumbnail"
+                :alt="doc.name"
+                class="w-16 h-16 object-cover rounded border border-border flex-shrink-0"
+              />
               <div class="flex-1">
                 <div class="flex items-center gap-3">
                   <span class="font-medium">{{ doc.name }}</span>

@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Query, ID } from "appwrite";
+import { Client, Account, Databases, Storage, Query, ID } from "appwrite";
 import type { Models } from "appwrite";
 
 export type DbDocumentType = "CV" | "CL" | "ES";
@@ -10,6 +10,7 @@ export interface SavedDocument {
   name: string;
   locale: string;
   data: string;
+  thumbnail?: string;
   $createdAt?: string;
   $updatedAt?: string;
 }
@@ -20,6 +21,7 @@ interface AppwriteDocument extends Models.Document {
   name: string;
   locale: string;
   data: string;
+  thumbnail?: string;
 }
 
 export function toDbDocumentType(type: string): DbDocumentType {
@@ -40,6 +42,7 @@ function mapDocument(doc: AppwriteDocument): SavedDocument {
     name: doc.name,
     locale: doc.locale,
     data: doc.data,
+    thumbnail: doc.thumbnail,
     $createdAt: doc.$createdAt,
     $updatedAt: doc.$updatedAt,
   };
@@ -49,6 +52,7 @@ export function useAppwrite() {
   const config = useRuntimeConfig();
   const DATABASE_ID = config.public.appwriteDatabaseId;
   const COLLECTION_ID = config.public.appwriteCollectionId;
+  const BUCKET_ID = config.public.appwriteBucketId;
 
   const client = new Client();
   client
@@ -57,6 +61,7 @@ export function useAppwrite() {
 
   const account = new Account(client);
   const databases = new Databases(client);
+  const storage = new Storage(client);
 
   async function createAccount(email: string, password: string, name?: string) {
     await account.create(ID.unique(), email, password, name);
@@ -130,6 +135,18 @@ export function useAppwrite() {
     await databases.deleteDocument(DATABASE_ID, COLLECTION_ID, id);
   }
 
+  async function uploadThumbnail(
+    file: File,
+    documentId: string,
+  ): Promise<string> {
+    const uploaded = await storage.createFile(BUCKET_ID, documentId, file);
+    return uploaded.$id;
+  }
+
+  function getThumbnailUrl(fileId: string): string {
+    return storage.getFileDownload(BUCKET_ID, fileId);
+  }
+
   async function ping() {
     return client.ping();
   }
@@ -138,6 +155,7 @@ export function useAppwrite() {
     client,
     account,
     databases,
+    storage,
     ping,
     createAccount,
     createEmailPasswordSession,
@@ -148,6 +166,8 @@ export function useAppwrite() {
     createDocument,
     updateDocument,
     deleteDocument,
+    uploadThumbnail,
+    getThumbnailUrl,
   };
 }
 

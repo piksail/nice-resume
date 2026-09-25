@@ -35,6 +35,7 @@ export default defineNuxtConfig({
       appwriteProjectId: process.env.APPWRITE_PROJECT_ID || "",
       appwriteDatabaseId: process.env.APPWRITE_DATABASE_ID || "",
       appwriteCollectionId: process.env.APPWRITE_COLLECTION_ID || "",
+      appwriteBucketId: process.env.APPWRITE_BUCKET_ID || "",
     },
   },
 

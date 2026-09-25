@@ -86,15 +86,18 @@ CI runs pa11y + axe on the preview server. Some rules are ignored in CI config (
 ## Appwrite integration
 
 - Self-hosted Appwrite for user management and document persistence
-- Auth is **magic link only** (passwordless) — `account.createMagicURLSession()` sends the link, `account.updateMagicURLSession()` verifies it
-- Runtime config: `APPWRITE_ENDPOINT` and `APPWRITE_PROJECT_ID` env vars (see `.env.example`)
-- Database: `nice-resume` database with `documents` collection
-- Document structure: `{ userId, type: "resume"|"letter"|"email", name, locale, data: JSON string }`
-- `use-appwrite.ts` — Appwrite client wrapper (auth + database CRUD)
+- Auth is **email/password** via `account.createEmailPasswordSession()`
+- Runtime config: `APPWRITE_ENDPOINT`, `APPWRITE_PROJECT_ID`, `APPWRITE_DATABASE_ID`, `APPWRITE_COLLECTION_ID`, `APPWRITE_BUCKET_ID` env vars (see `.env.example`)
+- Database: `Pebr PROD` with `documents` collection
+- Document structure: `{ userId, type: "CV"|"CL"|"ES", name, locale, data: JSON string, thumbnail?: string }`
+- RLS is enabled — users can only access their own documents (filtered by `userId`)
+- `use-appwrite.ts` — Appwrite client wrapper (auth + database CRUD + storage)
 - `use-document-persistence.ts` — Collects store state into `Export` shape and saves to Appwrite
 - `stores/appwrite.ts` — Pinia store for user session and document list
-- `middleware/auth.ts` — Redirects unauthenticated users to `/auth/login`
-- Save-to-cloud UI is in `ExportDialog.vue` (appears only when logged in)
+- `middleware/auth.ts` — Redirects unauthenticated users to `/auth/login`, redirects authenticated users away from auth pages
+- Save-to-cloud UI is in `ExportDialog.vue` (appears only when logged in), includes locale selector and client-side thumbnail capture via `html2canvas`
+- Thumbnails are stored as base64 data URLs in the document's `thumbnail` field (no Storage bucket access needed on free plan)
+- My documents view (`pages/documents/index.vue`) groups documents by type (CV, CL, ES) with thumbnails
 
 ## Key constraints
 

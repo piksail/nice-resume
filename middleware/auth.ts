@@ -3,7 +3,7 @@ import { useAppwriteStore } from "@/stores/appwrite";
 export default defineNuxtRouteMiddleware(async (to) => {
   const store = useAppwriteStore();
 
-  if (!store.user && !store.isAuthLoading) {
+  if (!store.user) {
     await store.initAuth();
   }
 

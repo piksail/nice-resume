@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
+import html2canvas from "html2canvas";
 import type { JsonResume } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
@@ -59,7 +60,7 @@ const exportItems = computed(() => {
       label: t("saveToCloud"),
       icon: "i-lucide-cloud-upload",
       onSelect: () => {
-        saveDocumentName.value = `${name.value || "Untitled"} - ${name.value || "Untitled"} - ${locale.value}`;
+        saveDocumentName.value = `${name.value || "Untitled"} - ${title.value || "Untitled"} - ${locale.value}`;
         saveDocumentLocale.value = locale.value;
         isSaveToCloudDialogOpen.value = true;
       },
@@ -86,13 +87,67 @@ async function saveToCloud() {
   saveError.value = "";
   try {
     const data = collectDocumentData(documentType.value);
-    await appwriteStore.saveDocument({
-      userId: appwriteStore.user!.$id,
-      type: toDbDocumentType(documentType.value),
-      name: saveDocumentName.value,
-      locale: saveDocumentLocale.value,
-      data: JSON.stringify(data),
-    });
+    let thumbnailDataUrl: string | undefined;
+    const preview = document.getElementById("preview");
+    if (preview) {
+      const canvas = await html2canvas(preview, {
+        scale: 0.5,
+        onclone: (clonedDoc) => {
+          const stylesheets = clonedDoc.querySelectorAll(
+            'style, link[rel="stylesheet"]',
+          );
+          stylesheets.forEach((el) => {
+            if (el instanceof HTMLStyleElement && el.sheet) {
+              try {
+                const rules = Array.from(el.sheet.cssRules);
+                const newRules = rules.map((rule) => {
+                  let cssText = rule.cssText;
+                  cssText = cssText.replace(
+                    /oklch\(([^)]+)\)/g,
+                    "rgb(128, 128, 128)",
+                  );
+                  cssText = cssText.replace(
+                    /oklab\(([^)]+)\)/g,
+                    "rgb(128, 128, 128)",
+                  );
+                  cssText = cssText.replace(
+                    /color-mix\(([^)]+)\)/g,
+                    "rgb(128, 128, 128)",
+                  );
+                  return cssText;
+                });
+                el.textContent = newRules.join("\n");
+              } catch {
+                // Cross-origin stylesheet — skip
+              }
+            }
+          });
+          const allElements = clonedDoc.querySelectorAll("*");
+          allElements.forEach((el) => {
+            if (el instanceof HTMLElement) {
+              const style = el.style;
+              if (style.color.includes("oklch")) {
+                style.color = "rgb(0, 0, 0)";
+              }
+              if (style.backgroundColor.includes("oklch")) {
+                style.backgroundColor = "rgb(255, 255, 255)";
+              }
+            }
+          });
+        },
+      });
+      thumbnailDataUrl = canvas.toDataURL("image/png");
+    }
+    await appwriteStore.saveDocument(
+      {
+        userId: appwriteStore.user!.$id,
+        type: toDbDocumentType(documentType.value),
+        name: saveDocumentName.value,
+        locale: saveDocumentLocale.value,
+        data: JSON.stringify(data),
+      },
+      thumbnailDataUrl,
+    );
     isSaveToCloudDialogOpen.value = false;
   } catch (e) {
     saveError.value = e instanceof Error ? e.message : "Failed to save";
