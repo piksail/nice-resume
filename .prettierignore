@@ -1,1 +1,8 @@
 *-lock.*
+.env*
+.nuxt
+.output
+dist
+node_modules
+*.min.js
+*.min.css

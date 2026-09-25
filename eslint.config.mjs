@@ -7,6 +7,15 @@ export default withNuxt(
     rules: {
       "vue/multi-word-component-names": "warn",
       "vue/no-mutating-props": "warn",
+      "vue/html-self-closing": ["warn", {
+        html: {
+          void: "always",
+          normal: "never",
+          component: "always",
+        },
+        svg: "always",
+        math: "always",
+      }],
     },
   },
 );

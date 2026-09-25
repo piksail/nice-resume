@@ -56,9 +56,10 @@ pnpm run coverage         # Vitest with --coverage
 - `globals/index.ts` — Font arrays, theme arrays (`themeSettings`, `themeBaseSettings`), A4 constants, locale labels.
 - `components/` — Document rendering (`Document.vue`, `ResumeBody.vue`, `ResumeEntry.vue`, etc.) and editor components.
 - `fragments/` — Editor fragments (`ResumeEditor.vue`, `LetterEditor.vue`, `EmailEditor.vue`, `ProfileEditor.vue`, `StyleEditor.vue`).
-- `stores/` — Pinia stores per domain: `resume`, `letter`, `email`, `profile`, `editor`.
-- `composables/` — `use-document-settings.ts`, `use-confirm-dialog.ts`.
-- `pages/` — `index.vue` (landing), `editor.vue` (main app).
+- `stores/` — Pinia stores per domain: `resume`, `letter`, `email`, `profile`, `editor`, `appwrite`.
+- `composables/` — `use-document-settings.ts`, `use-confirm-dialog.ts`, `use-appwrite.ts`, `use-document-persistence.ts`.
+- `pages/` — `index.vue` (landing), `editor.vue` (main app), `auth/login.vue`, `auth/verify.vue`, `documents/index.vue`.
+- `middleware/` — `auth.ts` route middleware for protecting authenticated routes.
 - `server/api/pdf.post.ts` — Server-side PDF generation via puppeteer. POST JSON resume data, returns PDF.
 - `i18n/i18n.config.ts` + `i18n/locales/` — Translation files.
 
@@ -81,6 +82,19 @@ Theme settings are structured as `{ base, resume, letter, email }` per theme. Se
 ## Accessibility
 
 CI runs pa11y + axe on the preview server. Some rules are ignored in CI config (color-contrast, link-in-text-block) — don't "fix" these without team discussion.
+
+## Appwrite integration
+
+- Self-hosted Appwrite for user management and document persistence
+- Auth is **magic link only** (passwordless) — `account.createMagicURLSession()` sends the link, `account.updateMagicURLSession()` verifies it
+- Runtime config: `APPWRITE_ENDPOINT` and `APPWRITE_PROJECT_ID` env vars (see `.env.example`)
+- Database: `nice-resume` database with `documents` collection
+- Document structure: `{ userId, type: "resume"|"letter"|"email", name, locale, data: JSON string }`
+- `use-appwrite.ts` — Appwrite client wrapper (auth + database CRUD)
+- `use-document-persistence.ts` — Collects store state into `Export` shape and saves to Appwrite
+- `stores/appwrite.ts` — Pinia store for user session and document list
+- `middleware/auth.ts` — Redirects unauthenticated users to `/auth/login`
+- Save-to-cloud UI is in `ExportDialog.vue` (appears only when logged in)
 
 ## Key constraints
 

@@ -31,6 +31,10 @@ export default defineNuxtConfig({
       sentry: {
         dsn: process.env.SENTRY_DSN,
       },
+      appwriteEndpoint: process.env.APPWRITE_ENDPOINT || "https://localhost/v1",
+      appwriteProjectId: process.env.APPWRITE_PROJECT_ID || "",
+      appwriteDatabaseId: process.env.APPWRITE_DATABASE_ID || "",
+      appwriteCollectionId: process.env.APPWRITE_COLLECTION_ID || "",
     },
   },
 

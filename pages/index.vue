@@ -5,6 +5,10 @@ import { useProfileStore } from "@/stores/profile";
 import { capitalize } from "@/utils/string";
 import { APP_NAME, themes } from "~/globals";
 
+definePageMeta({
+  layout: "landing",
+});
+
 const { theme } = storeToRefs(useProfileStore());
 
 // TODO localize meta
@@ -39,7 +43,7 @@ const thirdInputFontWeight = ref(400);
 </script>
 
 <template>
-  <NuxtLayout name="landing">
+  <div>
     <Head>
       <Title>{{ title }}</Title>
       <Meta name="description" :content="description" />
@@ -532,8 +536,7 @@ const thirdInputFontWeight = ref(400);
         </UButton>
       </div>
     </section>
-    <NuxtPage />
-  </NuxtLayout>
+  </div>
 </template>
 
 <i18n lang="json">

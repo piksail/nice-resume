@@ -5,6 +5,9 @@ import type { JsonResume } from "@/types";
 import { useEditorStore } from "@/stores/editor";
 import { useProfileStore } from "@/stores/profile";
 import { useResumeStore } from "@/stores/resume";
+import { useAppwriteStore } from "@/stores/appwrite";
+import { useDocumentPersistence } from "@/composables/use-document-persistence";
+import { toDbDocumentType } from "@/composables/use-appwrite";
 import { moveDown, moveUp, remove } from "@/utils/array";
 import { focusNextInput } from "@/utils/editor";
 import { download, downloadHtml } from "@/utils/file";
@@ -20,16 +23,27 @@ const { t, locale } = useI18n({
 const { documentType } = storeToRefs(useEditorStore());
 const profileStore = useProfileStore();
 const resumeStore = useResumeStore();
+const appwriteStore = useAppwriteStore();
+const { collectDocumentData } = useDocumentPersistence();
 const { about, contactDetails, name, title } = storeToRefs(profileStore);
 const { categories } = storeToRefs(resumeStore);
 
 const isExportDialogOpen = ref(false);
+const isSaveToCloudDialogOpen = ref(false);
+const saveDocumentName = ref("");
+const saveDocumentLocale = ref("");
+const isSaving = ref(false);
+const saveError = ref("");
+
+const locales = ["en", "fr"];
 
 const isJsonResumeExportDialogOpen = ref(false);
 const jsonResumeExportSteps = ref<string[]>([]);
 const jsonResume = ref<JsonResume>();
 
 const isExportError = ref(false);
+
+const isLoggedIn = computed(() => !!appwriteStore.user);
 
 const exportItems = computed(() => {
   const items = [
@@ -39,6 +53,18 @@ const exportItems = computed(() => {
       onSelect: () => exportToJson(),
     },
   ];
+
+  if (isLoggedIn.value) {
+    items.push({
+      label: t("saveToCloud"),
+      icon: "i-lucide-cloud-upload",
+      onSelect: () => {
+        saveDocumentName.value = `${name.value || "Untitled"} - ${name.value || "Untitled"} - ${locale.value}`;
+        saveDocumentLocale.value = locale.value;
+        isSaveToCloudDialogOpen.value = true;
+      },
+    });
+  }
 
   if (documentType.value === "resume") {
     items.push({
@@ -54,6 +80,26 @@ const exportItems = computed(() => {
   }
   return items;
 });
+
+async function saveToCloud() {
+  isSaving.value = true;
+  saveError.value = "";
+  try {
+    const data = collectDocumentData(documentType.value);
+    await appwriteStore.saveDocument({
+      userId: appwriteStore.user!.$id,
+      type: toDbDocumentType(documentType.value),
+      name: saveDocumentName.value,
+      locale: saveDocumentLocale.value,
+      data: JSON.stringify(data),
+    });
+    isSaveToCloudDialogOpen.value = false;
+  } catch (e) {
+    saveError.value = e instanceof Error ? e.message : "Failed to save";
+  } finally {
+    isSaving.value = false;
+  }
+}
 
 function addReference(index: number) {
   jsonResume.value?.references.push({ name: "", reference: "" });
@@ -185,6 +231,34 @@ function exportResumeToJsonResume() {
       />
     </UDropdownMenu>
   </UFieldGroup>
+
+  <UModal v-model:open="isSaveToCloudDialogOpen" modal>
+    <template #body>
+      <div class="space-y-4">
+        <h3 class="text-lg font-semibold">{{ t("saveToCloudTitle") }}</h3>
+        <Field
+          v-model="saveDocumentName"
+          :label="$t('name')"
+          icon="i-lucide-file"
+        />
+        <USelectMenu
+          v-model="saveDocumentLocale"
+          :items="locales"
+          :label="$t('language')"
+          icon="i-lucide-languages"
+        />
+        <p v-if="saveError" class="text-sm text-red-500">{{ saveError }}</p>
+        <div class="flex justify-end gap-3">
+          <UButton variant="ghost" @click="isSaveToCloudDialogOpen = false">
+            {{ $t("toCancel") }}
+          </UButton>
+          <UButton :loading="isSaving" @click="saveToCloud">
+            {{ t("saveToCloud") }}
+          </UButton>
+        </div>
+      </div>
+    </template>
+  </UModal>
 
   <UModal
     v-model:open="isJsonResumeExportDialogOpen"
@@ -538,7 +612,9 @@ function exportResumeToJsonResume() {
     "saveAsJson": "Save data in a file",
     "exportToJsonResume": "Export data for JSON Resume",
     "exportServerSide": "Export server-side",
-    "referToSchema": "Refer to the schema"
+    "referToSchema": "Refer to the schema",
+    "saveToCloud": "Save to cloud",
+    "saveToCloudTitle": "Save document to cloud"
   },
   "es": {
     "saveAsJson": "TODO",
@@ -550,7 +626,9 @@ function exportResumeToJsonResume() {
     "saveAsJson": "Sauvegarder dans un fichier",
     "exportToJsonResume": "Exporter au format JSON Resume",
     "exportServerSide": "Exporter côté serveur",
-    "referToSchema": "Consulter le format"
+    "referToSchema": "Consulter le format",
+    "saveToCloud": "Sauvegarder dans le cloud",
+    "saveToCloudTitle": "Sauvegarder le document dans le cloud"
   }
 }
 </i18n>
